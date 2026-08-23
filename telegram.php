@@ -7,6 +7,7 @@ header("Content-Type: application/json; charset=UTF-8");
 // =====================================================
 
 // IMPORTANT:
+
 // Put your NEW Telegram bot token here.
 // DO NOT upload this PHP file to GitHub.
 $botToken = "8682024840:AAHmPLREIhoxV6EEQC-4wVc9xpM0BRwxDa4";
