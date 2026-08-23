@@ -3,20 +3,16 @@
 header("Content-Type: application/json; charset=UTF-8");
 
 // =====================================================
-// TELEGRAM CONFIGURATION
+// TELEGRAM CONFIG
 // =====================================================
 
-// IMPORTANT:
-
-// Put your NEW Telegram bot token here.
-// DO NOT upload this PHP file to GitHub.
 $botToken = "8682024840:AAHmPLREIhoxV6EEQC-4wVc9xpM0BRwxDa4";
 
 $chatId = "8068863783";
 
 
 // =====================================================
-// BASIC SETTINGS
+// ORDER NUMBER FILE
 // =====================================================
 
 $orderFile = __DIR__ . "/order_number.txt";
@@ -63,11 +59,8 @@ if ($_FILES["photo"]["error"] !== UPLOAD_ERR_OK) {
 }
 
 
-// =====================================================
-// CHECK FILE
-// =====================================================
-
 $file = $_FILES["photo"]["tmp_name"];
+
 
 if (!file_exists($file)) {
 
@@ -81,7 +74,7 @@ if (!file_exists($file)) {
 
 
 // =====================================================
-// GET CUSTOMER DATA
+// CUSTOMER INFORMATION
 // =====================================================
 
 $package = isset($_POST["package"])
@@ -104,13 +97,9 @@ $phone = isset($_POST["phone"])
     ? trim($_POST["phone"])
     : "Not provided";
 
-$caption = isset($_POST["caption"])
-    ? trim($_POST["caption"])
-    : "";
-
 
 // =====================================================
-// GENERATE ORDER NUMBER
+// CREATE ORDER FILE IF MISSING
 // =====================================================
 
 if (!file_exists($orderFile)) {
@@ -123,8 +112,12 @@ if (!file_exists($orderFile)) {
 }
 
 
-// Open order number file
+// =====================================================
+// GENERATE NEXT ORDER NUMBER
+// =====================================================
+
 $fp = fopen($orderFile, "c+");
+
 
 if (!$fp) {
 
@@ -137,7 +130,7 @@ if (!$fp) {
 }
 
 
-// Lock file so two customers cannot get same number
+// Lock the file
 if (!flock($fp, LOCK_EX)) {
 
     fclose($fp);
@@ -158,9 +151,12 @@ $currentNumber = trim(
     stream_get_contents($fp)
 );
 
+
+// If empty, start from zero
 if ($currentNumber === "") {
-    $currentNumber = 0;
+    $currentNumber = "0";
 }
+
 
 $currentNumber = intval($currentNumber);
 
@@ -171,6 +167,7 @@ $newNumber = $currentNumber + 1;
 
 // Save new number
 ftruncate($fp, 0);
+
 rewind($fp);
 
 fwrite(
@@ -181,19 +178,15 @@ fwrite(
 fflush($fp);
 
 
-// Release lock
+// Unlock
 flock($fp, LOCK_UN);
 
 fclose($fp);
 
 
-// Format:
-//
-// 1      = 00001
-// 12     = 00012
-// 123    = 00123
-// 1234   = 01234
-// 12345  = 12345
+// =====================================================
+// FORMAT ORDER NUMBER
+// =====================================================
 
 $orderNumber = str_pad(
     $newNumber,
@@ -207,40 +200,38 @@ $orderNumber = str_pad(
 // TELEGRAM CAPTION
 // =====================================================
 
-$telegramCaption =
+$caption =
 "💎 ZYPER DIAMOND STORE\n\n" .
 
-"🧾 ORDER NO: " . $orderNumber . "\n\n" .
+"🧾 ORDER NO: " .
+$orderNumber .
+"\n\n" .
 
 "🎮 PACKAGE:\n" .
-$package . "\n\n" .
+$package .
+"\n\n" .
 
 "🆔 UID:\n" .
-$uid . "\n\n" .
+$uid .
+"\n\n" .
 
 "👤 NAME:\n" .
-$name . "\n\n" .
+$name .
+"\n\n" .
 
 "📧 EMAIL:\n" .
-$email . "\n\n" .
+$email .
+"\n\n" .
 
 "📱 PHONE:\n" .
-$phone . "\n\n" .
+$phone .
+"\n\n" .
 
 "📌 STATUS: PENDING";
 
 
-// If custom caption exists, append it
-if ($caption !== "") {
-
-    $telegramCaption .=
-        "\n\n" .
-        $caption;
-}
-
-
 // =====================================================
-// TELEGRAM API
+// TELEGRAM API URL
 // =====================================================
 
 $url =
@@ -263,8 +254,7 @@ $postFields = [
         $_FILES["photo"]["name"]
     ),
 
-    "caption" => $telegramCaption
-
+    "caption" => $caption
 ];
 
 
@@ -274,11 +264,13 @@ $postFields = [
 
 $ch = curl_init();
 
+
 curl_setopt(
     $ch,
     CURLOPT_URL,
     $url
 );
+
 
 curl_setopt(
     $ch,
@@ -286,17 +278,20 @@ curl_setopt(
     true
 );
 
+
 curl_setopt(
     $ch,
     CURLOPT_POST,
     true
 );
 
+
 curl_setopt(
     $ch,
     CURLOPT_POSTFIELDS,
     $postFields
 );
+
 
 curl_setopt(
     $ch,
@@ -306,7 +301,7 @@ curl_setopt(
 
 
 // =====================================================
-// EXECUTE
+// SEND TO TELEGRAM
 // =====================================================
 
 $result = curl_exec($ch);
@@ -327,8 +322,11 @@ if ($result === false) {
         "success" => false,
 
         "message" =>
-            "Telegram connection failed: " .
-            $error
+        "Telegram connection failed: " .
+        $error,
+
+        "order_number" =>
+        $orderNumber
 
     ]);
 
@@ -336,17 +334,21 @@ if ($result === false) {
 }
 
 
+// =====================================================
 // HTTP STATUS
+// =====================================================
+
 $httpCode = curl_getinfo(
     $ch,
     CURLINFO_HTTP_CODE
 );
 
+
 curl_close($ch);
 
 
 // =====================================================
-// TELEGRAM RESPONSE
+// DECODE TELEGRAM RESPONSE
 // =====================================================
 
 $data = json_decode(
@@ -355,7 +357,10 @@ $data = json_decode(
 );
 
 
-// Telegram failed
+// =====================================================
+// TELEGRAM FAILED
+// =====================================================
+
 if (
     $httpCode !== 200 ||
     !isset($data["ok"]) ||
@@ -367,11 +372,13 @@ if (
         "success" => false,
 
         "message" =>
-            "Telegram rejected the receipt",
+        "Telegram rejected the receipt",
 
-        "telegram_response" => $data,
+        "order_number" =>
+        $orderNumber,
 
-        "order_number" => $orderNumber
+        "telegram_response" =>
+        $data
 
     ]);
 
@@ -388,10 +395,10 @@ echo json_encode([
     "success" => true,
 
     "message" =>
-        "Receipt sent successfully",
+    "Receipt sent successfully",
 
     "order_number" =>
-        $orderNumber
+    $orderNumber
 
 ]);
 
