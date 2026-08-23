@@ -2,8 +2,6 @@
 <html lang="en">
 
 <head>
-  
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,16 +9,19 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-
 <style>
+
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
 background:linear-gradient(135deg,#0f172a,#020617);
 color:white;
+min-height:100vh;
 }
-
 
 .container{
 padding:15px;
@@ -28,268 +29,204 @@ max-width:900px;
 margin:auto;
 }
 
-
 h2{
-
 text-align:center;
 font-size:28px;
 font-weight:700;
-
 background:linear-gradient(90deg,#60a5fa,#c084fc);
-
 -webkit-background-clip:text;
 background-clip:text;
-
 color:transparent;
-
+margin:10px 0 25px;
 }
-
-
 
 h3{
-
 margin-top:25px;
+margin-bottom:15px;
 color:#cbd5e1;
-
 }
 
-
-
 .grid{
-
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
 gap:15px;
-
 }
-
-
 
 /* PACKAGE BOX */
 
 .card{
-
 background:#ffffff;
-
 color:#0f172a;
-
 aspect-ratio:1/1;
-
 border-radius:18px;
-
 padding:15px;
 
-box-sizing:border-box;
-
 display:flex;
-
 flex-direction:column;
-
 justify-content:center;
-
 align-items:center;
-
 text-align:center;
 
 cursor:pointer;
-
 position:relative;
-
 overflow:hidden;
 
 border:1px solid #e2e8f0;
-
-transition:.3s;
-
+transition:transform .3s,box-shadow .3s;
+-webkit-tap-highlight-color:transparent;
+user-select:none;
 }
-
-
 
 .card:hover{
-
 transform:translateY(-6px);
-
 box-shadow:0 12px 30px rgba(0,0,0,.25);
-
 }
-
-
 
 .card:active{
-
 transform:scale(.95);
-
 }
-
-
 
 /* IMAGES */
 
 .card img{
-
-width:100px;
-
-height:100px;
-
-object-fit:contain;
-
-margin-bottom:10px;
-
-}
-
-
-/* ALL NORMAL PACKAGE IMAGES */
-
-.card img{
-
 width:100px;
 height:100px;
-
 object-fit:contain;
-
 margin-bottom:10px;
-
 }
-
-
 
 /* MEMBERSHIP IMAGES */
 
-.card img[src*="weekly"],
-.card img[src*="monthly"],
-.card img[src*="weekly-lite"]{
-
+.card img[src*="Weekly"],
+.card img[src*="Monthly"]{
 width:150px;
 height:150px;
-
 }
 
+/* VIP IMAGES */
 
-
-/* VIP ONLY BIG */
-
-.card img[src*="vip.png"]{
-
-width:300px;
-height:300px;
-
+.card img[src*="Vip"],
+.card img[src*="Svip"]{
+width:150px;
+height:150px;
 object-fit:contain;
-
 }
 
-
-
-/* SVIP ONLY BIG */
-
-.card img[src*="svip.png"]{
-
-width:300px;
-height:300px;
-
-object-fit:contain;
-
-}
-
+/* TEXT */
 
 .card h4{
-
 margin:5px 0;
-
 font-size:15px;
-
 }
-
-
 
 .card p{
-
 margin:0;
-
 font-size:13px;
-
 color:#475569;
-
 }
 
-
+/* BADGE */
 
 .badge{
-
 position:absolute;
-
 top:8px;
-
 right:8px;
-
 background:#facc15;
-
 color:black;
-
 font-size:10px;
-
 padding:5px 8px;
-
 border-radius:8px;
-
 font-weight:bold;
-
+z-index:2;
 }
 
+/* RIPPLE */
 
 .ripple{
-
 position:absolute;
-
 border-radius:50%;
-
 background:rgba(0,0,0,.15);
-
 transform:scale(0);
-
 animation:ripple .6s linear;
-
+pointer-events:none;
 }
-
-
 
 @keyframes ripple{
-
 to{
-
 transform:scale(4);
-
 opacity:0;
+}
+}
 
+/* MOBILE */
+
+@media(max-width:500px){
+
+.container{
+padding:12px;
+}
+
+h2{
+font-size:25px;
+}
+
+.grid{
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.card{
+padding:10px;
+border-radius:15px;
+}
+
+.card img{
+width:85px;
+height:85px;
+}
+
+.card img[src*="Weekly"],
+.card img[src*="Monthly"]{
+width:110px;
+height:110px;
+}
+
+.card img[src*="Vip"],
+.card img[src*="Svip"]{
+width:110px;
+height:110px;
+}
+
+.card h4{
+font-size:13px;
+}
+
+.card p{
+font-size:12px;
 }
 
 }
-
 
 </style>
 
-
 </head>
-
 
 <body>
 
-
 <div class="container">
-
 
 <h2>🎮 Game Top Up</h2>
 
 
+<!-- MEMBERSHIP -->
 
 <h3>Membership</h3>
 
-
 <div class="grid">
-
 
 <div class="card" onclick="selectPackage(event,this,'Weekly - LKR 600')">
 
-<img src="topupimages/Weekly.png">
+<img src="topupimages/Weekly.png" alt="Weekly">
 
 <h4>Weekly</h4>
 
@@ -298,10 +235,9 @@ opacity:0;
 </div>
 
 
-
 <div class="card" onclick="selectPackage(event,this,'Monthly - LKR 2800')">
 
-<img src="topupimages/Monthly.png">
+<img src="topupimages/Monthly.png" alt="Monthly">
 
 <h4>Monthly</h4>
 
@@ -310,10 +246,9 @@ opacity:0;
 </div>
 
 
-
 <div class="card" onclick="selectPackage(event,this,'Weekly Lite - LKR 150')">
 
-<img src="topupimages/Weekly-lite.png">
+<img src="topupimages/Weekly-Lite.png" alt="Weekly Lite">
 
 <h4>Weekly Lite</h4>
 
@@ -321,20 +256,18 @@ opacity:0;
 
 </div>
 
-
 </div>
 
 
+<!-- VIP -->
 
 <h3>VIP Bundles</h3>
 
-
 <div class="grid">
-
 
 <div class="card" onclick="selectPackage(event,this,'VIP Bundle - LKR 3400')">
 
-<img src="topupimages/Vip.png">
+<img src="topupimages/Vip.png" alt="VIP">
 
 <h4>VIP Bundle</h4>
 
@@ -343,10 +276,9 @@ opacity:0;
 </div>
 
 
-
 <div class="card" onclick="selectPackage(event,this,'SVIP Bundle - LKR 5200')">
 
-<img src="topupimages/Svip.png">
+<img src="topupimages/Svip.png" alt="SVIP">
 
 <h4>SVIP Bundle</h4>
 
@@ -354,71 +286,92 @@ opacity:0;
 
 </div>
 
-
 </div>
 
+
+<!-- LEVEL UP -->
 
 <h3>Level Up Pass</h3>
 
 <div class="grid">
 
-
 <div class="card" onclick="selectPackage(event,this,'Level 6 - LKR 130')">
-<img src="topupimages/Levelup.png">
+
+<img src="topupimages/Levelup.png" alt="Level Up">
+
 <h4>Level 6</h4>
+
 <p>LKR 130</p>
+
 </div>
 
 
 <div class="card" onclick="selectPackage(event,this,'Level 10 - LKR 260')">
-<img src="topupimages/Levelup.png">
+
+<img src="topupimages/Levelup.png" alt="Level Up">
+
 <h4>Level 10</h4>
+
 <p>LKR 260</p>
+
 </div>
 
 
 <div class="card" onclick="selectPackage(event,this,'Level 15 - LKR 260')">
-<img src="topupimages/Levelup.png">
+
+<img src="topupimages/Levelup.png" alt="Level Up">
+
 <h4>Level 15</h4>
+
 <p>LKR 260</p>
+
 </div>
 
 
 <div class="card" onclick="selectPackage(event,this,'Level 20 - LKR 260')">
-<img src="topupimages/Levelup.png">
+
+<img src="topupimages/Levelup.png" alt="Level Up">
+
 <h4>Level 20</h4>
+
 <p>LKR 260</p>
+
 </div>
 
 
 <div class="card" onclick="selectPackage(event,this,'Level 25 - LKR 260')">
-<img src="topupimages/Levelup.png">
+
+<img src="topupimages/Levelup.png" alt="Level Up">
+
 <h4>Level 25</h4>
+
 <p>LKR 260</p>
+
 </div>
 
 
 <div class="card" onclick="selectPackage(event,this,'Level 30 - LKR 380')">
-<img src="topupimages/Levelup.png">
+
+<img src="topupimages/Levelup.png" alt="Level Up">
+
 <h4>Level 30</h4>
+
 <p>LKR 380</p>
-</div>
-
 
 </div>
 
+</div>
 
 
+<!-- EVO -->
 
 <h3>EVO Access</h3>
 
-
 <div class="grid">
-
 
 <div class="card" onclick="selectPackage(event,this,'E Badge 3 - LKR 250')">
 
-<img src="topupimages/Evo.png">
+<img src="topupimages/Evo.png" alt="EVO">
 
 <h4>E Badge 3</h4>
 
@@ -427,10 +380,9 @@ opacity:0;
 </div>
 
 
-
 <div class="card" onclick="selectPackage(event,this,'E Badge 7 - LKR 350')">
 
-<img src="topupimages/Evo.png">
+<img src="topupimages/Evo.png" alt="EVO">
 
 <h4>E Badge 7</h4>
 
@@ -439,10 +391,9 @@ opacity:0;
 </div>
 
 
-
 <div class="card" onclick="selectPackage(event,this,'E Badge 30 - LKR 1100')">
 
-<img src="topupimages/Evo.png">
+<img src="topupimages/Evo.png" alt="EVO">
 
 <h4>E Badge 30</h4>
 
@@ -450,23 +401,19 @@ opacity:0;
 
 </div>
 
-
 </div>
 
 
-
-
+<!-- DIAMONDS -->
 
 <h3>💎 Diamonds</h3>
-
 
 <div class="grid">
 
 
-
 <div class="card" onclick="selectPackage(event,this,'25 Diamonds - LKR 150')">
 
-<img src="topupimages/Diamond.png">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>25 Diamonds</h4>
 
@@ -475,10 +422,9 @@ opacity:0;
 </div>
 
 
-
 <div class="card" onclick="selectPackage(event,this,'100 Diamonds - LKR 380')">
 
-<img src="topupimages/Diamond.png">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>100 Diamonds</h4>
 
@@ -487,11 +433,9 @@ opacity:0;
 </div>
 
 
-
-
 <div class="card" onclick="selectPackage(event,this,'310 Diamonds - LKR 1150')">
 
-<img src="topupimages/Diamond.png">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>310 Diamonds</h4>
 
@@ -500,13 +444,11 @@ opacity:0;
 </div>
 
 
-
-
 <div class="card" onclick="selectPackage(event,this,'520 Diamonds - LKR 1800')">
 
 <span class="badge">BEST</span>
 
-<img src="topupimages/Diamond.png">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>520 Diamonds</h4>
 
@@ -515,10 +457,9 @@ opacity:0;
 </div>
 
 
-
 <div class="card" onclick="selectPackage(event,this,'1060 Diamonds - LKR 3400')">
 
-<img src="topupimages/Diamond.png">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>1060 Diamonds</h4>
 
@@ -527,11 +468,9 @@ opacity:0;
 </div>
 
 
-
-
 <div class="card" onclick="selectPackage(event,this,'2180 Diamonds - LKR 6500')">
 
-<img src="topupimages/Diamond.png">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>2180 Diamonds</h4>
 
@@ -540,11 +479,9 @@ opacity:0;
 </div>
 
 
-
-
 <div class="card" onclick="selectPackage(event,this,'5600 Diamonds - LKR 16500')">
 
-<img src="topupimages/Diamond.png">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>5600 Diamonds</h4>
 
@@ -553,11 +490,9 @@ opacity:0;
 </div>
 
 
-
-
 <div class="card" onclick="selectPackage(event,this,'11500 Diamonds - LKR 35000')">
 
-<img src="topupimages/Diamond.png">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>11500 Diamonds</h4>
 
@@ -565,76 +500,47 @@ opacity:0;
 
 </div>
 
-
 </div>
-
 
 </div>
 
 
 <script>
 
-
 function selectPackage(e, card, name){
 
-
-// Save selected package
-
+/* Save selected package */
 localStorage.setItem("package", name);
 
-
-
-// Ripple animation
-
+/* Ripple animation */
 let ripple = document.createElement("span");
 
 ripple.className = "ripple";
 
-
-
 let rect = card.getBoundingClientRect();
 
-
-
 ripple.style.width = "120px";
-
 ripple.style.height = "120px";
 
+ripple.style.left =
+(e.clientX - rect.left - 60) + "px";
 
-
-ripple.style.left = (e.clientX - rect.left - 60) + "px";
-
-ripple.style.top = (e.clientY - rect.top - 60) + "px";
-
-
+ripple.style.top =
+(e.clientY - rect.top - 60) + "px";
 
 card.appendChild(ripple);
 
 
-
-setTimeout(()=>{
-
-ripple.remove();
-
-},600);
-
-
-
-// Go to payment page
-
-setTimeout(()=>{
+/* Go to payment page */
+setTimeout(function(){
 
 window.location.href = "payment.html";
 
 },250);
 
-
-
 }
 
-
 </script>
-
 
 </body>
 
