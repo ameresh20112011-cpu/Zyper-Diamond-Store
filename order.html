@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Diamond Store - Order</title>
 
@@ -23,20 +19,12 @@ box-sizing:border-box;
 body{
 
 margin:0;
-
 font-family:'Segoe UI',Arial,sans-serif;
 
 background:
-linear-gradient(
-135deg,
-#020617,
-#0f172a,
-#312e81
-);
+linear-gradient(135deg,#020617,#0f172a,#312e81);
 
 color:white;
-
-min-height:100vh;
 
 }
 
@@ -45,14 +33,8 @@ min-height:100vh;
 .container{
 
 padding:20px;
-
 display:flex;
-
 justify-content:center;
-
-align-items:center;
-
-min-height:100vh;
 
 }
 
@@ -61,24 +43,17 @@ min-height:100vh;
 .card{
 
 width:100%;
-
 max-width:420px;
 
-background:
-rgba(255,255,255,0.08);
+background:rgba(255,255,255,0.08);
 
-backdrop-filter:
-blur(15px);
-
--webkit-backdrop-filter:
-blur(15px);
+backdrop-filter:blur(15px);
 
 padding:25px;
 
 border-radius:25px;
 
-border:
-1px solid rgba(255,255,255,.15);
+border:1px solid rgba(255,255,255,.15);
 
 box-shadow:
 0 20px 50px rgba(0,0,0,.4);
@@ -90,10 +65,7 @@ box-shadow:
 .logo{
 
 text-align:center;
-
 font-size:45px;
-
-margin-bottom:5px;
 
 }
 
@@ -102,22 +74,12 @@ margin-bottom:5px;
 .title{
 
 text-align:center;
-
 font-size:26px;
-
 font-weight:800;
 
-margin:5px 0;
-
-background:
-linear-gradient(
-90deg,
-#60a5fa,
-#c084fc
-);
+background:linear-gradient(90deg,#60a5fa,#c084fc);
 
 -webkit-background-clip:text;
-
 background-clip:text;
 
 color:transparent;
@@ -156,17 +118,6 @@ color:white;
 
 font-size:15px;
 
-outline:none;
-
-}
-
-
-
-input:focus{
-
-box-shadow:
-0 0 0 2px #60a5fa;
-
 }
 
 
@@ -179,9 +130,8 @@ color:#94a3b8;
 
 
 
-/* =========================
-UPLOAD BOX
-========================= */
+/* Upload Box */
+
 
 .upload-box{
 
@@ -192,6 +142,7 @@ margin-top:20px;
 
 
 .upload-label{
+
 
 display:flex;
 
@@ -215,9 +166,11 @@ rgba(37,99,235,.25),
 rgba(124,58,237,.25)
 );
 
+
 cursor:pointer;
 
 transition:.3s;
+
 
 }
 
@@ -263,8 +216,6 @@ color:#cbd5e1;
 
 font-size:14px;
 
-margin:0;
-
 }
 
 
@@ -274,23 +225,17 @@ margin:0;
 border-color:#22c55e;
 
 background:
+
 rgba(34,197,94,.15);
 
 }
 
 
 
-/* =========================
-RECEIPT PREVIEW
-========================= */
 
 .preview{
 
 width:100%;
-
-max-height:500px;
-
-object-fit:contain;
 
 margin-top:15px;
 
@@ -298,15 +243,11 @@ border-radius:15px;
 
 display:none;
 
-background:#020617;
-
 }
 
 
 
-/* =========================
-BUTTON
-========================= */
+
 
 button{
 
@@ -336,41 +277,17 @@ font-weight:bold;
 
 cursor:pointer;
 
-transition:.2s;
-
 }
 
 
 
 button:hover{
 
-transform:
-translateY(-2px);
-
-box-shadow:
-0 10px 25px rgba(59,130,246,.3);
+transform:translateY(-2px);
 
 }
 
 
-
-button:disabled{
-
-opacity:.6;
-
-cursor:not-allowed;
-
-transform:none;
-
-box-shadow:none;
-
-}
-
-
-
-/* =========================
-LOADING
-========================= */
 
 #loading{
 
@@ -382,96 +299,19 @@ color:#93c5fd;
 
 margin-top:15px;
 
-font-size:14px;
-
 }
 
 
-
-/* =========================
-ORDER NUMBER
-========================= */
-
-#successBox{
-
-display:none;
-
-margin-top:20px;
-
-padding:18px;
-
-border-radius:15px;
-
-background:
-rgba(34,197,94,.12);
-
-border:
-1px solid rgba(34,197,94,.4);
-
-text-align:center;
-
-}
-
-
-
-#successBox h3{
-
-margin:0 0 10px;
-
-color:#86efac;
-
-}
-
-
-
-#orderNumber{
-
-font-size:28px;
-
-font-weight:800;
-
-letter-spacing:3px;
-
-color:white;
-
-}
-
-
-
-/* =========================
-MOBILE
-========================= */
-
-@media(max-width:480px){
-
-.container{
-
-padding:12px;
-
-}
-
-.card{
-
-padding:20px;
-
-border-radius:22px;
-
-}
-
-.title{
-
-font-size:24px;
-
-}
-
-}
 
 </style>
+
 
 </head>
 
 
+
 <body>
+
 
 
 <div class="container">
@@ -485,70 +325,99 @@ font-size:24px;
 </div>
 
 
+
 <h2 class="title">
+
 Place Your Order
+
 </h2>
 
 
+
 <p class="subtitle">
+
 Complete your diamond purchase
+
 </p>
 
 
-<!-- GAME UID -->
+
 
 <input
-type="text"
+
 id="uid"
+
 placeholder="🎮 Enter Game UID"
-autocomplete="off"
+
 >
 
 
-<!-- SELECTED PACKAGE -->
+
 
 <input
-type="text"
+
 id="diamond"
+
 readonly
+
 placeholder="💎 Selected Package"
+
 >
 
 
-<!-- RECEIPT -->
+
+
 
 <div class="upload-box">
 
 
 <input
+
 type="file"
+
 id="receipt"
+
 accept="image/*"
+
 hidden
+
 >
 
 
+
 <label
+
 for="receipt"
+
 class="upload-label"
+
+
+
 >
 
 
 <div class="upload-icon">
+
 📸
+
 </div>
+
 
 
 <div class="upload-text">
 
 
 <h3>
+
 Upload Payment Receipt
+
 </h3>
 
 
 <p>
+
 Tap here to select screenshot
+
 </p>
 
 
@@ -558,63 +427,54 @@ Tap here to select screenshot
 </label>
 
 
+
 </div>
 
 
-<!-- PREVIEW -->
+
+
 
 <img
+
 id="preview"
+
 class="preview"
-alt="Receipt Preview"
+
 >
 
 
-<!-- SEND BUTTON -->
+
 
 <button id="send">
+
 🚀 Place Order
+
 </button>
 
 
-<!-- LOADING -->
 
 <p id="loading">
+
 ⏳ Sending Order...
+
 </p>
 
 
-<!-- SUCCESS -->
 
-<div id="successBox">
-
-<h3>
-✅ Order Submitted
-</h3>
-
-<div>
-Order Number
-</div>
-
-<div id="orderNumber">
-00000
-</div>
 
 </div>
 
 
 </div>
 
-</div>
+
+
+
 
 
 
 <script type="module">
 
-
-// =====================================================
-// FIREBASE IMPORTS
-// =====================================================
 
 import {
 
@@ -627,10 +487,25 @@ from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
+
+import {
+
+getFirestore,
+collection,
+addDoc,
+serverTimestamp
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
 import {
 
 getAuth,
-
 onAuthStateChanged
 
 }
@@ -640,670 +515,365 @@ from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-// =====================================================
-// FIREBASE CONFIG
-// =====================================================
+
+
+
 
 const firebaseConfig = {
 
-apiKey:
-"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
 
-authDomain:
-"zyper-d-iamond-store.firebaseapp.com",
+apiKey:"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
 
-projectId:
-"zyper-d-iamond-store",
+authDomain:"zyper-d-iamond-store.firebaseapp.com",
 
-messagingSenderId:
-"892467477866",
+projectId:"zyper-d-iamond-store",
 
-appId:
-"1:892467477866:web:61e9b6ff9435798da23913"
+messagingSenderId:"892467477866",
+
+appId:"1:892467477866:web:61e9b6ff9435798da23913"
 
 };
 
 
-// =====================================================
-// FIREBASE INITIALIZE
-// =====================================================
+
+
 
 const app =
-initializeApp(
-firebaseConfig
-);
+initializeApp(firebaseConfig);
+
+
+const db =
+getFirestore(app);
 
 
 const auth =
-getAuth(
-app
-);
+getAuth(app);
 
 
-// =====================================================
-// FIREBASE FUNCTION URL
-// =====================================================
-//
-// IMPORTANT:
-// If Firebase gives you another URL after deployment,
-// replace the URL below with your actual URL.
-//
-// =====================================================
 
-const FUNCTION_URL =
-
-"https://asia-south1-zyper-d-iamond-store.cloudfunctions.net/sendReceipt";
+let currentUser=null;
 
 
-// =====================================================
-// CURRENT USER
-// =====================================================
-
-let currentUser = null;
 
 
-// =====================================================
-// AUTH STATE
-// =====================================================
+onAuthStateChanged(auth,(user)=>{
 
-onAuthStateChanged(
-
-auth,
-
-(user) => {
 
 if(user){
 
-currentUser =
-user;
+currentUser=user;
 
 }
 
 else{
 
-location.href =
-"index.html";
+location.href="index.html";
 
 }
 
-}
 
-);
+});
 
 
-// =====================================================
-// SELECTED PACKAGE
-// =====================================================
 
-const savedPackage =
 
-localStorage.getItem(
-"package"
-);
+
+let savedPackage =
+localStorage.getItem("package");
 
 
 if(savedPackage){
 
-document
-.getElementById(
-"diamond"
-)
-.value =
-savedPackage;
+document.getElementById("diamond").value=savedPackage;
 
 }
 
 
-// =====================================================
-// RECEIPT UPLOAD
-// =====================================================
+
+
+
+
+// BEAUTIFUL RECEIPT UPLOAD
+
 
 document
-.getElementById(
-"receipt"
-)
-.addEventListener(
-
-"change",
-
-function(){
-
-const file =
-this.files[0];
+.getElementById("receipt")
+.addEventListener("change",function(){
 
 
-if(!file){
+let file=this.files[0];
 
-return;
+
+if(file){
+
+
+let img=document.getElementById("preview");
+
+
+img.src=URL.createObjectURL(file);
+
+
+img.style.display="block";
+
+
+
+document
+.querySelector(".upload-label")
+.classList.add("active");
+
+
+
+document
+.querySelector(".upload-text h3")
+.innerHTML="✅ Receipt Selected";
+
+
+
+document
+.querySelector(".upload-text p")
+.innerHTML=file.name;
+
 
 }
 
 
-// IMAGE PREVIEW
-
-const preview =
-document.getElementById(
-"preview"
-);
+});
 
 
-preview.src =
-URL.createObjectURL(
-file
-);
 
 
-preview.style.display =
-"block";
 
 
-// CHANGE UPLOAD BOX
 
-document
-.querySelector(
-".upload-label"
-)
-.classList.add(
-"active"
-);
+// SEND ORDER
 
 
 document
-.querySelector(
-".upload-text h3"
-)
-.innerHTML =
-"✅ Receipt Selected";
+.getElementById("send")
+.onclick=async()=>{
 
-
-document
-.querySelector(
-".upload-text p"
-)
-.innerHTML =
-file.name;
-
-}
-
-);
-
-
-// =====================================================
-// FILE TO BASE64
-// =====================================================
-
-function fileToBase64(file){
-
-return new Promise(
-
-(resolve,reject) => {
-
-const reader =
-new FileReader();
-
-
-reader.onload =
-function(){
-
-resolve(
-reader.result
-);
-
-};
-
-
-reader.onerror =
-function(error){
-
-reject(
-error
-);
-
-};
-
-
-reader.readAsDataURL(
-file
-);
-
-}
-
-);
-
-}
-
-
-// =====================================================
-// PLACE ORDER
-// =====================================================
-
-document
-.getElementById(
-"send"
-)
-.addEventListener(
-
-"click",
-
-async function(){
-
-
-// =====================================================
-// CHECK LOGIN
-// =====================================================
 
 if(!currentUser){
 
-alert(
-"Please login first."
-);
+alert("Please login first");
 
 return;
 
 }
 
 
-// =====================================================
-// GET VALUES
-// =====================================================
 
-const uid =
-
-document
-.getElementById(
-"uid"
-)
-.value
-.trim();
+let uid=
+document.getElementById("uid").value.trim();
 
 
-const packageName =
 
-document
-.getElementById(
-"diamond"
-)
-.value
-.trim();
+let pack=
+document.getElementById("diamond").value;
 
 
-const receipt =
 
-document
-.getElementById(
-"receipt"
-)
-.files[0];
+let receipt=
+document.getElementById("receipt").files[0];
 
 
-// =====================================================
-// VALIDATION
-// =====================================================
 
-if(uid === ""){
 
-alert(
-"🎮 Please enter your Game UID."
-);
+
+if(uid==""){
+
+alert("Enter Game UID");
 
 return;
 
 }
 
-
-if(packageName === ""){
-
-alert(
-"💎 Please select a package."
-);
-
-return;
-
-}
 
 
 if(!receipt){
 
-alert(
-"📸 Please upload your payment receipt."
-);
+alert("Upload payment receipt");
 
 return;
 
 }
 
 
-// =====================================================
-// FILE TYPE CHECK
-// =====================================================
-
-if(
-!receipt.type.startsWith(
-"image/"
-)
-){
-
-alert(
-"Please upload an image receipt."
-);
-
-return;
-
-}
-
-
-// =====================================================
-// FILE SIZE
-// =====================================================
-
-if(
-receipt.size >
-8 * 1024 * 1024
-){
-
-alert(
-"Receipt is too large.\n\nPlease upload an image smaller than 8MB."
-);
-
-return;
-
-}
-
-
-// =====================================================
-// BUTTON / LOADING
-// =====================================================
-
-const sendButton =
-document.getElementById(
-"send"
-);
-
-
-const loading =
-document.getElementById(
-"loading"
-);
-
-
-sendButton.disabled =
-true;
-
-
-sendButton.innerHTML =
-"⏳ Sending...";
-
-
-loading.style.display =
-"block";
 
 
 try{
 
 
-// =====================================================
-// GET FIREBASE LOGIN TOKEN
-// =====================================================
+document
+.getElementById("loading")
+.style.display="block";
 
-const idToken =
 
-await currentUser
-.getIdToken(
-true
+
+const orderRef =
+await addDoc(
+
+collection(db,"orders"),
+
+{
+
+userId:currentUser.uid,
+
+email:currentUser.email,
+
+gameUID:uid,
+
+package:pack,
+
+status:"Pending",
+
+receipt:"Telegram",
+
+createdAt:serverTimestamp()
+
+}
+
 );
 
 
-// =====================================================
-// CONVERT RECEIPT
-// =====================================================
 
-const receiptBase64 =
 
-await fileToBase64(
+let orderID=orderRef.id;
+
+
+
+
+
+
+let formData=new FormData();
+
+
+formData.append(
+"photo",
 receipt
 );
 
 
-// =====================================================
-// SEND TO FIREBASE FUNCTION
-// =====================================================
 
-const response =
+formData.append(
+"caption",
 
-await fetch(
+`
 
-FUNCTION_URL,
+💎 New Zyper Order
 
-{
+🆔 Order ID:
+${orderID}
 
-method:
-"POST",
-
-headers:{
-
-"Content-Type":
-"application/json",
-
-"Authorization":
-"Bearer " +
-idToken
-
-},
-
-body:
-JSON.stringify({
-
-uid:
-uid,
-
-package:
-packageName,
-
-receiptBase64:
-receiptBase64,
-
-receiptName:
-receipt.name,
-
-receiptType:
-receipt.type
-
-})
-
-}
-
-);
-
-
-// =====================================================
-// GET SERVER RESPONSE
-// =====================================================
-
-let result;
-
-
-try{
-
-result =
-await response.json();
-
-}
-
-catch(error){
-
-throw new Error(
-"Invalid response from server."
-);
-
-}
-
-
-// =====================================================
-// SERVER ERROR
-// =====================================================
-
-if(
-!response.ok ||
-!result.success
-){
-
-throw new Error(
-
-result.message ||
-"Unable to place order."
-
-);
-
-}
-
-
-// =====================================================
-// ORDER NUMBER
-// =====================================================
-
-const orderNumber =
-
-result.order_number;
-
-
-// =====================================================
-// SAVE ORDER NUMBER
-// =====================================================
-
-localStorage.setItem(
-
-"orderNumber",
-
-orderNumber
-
-);
-
-
-// =====================================================
-// SHOW SUCCESS
-// =====================================================
-
-document
-.getElementById(
-"orderNumber"
-)
-.innerText =
-orderNumber;
-
-
-document
-.getElementById(
-"successBox"
-)
-.style.display =
-"block";
-
-
-// =====================================================
-// WHATSAPP MESSAGE
-// =====================================================
-
-const whatsappMessage =
-
-`💎 Zyper Diamond Store
-
-🧾 Order Number:
-${orderNumber}
-
-🆔 UID:
+🎮 UID:
 ${uid}
 
 💎 Package:
-${packageName}
+${pack}
 
-📧 Email:
+👤 Email:
 ${currentUser.email}
 
-📌 Payment Completed`;
+`
+
+);
+
+
+
+
+
+fetch(
+"telegram.php",
+{
+
+method:"POST",
+
+body:formData
+
+}
+
+);
+
+
+
+
+
+let message=
+
+`
+
+💎 Zyper Diamond Store
+
+Order ID:
+${orderID}
+
+UID:
+${uid}
+
+Package:
+${pack}
+
+Payment Completed
+
+`;
+
+
+
 
 
 window.open(
 
-"https://wa.me/94751483909?text=" +
-encodeURIComponent(
-whatsappMessage
-),
+"https://wa.me/94751483909?text="+encodeURIComponent(message),
 
 "_blank"
 
 );
 
 
-// =====================================================
-// SUCCESS MESSAGE
-// =====================================================
+
+
 
 alert(
-
-"✅ Order Sent Successfully!\n\n" +
-
-"🧾 Order Number:\n" +
-
-orderNumber
-
+"✅ Order Sent\n\nOrder ID:\n"+orderID
 );
 
 
-// =====================================================
-// GO TRACK PAGE
-// =====================================================
 
-location.href =
 
-"track.html?id=" +
-encodeURIComponent(
-orderNumber
-);
+location.href="track.html?id="+orderID;
+
+
 
 
 }
 
 catch(error){
 
-console.error(
-"ORDER ERROR:",
-error
-);
 
+alert(error.message);
 
-alert(
-
-"❌ Order Failed\n\n" +
-
-error.message
-
-);
 
 }
 
-
-// =====================================================
-// RESET LOADING
-// =====================================================
 
 finally{
 
-sendButton.disabled =
-false;
 
-sendButton.innerHTML =
-"🚀 Place Order";
+document
+.getElementById("loading")
+.style.display="none";
 
-loading.style.display =
-"none";
 
 }
 
-}
 
-);
+
+};
+
+
 
 </script>
+
 
 
 </body>
