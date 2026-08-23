@@ -1,0 +1,70 @@
+/* 🔙 Back button */
+.back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: none;
+
+  background: #00f2ff;
+  color: black;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  width: auto !important;
+  display: inline-block;
+
+  box-shadow: 0 0 10px #00f2ff;
+  z-index: 1000;
+
+  transition: 0.3s;
+}
+
+/* ✨ Hover effect */
+.back:hover{
+  box-shadow:
+    0 0 10px #00f2ff,
+    0 0 20px #00f2ff,
+    0 0 40px #00f2ff;
+
+  transform: scale(1.05);
+}
+
+/* 📱 Tablet */
+@media screen and (max-width: 1024px){
+
+  .back{
+    top: 15px;
+    left: 15px;
+    padding: 7px 14px;
+    font-size: 14px;
+  }
+
+}
+
+/* 📲 Mobile */
+@media screen and (max-width: 768px){
+
+  .back{
+    top: 10px;
+    left: 10px;
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+}
+
+/* 📱 Small Mobile */
+@media screen and (max-width: 480px){
+
+  .back{
+    top: 8px;
+    left: 8px;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+}

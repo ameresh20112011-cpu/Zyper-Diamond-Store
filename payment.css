@@ -1,0 +1,168 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+}
+
+/* Container */
+.container {
+  width: 80%;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+/* Card */
+.card {
+  background: rgba(0,0,0,0.6);
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #00f2ff;
+  backdrop-filter: blur(10px);
+
+  display: grid;
+  gap: 15px;
+}
+
+/* Title */
+.title {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px #00f2ff;
+}
+
+/* Text highlight */
+.highlight {
+  color: #00f2ff;
+}
+
+/* Input fields */
+input {
+  width: 96%;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #111;
+  color: white;
+  box-shadow: 0 0 9px #00f2ff inset;
+}
+
+/* File input */
+input[type="file"] {
+  background: none;
+  box-shadow: none;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #00f2ff;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #00c3cc;
+  box-shadow: 0 0 15px #00f2ff;
+}
+
+/* Back button */
+.back {
+  width: auto !important;
+  padding: 8px 15px;
+  margin: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #00f2ff;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  box-shadow: 0 0 10px #00f2ff;
+}
+
+.back:hover {
+  box-shadow: 0 0 20px #00f2ff;
+}
+
+/* Small text */
+.preview {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 5px;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* Tablet */
+@media screen and (max-width: 1024px) {
+
+  .container {
+    width: 90%;
+  }
+
+  .card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+
+  .container {
+    width: 95%;
+  }
+
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  input {
+    width: 94%;
+  }
+}
+
+/* Small Mobile */
+@media screen and (max-width: 480px) {
+
+  h1 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  button {
+    padding: 10px;
+  }
+}

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Orders - Zyper Diamond Store</title>
+
+
+<style>
+
+body{
+
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0f172a;
+    color:white;
+
+}
+
+
+h2{
+
+    text-align:center;
+    color:#60a5fa;
+    margin-top:20px;
+
+}
+
+
+
+.order-card{
+
+    background:#1e293b;
+
+    margin:20px;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+
+}
+
+
+
+.status{
+
+    font-weight:bold;
+    font-size:18px;
+
+}
+
+
+
+.pending{
+
+    color:#facc15;
+
+}
+
+
+
+.approved{
+
+    color:#22c55e;
+
+}
+
+
+
+.rejected{
+
+    color:#ef4444;
+
+}
+
+
+
+.track-btn,
+.home-btn{
+
+
+    width:90%;
+
+    margin:15px auto;
+
+    display:block;
+
+    padding:13px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+}
+
+
+
+.track-btn{
+
+    width:100%;
+
+    margin-top:10px;
+
+}
+
+
+
+.empty{
+
+    text-align:center;
+
+    margin-top:50px;
+
+    font-size:18px;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+
+<h2>
+📜 My Order History
+</h2>
+
+
+
+<div id="orders">
+
+<p class="empty">
+⏳ Loading orders...
+</p>
+
+</div>
+
+
+
+
+<button class="home-btn" onclick="goHome()">
+
+🏠 Go Home
+
+</button>
+
+
+
+
+
+
+<script type="module">
+
+
+
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+
+import {
+
+getFirestore,
+
+collection,
+
+query,
+
+where,
+
+getDocs
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+import {
+
+getAuth,
+
+onAuthStateChanged
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+
+
+
+
+
+const firebaseConfig = {
+
+
+apiKey:"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
+
+authDomain:"zyper-d-iamond-store.firebaseapp.com",
+
+projectId:"zyper-d-iamond-store",
+
+messagingSenderId:"892467477866",
+
+appId:"1:892467477866:web:61e9b6ff9435798da23913"
+
+};
+
+
+
+
+
+
+const app = initializeApp(firebaseConfig);
+
+
+const db = getFirestore(app);
+
+
+const auth = getAuth(app);
+
+
+
+const ordersDiv =
+document.getElementById("orders");
+
+
+
+
+
+
+
+onAuthStateChanged(auth, async(user)=>{
+
+
+
+if(!user){
+
+
+ordersDiv.innerHTML = `
+
+<p class="empty">
+
+❌ Please Login First
+
+</p>
+
+`;
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+try{
+
+
+const q = query(
+
+
+collection(db,"orders"),
+
+
+where(
+"userId",
+"==",
+user.uid
+)
+
+
+);
+
+
+
+
+
+
+const snapshot = await getDocs(q);
+
+
+
+
+
+
+
+if(snapshot.empty){
+
+
+ordersDiv.innerHTML = `
+
+<p class="empty">
+
+📦 No Orders Found
+
+</p>
+
+`;
+
+return;
+
+
+}
+
+
+
+
+
+
+
+ordersDiv.innerHTML="";
+
+
+
+
+
+
+
+snapshot.forEach((order)=>{
+
+
+
+const data = order.data();
+
+
+
+let statusClass="pending";
+
+
+
+if(data.status=="Approved"){
+
+statusClass="approved";
+
+}
+
+
+
+if(data.status=="Rejected"){
+
+statusClass="rejected";
+
+}
+
+
+
+
+
+ordersDiv.innerHTML += `
+
+
+<div class="order-card">
+
+
+<h3>
+💎 Diamond Order
+</h3>
+
+
+
+<p>
+
+<b>Order ID:</b><br>
+
+${order.id}
+
+</p>
+
+
+
+
+<p>
+
+<b>Game UID:</b><br>
+
+${data.gameUID}
+
+</p>
+
+
+
+
+<p>
+
+<b>Package:</b><br>
+
+${data.package}
+
+</p>
+
+
+
+
+
+<p>
+
+<b>Status:</b>
+
+<span class="status ${statusClass}">
+
+${data.status}
+
+</span>
+
+
+</p>
+
+
+
+
+
+<button class="track-btn"
+
+onclick="trackOrder('${order.id}')">
+
+🔎 Track Order
+
+</button>
+
+
+
+</div>
+
+
+
+`;
+
+
+
+
+});
+
+
+
+
+
+}
+
+catch(error){
+
+
+
+console.log(error);
+
+
+ordersDiv.innerHTML = `
+
+<p class="empty">
+
+❌ ${error.message}
+
+</p>
+
+`;
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+
+
+window.trackOrder=function(id){
+
+
+window.location.href =
+"track.html?id="+id;
+
+
+}
+
+
+
+
+
+window.goHome=function(){
+
+
+window.location.href =
+"home.html";
+
+
+}
+
+
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

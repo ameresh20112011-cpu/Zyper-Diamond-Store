@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Zyper Dashboard
+</title>
+
+<link rel="stylesheet" href="admin.css">
+
+</head>
+
+
+<body>
+
+
+<!-- HIDDEN UNTIL ADMIN VERIFIED -->
+<div id="app" style="display:none;">
+
+
+
+<div class="sidebar">
+
+
+<h1>
+💎 Zyper
+</h1>
+
+
+<h3>
+Admin Panel
+</h3>
+
+
+
+<button id="logout">
+Logout
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="main">
+
+
+<h1>
+Orders Dashboard
+</h1>
+
+
+
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>
+Orders
+</h3>
+
+<h2 id="totalOrders">
+0
+</h2>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+Revenue
+</h3>
+
+<h2>
+$<span id="revenue">
+0
+</span>
+</h2>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+Pending
+</h3>
+
+<h2 id="pendingOrders">
+0
+</h2>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+Success
+</h3>
+
+<h2 id="successOrders">
+0
+</h2>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<input 
+id="search"
+placeholder="Search order">
+
+
+
+
+
+
+
+<table>
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+Order ID
+</th>
+
+
+<th>
+Customer
+</th>
+
+
+<th>
+Firebase UID
+</th>
+
+
+<th>
+Game UID
+</th>
+
+
+<th>
+Product
+</th>
+
+
+<th>
+Price
+</th>
+
+
+<th>
+Payment
+</th>
+
+
+<th>
+Date Time
+</th>
+
+
+<th>
+Total
+</th>
+
+
+<th>
+Status
+</th>
+
+
+<th>
+Action
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+<tbody id="orders">
+
+
+</tbody>
+
+
+</table>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script type="module" src="admin.js"></script>
+
+
+</body>
+
+</html>

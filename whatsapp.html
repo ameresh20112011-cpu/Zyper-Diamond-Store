@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Contact us</title>
+  <link rel="icon" href="1.jpg">
+<link rel="stylesheet" href="whatsapp.css">
+  <style>
+    body {
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background: linear-gradient(135deg,#0f172a,#1e293b);
+      color:white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+
+    .box {
+      text-align:center;
+      background: rgba(255,255,255,0.05);
+      padding:40px;
+      border-radius:20px;
+      backdrop-filter: blur(15px);
+    }
+
+    button {
+      padding:12px 25px;
+      border:none;
+      border-radius:12px;
+      background:linear-gradient(45deg,#25D366,#128C7E);
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+  </style>
+</head>
+
+<body>
+
+    <button class="back" onclick="goBack()">⬅ Back</button>
+
+<script>
+function goBack(){
+  window.location.href = "home.html";
+}
+</script>
+
+<div class="box">
+
+<h2>📲 Contact Support</h2>
+
+<button onclick="chat()">Chat on WhatsApp</button>
+
+</div>
+
+<script>
+function chat(){
+  const num="94751483909";
+  const msg="Hi Bro Web";
+
+  window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`);
+}
+</script>
+
+</body>
+</html>

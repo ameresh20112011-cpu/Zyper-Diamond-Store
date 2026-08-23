@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Track Order - Zyper Diamond Store</title>
+
+<style>
+
+body{
+    background:#0f172a;
+    color:white;
+    font-family:Arial;
+    margin:0;
+}
+
+
+h2{
+    text-align:center;
+    color:#60a5fa;
+}
+
+
+
+.card{
+
+    background:#1e293b;
+
+    margin:20px;
+
+    padding:20px;
+
+    border-radius:15px;
+
+}
+
+
+
+.status{
+
+    color:#22c55e;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+}
+
+
+
+.home-btn{
+
+    width:90%;
+
+    margin:20px auto;
+
+    display:block;
+
+    padding:14px;
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+.home-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+<h2>
+💎 Zyper Diamond Store
+</h2>
+
+
+
+<div class="card" id="box">
+
+Loading order...
+
+</div>
+
+
+
+<!-- HOME BUTTON -->
+
+<button class="home-btn" onclick="goHome()">
+
+🏠 Go To Home
+
+</button>
+
+
+
+
+
+
+
+<script type="module">
+
+
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+
+import {
+
+getFirestore,
+
+doc,
+
+getDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+import {
+
+getAuth,
+
+onAuthStateChanged
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+
+
+
+
+const firebaseConfig = {
+
+
+apiKey:"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
+
+authDomain:"zyper-d-iamond-store.firebaseapp.com",
+
+projectId:"zyper-d-iamond-store",
+
+messagingSenderId:"892467477866",
+
+appId:"1:892467477866:web:61e9b6ff9435798da23913"
+
+
+};
+
+
+
+
+
+
+const app = initializeApp(firebaseConfig);
+
+
+const db = getFirestore(app);
+
+
+const auth = getAuth(app);
+
+
+
+const box = document.getElementById("box");
+
+
+
+
+
+
+// GET ORDER ID
+
+const params =
+new URLSearchParams(window.location.search);
+
+
+
+const orderID =
+params.get("id");
+
+
+
+
+
+
+if(!orderID){
+
+
+box.innerHTML =
+"❌ No Order ID Found";
+
+
+}
+
+
+
+
+
+
+
+onAuthStateChanged(auth, async(user)=>{
+
+
+if(!user){
+
+
+box.innerHTML =
+"❌ Please Login First";
+
+
+return;
+
+
+}
+
+
+
+
+
+try{
+
+
+
+const orderSnap = await getDoc(
+
+doc(db,"orders",orderID)
+
+);
+
+
+
+
+
+if(!orderSnap.exists()){
+
+
+box.innerHTML =
+"❌ Order Not Found";
+
+
+return;
+
+
+}
+
+
+
+
+
+
+const data =
+orderSnap.data();
+
+
+
+
+
+let statusColor="#facc15";
+
+
+
+if(data.status=="Approved"){
+
+statusColor="#22c55e";
+
+}
+
+
+
+if(data.status=="Rejected"){
+
+statusColor="#ef4444";
+
+}
+
+
+
+
+
+
+box.innerHTML = `
+
+
+<h3>
+✅ Order Found
+</h3>
+
+
+
+<p>
+<b>Order ID:</b><br>
+${orderID}
+</p>
+
+
+
+<p>
+<b>Game UID:</b><br>
+${data.gameUID}
+</p>
+
+
+
+<p>
+<b>Package:</b><br>
+${data.package}
+</p>
+
+
+
+<p>
+<b>Status:</b><br>
+
+<span class="status" style="color:${statusColor}">
+
+${data.status}
+
+</span>
+
+</p>
+
+
+
+<p>
+<b>Email:</b><br>
+${data.email}
+</p>
+
+
+
+`;
+
+
+
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+box.innerHTML =
+"❌ Error: "+error.message;
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+
+// HOME FUNCTION
+
+window.goHome=function(){
+
+window.location.href="index.html";
+
+}
+
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

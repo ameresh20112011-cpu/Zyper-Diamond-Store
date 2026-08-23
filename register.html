@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Zyper Diamond Store</title>
+
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="media.css">
+<link rel="icon" href="1.jpg">
+
+</head>
+
+<body>
+
+<div class="login-container">
+  <div class="login-card">
+
+    <div class="login-header">
+      <h2>Create Account</h2>
+      <p>Sign up to continue</p>
+    </div>
+
+    <form id="registerForm" class="login-form">
+
+      <div class="form-group">
+        <div class="input-group neu-input">
+          <input type="email" id="email" required placeholder=" ">
+          <label>Email address</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group neu-input">
+          <input type="password" id="password" required placeholder=" ">
+          <label>Password</label>
+        </div>
+      </div>
+
+      <button type="submit" class="neu-button login-btn">
+        Create Account
+      </button>
+
+      <p id="successMsg" class="success-msg" style="display:none; color:rgb(255, 0, 0);">
+        Account Created Successfully ✅
+      </p>
+
+    </form>
+
+    <div class="signup-link">
+      <p>Already have an account? <a href="index.html">Login</a></p>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- 🔥 Firebase + Firestore Script -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+// ✅ Your Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
+  authDomain: "zyper-d-iamond-store.firebaseapp.com",
+  projectId: "zyper-d-iamond-store",
+  storageBucket: "zyper-d-iamond-store.firebasestorage.app",
+  messagingSenderId: "892467477866",
+  appId: "1:892467477866:web:61e9b6ff9435798da23913",
+};
+
+
+// ✅ Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+// ✅ Get elements
+const form = document.getElementById("registerForm");
+const msg = document.getElementById("successMsg");
+
+
+// ✅ Register function
+form.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const email = document.querySelector("#email").value.trim();
+  const password = document.querySelector("#password").value.trim();
+
+  // Password validation
+  if (password.length < 6) {
+    alert("Password must be at least 6 characters");
+    return;
+  }
+
+  try {
+
+    // ✅ Create user in Authentication
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    const user = userCredential.user;
+
+
+    // 🔥 Save user to Firestore
+    await setDoc(doc(db, "users", user.uid), {
+
+      uid: user.uid,
+      email: user.email,
+      createdAt: new Date()
+
+    });
+
+
+    // ✅ Show success message
+    msg.style.display = "block";
+
+
+    // ✅ Redirect after 2 seconds
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 2000);
+
+
+  } catch (error) {
+    alert(error.message);
+  }
+
+});
+
+</script>
+
+</body>
+</html>

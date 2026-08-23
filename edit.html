@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Profile</title>
+<link rel="stylesheet" href="ep.css">
+<link rel="stylesheet" href="media.css">
+</head>
+
+
+<body>
+
+<div class="profile-card">
+
+  <img id="preview" class="avatar">
+
+  <input type="file" id="file" accept="image/*">
+  <input type="text" id="name" placeholder="Enter Name">
+
+  <button onclick="save()">Save</button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
+  authDomain: "zyper-d-iamond-store.firebaseapp.com",
+  projectId: "zyper-d-iamond-store",
+  storageBucket: "zyper-d-iamond-store.firebasestorage.app",
+  messagingSenderId: "892467477866",
+  appId: "1:892467477866:web:61e9b6ff9435798da23913",
+  measurementId: "G-RLJFR6F2GC"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+let imageData = "";
+let currentUID = "";
+
+onAuthStateChanged(auth, (user) => {
+  if(user){
+    currentUID = user.uid;
+
+    let name = localStorage.getItem(currentUID + "_name");
+    let img = localStorage.getItem(currentUID + "_img");
+
+    if(name){
+      document.getElementById("name").value = name;
+    }
+
+    if(img){
+      document.getElementById("preview").src = img;
+    }
+  } else {
+    window.location.href = "index.html";
+  }
+});
+
+document.getElementById("file").addEventListener("change", function(e){
+  const file = e.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(){
+    imageData = reader.result;
+    document.getElementById("preview").src = imageData;
+  }
+
+  if(file){
+    reader.readAsDataURL(file);
+  }
+});
+
+window.save = function(){
+  let name = document.getElementById("name").value;
+
+  localStorage.setItem(currentUID + "_name", name);
+
+  if(imageData){
+    localStorage.setItem(currentUID + "_img", imageData);
+  }
+
+  window.location.href = "profile.html";
+}
+
+</script>
+
+</body>
+</html>

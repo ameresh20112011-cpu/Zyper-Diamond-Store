@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zyper Top Up</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#0f172a,#020617);
+color:white;
+}
+
+
+.container{
+padding:15px;
+max-width:900px;
+margin:auto;
+}
+
+
+h2{
+
+text-align:center;
+font-size:28px;
+font-weight:700;
+
+background:linear-gradient(90deg,#60a5fa,#c084fc);
+
+-webkit-background-clip:text;
+background-clip:text;
+
+color:transparent;
+
+}
+
+
+
+h3{
+
+margin-top:25px;
+color:#cbd5e1;
+
+}
+
+
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+
+}
+
+
+
+/* PACKAGE BOX */
+
+.card{
+
+background:#ffffff;
+
+color:#0f172a;
+
+aspect-ratio:1/1;
+
+border-radius:18px;
+
+padding:15px;
+
+box-sizing:border-box;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+cursor:pointer;
+
+position:relative;
+
+overflow:hidden;
+
+border:1px solid #e2e8f0;
+
+transition:.3s;
+
+}
+
+
+
+.card:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 12px 30px rgba(0,0,0,.25);
+
+}
+
+
+
+.card:active{
+
+transform:scale(.95);
+
+}
+
+
+
+/* IMAGES */
+
+.card img{
+
+width:100px;
+
+height:100px;
+
+object-fit:contain;
+
+margin-bottom:10px;
+
+}
+
+
+/* ALL NORMAL PACKAGE IMAGES */
+
+.card img{
+
+width:100px;
+height:100px;
+
+object-fit:contain;
+
+margin-bottom:10px;
+
+}
+
+
+
+/* MEMBERSHIP IMAGES */
+
+.card img[src*="weekly"],
+.card img[src*="monthly"],
+.card img[src*="weekly-lite"]{
+
+width:150px;
+height:150px;
+
+}
+
+
+
+/* VIP ONLY BIG */
+
+.card img[src*="vip.png"]{
+
+width:300px;
+height:300px;
+
+object-fit:contain;
+
+}
+
+
+
+/* SVIP ONLY BIG */
+
+.card img[src*="svip.png"]{
+
+width:300px;
+height:300px;
+
+object-fit:contain;
+
+}
+
+
+.card h4{
+
+margin:5px 0;
+
+font-size:15px;
+
+}
+
+
+
+.card p{
+
+margin:0;
+
+font-size:13px;
+
+color:#475569;
+
+}
+
+
+
+.badge{
+
+position:absolute;
+
+top:8px;
+
+right:8px;
+
+background:#facc15;
+
+color:black;
+
+font-size:10px;
+
+padding:5px 8px;
+
+border-radius:8px;
+
+font-weight:bold;
+
+}
+
+
+.ripple{
+
+position:absolute;
+
+border-radius:50%;
+
+background:rgba(0,0,0,.15);
+
+transform:scale(0);
+
+animation:ripple .6s linear;
+
+}
+
+
+
+@keyframes ripple{
+
+to{
+
+transform:scale(4);
+
+opacity:0;
+
+}
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h2>🎮 Game Top Up</h2>
+
+
+
+<h3>Membership</h3>
+
+
+<div class="grid">
+
+
+<div class="card" onclick="selectPackage(event,this,'Weekly - LKR 600')">
+
+<img src="topupimages/weekly.png">
+
+<h4>Weekly</h4>
+
+<p>LKR 600</p>
+
+</div>
+
+
+
+<div class="card" onclick="selectPackage(event,this,'Monthly - LKR 2800')">
+
+<img src="topupimages/monthly.png">
+
+<h4>Monthly</h4>
+
+<p>LKR 2800</p>
+
+</div>
+
+
+
+<div class="card" onclick="selectPackage(event,this,'Weekly Lite - LKR 150')">
+
+<img src="topupimages/weekly-lite.png">
+
+<h4>Weekly Lite</h4>
+
+<p>LKR 150</p>
+
+</div>
+
+
+</div>
+
+
+
+<h3>VIP Bundles</h3>
+
+
+<div class="grid">
+
+
+<div class="card" onclick="selectPackage(event,this,'VIP Bundle - LKR 3400')">
+
+<img src="topupimages/vip.png">
+
+<h4>VIP Bundle</h4>
+
+<p>LKR 3400</p>
+
+</div>
+
+
+
+<div class="card" onclick="selectPackage(event,this,'SVIP Bundle - LKR 5200')">
+
+<img src="topupimages/svip.png">
+
+<h4>SVIP Bundle</h4>
+
+<p>LKR 5200</p>
+
+</div>
+
+
+</div>
+
+
+<h3>Level Up Pass</h3>
+
+<div class="grid">
+
+
+<div class="card" onclick="selectPackage(event,this,'Level 6 - LKR 130')">
+<img src="topupimages/levelup.png">
+<h4>Level 6</h4>
+<p>LKR 130</p>
+</div>
+
+
+<div class="card" onclick="selectPackage(event,this,'Level 10 - LKR 260')">
+<img src="topupimages/levelup.png">
+<h4>Level 10</h4>
+<p>LKR 260</p>
+</div>
+
+
+<div class="card" onclick="selectPackage(event,this,'Level 15 - LKR 260')">
+<img src="topupimages/levelup.png">
+<h4>Level 15</h4>
+<p>LKR 260</p>
+</div>
+
+
+<div class="card" onclick="selectPackage(event,this,'Level 20 - LKR 260')">
+<img src="topupimages/levelup.png">
+<h4>Level 20</h4>
+<p>LKR 260</p>
+</div>
+
+
+<div class="card" onclick="selectPackage(event,this,'Level 25 - LKR 260')">
+<img src="topupimages/levelup.png">
+<h4>Level 25</h4>
+<p>LKR 260</p>
+</div>
+
+
+<div class="card" onclick="selectPackage(event,this,'Level 30 - LKR 380')">
+<img src="topupimages/levelup.png">
+<h4>Level 30</h4>
+<p>LKR 380</p>
+</div>
+
+
+</div>
+
+
+
+
+<h3>EVO Access</h3>
+
+
+<div class="grid">
+
+
+<div class="card" onclick="selectPackage(event,this,'E Badge 3 - LKR 250')">
+
+<img src="topupimages/evo.png">
+
+<h4>E Badge 3</h4>
+
+<p>LKR 250</p>
+
+</div>
+
+
+
+<div class="card" onclick="selectPackage(event,this,'E Badge 7 - LKR 350')">
+
+<img src="topupimages/evo.png">
+
+<h4>E Badge 7</h4>
+
+<p>LKR 350</p>
+
+</div>
+
+
+
+<div class="card" onclick="selectPackage(event,this,'E Badge 30 - LKR 1100')">
+
+<img src="topupimages/evo.png">
+
+<h4>E Badge 30</h4>
+
+<p>LKR 1100</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<h3>💎 Diamonds</h3>
+
+
+<div class="grid">
+
+
+
+<div class="card" onclick="selectPackage(event,this,'25 Diamonds - LKR 150')">
+
+<img src="topupimages/diamond.png">
+
+<h4>25 Diamonds</h4>
+
+<p>LKR 150</p>
+
+</div>
+
+
+
+<div class="card" onclick="selectPackage(event,this,'100 Diamonds - LKR 380')">
+
+<img src="topupimages/diamond.png">
+
+<h4>100 Diamonds</h4>
+
+<p>LKR 380</p>
+
+</div>
+
+
+
+
+<div class="card" onclick="selectPackage(event,this,'310 Diamonds - LKR 1150')">
+
+<img src="topupimages/diamond.png">
+
+<h4>310 Diamonds</h4>
+
+<p>LKR 1150</p>
+
+</div>
+
+
+
+
+<div class="card" onclick="selectPackage(event,this,'520 Diamonds - LKR 1800')">
+
+<span class="badge">BEST</span>
+
+<img src="topupimages/diamond.png">
+
+<h4>520 Diamonds</h4>
+
+<p>LKR 1800</p>
+
+</div>
+
+
+
+<div class="card" onclick="selectPackage(event,this,'1060 Diamonds - LKR 3400')">
+
+<img src="topupimages/diamond.png">
+
+<h4>1060 Diamonds</h4>
+
+<p>LKR 3400</p>
+
+</div>
+
+
+
+
+<div class="card" onclick="selectPackage(event,this,'2180 Diamonds - LKR 6500')">
+
+<img src="topupimages/diamond.png">
+
+<h4>2180 Diamonds</h4>
+
+<p>LKR 6500</p>
+
+</div>
+
+
+
+
+<div class="card" onclick="selectPackage(event,this,'5600 Diamonds - LKR 16500')">
+
+<img src="topupimages/diamond.png">
+
+<h4>5600 Diamonds</h4>
+
+<p>LKR 16500</p>
+
+</div>
+
+
+
+
+<div class="card" onclick="selectPackage(event,this,'11500 Diamonds - LKR 35000')">
+
+<img src="topupimages/diamond.png">
+
+<h4>11500 Diamonds</h4>
+
+<p>LKR 35000</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+function selectPackage(e, card, name){
+
+
+// Save selected package
+
+localStorage.setItem("package", name);
+
+
+
+// Ripple animation
+
+let ripple = document.createElement("span");
+
+ripple.className = "ripple";
+
+
+
+let rect = card.getBoundingClientRect();
+
+
+
+ripple.style.width = "120px";
+
+ripple.style.height = "120px";
+
+
+
+ripple.style.left = (e.clientX - rect.left - 60) + "px";
+
+ripple.style.top = (e.clientY - rect.top - 60) + "px";
+
+
+
+card.appendChild(ripple);
+
+
+
+setTimeout(()=>{
+
+ripple.remove();
+
+},600);
+
+
+
+// Go to payment page
+
+setTimeout(()=>{
+
+window.location.href = "payment.html";
+
+},250);
+
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
