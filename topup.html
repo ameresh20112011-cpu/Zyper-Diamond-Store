@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -52,7 +53,7 @@ grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
 gap:15px;
 }
 
-/* PACKAGE BOX */
+/* PACKAGE CARD */
 
 .card{
 background:#ffffff;
@@ -72,7 +73,9 @@ position:relative;
 overflow:hidden;
 
 border:1px solid #e2e8f0;
+
 transition:transform .3s,box-shadow .3s;
+
 -webkit-tap-highlight-color:transparent;
 user-select:none;
 }
@@ -95,7 +98,7 @@ object-fit:contain;
 margin-bottom:10px;
 }
 
-/* MEMBERSHIP IMAGES */
+/* MEMBERSHIP */
 
 .card img[src*="Weekly"],
 .card img[src*="Monthly"]{
@@ -103,7 +106,7 @@ width:150px;
 height:150px;
 }
 
-/* VIP IMAGES */
+/* VIP */
 
 .card img[src*="Vip"],
 .card img[src*="Svip"]{
@@ -131,12 +134,18 @@ color:#475569;
 position:absolute;
 top:8px;
 right:8px;
+
 background:#facc15;
 color:black;
+
 font-size:10px;
+
 padding:5px 8px;
+
 border-radius:8px;
+
 font-weight:bold;
+
 z-index:2;
 }
 
@@ -144,18 +153,25 @@ z-index:2;
 
 .ripple{
 position:absolute;
+
 border-radius:50%;
+
 background:rgba(0,0,0,.15);
+
 transform:scale(0);
+
 animation:ripple .6s linear;
+
 pointer-events:none;
 }
 
 @keyframes ripple{
+
 to{
 transform:scale(4);
 opacity:0;
 }
+
 }
 
 /* MOBILE */
@@ -224,9 +240,15 @@ font-size:12px;
 
 <div class="grid">
 
-<div class="card" onclick="selectPackage(event,this,'Weekly - LKR 600')">
 
-<img src="topupimages/Weekly.png" alt="Weekly">
+<!-- WEEKLY -->
+
+<div class="card"
+onclick="selectPackage(event,this,'Weekly - LKR 600')">
+
+<img
+src="topupimages/Weekly.png"
+alt="Weekly">
 
 <h4>Weekly</h4>
 
@@ -235,9 +257,14 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'Monthly - LKR 2800')">
+<!-- MONTHLY -->
 
-<img src="topupimages/Monthly.png" alt="Monthly">
+<div class="card"
+onclick="selectPackage(event,this,'Monthly - LKR 2800')">
+
+<img
+src="topupimages/Monthly.png"
+alt="Monthly">
 
 <h4>Monthly</h4>
 
@@ -246,9 +273,15 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'Weekly Lite - LKR 150')">
+<!-- WEEKLY LITE -->
 
-<img src="topupimages/Weekly-Lite.png" alt="Weekly Lite">
+<div class="card"
+onclick="selectPackage(event,this,'Weekly Lite - LKR 150')">
+
+<img
+src="topupimages/Weekly-Lite.png"
+alt="Weekly Lite"
+onerror="weeklyLiteFallback(this)">
 
 <h4>Weekly Lite</h4>
 
@@ -265,9 +298,13 @@ font-size:12px;
 
 <div class="grid">
 
-<div class="card" onclick="selectPackage(event,this,'VIP Bundle - LKR 3400')">
 
-<img src="topupimages/Vip.png" alt="VIP">
+<div class="card"
+onclick="selectPackage(event,this,'VIP Bundle - LKR 3400')">
+
+<img
+src="topupimages/Vip.png"
+alt="VIP">
 
 <h4>VIP Bundle</h4>
 
@@ -276,9 +313,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'SVIP Bundle - LKR 5200')">
+<div class="card"
+onclick="selectPackage(event,this,'SVIP Bundle - LKR 5200')">
 
-<img src="topupimages/Svip.png" alt="SVIP">
+<img
+src="topupimages/Svip.png"
+alt="SVIP">
 
 <h4>SVIP Bundle</h4>
 
@@ -295,9 +335,13 @@ font-size:12px;
 
 <div class="grid">
 
-<div class="card" onclick="selectPackage(event,this,'Level 6 - LKR 130')">
 
-<img src="topupimages/Levelup.png" alt="Level Up">
+<div class="card"
+onclick="selectPackage(event,this,'Level 6 - LKR 130')">
+
+<img
+src="topupimages/Levelup.png"
+alt="Level Up">
 
 <h4>Level 6</h4>
 
@@ -306,9 +350,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'Level 10 - LKR 260')">
+<div class="card"
+onclick="selectPackage(event,this,'Level 10 - LKR 260')">
 
-<img src="topupimages/Levelup.png" alt="Level Up">
+<img
+src="topupimages/Levelup.png"
+alt="Level Up">
 
 <h4>Level 10</h4>
 
@@ -317,9 +364,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'Level 15 - LKR 260')">
+<div class="card"
+onclick="selectPackage(event,this,'Level 15 - LKR 260')">
 
-<img src="topupimages/Levelup.png" alt="Level Up">
+<img
+src="topupimages/Levelup.png"
+alt="Level Up">
 
 <h4>Level 15</h4>
 
@@ -328,9 +378,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'Level 20 - LKR 260')">
+<div class="card"
+onclick="selectPackage(event,this,'Level 20 - LKR 260')">
 
-<img src="topupimages/Levelup.png" alt="Level Up">
+<img
+src="topupimages/Levelup.png"
+alt="Level Up">
 
 <h4>Level 20</h4>
 
@@ -339,9 +392,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'Level 25 - LKR 260')">
+<div class="card"
+onclick="selectPackage(event,this,'Level 25 - LKR 260')">
 
-<img src="topupimages/Levelup.png" alt="Level Up">
+<img
+src="topupimages/Levelup.png"
+alt="Level Up">
 
 <h4>Level 25</h4>
 
@@ -350,9 +406,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'Level 30 - LKR 380')">
+<div class="card"
+onclick="selectPackage(event,this,'Level 30 - LKR 380')">
 
-<img src="topupimages/Levelup.png" alt="Level Up">
+<img
+src="topupimages/Levelup.png"
+alt="Level Up">
 
 <h4>Level 30</h4>
 
@@ -369,9 +428,13 @@ font-size:12px;
 
 <div class="grid">
 
-<div class="card" onclick="selectPackage(event,this,'E Badge 3 - LKR 250')">
 
-<img src="topupimages/Evo.png" alt="EVO">
+<div class="card"
+onclick="selectPackage(event,this,'E Badge 3 - LKR 250')">
+
+<img
+src="topupimages/Evo.png"
+alt="EVO">
 
 <h4>E Badge 3</h4>
 
@@ -380,9 +443,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'E Badge 7 - LKR 350')">
+<div class="card"
+onclick="selectPackage(event,this,'E Badge 7 - LKR 350')">
 
-<img src="topupimages/Evo.png" alt="EVO">
+<img
+src="topupimages/Evo.png"
+alt="EVO">
 
 <h4>E Badge 7</h4>
 
@@ -391,9 +457,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'E Badge 30 - LKR 1100')">
+<div class="card"
+onclick="selectPackage(event,this,'E Badge 30 - LKR 1100')">
 
-<img src="topupimages/Evo.png" alt="EVO">
+<img
+src="topupimages/Evo.png"
+alt="EVO">
 
 <h4>E Badge 30</h4>
 
@@ -411,9 +480,12 @@ font-size:12px;
 <div class="grid">
 
 
-<div class="card" onclick="selectPackage(event,this,'25 Diamonds - LKR 150')">
+<div class="card"
+onclick="selectPackage(event,this,'25 Diamonds - LKR 150')">
 
-<img src="topupimages/Diamond.png" alt="Diamonds">
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
 
 <h4>25 Diamonds</h4>
 
@@ -422,9 +494,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'100 Diamonds - LKR 380')">
+<div class="card"
+onclick="selectPackage(event,this,'100 Diamonds - LKR 380')">
 
-<img src="topupimages/Diamond.png" alt="Diamonds">
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
 
 <h4>100 Diamonds</h4>
 
@@ -433,9 +508,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'310 Diamonds - LKR 1150')">
+<div class="card"
+onclick="selectPackage(event,this,'310 Diamonds - LKR 1150')">
 
-<img src="topupimages/Diamond.png" alt="Diamonds">
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
 
 <h4>310 Diamonds</h4>
 
@@ -444,11 +522,14 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'520 Diamonds - LKR 1800')">
+<div class="card"
+onclick="selectPackage(event,this,'520 Diamonds - LKR 1800')">
 
 <span class="badge">BEST</span>
 
-<img src="topupimages/Diamond.png" alt="Diamonds">
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
 
 <h4>520 Diamonds</h4>
 
@@ -457,9 +538,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'1060 Diamonds - LKR 3400')">
+<div class="card"
+onclick="selectPackage(event,this,'1060 Diamonds - LKR 3400')">
 
-<img src="topupimages/Diamond.png" alt="Diamonds">
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
 
 <h4>1060 Diamonds</h4>
 
@@ -468,9 +552,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'2180 Diamonds - LKR 6500')">
+<div class="card"
+onclick="selectPackage(event,this,'2180 Diamonds - LKR 6500')">
 
-<img src="topupimages/Diamond.png" alt="Diamonds">
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
 
 <h4>2180 Diamonds</h4>
 
@@ -479,9 +566,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'5600 Diamonds - LKR 16500')">
+<div class="card"
+onclick="selectPackage(event,this,'5600 Diamonds - LKR 16500')">
 
-<img src="topupimages/Diamond.png" alt="Diamonds">
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
 
 <h4>5600 Diamonds</h4>
 
@@ -490,9 +580,12 @@ font-size:12px;
 </div>
 
 
-<div class="card" onclick="selectPackage(event,this,'11500 Diamonds - LKR 35000')">
+<div class="card"
+onclick="selectPackage(event,this,'11500 Diamonds - LKR 35000')">
 
-<img src="topupimages/Diamond.png" alt="Diamonds">
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
 
 <h4>11500 Diamonds</h4>
 
@@ -507,34 +600,72 @@ font-size:12px;
 
 <script>
 
+/* WEEKLY LITE IMAGE FALLBACK */
+
+function weeklyLiteFallback(img){
+
+if(img.dataset.fallback === "1"){
+return;
+}
+
+if(img.src.includes("Weekly-Lite.png")){
+
+img.dataset.fallback = "1";
+
+img.src = "topupimages/Weekly-lite.png";
+
+return;
+
+}
+
+if(img.src.includes("Weekly-lite.png")){
+
+img.dataset.fallback = "2";
+
+img.src = "topupimages/weekly-lite.png";
+
+return;
+
+}
+
+}
+
+
+/* PACKAGE SELECTION */
+
 function selectPackage(e, card, name){
 
 /* Save selected package */
-localStorage.setItem("package", name);
 
-/* Ripple animation */
-let ripple = document.createElement("span");
+localStorage.setItem("package",name);
 
-ripple.className = "ripple";
 
-let rect = card.getBoundingClientRect();
+/* Ripple */
 
-ripple.style.width = "120px";
-ripple.style.height = "120px";
+let ripple=document.createElement("span");
 
-ripple.style.left =
-(e.clientX - rect.left - 60) + "px";
+ripple.className="ripple";
 
-ripple.style.top =
-(e.clientY - rect.top - 60) + "px";
+let rect=card.getBoundingClientRect();
+
+ripple.style.width="120px";
+
+ripple.style.height="120px";
+
+ripple.style.left=
+(e.clientX-rect.left-60)+"px";
+
+ripple.style.top=
+(e.clientY-rect.top-60)+"px";
 
 card.appendChild(ripple);
 
 
-/* Go to payment page */
+/* Go to payment */
+
 setTimeout(function(){
 
-window.location.href = "payment.html";
+window.location.href="payment.html";
 
 },250);
 
