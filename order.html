@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -396,14 +395,21 @@ background:#475569;
 transform:translateY(-2px);
 }
 
-.login-message{
-display:none;
+/* AUTH CHECK SCREEN */
+
+#checking{
 text-align:center;
 padding:30px 10px;
 }
 
-.login-message h2{
-color:#60a5fa;
+#checking .check-icon{
+font-size:50px;
+margin-bottom:10px;
+}
+
+#checking p{
+color:#cbd5e1;
+font-size:14px;
 }
 
 </style>
@@ -416,28 +422,34 @@ color:#60a5fa;
 
 <div class="card">
 
-<!-- LOGIN MESSAGE -->
 
-<div id="loginMessage" class="login-message">
+<!-- ==========================================
+AUTH CHECK
+========================================== -->
 
-<div class="logo">🔐</div>
+<div id="checking">
 
-<h2>Login Required</h2>
+<div class="check-icon">
+🔐
+</div>
 
-<p class="success-text">
-Please login to your account before placing an order.
+<h2>
+Checking Login...
+</h2>
+
+<p>
+Please wait...
 </p>
-
-<button id="loginButton">
-🔐 Login Now
-</button>
 
 </div>
 
 
-<!-- ORDER FORM -->
+<!-- ==========================================
+ORDER FORM
+========================================== -->
 
-<div id="formArea">
+<div id="formArea"
+style="display:none;">
 
 <div class="logo">
 💎
@@ -612,7 +624,9 @@ class="back-button">
 </div>
 
 
-<!-- SUCCESS -->
+<!-- ==========================================
+SUCCESS
+========================================== -->
 
 <div id="success">
 
@@ -675,53 +689,41 @@ class="home-button">
 <script type="module">
 
 
-/*
-====================================================
-IMPORTANT
-====================================================
-
-Your firebase.js is inside the ADMIN folder.
-
-Therefore:
-
-./admin/firebase.js
-
-is used below.
-
-If your firebase.js is actually in the main folder,
-change ONLY that line to:
-
-./firebase.js
-
-====================================================
-*/
-
+/* ==========================================
+FIREBASE
+========================================== */
 
 import {
+
 auth,
 db
+
 }
 from "./admin/firebase.js";
 
 
 import {
+
 onAuthStateChanged
+
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 import {
+
 doc,
 setDoc,
 serverTimestamp
+
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 /* ==========================================
-WORKER
+CLOUDFLARE WORKER
 ========================================== */
 
 const WORKER_URL =
@@ -795,17 +797,17 @@ const PACKAGES = {
 ELEMENTS
 ========================================== */
 
+const checking =
+document.getElementById("checking");
+
+const formArea =
+document.getElementById("formArea");
+
 const errorBox =
 document.getElementById("error");
 
 const sendButton =
 document.getElementById("send");
-
-const formArea =
-document.getElementById("formArea");
-
-const loginMessage =
-document.getElementById("loginMessage");
 
 const customerEmail =
 document.getElementById("customerEmail");
@@ -843,7 +845,7 @@ errorBox.style.display =
 
 
 /* ==========================================
-GET PACKAGE
+GET SELECTED PACKAGE
 ========================================== */
 
 function getSelectedPackage(){
@@ -939,7 +941,17 @@ true;
 
 
 /* ==========================================
-AUTH CHECK
+AUTHENTICATION CHECK
+==========================================
+
+IMPORTANT:
+
+If customer is already logged in:
+→ Continue normally.
+
+If customer is NOT logged in:
+→ Redirect to index.html.
+
 ========================================== */
 
 onAuthStateChanged(
@@ -948,39 +960,82 @@ auth,
 
 function(user){
 
+console.log(
+"Firebase Auth State:",
+user ? "LOGGED IN" : "NOT LOGGED IN"
+);
+
+
+/* ==========================================
+NOT LOGGED IN
+========================================== */
+
 if(!user){
 
-formArea.style.display =
-"none";
+console.log(
+"Customer not logged in. Redirecting to index.html..."
+);
 
-loginMessage.style.display =
-"block";
 
-customerEmail.textContent =
-"Not logged in";
+/*
+Save that customer wanted to order.
+
+After login, index.html can send
+them back to order.html if you want.
+*/
+
+localStorage.setItem(
+"returnAfterLogin",
+"order.html"
+);
+
+
+/*
+Redirect to login page.
+*/
+
+window.location.replace(
+"index.html"
+);
 
 return;
 
 }
 
 
-/* USER LOGGED IN */
+/* ==========================================
+CUSTOMER ALREADY LOGGED IN
+========================================== */
+
+console.log(
+"Customer logged in:",
+user.uid
+);
+
+
+/*
+Show order page.
+*/
+
+checking.style.display =
+"none";
 
 formArea.style.display =
 "block";
 
-loginMessage.style.display =
-"none";
 
-
-/* EMAIL */
+/*
+Show customer's login email.
+*/
 
 customerEmail.textContent =
 user.email ||
 "Email not available";
 
 
-/* PACKAGE */
+/*
+Show selected package.
+*/
 
 if(selected){
 
@@ -1000,23 +1055,6 @@ selected.price.toLocaleString(
 }
 
 });
-
-
-/* ==========================================
-LOGIN BUTTON
-========================================== */
-
-document
-.getElementById("loginButton")
-.addEventListener(
-"click",
-function(){
-
-window.location.href =
-"index.html";
-
-}
-);
 
 
 /* ==========================================
@@ -1040,6 +1078,7 @@ return;
 
 }
 
+
 if(
 file.type !== "image/jpeg" &&
 file.type !== "image/png"
@@ -1054,6 +1093,7 @@ showError(
 return;
 
 }
+
 
 if(
 file.size >
@@ -1070,6 +1110,7 @@ return;
 
 }
 
+
 const preview =
 document.getElementById("preview");
 
@@ -1079,15 +1120,18 @@ URL.createObjectURL(file);
 preview.style.display =
 "block";
 
+
 document
 .getElementById("uploadLabel")
 .classList
 .add("active");
 
+
 document
 .getElementById("uploadTitle")
 .textContent =
 "✅ Receipt Selected";
+
 
 document
 .getElementById("uploadText")
@@ -1111,7 +1155,9 @@ async function(){
 hideError();
 
 
-/* USER */
+/* ==========================================
+CHECK LOGIN AGAIN
+========================================== */
 
 const user =
 auth.currentUser;
@@ -1119,18 +1165,23 @@ auth.currentUser;
 
 if(!user){
 
-formArea.style.display =
-"none";
+localStorage.setItem(
+"returnAfterLogin",
+"order.html"
+);
 
-loginMessage.style.display =
-"block";
+window.location.replace(
+"index.html"
+);
 
 return;
 
 }
 
 
-/* PACKAGE */
+/* ==========================================
+PACKAGE
+========================================== */
 
 if(!selected){
 
@@ -1143,7 +1194,9 @@ return;
 }
 
 
-/* VALUES */
+/* ==========================================
+VALUES
+========================================== */
 
 const uid =
 document
@@ -1151,11 +1204,13 @@ document
 .value
 .trim();
 
+
 const playerName =
 document
 .getElementById("playerName")
 .value
 .trim();
+
 
 const phone =
 document
@@ -1163,13 +1218,16 @@ document
 .value
 .trim();
 
+
 const receipt =
 document
 .getElementById("receipt")
 .files[0];
 
 
-/* UID */
+/* ==========================================
+UID
+========================================== */
 
 if(
 !/^[0-9]{6,15}$/.test(uid)
@@ -1188,7 +1246,9 @@ return;
 }
 
 
-/* NAME */
+/* ==========================================
+CUSTOMER NAME
+========================================== */
 
 if(
 playerName.length < 2 ||
@@ -1208,13 +1268,16 @@ return;
 }
 
 
-/* PHONE */
+/* ==========================================
+PHONE
+========================================== */
 
 const cleanPhone =
 phone.replace(
 /[\s\-().]/g,
 ""
 );
+
 
 if(
 !/^\+?[0-9]{9,15}$/.test(
@@ -1235,7 +1298,9 @@ return;
 }
 
 
-/* RECEIPT */
+/* ==========================================
+RECEIPT
+========================================== */
 
 if(!receipt){
 
@@ -1246,6 +1311,7 @@ showError(
 return;
 
 }
+
 
 if(
 receipt.type !== "image/jpeg" &&
@@ -1259,6 +1325,7 @@ showError(
 return;
 
 }
+
 
 if(
 receipt.size >
@@ -1274,13 +1341,16 @@ return;
 }
 
 
-/* LOADING */
+/* ==========================================
+LOADING
+========================================== */
 
 sendButton.disabled =
 true;
 
 sendButton.textContent =
 "⏳ Sending Order...";
+
 
 document
 .getElementById("loading")
@@ -1292,7 +1362,7 @@ try{
 
 
 /* ==========================================
-SEND TO WORKER
+SEND TO CLOUDFLARE WORKER
 ========================================== */
 
 const formData =
@@ -1306,30 +1376,41 @@ selected.name +
 selected.price
 );
 
+
 formData.append(
 "uid",
 uid
 );
+
 
 formData.append(
 "playerName",
 playerName
 );
 
+
 formData.append(
 "phone",
 phone
 );
+
+
+/*
+Keep customer Firebase information
+because customer is authenticated.
+*/
 
 formData.append(
 "email",
 user.email || ""
 );
 
+
 formData.append(
 "firebaseUID",
 user.uid
 );
+
 
 formData.append(
 "receipt",
@@ -1337,6 +1418,10 @@ receipt,
 receipt.name
 );
 
+
+/* ==========================================
+WORKER REQUEST
+========================================== */
 
 const response =
 await fetch(
@@ -1354,7 +1439,9 @@ body:formData
 );
 
 
-/* RESPONSE */
+/* ==========================================
+RESPONSE
+========================================== */
 
 let result;
 
@@ -1385,7 +1472,9 @@ result.message ||
 }
 
 
-/* ORDER ID */
+/* ==========================================
+ORDER ID
+========================================== */
 
 const orderId =
 String(result.orderId);
@@ -1419,9 +1508,11 @@ orderId
 
 orderId:orderId,
 
+
 /* CUSTOMER */
 
-userId:user.uid,
+userId:
+user.uid,
 
 customerEmail:
 user.email || "",
@@ -1432,10 +1523,12 @@ playerName,
 phone:
 phone,
 
+
 /* GAME */
 
 gameUID:
 uid,
+
 
 /* PRODUCT */
 
@@ -1451,6 +1544,7 @@ selected.name,
 price:
 selected.price,
 
+
 /* PAYMENT */
 
 paymentMethod:
@@ -1459,12 +1553,14 @@ paymentMethod:
 total:
 selected.price,
 
+
 /* STATUS */
 
 status:
 "Pending",
 
-/* FIRESTORE TIMESTAMP */
+
+/* TIMESTAMP */
 
 createdAt:
 serverTimestamp()
@@ -1475,7 +1571,7 @@ serverTimestamp()
 
 
 /* ==========================================
-WHATSAPP
+WHATSAPP MESSAGE
 ========================================== */
 
 const whatsappMessage =
@@ -1516,6 +1612,10 @@ whatsappMessage
 );
 
 
+/* ==========================================
+WHATSAPP BUTTON
+========================================== */
+
 document
 .getElementById(
 "whatsappButton"
@@ -1524,15 +1624,19 @@ document
 whatsappURL;
 
 
-/* SUCCESS */
+/* ==========================================
+SUCCESS
+========================================== */
 
 formArea.style.display =
 "none";
+
 
 document
 .getElementById("success")
 .style.display =
 "block";
+
 
 document
 .getElementById("orderId")
@@ -1540,14 +1644,18 @@ document
 orderId;
 
 
-/* CLEAR PACKAGE */
+/* ==========================================
+CLEAR PACKAGE
+========================================== */
 
 localStorage.removeItem(
 "package"
 );
 
 
-/* TOP */
+/* ==========================================
+SCROLL TOP
+========================================== */
 
 window.scrollTo({
 
@@ -1558,7 +1666,9 @@ behavior:"smooth"
 });
 
 
-/* OPEN WHATSAPP */
+/* ==========================================
+OPEN WHATSAPP
+========================================== */
 
 setTimeout(
 
@@ -1596,8 +1706,10 @@ error.message ||
 sendButton.disabled =
 false;
 
+
 sendButton.textContent =
 "🚀 Place Order";
+
 
 }finally{
 
@@ -1615,4 +1727,3 @@ document
 </body>
 
 </html>
-```
