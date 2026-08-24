@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,273 +9,334 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Zyper Diamond Store - Admin Dashboard</title>
+<title>Zyper Admin Dashboard</title>
 
-<link rel="stylesheet" href="./admin.css">
+<link
+rel="stylesheet"
+href="admin.css">
 
 </head>
 
+
 <body>
 
-<div id="app" style="display:none;">
+
+<!-- ==========================================
+     ADMIN APP
+========================================== -->
+
+<div
+id="app"
+style="display:none;">
+
+
+<!-- ==========================================
+     TOP BAR
+========================================== -->
 
 <header class="topbar">
 
+
+<div class="brand-area">
+
 <div class="brand">
+💎 Zyper
+</div>
 
-<span class="brand-icon">💎</span>
-
-<div>
-
-<strong>ZYPER</strong>
-
-<small>DIAMOND STORE</small>
-
+<div class="admin-label">
+ADMIN DASHBOARD
 </div>
 
 </div>
+
 
 <div class="top-actions">
 
-<span id="adminEmail">
-Admin
-</span>
+<button
+id="refresh"
+class="refresh">
 
-<button id="logout">
-Logout
+🔄 Refresh
+
+</button>
+
+
+<button
+id="logout"
+class="logout">
+
+🚪 Logout
+
 </button>
 
 </div>
 
+
 </header>
 
 
-<main class="dashboard">
 
-<div class="welcome">
+<!-- ==========================================
+     MAIN
+========================================== -->
+
+<main class="main">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
 
 <div>
 
-<h1>Orders Dashboard</h1>
+<h1>
+Orders Dashboard
+</h1>
 
 <p>
-Manage and monitor your customer orders.
+Manage and monitor customer orders
 </p>
 
 </div>
 
-<div class="live-badge">
-● LIVE
-</div>
 
-</div>
+</section>
 
 
-<!-- STATISTICS -->
 
-<section class="stats">
+<!-- ==========================================
+     STATISTICS
+========================================== -->
+
+<section class="cards">
+
 
 <div class="stat-card">
+
 
 <div class="stat-icon">
 📦
 </div>
 
+
 <div>
 
-<span>Total Orders</span>
+<span>
+Total Orders
+</span>
 
-<strong id="totalOrders">
+
+<strong
+id="totalOrders">
+
 0
+
 </strong>
 
 </div>
 
+
 </div>
+
 
 
 <div class="stat-card">
 
-<div class="stat-icon">
-⏳
-</div>
-
-<div>
-
-<span>Pending</span>
-
-<strong id="pendingOrders">
-0
-</strong>
-
-</div>
-
-</div>
-
-
-<div class="stat-card">
-
-<div class="stat-icon">
-✅
-</div>
-
-<div>
-
-<span>Success</span>
-
-<strong id="successOrders">
-0
-</strong>
-
-</div>
-
-</div>
-
-
-<div class="stat-card">
-
-<div class="stat-icon">
-❌
-</div>
-
-<div>
-
-<span>Rejected</span>
-
-<strong id="rejectedOrders">
-0
-</strong>
-
-</div>
-
-</div>
-
-
-<div class="stat-card">
 
 <div class="stat-icon">
 💰
 </div>
 
+
 <div>
 
-<span>Revenue</span>
+<span>
+Revenue
+</span>
+
 
 <strong>
-LKR <span id="revenue">0</span>
+
+LKR
+
+<span id="revenue">
+0
+</span>
+
 </strong>
 
 </div>
 
+
 </div>
+
+
+
+<div class="stat-card">
+
+
+<div class="stat-icon">
+⏳
+</div>
+
+
+<div>
+
+<span>
+Pending
+</span>
+
+
+<strong
+id="pendingOrders">
+
+0
+
+</strong>
+
+</div>
+
+
+</div>
+
+
+
+<div class="stat-card">
+
+
+<div class="stat-icon">
+✅
+</div>
+
+
+<div>
+
+<span>
+Success
+</span>
+
+
+<strong
+id="successOrders">
+
+0
+
+</strong>
+
+</div>
+
+
+</div>
+
 
 </section>
 
 
-<!-- FILTER PANEL -->
 
-<section class="filter-panel">
+<!-- ==========================================
+     FILTER PANEL
+========================================== -->
 
-<div class="filter-title">
+<section class="panel">
+
+
+<div class="panel-title">
+
+
+<div>
 
 <h2>
-📅 Order Filter
+Order Management
 </h2>
+
+
+<p>
+Search orders or select a specific date.
+</p>
+
+</div>
+
 
 <button
 id="clearFilter"
-type="button">
+class="clear">
 
-Clear
+📋 All Orders
 
 </button>
 
+
 </div>
+
 
 
 <div class="filters">
 
-<div class="filter-item">
 
-<label>From Date</label>
+<!-- SEARCH -->
 
 <input
-id="fromDate"
+id="search"
+type="search"
+placeholder="🔎 Search Order ID, UID, name, email..."
+autocomplete="off"
+>
+
+
+<!-- DATE -->
+
+<input
+id="dateFilter"
 type="date"
 >
 
-</div>
 
+<!-- STATUS -->
 
-<div class="filter-item">
+<select
+id="statusFilter">
 
-<label>To Date</label>
-
-<input
-id="toDate"
-type="date"
->
-
-</div>
-
-
-<div class="filter-item">
-
-<label>Status</label>
-
-<select id="statusFilter">
 
 <option value="all">
 All Status
 </option>
 
+
 <option value="Pending">
 Pending
 </option>
+
 
 <option value="Success">
 Success
 </option>
 
+
 <option value="Rejected">
 Rejected
 </option>
 
+
 </select>
 
-</div>
-
-
-<div class="filter-item search-box">
-
-<label>Search</label>
-
-<input
-id="search"
-type="text"
-placeholder="Order ID, UID, customer..."
-autocomplete="off"
->
 
 </div>
 
-</div>
-
-<div id="filterInfo"
-class="filter-info">
-
-Showing all orders
-
-</div>
 
 </section>
 
 
-<!-- ORDERS -->
 
-<section class="orders-panel">
+<!-- ==========================================
+     ORDERS TABLE
+========================================== -->
 
-<div class="orders-header">
+<section class="table-panel">
+
+
+<div class="table-header">
+
 
 <div>
 
@@ -282,101 +344,148 @@ Showing all orders
 📋 Orders
 </h2>
 
-<p id="ordersCount">
-0 orders
+<p>
+Customer order history
 </p>
-
-</div>
-
-<button
-id="refresh"
-class="refresh-btn"
-type="button">
-
-↻ Refresh
-
-</button>
 
 </div>
 
 
 <div
-id="errorBox"
-class="error-box"
-style="display:none;">
+id="filterInfo"
+class="filter-info">
+
+All Orders
+
 </div>
 
 
-<div class="table-container">
+</div>
+
+
+
+<div class="table-scroll">
+
 
 <table>
 
+
 <thead>
+
 
 <tr>
 
-<th>Order ID</th>
 
-<th>Customer</th>
+<th>
+Order ID
+</th>
 
-<th>Email</th>
 
-<th>Firebase UID</th>
+<th>
+Customer
+</th>
 
-<th>Game UID</th>
 
-<th>Product</th>
+<th>
+Email
+</th>
 
-<th>Price</th>
 
-<th>Phone</th>
+<th>
+Firebase UID
+</th>
 
-<th>Date / Time</th>
 
-<th>Status</th>
+<th>
+Game UID
+</th>
 
-<th>Action</th>
+
+<th>
+Product
+</th>
+
+
+<th>
+Price
+</th>
+
+
+<th>
+Payment
+</th>
+
+
+<th>
+Date / Time
+</th>
+
+
+<th>
+Status
+</th>
+
+
+<th>
+Action
+</th>
+
 
 </tr>
+
 
 </thead>
 
-<tbody id="orders">
+
+
+<tbody
+id="orders">
+
 
 <tr>
 
-<td colspan="11">
 
-<div class="loading">
+<td
+colspan="11">
 
-<div class="spinner"></div>
-
-Loading orders...
-
-</div>
+⏳ Loading orders...
 
 </td>
 
+
 </tr>
+
 
 </tbody>
 
+
 </table>
 
+
 </div>
+
 
 </section>
 
+
 </main>
+
 
 </div>
 
 
+
+<!-- ==========================================
+     ADMIN JAVASCRIPT
+========================================== -->
+
 <script
 type="module"
-src="./admin.js">
+src="admin.js">
 </script>
+
 
 </body>
 
 </html>
+```
