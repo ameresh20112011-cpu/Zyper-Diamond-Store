@@ -1,1309 +1,1341 @@
-```javascript
-import { auth, db } from "./firebase.js";
+import {
+auth,
+db
+}
+from "./firebase.js";
+
 
 import {
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
+
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+
 import {
-    collection,
-    getDocs,
-    doc,
-    getDoc,
-    updateDoc
+
+collection,
+getDocs,
+doc,
+getDoc,
+updateDoc
+
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
-// =====================================================
-// CHECK ADMIN
-// =====================================================
 
-async function checkAdmin(user) {
+/* =====================================
+   ADMIN CHECK
+===================================== */
 
-    if (!user) {
-        return false;
-    }
+async function checkAdmin(user){
 
-    try {
+if(!user){
 
-        const adminDoc = await getDoc(
-            doc(
-                db,
-                "users",
-                user.uid
-            )
-        );
+return false;
 
-        return (
-            adminDoc.exists() &&
-            adminDoc.data().role === "admin"
-        );
+}
 
-    } catch (error) {
+try{
 
-        console.error(
-            "Admin check error:",
-            error
-        );
+const adminDoc =
+await getDoc(
 
-        return false;
-    }
+doc(
+db,
+"users",
+user.uid
+)
+
+);
+
+return (
+
+adminDoc.exists() &&
+adminDoc.data().role === "admin"
+
+);
+
+}catch(error){
+
+console.error(
+"Admin check:",
+error
+);
+
+return false;
+
+}
+
 }
 
 
-// =====================================================
-// LOGIN
-// =====================================================
+
+/* =====================================
+   LOGIN
+===================================== */
 
 const loginButton =
 document.getElementById("login");
 
 
-if (loginButton) {
+if(loginButton){
 
-    loginButton.onclick = async () => {
+loginButton.onclick =
+async function(){
 
-        const email =
-        document.getElementById("email").value.trim();
+const email =
+document
+.getElementById("email")
+.value
+.trim();
 
-        const password =
-        document.getElementById("password").value;
+const password =
+document
+.getElementById("password")
+.value;
 
-        const msg =
-        document.getElementById("msg");
-
-
-        if (!email || !password) {
-
-            msg.innerHTML =
-            "Enter email and password";
-
-            return;
-        }
+const msg =
+document
+.getElementById("msg");
 
 
-        try {
+if(!email || !password){
 
-            const result =
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
+msg.textContent =
+"Enter email and password.";
 
-
-            const admin =
-            await checkAdmin(
-                result.user
-            );
-
-
-            if (admin) {
-
-                location.href =
-                "admin-dashboard.html";
-
-            } else {
-
-                msg.innerHTML =
-                "❌ You are not admin";
-
-                await signOut(auth);
-            }
-
-
-        } catch (error) {
-
-            console.error(error);
-
-            msg.innerHTML =
-            error.message;
-        }
-
-    };
+return;
 
 }
 
 
-// =====================================================
-// DASHBOARD PROTECTION
-// =====================================================
+loginButton.disabled =
+true;
+
+loginButton.textContent =
+"LOGIN...";
+
+
+try{
+
+const result =
+await signInWithEmailAndPassword(
+
+auth,
+email,
+password
+
+);
+
+
+const admin =
+await checkAdmin(
+result.user
+);
+
+
+if(admin){
+
+location.href =
+"admin-dashboard.html";
+
+}else{
+
+msg.textContent =
+"❌ You are not admin.";
+
+await signOut(auth);
+
+}
+
+
+}catch(error){
+
+console.error(error);
+
+msg.textContent =
+"❌ " +
+error.message;
+
+}finally{
+
+loginButton.disabled =
+false;
+
+loginButton.textContent =
+"LOGIN";
+
+}
+
+};
+
+}
+
+
+
+/* =====================================
+   DASHBOARD PROTECTION
+===================================== */
 
 const orderTable =
 document.getElementById("orders");
 
 
-if (orderTable) {
+if(orderTable){
 
-    onAuthStateChanged(
-        auth,
-        async (user) => {
+onAuthStateChanged(
 
-            const admin =
-            await checkAdmin(user);
+auth,
 
+async function(user){
 
-            if (!admin) {
-
-                location.href =
-                "admin-login.html";
-
-                return;
-            }
+const admin =
+await checkAdmin(user);
 
 
-            const app =
-            document.getElementById("app");
+if(!admin){
 
+location.href =
+"admin-login.html";
 
-            if (app) {
-
-                app.style.display =
-                "block";
-            }
-
-
-            loadOrders();
-
-        }
-    );
+return;
 
 }
 
 
-// =====================================================
-// FORMAT DATE
-// =====================================================
+const app =
+document.getElementById("app");
 
-function formatDate(timestamp) {
 
-    if (!timestamp) {
-        return "-";
-    }
+if(app){
 
-
-    if (timestamp.toDate) {
-
-        const date =
-        timestamp.toDate();
-
-
-        const hour =
-        String(
-            date.getHours()
-        ).padStart(2, "0");
-
-
-        const minute =
-        String(
-            date.getMinutes()
-        ).padStart(2, "0");
-
-
-        const year =
-        date.getFullYear();
-
-
-        const month =
-        String(
-            date.getMonth() + 1
-        ).padStart(2, "0");
-
-
-        const day =
-        String(
-            date.getDate()
-        ).padStart(2, "0");
-
-
-        return `${hour}:${minute} , ${year}/${month}/${day}`;
-    }
-
-
-    return timestamp;
-}
-
-
-// =====================================================
-// ESCAPE HTML
-// =====================================================
-
-function escapeHTML(value) {
-
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-
-// =====================================================
-// LOAD ORDERS
-// =====================================================
-
-async function loadOrders() {
-
-    const table =
-    document.getElementById("orders");
-
-
-    table.innerHTML = `
-        <tr>
-            <td colspan="12">
-                ⏳ Loading orders...
-            </td>
-        </tr>
-    `;
-
-
-    let totalOrders = 0;
-    let revenue = 0;
-    let pending = 0;
-    let success = 0;
-
-
-    try {
-
-        const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "orders"
-            )
-        );
-
-
-        let orders = [];
-
-
-        snapshot.forEach(
-            (document) => {
-
-                orders.push({
-
-                    id: document.id,
-
-                    data: document.data()
-
-                });
-
-            }
-        );
-
-
-        // =================================================
-        // NEWEST FIRST
-        // =================================================
-
-        orders.sort(
-            (a, b) => {
-
-                const dateA =
-                a.data.createdAt;
-
-                const dateB =
-                b.data.createdAt;
-
-
-                if (
-                    dateA &&
-                    dateB &&
-                    dateA.seconds !== undefined &&
-                    dateB.seconds !== undefined
-                ) {
-
-                    return (
-                        dateB.seconds -
-                        dateA.seconds
-                    );
-                }
-
-
-                return 0;
-            }
-        );
-
-
-        table.innerHTML = "";
-
-
-        if (orders.length === 0) {
-
-            table.innerHTML = `
-                <tr>
-                    <td colspan="12">
-                        No orders found.
-                    </td>
-                </tr>
-            `;
-
-        }
-
-
-        // =================================================
-        // DISPLAY ORDERS
-        // =================================================
-
-        orders.forEach(
-            (item) => {
-
-                const order =
-                item.data;
-
-
-                // -------------------------------
-                // CUSTOMER
-                // -------------------------------
-
-                const customer =
-                order.customerName ||
-                order.playerName ||
-                order.name ||
-                "-";
-
-
-                // -------------------------------
-                // PHONE
-                // -------------------------------
-
-                const phone =
-                order.phone ||
-                order.customerPhone ||
-                order.whatsapp ||
-                "-";
-
-
-                // -------------------------------
-                // FIREBASE UID
-                // -------------------------------
-
-                const firebaseUID =
-                order.userId ||
-                order.firebaseUID ||
-                "-";
-
-
-                // -------------------------------
-                // GAME UID
-                // -------------------------------
-
-                const gameUID =
-                order.gameUID ||
-                order.gameUid ||
-                order.gameId ||
-                order.uid ||
-                "-";
-
-
-                // -------------------------------
-                // PRODUCT
-                // -------------------------------
-
-                const product =
-                order.productName ||
-                order.product ||
-                order.package ||
-                order.plan ||
-                "-";
-
-
-                // -------------------------------
-                // PRICE
-                // -------------------------------
-
-                const price =
-                Number(
-                    order.productPrice ||
-                    order.price ||
-                    0
-                );
-
-
-                // -------------------------------
-                // PAYMENT
-                // -------------------------------
-
-                const payment =
-                order.paymentMethod ||
-                order.payment ||
-                "-";
-
-
-                // -------------------------------
-                // TOTAL
-                // -------------------------------
-
-                const total =
-                Number(
-                    order.total ||
-                    order.amount ||
-                    price
-                );
-
-
-                // -------------------------------
-                // ORDER ID
-                // -------------------------------
-
-                const orderId =
-                order.orderId ||
-                item.id;
-
-
-                // -------------------------------
-                // DATE
-                // -------------------------------
-
-                const date =
-                formatDate(
-                    order.createdAt
-                );
-
-
-                // -------------------------------
-                // STATUS
-                // -------------------------------
-
-                const status =
-                order.status ||
-                "Pending";
-
-
-                // -------------------------------
-                // COUNTERS
-                // -------------------------------
-
-                totalOrders++;
-
-                revenue += total;
-
-
-                if (
-                    status === "Pending"
-                ) {
-
-                    pending++;
-                }
-
-
-                if (
-                    status === "Success" ||
-                    status === "Successful"
-                ) {
-
-                    success++;
-                }
-
-
-                // =================================================
-                // ACTION AREA
-                // =================================================
-
-                let actionHTML = "";
-
-
-                if (
-                    status === "Pending"
-                ) {
-
-                    actionHTML = `
-
-                    <div class="action-box">
-
-                        <div
-                            class="receipt-paste"
-                            id="paste-${item.id}"
-                            data-order-id="${escapeHTML(item.id)}"
-                            tabindex="0">
-
-                            📸 Click here and
-                            <b>paste receipt</b>
-
-                            <div
-                                class="paste-preview"
-                                id="preview-${item.id}">
-                            </div>
-
-                        </div>
-
-
-                        <button
-                            class="success-btn"
-                            onclick="changeStatus('${item.id}','Success')">
-
-                            ✅ DONE / SUCCESS
-
-                        </button>
-
-
-                        <button
-                            class="reject-btn"
-                            onclick="changeStatus('${item.id}','Rejected')">
-
-                            ❌ REJECT
-
-                        </button>
-
-                    </div>
-
-                    `;
-
-                } else {
-
-                    actionHTML = `
-
-                    <div class="completed-action">
-
-                        ${
-                            status === "Success" ||
-                            status === "Successful"
-
-                            ? "✅ Completed"
-
-                            : "❌ Rejected"
-                        }
-
-                    </div>
-
-                    `;
-                }
-
-
-                // =================================================
-                // TABLE ROW
-                // =================================================
-
-                table.innerHTML += `
-
-                <tr>
-
-                    <td>
-
-                        <strong>
-                            ${escapeHTML(orderId)}
-                        </strong>
-
-                    </td>
-
-
-                    <td>
-                        ${escapeHTML(customer)}
-                    </td>
-
-
-                    <td>
-                        ${escapeHTML(phone)}
-                    </td>
-
-
-                    <td>
-                        ${escapeHTML(firebaseUID)}
-                    </td>
-
-
-                    <td>
-                        ${escapeHTML(gameUID)}
-                    </td>
-
-
-                    <td>
-                        ${escapeHTML(product)}
-                    </td>
-
-
-                    <td>
-                        LKR ${price.toLocaleString("en-US")}
-                    </td>
-
-
-                    <td>
-                        ${escapeHTML(payment)}
-                    </td>
-
-
-                    <td>
-                        ${escapeHTML(date)}
-                    </td>
-
-
-                    <td>
-                        LKR ${total.toLocaleString("en-US")}
-                    </td>
-
-
-                    <td
-                        class="status-cell
-                        ${escapeHTML(status)}">
-
-                        ${escapeHTML(status)}
-
-                    </td>
-
-
-                    <td>
-
-                        ${actionHTML}
-
-                    </td>
-
-                </tr>
-
-                `;
-
-
-                // =================================================
-                // PASTE RECEIPT HANDLER
-                // =================================================
-
-                setTimeout(
-                    () => {
-
-                        const pasteBox =
-                        document.getElementById(
-                            `paste-${item.id}`
-                        );
-
-
-                        if (!pasteBox) {
-                            return;
-                        }
-
-
-                        pasteBox.addEventListener(
-                            "paste",
-                            (event) => {
-
-                                const items =
-                                event.clipboardData.items;
-
-
-                                let foundImage =
-                                false;
-
-
-                                for (
-                                    const clipboardItem
-                                    of items
-                                ) {
-
-                                    if (
-                                        clipboardItem.type
-                                        .startsWith("image/")
-                                    ) {
-
-                                        foundImage =
-                                        true;
-
-
-                                        const file =
-                                        clipboardItem.getAsFile();
-
-
-                                        if (!file) {
-                                            return;
-                                        }
-
-
-                                        const preview =
-                                        document.getElementById(
-                                            `preview-${item.id}`
-                                        );
-
-
-                                        const imageURL =
-                                        URL.createObjectURL(
-                                            file
-                                        );
-
-
-                                        preview.innerHTML = `
-
-                                            <img
-                                                src="${imageURL}"
-                                                alt="Receipt"
-                                            >
-
-                                            <div>
-                                                ✅ Receipt pasted
-                                            </div>
-
-                                        `;
-
-
-                                        pasteBox.classList.add(
-                                            "receipt-pasted"
-                                        );
-
-
-                                        event.preventDefault();
-
-                                        break;
-                                    }
-
-                                }
-
-
-                                if (!foundImage) {
-
-                                    alert(
-                                        "Please copy a receipt image first, then paste it here."
-                                    );
-
-                                }
-
-                            }
-                        );
-
-                    },
-                    0
-                );
-
-            }
-        );
-
-
-        // =================================================
-        // UPDATE CARDS
-        // =================================================
-
-        document.getElementById(
-            "totalOrders"
-        ).textContent =
-        totalOrders;
-
-
-        document.getElementById(
-            "revenue"
-        ).textContent =
-        revenue.toLocaleString("en-US");
-
-
-        document.getElementById(
-            "pendingOrders"
-        ).textContent =
-        pending;
-
-
-        document.getElementById(
-            "successOrders"
-        ).textContent =
-        success;
-
-
-        setupSearch();
-
-
-    } catch (error) {
-
-        console.error(
-            "Load orders error:",
-            error
-        );
-
-
-        table.innerHTML = `
-
-            <tr>
-
-                <td colspan="12">
-
-                    ❌ Unable to load orders.
-
-                    <br><br>
-
-                    ${escapeHTML(error.message)}
-
-                </td>
-
-            </tr>
-
-        `;
-    }
+app.style.display =
+"block";
 
 }
 
 
-// =====================================================
-// CHANGE STATUS
-// =====================================================
+loadOrders();
 
-window.changeStatus =
-async function(id, status) {
+}
 
-    const user =
-    auth.currentUser;
+);
 
+}
 
-    const admin =
-    await checkAdmin(user);
 
 
-    if (!admin) {
+/* =====================================
+   DATE
+===================================== */
 
-        alert(
-            "❌ Access denied."
-        );
+function formatDate(timestamp){
 
-        return;
-    }
+if(!timestamp){
 
+return "-";
 
-    // =================================================
-    // GET ORDER
-    // =================================================
+}
 
-    let order;
 
+if(timestamp.toDate){
 
-    try {
+const date =
+timestamp.toDate();
 
-        const orderSnapshot =
-        await getDoc(
-            doc(
-                db,
-                "orders",
-                id
-            )
-        );
 
+const hour =
+String(
+date.getHours()
+)
+.padStart(2,"0");
 
-        if (!orderSnapshot.exists()) {
 
-            alert(
-                "❌ Order not found."
-            );
+const minute =
+String(
+date.getMinutes()
+)
+.padStart(2,"0");
 
-            return;
-        }
 
+const year =
+date.getFullYear();
 
-        order =
-        orderSnapshot.data();
 
+const month =
+String(
+date.getMonth()+1
+)
+.padStart(2,"0");
 
-    } catch (error) {
 
-        console.error(error);
+const day =
+String(
+date.getDate()
+)
+.padStart(2,"0");
 
-        alert(
-            "❌ Unable to read order."
-        );
 
-        return;
-    }
+return `${hour}:${minute} , ${year}/${month}/${day}`;
 
+}
 
-    // =================================================
-    // CONFIRM
-    // =================================================
 
-    const orderId =
-    order.orderId ||
-    id;
+return timestamp;
 
+}
 
-    const customer =
-    order.customerName ||
-    order.playerName ||
-    order.name ||
-    "Customer";
 
 
-    const phone =
-    order.phone ||
-    order.customerPhone ||
-    order.whatsapp ||
-    "";
+/* =====================================
+   LOAD ORDERS
+===================================== */
 
+async function loadOrders(){
 
-    const gameUID =
-    order.gameUID ||
-    order.gameUid ||
-    order.gameId ||
-    order.uid ||
-    "-";
+const table =
+document.getElementById("orders");
 
 
-    const product =
-    order.productName ||
-    order.product ||
-    order.package ||
-    order.plan ||
-    "-";
+if(!table){
 
+return;
 
-    const price =
-    Number(
-        order.productPrice ||
-        order.price ||
-        order.total ||
-        order.amount ||
-        0
-    );
+}
 
 
-    // =================================================
-    // SUCCESS
-    // =================================================
+table.innerHTML = `
 
-    if (
-        status === "Success"
-    ) {
+<tr>
 
-        const confirmed =
-        confirm(
-            `Mark Order ${orderId} as SUCCESSFUL?\n\n` +
-            `Customer: ${customer}\n` +
-            `UID: ${gameUID}\n` +
-            `Package: ${product}`
-        );
+<td colspan="11">
 
+⏳ Loading orders...
 
-        if (!confirmed) {
-            return;
-        }
+</td>
 
-    }
+</tr>
 
+`;
 
-    // =================================================
-    // REJECT
-    // =================================================
 
-    if (
-        status === "Rejected"
-    ) {
+try{
 
-        const confirmed =
-        confirm(
-            `Reject Order ${orderId}?\n\n` +
-            `Customer: ${customer}\n` +
-            `UID: ${gameUID}\n` +
-            `Package: ${product}`
-        );
+const snapshot =
+await getDocs(
 
+collection(
+db,
+"orders"
+)
 
-        if (!confirmed) {
-            return;
-        }
+);
 
-    }
 
+let orders = [];
 
-    // =================================================
-    // UPDATE FIREBASE
-    // =================================================
 
-    try {
+snapshot.forEach(
+(document)=>{
 
-        await updateDoc(
+orders.push({
 
-            doc(
-                db,
-                "orders",
-                id
-            ),
+id:document.id,
 
-            {
+data:document.data()
 
-                status: status,
+});
 
-                statusUpdatedAt:
-                new Date()
+});
 
-            }
 
-        );
+/* NEWEST FIRST */
 
+orders.sort(
+(a,b)=>{
 
-        // =================================================
-        // WHATSAPP
-        // =================================================
+const aDate =
+a.data.createdAt;
 
-        if (phone) {
+const bDate =
+b.data.createdAt;
 
-            openWhatsApp(
-                phone,
-                {
-                    orderId,
-                    customer,
-                    gameUID,
-                    product,
-                    price,
-                    status
-                }
-            );
 
-        } else {
+if(
+aDate &&
+bDate &&
+aDate.seconds !== undefined &&
+bDate.seconds !== undefined
+){
 
-            alert(
-                `✅ Firebase updated to ${status}.\n\n` +
-                `⚠️ No customer phone number was found, so WhatsApp could not be opened.`
-            );
+return (
+bDate.seconds -
+aDate.seconds
+);
 
-        }
+}
 
 
-        // =================================================
-        // RELOAD
-        // =================================================
+return 0;
 
-        await loadOrders();
+});
 
 
-    } catch (error) {
+let totalOrders = 0;
 
-        console.error(
-            "Status update error:",
-            error
-        );
+let revenue = 0;
 
+let pending = 0;
 
-        alert(
-            "❌ Failed to update Firebase:\n\n" +
-            error.message
-        );
+let success = 0;
 
-    }
+
+table.innerHTML = "";
+
+
+if(orders.length === 0){
+
+table.innerHTML = `
+
+<tr>
+
+<td colspan="11">
+
+📦 No orders found.
+
+</td>
+
+</tr>
+
+`;
+
+updateCards(
+0,
+0,
+0,
+0
+);
+
+return;
+
+}
+
+
+orders.forEach(
+(item)=>{
+
+const order =
+item.data;
+
+
+/* CUSTOMER */
+
+const customer =
+order.customerName ||
+order.playerName ||
+order.name ||
+"-";
+
+
+/* FIREBASE UID */
+
+const firebaseUID =
+order.userId ||
+"-";
+
+
+/* GAME UID */
+
+const gameUID =
+order.gameUID ||
+order.gameUid ||
+order.gameId ||
+order.uid ||
+"-";
+
+
+/* PRODUCT */
+
+const product =
+order.productName ||
+order.product ||
+order.package ||
+order.plan ||
+"-";
+
+
+/* PRICE */
+
+const price =
+Number(
+
+order.productPrice ||
+order.price ||
+0
+
+);
+
+
+/* PHONE */
+
+const phone =
+order.phone ||
+order.customerPhone ||
+order.whatsapp ||
+"-";
+
+
+/* PAYMENT */
+
+const payment =
+order.paymentMethod ||
+order.payment ||
+"-";
+
+
+/* TOTAL */
+
+const total =
+Number(
+
+order.total ||
+order.amount ||
+price ||
+0
+
+);
+
+
+/* DATE */
+
+const date =
+formatDate(
+order.createdAt
+);
+
+
+/* STATUS */
+
+const status =
+order.status ||
+"Pending";
+
+
+totalOrders++;
+
+revenue += total;
+
+
+if(status === "Pending"){
+
+pending++;
+
+}
+
+
+if(status === "Success"){
+
+success++;
+
+}
+
+
+/* ROW */
+
+const row =
+document.createElement("tr");
+
+
+row.innerHTML = `
+
+<td>
+
+<b>${item.id}</b>
+
+<br>
+
+<button
+class="copy-btn"
+data-copy="${item.id}">
+
+📋 Copy
+
+</button>
+
+</td>
+
+
+<td>
+
+${customer}
+
+</td>
+
+
+<td>
+
+${firebaseUID}
+
+<br>
+
+<button
+class="copy-btn"
+data-copy="${firebaseUID}">
+
+📋
+
+</button>
+
+</td>
+
+
+<td>
+
+${gameUID}
+
+<br>
+
+<button
+class="copy-btn"
+data-copy="${gameUID}">
+
+📋
+
+</button>
+
+</td>
+
+
+<td>
+
+${product}
+
+</td>
+
+
+<td>
+
+LKR ${price.toLocaleString("en-US")}
+
+</td>
+
+
+<td>
+
+${payment}
+
+<br>
+
+${phone}
+
+</td>
+
+
+<td>
+
+${date}
+
+</td>
+
+
+<td>
+
+LKR ${total.toLocaleString("en-US")}
+
+</td>
+
+
+<td class="${status}">
+
+${status}
+
+</td>
+
+
+<td>
+
+
+<button
+class="success-btn"
+data-success>
+
+✔
+
+</button>
+
+
+<button
+class="reject-btn"
+data-reject>
+
+✖
+
+</button>
+
+
+<button
+class="whatsapp-btn"
+data-whatsapp>
+
+💬
+
+</button>
+
+
+</td>
+
+`;
+
+
+/* BUTTONS */
+
+const successButton =
+row.querySelector(
+"[data-success]"
+);
+
+
+const rejectButton =
+row.querySelector(
+"[data-reject]"
+);
+
+
+const whatsappButton =
+row.querySelector(
+"[data-whatsapp]"
+);
+
+
+/* ALREADY SUCCESS */
+
+if(status === "Success"){
+
+successButton.disabled =
+true;
+
+}
+
+
+/* ALREADY REJECTED */
+
+if(status === "Rejected"){
+
+rejectButton.disabled =
+true;
+
+}
+
+
+/* SUCCESS */
+
+successButton.onclick =
+function(){
+
+changeStatus(
+
+item.id,
+
+"Success",
+
+order
+
+);
 
 };
 
 
-// =====================================================
-// OPEN WHATSAPP WEB
-// =====================================================
+/* REJECT */
+
+rejectButton.onclick =
+function(){
+
+changeStatus(
+
+item.id,
+
+"Rejected",
+
+order
+
+);
+
+};
+
+
+/* WHATSAPP */
+
+whatsappButton.onclick =
+function(){
+
+openWhatsApp(
+
+order,
+
+item.id,
+
+status
+
+);
+
+};
+
+
+table.appendChild(row);
+
+}
+
+);
+
+
+/* UPDATE CARDS */
+
+updateCards(
+
+totalOrders,
+revenue,
+pending,
+success
+
+);
+
+
+}catch(error){
+
+console.error(error);
+
+table.innerHTML = `
+
+<tr>
+
+<td colspan="11">
+
+❌ Error loading orders
+
+<br><br>
+
+${error.message}
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+}
+
+
+
+/* =====================================
+   DASHBOARD CARDS
+===================================== */
+
+function updateCards(
+
+total,
+revenue,
+pending,
+success
+
+){
+
+document
+.getElementById("totalOrders")
+.textContent =
+total;
+
+
+document
+.getElementById("revenue")
+.textContent =
+revenue.toLocaleString("en-US");
+
+
+document
+.getElementById("pendingOrders")
+.textContent =
+pending;
+
+
+document
+.getElementById("successOrders")
+.textContent =
+success;
+
+}
+
+
+
+/* =====================================
+   CHANGE STATUS
+===================================== */
+
+window.changeStatus =
+async function(
+
+orderId,
+newStatus,
+order
+
+){
+
+const user =
+auth.currentUser;
+
+
+const admin =
+await checkAdmin(user);
+
+
+if(!admin){
+
+alert(
+"❌ Access denied."
+);
+
+return;
+
+}
+
+
+let question;
+
+
+if(newStatus === "Success"){
+
+question =
+"Are you sure you want to mark this order as SUCCESS?";
+
+}else{
+
+question =
+"Are you sure you want to REJECT this order?";
+
+}
+
+
+if(!confirm(question)){
+
+return;
+
+}
+
+
+try{
+
+/* FIREBASE UPDATE */
+
+await updateDoc(
+
+doc(
+db,
+"orders",
+orderId
+),
+
+{
+
+status:newStatus,
+
+statusUpdatedAt:
+new Date(),
+
+statusUpdatedBy:
+user.uid
+
+}
+
+);
+
+
+alert(
+"✅ Firebase updated successfully."
+);
+
+
+/* WHATSAPP */
+
+openWhatsApp(
+
+order,
+orderId,
+newStatus
+
+);
+
+
+/* REFRESH */
+
+await loadOrders();
+
+
+}catch(error){
+
+console.error(error);
+
+alert(
+
+"❌ Firebase update failed.\n\n" +
+error.message
+
+);
+
+}
+
+};
+
+
+
+/* =====================================
+   WHATSAPP
+===================================== */
 
 function openWhatsApp(
-    phone,
-    order
-) {
 
-    // Remove spaces, +, -, brackets etc.
-    let cleanPhone =
-    String(phone)
-        .replace(
-            /[\s\-().]/g,
-            ""
-        );
+order,
+orderId,
+status
 
+){
 
-    // Sri Lankan 07XXXXXXXX
-    if (
-        cleanPhone.startsWith("0")
-    ) {
-
-        cleanPhone =
-        "94" +
-        cleanPhone.substring(1);
-
-    }
+let phone =
+order.phone ||
+order.customerPhone ||
+order.whatsapp ||
+"";
 
 
-    // Remove leading +
-    cleanPhone =
-    cleanPhone.replace(
-        /^\+/,
-        ""
-    );
+/* REMOVE SYMBOLS */
+
+phone =
+String(phone)
+.replace(
+/[\s\-().]/g,
+""
+);
 
 
-    let message = "";
+/* SRI LANKA 07XXXXXXXX */
 
+if(phone.startsWith("0")){
 
-    // =================================================
-    // SUCCESS MESSAGE
-    // =================================================
-
-    if (
-        order.status === "Success"
-    ) {
-
-        message =
-
-`💎 ZYPER DIAMOND STORE
-
-━━━━━━━━━━━━━━━━━━
-
-🧾 ORDER ID: ${order.orderId}
-
-📦 Package: ${order.product}
-
-💰 Price: LKR ${order.price.toLocaleString("en-US")}
-
-🎮 UID: ${order.gameUID}
-
-👤 Customer: ${order.customer}
-
-━━━━━━━━━━━━━━━━━━
-
-✅ PAYMENT SUCCESSFUL
-
-Your payment has been verified.
-
-🎉 Your order has been completed successfully.
-
-Thank you for ordering with Zyper Diamond Store ❤️
-
-━━━━━━━━━━━━━━━━━━`;
-
-    }
-
-
-    // =================================================
-    // REJECT MESSAGE
-    // =================================================
-
-    else if (
-        order.status === "Rejected"
-    ) {
-
-        message =
-
-`💎 ZYPER DIAMOND STORE
-
-━━━━━━━━━━━━━━━━━━
-
-🧾 ORDER ID: ${order.orderId}
-
-📦 Package: ${order.product}
-
-💰 Price: LKR ${order.price.toLocaleString("en-US")}
-
-🎮 UID: ${order.gameUID}
-
-👤 Customer: ${order.customer}
-
-━━━━━━━━━━━━━━━━━━
-
-❌ PAYMENT REJECTED
-
-Your payment receipt could not be verified.
-
-Please contact Zyper Diamond Store support.
-
-━━━━━━━━━━━━━━━━━━`;
-
-    }
-
-
-    if (!message) {
-        return;
-    }
-
-
-    // =================================================
-    // WHATSAPP WEB URL
-    // =================================================
-
-    const whatsappURL =
-    `https://web.whatsapp.com/send?phone=${encodeURIComponent(cleanPhone)}&text=${encodeURIComponent(message)}`;
-
-
-    // =================================================
-    // OPEN WHATSAPP
-    // =================================================
-
-    window.open(
-        whatsappURL,
-        "_blank"
-    );
+phone =
+"94" +
+phone.substring(1);
 
 }
 
 
-// =====================================================
-// SEARCH
-// =====================================================
+/* REMOVE + */
 
-let searchReady =
-false;
+if(phone.startsWith("+")){
 
-
-function setupSearch() {
-
-    if (searchReady) {
-        return;
-    }
-
-
-    const search =
-    document.getElementById("search");
-
-
-    if (!search) {
-        return;
-    }
-
-
-    searchReady =
-    true;
-
-
-    search.addEventListener(
-        "input",
-        function() {
-
-            const query =
-            this.value
-                .toLowerCase()
-                .trim();
-
-
-            const rows =
-            document.querySelectorAll(
-                "#orders tr"
-            );
-
-
-            rows.forEach(
-                (row) => {
-
-                    const text =
-                    row.textContent
-                        .toLowerCase();
-
-
-                    row.style.display =
-                    text.includes(query)
-                    ? ""
-                    : "none";
-
-                }
-            );
-
-        }
-    );
+phone =
+phone.substring(1);
 
 }
 
 
-// =====================================================
-// LOGOUT
-// =====================================================
+if(!phone){
+
+alert(
+"❌ Customer WhatsApp number not found."
+);
+
+return;
+
+}
+
+
+/* DATA */
+
+const customer =
+order.customerName ||
+order.playerName ||
+order.name ||
+"Customer";
+
+
+const gameUID =
+order.gameUID ||
+order.gameUid ||
+order.gameId ||
+order.uid ||
+"-";
+
+
+const product =
+order.productName ||
+order.product ||
+order.package ||
+order.plan ||
+"-";
+
+
+const price =
+Number(
+
+order.productPrice ||
+order.price ||
+order.amount ||
+order.total ||
+0
+
+);
+
+
+/* MESSAGE */
+
+let message;
+
+
+if(status === "Success"){
+
+message =
+
+`💎 ZYPER DIAMOND STORE
+
+━━━━━━━━━━━━━━━━
+
+🧾 Order ID: ${orderId}
+
+👤 Customer: ${customer}
+
+🎮 UID: ${gameUID}
+
+📦 Package: ${product}
+
+💰 Amount: LKR ${price.toLocaleString("en-US")}
+
+✅ Status: SUCCESS
+
+Your order has been successfully completed.
+
+Thank you for ordering from Zyper Diamond Store 💎
+
+━━━━━━━━━━━━━━━━`;
+
+}else if(status === "Rejected"){
+
+message =
+
+`💎 ZYPER DIAMOND STORE
+
+━━━━━━━━━━━━━━━━
+
+🧾 Order ID: ${orderId}
+
+👤 Customer: ${customer}
+
+🎮 UID: ${gameUID}
+
+📦 Package: ${product}
+
+💰 Amount: LKR ${price.toLocaleString("en-US")}
+
+❌ Status: REJECTED
+
+Unfortunately, your order/payment could not be approved.
+
+Please contact Zyper Diamond Store for assistance.
+
+━━━━━━━━━━━━━━━━`;
+
+}else{
+
+message =
+
+`💎 ZYPER DIAMOND STORE
+
+━━━━━━━━━━━━━━━━
+
+🧾 Order ID: ${orderId}
+
+👤 Customer: ${customer}
+
+🎮 UID: ${gameUID}
+
+📦 Package: ${product}
+
+💰 Amount: LKR ${price.toLocaleString("en-US")}
+
+⏳ Status: PENDING
+
+━━━━━━━━━━━━━━━━`;
+
+}
+
+
+/* OPEN NORMAL WHATSAPP */
+
+const url =
+"https://wa.me/" +
+phone +
+"?text=" +
+encodeURIComponent(message);
+
+
+window.open(
+url,
+"_blank"
+);
+
+}
+
+
+
+/* =====================================
+   COPY
+===================================== */
+
+document.addEventListener(
+
+"click",
+
+async function(event){
+
+const button =
+event.target.closest(
+"[data-copy]"
+);
+
+
+if(!button){
+
+return;
+
+}
+
+
+const value =
+button.getAttribute(
+"data-copy"
+);
+
+
+try{
+
+await navigator.clipboard.writeText(
+value
+);
+
+
+const old =
+button.textContent;
+
+
+button.textContent =
+"✅";
+
+
+setTimeout(
+function(){
+
+button.textContent =
+old;
+
+},
+1000
+);
+
+
+}catch(error){
+
+alert(
+"Copy failed. Please copy manually."
+);
+
+}
+
+});
+
+
+
+/* =====================================
+   SEARCH
+===================================== */
+
+const search =
+document.getElementById("search");
+
+
+if(search){
+
+search.addEventListener(
+
+"input",
+
+function(){
+
+const text =
+search.value
+.toLowerCase()
+.trim();
+
+
+const rows =
+document.querySelectorAll(
+"#orders tr"
+);
+
+
+rows.forEach(
+function(row){
+
+const content =
+row.textContent
+.toLowerCase();
+
+
+if(
+content.includes(text)
+){
+
+row.style.display =
+"";
+
+}else{
+
+row.style.display =
+"none";
+
+}
+
+});
+
+});
+
+}
+
+
+
+/* =====================================
+   LOGOUT
+===================================== */
 
 const logout =
 document.getElementById("logout");
 
 
-if (logout) {
+if(logout){
 
-    logout.onclick =
-    async () => {
+logout.onclick =
+async function(){
 
-        await signOut(auth);
+await signOut(auth);
 
-        location.href =
-        "admin-login.html";
+location.href =
+"admin-login.html";
 
-    };
+};
 
 }
-```
