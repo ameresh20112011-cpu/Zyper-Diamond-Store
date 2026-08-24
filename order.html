@@ -397,7 +397,7 @@ transform:translateY(-2px);
 
 #checking{
 text-align:center;
-padding:35px 10px;
+padding:30px 10px;
 }
 
 .check-icon{
@@ -421,7 +421,7 @@ font-size:14px;
 
 
 <!-- ==========================================
-CHECKING LOGIN
+LOGIN CHECK
 ========================================== -->
 
 <div id="checking">
@@ -691,32 +691,26 @@ FIREBASE
 ========================================== */
 
 import {
-
-auth,
-db
-
+auth
 }
 from "./admin/firebase.js";
 
 
 import {
-
 onAuthStateChanged
-
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-import {
+/*
+IMPORTANT:
 
-doc,
-setDoc,
-serverTimestamp
+There is NO Firestore import here.
 
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+The Cloudflare Worker is responsible
+for saving the order to Firestore.
+*/
 
 
 /* ==========================================
@@ -742,31 +736,49 @@ PACKAGES
 const PACKAGES = {
 
 "Weekly":560,
+
 "Monthly":2720,
+
 "Weekly Lite":150,
 
 "VIP Bundle":3280,
+
 "SVIP Bundle":4960,
 
 "Level 6":130,
+
 "Level 10":250,
+
 "Level 15":250,
+
 "Level 20":250,
+
 "Level 25":250,
+
 "Level 30":380,
+
 "Full Pass":1500,
 
 "E Badge 3":250,
+
 "E Badge 7":350,
+
 "E Badge 30":1100,
 
 "25 Diamonds":150,
+
 "100 Diamonds":380,
+
 "310 Diamonds":1150,
+
 "520 Diamonds":1800,
+
 "1060 Diamonds":3400,
+
 "2180 Diamonds":6500,
+
 "5600 Diamonds":16500,
+
 "11500 Diamonds":35000
 
 };
@@ -805,8 +817,11 @@ errorBox.style.display =
 "block";
 
 window.scrollTo({
+
 top:0,
+
 behavior:"smooth"
+
 });
 
 }
@@ -821,7 +836,7 @@ errorBox.style.display =
 
 
 /* ==========================================
-GET PACKAGE
+GET SELECTED PACKAGE
 ========================================== */
 
 function getSelectedPackage(){
@@ -830,7 +845,9 @@ const raw =
 localStorage.getItem("package");
 
 if(!raw){
+
 return null;
+
 }
 
 const separator =
@@ -840,7 +857,9 @@ const index =
 raw.lastIndexOf(separator);
 
 if(index === -1){
+
 return null;
+
 }
 
 const name =
@@ -856,6 +875,7 @@ index + separator.length
 ).trim()
 );
 
+
 if(
 !Object.prototype.hasOwnProperty.call(
 PACKAGES,
@@ -867,6 +887,7 @@ return null;
 
 }
 
+
 if(
 PACKAGES[name] !== price
 ){
@@ -875,9 +896,13 @@ return null;
 
 }
 
+
 return {
+
 name:name,
+
 price:price
+
 };
 
 }
@@ -910,7 +935,7 @@ true;
 
 
 /* ==========================================
-FIREBASE LOGIN CHECK
+FIREBASE LOGIN
 ========================================== */
 
 onAuthStateChanged(
@@ -934,11 +959,12 @@ NOT LOGGED IN
 if(!user){
 
 console.log(
-"Customer is NOT logged in."
+"Customer not logged in."
 );
 
+
 /*
-Save page for after login.
+Remember the page.
 */
 
 localStorage.setItem(
@@ -946,9 +972,9 @@ localStorage.setItem(
 "order.html"
 );
 
+
 /*
-Send directly to your
-existing login page.
+Go to existing login page.
 */
 
 window.location.replace(
@@ -961,7 +987,7 @@ return;
 
 
 /* ==========================================
-CUSTOMER LOGGED IN
+LOGGED IN
 ========================================== */
 
 console.log(
@@ -970,46 +996,34 @@ user.uid
 );
 
 
-/*
-Get Firebase token immediately.
-
-This confirms the current
-customer has a valid Firebase
-authentication session.
-*/
-
 try{
+
+/*
+Get token here only to verify
+that the Firebase session is valid.
+*/
 
 const token =
 await user.getIdToken();
 
 
-console.log(
-"Firebase ID token obtained:",
-token ?
-"YES" :
-"NO"
+if(!token){
+
+throw new Error(
+"Firebase authentication token unavailable."
 );
-
-}catch(error){
-
-console.error(
-"Firebase token error:",
-error
-);
-
-window.location.replace(
-"index.html"
-);
-
-return;
 
 }
 
 
-/* ==========================================
-SHOW ORDER PAGE
-========================================== */
+console.log(
+"Firebase authentication token ready."
+);
+
+
+/*
+Show order page.
+*/
 
 checking.style.display =
 "none";
@@ -1018,14 +1032,18 @@ formArea.style.display =
 "block";
 
 
-/* EMAIL */
+/*
+Email.
+*/
 
 customerEmail.textContent =
 user.email ||
 "Email not available";
 
 
-/* PACKAGE */
+/*
+Package.
+*/
 
 if(selected){
 
@@ -1044,17 +1062,33 @@ selected.price.toLocaleString(
 
 }
 
+
+}catch(error){
+
+console.error(
+"Authentication error:",
+error
+);
+
+window.location.replace(
+"index.html"
+);
+
+}
+
 });
 
 
 /* ==========================================
-RECEIPT
+RECEIPT PREVIEW
 ========================================== */
 
 document
 .getElementById("receipt")
 .addEventListener(
+
 "change",
+
 function(){
 
 hideError();
@@ -1063,7 +1097,9 @@ const file =
 this.files[0];
 
 if(!file){
+
 return;
+
 }
 
 
@@ -1102,8 +1138,10 @@ return;
 const preview =
 document.getElementById("preview");
 
+
 preview.src =
 URL.createObjectURL(file);
+
 
 preview.style.display =
 "block";
@@ -1126,12 +1164,12 @@ document
 .textContent =
 file.name;
 
-}
-);
+});
+
 
 
 /* ==========================================
-SUBMIT ORDER
+PLACE ORDER
 ========================================== */
 
 sendButton.addEventListener(
@@ -1153,10 +1191,6 @@ auth.currentUser;
 
 if(!user){
 
-console.log(
-"No Firebase user at submit."
-);
-
 localStorage.setItem(
 "returnAfterLogin",
 "order.html"
@@ -1172,7 +1206,7 @@ return;
 
 
 /* ==========================================
-PACKAGE
+PACKAGE CHECK
 ========================================== */
 
 if(!selected){
@@ -1218,7 +1252,7 @@ document
 
 
 /* ==========================================
-UID
+UID VALIDATION
 ========================================== */
 
 if(
@@ -1239,7 +1273,7 @@ return;
 
 
 /* ==========================================
-NAME
+NAME VALIDATION
 ========================================== */
 
 if(
@@ -1261,7 +1295,7 @@ return;
 
 
 /* ==========================================
-PHONE
+PHONE VALIDATION
 ========================================== */
 
 const cleanPhone =
@@ -1291,7 +1325,7 @@ return;
 
 
 /* ==========================================
-RECEIPT
+RECEIPT VALIDATION
 ========================================== */
 
 if(!receipt){
@@ -1343,6 +1377,7 @@ true;
 sendButton.textContent =
 "⏳ Sending Order...";
 
+
 document
 .getElementById("loading")
 .style.display =
@@ -1353,16 +1388,7 @@ try{
 
 
 /* ==========================================
-FIREBASE ID TOKEN
-==========================================
-
-IMPORTANT FIX
-
-The Cloudflare Worker checks:
-
-Authorization:
-Bearer Firebase_ID_TOKEN
-
+GET FRESH FIREBASE TOKEN
 ========================================== */
 
 const firebaseToken =
@@ -1372,14 +1398,14 @@ await user.getIdToken(true);
 if(!firebaseToken){
 
 throw new Error(
-"Unable to get Firebase ID token."
+"Unable to get Firebase login token."
 );
 
 }
 
 
 console.log(
-"Firebase token ready. Sending authenticated request..."
+"Firebase token obtained successfully."
 );
 
 
@@ -1437,7 +1463,7 @@ receipt.name
 
 
 /* ==========================================
-CLOUDFLARE WORKER REQUEST
+SEND TO CLOUDFLARE WORKER
 ========================================== */
 
 const response =
@@ -1449,35 +1475,36 @@ WORKER_URL,
 
 method:"POST",
 
-/*
-THIS IS THE IMPORTANT PART.
-
-The Firebase token is sent
-in the HTTP Authorization header.
-*/
-
 headers:{
 
+/*
+IMPORTANT:
+
+Worker expects:
+
+Authorization:
+Bearer Firebase ID Token
+*/
+
 "Authorization":
-`Bearer ${firebaseToken}`
+"Bearer " +
+firebaseToken
 
 },
 
 body:formData
 
-}
-
-);
+});
 
 
 console.log(
-"Worker HTTP status:",
+"Worker response status:",
 response.status
 );
 
 
 /* ==========================================
-RESPONSE
+READ RESPONSE
 ========================================== */
 
 let result;
@@ -1503,7 +1530,7 @@ result
 
 
 /* ==========================================
-WORKER ERROR
+CHECK RESPONSE
 ========================================== */
 
 if(
@@ -1538,67 +1565,6 @@ throw new Error(
 );
 
 }
-
-
-/* ==========================================
-SAVE FIRESTORE
-========================================== */
-
-await setDoc(
-
-doc(
-db,
-"orders",
-orderId
-),
-
-{
-
-orderId:
-orderId,
-
-userId:
-user.uid,
-
-customerEmail:
-user.email || "",
-
-customerName:
-playerName,
-
-phone:
-phone,
-
-gameUID:
-uid,
-
-productName:
-selected.name,
-
-productPrice:
-selected.price,
-
-package:
-selected.name,
-
-price:
-selected.price,
-
-paymentMethod:
-"WhatsApp / Receipt",
-
-total:
-selected.price,
-
-status:
-"Pending",
-
-createdAt:
-serverTimestamp()
-
-}
-
-);
 
 
 /* ==========================================
@@ -1644,13 +1610,11 @@ whatsappMessage
 
 
 /* ==========================================
-SET WHATSAPP BUTTON
+WHATSAPP BUTTON
 ========================================== */
 
 document
-.getElementById(
-"whatsappButton"
-)
+.getElementById("whatsappButton")
 .href =
 whatsappURL;
 
@@ -1736,6 +1700,7 @@ error.message ||
 
 sendButton.disabled =
 false;
+
 
 sendButton.textContent =
 "🚀 Place Order";
