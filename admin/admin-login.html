@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +6,15 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
+<meta
+name="viewport"
 content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Admin Login</title>
 
-<link rel="stylesheet" href="admin.css">
+<link
+rel="stylesheet"
+href="admin.css">
 
 </head>
 
@@ -21,7 +25,7 @@ content="width=device-width, initial-scale=1.0">
 <div class="login-box">
 
 
-<div class="logo">
+<div class="login-logo">
 💎
 </div>
 
@@ -31,33 +35,60 @@ Zyper Diamond Store
 </h1>
 
 
-<h3>
-Admin Login
-</h3>
+<p class="login-subtitle">
+Administrator Login
+</p>
 
+
+<div class="input-group">
+
+<label>
+📧 Admin Email
+</label>
 
 <input
 id="email"
 type="email"
-placeholder="Email"
-autocomplete="email"
->
+placeholder="Enter admin email"
+autocomplete="username">
 
+</div>
+
+
+<div class="input-group">
+
+<label>
+🔐 Password
+</label>
 
 <input
 id="password"
 type="password"
-placeholder="Password"
-autocomplete="current-password"
->
+placeholder="Enter password"
+autocomplete="current-password">
+
+</div>
 
 
-<button id="login">
+<button
+id="login"
+type="button">
+
 LOGIN
+
 </button>
 
 
 <p id="msg"></p>
+
+
+<a
+href="../index.html"
+class="back-link">
+
+← Back to Store
+
+</a>
 
 
 </div>
@@ -72,3 +103,4 @@ src="admin.js">
 </body>
 
 </html>
+```
