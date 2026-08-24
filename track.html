@@ -1,86 +1,383 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Track Order - Zyper Diamond Store</title>
 
 <style>
 
+*{
+    box-sizing:border-box;
+}
+
 body{
-    background:#0f172a;
-    color:white;
-    font-family:Arial;
+
     margin:0;
+
+    min-height:100vh;
+
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+    background:
+    linear-gradient(
+        135deg,
+        #020617,
+        #0f172a,
+        #312e81
+    );
+
+    color:white;
+
 }
 
 
-h2{
-    text-align:center;
-    color:#60a5fa;
-}
+.container{
 
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    padding:25px 15px;
+
+}
 
 
 .card{
 
-    background:#1e293b;
+    width:100%;
 
-    margin:20px;
+    max-width:450px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    border:
+    1px solid rgba(255,255,255,.15);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.45);
+
+}
+
+
+.logo{
+
+    text-align:center;
+
+    font-size:50px;
+
+}
+
+
+.title{
+
+    text-align:center;
+
+    margin:8px 0 5px;
+
+    font-size:25px;
+
+    font-weight:800;
+
+    background:
+    linear-gradient(
+        90deg,
+        #60a5fa,
+        #c084fc
+    );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+
+}
+
+
+.subtitle{
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    margin-bottom:25px;
+
+}
+
+
+.loading{
+
+    text-align:center;
+
+    padding:30px 10px;
+
+    color:#93c5fd;
+
+}
+
+
+.error{
+
+    text-align:center;
 
     padding:20px;
 
     border-radius:15px;
 
+    background:
+    rgba(239,68,68,.12);
+
+    border:
+    1px solid rgba(239,68,68,.3);
+
+    color:#fca5a5;
+
 }
 
+
+.success-box{
+
+    background:
+    rgba(34,197,94,.08);
+
+    border:
+    1px solid rgba(34,197,94,.25);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    margin-bottom:20px;
+
+    text-align:center;
+
+}
+
+
+.success-icon{
+
+    font-size:45px;
+
+}
+
+
+.success-title{
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    margin-top:5px;
+
+}
+
+
+.order-id{
+
+    margin-top:8px;
+
+    font-size:27px;
+
+    font-weight:800;
+
+    letter-spacing:3px;
+
+    color:#60a5fa;
+
+}
+
+
+.info{
+
+    background:
+    rgba(15,23,42,.65);
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    border-radius:15px;
+
+    padding:15px;
+
+}
+
+
+.info-row{
+
+    padding:12px 0;
+
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
+
+}
+
+
+.info-row:last-child{
+
+    border-bottom:none;
+
+}
+
+
+.label{
+
+    display:block;
+
+    font-size:12px;
+
+    color:#94a3b8;
+
+    margin-bottom:5px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+}
+
+
+.value{
+
+    display:block;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    word-break:break-word;
+
+}
 
 
 .status{
 
-    color:#22c55e;
+    display:inline-block;
 
-    font-size:20px;
+    padding:7px 13px;
+
+    border-radius:20px;
+
+    font-size:14px;
 
     font-weight:bold;
 
 }
 
 
+.pending{
 
-.home-btn{
+    background:
+    rgba(250,204,21,.12);
 
-    width:90%;
+    color:#facc15;
 
-    margin:20px auto;
+    border:
+    1px solid rgba(250,204,21,.25);
+
+}
+
+
+.success{
+
+    background:
+    rgba(34,197,94,.12);
+
+    color:#22c55e;
+
+    border:
+    1px solid rgba(34,197,94,.25);
+
+}
+
+
+.rejected{
+
+    background:
+    rgba(239,68,68,.12);
+
+    color:#ef4444;
+
+    border:
+    1px solid rgba(239,68,68,.25);
+
+}
+
+
+.button{
+
+    width:100%;
 
     display:block;
 
-    padding:14px;
-
-    background:#2563eb;
-
-    color:white;
-
     border:none;
 
-    border-radius:10px;
+    border-radius:14px;
+
+    padding:14px;
+
+    margin-top:15px;
+
+    color:white;
 
     font-size:16px;
 
     font-weight:bold;
+
+    text-align:center;
+
+    text-decoration:none;
 
     cursor:pointer;
 
 }
 
 
-.home-btn:hover{
+.home-button{
 
-    background:#1d4ed8;
+    background:
+    linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed
+    );
+
+}
+
+
+.orders-button{
+
+    background:#334155;
+
+}
+
+
+.button:hover{
+
+    transform:translateY(-2px);
 
 }
 
@@ -90,45 +387,74 @@ h2{
 </head>
 
 
-
 <body>
 
 
-<h2>
-💎 Zyper Diamond Store
-</h2>
+<div class="container">
+
+<div class="card">
 
 
+<div class="logo">
+💎
+</div>
 
-<div class="card" id="box">
 
-Loading order...
+<h1 class="title">
+Track Your Order
+</h1>
+
+
+<p class="subtitle">
+Zyper Diamond Store
+</p>
+
+
+<div id="box">
+
+<div class="loading">
+⏳ Loading order...
+</div>
 
 </div>
 
 
-
-<!-- HOME BUTTON -->
-
-<button class="home-btn" onclick="goHome()">
+<a
+href="home.html"
+class="button home-button">
 
 🏠 Go To Home
 
-</button>
+</a>
 
 
+<a
+href="orders.html"
+class="button orders-button">
+
+📜 My Order History
+
+</a>
 
 
+</div>
+
+</div>
 
 
 
 <script type="module">
 
 
-import { initializeApp }
+import {
 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+initializeApp
 
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
 import {
@@ -141,8 +467,9 @@ getDoc
 
 }
 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+from
 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 import {
@@ -153,256 +480,524 @@ onAuthStateChanged
 
 }
 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 
-
-
+/* ==========================================
+   FIREBASE
+========================================== */
 
 const firebaseConfig = {
 
+    apiKey:
+    "AIzaSyCd_2LplLOl4TOGJQqWqndwHNGzPh2PEHM",
 
-apiKey:"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
+    authDomain:
+    "zyper-d-iamond-store.firebaseapp.com",
 
-authDomain:"zyper-d-iamond-store.firebaseapp.com",
+    projectId:
+    "zyper-d-iamond-store",
 
-projectId:"zyper-d-iamond-store",
+    messagingSenderId:
+    "892467477866",
 
-messagingSenderId:"892467477866",
-
-appId:"1:892467477866:web:61e9b6ff9435798da23913"
-
+    appId:
+    "1:892467477866:web:61e9b6ff9435798da23913"
 
 };
 
 
+const app =
+initializeApp(firebaseConfig);
 
 
+const db =
+getFirestore(app);
 
 
-const app = initializeApp(firebaseConfig);
+const auth =
+getAuth(app);
 
 
-const db = getFirestore(app);
+const box =
+document.getElementById("box");
 
 
-const auth = getAuth(app);
-
-
-
-const box = document.getElementById("box");
-
-
-
-
-
-
-// GET ORDER ID
+/* ==========================================
+   ORDER ID
+========================================== */
 
 const params =
-new URLSearchParams(window.location.search);
-
+new URLSearchParams(
+    window.location.search
+);
 
 
 const orderID =
 params.get("id");
 
 
-
-
-
-
 if(!orderID){
 
+    box.innerHTML = `
 
-box.innerHTML =
-"❌ No Order ID Found";
+        <div class="error">
 
+            ❌ No Order ID Found.
 
-}
+        </div>
 
-
-
-
-
-
-
-onAuthStateChanged(auth, async(user)=>{
-
-
-if(!user){
-
-
-box.innerHTML =
-"❌ Please Login First";
-
-
-return;
-
+    `;
 
 }
 
 
+/* ==========================================
+   STATUS
+========================================== */
+
+function getStatusInfo(status){
+
+    const normalized =
+    String(status || "Pending")
+    .trim()
+    .toLowerCase();
 
 
+    if(normalized === "success"){
 
-try{
+        return {
+
+            text:"✅ Success",
+
+            className:"success"
+
+        };
+
+    }
 
 
+    if(normalized === "rejected"){
 
-const orderSnap = await getDoc(
+        return {
 
-doc(db,"orders",orderID)
+            text:"❌ Rejected",
+
+            className:"rejected"
+
+        };
+
+    }
+
+
+    return {
+
+        text:"⏳ Pending",
+
+        className:"pending"
+
+    };
+
+}
+
+
+/* ==========================================
+   SAFE HTML
+========================================== */
+
+function escapeHTML(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+    .replaceAll("&","&amp;")
+
+    .replaceAll("<","&lt;")
+
+    .replaceAll(">","&gt;")
+
+    .replaceAll('"',"&quot;")
+
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* ==========================================
+   AUTH CHECK
+========================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    async function(user){
+
+        if(!user){
+
+            box.innerHTML = `
+
+                <div class="error">
+
+                    ❌ Please Login First.
+
+                    <br><br>
+
+                    You must login to track your order.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        if(!orderID){
+
+            return;
+
+        }
+
+
+        try{
+
+            /* =================================
+               GET ORDER
+            ================================= */
+
+            const orderReference =
+            doc(
+                db,
+                "orders",
+                orderID
+            );
+
+
+            const orderSnapshot =
+            await getDoc(
+                orderReference
+            );
+
+
+            if(!orderSnapshot.exists()){
+
+                box.innerHTML = `
+
+                    <div class="error">
+
+                        ❌ Order Not Found.
+
+                        <br><br>
+
+                        Please check your Order ID.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            const data =
+            orderSnapshot.data();
+
+
+            /* =================================
+               CUSTOMER SECURITY
+            ================================= */
+
+            if(
+                data.userId !== user.uid
+            ){
+
+                box.innerHTML = `
+
+                    <div class="error">
+
+                        ❌ Access Denied.
+
+                        <br><br>
+
+                        This order does not belong
+                        to your account.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            /* =================================
+               DATA
+            ================================= */
+
+            const email =
+
+                data.email ||
+
+                user.email ||
+
+                "Email not available";
+
+
+            const gameUID =
+
+                data.gameUID ||
+
+                data.gameUid ||
+
+                data.gameId ||
+
+                data.uid ||
+
+                "-";
+
+
+            const packageName =
+
+                data.package ||
+
+                data.productName ||
+
+                data.product ||
+
+                "-";
+
+
+            const price =
+
+                Number(
+                    data.price ||
+                    data.productPrice ||
+                    data.total ||
+                    0
+                );
+
+
+            const customerName =
+
+                data.customerName ||
+
+                data.playerName ||
+
+                "-";
+
+
+            const phone =
+
+                data.phone ||
+
+                "-";
+
+
+            const statusInfo =
+            getStatusInfo(
+                data.status
+            );
+
+
+            /* =================================
+               DISPLAY
+            ================================= */
+
+            box.innerHTML = `
+
+                <div class="success-box">
+
+                    <div class="success-icon">
+
+                        ${statusInfo.text.startsWith("❌")
+                        ? "❌"
+                        : statusInfo.text.startsWith("⏳")
+                        ? "⏳"
+                        : "✅"}
+
+                    </div>
+
+                    <div class="success-title">
+
+                        Order Found
+
+                    </div>
+
+                    <div class="order-id">
+
+                        ${escapeHTML(orderID)}
+
+                    </div>
+
+                </div>
+
+
+                <div class="info">
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Order ID
+                        </span>
+
+                        <span class="value">
+                            ${escapeHTML(orderID)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Customer Email
+                        </span>
+
+                        <span class="value">
+                            ${escapeHTML(email)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Customer Name
+                        </span>
+
+                        <span class="value">
+                            ${escapeHTML(customerName)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Free Fire UID
+                        </span>
+
+                        <span class="value">
+                            ${escapeHTML(gameUID)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Package
+                        </span>
+
+                        <span class="value">
+                            ${escapeHTML(packageName)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Price
+                        </span>
+
+                        <span class="value">
+
+                            LKR
+                            ${price.toLocaleString("en-US")}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Phone
+                        </span>
+
+                        <span class="value">
+                            ${escapeHTML(phone)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Order Status
+                        </span>
+
+                        <span
+                        class="status ${statusInfo.className}">
+
+                            ${statusInfo.text}
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+
+        }catch(error){
+
+            console.error(
+                "Track order error:",
+                error
+            );
+
+
+            box.innerHTML = `
+
+                <div class="error">
+
+                    ❌ Failed to load order.
+
+                    <br><br>
+
+                    ${escapeHTML(
+                        error.message
+                    )}
+
+                </div>
+
+            `;
+
+        }
+
+    }
 
 );
 
 
-
-
-
-if(!orderSnap.exists()){
-
-
-box.innerHTML =
-"❌ Order Not Found";
-
-
-return;
-
-
-}
-
-
-
-
-
-
-const data =
-orderSnap.data();
-
-
-
-
-
-let statusColor="#facc15";
-
-
-
-if(data.status=="Approved"){
-
-statusColor="#22c55e";
-
-}
-
-
-
-if(data.status=="Rejected"){
-
-statusColor="#ef4444";
-
-}
-
-
-
-
-
-
-box.innerHTML = `
-
-
-<h3>
-✅ Order Found
-</h3>
-
-
-
-<p>
-<b>Order ID:</b><br>
-${orderID}
-</p>
-
-
-
-<p>
-<b>Game UID:</b><br>
-${data.gameUID}
-</p>
-
-
-
-<p>
-<b>Package:</b><br>
-${data.package}
-</p>
-
-
-
-<p>
-<b>Status:</b><br>
-
-<span class="status" style="color:${statusColor}">
-
-${data.status}
-
-</span>
-
-</p>
-
-
-
-<p>
-<b>Email:</b><br>
-${data.email}
-</p>
-
-
-
-`;
-
-
-
-
-
-}
-
-catch(error){
-
-
-console.log(error);
-
-
-box.innerHTML =
-"❌ Error: "+error.message;
-
-
-}
-
-
-
-});
-
-
-
-
-
-
-
-
-// HOME FUNCTION
-
-window.goHome=function(){
-
-window.location.href="index.html";
-
-}
-
-
-
-
 </script>
-
-
 
 </body>
 
