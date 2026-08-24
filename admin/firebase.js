@@ -1,10 +1,13 @@
+```javascript
 // ==========================================
 // ZYPER DIAMOND STORE
-// ADMIN FIREBASE CONFIG
+// ADMIN FIREBASE
 // ==========================================
 
 import {
-    initializeApp
+    initializeApp,
+    getApps,
+    getApp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
@@ -15,53 +18,25 @@ import {
     getFirestore
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
-// ==========================================
-// FIREBASE CONFIG
-// ==========================================
-
 const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyCd_2LplLOl4TOGJQWqndwHNGzPh2PEHM",
-
-    authDomain:
-        "zyper-d-iamond-store.firebaseapp.com",
-
-    projectId:
-        "zyper-d-iamond-store",
-
-    messagingSenderId:
-        "892467477866",
-
-    appId:
-        "1:892467477866:web:61e9b6ff9435798da23913"
-
+    apiKey: "AIzaSyCd_2LplLOl4TOGJQWqndwHNGzPh2PEHM",
+    authDomain: "zyper-d-iamond-store.firebaseapp.com",
+    projectId: "zyper-d-iamond-store",
+    storageBucket: "zyper-d-iamond-store.firebasestorage.app",
+    messagingSenderId: "892467477866",
+    appId: "1:892467477866:web:61e9b6ff9435798da23913"
 };
 
+const app = getApps().length
+    ? getApp()
+    : initializeApp(firebaseConfig);
 
-// ==========================================
-// INITIALIZE
-// ==========================================
-
-const app =
-    initializeApp(firebaseConfig);
-
-
-const auth =
-    getAuth(app);
-
-
-const db =
-    getFirestore(app);
-
-
-// ==========================================
-// EXPORT
-// ==========================================
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 export {
     app,
     auth,
     db
 };
+```
