@@ -1,6 +1,4 @@
-// ===============================
-// ADMIN FIREBASE.JS
-// ===============================
+// admin/firebase.js
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -11,10 +9,6 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
-// ===============================
-// FIREBASE CONFIG
-// ===============================
 
 const firebaseConfig = {
 
@@ -31,19 +25,11 @@ const firebaseConfig = {
     appId: "1:892467477866:web:61e9b6ff9435798da23913",
 
     measurementId: "G-RLJFR6F2GC"
+
 };
 
 
-// ===============================
-// INITIALIZE
-// ===============================
-
 const app = initializeApp(firebaseConfig);
-
-
-// ===============================
-// EXPORT
-// ===============================
 
 export const auth = getAuth(app);
 
