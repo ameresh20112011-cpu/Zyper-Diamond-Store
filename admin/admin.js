@@ -1,165 +1,149 @@
-// ==========================================
-// ZYPER DIAMOND STORE
-// ADMIN JAVASCRIPT
-// ==========================================
-
 import { auth, db } from "./firebase.js";
 
 import {
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
-    collection,
-    getDocs,
-    doc,
-    getDoc,
-    updateDoc
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+collection,
+getDocs,
+doc,
+getDoc,
+updateDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
-// ==========================================
-// GLOBAL
-// ==========================================
+/* =====================================================
+GLOBAL DATA
+===================================================== */
 
 let allOrders = [];
 
-let currentDateFilter = "all";
+let selectedDate = "";
 
-let currentStatusFilter = "all";
+let searchValue = "";
 
-let customDate = "";
-
-
-// ==========================================
-// CHECK ADMIN
-// ==========================================
+/* =====================================================
+ADMIN CHECK
+===================================================== */
 
 async function checkAdmin(user){
 
-    try{
+```
+try{
 
-        if(!user){
-            return false;
-        }
+    if(!user){
+        return false;
+    }
 
-        const adminRef =
+    const adminRef =
         doc(
             db,
             "users",
             user.uid
         );
 
-        const adminDoc =
+    const adminDoc =
         await getDoc(adminRef);
 
-        if(!adminDoc.exists()){
-            return false;
-        }
+    if(!adminDoc.exists()){
+        return false;
+    }
 
-        const data =
+    const data =
         adminDoc.data();
 
-        return data.role === "admin";
+    return data.role === "admin";
 
-    }catch(error){
+}catch(error){
 
-        console.error(
-            "Admin check error:",
-            error
-        );
+    console.error(
+        "Admin check error:",
+        error
+    );
 
-        return false;
+    return false;
 
-    }
+}
+```
 
 }
 
-
-// ==========================================
-// ADMIN LOGIN
-// ==========================================
+/* =====================================================
+LOGIN
+===================================================== */
 
 const loginButton =
 document.getElementById("login");
 
-
 if(loginButton){
 
-    loginButton.addEventListener(
-        "click",
-        adminLogin
-    );
+```
+loginButton.addEventListener(
+    "click",
+    adminLogin
+);
 
-
-    const passwordInput =
+const passwordInput =
     document.getElementById("password");
 
+if(passwordInput){
 
-    if(passwordInput){
+    passwordInput.addEventListener(
+        "keydown",
+        function(event){
 
-        passwordInput.addEventListener(
-            "keydown",
-            function(event){
-
-                if(event.key === "Enter"){
-                    adminLogin();
-                }
-
+            if(event.key === "Enter"){
+                adminLogin();
             }
-        );
 
-    }
+        }
+    );
+
+}
+```
 
 }
 
-
 async function adminLogin(){
 
-    const email =
+```
+const email =
     document
     .getElementById("email")
     .value
     .trim();
 
-
-    const password =
+const password =
     document
     .getElementById("password")
     .value;
 
-
-    const msg =
+const msg =
     document
     .getElementById("msg");
 
 
-    if(!email || !password){
+if(!email || !password){
 
-        msg.textContent =
+    msg.textContent =
         "Enter email and password.";
 
-        return;
+    return;
 
-    }
+}
 
 
-    loginButton.disabled =
-    true;
+loginButton.disabled = true;
 
-    loginButton.textContent =
+loginButton.textContent =
     "Logging in...";
 
 
-    try{
+try{
 
-        const result =
+    const result =
         await signInWithEmailAndPassword(
             auth,
             email,
@@ -167,576 +151,384 @@ async function adminLogin(){
         );
 
 
-        const admin =
+    const admin =
         await checkAdmin(
             result.user
         );
 
 
-        if(!admin){
+    if(!admin){
 
-            msg.textContent =
+        msg.textContent =
             "❌ This account is not an admin.";
 
-            await signOut(auth);
+        await signOut(auth);
 
-            loginButton.disabled =
-            false;
+        loginButton.disabled = false;
 
-            loginButton.textContent =
+        loginButton.textContent =
             "LOGIN";
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "admin-dashboard.html";
+
+
+}catch(error){
+
+    console.error(
+        "Login error:",
+        error
+    );
+
+
+    let message =
+        "Login failed.";
+
+
+    if(
+        error.code ===
+        "auth/invalid-credential"
+    ){
+
+        message =
+            "❌ Incorrect email or password.";
+
+    }
+
+    else if(
+        error.code ===
+        "auth/user-not-found"
+    ){
+
+        message =
+            "❌ User account not found.";
+
+    }
+
+    else if(
+        error.code ===
+        "auth/wrong-password"
+    ){
+
+        message =
+            "❌ Incorrect password.";
+
+    }
+
+    else if(
+        error.code ===
+        "auth/invalid-email"
+    ){
+
+        message =
+            "❌ Invalid email address.";
+
+    }
+
+    else if(
+        error.code ===
+        "auth/network-request-failed"
+    ){
+
+        message =
+            "❌ Network error.";
+
+    }
+
+    else{
+
+        message =
+            "❌ " +
+            error.message;
+
+    }
+
+
+    msg.textContent =
+        message;
+
+
+    loginButton.disabled = false;
+
+    loginButton.textContent =
+        "LOGIN";
+
+}
+```
+
+}
+
+/* =====================================================
+DASHBOARD PROTECTION
+===================================================== */
+
+const orderTable =
+document.getElementById("orders");
+
+if(orderTable){
+
+```
+onAuthStateChanged(
+    auth,
+    async function(user){
+
+        const admin =
+            await checkAdmin(user);
+
+
+        if(!admin){
+
+            window.location.href =
+                "admin-login.html";
 
             return;
 
         }
 
 
-        window.location.href =
-        "admin-dashboard.html";
-
-
-    }catch(error){
-
-        console.error(
-            "Login error:",
-            error
-        );
-
-
-        let message =
-        "Login failed.";
-
-
-        if(
-            error.code ===
-            "auth/invalid-credential"
-        ){
-
-            message =
-            "❌ Incorrect email or password.";
-
-        }
-
-        else if(
-            error.code ===
-            "auth/user-not-found"
-        ){
-
-            message =
-            "❌ User account not found.";
-
-        }
-
-        else if(
-            error.code ===
-            "auth/wrong-password"
-        ){
-
-            message =
-            "❌ Incorrect password.";
-
-        }
-
-        else if(
-            error.code ===
-            "auth/invalid-email"
-        ){
-
-            message =
-            "❌ Invalid email address.";
-
-        }
-
-        else if(
-            error.code ===
-            "auth/network-request-failed"
-        ){
-
-            message =
-            "❌ Network error. Check your internet.";
-
-        }
-
-        else{
-
-            message =
-            "❌ " +
-            error.message;
-
-        }
-
-
-        msg.textContent =
-        message;
-
-
-        loginButton.disabled =
-        false;
-
-        loginButton.textContent =
-        "LOGIN";
-
-    }
-
-}
-
-
-// ==========================================
-// DASHBOARD
-// ==========================================
-
-const orderTable =
-document.getElementById("orders");
-
-
-if(orderTable){
-
-    onAuthStateChanged(
-        auth,
-        async function(user){
-
-            const admin =
-            await checkAdmin(user);
-
-
-            if(!admin){
-
-                window.location.href =
-                "admin-login.html";
-
-                return;
-
-            }
-
-
-            const app =
+        const app =
             document.getElementById("app");
 
 
-            if(app){
-                app.style.display =
+        if(app){
+
+            app.style.display =
                 "block";
-            }
-
-
-            createFilters();
-
-            await loadOrders();
 
         }
-    );
+
+
+        await loadOrders();
+
+    }
+);
+```
 
 }
 
-
-// ==========================================
-// CREATE FILTER AREA
-// ==========================================
-
-function createFilters(){
-
-    if(
-        document.getElementById(
-            "adminFilters"
-        )
-    ){
-        return;
-    }
-
-
-    const table =
-    document.getElementById("orders");
-
-
-    if(!table){
-        return;
-    }
-
-
-    const container =
-    table.closest("table");
-
-
-    if(!container){
-        return;
-    }
-
-
-    const wrapper =
-    document.createElement("div");
-
-
-    wrapper.id =
-    "adminFilters";
-
-
-    wrapper.style.cssText = `
-        display:flex;
-        flex-wrap:wrap;
-        gap:10px;
-        margin:15px 0;
-        padding:15px;
-        background:rgba(255,255,255,.06);
-        border-radius:15px;
-    `;
-
-
-    wrapper.innerHTML = `
-
-        <select id="dateFilter"
-        style="
-        padding:12px;
-        border-radius:10px;
-        background:#1e293b;
-        color:white;
-        border:1px solid #475569;
-        ">
-
-            <option value="all">
-                📋 All Orders
-            </option>
-
-            <option value="today">
-                📅 Today
-            </option>
-
-            <option value="yesterday">
-                📅 Yesterday
-            </option>
-
-            <option value="7days">
-                📅 Last 7 Days
-            </option>
-
-            <option value="month">
-                📅 This Month
-            </option>
-
-            <option value="custom">
-                📅 Custom Date
-            </option>
-
-        </select>
-
-
-        <select id="statusFilter"
-        style="
-        padding:12px;
-        border-radius:10px;
-        background:#1e293b;
-        color:white;
-        border:1px solid #475569;
-        ">
-
-            <option value="all">
-                📦 All Status
-            </option>
-
-            <option value="Pending">
-                ⏳ Pending
-            </option>
-
-            <option value="Success">
-                ✅ Success
-            </option>
-
-            <option value="Rejected">
-                ❌ Rejected
-            </option>
-
-        </select>
-
-
-        <input
-        type="date"
-        id="customDate"
-        style="
-        display:none;
-        padding:12px;
-        border-radius:10px;
-        background:#1e293b;
-        color:white;
-        border:1px solid #475569;
-        ">
-
-
-        <button
-        id="clearFilters"
-        type="button"
-        style="
-        padding:12px 18px;
-        border:none;
-        border-radius:10px;
-        background:#475569;
-        color:white;
-        font-weight:bold;
-        cursor:pointer;
-        ">
-
-            🔄 Reset
-
-        </button>
-
-    `;
-
-
-    container.parentNode.insertBefore(
-        wrapper,
-        container
-    );
-
-
-    const dateFilter =
-    document.getElementById(
-        "dateFilter"
-    );
-
-
-    const statusFilter =
-    document.getElementById(
-        "statusFilter"
-    );
-
-
-    const customDateInput =
-    document.getElementById(
-        "customDate"
-    );
-
-
-    dateFilter.addEventListener(
-        "change",
-        function(){
-
-            currentDateFilter =
-            this.value;
-
-
-            if(
-                this.value ===
-                "custom"
-            ){
-
-                customDateInput.style.display =
-                "block";
-
-            }else{
-
-                customDateInput.style.display =
-                "none";
-
-                customDate = "";
-
-            }
-
-
-            applyFilters();
-
-        }
-    );
-
-
-    statusFilter.addEventListener(
-        "change",
-        function(){
-
-            currentStatusFilter =
-            this.value;
-
-            applyFilters();
-
-        }
-    );
-
-
-    customDateInput.addEventListener(
-        "change",
-        function(){
-
-            customDate =
-            this.value;
-
-            applyFilters();
-
-        }
-    );
-
-
-    document
-    .getElementById(
-        "clearFilters"
-    )
-    .addEventListener(
-        "click",
-        function(){
-
-            currentDateFilter =
-            "all";
-
-            currentStatusFilter =
-            "all";
-
-            customDate = "";
-
-            dateFilter.value =
-            "all";
-
-            statusFilter.value =
-            "all";
-
-            customDateInput.value =
-            "";
-
-            customDateInput.style.display =
-            "none";
-
-            applyFilters();
-
-        }
-    );
-
-}
-
-
-// ==========================================
-// FORMAT DATE
-// ==========================================
+/* =====================================================
+FIRESTORE DATE CONVERTER
+===================================================== */
 
 function getOrderDate(timestamp){
 
-    if(!timestamp){
-        return null;
+```
+if(!timestamp){
+    return null;
+}
+
+
+try{
+
+    if(
+        timestamp &&
+        typeof timestamp.toDate === "function"
+    ){
+
+        return timestamp.toDate();
+
     }
 
 
-    try{
+    if(
+        timestamp instanceof Date
+    ){
 
-        if(
-            typeof timestamp.toDate ===
-            "function"
-        ){
+        return timestamp;
 
-            return timestamp.toDate();
-
-        }
+    }
 
 
-        if(
-            timestamp.seconds != null
-        ){
-
-            return new Date(
-                timestamp.seconds * 1000
-            );
-
-        }
-
-
-        if(
-            timestamp instanceof Date
-        ){
-
-            return timestamp;
-
-        }
-
+    if(
+        typeof timestamp === "number"
+    ){
 
         return new Date(timestamp);
 
-    }catch{
+    }
 
-        return null;
+
+    if(
+        typeof timestamp === "string"
+    ){
+
+        const date =
+            new Date(timestamp);
+
+        if(!isNaN(date.getTime())){
+            return date;
+        }
 
     }
 
+
+    if(
+        timestamp.seconds !== undefined
+    ){
+
+        return new Date(
+            timestamp.seconds * 1000
+        );
+
+    }
+
+
+    return null;
+
+}catch{
+
+    return null;
+
+}
+```
+
 }
 
+/* =====================================================
+DATE KEY
+===================================================== */
+
+function getDateKey(date){
+
+```
+if(!date){
+    return "";
+}
+
+
+const year =
+    date.getFullYear();
+
+
+const month =
+    String(
+        date.getMonth() + 1
+    ).padStart(2,"0");
+
+
+const day =
+    String(
+        date.getDate()
+    ).padStart(2,"0");
+
+
+return (
+    year +
+    "-" +
+    month +
+    "-" +
+    day
+);
+```
+
+}
+
+/* =====================================================
+FORMAT DATE
+===================================================== */
 
 function formatDate(timestamp){
 
-    const date =
+```
+const date =
     getOrderDate(timestamp);
 
 
-    if(!date){
-        return "-";
-    }
-
-
-    try{
-
-        const hour =
-        String(
-            date.getHours()
-        ).padStart(2,"0");
-
-
-        const minute =
-        String(
-            date.getMinutes()
-        ).padStart(2,"0");
-
-
-        const year =
-        date.getFullYear();
-
-
-        const month =
-        String(
-            date.getMonth()+1
-        ).padStart(2,"0");
-
-
-        const day =
-        String(
-            date.getDate()
-        ).padStart(2,"0");
-
-
-        return `${hour}:${minute} , ${year}/${month}/${day}`;
-
-    }catch{
-
-        return "-";
-
-    }
-
+if(!date){
+    return "-";
 }
 
 
-// ==========================================
-// LOAD ORDERS
-// ==========================================
+const year =
+    date.getFullYear();
+
+
+const month =
+    String(
+        date.getMonth() + 1
+    ).padStart(2,"0");
+
+
+const day =
+    String(
+        date.getDate()
+    ).padStart(2,"0");
+
+
+const hour =
+    String(
+        date.getHours()
+    ).padStart(2,"0");
+
+
+const minute =
+    String(
+        date.getMinutes()
+    ).padStart(2,"0");
+
+
+const second =
+    String(
+        date.getSeconds()
+    ).padStart(2,"0");
+
+
+return (
+    year +
+    "/" +
+    month +
+    "/" +
+    day +
+    " " +
+    hour +
+    ":" +
+    minute +
+    ":" +
+    second
+);
+```
+
+}
+
+/* =====================================================
+LOAD ORDERS
+===================================================== */
 
 async function loadOrders(){
 
-    const table =
+```
+const table =
     document.getElementById("orders");
 
 
-    if(!table){
-        return;
-    }
+if(!table){
+    return;
+}
 
 
-    table.innerHTML = `
+table.innerHTML = `
 
-        <tr>
+    <tr>
+        <td
+            colspan="12"
+            class="loading-cell">
 
-            <td colspan="12">
+            ⏳ Loading orders...
 
-                ⏳ Loading orders...
+        </td>
+    </tr>
 
-            </td>
-
-        </tr>
-
-    `;
+`;
 
 
-    try{
+try{
 
-        const snapshot =
+    const snapshot =
         await getDocs(
             collection(
                 db,
@@ -745,406 +537,357 @@ async function loadOrders(){
         );
 
 
-        allOrders = [];
+    allOrders = [];
 
 
-        snapshot.forEach(
-            function(document){
+    snapshot.forEach(
+        function(document){
 
-                allOrders.push({
+            allOrders.push({
 
-                    id:document.id,
+                id:
+                    document.id,
 
-                    data:document.data()
+                data:
+                    document.data()
 
-                });
+            });
 
-            }
-        );
+        }
+    );
 
 
-        allOrders.sort(
-            function(a,b){
+    /* newest first */
 
-                const dateA =
+    allOrders.sort(
+        function(a,b){
+
+            const dateA =
                 getOrderDate(
                     a.data.createdAt
                 );
 
-
-                const dateB =
+            const dateB =
                 getOrderDate(
                     b.data.createdAt
                 );
 
 
-                if(!dateA && !dateB){
-                    return 0;
-                }
-
-                if(!dateA){
-                    return 1;
-                }
-
-                if(!dateB){
-                    return -1;
-                }
-
-
-                return dateB - dateA;
-
+            if(!dateA && !dateB){
+                return 0;
             }
-        );
 
+            if(!dateA){
+                return 1;
+            }
 
-        applyFilters();
+            if(!dateB){
+                return -1;
+            }
 
 
-    }catch(error){
-
-        console.error(
-            "Load orders error:",
-            error
-        );
-
-
-        table.innerHTML = `
-
-            <tr>
-
-                <td colspan="12">
-
-                    ❌ Failed to load orders
-
-                    <br><br>
-
-                    ${escapeHTML(
-                        error.message
-                    )}
-
-                </td>
-
-            </tr>
-
-        `;
-
-    }
-
-}
-
-
-// ==========================================
-// DATE FILTER
-// ==========================================
-
-function sameDay(
-    date,
-    target
-){
-
-    return(
-        date.getFullYear() ===
-        target.getFullYear() &&
-
-        date.getMonth() ===
-        target.getMonth() &&
-
-        date.getDate() ===
-        target.getDate()
-    );
-
-}
-
-
-function isDateMatch(
-    orderDate
-){
-
-    if(
-        currentDateFilter ===
-        "all"
-    ){
-
-        return true;
-
-    }
-
-
-    if(!orderDate){
-
-        return false;
-
-    }
-
-
-    const now =
-    new Date();
-
-
-    if(
-        currentDateFilter ===
-        "today"
-    ){
-
-        return sameDay(
-            orderDate,
-            now
-        );
-
-    }
-
-
-    if(
-        currentDateFilter ===
-        "yesterday"
-    ){
-
-        const yesterday =
-        new Date(now);
-
-        yesterday.setDate(
-            yesterday.getDate() - 1
-        );
-
-
-        return sameDay(
-            orderDate,
-            yesterday
-        );
-
-    }
-
-
-    if(
-        currentDateFilter ===
-        "7days"
-    ){
-
-        const start =
-        new Date(now);
-
-        start.setHours(
-            0,0,0,0
-        );
-
-        start.setDate(
-            start.getDate() - 6
-        );
-
-
-        const end =
-        new Date(now);
-
-        end.setHours(
-            23,59,59,999
-        );
-
-
-        return(
-            orderDate >= start &&
-            orderDate <= end
-        );
-
-    }
-
-
-    if(
-        currentDateFilter ===
-        "month"
-    ){
-
-        return(
-            orderDate.getFullYear() ===
-            now.getFullYear() &&
-
-            orderDate.getMonth() ===
-            now.getMonth()
-        );
-
-    }
-
-
-    if(
-        currentDateFilter ===
-        "custom"
-    ){
-
-        if(!customDate){
-            return true;
-        }
-
-
-        const selectedDate =
-        new Date(
-            customDate +
-            "T00:00:00"
-        );
-
-
-        return sameDay(
-            orderDate,
-            selectedDate
-        );
-
-    }
-
-
-    return true;
-
-}
-
-
-// ==========================================
-// APPLY FILTERS
-// ==========================================
-
-function applyFilters(){
-
-    let filtered =
-    allOrders.filter(
-        function(item){
-
-            const order =
-            item.data;
-
-
-            const date =
-            getOrderDate(
-                order.createdAt
+            return (
+                dateB.getTime() -
+                dateA.getTime()
             );
 
-
-            if(
-                !isDateMatch(date)
-            ){
-
-                return false;
-
-            }
-
-
-            if(
-                currentStatusFilter !==
-                "all"
-            ){
-
-                const status =
-                String(
-                    order.status ||
-                    "Pending"
-                ).toLowerCase();
-
-
-                if(
-                    status !==
-                    currentStatusFilter.toLowerCase()
-                ){
-
-                    return false;
-
-                }
-
-            }
-
-
-            return true;
-
         }
     );
 
 
-    renderOrders(
-        filtered
+    renderFilteredOrders();
+
+
+}catch(error){
+
+    console.error(
+        "Load orders error:",
+        error
     );
+
+
+    table.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="12"
+                class="loading-cell">
+
+                ❌ Failed to load orders
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </td>
+
+        </tr>
+
+    `;
+
+}
+```
+
+}
+
+/* =====================================================
+FILTER ORDERS
+===================================================== */
+
+function renderFilteredOrders(){
+
+```
+let filtered =
+    [...allOrders];
+
+
+/* DATE FILTER */
+
+if(selectedDate){
+
+    filtered =
+        filtered.filter(
+            function(item){
+
+                const date =
+                    getOrderDate(
+                        item.data.createdAt
+                    );
+
+
+                if(!date){
+                    return false;
+                }
+
+
+                return (
+                    getDateKey(date) ===
+                    selectedDate
+                );
+
+            }
+        );
 
 }
 
 
-// ==========================================
-// RENDER ORDERS
-// ==========================================
+/* SEARCH */
 
-function renderOrders(
-    orders
-){
+if(searchValue){
 
-    const table =
-    document.getElementById(
-        "orders"
+    filtered =
+        filtered.filter(
+            function(item){
+
+                const order =
+                    item.data;
+
+
+                const text = [
+
+                    item.id,
+
+                    order.customerName,
+
+                    order.playerName,
+
+                    order.name,
+
+                    order.email,
+
+                    order.customerEmail,
+
+                    order.userEmail,
+
+                    order.userId,
+
+                    order.gameUID,
+
+                    order.gameUid,
+
+                    order.gameId,
+
+                    order.uid,
+
+                    order.productName,
+
+                    order.product,
+
+                    order.package,
+
+                    order.plan,
+
+                    order.paymentMethod,
+
+                    order.payment,
+
+                    order.status
+
+                ]
+                .filter(
+                    value =>
+                        value !==
+                        undefined &&
+                        value !== null
+                )
+                .join(" ")
+                .toLowerCase();
+
+
+                return text.includes(
+                    searchValue
+                );
+
+            }
+        );
+
+}
+
+
+renderOrders(filtered);
+```
+
+}
+
+/* =====================================================
+RENDER ORDERS
+===================================================== */
+
+function renderOrders(orders){
+
+```
+const table =
+    document.getElementById("orders");
+
+
+if(!table){
+    return;
+}
+
+
+table.innerHTML = "";
+
+
+let totalOrders = 0;
+
+let revenue = 0;
+
+let pending = 0;
+
+let success = 0;
+
+
+/* =================================================
+   NO ORDERS
+================================================= */
+
+if(orders.length === 0){
+
+    let message =
+        "📦 No orders found.";
+
+
+    if(selectedDate){
+
+        message =
+            "📅 No orders on " +
+            formatSelectedDate(
+                selectedDate
+            );
+
+    }
+
+
+    if(searchValue){
+
+        message +=
+            "<br><br>🔎 No matching orders.";
+
+    }
+
+
+    table.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="12"
+                class="loading-cell">
+
+                ${message}
+
+            </td>
+
+        </tr>
+
+    `;
+
+
+    updateStats(
+        0,
+        0,
+        0,
+        0
     );
 
 
-    if(!table){
-        return;
-    }
+    updateDailyInfo(
+        orders
+    );
 
 
-    table.innerHTML = "";
+    return;
+
+}
 
 
-    let totalOrders = 0;
+/* =================================================
+   BUILD TABLE
+================================================= */
 
-    let revenue = 0;
+orders.forEach(
+    function(item){
 
-    let pending = 0;
-
-    let success = 0;
-
-    let rejected = 0;
-
-
-    if(orders.length === 0){
-
-        table.innerHTML = `
-
-            <tr>
-
-                <td colspan="12">
-
-                    📦 No orders found
-                    for this selection.
-
-                </td>
-
-            </tr>
-
-        `;
-
-    }
-
-
-    orders.forEach(
-        function(item){
-
-            const order =
+        const order =
             item.data;
 
 
-            const customer =
+        const customer =
             order.customerName ||
             order.playerName ||
             order.name ||
             "-";
 
 
-            const email =
+        /* EMAIL FIX */
+
+        const email =
             order.email ||
+            order.customerEmail ||
+            order.userEmail ||
+            order.user_email ||
             "-";
 
 
-            const firebaseUID =
+        const firebaseUID =
             order.userId ||
+            order.uid ||
             "-";
 
 
-            const gameUID =
+        const gameUID =
             order.gameUID ||
             order.gameUid ||
             order.gameId ||
+            order.game_uid ||
+            order.uid ||
             "-";
 
 
-            const product =
+        const product =
             order.productName ||
             order.product ||
             order.package ||
@@ -1152,7 +895,7 @@ function renderOrders(
             "-";
 
 
-            const price =
+        const price =
             Number(
                 order.productPrice ||
                 order.price ||
@@ -1160,13 +903,13 @@ function renderOrders(
             );
 
 
-            const payment =
+        const payment =
             order.paymentMethod ||
             order.payment ||
             "-";
 
 
-            const total =
+        const total =
             Number(
                 order.total ||
                 order.amount ||
@@ -1174,249 +917,241 @@ function renderOrders(
             );
 
 
-            const date =
+        const date =
             formatDate(
                 order.createdAt
             );
 
 
-            const status =
+        const status =
             order.status ||
             "Pending";
 
 
-            totalOrders++;
+        totalOrders++;
+
+        revenue += total;
 
 
-            revenue += total;
-
-
-            const lowerStatus =
+        const lowerStatus =
             String(status)
             .toLowerCase();
 
 
-            if(
-                lowerStatus ===
-                "pending"
-            ){
+        if(
+            lowerStatus ===
+            "pending"
+        ){
 
-                pending++;
+            pending++;
 
-            }
-
-
-            if(
-                lowerStatus ===
-                "success"
-            ){
-
-                success++;
-
-            }
+        }
 
 
-            if(
-                lowerStatus ===
-                "rejected"
-            ){
+        if(
+            lowerStatus ===
+            "success"
+        ){
 
-                rejected++;
+            success++;
 
-            }
+        }
 
 
-            const row =
+        const row =
             document.createElement(
                 "tr"
             );
 
 
-            row.innerHTML = `
+        row.innerHTML = `
 
-                <td>
+            <td>
+
+                <span class="order-id">
+
                     ${escapeHTML(
                         item.id
                     )}
-                </td>
 
-                <td>
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span class="customer-name">
+
                     ${escapeHTML(
                         customer
                     )}
-                </td>
 
-                <td>
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span class="email-cell">
+
                     ${escapeHTML(
                         email
                     )}
-                </td>
 
-                <td>
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span class="uid">
+
                     ${escapeHTML(
                         firebaseUID
                     )}
-                </td>
 
-                <td>
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span class="uid">
+
                     ${escapeHTML(
                         gameUID
                     )}
-                </td>
 
-                <td>
-                    ${escapeHTML(
-                        product
-                    )}
-                </td>
+                </span>
 
-                <td>
-                    LKR
-                    ${price.toLocaleString(
-                        "en-US"
-                    )}
-                </td>
+            </td>
 
-                <td>
-                    ${escapeHTML(
-                        payment
-                    )}
-                </td>
 
-                <td>
-                    ${escapeHTML(
-                        date
-                    )}
-                </td>
+            <td>
 
-                <td>
-                    LKR
-                    ${total.toLocaleString(
-                        "en-US"
-                    )}
-                </td>
+                ${escapeHTML(
+                    product
+                )}
 
-                <td class="${escapeHTML(
-                    lowerStatus
+            </td>
+
+
+            <td>
+
+                LKR
+                ${price.toLocaleString(
+                    "en-US"
+                )}
+
+            </td>
+
+
+            <td>
+
+                ${escapeHTML(
+                    payment
+                )}
+
+            </td>
+
+
+            <td>
+
+                ${escapeHTML(
+                    date
+                )}
+
+            </td>
+
+
+            <td>
+
+                LKR
+                ${total.toLocaleString(
+                    "en-US"
+                )}
+
+            </td>
+
+
+            <td
+                class="${escapeHTML(
+                    status
                 )}">
 
-                    ${escapeHTML(
-                        status
-                    )}
+                ${escapeHTML(
+                    status
+                )}
 
-                </td>
+            </td>
 
-                <td>
 
-                    <button
+            <td>
+
+                <button
+
                     class="action-success"
+
                     data-id="${escapeHTML(
                         item.id
                     )}"
+
                     data-status="Success">
 
-                        ✔
+                    ✔ Success
 
-                    </button>
+                </button>
 
 
-                    <button
+                <button
+
                     class="action-rejected"
+
                     data-id="${escapeHTML(
                         item.id
                     )}"
+
                     data-status="Rejected">
 
-                        ✖
+                    ✖ Reject
 
-                    </button>
+                </button>
 
-                </td>
+            </td>
 
-            `;
-
-
-            table.appendChild(
-                row
-            );
-
-        }
-    );
+        `;
 
 
-    const totalElement =
-    document.getElementById(
-        "totalOrders"
-    );
-
-
-    if(totalElement){
-
-        totalElement.textContent =
-        totalOrders;
-
-    }
-
-
-    const revenueElement =
-    document.getElementById(
-        "revenue"
-    );
-
-
-    if(revenueElement){
-
-        revenueElement.textContent =
-        revenue.toLocaleString(
-            "en-US"
+        table.appendChild(
+            row
         );
 
     }
+);
 
 
-    const pendingElement =
-    document.getElementById(
-        "pendingOrders"
-    );
+updateStats(
+    totalOrders,
+    revenue,
+    pending,
+    success
+);
 
 
-    if(pendingElement){
-
-        pendingElement.textContent =
-        pending;
-
-    }
+updateDailyInfo(
+    orders
+);
 
 
-    const successElement =
-    document.getElementById(
-        "successOrders"
-    );
+/* =================================================
+   BUTTON EVENTS
+================================================= */
 
-
-    if(successElement){
-
-        successElement.textContent =
-        success;
-
-    }
-
-
-    const rejectedElement =
-    document.getElementById(
-        "rejectedOrders"
-    );
-
-
-    if(rejectedElement){
-
-        rejectedElement.textContent =
-        rejected;
-
-    }
-
-
-    document
+document
     .querySelectorAll(
         "[data-status]"
     )
@@ -1437,304 +1172,449 @@ function renderOrders(
 
         }
     );
+```
+
+}
+
+/* =====================================================
+UPDATE STATS
+===================================================== */
+
+function updateStats(
+total,
+revenue,
+pending,
+success
+){
+
+```
+const totalElement =
+    document.getElementById(
+        "totalOrders"
+    );
+
+
+const revenueElement =
+    document.getElementById(
+        "revenue"
+    );
+
+
+const pendingElement =
+    document.getElementById(
+        "pendingOrders"
+    );
+
+
+const successElement =
+    document.getElementById(
+        "successOrders"
+    );
+
+
+if(totalElement){
+
+    totalElement.textContent =
+        total;
 
 }
 
 
-// ==========================================
-// CHANGE STATUS
-// ==========================================
+if(revenueElement){
+
+    revenueElement.textContent =
+        revenue.toLocaleString(
+            "en-US"
+        );
+
+}
+
+
+if(pendingElement){
+
+    pendingElement.textContent =
+        pending;
+
+}
+
+
+if(successElement){
+
+    successElement.textContent =
+        success;
+
+}
+```
+
+}
+
+/* =====================================================
+DAILY INFO
+===================================================== */
+
+function updateDailyInfo(orders){
+
+```
+const info =
+    document.getElementById(
+        "dailyInfo"
+    );
+
+
+if(!info){
+    return;
+}
+
+
+if(selectedDate){
+
+    info.innerHTML =
+        "📅 Showing orders for <b>" +
+        escapeHTML(
+            formatSelectedDate(
+                selectedDate
+            )
+        ) +
+        "</b> — " +
+        orders.length +
+        " order(s)";
+
+    return;
+
+}
+
+
+info.textContent =
+    "📦 Showing all orders — " +
+    orders.length +
+    " order(s)";
+```
+
+}
+
+/* =====================================================
+FORMAT SELECTED DATE
+===================================================== */
+
+function formatSelectedDate(value){
+
+```
+if(!value){
+    return "";
+}
+
+
+const parts =
+    value.split("-");
+
+
+if(parts.length !== 3){
+    return value;
+}
+
+
+return (
+    parts[2] +
+    "/" +
+    parts[1] +
+    "/" +
+    parts[0]
+);
+```
+
+}
+
+/* =====================================================
+CHANGE STATUS
+===================================================== */
 
 async function changeStatus(
-    id,
-    status
+id,
+status
 ){
 
-    try{
+```
+try{
 
-        const user =
+    const user =
         auth.currentUser;
 
 
-        const admin =
+    const admin =
         await checkAdmin(
             user
         );
 
 
-        if(!admin){
-
-            alert(
-                "❌ Access denied."
-            );
-
-            return;
-
-        }
-
-
-        await updateDoc(
-
-            doc(
-                db,
-                "orders",
-                id
-            ),
-
-            {
-                status:status
-            }
-
-        );
-
-
-        await loadOrders();
-
-
-    }catch(error){
-
-        console.error(
-            "Status update error:",
-            error
-        );
-
+    if(!admin){
 
         alert(
-            "❌ Failed to update status:\n" +
-            error.message
+            "❌ Access denied."
         );
+
+        return;
 
     }
 
+
+    await updateDoc(
+
+        doc(
+            db,
+            "orders",
+            id
+        ),
+
+        {
+            status:
+                status
+        }
+
+    );
+
+
+    await loadOrders();
+
+
+}catch(error){
+
+    console.error(
+        "Status update error:",
+        error
+    );
+
+
+    alert(
+        "❌ Failed to update status:\n" +
+        error.message
+    );
+
+}
+```
+
 }
 
-
-// ==========================================
-// SEARCH
-// ==========================================
+/* =====================================================
+SEARCH
+===================================================== */
 
 const search =
 document.getElementById(
-    "search"
+"search"
 );
-
 
 if(search){
 
-    search.addEventListener(
-        "input",
-        function(){
+```
+search.addEventListener(
+    "input",
+    function(){
 
-            const value =
+        searchValue =
             this.value
             .trim()
             .toLowerCase();
 
 
-            let filtered =
-            allOrders;
+        renderFilteredOrders();
 
-
-            if(value){
-
-                filtered =
-                allOrders.filter(
-                    function(item){
-
-                        const order =
-                        item.data;
-
-
-                        const text = [
-
-                            item.id,
-
-                            order.customerName,
-
-                            order.playerName,
-
-                            order.name,
-
-                            order.email,
-
-                            order.userId,
-
-                            order.gameUID,
-
-                            order.gameUid,
-
-                            order.gameId,
-
-                            order.productName,
-
-                            order.product,
-
-                            order.package,
-
-                            order.paymentMethod,
-
-                            order.payment,
-
-                            order.phone,
-
-                            order.status
-
-                        ]
-                        .filter(Boolean)
-                        .join(" ")
-                        .toLowerCase();
-
-
-                        return text.includes(
-                            value
-                        );
-
-                    }
-                );
-
-            }
-
-
-            filtered =
-            filtered.filter(
-                function(item){
-
-                    const order =
-                    item.data;
-
-                    const date =
-                    getOrderDate(
-                        order.createdAt
-                    );
-
-
-                    if(
-                        !isDateMatch(
-                            date
-                        )
-                    ){
-
-                        return false;
-
-                    }
-
-
-                    if(
-                        currentStatusFilter !==
-                        "all"
-                    ){
-
-                        return String(
-                            order.status ||
-                            "Pending"
-                        ).toLowerCase()
-                        ===
-                        currentStatusFilter.toLowerCase();
-
-                    }
-
-
-                    return true;
-
-                }
-            );
-
-
-            renderOrders(
-                filtered
-            );
-
-        }
-    );
+    }
+);
+```
 
 }
 
+/* =====================================================
+DATE FILTER
+===================================================== */
 
-// ==========================================
-// LOGOUT
-// ==========================================
+const dateFilter =
+document.getElementById(
+"dateFilter"
+);
+
+if(dateFilter){
+
+```
+dateFilter.addEventListener(
+    "change",
+    function(){
+
+        selectedDate =
+            this.value;
+
+
+        renderFilteredOrders();
+
+    }
+);
+```
+
+}
+
+/* =====================================================
+TODAY BUTTON
+===================================================== */
+
+const todayBtn =
+document.getElementById(
+"todayBtn"
+);
+
+if(todayBtn){
+
+```
+todayBtn.addEventListener(
+    "click",
+    function(){
+
+        const today =
+            new Date();
+
+
+        selectedDate =
+            getDateKey(
+                today
+            );
+
+
+        if(dateFilter){
+
+            dateFilter.value =
+                selectedDate;
+
+        }
+
+
+        renderFilteredOrders();
+
+    }
+);
+```
+
+}
+
+/* =====================================================
+ALL ORDERS BUTTON
+===================================================== */
+
+const allBtn =
+document.getElementById(
+"allBtn"
+);
+
+if(allBtn){
+
+```
+allBtn.addEventListener(
+    "click",
+    function(){
+
+        selectedDate =
+            "";
+
+
+        if(dateFilter){
+
+            dateFilter.value =
+                "";
+
+        }
+
+
+        renderFilteredOrders();
+
+    }
+);
+```
+
+}
+
+/* =====================================================
+LOGOUT
+===================================================== */
 
 const logout =
 document.getElementById(
-    "logout"
+"logout"
 );
-
 
 if(logout){
 
-    logout.addEventListener(
-        "click",
-        async function(){
+```
+logout.addEventListener(
+    "click",
+    async function(){
 
-            try{
+        try{
 
-                await signOut(
-                    auth
-                );
+            await signOut(
+                auth
+            );
 
 
-                window.location.href =
+            window.location.href =
                 "admin-login.html";
 
 
-            }catch(error){
+        }catch(error){
 
-                console.error(
-                    "Logout error:",
-                    error
-                );
-
-            }
+            console.error(
+                "Logout error:",
+                error
+            );
 
         }
-    );
+
+    }
+);
+```
+
+}
+
+/* =====================================================
+ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+```
+if(
+    value === null ||
+    value === undefined
+){
+
+    return "";
 
 }
 
 
-// ==========================================
-// ESCAPE HTML
-// ==========================================
+return String(value)
 
-function escapeHTML(
-    value
-){
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
 
-    if(
-        value === null ||
-        value === undefined
-    ){
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
 
-        return "";
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
 
-    }
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
 
-
-    return String(value)
-
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+```
 
 }
