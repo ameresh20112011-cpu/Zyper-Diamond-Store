@@ -395,8 +395,6 @@ background:#475569;
 transform:translateY(-2px);
 }
 
-/* AUTH CHECK SCREEN */
-
 #checking{
 text-align:center;
 padding:30px 10px;
@@ -723,7 +721,7 @@ from
 
 
 /* ==========================================
-CLOUDFLARE WORKER
+WORKER
 ========================================== */
 
 const WORKER_URL =
@@ -941,28 +939,20 @@ true;
 
 
 /* ==========================================
-AUTHENTICATION CHECK
-==========================================
-
-IMPORTANT:
-
-If customer is already logged in:
-→ Continue normally.
-
-If customer is NOT logged in:
-→ Redirect to index.html.
-
+FIREBASE AUTH CHECK
 ========================================== */
 
 onAuthStateChanged(
 
 auth,
 
-function(user){
+async function(user){
 
 console.log(
 "Firebase Auth State:",
-user ? "LOGGED IN" : "NOT LOGGED IN"
+user ?
+"LOGGED IN" :
+"NOT LOGGED IN"
 );
 
 
@@ -973,15 +963,13 @@ NOT LOGGED IN
 if(!user){
 
 console.log(
-"Customer not logged in. Redirecting to index.html..."
+"Customer not logged in."
 );
 
 
 /*
-Save that customer wanted to order.
-
-After login, index.html can send
-them back to order.html if you want.
+Remember that the customer wanted
+to continue to the order page.
 */
 
 localStorage.setItem(
@@ -991,7 +979,7 @@ localStorage.setItem(
 
 
 /*
-Redirect to login page.
+Send customer to your login page.
 */
 
 window.location.replace(
@@ -1004,7 +992,7 @@ return;
 
 
 /* ==========================================
-CUSTOMER ALREADY LOGGED IN
+LOGGED IN
 ========================================== */
 
 console.log(
@@ -1025,7 +1013,7 @@ formArea.style.display =
 
 
 /*
-Show customer's login email.
+Show email.
 */
 
 customerEmail.textContent =
@@ -1034,7 +1022,7 @@ user.email ||
 
 
 /*
-Show selected package.
+Show package.
 */
 
 if(selected){
@@ -1156,7 +1144,7 @@ hideError();
 
 
 /* ==========================================
-CHECK LOGIN AGAIN
+CHECK LOGIN
 ========================================== */
 
 const user =
@@ -1247,7 +1235,7 @@ return;
 
 
 /* ==========================================
-CUSTOMER NAME
+NAME
 ========================================== */
 
 if(
@@ -1362,7 +1350,33 @@ try{
 
 
 /* ==========================================
-SEND TO CLOUDFLARE WORKER
+GET FIREBASE ID TOKEN
+==========================================
+
+THIS IS THE IMPORTANT FIX.
+
+The Worker expects:
+
+Authorization:
+Bearer Firebase-ID-Token
+
+========================================== */
+
+const firebaseToken =
+await user.getIdToken(true);
+
+
+if(!firebaseToken){
+
+throw new Error(
+"Unable to get Firebase login token."
+);
+
+}
+
+
+/* ==========================================
+FORM DATA
 ========================================== */
 
 const formData =
@@ -1395,11 +1409,6 @@ phone
 );
 
 
-/*
-Keep customer Firebase information
-because customer is authenticated.
-*/
-
 formData.append(
 "email",
 user.email || ""
@@ -1420,7 +1429,7 @@ receipt.name
 
 
 /* ==========================================
-WORKER REQUEST
+SEND TO CLOUDFLARE WORKER
 ========================================== */
 
 const response =
@@ -1432,6 +1441,23 @@ WORKER_URL,
 
 method:"POST",
 
+headers:{
+
+/*
+IMPORTANT:
+
+Do NOT put this token
+inside FormData.
+
+It must be an HTTP
+Authorization header.
+*/
+
+"Authorization":
+"Bearer " + firebaseToken
+
+},
+
 body:formData
 
 }
@@ -1440,7 +1466,7 @@ body:formData
 
 
 /* ==========================================
-RESPONSE
+READ RESPONSE
 ========================================== */
 
 let result;
@@ -1458,6 +1484,10 @@ throw new Error(
 
 }
 
+
+/* ==========================================
+WORKER ERROR
+========================================== */
 
 if(
 !response.ok ||
@@ -1506,7 +1536,8 @@ orderId
 
 {
 
-orderId:orderId,
+orderId:
+orderId,
 
 
 /* CUSTOMER */
@@ -1571,7 +1602,7 @@ serverTimestamp()
 
 
 /* ==========================================
-WHATSAPP MESSAGE
+WHATSAPP
 ========================================== */
 
 const whatsappMessage =
