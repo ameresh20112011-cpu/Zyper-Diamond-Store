@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
@@ -8,17 +8,16 @@
 
 <title>Zyper Diamond Store - Order</title>
 
-
 <style>
 
 *{
 box-sizing:border-box;
 }
 
-
 body{
 
 margin:0;
+
 font-family:'Segoe UI',Arial,sans-serif;
 
 background:
@@ -26,23 +25,24 @@ linear-gradient(135deg,#020617,#0f172a,#312e81);
 
 color:white;
 
+min-height:100vh;
+
 }
-
-
 
 .container{
 
 padding:20px;
+
 display:flex;
+
 justify-content:center;
 
 }
 
-
-
 .card{
 
 width:100%;
+
 max-width:420px;
 
 background:rgba(255,255,255,0.08);
@@ -58,35 +58,56 @@ border:1px solid rgba(255,255,255,.15);
 box-shadow:
 0 20px 50px rgba(0,0,0,.4);
 
+animation:show .5s ease;
+
 }
 
+@keyframes show{
 
+from{
+
+opacity:0;
+
+transform:translateY(25px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
 
 .logo{
 
 text-align:center;
+
 font-size:45px;
 
 }
 
-
-
 .title{
 
 text-align:center;
+
 font-size:26px;
+
 font-weight:800;
 
-background:linear-gradient(90deg,#60a5fa,#c084fc);
+background:
+linear-gradient(90deg,#60a5fa,#c084fc);
 
 -webkit-background-clip:text;
+
 background-clip:text;
 
 color:transparent;
 
 }
-
-
 
 .subtitle{
 
@@ -99,16 +120,90 @@ margin-bottom:20px;
 }
 
 
+/* PACKAGE */
 
-input{
+.package-box{
+
+background:
+linear-gradient(
+135deg,
+rgba(37,99,235,.25),
+rgba(124,58,237,.25)
+);
+
+padding:18px;
+
+border-radius:18px;
+
+border:1px solid rgba(255,255,255,.15);
+
+margin-bottom:20px;
+
+text-align:center;
+
+}
+
+.package-label{
+
+font-size:12px;
+
+color:#94a3b8;
+
+}
+
+.package-name{
+
+font-size:20px;
+
+font-weight:bold;
+
+margin-top:5px;
+
+}
+
+.package-price{
+
+font-size:24px;
+
+font-weight:bold;
+
+color:#60a5fa;
+
+margin-top:5px;
+
+}
+
+
+/* INPUT */
+
+.field{
+
+margin-top:16px;
+
+}
+
+.field label{
+
+display:block;
+
+font-size:13px;
+
+font-weight:600;
+
+color:#cbd5e1;
+
+margin-bottom:7px;
+
+}
+
+input[type="text"],
+input[type="tel"]{
 
 width:100%;
 
 padding:14px;
 
-margin-top:15px;
-
-border:none;
+border:1px solid rgba(255,255,255,.1);
 
 border-radius:12px;
 
@@ -118,9 +213,9 @@ color:white;
 
 font-size:15px;
 
+outline:none;
+
 }
-
-
 
 input::placeholder{
 
@@ -128,10 +223,17 @@ color:#94a3b8;
 
 }
 
+input:focus{
+
+border-color:#60a5fa;
+
+box-shadow:
+0 0 0 3px rgba(96,165,250,.1);
+
+}
 
 
-/* Upload Box */
-
+/* UPLOAD */
 
 .upload-box{
 
@@ -139,10 +241,7 @@ margin-top:20px;
 
 }
 
-
-
 .upload-label{
-
 
 display:flex;
 
@@ -159,32 +258,34 @@ border-radius:20px;
 border:2px dashed #60a5fa;
 
 background:
-
 linear-gradient(
 135deg,
 rgba(37,99,235,.25),
 rgba(124,58,237,.25)
 );
 
-
 cursor:pointer;
 
 transition:.3s;
 
-
 }
-
-
 
 .upload-label:hover{
 
-transform:scale(1.03);
+transform:scale(1.02);
 
 border-color:#c084fc;
 
 }
 
+.upload-label.active{
 
+border-color:#22c55e;
+
+background:
+rgba(34,197,94,.15);
+
+}
 
 .upload-icon{
 
@@ -192,15 +293,11 @@ font-size:50px;
 
 }
 
-
-
 .upload-text{
 
 text-align:center;
 
 }
-
-
 
 .upload-text h3{
 
@@ -208,34 +305,34 @@ margin:10px 0 5px;
 
 }
 
-
-
 .upload-text p{
 
 color:#cbd5e1;
 
-font-size:14px;
+font-size:13px;
+
+margin:0;
+
+word-break:break-word;
+
+}
+
+#receipt{
+
+display:none;
 
 }
 
 
-
-.upload-label.active{
-
-border-color:#22c55e;
-
-background:
-
-rgba(34,197,94,.15);
-
-}
-
-
-
+/* PREVIEW */
 
 .preview{
 
 width:100%;
+
+max-height:300px;
+
+object-fit:contain;
 
 margin-top:15px;
 
@@ -243,11 +340,12 @@ border-radius:15px;
 
 display:none;
 
+border:1px solid rgba(255,255,255,.15);
+
 }
 
 
-
-
+/* BUTTON */
 
 button{
 
@@ -262,7 +360,6 @@ border:none;
 border-radius:15px;
 
 background:
-
 linear-gradient(
 90deg,
 #2563eb,
@@ -277,9 +374,12 @@ font-weight:bold;
 
 cursor:pointer;
 
+box-shadow:
+0 10px 25px rgba(37,99,235,.35);
+
+transition:.3s;
+
 }
-
-
 
 button:hover{
 
@@ -287,7 +387,18 @@ transform:translateY(-2px);
 
 }
 
+button:disabled{
 
+opacity:.6;
+
+cursor:not-allowed;
+
+transform:none;
+
+}
+
+
+/* LOADING */
 
 #loading{
 
@@ -299,19 +410,126 @@ color:#93c5fd;
 
 margin-top:15px;
 
+font-size:14px;
+
 }
 
 
+/* ERROR */
+
+#error{
+
+display:none;
+
+background:rgba(239,68,68,.12);
+
+border:1px solid rgba(239,68,68,.35);
+
+color:#fca5a5;
+
+padding:13px;
+
+border-radius:12px;
+
+margin-bottom:15px;
+
+font-size:13px;
+
+text-align:center;
+
+}
+
+
+/* SUCCESS */
+
+#success{
+
+display:none;
+
+text-align:center;
+
+}
+
+.success-icon{
+
+font-size:65px;
+
+margin-top:10px;
+
+}
+
+.success-title{
+
+font-size:25px;
+
+font-weight:bold;
+
+margin-top:10px;
+
+}
+
+.order-id{
+
+font-size:42px;
+
+font-weight:800;
+
+letter-spacing:5px;
+
+margin:15px 0;
+
+background:
+linear-gradient(90deg,#60a5fa,#c084fc);
+
+-webkit-background-clip:text;
+
+background-clip:text;
+
+color:transparent;
+
+}
+
+.success-text{
+
+color:#cbd5e1;
+
+font-size:13px;
+
+line-height:1.7;
+
+}
+
+.home-button{
+
+display:block;
+
+text-decoration:none;
+
+padding:14px;
+
+margin-top:20px;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+90deg,
+#2563eb,
+#7c3aed
+);
+
+color:white;
+
+font-weight:bold;
+
+}
 
 </style>
-
 
 </head>
 
 
-
 <body>
-
 
 
 <div class="container">
@@ -320,146 +538,232 @@ margin-top:15px;
 <div class="card">
 
 
+<!-- =========================
+     ORDER FORM
+========================= -->
+
+<div id="formArea">
+
+
 <div class="logo">
 💎
 </div>
 
 
-
 <h2 class="title">
-
 Place Your Order
-
 </h2>
 
 
-
 <p class="subtitle">
-
 Complete your diamond purchase
-
 </p>
 
 
+<div id="error"></div>
 
 
-<input
+<!-- PACKAGE -->
 
-id="uid"
+<div class="package-box">
 
-placeholder="🎮 Enter Game UID"
+<div class="package-label">
+SELECTED PACKAGE
+</div>
 
->
+<div
+id="packageName"
+class="package-name">
 
-
-
-
-<input
-
-id="diamond"
-
-readonly
-
-placeholder="💎 Selected Package"
-
->
-
-
-
-
-
-<div class="upload-box">
-
-
-<input
-
-type="file"
-
-id="receipt"
-
-accept="image/*"
-
-hidden
-
->
-
-
-
-<label
-
-for="receipt"
-
-class="upload-label"
-
-
-
->
-
-
-<div class="upload-icon">
-
-📸
+Loading...
 
 </div>
 
+<div
+id="packagePrice"
+class="package-price">
+
+LKR 0
+
+</div>
+
+</div>
+
+
+<!-- UID -->
+
+<div class="field">
+
+<label for="uid">
+🎮 Free Fire UID
+</label>
+
+<input
+type="text"
+id="uid"
+inputmode="numeric"
+maxlength="15"
+placeholder="Enter your Free Fire UID"
+autocomplete="off"
+>
+
+</div>
+
+
+<!-- PLAYER NAME -->
+
+<div class="field">
+
+<label for="playerName">
+👤 Player Name
+</label>
+
+<input
+type="text"
+id="playerName"
+maxlength="50"
+placeholder="Enter your Player Name"
+autocomplete="name"
+>
+
+</div>
+
+
+<!-- PHONE -->
+
+<div class="field">
+
+<label for="phone">
+📱 WhatsApp / Phone
+</label>
+
+<input
+type="tel"
+id="phone"
+maxlength="20"
+placeholder="07XXXXXXXX"
+autocomplete="tel"
+>
+
+</div>
+
+
+<!-- RECEIPT -->
+
+<div class="upload-box">
+
+<input
+type="file"
+id="receipt"
+accept="image/jpeg,image/png"
+>
+
+<label
+for="receipt"
+class="upload-label"
+id="uploadLabel"
+>
+
+<div class="upload-icon">
+📸
+</div>
 
 
 <div class="upload-text">
 
-
-<h3>
-
+<h3 id="uploadTitle">
 Upload Payment Receipt
-
 </h3>
 
-
-<p>
-
-Tap here to select screenshot
-
+<p id="uploadText">
+JPG or PNG • Maximum 5 MB
 </p>
 
-
 </div>
-
 
 </label>
 
 
+<img
+id="preview"
+class="preview"
+alt="Payment Receipt Preview"
+>
 
 </div>
 
 
+<!-- SUBMIT -->
 
-
-
-<img
-
-id="preview"
-
-class="preview"
-
->
-
-
-
-
-<button id="send">
+<button
+id="send"
+type="button">
 
 🚀 Place Order
 
 </button>
 
 
-
 <p id="loading">
-
 ⏳ Sending Order...
+</p>
+
+
+</div>
+
+
+<!-- =========================
+     SUCCESS
+========================= -->
+
+<div id="success">
+
+
+<div class="success-icon">
+✅
+</div>
+
+
+<div class="success-title">
+Order Submitted!
+</div>
+
+
+<p class="success-text">
+
+Your order has been successfully sent
+to Zyper Diamond Store.
 
 </p>
 
 
+<div
+id="orderId"
+class="order-id">
+
+0000
+
+</div>
+
+
+<p class="success-text">
+
+⏳ Status: <b>Pending</b>
+
+<br><br>
+
+Please save your Order ID.
+
+</p>
+
+
+<a
+href="topup.html"
+class="home-button">
+
+💎 Place Another Order
+
+</a>
 
 
 </div>
@@ -467,323 +771,521 @@ class="preview"
 
 </div>
 
+</div>
 
 
+<script>
 
 
+/* =========================================
+   CLOUDFLARE WORKER
+========================================= */
+
+const WORKER_URL =
+"https://zyper-order.ameresh20112011.workers.dev/";
 
 
-<script type="module">
+/* =========================================
+   FINAL PACKAGE PRICES
+========================================= */
 
+const PACKAGES = {
 
-import {
+"Weekly":560,
 
-initializeApp
+"Monthly":2720,
 
-}
+"Weekly Lite":150,
 
-from
+"VIP Bundle":3280,
 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+"SVIP Bundle":4960,
 
+"Level 6":130,
 
+"Level 10":250,
 
-import {
+"Level 15":250,
 
-getFirestore,
-collection,
-addDoc,
-serverTimestamp
+"Level 20":250,
 
-}
+"Level 25":250,
 
-from
+"Level 30":380,
 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+"Full Pass":1500,
 
+"E Badge 3":250,
 
+"E Badge 7":350,
 
-import {
+"E Badge 30":1100,
 
-getAuth,
-onAuthStateChanged
+"25 Diamonds":150,
 
-}
+"100 Diamonds":380,
 
-from
+"310 Diamonds":1150,
 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+"520 Diamonds":1800,
 
+"1060 Diamonds":3400,
 
+"2180 Diamonds":6500,
 
+"5600 Diamonds":16500,
 
-
-
-const firebaseConfig = {
-
-
-apiKey:"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
-
-authDomain:"zyper-d-iamond-store.firebaseapp.com",
-
-projectId:"zyper-d-iamond-store",
-
-messagingSenderId:"892467477866",
-
-appId:"1:892467477866:web:61e9b6ff9435798da23913"
+"11500 Diamonds":35000
 
 };
 
 
+/* =========================================
+   GET PACKAGE
+========================================= */
 
+function getSelectedPackage(){
 
-
-const app =
-initializeApp(firebaseConfig);
-
-
-const db =
-getFirestore(app);
-
-
-const auth =
-getAuth(app);
-
-
-
-let currentUser=null;
-
-
-
-
-onAuthStateChanged(auth,(user)=>{
-
-
-if(user){
-
-currentUser=user;
-
-}
-
-else{
-
-location.href="index.html";
-
-}
-
-
-});
-
-
-
-
-
-let savedPackage =
+const raw =
 localStorage.getItem("package");
 
 
-if(savedPackage){
+if(!raw){
 
-document.getElementById("diamond").value=savedPackage;
+return null;
 
 }
 
 
+const separator =
+" - LKR ";
 
 
+const index =
+raw.lastIndexOf(separator);
 
 
-// BEAUTIFUL RECEIPT UPLOAD
+if(index === -1){
 
+return null;
+
+}
+
+
+const name =
+raw.substring(
+0,
+index
+).trim();
+
+
+const price =
+Number(
+raw.substring(
+index + separator.length
+).trim()
+);
+
+
+if(
+!Object.prototype.hasOwnProperty.call(
+PACKAGES,
+name
+)
+){
+
+return null;
+
+}
+
+
+if(
+PACKAGES[name] !== price
+){
+
+return null;
+
+}
+
+
+return {
+
+name:name,
+
+price:price
+
+};
+
+}
+
+
+/* =========================================
+   PACKAGE
+========================================= */
+
+const selected =
+getSelectedPackage();
+
+
+if(!selected){
+
+showError(
+"Package information is missing. Please select a package again."
+);
+
+document.getElementById("send").disabled=true;
+
+}else{
+
+document.getElementById("packageName").textContent=
+selected.name;
+
+document.getElementById("packagePrice").textContent=
+"LKR " +
+selected.price.toLocaleString("en-US");
+
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+function showError(message){
+
+const error =
+document.getElementById("error");
+
+error.textContent =
+message;
+
+error.style.display =
+"block";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================================
+   RECEIPT
+========================================= */
 
 document
 .getElementById("receipt")
-.addEventListener("change",function(){
+.addEventListener(
+"change",
+function(){
+
+const file =
+this.files[0];
 
 
-let file=this.files[0];
+if(!file){
 
-
-if(file){
-
-
-let img=document.getElementById("preview");
-
-
-img.src=URL.createObjectURL(file);
-
-
-img.style.display="block";
-
-
-
-document
-.querySelector(".upload-label")
-.classList.add("active");
-
-
-
-document
-.querySelector(".upload-text h3")
-.innerHTML="✅ Receipt Selected";
-
-
-
-document
-.querySelector(".upload-text p")
-.innerHTML=file.name;
-
+return;
 
 }
 
 
-});
+/* FILE TYPE */
+
+if(
+file.type !== "image/jpeg" &&
+file.type !== "image/png"
+){
+
+this.value="";
+
+showError(
+"Only JPG and PNG receipts are allowed."
+);
+
+return;
+
+}
 
 
+/* FILE SIZE */
+
+if(
+file.size > 5 * 1024 * 1024
+){
+
+this.value="";
+
+showError(
+"Receipt image must be 5 MB or smaller."
+);
+
+return;
+
+}
 
 
+/* PREVIEW */
+
+const preview =
+document.getElementById("preview");
 
 
+preview.src =
+URL.createObjectURL(file);
 
-// SEND ORDER
 
+preview.style.display =
+"block";
+
+
+document
+.getElementById("uploadLabel")
+.classList
+.add("active");
+
+
+document
+.getElementById("uploadTitle")
+.textContent =
+"✅ Receipt Selected";
+
+
+document
+.getElementById("uploadText")
+.textContent =
+file.name;
+
+}
+);
+
+
+/* =========================================
+   SUBMIT ORDER
+========================================= */
 
 document
 .getElementById("send")
-.onclick=async()=>{
+.addEventListener(
+"click",
+async function(){
 
+if(!selected){
 
-if(!currentUser){
-
-alert("Please login first");
-
-return;
-
-}
-
-
-
-let uid=
-document.getElementById("uid").value.trim();
-
-
-
-let pack=
-document.getElementById("diamond").value;
-
-
-
-let receipt=
-document.getElementById("receipt").files[0];
-
-
-
-
-
-if(uid==""){
-
-alert("Enter Game UID");
+showError(
+"Please select a package first."
+);
 
 return;
 
 }
 
 
+/* PREVENT DOUBLE CLICK */
+
+const button =
+document.getElementById("send");
+
+
+if(button.disabled){
+
+return;
+
+}
+
+
+/* GET VALUES */
+
+const uid =
+document
+.getElementById("uid")
+.value
+.trim();
+
+
+const playerName =
+document
+.getElementById("playerName")
+.value
+.trim();
+
+
+const phone =
+document
+.getElementById("phone")
+.value
+.trim();
+
+
+const receipt =
+document
+.getElementById("receipt")
+.files[0];
+
+
+/* UID */
+
+if(
+!/^[0-9]{6,15}$/.test(uid)
+){
+
+showError(
+"Please enter a valid Free Fire UID."
+);
+
+return;
+
+}
+
+
+/* PLAYER NAME */
+
+if(
+playerName.length < 2 ||
+playerName.length > 50
+){
+
+showError(
+"Player Name must be between 2 and 50 characters."
+);
+
+return;
+
+}
+
+
+/* PHONE */
+
+const cleanPhone =
+phone.replace(
+/[\s\-().]/g,
+""
+);
+
+
+if(
+!/^\+?[0-9]{9,15}$/.test(
+cleanPhone
+)
+){
+
+showError(
+"Please enter a valid WhatsApp / Phone number."
+);
+
+return;
+
+}
+
+
+/* RECEIPT */
 
 if(!receipt){
 
-alert("Upload payment receipt");
+showError(
+"Please upload your payment receipt."
+);
 
 return;
 
 }
 
 
+if(
+receipt.type !== "image/jpeg" &&
+receipt.type !== "image/png"
+){
+
+showError(
+"Receipt must be JPG or PNG."
+);
+
+return;
+
+}
+
+
+if(
+receipt.size > 5 * 1024 * 1024
+){
+
+showError(
+"Receipt must be 5 MB or smaller."
+);
+
+return;
+
+}
+
+
+/* =========================================
+   START LOADING
+========================================= */
+
+button.disabled =
+true;
+
+button.textContent =
+"⏳ Sending Order...";
+
+document
+.getElementById("loading")
+.style.display =
+"block";
 
 
 try{
 
 
-document
-.getElementById("loading")
-.style.display="block";
+/* =========================================
+   FORM DATA
+========================================= */
 
-
-
-const orderRef =
-await addDoc(
-
-collection(db,"orders"),
-
-{
-
-userId:currentUser.uid,
-
-email:currentUser.email,
-
-gameUID:uid,
-
-package:pack,
-
-status:"Pending",
-
-receipt:"Telegram",
-
-createdAt:serverTimestamp()
-
-}
-
-);
-
-
-
-
-let orderID=orderRef.id;
-
-
-
-
-
-
-let formData=new FormData();
+const formData =
+new FormData();
 
 
 formData.append(
-"photo",
-receipt
+"package",
+selected.name +
+" - LKR " +
+selected.price
 );
-
 
 
 formData.append(
-"caption",
-
-`
-
-💎 New Zyper Order
-
-🆔 Order ID:
-${orderID}
-
-🎮 UID:
-${uid}
-
-💎 Package:
-${pack}
-
-👤 Email:
-${currentUser.email}
-
-`
-
+"uid",
+uid
 );
 
 
+formData.append(
+"playerName",
+playerName
+);
 
 
+formData.append(
+"phone",
+phone
+);
 
-fetch(
-"telegram.php",
+
+formData.append(
+"receipt",
+receipt,
+receipt.name
+);
+
+
+/* =========================================
+   SEND TO WORKER
+========================================= */
+
+const response =
+await fetch(
+WORKER_URL,
 {
 
 method:"POST",
@@ -791,89 +1293,117 @@ method:"POST",
 body:formData
 
 }
-
 );
 
 
+/* =========================================
+   RESPONSE
+========================================= */
 
+let result;
 
+try{
 
-let message=
+result =
+await response.json();
 
-`
+}catch{
 
-💎 Zyper Diamond Store
-
-Order ID:
-${orderID}
-
-UID:
-${uid}
-
-Package:
-${pack}
-
-Payment Completed
-
-`;
-
-
-
-
-
-window.open(
-
-"https://wa.me/94751483909?text="+encodeURIComponent(message),
-
-"_blank"
-
+throw new Error(
+"Invalid response from Cloudflare Worker."
 );
-
-
-
-
-
-alert(
-"✅ Order Sent\n\nOrder ID:\n"+orderID
-);
-
-
-
-
-location.href="track.html?id="+orderID;
-
-
-
-
-}
-
-catch(error){
-
-
-alert(error.message);
-
 
 }
 
 
-finally{
+/* =========================================
+   ERROR
+========================================= */
+
+if(
+!response.ok ||
+!result.success
+){
+
+throw new Error(
+result.message ||
+"Order submission failed."
+);
+
+}
+
+
+/* =========================================
+   SUCCESS
+========================================= */
+
+document
+.getElementById("formArea")
+.style.display =
+"none";
 
 
 document
-.getElementById("loading")
-.style.display="none";
+.getElementById("success")
+.style.display =
+"block";
 
+
+document
+.getElementById("orderId")
+.textContent =
+result.orderId;
+
+
+/* =========================================
+   CLEAR PACKAGE ONLY AFTER SUCCESS
+========================================= */
+
+localStorage.removeItem(
+"package"
+);
+
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+
+}catch(error){
+
+console.error(error);
+
+showError(
+error.message ||
+"Something went wrong. Please try again."
+);
+
+
+button.disabled =
+false;
+
+
+button.textContent =
+"🚀 Place Order";
+
+
+}finally{
+
+document
+.getElementById("loading")
+.style.display =
+"none";
 
 }
 
-
-
-};
-
-
+}
+);
 
 </script>
-
 
 
 </body>
