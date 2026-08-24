@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -134,9 +133,7 @@ margin-bottom:20px;
 }
 
 
-/* =========================
-PACKAGE
-========================= */
+/* PACKAGE */
 
 .package-box{
 
@@ -191,9 +188,7 @@ margin-top:5px;
 }
 
 
-/* =========================
-INPUT
-========================= */
+/* INPUT */
 
 .field{
 
@@ -253,9 +248,7 @@ box-shadow:
 }
 
 
-/* =========================
-UPLOAD
-========================= */
+/* UPLOAD */
 
 .upload-box{
 
@@ -347,9 +340,7 @@ display:none;
 }
 
 
-/* =========================
-PREVIEW
-========================= */
+/* PREVIEW */
 
 .preview{
 
@@ -371,9 +362,7 @@ border:
 }
 
 
-/* =========================
-BUTTON
-========================= */
+/* BUTTON */
 
 button{
 
@@ -426,9 +415,7 @@ transform:none;
 }
 
 
-/* =========================
-LOADING
-========================= */
+/* LOADING */
 
 #loading{
 
@@ -445,9 +432,7 @@ font-size:14px;
 }
 
 
-/* =========================
-ERROR
-========================= */
+/* ERROR */
 
 #error{
 
@@ -474,9 +459,7 @@ text-align:center;
 }
 
 
-/* =========================
-SUCCESS
-========================= */
+/* SUCCESS */
 
 #success{
 
@@ -565,9 +548,7 @@ font-weight:bold;
 }
 
 
-/* =========================
-WHATSAPP BUTTON
-========================= */
+/* WHATSAPP */
 
 .whatsapp-button{
 
@@ -608,9 +589,7 @@ transform:translateY(-2px);
 }
 
 
-/* =========================
-BACK BUTTON
-========================= */
+/* BACK */
 
 .back-button{
 
@@ -656,10 +635,6 @@ transform:translateY(-2px);
 
 <div class="card">
 
-
-<!-- =========================
-ORDER FORM
-========================= -->
 
 <div id="formArea">
 
@@ -826,8 +801,6 @@ type="button">
 </p>
 
 
-<!-- BACK -->
-
 <a
 href="topup.html"
 class="back-button">
@@ -840,9 +813,7 @@ class="back-button">
 </div>
 
 
-<!-- =========================
-SUCCESS
-========================= -->
+<!-- SUCCESS -->
 
 <div id="success">
 
@@ -885,8 +856,6 @@ Please save your Order ID.
 </p>
 
 
-<!-- WHATSAPP -->
-
 <a
 id="whatsappButton"
 class="whatsapp-button"
@@ -916,91 +885,85 @@ class="home-button">
 </div>
 
 
-<script>
+<script type="module">
 
 
-/* =========================================
-CLOUDFLARE WORKER URL
-========================================= */
+// =========================================
+// FIREBASE AUTH
+// =========================================
+
+import {
+    auth,
+    loginCustomer
+}
+from "./firebase.js";
+
+
+// =========================================
+// CLOUDFLARE WORKER
+// =========================================
 
 const WORKER_URL =
 "https://zyper-order.ameresh20112011.workers.dev/";
 
 
-/* =========================================
-YOUR WHATSAPP NUMBER
-========================================= */
+// =========================================
+// WHATSAPP NUMBER
+// =========================================
 
 const WHATSAPP_NUMBER =
 "94751483909";
 
 
-/* =========================================
-PACKAGE PRICES
-========================================= */
+// =========================================
+// PACKAGES
+// =========================================
 
 const PACKAGES = {
 
 "Weekly":560,
-
 "Monthly":2720,
-
 "Weekly Lite":150,
 
 "VIP Bundle":3280,
-
 "SVIP Bundle":4960,
 
 "Level 6":130,
-
 "Level 10":250,
-
 "Level 15":250,
-
 "Level 20":250,
-
 "Level 25":250,
-
 "Level 30":380,
 
 "Full Pass":1500,
 
 "E Badge 3":250,
-
 "E Badge 7":350,
-
 "E Badge 30":1100,
 
 "25 Diamonds":150,
-
 "100 Diamonds":380,
-
 "310 Diamonds":1150,
-
 "520 Diamonds":1800,
-
 "1060 Diamonds":3400,
-
 "2180 Diamonds":6500,
-
 "5600 Diamonds":16500,
-
 "11500 Diamonds":35000
 
 };
 
 
-/* =========================================
-ELEMENTS
-========================================= */
+// =========================================
+// ELEMENTS
+// =========================================
 
 const errorBox =
 document.getElementById("error");
 
 
-/* =========================================
-SHOW ERROR
-========================================= */
+// =========================================
+// ERROR
+// =========================================
 
 function showError(message){
 
@@ -1021,10 +984,6 @@ behavior:"smooth"
 }
 
 
-/* =========================================
-HIDE ERROR
-========================================= */
-
 function hideError(){
 
 errorBox.style.display =
@@ -1033,9 +992,9 @@ errorBox.style.display =
 }
 
 
-/* =========================================
-GET PACKAGE
-========================================= */
+// =========================================
+// PACKAGE
+// =========================================
 
 function getSelectedPackage(){
 
@@ -1092,17 +1051,12 @@ return null;
 return {
 
 name:name,
-
 price:price
 
 };
 
 }
 
-
-/* =========================================
-LOAD PACKAGE
-========================================= */
 
 const selected =
 getSelectedPackage();
@@ -1129,7 +1083,8 @@ showError(
 "Package information is missing. Please go back and select a package."
 );
 
-}else{
+}
+else{
 
 document
 .getElementById("packageName")
@@ -1145,9 +1100,9 @@ selected.price.toLocaleString("en-US");
 }
 
 
-/* =========================================
-RECEIPT UPLOAD
-========================================= */
+// =========================================
+// RECEIPT
+// =========================================
 
 document
 .getElementById("receipt")
@@ -1231,9 +1186,9 @@ file.name;
 );
 
 
-/* =========================================
-SUBMIT ORDER
-========================================= */
+// =========================================
+// SUBMIT
+// =========================================
 
 document
 .getElementById("send")
@@ -1263,13 +1218,12 @@ return;
 }
 
 
-/* VALUES */
-
 const uid =
 document
 .getElementById("uid")
 .value
 .trim();
+
 
 const playerName =
 document
@@ -1277,11 +1231,13 @@ document
 .value
 .trim();
 
+
 const phone =
 document
 .getElementById("phone")
 .value
 .trim();
+
 
 const receipt =
 document
@@ -1289,7 +1245,7 @@ document
 .files[0];
 
 
-/* UID */
+// UID
 
 if(
 !/^[0-9]{6,15}$/.test(uid)
@@ -1308,7 +1264,7 @@ return;
 }
 
 
-/* NAME */
+// NAME
 
 if(
 playerName.length < 2 ||
@@ -1328,7 +1284,7 @@ return;
 }
 
 
-/* PHONE */
+// PHONE
 
 const cleanPhone =
 phone.replace(
@@ -1355,7 +1311,7 @@ return;
 }
 
 
-/* RECEIPT */
+// RECEIPT
 
 if(!receipt){
 
@@ -1366,6 +1322,7 @@ showError(
 return;
 
 }
+
 
 if(
 receipt.type !== "image/jpeg" &&
@@ -1380,6 +1337,7 @@ return;
 
 }
 
+
 if(
 receipt.size > 5 * 1024 * 1024
 ){
@@ -1393,13 +1351,15 @@ return;
 }
 
 
-/* LOADING */
+// =========================================
+// LOGIN ANONYMOUSLY
+// =========================================
 
 button.disabled =
 true;
 
 button.textContent =
-"⏳ Sending Order...";
+"⏳ Connecting...";
 
 document
 .getElementById("loading")
@@ -1410,9 +1370,26 @@ document
 try{
 
 
-/* =========================================
-FORM DATA
-========================================= */
+const user =
+await loginCustomer();
+
+
+if(!user){
+
+throw new Error(
+"Unable to create customer session."
+);
+
+}
+
+
+const userId =
+user.uid;
+
+
+// =========================================
+// FORM DATA
+// =========================================
 
 const formData =
 new FormData();
@@ -1425,20 +1402,33 @@ selected.name +
 selected.price
 );
 
+
 formData.append(
 "uid",
 uid
 );
+
 
 formData.append(
 "playerName",
 playerName
 );
 
+
 formData.append(
 "phone",
 phone
 );
+
+
+// IMPORTANT:
+// Firebase customer UID
+
+formData.append(
+"userId",
+userId
+);
+
 
 formData.append(
 "receipt",
@@ -1447,9 +1437,13 @@ receipt.name
 );
 
 
-/* =========================================
-SEND TO WORKER
-========================================= */
+// =========================================
+// SEND TO WORKER
+// =========================================
+
+button.textContent =
+"⏳ Sending Order...";
+
 
 const response =
 await fetch(
@@ -1464,16 +1458,16 @@ body:formData
 );
 
 
-/* RESPONSE */
-
 let result;
+
 
 try{
 
 result =
 await response.json();
 
-}catch{
+}
+catch{
 
 throw new Error(
 "Invalid response from Cloudflare Worker."
@@ -1481,8 +1475,6 @@ throw new Error(
 
 }
 
-
-/* SERVER ERROR */
 
 if(
 !response.ok ||
@@ -1497,9 +1489,9 @@ result.message ||
 }
 
 
-/* =========================================
-CREATE WHATSAPP MESSAGE
-========================================= */
+// =========================================
+// WHATSAPP MESSAGE
+// =========================================
 
 const whatsappMessage =
 
@@ -1528,9 +1520,9 @@ const whatsappMessage =
 Please check and process this order.`;
 
 
-/* =========================================
-CREATE WHATSAPP URL
-========================================= */
+// =========================================
+// WHATSAPP
+// =========================================
 
 const whatsappURL =
 "https://wa.me/" +
@@ -1541,22 +1533,15 @@ whatsappMessage
 );
 
 
-/* =========================================
-SET WHATSAPP BUTTON
-========================================= */
-
-const whatsappButton =
-document.getElementById(
-"whatsappButton"
-);
-
-whatsappButton.href =
+document
+.getElementById("whatsappButton")
+.href =
 whatsappURL;
 
 
-/* =========================================
-SUCCESS
-========================================= */
+// =========================================
+// SUCCESS
+// =========================================
 
 document
 .getElementById("formArea")
@@ -1574,8 +1559,6 @@ document
 result.orderId;
 
 
-/* CLEAR PACKAGE */
-
 localStorage.removeItem(
 "package"
 );
@@ -1590,19 +1573,20 @@ behavior:"smooth"
 });
 
 
-/* =========================================
-OPEN WHATSAPP AUTOMATICALLY
-========================================= */
+// =========================================
+// OPEN WHATSAPP
+// =========================================
 
 setTimeout(function(){
 
 window.location.href =
 whatsappURL;
 
-}, 700);
+},700);
 
 
-}catch(error){
+}
+catch(error){
 
 console.error(
 "Order error:",
@@ -1623,7 +1607,8 @@ false;
 button.textContent =
 "🚀 Place Order";
 
-}finally{
+}
+finally{
 
 document
 .getElementById("loading")
@@ -1637,8 +1622,5 @@ document
 
 </script>
 
-
 </body>
-
 </html>
-```
