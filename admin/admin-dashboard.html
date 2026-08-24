@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>
-Zyper Dashboard
-</title>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zyper Dashboard</title>
 
 <link rel="stylesheet" href="admin.css">
 
@@ -15,224 +17,209 @@ Zyper Dashboard
 <body>
 
 
-<!-- HIDDEN UNTIL ADMIN VERIFIED -->
+<!-- DASHBOARD HIDDEN UNTIL ADMIN IS VERIFIED -->
+
 <div id="app" style="display:none;">
 
 
+<!-- SIDEBAR -->
 
 <div class="sidebar">
 
+    <h1>💎 Zyper</h1>
 
-<h1>
-💎 Zyper
-</h1>
+    <h3>Admin Panel</h3>
 
+    <div class="sidebar-line"></div>
 
-<h3>
-Admin Panel
-</h3>
+    <p class="admin-label">
+        🛡️ Administrator
+    </p>
 
-
-
-<button id="logout">
-Logout
-</button>
-
+    <button id="logout">
+        Logout
+    </button>
 
 </div>
 
 
-
-
+<!-- MAIN -->
 
 <div class="main">
 
 
-<h1>
-Orders Dashboard
-</h1>
+    <div class="topbar">
 
+        <div>
 
+            <h1>
+                Orders Dashboard
+            </h1>
 
+            <p class="subtitle">
+                Zyper Diamond Store
+            </p>
 
+        </div>
 
-<div class="cards">
+        <button
+            id="refresh"
+            class="refresh-btn"
+        >
+            ↻ Refresh
+        </button>
 
+    </div>
 
-<div class="card">
 
-<h3>
-Orders
-</h3>
+    <!-- STAT CARDS -->
 
-<h2 id="totalOrders">
-0
-</h2>
+    <div class="cards">
 
-</div>
 
+        <div class="card">
 
+            <h3>
+                Orders
+            </h3>
 
+            <h2 id="totalOrders">
+                0
+            </h2>
 
+        </div>
 
-<div class="card">
 
-<h3>
-Revenue
-</h3>
+        <div class="card">
 
-<h2>
-$<span id="revenue">
-0
-</span>
-</h2>
+            <h3>
+                Revenue
+            </h3>
 
-</div>
+            <h2>
+                Rs. <span id="revenue">0</span>
+            </h2>
 
+        </div>
 
 
+        <div class="card">
 
+            <h3>
+                Pending
+            </h3>
 
-<div class="card">
+            <h2 id="pendingOrders">
+                0
+            </h2>
 
-<h3>
-Pending
-</h3>
+        </div>
 
-<h2 id="pendingOrders">
-0
-</h2>
 
-</div>
+        <div class="card">
 
+            <h3>
+                Success
+            </h3>
 
+            <h2 id="successOrders">
+                0
+            </h2>
 
+        </div>
 
 
-<div class="card">
+    </div>
 
-<h3>
-Success
-</h3>
 
-<h2 id="successOrders">
-0
-</h2>
+    <!-- SEARCH -->
 
-</div>
+    <div class="search-box">
 
+        <input
+            id="search"
+            type="text"
+            placeholder="🔎 Search Order ID, UID, phone, customer, product..."
+        >
 
-</div>
+    </div>
 
 
+    <!-- TABLE -->
 
+    <div class="table-container">
 
+        <table>
 
+            <thead>
 
+                <tr>
 
+                    <th>
+                        Order ID
+                    </th>
 
-<input 
-id="search"
-placeholder="Search order">
+                    <th>
+                        Customer
+                    </th>
 
+                    <th>
+                        Firebase UID
+                    </th>
 
+                    <th>
+                        Game UID
+                    </th>
 
+                    <th>
+                        Product
+                    </th>
 
+                    <th>
+                        Price
+                    </th>
 
+                    <th>
+                        Payment
+                    </th>
 
+                    <th>
+                        Date Time
+                    </th>
 
-<table>
+                    <th>
+                        Total
+                    </th>
 
+                    <th>
+                        Status
+                    </th>
 
-<thead>
+                    <th>
+                        Action
+                    </th>
 
+                </tr>
 
-<tr>
+            </thead>
 
 
-<th>
-Order ID
-</th>
+            <tbody id="orders">
 
+            </tbody>
 
-<th>
-Customer
-</th>
+        </table>
 
-
-<th>
-Firebase UID
-</th>
-
-
-<th>
-Game UID
-</th>
-
-
-<th>
-Product
-</th>
-
-
-<th>
-Price
-</th>
-
-
-<th>
-Payment
-</th>
-
-
-<th>
-Date Time
-</th>
-
-
-<th>
-Total
-</th>
-
-
-<th>
-Status
-</th>
-
-
-<th>
-Action
-</th>
-
-
-</tr>
-
-
-</thead>
-
-
-
-
-<tbody id="orders">
-
-
-</tbody>
-
-
-</table>
-
+    </div>
 
 
 </div>
 
 
 </div>
-
-
 
 
 <script type="module" src="admin.js"></script>
-
 
 </body>
 
