@@ -1,7 +1,7 @@
 ```javascript
 // ==========================================
 // ZYPER DIAMOND STORE
-// ADMIN JAVASCRIPT
+// ADMIN LOGIN + DASHBOARD
 // ==========================================
 
 import { auth, db } from "./firebase.js";
@@ -21,103 +21,132 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-// ==========================================
-// GLOBAL
-// ==========================================
-
-let allOrders = [];
+console.log("✅ admin.js loaded");
+console.log("Firebase Auth:", auth);
+console.log("Firebase DB:", db);
 
 
 // ==========================================
-// ADMIN CHECK
+// ELEMENTS
+// ==========================================
+
+const loginButton =
+    document.getElementById("login");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const message =
+    document.getElementById("msg");
+
+
+// ==========================================
+// SHOW MESSAGE
+// ==========================================
+
+function showMessage(text, success = false) {
+
+    if (!message) {
+        alert(text);
+        return;
+    }
+
+    message.textContent = text;
+
+    message.style.color =
+        success ? "#86efac" : "#fca5a5";
+}
+
+
+// ==========================================
+// CHECK ADMIN
 // ==========================================
 
 async function checkAdmin(user) {
 
+    if (!user) {
+        return false;
+    }
+
     try {
 
-        if (!user) {
-            return false;
-        }
-
-        const adminRef = doc(
-            db,
-            "users",
+        console.log(
+            "Checking admin UID:",
             user.uid
         );
 
-        const adminSnapshot =
-            await getDoc(adminRef);
+        const userRef =
+            doc(
+                db,
+                "users",
+                user.uid
+            );
 
-        if (!adminSnapshot.exists()) {
+        const userSnap =
+            await getDoc(userRef);
+
+        console.log(
+            "Admin document exists:",
+            userSnap.exists()
+        );
+
+        if (!userSnap.exists()) {
             return false;
         }
 
         const data =
-            adminSnapshot.data();
+            userSnap.data();
+
+        console.log(
+            "User document:",
+            data
+        );
 
         return data.role === "admin";
 
     } catch (error) {
 
         console.error(
-            "Admin check error:",
+            "ADMIN CHECK ERROR:",
             error
         );
 
-        return false;
+        throw error;
     }
 }
 
 
 // ==========================================
-// ADMIN LOGIN PAGE
+// LOGIN
 // ==========================================
-
-const loginButton =
-    document.getElementById("login");
-
-
-if (loginButton) {
-
-    loginButton.addEventListener(
-        "click",
-        adminLogin
-    );
-
-    const passwordInput =
-        document.getElementById("password");
-
-    if (passwordInput) {
-
-        passwordInput.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (event.key === "Enter") {
-                    adminLogin();
-                }
-
-            }
-        );
-    }
-}
-
 
 async function adminLogin() {
 
-    const emailInput =
-        document.getElementById("email");
+    console.log("LOGIN BUTTON CLICKED");
 
-    const passwordInput =
-        document.getElementById("password");
 
-    const msg =
-        document.getElementById("msg");
+    if (!emailInput) {
 
-    if (!emailInput || !passwordInput) {
+        alert(
+            "ERROR: Email input not found."
+        );
+
         return;
     }
+
+
+    if (!passwordInput) {
+
+        alert(
+            "ERROR: Password input not found."
+        );
+
+        return;
+    }
+
 
     const email =
         emailInput.value.trim();
@@ -125,21 +154,50 @@ async function adminLogin() {
     const password =
         passwordInput.value;
 
-    if (!email || !password) {
 
-        if (msg) {
-            msg.textContent =
-                "❌ Enter email and password.";
-        }
+    if (!email) {
+
+        showMessage(
+            "❌ Enter your admin email."
+        );
+
+        emailInput.focus();
 
         return;
     }
 
+
+    if (!password) {
+
+        showMessage(
+            "❌ Enter your password."
+        );
+
+        passwordInput.focus();
+
+        return;
+    }
+
+
     loginButton.disabled = true;
+
     loginButton.textContent =
-        "Logging in...";
+        "⏳ LOGIN...";
+
+
+    showMessage(
+        "Checking login...",
+        true
+    );
+
 
     try {
+
+        console.log(
+            "Signing in:",
+            email
+        );
+
 
         const result =
             await signInWithEmailAndPassword(
@@ -148,21 +206,29 @@ async function adminLogin() {
                 password
             );
 
-        const isAdmin =
+
+        console.log(
+            "Firebase login successful:",
+            result.user.uid
+        );
+
+
+        const admin =
             await checkAdmin(
                 result.user
             );
 
-        if (!isAdmin) {
 
-            if (msg) {
-                msg.textContent =
-                    "❌ This account is not an admin.";
-            }
+        if (!admin) {
 
             await signOut(auth);
 
-            loginButton.disabled = false;
+            showMessage(
+                "❌ Login successful, but this account is NOT an admin."
+            );
+
+            loginButton.disabled =
+                false;
 
             loginButton.textContent =
                 "LOGIN";
@@ -170,80 +236,108 @@ async function adminLogin() {
             return;
         }
 
-        window.location.href =
-            "admin-dashboard.html";
+
+        showMessage(
+            "✅ Admin verified. Opening dashboard...",
+            true
+        );
+
+
+        setTimeout(
+            function () {
+
+                window.location.href =
+                    "admin-dashboard.html";
+
+            },
+            500
+        );
+
 
     } catch (error) {
 
         console.error(
-            "Admin login error:",
+            "🔥 LOGIN ERROR:",
             error
         );
 
-        let message =
+
+        let text =
             "❌ Login failed.";
+
 
         if (
             error.code ===
             "auth/invalid-credential"
         ) {
 
-            message =
+            text =
                 "❌ Incorrect email or password.";
-
-        } else if (
-            error.code ===
-            "auth/user-not-found"
-        ) {
-
-            message =
-                "❌ User account not found.";
-
-        } else if (
-            error.code ===
-            "auth/wrong-password"
-        ) {
-
-            message =
-                "❌ Incorrect password.";
 
         } else if (
             error.code ===
             "auth/invalid-email"
         ) {
 
-            message =
+            text =
                 "❌ Invalid email address.";
+
+        } else if (
+            error.code ===
+            "auth/user-not-found"
+        ) {
+
+            text =
+                "❌ Admin account not found.";
+
+        } else if (
+            error.code ===
+            "auth/wrong-password"
+        ) {
+
+            text =
+                "❌ Incorrect password.";
 
         } else if (
             error.code ===
             "auth/too-many-requests"
         ) {
 
-            message =
-                "❌ Too many attempts. Try again later.";
+            text =
+                "❌ Too many login attempts. Try again later.";
 
         } else if (
             error.code ===
             "auth/network-request-failed"
         ) {
 
-            message =
-                "❌ Network error. Check your internet.";
+            text =
+                "❌ Internet/network error.";
+
+        } else if (
+            error.code ===
+            "permission-denied"
+        ) {
+
+            text =
+                "❌ Firebase permission denied.";
 
         } else {
 
-            message =
+            text =
                 "❌ " +
-                error.message;
+                (
+                    error.message ||
+                    "Unknown error."
+                );
         }
 
-        if (msg) {
-            msg.textContent =
-                message;
-        }
 
-        loginButton.disabled = false;
+        showMessage(text);
+
+
+        loginButton.disabled =
+            false;
 
         loginButton.textContent =
             "LOGIN";
@@ -252,7 +346,48 @@ async function adminLogin() {
 
 
 // ==========================================
-// DASHBOARD AUTH PROTECTION
+// CLICK
+// ==========================================
+
+if (loginButton) {
+
+    loginButton.addEventListener(
+        "click",
+        adminLogin
+    );
+
+} else {
+
+    console.error(
+        "❌ LOGIN BUTTON NOT FOUND"
+    );
+}
+
+
+// ==========================================
+// ENTER KEY
+// ==========================================
+
+if (passwordInput) {
+
+    passwordInput.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key ===
+                "Enter"
+            ) {
+
+                adminLogin();
+            }
+        }
+    );
+}
+
+
+// ==========================================
+// DASHBOARD
 // ==========================================
 
 const ordersTable =
@@ -261,14 +396,22 @@ const ordersTable =
 
 if (ordersTable) {
 
+    console.log(
+        "Dashboard detected."
+    );
+
+
     onAuthStateChanged(
         auth,
         async function (user) {
 
-            const isAdmin =
-                await checkAdmin(user);
+            console.log(
+                "Dashboard auth:",
+                user
+            );
 
-            if (!isAdmin) {
+
+            if (!user) {
 
                 window.location.href =
                     "admin-login.html";
@@ -276,142 +419,57 @@ if (ordersTable) {
                 return;
             }
 
-            const app =
-                document.getElementById("app");
 
-            if (app) {
-                app.style.display =
-                    "block";
+            try {
+
+                const admin =
+                    await checkAdmin(
+                        user
+                    );
+
+
+                if (!admin) {
+
+                    await signOut(auth);
+
+                    window.location.href =
+                        "admin-login.html";
+
+                    return;
+                }
+
+
+                const app =
+                    document.getElementById(
+                        "app"
+                    );
+
+
+                if (app) {
+
+                    app.style.display =
+                        "block";
+                }
+
+
+                await loadOrders();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Dashboard error:",
+                    error
+                );
+
+                alert(
+                    "Dashboard error:\n" +
+                    error.message
+                );
             }
-
-            await loadOrders();
 
         }
     );
-}
-
-
-// ==========================================
-// FORMAT DATE
-// ==========================================
-
-function getDateObject(timestamp) {
-
-    if (!timestamp) {
-        return null;
-    }
-
-    try {
-
-        if (
-            typeof timestamp.toDate ===
-            "function"
-        ) {
-
-            return timestamp.toDate();
-        }
-
-        if (
-            timestamp.seconds !==
-            undefined
-        ) {
-
-            return new Date(
-                timestamp.seconds * 1000
-            );
-        }
-
-        if (
-            timestamp instanceof Date
-        ) {
-
-            return timestamp;
-        }
-
-        if (
-            typeof timestamp === "string"
-        ) {
-
-            const date =
-                new Date(timestamp);
-
-            if (!isNaN(date.getTime())) {
-                return date;
-            }
-        }
-
-        return null;
-
-    } catch {
-
-        return null;
-    }
-}
-
-
-function formatDate(timestamp) {
-
-    const date =
-        getDateObject(timestamp);
-
-    if (!date) {
-        return "-";
-    }
-
-    const day =
-        String(
-            date.getDate()
-        ).padStart(2, "0");
-
-    const month =
-        String(
-            date.getMonth() + 1
-        ).padStart(2, "0");
-
-    const year =
-        date.getFullYear();
-
-    const hours =
-        String(
-            date.getHours()
-        ).padStart(2, "0");
-
-    const minutes =
-        String(
-            date.getMinutes()
-        ).padStart(2, "0");
-
-    return `${day}/${month}/${year} ${hours}:${minutes}`;
-}
-
-
-// ==========================================
-// DATE ONLY
-// ==========================================
-
-function formatDateForInput(timestamp) {
-
-    const date =
-        getDateObject(timestamp);
-
-    if (!date) {
-        return "";
-    }
-
-    const year =
-        date.getFullYear();
-
-    const month =
-        String(
-            date.getMonth() + 1
-        ).padStart(2, "0");
-
-    const day =
-        String(
-            date.getDate()
-        ).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
 }
 
 
@@ -422,19 +480,24 @@ function formatDateForInput(timestamp) {
 async function loadOrders() {
 
     const table =
-        document.getElementById("orders");
+        document.getElementById(
+            "orders"
+        );
+
 
     if (!table) {
         return;
     }
 
+
     table.innerHTML = `
         <tr>
-            <td colspan="11" class="empty-row">
+            <td colspan="11">
                 ⏳ Loading orders...
             </td>
         </tr>
     `;
+
 
     try {
 
@@ -446,76 +509,167 @@ async function loadOrders() {
                 )
             );
 
-        allOrders = [];
+
+        table.innerHTML = "";
+
+
+        if (snapshot.empty) {
+
+            table.innerHTML = `
+                <tr>
+                    <td colspan="11">
+                        📦 No orders found.
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
 
         snapshot.forEach(
-            function (documentSnapshot) {
+            function (item) {
 
-                allOrders.push({
-
-                    id:
-                        documentSnapshot.id,
-
-                    data:
-                        documentSnapshot.data()
-
-                });
-
-            }
-        );
+                const order =
+                    item.data();
 
 
-        // Newest first
-
-        allOrders.sort(
-            function (a, b) {
-
-                const dateA =
-                    getDateObject(
-                        a.data.createdAt
+                const row =
+                    document.createElement(
+                        "tr"
                     );
 
-                const dateB =
-                    getDateObject(
-                        b.data.createdAt
-                    );
 
-                if (!dateA && !dateB) {
-                    return 0;
-                }
+                const status =
+                    order.status ||
+                    "Pending";
 
-                if (!dateA) {
-                    return 1;
-                }
 
-                if (!dateB) {
-                    return -1;
-                }
+                row.innerHTML = `
 
-                return (
-                    dateB.getTime() -
-                    dateA.getTime()
+                    <td>
+                        ${escapeHTML(
+                            item.id
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            order.customerName ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            order.email ||
+                            order.customerEmail ||
+                            order.userEmail ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            order.userId ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            order.gameUID ||
+                            order.gameUid ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            order.productName ||
+                            order.package ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        LKR
+                        ${Number(
+                            order.price ||
+                            order.productPrice ||
+                            0
+                        ).toLocaleString()}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            order.paymentMethod ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatDate(
+                            order.createdAt
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            status
+                        )}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="action-success"
+                            data-id="${escapeHTML(
+                                item.id
+                            )}"
+                            data-status="Success">
+
+                            ✔
+
+                        </button>
+
+                        <button
+                            class="action-rejected"
+                            data-id="${escapeHTML(
+                                item.id
+                            )}"
+                            data-status="Rejected">
+
+                            ✖
+
+                        </button>
+
+                    </td>
+
+                `;
+
+
+                table.appendChild(
+                    row
                 );
             }
         );
 
 
-        renderOrders(
-            allOrders
-        );
+        attachStatusButtons();
 
 
     } catch (error) {
 
         console.error(
-            "Load orders error:",
+            "LOAD ORDERS ERROR:",
             error
         );
 
+
         table.innerHTML = `
             <tr>
-                <td colspan="11"
-                    class="error-row">
+                <td colspan="11">
 
                     ❌ Failed to load orders
 
@@ -533,423 +687,10 @@ async function loadOrders() {
 
 
 // ==========================================
-// RENDER ORDERS
+// STATUS BUTTONS
 // ==========================================
 
-function renderOrders(orders) {
-
-    const table =
-        document.getElementById("orders");
-
-    if (!table) {
-        return;
-    }
-
-    table.innerHTML = "";
-
-    let totalOrders = 0;
-
-    let revenue = 0;
-
-    let pending = 0;
-
-    let success = 0;
-
-
-    if (orders.length === 0) {
-
-        table.innerHTML = `
-            <tr>
-                <td colspan="11"
-                    class="empty-row">
-
-                    📦 No orders found.
-
-                </td>
-            </tr>
-        `;
-
-        updateStatistics(
-            0,
-            0,
-            0,
-            0
-        );
-
-        return;
-    }
-
-
-    orders.forEach(
-        function (item) {
-
-            const order =
-                item.data;
-
-
-            // CUSTOMER NAME
-
-            const customer =
-                order.customerName ||
-                order.playerName ||
-                order.name ||
-                "-";
-
-
-            // CUSTOMER EMAIL
-
-            const email =
-                order.email ||
-                order.customerEmail ||
-                order.userEmail ||
-                "-";
-
-
-            // FIREBASE UID
-
-            const firebaseUID =
-                order.userId ||
-                order.uid ||
-                "-";
-
-
-            // GAME UID
-
-            const gameUID =
-                order.gameUID ||
-                order.gameUid ||
-                order.gameId ||
-                order.freeFireUID ||
-                "-";
-
-
-            // PRODUCT
-
-            const product =
-                order.productName ||
-                order.product ||
-                order.package ||
-                order.plan ||
-                "-";
-
-
-            // PRICE
-
-            const price =
-                Number(
-                    order.productPrice ||
-                    order.price ||
-                    0
-                );
-
-
-            // PAYMENT
-
-            const payment =
-                order.paymentMethod ||
-                order.payment ||
-                "-";
-
-
-            // TOTAL
-
-            const total =
-                Number(
-                    order.total ||
-                    order.amount ||
-                    price
-                );
-
-
-            // DATE
-
-            const date =
-                formatDate(
-                    order.createdAt
-                );
-
-
-            // STATUS
-
-            const rawStatus =
-                order.status ||
-                "Pending";
-
-
-            const status =
-                normalizeStatus(
-                    rawStatus
-                );
-
-
-            totalOrders++;
-
-            revenue += total;
-
-
-            if (
-                status === "Pending"
-            ) {
-
-                pending++;
-            }
-
-
-            if (
-                status === "Success"
-            ) {
-
-                success++;
-            }
-
-
-            const row =
-                document.createElement(
-                    "tr"
-                );
-
-
-            row.innerHTML = `
-
-                <td>
-                    <strong>
-                        ${escapeHTML(
-                            item.id
-                        )}
-                    </strong>
-                </td>
-
-
-                <td>
-                    ${escapeHTML(
-                        customer
-                    )}
-                </td>
-
-
-                <td>
-                    ${escapeHTML(
-                        email
-                    )}
-                </td>
-
-
-                <td>
-                    ${escapeHTML(
-                        firebaseUID
-                    )}
-                </td>
-
-
-                <td>
-                    ${escapeHTML(
-                        gameUID
-                    )}
-                </td>
-
-
-                <td>
-                    ${escapeHTML(
-                        product
-                    )}
-                </td>
-
-
-                <td>
-                    LKR
-                    ${price.toLocaleString(
-                        "en-US"
-                    )}
-                </td>
-
-
-                <td>
-                    ${escapeHTML(
-                        payment
-                    )}
-                </td>
-
-
-                <td>
-                    ${escapeHTML(
-                        date
-                    )}
-                </td>
-
-
-                <td>
-
-                    <span class="
-                        status
-                        ${status.toLowerCase()}
-                    ">
-
-                        ${escapeHTML(
-                            status
-                        )}
-
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <button
-                        class="action-success"
-                        data-id="${escapeHTML(
-                            item.id
-                        )}"
-                        data-status="Success"
-                        title="Mark Success">
-
-                        ✔
-
-                    </button>
-
-
-                    <button
-                        class="action-rejected"
-                        data-id="${escapeHTML(
-                            item.id
-                        )}"
-                        data-status="Rejected"
-                        title="Reject Order">
-
-                        ✖
-
-                    </button>
-
-                </td>
-
-            `;
-
-
-            table.appendChild(
-                row
-            );
-
-        }
-    );
-
-
-    updateStatistics(
-        totalOrders,
-        revenue,
-        pending,
-        success
-    );
-
-
-    attachActionButtons();
-}
-
-
-// ==========================================
-// NORMALIZE STATUS
-// ==========================================
-
-function normalizeStatus(status) {
-
-    const value =
-        String(status)
-        .trim()
-        .toLowerCase();
-
-
-    if (
-        value === "success" ||
-        value === "approved" ||
-        value === "complete" ||
-        value === "completed"
-    ) {
-
-        return "Success";
-    }
-
-
-    if (
-        value === "rejected" ||
-        value === "reject" ||
-        value === "failed"
-    ) {
-
-        return "Rejected";
-    }
-
-
-    return "Pending";
-}
-
-
-// ==========================================
-// STATISTICS
-// ==========================================
-
-function updateStatistics(
-    total,
-    revenue,
-    pending,
-    success
-) {
-
-    const totalElement =
-        document.getElementById(
-            "totalOrders"
-        );
-
-    const revenueElement =
-        document.getElementById(
-            "revenue"
-        );
-
-    const pendingElement =
-        document.getElementById(
-            "pendingOrders"
-        );
-
-    const successElement =
-        document.getElementById(
-            "successOrders"
-        );
-
-
-    if (totalElement) {
-
-        totalElement.textContent =
-            total;
-    }
-
-
-    if (revenueElement) {
-
-        revenueElement.textContent =
-            revenue.toLocaleString(
-                "en-US"
-            );
-    }
-
-
-    if (pendingElement) {
-
-        pendingElement.textContent =
-            pending;
-    }
-
-
-    if (successElement) {
-
-        successElement.textContent =
-            success;
-    }
-}
-
-
-// ==========================================
-// ACTION BUTTONS
-// ==========================================
-
-function attachActionButtons() {
+function attachStatusButtons() {
 
     document
         .querySelectorAll(
@@ -960,12 +701,58 @@ function attachActionButtons() {
 
                 button.addEventListener(
                     "click",
-                    function () {
+                    async function () {
 
-                        changeStatus(
-                            this.dataset.id,
-                            this.dataset.status
-                        );
+                        const id =
+                            this.dataset.id;
+
+                        const status =
+                            this.dataset.status;
+
+
+                        if (
+                            !confirm(
+                                `Change order to ${status}?`
+                            )
+                        ) {
+
+                            return;
+                        }
+
+
+                        try {
+
+                            await updateDoc(
+
+                                doc(
+                                    db,
+                                    "orders",
+                                    id
+                                ),
+
+                                {
+                                    status:
+                                        status
+                                }
+
+                            );
+
+
+                            await loadOrders();
+
+
+                        } catch (error) {
+
+                            console.error(
+                                "STATUS ERROR:",
+                                error
+                            );
+
+                            alert(
+                                "❌ Failed:\n" +
+                                error.message
+                            );
+                        }
 
                     }
                 );
@@ -976,467 +763,66 @@ function attachActionButtons() {
 
 
 // ==========================================
-// CHANGE STATUS
+// FORMAT DATE
 // ==========================================
 
-async function changeStatus(
-    id,
-    status
-) {
+function formatDate(timestamp) {
+
+    if (!timestamp) {
+        return "-";
+    }
+
 
     try {
 
-        const user =
-            auth.currentUser;
+        let date;
 
 
-        const isAdmin =
-            await checkAdmin(
-                user
-            );
+        if (
+            typeof timestamp.toDate ===
+            "function"
+        ) {
 
+            date =
+                timestamp.toDate();
 
-        if (!isAdmin) {
+        } else if (
+            timestamp.seconds !==
+            undefined
+        ) {
 
-            alert(
-                "❌ Access denied."
-            );
+            date =
+                new Date(
+                    timestamp.seconds *
+                    1000
+                );
 
-            return;
+        } else {
+
+            date =
+                new Date(timestamp);
         }
 
 
-        const message =
-            status === "Success"
-                ? "Mark this order as Success?"
-                : "Reject this order?";
+        if (
+            isNaN(
+                date.getTime()
+            )
+        ) {
 
-
-        if (!confirm(message)) {
-            return;
+            return "-";
         }
 
 
-        await updateDoc(
-
-            doc(
-                db,
-                "orders",
-                id
-            ),
-
-            {
-                status: status
-            }
-
+        return date.toLocaleString(
+            "en-GB"
         );
 
 
-        await loadOrders();
+    } catch {
 
-        applyFilters();
-
-
-    } catch (error) {
-
-        console.error(
-            "Status update error:",
-            error
-        );
-
-
-        alert(
-            "❌ Failed to update status:\n\n" +
-            error.message
-        );
+        return "-";
     }
-}
-
-
-// ==========================================
-// APPLY FILTERS
-// ==========================================
-
-function applyFilters() {
-
-    const searchInput =
-        document.getElementById(
-            "search"
-        );
-
-    const dateInput =
-        document.getElementById(
-            "dateFilter"
-        );
-
-    const statusInput =
-        document.getElementById(
-            "statusFilter"
-        );
-
-
-    const searchValue =
-        searchInput
-            ? searchInput.value
-                .trim()
-                .toLowerCase()
-            : "";
-
-
-    const selectedDate =
-        dateInput
-            ? dateInput.value
-            : "";
-
-
-    const selectedStatus =
-        statusInput
-            ? statusInput.value
-            : "all";
-
-
-    const filtered =
-        allOrders.filter(
-            function (item) {
-
-                const order =
-                    item.data;
-
-
-                // SEARCH
-
-                const searchableText = [
-
-                    item.id,
-
-                    order.customerName,
-
-                    order.playerName,
-
-                    order.name,
-
-                    order.email,
-
-                    order.customerEmail,
-
-                    order.userEmail,
-
-                    order.userId,
-
-                    order.uid,
-
-                    order.gameUID,
-
-                    order.gameUid,
-
-                    order.gameId,
-
-                    order.freeFireUID,
-
-                    order.productName,
-
-                    order.product,
-
-                    order.package,
-
-                    order.plan,
-
-                    order.paymentMethod,
-
-                    order.payment,
-
-                    order.status
-
-                ]
-                .filter(
-                    value =>
-                        value !==
-                        undefined &&
-                        value !==
-                        null
-                )
-                .join(" ")
-                .toLowerCase();
-
-
-                if (
-                    searchValue &&
-                    !searchableText.includes(
-                        searchValue
-                    )
-                ) {
-
-                    return false;
-                }
-
-
-                // DATE FILTER
-
-                if (selectedDate) {
-
-                    const orderDate =
-                        formatDateForInput(
-                            order.createdAt
-                        );
-
-
-                    if (
-                        orderDate !==
-                        selectedDate
-                    ) {
-
-                        return false;
-                    }
-                }
-
-
-                // STATUS FILTER
-
-                if (
-                    selectedStatus !==
-                    "all"
-                ) {
-
-                    const currentStatus =
-                        normalizeStatus(
-                            order.status
-                        );
-
-
-                    if (
-                        currentStatus !==
-                        selectedStatus
-                    ) {
-
-                        return false;
-                    }
-                }
-
-
-                return true;
-
-            }
-        );
-
-
-    renderOrders(
-        filtered
-    );
-
-
-    updateFilterInfo(
-        filtered.length,
-        selectedDate,
-        selectedStatus,
-        searchValue
-    );
-}
-
-
-// ==========================================
-// FILTER INFORMATION
-// ==========================================
-
-function updateFilterInfo(
-    count,
-    date,
-    status,
-    search
-) {
-
-    const element =
-        document.getElementById(
-            "filterInfo"
-        );
-
-
-    if (!element) {
-        return;
-    }
-
-
-    const parts = [];
-
-
-    if (date) {
-
-        parts.push(
-            "📅 " + date
-        );
-    }
-
-
-    if (
-        status &&
-        status !== "all"
-    ) {
-
-        parts.push(
-            "📌 " + status
-        );
-    }
-
-
-    if (search) {
-
-        parts.push(
-            "🔎 " + search
-        );
-    }
-
-
-    if (parts.length === 0) {
-
-        element.textContent =
-            `All Orders • ${count}`;
-
-    } else {
-
-        element.textContent =
-            `${parts.join(" • ")} • ${count}`;
-    }
-}
-
-
-// ==========================================
-// SEARCH
-// ==========================================
-
-const search =
-    document.getElementById(
-        "search"
-    );
-
-
-if (search) {
-
-    search.addEventListener(
-        "input",
-        applyFilters
-    );
-}
-
-
-// ==========================================
-// DATE FILTER
-// ==========================================
-
-const dateFilter =
-    document.getElementById(
-        "dateFilter"
-    );
-
-
-if (dateFilter) {
-
-    dateFilter.addEventListener(
-        "change",
-        applyFilters
-    );
-}
-
-
-// ==========================================
-// STATUS FILTER
-// ==========================================
-
-const statusFilter =
-    document.getElementById(
-        "statusFilter"
-    );
-
-
-if (statusFilter) {
-
-    statusFilter.addEventListener(
-        "change",
-        applyFilters
-    );
-}
-
-
-// ==========================================
-// CLEAR FILTER
-// ==========================================
-
-const clearFilter =
-    document.getElementById(
-        "clearFilter"
-    );
-
-
-if (clearFilter) {
-
-    clearFilter.addEventListener(
-        "click",
-        function () {
-
-            if (search) {
-                search.value = "";
-            }
-
-            if (dateFilter) {
-                dateFilter.value = "";
-            }
-
-            if (statusFilter) {
-                statusFilter.value =
-                    "all";
-            }
-
-            renderOrders(
-                allOrders
-            );
-
-            updateFilterInfo(
-                allOrders.length,
-                "",
-                "all",
-                ""
-            );
-
-        }
-    );
-}
-
-
-// ==========================================
-// REFRESH
-// ==========================================
-
-const refresh =
-    document.getElementById(
-        "refresh"
-    );
-
-
-if (refresh) {
-
-    refresh.addEventListener(
-        "click",
-        async function () {
-
-            refresh.disabled = true;
-
-            refresh.textContent =
-                "⏳ Loading...";
-
-            try {
-
-                await loadOrders();
-
-                applyFilters();
-
-            } finally {
-
-                refresh.disabled = false;
-
-                refresh.textContent =
-                    "🔄 Refresh";
-            }
-
-        }
-    );
 }
 
 
@@ -1444,19 +830,13 @@ if (refresh) {
 // LOGOUT
 // ==========================================
 
-const logout =
-    document.getElementById(
-        "logout"
-    );
+if (logoutExists()) {
 
-
-if (logout) {
-
-    logout.addEventListener(
-        "click",
-        async function () {
-
-            try {
+    document
+        .getElementById("logout")
+        .addEventListener(
+            "click",
+            async function () {
 
                 await signOut(
                     auth
@@ -1465,19 +845,17 @@ if (logout) {
                 window.location.href =
                     "admin-login.html";
 
-            } catch (error) {
-
-                console.error(
-                    "Logout error:",
-                    error
-                );
-
-                alert(
-                    "❌ Logout failed."
-                );
             }
+        );
+}
 
-        }
+
+function logoutExists() {
+
+    return Boolean(
+        document.getElementById(
+            "logout"
+        )
     );
 }
 
