@@ -1,10 +1,13 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Diamond Store - Order</title>
 
@@ -21,7 +24,12 @@ margin:0;
 font-family:'Segoe UI',Arial,sans-serif;
 
 background:
-linear-gradient(135deg,#020617,#0f172a,#312e81);
+linear-gradient(
+135deg,
+#020617,
+#0f172a,
+#312e81
+);
 
 color:white;
 
@@ -45,7 +53,8 @@ width:100%;
 
 max-width:420px;
 
-background:rgba(255,255,255,0.08);
+background:
+rgba(255,255,255,0.08);
 
 backdrop-filter:blur(15px);
 
@@ -53,7 +62,8 @@ padding:25px;
 
 border-radius:25px;
 
-border:1px solid rgba(255,255,255,.15);
+border:
+1px solid rgba(255,255,255,.15);
 
 box-shadow:
 0 20px 50px rgba(0,0,0,.4);
@@ -99,7 +109,11 @@ font-size:26px;
 font-weight:800;
 
 background:
-linear-gradient(90deg,#60a5fa,#c084fc);
+linear-gradient(
+90deg,
+#60a5fa,
+#c084fc
+);
 
 -webkit-background-clip:text;
 
@@ -121,7 +135,7 @@ margin-bottom:20px;
 
 
 /* =========================
-   PACKAGE
+PACKAGE
 ========================= */
 
 .package-box{
@@ -137,7 +151,8 @@ padding:18px;
 
 border-radius:18px;
 
-border:1px solid rgba(255,255,255,.15);
+border:
+1px solid rgba(255,255,255,.15);
 
 margin-bottom:20px;
 
@@ -177,7 +192,7 @@ margin-top:5px;
 
 
 /* =========================
-   INPUT
+INPUT
 ========================= */
 
 .field{
@@ -207,7 +222,8 @@ width:100%;
 
 padding:14px;
 
-border:1px solid rgba(255,255,255,.1);
+border:
+1px solid rgba(255,255,255,.1);
 
 border-radius:12px;
 
@@ -238,7 +254,7 @@ box-shadow:
 
 
 /* =========================
-   UPLOAD
+UPLOAD
 ========================= */
 
 .upload-box{
@@ -261,7 +277,8 @@ padding:25px;
 
 border-radius:20px;
 
-border:2px dashed #60a5fa;
+border:
+2px dashed #60a5fa;
 
 background:
 linear-gradient(
@@ -331,7 +348,7 @@ display:none;
 
 
 /* =========================
-   PREVIEW
+PREVIEW
 ========================= */
 
 .preview{
@@ -348,13 +365,14 @@ border-radius:15px;
 
 display:none;
 
-border:1px solid rgba(255,255,255,.15);
+border:
+1px solid rgba(255,255,255,.15);
 
 }
 
 
 /* =========================
-   BUTTON
+BUTTON
 ========================= */
 
 button{
@@ -409,7 +427,7 @@ transform:none;
 
 
 /* =========================
-   LOADING
+LOADING
 ========================= */
 
 #loading{
@@ -428,16 +446,18 @@ font-size:14px;
 
 
 /* =========================
-   ERROR
+ERROR
 ========================= */
 
 #error{
 
 display:none;
 
-background:rgba(239,68,68,.12);
+background:
+rgba(239,68,68,.12);
 
-border:1px solid rgba(239,68,68,.35);
+border:
+1px solid rgba(239,68,68,.35);
 
 color:#fca5a5;
 
@@ -455,7 +475,7 @@ text-align:center;
 
 
 /* =========================
-   SUCCESS
+SUCCESS
 ========================= */
 
 #success{
@@ -495,7 +515,11 @@ letter-spacing:5px;
 margin:15px 0;
 
 background:
-linear-gradient(90deg,#60a5fa,#c084fc);
+linear-gradient(
+90deg,
+#60a5fa,
+#c084fc
+);
 
 -webkit-background-clip:text;
 
@@ -542,7 +566,50 @@ font-weight:bold;
 
 
 /* =========================
-   BACK BUTTON
+WHATSAPP BUTTON
+========================= */
+
+.whatsapp-button{
+
+display:block;
+
+width:100%;
+
+padding:14px;
+
+margin-top:12px;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+90deg,
+#25D366,
+#128C7E
+);
+
+color:white;
+
+font-weight:bold;
+
+text-decoration:none;
+
+box-shadow:
+0 10px 25px rgba(37,211,102,.25);
+
+transition:.3s;
+
+}
+
+.whatsapp-button:hover{
+
+transform:translateY(-2px);
+
+}
+
+
+/* =========================
+BACK BUTTON
 ========================= */
 
 .back-button{
@@ -591,7 +658,7 @@ transform:translateY(-2px);
 
 
 <!-- =========================
-     ORDER FORM
+ORDER FORM
 ========================= -->
 
 <div id="formArea">
@@ -615,9 +682,7 @@ Complete your diamond purchase
 <div id="error"></div>
 
 
-<!-- =========================
-     PACKAGE
-========================= -->
+<!-- PACKAGE -->
 
 <div class="package-box">
 
@@ -644,9 +709,7 @@ LKR 0
 </div>
 
 
-<!-- =========================
-     UID
-========================= -->
+<!-- UID -->
 
 <div class="field">
 
@@ -666,9 +729,7 @@ autocomplete="off"
 </div>
 
 
-<!-- =========================
-     CUSTOMER NAME
-========================= -->
+<!-- CUSTOMER NAME -->
 
 <div class="field">
 
@@ -687,9 +748,7 @@ autocomplete="name"
 </div>
 
 
-<!-- =========================
-     PHONE
-========================= -->
+<!-- PHONE -->
 
 <div class="field">
 
@@ -708,9 +767,7 @@ autocomplete="tel"
 </div>
 
 
-<!-- =========================
-     RECEIPT
-========================= -->
+<!-- RECEIPT -->
 
 <div class="upload-box">
 
@@ -723,13 +780,11 @@ accept="image/jpeg,image/png"
 <label
 for="receipt"
 class="upload-label"
-id="uploadLabel"
->
+id="uploadLabel">
 
 <div class="upload-icon">
 📸
 </div>
-
 
 <div class="upload-text">
 
@@ -755,9 +810,7 @@ alt="Payment Receipt Preview"
 </div>
 
 
-<!-- =========================
-     SUBMIT
-========================= -->
+<!-- SUBMIT -->
 
 <button
 id="send"
@@ -788,7 +841,7 @@ class="back-button">
 
 
 <!-- =========================
-     SUCCESS
+SUCCESS
 ========================= -->
 
 <div id="success">
@@ -832,6 +885,20 @@ Please save your Order ID.
 </p>
 
 
+<!-- WHATSAPP -->
+
+<a
+id="whatsappButton"
+class="whatsapp-button"
+href="#"
+target="_blank"
+rel="noopener">
+
+💬 Open WhatsApp & Send Order
+
+</a>
+
+
 <a
 href="topup.html"
 class="home-button">
@@ -853,7 +920,7 @@ class="home-button">
 
 
 /* =========================================
-   CLOUDFLARE WORKER URL
+CLOUDFLARE WORKER URL
 ========================================= */
 
 const WORKER_URL =
@@ -861,7 +928,15 @@ const WORKER_URL =
 
 
 /* =========================================
-   PACKAGE PRICES
+YOUR WHATSAPP NUMBER
+========================================= */
+
+const WHATSAPP_NUMBER =
+"94751483909";
+
+
+/* =========================================
+PACKAGE PRICES
 ========================================= */
 
 const PACKAGES = {
@@ -916,7 +991,7 @@ const PACKAGES = {
 
 
 /* =========================================
-   ERROR ELEMENT
+ELEMENTS
 ========================================= */
 
 const errorBox =
@@ -924,7 +999,7 @@ document.getElementById("error");
 
 
 /* =========================================
-   SHOW ERROR
+SHOW ERROR
 ========================================= */
 
 function showError(message){
@@ -947,7 +1022,7 @@ behavior:"smooth"
 
 
 /* =========================================
-   HIDE ERROR
+HIDE ERROR
 ========================================= */
 
 function hideError(){
@@ -959,7 +1034,7 @@ errorBox.style.display =
 
 
 /* =========================================
-   GET SELECTED PACKAGE
+GET PACKAGE
 ========================================= */
 
 function getSelectedPackage(){
@@ -973,14 +1048,11 @@ return null;
 
 }
 
-
 const separator =
 " - LKR ";
 
-
 const index =
 raw.lastIndexOf(separator);
-
 
 if(index === -1){
 
@@ -988,22 +1060,15 @@ return null;
 
 }
 
-
 const name =
-raw
-.substring(0,index)
-.trim();
-
+raw.substring(0,index).trim();
 
 const price =
 Number(
-raw
-.substring(
+raw.substring(
 index + separator.length
-)
-.trim()
+).trim()
 );
-
 
 if(
 !Object.prototype.hasOwnProperty.call(
@@ -1016,7 +1081,6 @@ return null;
 
 }
 
-
 if(
 PACKAGES[name] !== price
 ){
@@ -1024,7 +1088,6 @@ PACKAGES[name] !== price
 return null;
 
 }
-
 
 return {
 
@@ -1038,7 +1101,7 @@ price:price
 
 
 /* =========================================
-   LOAD PACKAGE
+LOAD PACKAGE
 ========================================= */
 
 const selected =
@@ -1083,7 +1146,7 @@ selected.price.toLocaleString("en-US");
 
 
 /* =========================================
-   RECEIPT UPLOAD
+RECEIPT UPLOAD
 ========================================= */
 
 document
@@ -1103,9 +1166,6 @@ return;
 
 }
 
-
-/* TYPE */
-
 if(
 file.type !== "image/jpeg" &&
 file.type !== "image/png"
@@ -1121,9 +1181,6 @@ return;
 
 }
 
-
-/* SIZE */
-
 if(
 file.size > 5 * 1024 * 1024
 ){
@@ -1138,16 +1195,10 @@ return;
 
 }
 
-
-/* PREVIEW */
-
 const preview =
 document.getElementById("preview");
 
-
-if(
-preview.src
-){
+if(preview.src){
 
 URL.revokeObjectURL(
 preview.src
@@ -1155,25 +1206,21 @@ preview.src
 
 }
 
-
 preview.src =
 URL.createObjectURL(file);
 
 preview.style.display =
 "block";
 
-
 document
 .getElementById("uploadLabel")
 .classList
 .add("active");
 
-
 document
 .getElementById("uploadTitle")
 .textContent =
 "✅ Receipt Selected";
-
 
 document
 .getElementById("uploadText")
@@ -1185,7 +1232,7 @@ file.name;
 
 
 /* =========================================
-   SUBMIT ORDER
+SUBMIT ORDER
 ========================================= */
 
 document
@@ -1195,9 +1242,6 @@ document
 async function(){
 
 hideError();
-
-
-/* PACKAGE CHECK */
 
 if(!selected){
 
@@ -1209,12 +1253,8 @@ return;
 
 }
 
-
-/* BUTTON */
-
 const button =
 document.getElementById("send");
-
 
 if(button.disabled){
 
@@ -1231,13 +1271,11 @@ document
 .value
 .trim();
 
-
 const playerName =
 document
 .getElementById("playerName")
 .value
 .trim();
-
 
 const phone =
 document
@@ -1245,14 +1283,13 @@ document
 .value
 .trim();
 
-
 const receipt =
 document
 .getElementById("receipt")
 .files[0];
 
 
-/* UID VALIDATION */
+/* UID */
 
 if(
 !/^[0-9]{6,15}$/.test(uid)
@@ -1271,7 +1308,7 @@ return;
 }
 
 
-/* CUSTOMER NAME */
+/* NAME */
 
 if(
 playerName.length < 2 ||
@@ -1298,7 +1335,6 @@ phone.replace(
 /[\s\-().]/g,
 ""
 );
-
 
 if(
 !/^\+?[0-9]{9,15}$/.test(
@@ -1331,7 +1367,6 @@ return;
 
 }
 
-
 if(
 receipt.type !== "image/jpeg" &&
 receipt.type !== "image/png"
@@ -1344,7 +1379,6 @@ showError(
 return;
 
 }
-
 
 if(
 receipt.size > 5 * 1024 * 1024
@@ -1359,16 +1393,13 @@ return;
 }
 
 
-/* =========================================
-   LOADING
-========================================= */
+/* LOADING */
 
 button.disabled =
 true;
 
 button.textContent =
 "⏳ Sending Order...";
-
 
 document
 .getElementById("loading")
@@ -1380,7 +1411,7 @@ try{
 
 
 /* =========================================
-   FORM DATA
+FORM DATA
 ========================================= */
 
 const formData =
@@ -1394,24 +1425,20 @@ selected.name +
 selected.price
 );
 
-
 formData.append(
 "uid",
 uid
 );
-
 
 formData.append(
 "playerName",
 playerName
 );
 
-
 formData.append(
 "phone",
 phone
 );
-
 
 formData.append(
 "receipt",
@@ -1421,7 +1448,7 @@ receipt.name
 
 
 /* =========================================
-   SEND TO CLOUDFLARE WORKER
+SEND TO WORKER
 ========================================= */
 
 const response =
@@ -1437,9 +1464,7 @@ body:formData
 );
 
 
-/* =========================================
-   READ RESPONSE
-========================================= */
+/* RESPONSE */
 
 let result;
 
@@ -1457,9 +1482,7 @@ throw new Error(
 }
 
 
-/* =========================================
-   SERVER ERROR
-========================================= */
+/* SERVER ERROR */
 
 if(
 !response.ok ||
@@ -1475,7 +1498,64 @@ result.message ||
 
 
 /* =========================================
-   SUCCESS
+CREATE WHATSAPP MESSAGE
+========================================= */
+
+const whatsappMessage =
+
+`💎 ZYPER DIAMOND STORE
+
+━━━━━━━━━━━━━━━━━━
+
+🧾 ORDER ID: ${result.orderId}
+
+📦 Package: ${selected.name}
+
+💰 Price: LKR ${selected.price.toLocaleString("en-US")}
+
+🎮 UID: ${uid}
+
+👤 Player: ${playerName}
+
+📱 Customer Phone: ${phone}
+
+📸 Payment Receipt: Sent to Telegram
+
+⏳ Status: Pending
+
+━━━━━━━━━━━━━━━━━━
+
+Please check and process this order.`;
+
+
+/* =========================================
+CREATE WHATSAPP URL
+========================================= */
+
+const whatsappURL =
+"https://wa.me/" +
+WHATSAPP_NUMBER +
+"?text=" +
+encodeURIComponent(
+whatsappMessage
+);
+
+
+/* =========================================
+SET WHATSAPP BUTTON
+========================================= */
+
+const whatsappButton =
+document.getElementById(
+"whatsappButton"
+);
+
+whatsappButton.href =
+whatsappURL;
+
+
+/* =========================================
+SUCCESS
 ========================================= */
 
 document
@@ -1483,12 +1563,10 @@ document
 .style.display =
 "none";
 
-
 document
 .getElementById("success")
 .style.display =
 "block";
-
 
 document
 .getElementById("orderId")
@@ -1496,9 +1574,7 @@ document
 result.orderId;
 
 
-/* =========================================
-   CLEAR PACKAGE ONLY AFTER SUCCESS
-========================================= */
+/* CLEAR PACKAGE */
 
 localStorage.removeItem(
 "package"
@@ -1512,6 +1588,18 @@ top:0,
 behavior:"smooth"
 
 });
+
+
+/* =========================================
+OPEN WHATSAPP AUTOMATICALLY
+========================================= */
+
+setTimeout(function(){
+
+window.location.href =
+whatsappURL;
+
+}, 700);
 
 
 }catch(error){
@@ -1529,13 +1617,11 @@ error.message ||
 )
 );
 
-
 button.disabled =
 false;
 
 button.textContent =
 "🚀 Place Order";
-
 
 }finally{
 
@@ -1555,3 +1641,4 @@ document
 </body>
 
 </html>
+```
