@@ -6,415 +6,127 @@
 <meta charset="UTF-8">
 
 <meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>My Orders - Zyper Diamond Store</title>
+<title>
+My Orders - Zyper Diamond Store
+</title>
 
 <style>
 
-*{
-  box-sizing:border-box;
-}
-
 body{
 
-  margin:0;
+margin:0;
 
-  font-family:
-  Arial,
-  sans-serif;
+font-family:Arial,sans-serif;
 
-  background:
-  linear-gradient(
-    135deg,
-    #020617,
-    #0f172a,
-    #312e81
-  );
+background:#0f172a;
 
-  color:white;
-
-  min-height:100vh;
+color:white;
 
 }
 
-
-/* =========================
-   HEADER
-========================= */
 
 h2{
 
-  text-align:center;
+text-align:center;
 
-  color:#60a5fa;
+color:#60a5fa;
 
-  margin:25px 0;
-
-  font-size:25px;
+margin-top:20px;
 
 }
 
-
-/* =========================
-   ORDERS CONTAINER
-========================= */
-
-#orders{
-
-  width:100%;
-
-  max-width:600px;
-
-  margin:auto;
-
-  padding-bottom:20px;
-
-}
-
-
-/* =========================
-   ORDER CARD
-========================= */
 
 .order-card{
 
-  background:
-  rgba(30,41,59,.9);
+background:#1e293b;
 
-  margin:18px;
+margin:20px;
 
-  padding:20px;
+padding:20px;
 
-  border-radius:20px;
+border-radius:15px;
 
-  border:1px solid
-  rgba(255,255,255,.1);
-
-  box-shadow:
-  0 15px 40px
-  rgba(0,0,0,.35);
-
-  animation:
-  cardShow .4s ease;
+box-shadow:
+0 0 15px rgba(0,0,0,0.3);
 
 }
 
 
-@keyframes cardShow{
+.status{
 
-  from{
+font-weight:bold;
 
-    opacity:0;
-
-    transform:
-    translateY(15px);
-
-  }
-
-  to{
-
-    opacity:1;
-
-    transform:
-    translateY(0);
-
-  }
+font-size:18px;
 
 }
 
 
-/* =========================
-   ORDER TITLE
-========================= */
+.pending{
 
-.order-title{
-
-  font-size:20px;
-
-  font-weight:bold;
-
-  margin-bottom:15px;
-
-  color:#c4b5fd;
+color:#facc15;
 
 }
 
 
-/* =========================
-   DETAILS
-========================= */
+.approved{
 
-.detail{
-
-  margin:10px 0;
-
-  padding:10px;
-
-  background:
-  rgba(255,255,255,.04);
-
-  border-radius:10px;
+color:#22c55e;
 
 }
 
 
-.detail b{
+.rejected{
 
-  color:#94a3b8;
-
-  font-size:13px;
-
-  display:block;
-
-  margin-bottom:4px;
+color:#ef4444;
 
 }
 
 
-.detail span{
+.track-btn,
+.home-btn{
 
-  color:white;
+width:90%;
 
-  font-size:15px;
+margin:15px auto;
 
-  word-break:break-word;
+display:block;
 
-}
+padding:13px;
 
+border:none;
 
-/* =========================
-   STATUS
-========================= */
+border-radius:10px;
 
-.status-box{
+background:#2563eb;
 
-  margin-top:15px;
+color:white;
 
-  padding:14px;
+font-size:16px;
 
-  border-radius:12px;
-
-  text-align:center;
-
-  font-size:18px;
-
-  font-weight:bold;
+font-weight:bold;
 
 }
 
-
-/* PENDING */
-
-.status-pending{
-
-  background:
-  rgba(250,204,21,.12);
-
-  border:
-  1px solid
-  rgba(250,204,21,.3);
-
-  color:#facc15;
-
-}
-
-
-/* SUCCESS */
-
-.status-success{
-
-  background:
-  rgba(34,197,94,.12);
-
-  border:
-  1px solid
-  rgba(34,197,94,.3);
-
-  color:#22c55e;
-
-}
-
-
-/* REJECTED */
-
-.status-rejected{
-
-  background:
-  rgba(239,68,68,.12);
-
-  border:
-  1px solid
-  rgba(239,68,68,.3);
-
-  color:#ef4444;
-
-}
-
-
-/* =========================
-   TRACK BUTTON
-========================= */
 
 .track-btn{
 
-  width:100%;
+width:100%;
 
-  margin-top:15px;
-
-  padding:13px;
-
-  border:none;
-
-  border-radius:12px;
-
-  background:
-  linear-gradient(
-    90deg,
-    #2563eb,
-    #7c3aed
-  );
-
-  color:white;
-
-  font-size:15px;
-
-  font-weight:bold;
-
-  cursor:pointer;
+margin-top:10px;
 
 }
 
-
-.track-btn:hover{
-
-  opacity:.9;
-
-  transform:
-  translateY(-1px);
-
-}
-
-
-/* =========================
-   HOME BUTTON
-========================= */
-
-.home-btn{
-
-  width:
-  calc(100% - 36px);
-
-  max-width:564px;
-
-  margin:
-  10px auto 30px;
-
-  display:block;
-
-  padding:14px;
-
-  border:none;
-
-  border-radius:12px;
-
-  background:#334155;
-
-  color:white;
-
-  font-size:16px;
-
-  font-weight:bold;
-
-  cursor:pointer;
-
-}
-
-
-.home-btn:hover{
-
-  background:#475569;
-
-}
-
-
-/* =========================
-   EMPTY
-========================= */
 
 .empty{
 
-  text-align:center;
+text-align:center;
 
-  margin-top:60px;
+margin-top:50px;
 
-  padding:25px;
-
-  color:#cbd5e1;
-
-  font-size:17px;
-
-}
-
-
-/* =========================
-   LOADING
-========================= */
-
-.loading{
-
-  text-align:center;
-
-  margin-top:60px;
-
-  color:#93c5fd;
-
-  font-size:17px;
-
-}
-
-
-/* =========================
-   ERROR
-========================= */
-
-.error{
-
-  text-align:center;
-
-  margin:50px 20px;
-
-  padding:20px;
-
-  border-radius:15px;
-
-  background:
-  rgba(239,68,68,.1);
-
-  border:
-  1px solid
-  rgba(239,68,68,.3);
-
-  color:#fca5a5;
-
-}
-
-
-/* =========================
-   ORDER ID
-========================= */
-
-.order-id{
-
-  color:#60a5fa;
-
-  font-size:18px;
-
-  font-weight:bold;
-
-  letter-spacing:2px;
+font-size:18px;
 
 }
 
@@ -433,7 +145,7 @@ h2{
 
 <div id="orders">
 
-<p class="loading">
+<p class="empty">
 ⏳ Loading orders...
 </p>
 
@@ -441,647 +153,341 @@ h2{
 
 
 <button
-  class="home-btn"
-  onclick="goHome()"
->
+class="home-btn"
+onclick="goHome()">
 
 🏠 Go Home
 
 </button>
 
 
+
 <script type="module">
 
 
-/* =========================================
-   FIREBASE
-========================================= */
-
 import {
-  auth,
-  db
-}
-from "./firebase.js";
-
-
-import {
-  onAuthStateChanged
+initializeApp
 }
 from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 
 import {
-  collection,
-  query,
-  where,
-  getDocs
+
+getFirestore,
+collection,
+query,
+where,
+getDocs
+
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
+import {
 
-/* =========================================
-   ELEMENT
-========================================= */
+getAuth,
+onAuthStateChanged
+
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+
+
+/* =====================================
+FIREBASE
+===================================== */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyCd_2LplLOl4TOGJQWqndwHNGzPh2PEHM",
+
+authDomain:
+"zyper-d-iamond-store.firebaseapp.com",
+
+projectId:
+"zyper-d-iamond-store",
+
+messagingSenderId:
+"892467477866",
+
+appId:
+"1:892467477866:web:61e9b6ff9435798da23913"
+
+};
+
+
+const app =
+initializeApp(
+firebaseConfig
+);
+
+
+const db =
+getFirestore(app);
+
+
+const auth =
+getAuth(app);
+
 
 const ordersDiv =
-document.getElementById("orders");
-
-
-
-/* =========================================
-   DATE FORMAT
-========================================= */
-
-function formatDate(timestamp){
-
-  if(!timestamp){
-
-    return "-";
-
-  }
-
-
-  try{
-
-    if(timestamp.toDate){
-
-      const date =
-      timestamp.toDate();
-
-
-      const day =
-      String(
-        date.getDate()
-      ).padStart(2,"0");
-
-
-      const month =
-      String(
-        date.getMonth()+1
-      ).padStart(2,"0");
-
-
-      const year =
-      date.getFullYear();
-
-
-      const hour =
-      String(
-        date.getHours()
-      ).padStart(2,"0");
-
-
-      const minute =
-      String(
-        date.getMinutes()
-      ).padStart(2,"0");
-
-
-      return `${day}/${month}/${year} ${hour}:${minute}`;
-
-    }
-
-
-    return String(timestamp);
-
-  }
-
-  catch{
-
-    return "-";
-
-  }
-
-}
-
-
-
-/* =========================================
-   STATUS
-========================================= */
-
-function getStatusInfo(status){
-
-  status =
-  String(
-    status ||
-    "Pending"
-  ).trim();
-
-
-  /*
-     NEW SYSTEM
-     
-     Pending
-     Success
-     Rejected
-  */
-
-
-  if(
-    status.toLowerCase()
-    ===
-    "success"
-  ){
-
-    return {
-
-      text:"✅ Success",
-
-      className:
-      "status-success"
-
-    };
-
-  }
-
-
-  if(
-    status.toLowerCase()
-    ===
-    "rejected"
-  ){
-
-    return {
-
-      text:"❌ Rejected",
-
-      className:
-      "status-rejected"
-
-    };
-
-  }
-
-
-  return {
-
-    text:"⏳ Pending",
-
-    className:
-    "status-pending"
-
-  };
-
-}
-
-
-
-/* =========================================
-   LOAD CUSTOMER ORDERS
-========================================= */
-
-async function loadOrders(user){
-
-  try{
-
-    const q =
-    query(
-
-      collection(
-        db,
-        "orders"
-      ),
-
-      where(
-        "userId",
-        "==",
-        user.uid
-      )
-
-    );
-
-
-    const snapshot =
-    await getDocs(q);
-
-
-    if(
-      snapshot.empty
-    ){
-
-      ordersDiv.innerHTML = `
-
-        <p class="empty">
-
-          📦 No Orders Found
-
-          <br><br>
-
-          You have not placed any orders yet.
-
-        </p>
-
-      `;
-
-      return;
-
-    }
-
-
-    let orders = [];
-
-
-    snapshot.forEach(
-      documentSnapshot => {
-
-        orders.push({
-
-          id:
-          documentSnapshot.id,
-
-          data:
-          documentSnapshot.data()
-
-        });
-
-      }
-    );
-
-
-    /* =====================================
-       NEWEST FIRST
-    ===================================== */
-
-    orders.sort(
-      (a,b)=>{
-
-        const aTime =
-        a.data.createdAt
-        &&
-        a.data.createdAt.seconds
-        ?
-        a.data.createdAt.seconds
-        :
-        0;
-
-
-        const bTime =
-        b.data.createdAt
-        &&
-        b.data.createdAt.seconds
-        ?
-        b.data.createdAt.seconds
-        :
-        0;
-
-
-        return bTime - aTime;
-
-      }
-    );
-
-
-    ordersDiv.innerHTML = "";
-
-
-    /* =====================================
-       DISPLAY ORDERS
-    ===================================== */
-
-    orders.forEach(
-      order => {
-
-        const data =
-        order.data;
-
-
-        /*
-          Support both:
-
-          orderId: "0001"
-
-          AND old document ID
-        */
-
-        const orderId =
-        data.orderId ||
-        order.id;
-
-
-        const gameUID =
-        data.gameUID ||
-        data.gameUid ||
-        data.gameId ||
-        data.uid ||
-        "-";
-
-
-        const packageName =
-        data.packageName ||
-        data.package ||
-        data.productName ||
-        data.product ||
-        "-";
-
-
-        const price =
-        data.price ||
-        data.productPrice ||
-        data.amount ||
-        data.total ||
-        0;
-
-
-        const customerName =
-        data.customerName ||
-        data.playerName ||
-        data.name ||
-        "-";
-
-
-        const createdAt =
-        formatDate(
-          data.createdAt
-        );
-
-
-        const statusInfo =
-        getStatusInfo(
-          data.status
-        );
-
-
-        const card =
-        document.createElement(
-          "div"
-        );
-
-
-        card.className =
-        "order-card";
-
-
-        card.innerHTML = `
-
-          <div class="order-title">
-
-            💎 Diamond Order
-
-          </div>
-
-
-          <div class="detail">
-
-            <b>ORDER ID</b>
-
-            <span class="order-id">
-
-              ${escapeHTML(orderId)}
-
-            </span>
-
-          </div>
-
-
-          <div class="detail">
-
-            <b>GAME UID</b>
-
-            <span>
-
-              ${escapeHTML(gameUID)}
-
-            </span>
-
-          </div>
-
-
-          <div class="detail">
-
-            <b>PACKAGE</b>
-
-            <span>
-
-              ${escapeHTML(packageName)}
-
-            </span>
-
-          </div>
-
-
-          <div class="detail">
-
-            <b>PRICE</b>
-
-            <span>
-
-              LKR ${Number(price).toLocaleString("en-US")}
-
-            </span>
-
-          </div>
-
-
-          <div class="detail">
-
-            <b>CUSTOMER</b>
-
-            <span>
-
-              ${escapeHTML(customerName)}
-
-            </span>
-
-          </div>
-
-
-          <div class="detail">
-
-            <b>DATE</b>
-
-            <span>
-
-              ${createdAt}
-
-            </span>
-
-          </div>
-
-
-          <div
-            class="status-box
-            ${statusInfo.className}"
-          >
-
-            ${statusInfo.text}
-
-          </div>
-
-
-          <button
-            class="track-btn"
-            data-id="${escapeHTML(order.id)}"
-          >
-
-            🔎 Track Order
-
-          </button>
-
-        `;
-
-
-        const trackButton =
-        card.querySelector(
-          ".track-btn"
-        );
-
-
-        trackButton.onclick =
-        function(){
-
-          trackOrder(
-            order.id
-          );
-
-        };
-
-
-        ordersDiv.appendChild(
-          card
-        );
-
-      }
-    );
-
-  }
-
-  catch(error){
-
-    console.error(
-      "History error:",
-      error
-    );
-
-
-    ordersDiv.innerHTML = `
-
-      <div class="error">
-
-        ❌ Unable to load your orders.
-
-        <br><br>
-
-        ${escapeHTML(
-          error.message
-        )}
-
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-
-/* =========================================
-   HTML SECURITY
-========================================= */
-
-function escapeHTML(value){
-
-  return String(
-    value ?? ""
-  )
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-  .replace(
-    /</g,
-    "&lt;"
-  )
-  .replace(
-    />/g,
-    "&gt;"
-  )
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-  .replace(
-    /'/g,
-    "&#039;"
-  );
-
-}
-
-
-
-/* =========================================
-   AUTH
-========================================= */
-
-onAuthStateChanged(
-  auth,
-  user => {
-
-    if(!user){
-
-      ordersDiv.innerHTML = `
-
-        <p class="empty">
-
-          ❌ Please Login First
-
-          <br><br>
-
-          Login to view your orders.
-
-        </p>
-
-      `;
-
-      return;
-
-    }
-
-
-    loadOrders(
-      user
-    );
-
-  }
+document.getElementById(
+"orders"
 );
 
 
 
-/* =========================================
-   TRACK ORDER
-========================================= */
+/* =====================================
+AUTH
+===================================== */
+
+onAuthStateChanged(
+
+auth,
+
+async function(user){
+
+if(!user){
+
+ordersDiv.innerHTML = `
+
+<p class="empty">
+
+❌ Please Login First
+
+</p>
+
+`;
+
+return;
+
+}
+
+
+try{
+
+const q =
+query(
+
+collection(
+db,
+"orders"
+),
+
+where(
+"userId",
+"==",
+user.uid
+)
+
+);
+
+
+const snapshot =
+await getDocs(q);
+
+
+if(snapshot.empty){
+
+ordersDiv.innerHTML = `
+
+<p class="empty">
+
+📦 No Orders Found
+
+</p>
+
+`;
+
+return;
+
+}
+
+
+ordersDiv.innerHTML = "";
+
+
+snapshot.forEach(
+function(orderSnapshot){
+
+const data =
+orderSnapshot.data();
+
+
+const orderId =
+orderSnapshot.id;
+
+
+let status =
+data.status ||
+"Pending";
+
+
+let statusClass =
+"pending";
+
+
+let statusText =
+"⏳ Pending";
+
+
+if(status === "Success"){
+
+statusClass =
+"approved";
+
+statusText =
+"✅ Success";
+
+}
+
+
+if(status === "Rejected"){
+
+statusClass =
+"rejected";
+
+statusText =
+"❌ Rejected";
+
+}
+
+
+const gameUID =
+data.gameUID ||
+data.gameUid ||
+data.gameId ||
+data.uid ||
+"-";
+
+
+const packageName =
+data.package ||
+data.product ||
+data.productName ||
+"-";
+
+
+ordersDiv.innerHTML += `
+
+<div class="order-card">
+
+
+<h3>
+💎 Diamond Order
+</h3>
+
+
+<p>
+
+<b>Order ID:</b><br>
+
+${orderId}
+
+</p>
+
+
+<p>
+
+<b>Game UID:</b><br>
+
+${gameUID}
+
+</p>
+
+
+<p>
+
+<b>Package:</b><br>
+
+${packageName}
+
+</p>
+
+
+<p>
+
+<b>Status:</b>
+
+<span class="status ${statusClass}">
+
+${statusText}
+
+</span>
+
+</p>
+
+
+<button
+class="track-btn"
+onclick="trackOrder('${orderId}')">
+
+🔎 Track Order
+
+</button>
+
+
+</div>
+
+`;
+
+});
+
+
+
+}catch(error){
+
+console.error(error);
+
+
+ordersDiv.innerHTML = `
+
+<p class="empty">
+
+❌ ${error.message}
+
+</p>
+
+`;
+
+}
+
+});
+
+
+
+/* =====================================
+TRACK
+===================================== */
 
 window.trackOrder =
 function(id){
 
-  window.location.href =
-  "track.html?id="
-  +
-  encodeURIComponent(id);
+window.location.href =
+"track.html?id=" +
+encodeURIComponent(id);
 
 };
 
 
 
-/* =========================================
-   HOME
-========================================= */
+/* =====================================
+HOME
+===================================== */
 
 window.goHome =
 function(){
 
-  window.location.href =
-  "home.html";
+window.location.href =
+"home.html";
 
 };
 
-
 </script>
-
 
 </body>
 
