@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 
 <head>
 
@@ -9,12 +8,9 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>
-Zyper Dashboard
-</title>
+<title>Zyper Dashboard</title>
 
-<link rel="stylesheet"
-href="admin.css">
+<link rel="stylesheet" href="admin.css">
 
 </head>
 
@@ -22,9 +18,14 @@ href="admin.css">
 <body>
 
 
-<div id="app"
-style="display:none;">
+<!-- ==========================================
+     ADMIN DASHBOARD
+========================================== -->
 
+<div id="app" style="display:none;">
+
+
+<!-- SIDEBAR -->
 
 <div class="sidebar">
 
@@ -47,6 +48,9 @@ Logout
 </div>
 
 
+
+<!-- MAIN -->
+
 <div class="main">
 
 
@@ -54,6 +58,8 @@ Logout
 Orders Dashboard
 </h1>
 
+
+<!-- CARDS -->
 
 <div class="cards">
 
@@ -71,6 +77,7 @@ Orders
 </div>
 
 
+
 <div class="card">
 
 <h3>
@@ -84,6 +91,7 @@ LKR <span id="revenue">0</span>
 </div>
 
 
+
 <div class="card">
 
 <h3>
@@ -95,6 +103,7 @@ Pending
 </h2>
 
 </div>
+
 
 
 <div class="card">
@@ -113,12 +122,21 @@ Success
 </div>
 
 
+<!-- SEARCH -->
+
 <input
 id="search"
-placeholder="Search Order ID / UID / Customer">
+class="search"
+type="text"
+placeholder="Search order..."
+autocomplete="off"
+>
 
 
-<div class="table-wrapper">
+<!-- ORDERS TABLE -->
+
+<div class="table-container">
+
 
 <table>
 
@@ -127,49 +145,27 @@ placeholder="Search Order ID / UID / Customer">
 
 <tr>
 
-<th>
-Order ID
-</th>
+<th>Order ID</th>
 
-<th>
-Customer
-</th>
+<th>Customer</th>
 
-<th>
-Firebase UID
-</th>
+<th>Firebase UID</th>
 
-<th>
-Game UID
-</th>
+<th>Game UID</th>
 
-<th>
-Product
-</th>
+<th>Product</th>
 
-<th>
-Price
-</th>
+<th>Price</th>
 
-<th>
-Payment
-</th>
+<th>Payment</th>
 
-<th>
-Date Time
-</th>
+<th>Date Time</th>
 
-<th>
-Total
-</th>
+<th>Total</th>
 
-<th>
-Status
-</th>
+<th>Status</th>
 
-<th>
-Action
-</th>
+<th>Action</th>
 
 </tr>
 
@@ -178,15 +174,25 @@ Action
 
 <tbody id="orders">
 
+<tr>
+
+<td colspan="11">
+Loading orders...
+</td>
+
+</tr>
+
 </tbody>
 
 
 </table>
 
+
 </div>
 
 
 </div>
+
 
 </div>
 
