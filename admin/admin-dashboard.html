@@ -5,11 +5,12 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Dashboard</title>
 
-<link rel="stylesheet" href="admin.css">
+<link rel="stylesheet" href="./admin.css">
 
 </head>
 
@@ -17,14 +18,10 @@
 <body>
 
 
-<!-- DASHBOARD HIDDEN UNTIL ADMIN IS VERIFIED -->
-
 <div id="app" style="display:none;">
 
 
-<!-- SIDEBAR -->
-
-<div class="sidebar">
+<aside class="sidebar">
 
     <h1>💎 Zyper</h1>
 
@@ -32,186 +29,136 @@
 
     <div class="sidebar-line"></div>
 
-    <p class="admin-label">
-        🛡️ Administrator
-    </p>
+    <p>🛡️ Administrator</p>
 
     <button id="logout">
         Logout
     </button>
 
+</aside>
+
+
+
+<main class="main">
+
+
+<div class="topbar">
+
+    <div>
+
+        <h1>
+            Orders Dashboard
+        </h1>
+
+        <p class="subtitle">
+            Zyper Diamond Store
+        </p>
+
+    </div>
+
+
+    <button
+        id="refresh"
+        class="refresh-btn"
+    >
+        ↻ Refresh
+    </button>
+
 </div>
 
 
-<!-- MAIN -->
 
-<div class="main">
+<!-- DATE SEARCH -->
 
+<div class="date-search">
 
-    <div class="topbar">
-
-        <div>
-
-            <h1>
-                Orders Dashboard
-            </h1>
-
-            <p class="subtitle">
-                Zyper Diamond Store
-            </p>
-
-        </div>
-
-        <button
-            id="refresh"
-            class="refresh-btn"
-        >
-            ↻ Refresh
-        </button>
-
+    <div class="date-title">
+        📅 Order Date
     </div>
 
 
-    <!-- STAT CARDS -->
-
-    <div class="cards">
-
-
-        <div class="card">
-
-            <h3>
-                Orders
-            </h3>
-
-            <h2 id="totalOrders">
-                0
-            </h2>
-
-        </div>
+    <input
+        type="date"
+        id="orderDate"
+    >
 
 
-        <div class="card">
-
-            <h3>
-                Revenue
-            </h3>
-
-            <h2>
-                Rs. <span id="revenue">0</span>
-            </h2>
-
-        </div>
+    <button
+        id="dateSearch"
+        class="date-search-btn"
+    >
+        🔎 Search
+    </button>
 
 
-        <div class="card">
+    <button
+        id="todayButton"
+        class="today-btn"
+    >
+        Today
+    </button>
 
-            <h3>
-                Pending
-            </h3>
-
-            <h2 id="pendingOrders">
-                0
-            </h2>
-
-        </div>
+</div>
 
 
-        <div class="card">
 
-            <h3>
-                Success
-            </h3>
-
-            <h2 id="successOrders">
-                0
-            </h2>
-
-        </div>
+<div class="cards">
 
 
-    </div>
+<div class="card">
+
+    <h3>
+        Orders
+    </h3>
+
+    <h2 id="totalOrders">
+        0
+    </h2>
+
+</div>
 
 
-    <!-- SEARCH -->
 
-    <div class="search-box">
+<div class="card">
 
-        <input
-            id="search"
-            type="text"
-            placeholder="🔎 Search Order ID, UID, phone, customer, product..."
-        >
+    <h3>
+        Revenue
+    </h3>
 
-    </div>
+    <h2>
+        Rs.
+        <span id="revenue">
+            0
+        </span>
+    </h2>
 
-
-    <!-- TABLE -->
-
-    <div class="table-container">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Order ID
-                    </th>
-
-                    <th>
-                        Customer
-                    </th>
-
-                    <th>
-                        Firebase UID
-                    </th>
-
-                    <th>
-                        Game UID
-                    </th>
-
-                    <th>
-                        Product
-                    </th>
-
-                    <th>
-                        Price
-                    </th>
-
-                    <th>
-                        Payment
-                    </th>
-
-                    <th>
-                        Date Time
-                    </th>
-
-                    <th>
-                        Total
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
-
-                    <th>
-                        Action
-                    </th>
-
-                </tr>
-
-            </thead>
+</div>
 
 
-            <tbody id="orders">
 
-            </tbody>
+<div class="card">
 
-        </table>
+    <h3>
+        Pending
+    </h3>
 
-    </div>
+    <h2 id="pendingOrders">
+        0
+    </h2>
 
+</div>
+
+
+
+<div class="card">
+
+    <h3>
+        Success
+    </h3>
+
+    <h2 id="successOrders">
+        0
+    </h2>
 
 </div>
 
@@ -219,7 +166,76 @@
 </div>
 
 
-<script type="module" src="admin.js"></script>
+
+<!-- TEXT SEARCH -->
+
+<div class="search-box">
+
+    <input
+        id="search"
+        type="text"
+        placeholder="Search Order ID, UID, customer, product..."
+    >
+
+</div>
+
+
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Order ID</th>
+
+<th>Customer</th>
+
+<th>Firebase UID</th>
+
+<th>Game UID</th>
+
+<th>Product</th>
+
+<th>Price</th>
+
+<th>Payment</th>
+
+<th>Date Time</th>
+
+<th>Total</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="orders">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+</main>
+
+
+</div>
+
+
+<script
+type="module"
+src="./admin.js">
+</script>
+
 
 </body>
 
