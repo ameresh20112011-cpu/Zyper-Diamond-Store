@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,91 +11,297 @@ content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Admin Login</title>
 
-<link rel="stylesheet"
-href="admin.css">
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+
+margin:0;
+
+min-height:100vh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-family:
+Segoe UI,
+Arial,
+sans-serif;
+
+color:white;
+
+background:
+radial-gradient(
+circle at top,
+#312e81,
+#0f172a 50%,
+#020617
+);
+
+}
+
+.login-box{
+
+width:92%;
+
+max-width:400px;
+
+padding:35px;
+
+border-radius:25px;
+
+background:
+rgba(255,255,255,.08);
+
+border:
+1px solid rgba(255,255,255,.15);
+
+backdrop-filter:
+blur(20px);
+
+box-shadow:
+0 25px 70px
+rgba(0,0,0,.5);
+
+}
+
+.logo{
+
+text-align:center;
+
+font-size:55px;
+
+}
+
+h1{
+
+text-align:center;
+
+margin:10px 0;
+
+}
+
+.subtitle{
+
+text-align:center;
+
+color:#94a3b8;
+
+margin-bottom:25px;
+
+}
+
+label{
+
+display:block;
+
+margin:15px 0 7px;
+
+color:#cbd5e1;
+
+font-size:14px;
+
+}
+
+input{
+
+width:100%;
+
+padding:14px;
+
+border:
+1px solid #334155;
+
+border-radius:12px;
+
+background:#0f172a;
+
+color:white;
+
+outline:none;
+
+font-size:15px;
+
+}
+
+input:focus{
+
+border-color:#60a5fa;
+
+box-shadow:
+0 0 0 3px
+rgba(96,165,250,.1);
+
+}
+
+button{
+
+width:100%;
+
+margin-top:22px;
+
+padding:15px;
+
+border:0;
+
+border-radius:13px;
+
+background:
+linear-gradient(
+90deg,
+#2563eb,
+#7c3aed
+);
+
+color:white;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+box-shadow:
+0 10px 25px
+rgba(37,99,235,.25);
+
+transition:.2s;
+
+}
+
+button:hover{
+
+transform:
+translateY(-2px);
+
+}
+
+button:disabled{
+
+opacity:.6;
+
+cursor:not-allowed;
+
+transform:none;
+
+}
+
+#msg{
+
+min-height:20px;
+
+margin-top:18px;
+
+text-align:center;
+
+color:#fca5a5;
+
+font-size:14px;
+
+line-height:1.5;
+
+}
+
+.back{
+
+display:block;
+
+text-align:center;
+
+margin-top:20px;
+
+color:#93c5fd;
+
+text-decoration:none;
+
+font-size:14px;
+
+}
+
+.back:hover{
+
+color:white;
+
+}
+
+</style>
 
 </head>
 
 
-<body class="login-page">
+<body>
 
 
-<div class="login-background">
-
-<div class="glow glow-one"></div>
-<div class="glow glow-two"></div>
+<div class="login-box">
 
 
-<div class="login-card">
-
-
-<div class="login-logo">
+<div class="logo">
 💎
 </div>
 
 
 <h1>
-Zyper Diamond Store
+Zyper Admin
 </h1>
 
 
-<p class="login-subtitle">
-Administrator Panel
-</p>
-
-
-<div id="msg"
-class="login-message">
+<div class="subtitle">
+Secure Administrator Login
 </div>
 
 
-<div class="input-group">
-
-<label>
-📧 Admin Email
+<label for="email">
+Email
 </label>
 
+
 <input
-type="email"
 id="email"
+type="email"
 placeholder="Enter admin email"
-autocomplete="username">
+autocomplete="username"
+>
 
-</div>
 
-
-<div class="input-group">
-
-<label>
-🔐 Password
+<label for="password">
+Password
 </label>
 
-<input
-type="password"
-id="password"
-placeholder="Enter password"
-autocomplete="current-password">
 
-</div>
+<input
+id="password"
+type="password"
+placeholder="Enter admin password"
+autocomplete="current-password"
+>
 
 
 <button
 id="login"
-class="login-button">
+type="button">
 
-🔐 LOGIN TO DASHBOARD
+LOGIN
 
 </button>
 
 
-<div class="security-note">
-
-🔒 Secure Firebase Authentication
-
-</div>
+<div id="msg"></div>
 
 
-</div>
+<a
+class="back"
+href="../index.html">
+
+← Back to Store
+
+</a>
+
 
 </div>
 
@@ -104,6 +311,8 @@ type="module"
 src="admin.js">
 </script>
 
+
 </body>
 
 </html>
+```
