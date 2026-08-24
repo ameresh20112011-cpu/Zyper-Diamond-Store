@@ -1,34 +1,23 @@
-```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Zyper Dashboard</title>
+<title>
+Zyper Dashboard
+</title>
 
 <link rel="stylesheet" href="admin.css">
 
 </head>
 
-
 <body>
 
 
-<!-- =====================================================
-     ADMIN DASHBOARD
-===================================================== -->
+<!-- HIDDEN UNTIL ADMIN VERIFIED -->
 
 <div id="app" style="display:none;">
 
-
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
 
 <div class="sidebar">
 
@@ -47,23 +36,12 @@ Logout
 </div>
 
 
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
 <div class="main">
-
 
 <h1>
 Orders Dashboard
 </h1>
 
-
-
-<!-- =====================================================
-     DASHBOARD CARDS
-===================================================== -->
 
 <div class="cards">
 
@@ -81,7 +59,6 @@ Orders
 </div>
 
 
-
 <div class="card">
 
 <h3>
@@ -95,7 +72,6 @@ LKR <span id="revenue">0</span>
 </div>
 
 
-
 <div class="card">
 
 <h3>
@@ -107,7 +83,6 @@ Pending
 </h2>
 
 </div>
-
 
 
 <div class="card">
@@ -126,29 +101,13 @@ Success
 </div>
 
 
-
-<!-- =====================================================
-     SEARCH
-===================================================== -->
-
 <input
 id="search"
-class="search"
-type="text"
-placeholder="🔎 Search Order ID / Customer / UID / Phone"
-autocomplete="off"
+placeholder="Search order"
 >
 
 
-
-<!-- =====================================================
-     ORDERS TABLE
-===================================================== -->
-
-<div class="table-wrapper">
-
 <table>
-
 
 <thead>
 
@@ -160,10 +119,6 @@ Order ID
 
 <th>
 Customer
-</th>
-
-<th>
-Phone
 </th>
 
 <th>
@@ -207,42 +162,23 @@ Action
 </thead>
 
 
-
 <tbody id="orders">
-
-<tr>
-
-<td colspan="12">
-Loading orders...
-</td>
-
-</tr>
 
 </tbody>
 
-
 </table>
 
-</div>
-
 
 </div>
 
 </div>
 
-
-
-<!-- =====================================================
-     ADMIN JAVASCRIPT
-===================================================== -->
 
 <script
 type="module"
 src="admin.js">
 </script>
 
-
 </body>
 
 </html>
-```
