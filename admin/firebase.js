@@ -1,66 +1,50 @@
-// ==========================================
-// ZYPER DIAMOND STORE - FIREBASE
-// ==========================================
+// ===============================
+// ADMIN FIREBASE.JS
+// ===============================
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import {
-    getAuth
-}
+import { getAuth }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import {
-    getFirestore
-}
+import { getFirestore }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-// ==========================================
+// ===============================
 // FIREBASE CONFIG
-// ==========================================
+// ===============================
 
 const firebaseConfig = {
 
-    apiKey:
-        "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
+    apiKey: "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
 
-    authDomain:
-        "zyper-d-iamond-store.firebaseapp.com",
+    authDomain: "zyper-d-iamond-store.firebaseapp.com",
 
-    projectId:
-        "zyper-d-iamond-store",
+    projectId: "zyper-d-iamond-store",
 
-    storageBucket:
-        "zyper-d-iamond-store.firebasestorage.app",
+    storageBucket: "zyper-d-iamond-store.firebasestorage.app",
 
-    messagingSenderId:
-        "892467477866",
+    messagingSenderId: "892467477866",
 
-    appId:
-        "1:892467477866:web:61e9b6ff9435798da23913",
+    appId: "1:892467477866:web:61e9b6ff9435798da23913",
 
-    measurementId:
-        "G-RLJFR6F2GC"
+    measurementId: "G-RLJFR6F2GC"
 };
 
 
-// ==========================================
+// ===============================
 // INITIALIZE
-// ==========================================
+// ===============================
 
-const app =
-    initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 
-// ==========================================
-// SERVICES
-// ==========================================
+// ===============================
+// EXPORT
+// ===============================
 
-export const auth =
-    getAuth(app);
+export const auth = getAuth(app);
 
-export const db =
-    getFirestore(app);
-
-export { app };
+export const db = getFirestore(app);
