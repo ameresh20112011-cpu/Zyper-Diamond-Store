@@ -10,6 +10,7 @@ content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Diamond Store - Order</title>
 
+
 <style>
 
 *{
@@ -52,8 +53,7 @@ width:100%;
 
 max-width:420px;
 
-background:
-rgba(255,255,255,0.08);
+background:rgba(255,255,255,0.08);
 
 backdrop-filter:blur(15px);
 
@@ -61,11 +61,9 @@ padding:25px;
 
 border-radius:25px;
 
-border:
-1px solid rgba(255,255,255,.15);
+border:1px solid rgba(255,255,255,.15);
 
-box-shadow:
-0 20px 50px rgba(0,0,0,.4);
+box-shadow:0 20px 50px rgba(0,0,0,.4);
 
 animation:show .5s ease;
 
@@ -107,12 +105,7 @@ font-size:26px;
 
 font-weight:800;
 
-background:
-linear-gradient(
-90deg,
-#60a5fa,
-#c084fc
-);
+background:linear-gradient(90deg,#60a5fa,#c084fc);
 
 -webkit-background-clip:text;
 
@@ -132,9 +125,6 @@ margin-bottom:20px;
 
 }
 
-
-/* PACKAGE */
-
 .package-box{
 
 background:
@@ -148,8 +138,7 @@ padding:18px;
 
 border-radius:18px;
 
-border:
-1px solid rgba(255,255,255,.15);
+border:1px solid rgba(255,255,255,.15);
 
 margin-bottom:20px;
 
@@ -187,9 +176,6 @@ margin-top:5px;
 
 }
 
-
-/* INPUT */
-
 .field{
 
 margin-top:16px;
@@ -217,8 +203,7 @@ width:100%;
 
 padding:14px;
 
-border:
-1px solid rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.1);
 
 border-radius:12px;
 
@@ -242,13 +227,9 @@ input:focus{
 
 border-color:#60a5fa;
 
-box-shadow:
-0 0 0 3px rgba(96,165,250,.1);
+box-shadow:0 0 0 3px rgba(96,165,250,.1);
 
 }
-
-
-/* UPLOAD */
 
 .upload-box{
 
@@ -270,8 +251,7 @@ padding:25px;
 
 border-radius:20px;
 
-border:
-2px dashed #60a5fa;
+border:2px dashed #60a5fa;
 
 background:
 linear-gradient(
@@ -298,8 +278,7 @@ border-color:#c084fc;
 
 border-color:#22c55e;
 
-background:
-rgba(34,197,94,.15);
+background:rgba(34,197,94,.15);
 
 }
 
@@ -339,9 +318,6 @@ display:none;
 
 }
 
-
-/* PREVIEW */
-
 .preview{
 
 width:100%;
@@ -356,13 +332,9 @@ border-radius:15px;
 
 display:none;
 
-border:
-1px solid rgba(255,255,255,.15);
+border:1px solid rgba(255,255,255,.15);
 
 }
-
-
-/* BUTTON */
 
 button{
 
@@ -391,8 +363,7 @@ font-weight:bold;
 
 cursor:pointer;
 
-box-shadow:
-0 10px 25px rgba(37,99,235,.35);
+box-shadow:0 10px 25px rgba(37,99,235,.35);
 
 transition:.3s;
 
@@ -414,9 +385,6 @@ transform:none;
 
 }
 
-
-/* LOADING */
-
 #loading{
 
 display:none;
@@ -431,18 +399,13 @@ font-size:14px;
 
 }
 
-
-/* ERROR */
-
 #error{
 
 display:none;
 
-background:
-rgba(239,68,68,.12);
+background:rgba(239,68,68,.12);
 
-border:
-1px solid rgba(239,68,68,.35);
+border:1px solid rgba(239,68,68,.35);
 
 color:#fca5a5;
 
@@ -457,9 +420,6 @@ font-size:13px;
 text-align:center;
 
 }
-
-
-/* SUCCESS */
 
 #success{
 
@@ -497,12 +457,7 @@ letter-spacing:5px;
 
 margin:15px 0;
 
-background:
-linear-gradient(
-90deg,
-#60a5fa,
-#c084fc
-);
+background:linear-gradient(90deg,#60a5fa,#c084fc);
 
 -webkit-background-clip:text;
 
@@ -522,7 +477,9 @@ line-height:1.7;
 
 }
 
-.home-button{
+.home-button,
+.whatsapp-button,
+.back-button{
 
 display:block;
 
@@ -530,9 +487,19 @@ text-decoration:none;
 
 padding:14px;
 
-margin-top:20px;
+margin-top:12px;
 
 border-radius:14px;
+
+color:white;
+
+font-weight:bold;
+
+text-align:center;
+
+}
+
+.home-button{
 
 background:
 linear-gradient(
@@ -541,26 +508,9 @@ linear-gradient(
 #7c3aed
 );
 
-color:white;
-
-font-weight:bold;
-
 }
 
-
-/* WHATSAPP */
-
 .whatsapp-button{
-
-display:block;
-
-width:100%;
-
-padding:14px;
-
-margin-top:12px;
-
-border-radius:14px;
 
 background:
 linear-gradient(
@@ -569,57 +519,11 @@ linear-gradient(
 #128C7E
 );
 
-color:white;
-
-font-weight:bold;
-
-text-decoration:none;
-
-box-shadow:
-0 10px 25px rgba(37,211,102,.25);
-
-transition:.3s;
-
 }
-
-.whatsapp-button:hover{
-
-transform:translateY(-2px);
-
-}
-
-
-/* BACK */
 
 .back-button{
 
-display:block;
-
-text-decoration:none;
-
-padding:13px;
-
-margin-top:12px;
-
-border-radius:14px;
-
 background:#334155;
-
-color:white;
-
-font-weight:bold;
-
-text-align:center;
-
-transition:.3s;
-
-}
-
-.back-button:hover{
-
-background:#475569;
-
-transform:translateY(-2px);
 
 }
 
@@ -657,38 +561,28 @@ Complete your diamond purchase
 <div id="error"></div>
 
 
-<!-- PACKAGE -->
-
 <div class="package-box">
 
 <div class="package-label">
 SELECTED PACKAGE
 </div>
 
-<div
-id="packageName"
+<div id="packageName"
 class="package-name">
-
 Loading...
-
 </div>
 
-<div
-id="packagePrice"
+<div id="packagePrice"
 class="package-price">
-
 LKR 0
-
 </div>
 
 </div>
 
-
-<!-- UID -->
 
 <div class="field">
 
-<label for="uid">
+<label>
 🎮 Free Fire UID
 </label>
 
@@ -704,11 +598,9 @@ autocomplete="off"
 </div>
 
 
-<!-- CUSTOMER NAME -->
-
 <div class="field">
 
-<label for="playerName">
+<label>
 👤 Customer Name
 </label>
 
@@ -723,11 +615,9 @@ autocomplete="name"
 </div>
 
 
-<!-- PHONE -->
-
 <div class="field">
 
-<label for="phone">
+<label>
 📱 WhatsApp / Phone
 </label>
 
@@ -741,8 +631,6 @@ autocomplete="tel"
 
 </div>
 
-
-<!-- RECEIPT -->
 
 <div class="upload-box">
 
@@ -785,8 +673,6 @@ alt="Payment Receipt Preview"
 </div>
 
 
-<!-- SUBMIT -->
-
 <button
 id="send"
 type="button">
@@ -813,8 +699,6 @@ class="back-button">
 </div>
 
 
-<!-- SUCCESS -->
-
 <div id="success">
 
 
@@ -836,12 +720,9 @@ to Zyper Diamond Store.
 </p>
 
 
-<div
-id="orderId"
+<div id="orderId"
 class="order-id">
-
 0000
-
 </div>
 
 
@@ -863,7 +744,7 @@ href="#"
 target="_blank"
 rel="noopener">
 
-💬 Open WhatsApp & Send Order
+💬 Open WhatsApp
 
 </a>
 
@@ -887,37 +768,52 @@ class="home-button">
 
 <script type="module">
 
-
-// =========================================
-// FIREBASE AUTH
-// =========================================
+// ==========================================
+// FIREBASE
+// ==========================================
 
 import {
     auth,
-    loginCustomer
+    db
 }
-from "./firebase.js";
+from "./admin/firebase.js";
 
 
-// =========================================
-// CLOUDFLARE WORKER
-// =========================================
+import {
+    signInAnonymously
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+import {
+    doc,
+    setDoc,
+    serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+// ==========================================
+// WORKER
+// ==========================================
 
 const WORKER_URL =
 "https://zyper-order.ameresh20112011.workers.dev/";
 
 
-// =========================================
-// WHATSAPP NUMBER
-// =========================================
+// ==========================================
+// YOUR WHATSAPP NUMBER
+// ==========================================
 
 const WHATSAPP_NUMBER =
 "94751483909";
 
 
-// =========================================
+// ==========================================
 // PACKAGES
-// =========================================
+// ==========================================
 
 const PACKAGES = {
 
@@ -934,7 +830,6 @@ const PACKAGES = {
 "Level 20":250,
 "Level 25":250,
 "Level 30":380,
-
 "Full Pass":1500,
 
 "E Badge 3":250,
@@ -953,110 +848,126 @@ const PACKAGES = {
 };
 
 
-// =========================================
+// ==========================================
 // ELEMENTS
-// =========================================
+// ==========================================
 
 const errorBox =
 document.getElementById("error");
 
 
-// =========================================
+// ==========================================
 // ERROR
-// =========================================
+// ==========================================
 
 function showError(message){
 
-errorBox.textContent =
-message;
+    errorBox.textContent =
+    message;
 
-errorBox.style.display =
-"block";
+    errorBox.style.display =
+    "block";
 
-window.scrollTo({
-
-top:0,
-
-behavior:"smooth"
-
-});
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
 
 function hideError(){
 
-errorBox.style.display =
-"none";
+    errorBox.style.display =
+    "none";
 
 }
 
 
-// =========================================
-// PACKAGE
-// =========================================
+// ==========================================
+// GET PACKAGE
+// ==========================================
 
 function getSelectedPackage(){
 
-const raw =
-localStorage.getItem("package");
+    const raw =
+    localStorage.getItem("package");
 
-if(!raw){
 
-return null;
+    if(!raw){
+
+        return null;
+
+    }
+
+
+    const separator =
+    " - LKR ";
+
+
+    const index =
+    raw.lastIndexOf(
+        separator
+    );
+
+
+    if(index === -1){
+
+        return null;
+
+    }
+
+
+    const name =
+    raw
+    .substring(
+        0,
+        index
+    )
+    .trim();
+
+
+    const price =
+    Number(
+        raw.substring(
+            index +
+            separator.length
+        ).trim()
+    );
+
+
+    if(
+        !Object.prototype.hasOwnProperty.call(
+            PACKAGES,
+            name
+        )
+    ){
+
+        return null;
+
+    }
+
+
+    if(
+        PACKAGES[name] !== price
+    ){
+
+        return null;
+
+    }
+
+
+    return {
+        name,
+        price
+    };
 
 }
 
-const separator =
-" - LKR ";
 
-const index =
-raw.lastIndexOf(separator);
-
-if(index === -1){
-
-return null;
-
-}
-
-const name =
-raw.substring(0,index).trim();
-
-const price =
-Number(
-raw.substring(
-index + separator.length
-).trim()
-);
-
-if(
-!Object.prototype.hasOwnProperty.call(
-PACKAGES,
-name
-)
-){
-
-return null;
-
-}
-
-if(
-PACKAGES[name] !== price
-){
-
-return null;
-
-}
-
-return {
-
-name:name,
-price:price
-
-};
-
-}
-
+// ==========================================
+// PACKAGE
+// ==========================================
 
 const selected =
 getSelectedPackage();
@@ -1064,45 +975,51 @@ getSelectedPackage();
 
 if(!selected){
 
-document
-.getElementById("packageName")
-.textContent =
-"No Package Selected";
+    document
+    .getElementById("packageName")
+    .textContent =
+    "No Package Selected";
 
-document
-.getElementById("packagePrice")
-.textContent =
-"LKR 0";
 
-document
-.getElementById("send")
-.disabled =
-true;
+    document
+    .getElementById("packagePrice")
+    .textContent =
+    "LKR 0";
 
-showError(
-"Package information is missing. Please go back and select a package."
-);
+
+    document
+    .getElementById("send")
+    .disabled =
+    true;
+
+
+    showError(
+        "Package information is missing. Please go back and select a package."
+    );
 
 }
 else{
 
-document
-.getElementById("packageName")
-.textContent =
-selected.name;
+    document
+    .getElementById("packageName")
+    .textContent =
+    selected.name;
 
-document
-.getElementById("packagePrice")
-.textContent =
-"LKR " +
-selected.price.toLocaleString("en-US");
+
+    document
+    .getElementById("packagePrice")
+    .textContent =
+    "LKR " +
+    selected.price.toLocaleString(
+        "en-US"
+    );
 
 }
 
 
-// =========================================
+// ==========================================
 // RECEIPT
-// =========================================
+// ==========================================
 
 document
 .getElementById("receipt")
@@ -1110,85 +1027,97 @@ document
 "change",
 function(){
 
-hideError();
-
-const file =
-this.files[0];
-
-if(!file){
-
-return;
-
-}
-
-if(
-file.type !== "image/jpeg" &&
-file.type !== "image/png"
-){
-
-this.value="";
-
-showError(
-"❌ Only JPG and PNG receipts are allowed."
-);
-
-return;
-
-}
-
-if(
-file.size > 5 * 1024 * 1024
-){
-
-this.value="";
-
-showError(
-"❌ Receipt image must be 5 MB or smaller."
-);
-
-return;
-
-}
-
-const preview =
-document.getElementById("preview");
-
-if(preview.src){
-
-URL.revokeObjectURL(
-preview.src
-);
-
-}
-
-preview.src =
-URL.createObjectURL(file);
-
-preview.style.display =
-"block";
-
-document
-.getElementById("uploadLabel")
-.classList
-.add("active");
-
-document
-.getElementById("uploadTitle")
-.textContent =
-"✅ Receipt Selected";
-
-document
-.getElementById("uploadText")
-.textContent =
-file.name;
-
-}
-);
+    hideError();
 
 
-// =========================================
+    const file =
+    this.files[0];
+
+
+    if(!file){
+
+        return;
+
+    }
+
+
+    if(
+        file.type !== "image/jpeg" &&
+        file.type !== "image/png"
+    ){
+
+        this.value = "";
+
+        showError(
+            "❌ Only JPG and PNG receipts are allowed."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        file.size >
+        5 * 1024 * 1024
+    ){
+
+        this.value = "";
+
+        showError(
+            "❌ Receipt image must be 5 MB or smaller."
+        );
+
+        return;
+
+    }
+
+
+    const preview =
+    document.getElementById(
+        "preview"
+    );
+
+
+    preview.src =
+    URL.createObjectURL(
+        file
+    );
+
+
+    preview.style.display =
+    "block";
+
+
+    document
+    .getElementById(
+        "uploadLabel"
+    )
+    .classList
+    .add("active");
+
+
+    document
+    .getElementById(
+        "uploadTitle"
+    )
+    .textContent =
+    "✅ Receipt Selected";
+
+
+    document
+    .getElementById(
+        "uploadText"
+    )
+    .textContent =
+    file.name;
+
+});
+
+
+// ==========================================
 // SUBMIT
-// =========================================
+// ==========================================
 
 document
 .getElementById("send")
@@ -1196,310 +1125,343 @@ document
 "click",
 async function(){
 
-hideError();
+    hideError();
 
-if(!selected){
 
-showError(
-"Please select a package first."
-);
+    if(!selected){
 
-return;
+        showError(
+            "Please select a package first."
+        );
 
-}
+        return;
 
-const button =
-document.getElementById("send");
+    }
 
-if(button.disabled){
 
-return;
+    const button =
+    document.getElementById(
+        "send"
+    );
 
-}
 
+    const uid =
+    document
+    .getElementById("uid")
+    .value
+    .trim();
 
-const uid =
-document
-.getElementById("uid")
-.value
-.trim();
 
+    const playerName =
+    document
+    .getElementById("playerName")
+    .value
+    .trim();
 
-const playerName =
-document
-.getElementById("playerName")
-.value
-.trim();
 
+    const phone =
+    document
+    .getElementById("phone")
+    .value
+    .trim();
 
-const phone =
-document
-.getElementById("phone")
-.value
-.trim();
 
+    const receipt =
+    document
+    .getElementById("receipt")
+    .files[0];
 
-const receipt =
-document
-.getElementById("receipt")
-.files[0];
 
+    // UID
 
-// UID
+    if(
+        !/^[0-9]{6,15}$/.test(uid)
+    ){
 
-if(
-!/^[0-9]{6,15}$/.test(uid)
-){
+        showError(
+            "❌ Please enter a valid Free Fire UID (6-15 digits)."
+        );
 
-showError(
-"❌ Please enter a valid Free Fire UID (6-15 digits)."
-);
+        return;
 
-document
-.getElementById("uid")
-.focus();
+    }
 
-return;
 
-}
+    // NAME
 
+    if(
+        playerName.length < 2 ||
+        playerName.length > 50
+    ){
 
-// NAME
+        showError(
+            "❌ Customer Name must be between 2 and 50 characters."
+        );
 
-if(
-playerName.length < 2 ||
-playerName.length > 50
-){
+        return;
 
-showError(
-"❌ Customer Name must be between 2 and 50 characters."
-);
+    }
 
-document
-.getElementById("playerName")
-.focus();
 
-return;
+    // PHONE
 
-}
+    const cleanPhone =
+    phone.replace(
+        /[\s\-().]/g,
+        ""
+    );
 
 
-// PHONE
+    if(
+        !/^\+?[0-9]{9,15}$/.test(
+            cleanPhone
+        )
+    ){
 
-const cleanPhone =
-phone.replace(
-/[\s\-().]/g,
-""
-);
+        showError(
+            "❌ Please enter a valid WhatsApp / Phone number."
+        );
 
-if(
-!/^\+?[0-9]{9,15}$/.test(
-cleanPhone
-)
-){
+        return;
 
-showError(
-"❌ Please enter a valid WhatsApp / Phone number."
-);
+    }
 
-document
-.getElementById("phone")
-.focus();
 
-return;
+    // RECEIPT
 
-}
+    if(!receipt){
 
+        showError(
+            "❌ Please upload your payment receipt."
+        );
 
-// RECEIPT
+        return;
 
-if(!receipt){
+    }
 
-showError(
-"❌ Please upload your payment receipt."
-);
 
-return;
+    button.disabled =
+    true;
 
-}
+    button.textContent =
+    "⏳ Sending Order...";
 
 
-if(
-receipt.type !== "image/jpeg" &&
-receipt.type !== "image/png"
-){
+    document
+    .getElementById("loading")
+    .style.display =
+    "block";
 
-showError(
-"❌ Receipt must be JPG or PNG."
-);
 
-return;
+    try{
 
-}
+        // ==================================
+        // FIREBASE ANONYMOUS LOGIN
+        // ==================================
 
+        let user =
+        auth.currentUser;
 
-if(
-receipt.size > 5 * 1024 * 1024
-){
 
-showError(
-"❌ Receipt must be 5 MB or smaller."
-);
+        if(!user){
 
-return;
+            const result =
+            await signInAnonymously(
+                auth
+            );
 
-}
+            user =
+            result.user;
 
+        }
 
-// =========================================
-// LOGIN ANONYMOUSLY
-// =========================================
 
-button.disabled =
-true;
+        // ==================================
+        // SEND RECEIPT TO WORKER
+        // ==================================
 
-button.textContent =
-"⏳ Connecting...";
+        const formData =
+        new FormData();
 
-document
-.getElementById("loading")
-.style.display =
-"block";
 
+        formData.append(
+            "package",
+            selected.name +
+            " - LKR " +
+            selected.price
+        );
 
-try{
 
+        formData.append(
+            "uid",
+            uid
+        );
 
-const user =
-await loginCustomer();
 
+        formData.append(
+            "playerName",
+            playerName
+        );
 
-if(!user){
 
-throw new Error(
-"Unable to create customer session."
-);
+        formData.append(
+            "phone",
+            phone
+        );
 
-}
 
+        formData.append(
+            "receipt",
+            receipt,
+            receipt.name
+        );
 
-const userId =
-user.uid;
 
+        const response =
+        await fetch(
+            WORKER_URL,
+            {
+                method:"POST",
+                body:formData
+            }
+        );
 
-// =========================================
-// FORM DATA
-// =========================================
 
-const formData =
-new FormData();
+        let result;
 
 
-formData.append(
-"package",
-selected.name +
-" - LKR " +
-selected.price
-);
+        try{
 
+            result =
+            await response.json();
 
-formData.append(
-"uid",
-uid
-);
+        }
+        catch{
 
+            throw new Error(
+                "Invalid response from Cloudflare Worker."
+            );
 
-formData.append(
-"playerName",
-playerName
-);
+        }
 
 
-formData.append(
-"phone",
-phone
-);
+        if(
+            !response.ok ||
+            !result.success
+        ){
 
+            throw new Error(
+                result.message ||
+                "Order submission failed."
+            );
 
-// IMPORTANT:
-// Firebase customer UID
+        }
 
-formData.append(
-"userId",
-userId
-);
 
+        // ==================================
+        // ORDER ID FROM WORKER
+        // ==================================
 
-formData.append(
-"receipt",
-receipt,
-receipt.name
-);
+        const orderId =
+        String(
+            result.orderId
+        );
 
 
-// =========================================
-// SEND TO WORKER
-// =========================================
+        // ==================================
+        // SAVE ORDER TO FIRESTORE
+        // ==================================
 
-button.textContent =
-"⏳ Sending Order...";
+        await setDoc(
 
+            doc(
+                db,
+                "orders",
+                orderId
+            ),
 
-const response =
-await fetch(
-WORKER_URL,
-{
+            {
 
-method:"POST",
+                orderId:
 
-body:formData
+                    orderId,
 
-}
-);
+                userId:
 
+                    user.uid,
 
-let result;
+                customerName:
 
+                    playerName,
 
-try{
+                playerName:
 
-result =
-await response.json();
+                    playerName,
 
-}
-catch{
+                phone:
 
-throw new Error(
-"Invalid response from Cloudflare Worker."
-);
+                    phone,
 
-}
+                gameUID:
 
+                    uid,
 
-if(
-!response.ok ||
-!result.success
-){
+                uid:
 
-throw new Error(
-result.message ||
-"Order submission failed."
-);
+                    uid,
 
-}
+                package:
 
+                    selected.name,
 
-// =========================================
-// WHATSAPP MESSAGE
-// =========================================
+                productName:
 
-const whatsappMessage =
+                    selected.name,
+
+                productPrice:
+
+                    selected.price,
+
+                price:
+
+                    selected.price,
+
+                total:
+
+                    selected.price,
+
+                paymentMethod:
+
+                    "Receipt",
+
+                status:
+
+                    "Pending",
+
+                createdAt:
+
+                    serverTimestamp(),
+
+                updatedAt:
+
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        // ==================================
+        // WHATSAPP MESSAGE
+        // ==================================
+
+        const whatsappMessage =
 
 `💎 ZYPER DIAMOND STORE
 
 ━━━━━━━━━━━━━━━━━━
 
-🧾 ORDER ID: ${result.orderId}
+🧾 ORDER ID: ${orderId}
 
 📦 Package: ${selected.name}
 
@@ -1507,120 +1469,120 @@ const whatsappMessage =
 
 🎮 UID: ${uid}
 
-👤 Player: ${playerName}
+👤 Customer: ${playerName}
 
-📱 Customer Phone: ${phone}
-
-📸 Payment Receipt: Sent to Telegram
+📱 Phone: ${phone}
 
 ⏳ Status: Pending
 
 ━━━━━━━━━━━━━━━━━━
 
-Please check and process this order.`;
+Please check my order.`;
 
 
-// =========================================
-// WHATSAPP
-// =========================================
-
-const whatsappURL =
-"https://wa.me/" +
-WHATSAPP_NUMBER +
-"?text=" +
-encodeURIComponent(
-whatsappMessage
-);
+        const whatsappURL =
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        encodeURIComponent(
+            whatsappMessage
+        );
 
 
-document
-.getElementById("whatsappButton")
-.href =
-whatsappURL;
+        document
+        .getElementById(
+            "whatsappButton"
+        )
+        .href =
+        whatsappURL;
 
 
-// =========================================
-// SUCCESS
-// =========================================
+        // ==================================
+        // SUCCESS
+        // ==================================
 
-document
-.getElementById("formArea")
-.style.display =
-"none";
-
-document
-.getElementById("success")
-.style.display =
-"block";
-
-document
-.getElementById("orderId")
-.textContent =
-result.orderId;
+        document
+        .getElementById(
+            "formArea"
+        )
+        .style.display =
+        "none";
 
 
-localStorage.removeItem(
-"package"
-);
+        document
+        .getElementById(
+            "success"
+        )
+        .style.display =
+        "block";
 
 
-window.scrollTo({
+        document
+        .getElementById(
+            "orderId"
+        )
+        .textContent =
+        orderId;
 
-top:0,
 
-behavior:"smooth"
+        localStorage.removeItem(
+            "package"
+        );
+
+
+        // Open WhatsApp
+
+        setTimeout(
+            function(){
+
+                window.location.href =
+                whatsappURL;
+
+            },
+            700
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Order error:",
+            error
+        );
+
+
+        showError(
+            "❌ " +
+            (
+                error.message ||
+                "Something went wrong."
+            )
+        );
+
+
+        button.disabled =
+        false;
+
+
+        button.textContent =
+        "🚀 Place Order";
+
+    }
+    finally{
+
+        document
+        .getElementById(
+            "loading"
+        )
+        .style.display =
+        "none";
+
+    }
 
 });
-
-
-// =========================================
-// OPEN WHATSAPP
-// =========================================
-
-setTimeout(function(){
-
-window.location.href =
-whatsappURL;
-
-},700);
-
-
-}
-catch(error){
-
-console.error(
-"Order error:",
-error
-);
-
-showError(
-"❌ " +
-(
-error.message ||
-"Something went wrong. Please try again."
-)
-);
-
-button.disabled =
-false;
-
-button.textContent =
-"🚀 Place Order";
-
-}
-finally{
-
-document
-.getElementById("loading")
-.style.display =
-"none";
-
-}
-
-}
-);
 
 </script>
 
 </body>
+
 </html>
