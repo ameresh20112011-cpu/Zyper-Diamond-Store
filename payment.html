@@ -14,11 +14,11 @@
 box-sizing:border-box;
 }
 
-
 body{
 
 margin:0;
 font-family:'Segoe UI',Arial,sans-serif;
+
 background:
 linear-gradient(135deg,#020617,#0f172a,#1e1b4b);
 
@@ -27,15 +27,14 @@ min-height:100vh;
 
 }
 
-
 .container{
 
 padding:20px;
+
 display:flex;
 justify-content:center;
 
 }
-
 
 .card{
 
@@ -60,8 +59,6 @@ animation:show .5s ease;
 
 }
 
-
-
 @keyframes show{
 
 from{
@@ -80,8 +77,6 @@ opacity:1;
 
 }
 
-
-
 .logo{
 
 text-align:center;
@@ -89,15 +84,14 @@ font-size:40px;
 
 }
 
-
-
 .title{
 
 text-align:center;
 font-size:26px;
 font-weight:800;
 
-background:linear-gradient(90deg,#60a5fa,#c084fc);
+background:
+linear-gradient(90deg,#60a5fa,#c084fc);
 
 -webkit-background-clip:text;
 background-clip:text;
@@ -106,18 +100,71 @@ color:transparent;
 
 }
 
-
-
 .subtitle{
 
 text-align:center;
 color:#cbd5e1;
+
 margin-bottom:25px;
 
 }
 
 
+/* SELECTED PACKAGE */
 
+.package{
+
+background:
+linear-gradient(
+135deg,
+rgba(37,99,235,.25),
+rgba(139,92,246,.25)
+);
+
+padding:18px;
+
+border-radius:18px;
+
+border:1px solid rgba(255,255,255,.15);
+
+margin-bottom:20px;
+
+text-align:center;
+
+}
+
+.package-label{
+
+font-size:12px;
+
+color:#94a3b8;
+
+margin-bottom:5px;
+
+}
+
+.package-name{
+
+font-size:20px;
+
+font-weight:bold;
+
+}
+
+.package-price{
+
+font-size:25px;
+
+font-weight:800;
+
+margin-top:5px;
+
+color:#60a5fa;
+
+}
+
+
+/* PAYMENT METHOD */
 
 .method{
 
@@ -136,7 +183,6 @@ border:1px solid rgba(255,255,255,.15);
 
 }
 
-
 .method h3{
 
 margin-top:0;
@@ -144,10 +190,12 @@ margin-top:0;
 }
 
 
+/* INFO */
 
 .info{
 
 display:flex;
+
 justify-content:space-between;
 
 background:rgba(0,0,0,.25);
@@ -158,9 +206,9 @@ border-radius:10px;
 
 margin:10px 0;
 
+gap:10px;
+
 }
-
-
 
 .label{
 
@@ -168,17 +216,20 @@ color:#cbd5e1;
 
 }
 
-
-
 .value{
 
 font-weight:bold;
 
 color:#fff;
 
+text-align:right;
+
+word-break:break-word;
+
 }
 
 
+/* INSTRUCTIONS */
 
 .instruction{
 
@@ -196,7 +247,14 @@ color:#e2e8f0;
 
 }
 
+.instruction h3{
 
+margin-top:0;
+
+}
+
+
+/* BUTTON */
 
 button{
 
@@ -218,7 +276,6 @@ cursor:pointer;
 
 color:white;
 
-
 background:
 linear-gradient(
 90deg,
@@ -226,16 +283,12 @@ linear-gradient(
 #7c3aed
 );
 
-
 box-shadow:
 0 10px 25px rgba(37,99,235,.4);
-
 
 transition:.3s;
 
 }
-
-
 
 button:hover{
 
@@ -243,7 +296,14 @@ transform:translateY(-3px);
 
 }
 
+button:active{
 
+transform:scale(.98);
+
+}
+
+
+/* BACK BUTTON */
 
 .back{
 
@@ -254,6 +314,32 @@ box-shadow:none;
 }
 
 
+/* ERROR */
+
+.error{
+
+display:none;
+
+background:rgba(239,68,68,.15);
+
+border:1px solid rgba(239,68,68,.4);
+
+color:#fca5a5;
+
+padding:14px;
+
+border-radius:12px;
+
+text-align:center;
+
+margin-bottom:15px;
+
+font-size:13px;
+
+}
+
+
+/* FOOTER */
 
 .footer{
 
@@ -268,15 +354,48 @@ font-size:13px;
 }
 
 
-</style>
+/* MOBILE */
 
+@media(max-width:500px){
+
+.card{
+
+padding:20px;
+
+}
+
+.title{
+
+font-size:23px;
+
+}
+
+.package-name{
+
+font-size:18px;
+
+}
+
+.package-price{
+
+font-size:23px;
+
+}
+
+.info{
+
+font-size:13px;
+
+}
+
+}
+
+</style>
 
 </head>
 
 
-
 <body>
-
 
 
 <div class="container">
@@ -304,7 +423,47 @@ Secure Payment Gateway
 </div>
 
 
+<!-- ERROR -->
 
+<div
+id="error"
+class="error">
+
+Package information is missing.
+
+</div>
+
+
+<!-- SELECTED PACKAGE -->
+
+<div class="package">
+
+<div class="package-label">
+
+SELECTED PACKAGE
+
+</div>
+
+<div
+id="packageName"
+class="package-name">
+
+Loading...
+
+</div>
+
+<div
+id="packagePrice"
+class="package-price">
+
+LKR 0
+
+</div>
+
+</div>
+
+
+<!-- PAYMENT METHOD -->
 
 <div class="method">
 
@@ -312,7 +471,6 @@ Secure Payment Gateway
 <h3>
 🏦 Bank Transfer
 </h3>
-
 
 
 <div class="info">
@@ -328,7 +486,6 @@ BOC
 </div>
 
 
-
 <div class="info">
 
 <span class="label">
@@ -340,7 +497,6 @@ Account
 </span>
 
 </div>
-
 
 
 <div class="info">
@@ -356,11 +512,10 @@ Ameresh R
 </div>
 
 
-
 </div>
 
 
-
+<!-- INSTRUCTIONS -->
 
 <div class="instruction">
 
@@ -371,45 +526,53 @@ Ameresh R
 
 
 <p>
-1️⃣ Choose your diamond package
+1️⃣ Check your selected package and price
 </p>
 
 
 <p>
-2️⃣ Complete payment using above details
+2️⃣ Complete payment using above bank details
 </p>
 
 
 <p>
-3️⃣ Take payment screenshot
+3️⃣ Take a clear payment screenshot
 </p>
 
 
 <p>
-4️⃣ Upload receipt in order page
+4️⃣ Continue to the order page
+</p>
+
+
+<p>
+5️⃣ Upload your receipt there
 </p>
 
 
 </div>
 
 
+<!-- CONTINUE -->
 
-
-<button onclick="location.href='order.html'">
+<button
+id="continueButton"
+onclick="continueOrder()">
 
 💎 Continue Order
 
 </button>
 
 
+<!-- BACK -->
 
-
-<button class="back" onclick="history.back()">
+<button
+class="back"
+onclick="history.back()">
 
 ⬅ Go Back
 
 </button>
-
 
 
 <div class="footer">
@@ -419,12 +582,224 @@ Ameresh R
 </div>
 
 
+</div>
 
 </div>
 
 
-</div>
+<script>
 
+
+/* =========================================
+   FINAL PACKAGE PRICES
+========================================= */
+
+const PACKAGES = {
+
+"Weekly":560,
+
+"Monthly":2720,
+
+"Weekly Lite":150,
+
+"VIP Bundle":3280,
+
+"SVIP Bundle":4960,
+
+"Level 6":130,
+
+"Level 10":250,
+
+"Level 15":250,
+
+"Level 20":250,
+
+"Level 25":250,
+
+"Level 30":380,
+
+"Full Pass":1500,
+
+"E Badge 3":250,
+
+"E Badge 7":350,
+
+"E Badge 30":1100,
+
+"25 Diamonds":150,
+
+"100 Diamonds":380,
+
+"310 Diamonds":1150,
+
+"520 Diamonds":1800,
+
+"1060 Diamonds":3400,
+
+"2180 Diamonds":6500,
+
+"5600 Diamonds":16500,
+
+"11500 Diamonds":35000
+
+};
+
+
+/* =========================================
+   READ PACKAGE FROM LOCAL STORAGE
+========================================= */
+
+function getSelectedPackage(){
+
+const raw =
+localStorage.getItem("package");
+
+
+if(!raw){
+
+return null;
+
+}
+
+
+/*
+Expected:
+
+Weekly - LKR 560
+
+*/
+
+const separator =
+" - LKR ";
+
+
+const index =
+raw.lastIndexOf(separator);
+
+
+if(index === -1){
+
+return null;
+
+}
+
+
+const name =
+raw.substring(0,index).trim();
+
+
+const price =
+Number(
+raw.substring(
+index + separator.length
+).trim()
+);
+
+
+/* Check package */
+
+if(
+!Object.prototype.hasOwnProperty.call(
+PACKAGES,
+name
+)
+){
+
+return null;
+
+}
+
+
+/* Check price */
+
+if(
+PACKAGES[name] !== price
+){
+
+return null;
+
+}
+
+
+return {
+
+name:name,
+
+price:price
+
+};
+
+}
+
+
+/* =========================================
+   LOAD PACKAGE
+========================================= */
+
+const selected =
+getSelectedPackage();
+
+
+if(!selected){
+
+document.getElementById("error").style.display=
+"block";
+
+document.getElementById("packageName").textContent=
+"No package selected";
+
+document.getElementById("packagePrice").textContent=
+"LKR 0";
+
+document.getElementById("continueButton").disabled=
+true;
+
+}else{
+
+document.getElementById("packageName").textContent=
+selected.name;
+
+document.getElementById("packagePrice").textContent=
+"LKR " +
+selected.price.toLocaleString("en-US");
+
+}
+
+
+/* =========================================
+   CONTINUE
+========================================= */
+
+function continueOrder(){
+
+if(!selected){
+
+alert(
+"Please select a package first."
+);
+
+window.location.href=
+"topup.html";
+
+return;
+
+}
+
+
+/*
+Do NOT clear localStorage here.
+
+We clear it only after
+successful order submission.
+*/
+
+window.location.href=
+"order.html";
+
+}
+
+
+</script>
 
 
 </body>
