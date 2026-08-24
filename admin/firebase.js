@@ -1,48 +1,24 @@
-// =========================================
-// FIREBASE APP
-// =========================================
+// ==========================================
+// ZYPER DIAMOND STORE - FIREBASE
+// ==========================================
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-    initializeApp
+    getAuth
 }
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
-
-// =========================================
-// FIREBASE AUTH
-// =========================================
-
-import {
-    getAuth,
-    signInAnonymously
-}
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-
-// =========================================
-// FIRESTORE
-// =========================================
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
     getFirestore
 }
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-// =========================================
-// FIREBASE APP CHECK
-// =========================================
-
-import {
-    initializeAppCheck,
-    ReCaptchaV3Provider
-}
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
-
-
-// =========================================
+// ==========================================
 // FIREBASE CONFIG
-// =========================================
+// ==========================================
 
 const firebaseConfig = {
 
@@ -66,38 +42,20 @@ const firebaseConfig = {
 
     measurementId:
         "G-RLJFR6F2GC"
-
 };
 
 
-// =========================================
-// INITIALIZE FIREBASE
-// =========================================
+// ==========================================
+// INITIALIZE
+// ==========================================
 
 const app =
     initializeApp(firebaseConfig);
 
 
-// =========================================
-// APP CHECK
-// =========================================
-
-initializeAppCheck(app, {
-
-    provider:
-        new ReCaptchaV3Provider(
-            "6LfBe2QtAAAAAJsp-crpLwMXkhPn1QhvRSVWzB8P"
-        ),
-
-    isTokenAutoRefreshEnabled:
-        true
-
-});
-
-
-// =========================================
-// FIREBASE SERVICES
-// =========================================
+// ==========================================
+// SERVICES
+// ==========================================
 
 export const auth =
     getAuth(app);
@@ -105,25 +63,4 @@ export const auth =
 export const db =
     getFirestore(app);
 
-
-// =========================================
-// ANONYMOUS LOGIN
-// =========================================
-
-export async function loginCustomer() {
-
-    // Already logged in
-    if (auth.currentUser) {
-
-        return auth.currentUser;
-
-    }
-
-
-    const result =
-        await signInAnonymously(auth);
-
-
-    return result.user;
-
-}
+export { app };
