@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,8 +54,6 @@ grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
 gap:15px;
 }
 
-/* PACKAGE CARD */
-
 .card{
 background:#ffffff;
 color:#0f172a;
@@ -89,8 +88,6 @@ box-shadow:0 12px 30px rgba(0,0,0,.25);
 transform:scale(.95);
 }
 
-/* IMAGES */
-
 .card img{
 width:100px;
 height:100px;
@@ -98,15 +95,11 @@ object-fit:contain;
 margin-bottom:10px;
 }
 
-/* MEMBERSHIP */
-
 .card img[src*="Weekly"],
 .card img[src*="Monthly"]{
 width:150px;
 height:150px;
 }
-
-/* VIP */
 
 .card img[src*="Vip"],
 .card img[src*="Svip"]{
@@ -114,8 +107,6 @@ width:150px;
 height:150px;
 object-fit:contain;
 }
-
-/* TEXT */
 
 .card h4{
 margin:5px 0;
@@ -127,8 +118,6 @@ margin:0;
 font-size:13px;
 color:#475569;
 }
-
-/* BADGE */
 
 .badge{
 position:absolute;
@@ -149,32 +138,21 @@ font-weight:bold;
 z-index:2;
 }
 
-/* RIPPLE */
-
 .ripple{
 position:absolute;
-
 border-radius:50%;
-
 background:rgba(0,0,0,.15);
-
 transform:scale(0);
-
 animation:ripple .6s linear;
-
 pointer-events:none;
 }
 
 @keyframes ripple{
-
 to{
 transform:scale(4);
 opacity:0;
 }
-
 }
-
-/* MOBILE */
 
 @media(max-width:500px){
 
@@ -240,40 +218,27 @@ font-size:12px;
 
 <div class="grid">
 
-
-<!-- WEEKLY -->
-
 <div class="card"
-onclick="selectPackage(event,this,'Weekly - LKR 600')">
+onclick="selectPackage(event,this,'Weekly - LKR 560')">
 
-<img
-src="topupimages/Weekly.png"
-alt="Weekly">
+<img src="topupimages/Weekly.png" alt="Weekly">
 
 <h4>Weekly</h4>
-
-<p>LKR 600</p>
+<p>LKR 560</p>
 
 </div>
 
-
-<!-- MONTHLY -->
 
 <div class="card"
-onclick="selectPackage(event,this,'Monthly - LKR 2800')">
+onclick="selectPackage(event,this,'Monthly - LKR 2720')">
 
-<img
-src="topupimages/Monthly.png"
-alt="Monthly">
+<img src="topupimages/Monthly.png" alt="Monthly">
 
 <h4>Monthly</h4>
-
-<p>LKR 2800</p>
+<p>LKR 2720</p>
 
 </div>
 
-
-<!-- WEEKLY LITE -->
 
 <div class="card"
 onclick="selectPackage(event,this,'Weekly Lite - LKR 150')">
@@ -284,7 +249,6 @@ alt="Weekly Lite"
 onerror="weeklyLiteFallback(this)">
 
 <h4>Weekly Lite</h4>
-
 <p>LKR 150</p>
 
 </div>
@@ -298,31 +262,24 @@ onerror="weeklyLiteFallback(this)">
 
 <div class="grid">
 
-
 <div class="card"
-onclick="selectPackage(event,this,'VIP Bundle - LKR 3400')">
+onclick="selectPackage(event,this,'VIP Bundle - LKR 3280')">
 
-<img
-src="topupimages/Vip.png"
-alt="VIP">
+<img src="topupimages/Vip.png" alt="VIP">
 
 <h4>VIP Bundle</h4>
-
-<p>LKR 3400</p>
+<p>LKR 3280</p>
 
 </div>
 
 
 <div class="card"
-onclick="selectPackage(event,this,'SVIP Bundle - LKR 5200')">
+onclick="selectPackage(event,this,'SVIP Bundle - LKR 4960')">
 
-<img
-src="topupimages/Svip.png"
-alt="SVIP">
+<img src="topupimages/Svip.png" alt="SVIP">
 
 <h4>SVIP Bundle</h4>
-
-<p>LKR 5200</p>
+<p>LKR 4960</p>
 
 </div>
 
@@ -335,73 +292,57 @@ alt="SVIP">
 
 <div class="grid">
 
-
 <div class="card"
 onclick="selectPackage(event,this,'Level 6 - LKR 130')">
 
-<img
-src="topupimages/Levelup.png"
-alt="Level Up">
+<img src="topupimages/Levelup.png" alt="Level Up">
 
 <h4>Level 6</h4>
-
 <p>LKR 130</p>
 
 </div>
 
 
 <div class="card"
-onclick="selectPackage(event,this,'Level 10 - LKR 260')">
+onclick="selectPackage(event,this,'Level 10 - LKR 250')">
 
-<img
-src="topupimages/Levelup.png"
-alt="Level Up">
+<img src="topupimages/Levelup.png" alt="Level Up">
 
 <h4>Level 10</h4>
-
-<p>LKR 260</p>
+<p>LKR 250</p>
 
 </div>
 
 
 <div class="card"
-onclick="selectPackage(event,this,'Level 15 - LKR 260')">
+onclick="selectPackage(event,this,'Level 15 - LKR 250')">
 
-<img
-src="topupimages/Levelup.png"
-alt="Level Up">
+<img src="topupimages/Levelup.png" alt="Level Up">
 
 <h4>Level 15</h4>
-
-<p>LKR 260</p>
+<p>LKR 250</p>
 
 </div>
 
 
 <div class="card"
-onclick="selectPackage(event,this,'Level 20 - LKR 260')">
+onclick="selectPackage(event,this,'Level 20 - LKR 250')">
 
-<img
-src="topupimages/Levelup.png"
-alt="Level Up">
+<img src="topupimages/Levelup.png" alt="Level Up">
 
 <h4>Level 20</h4>
-
-<p>LKR 260</p>
+<p>LKR 250</p>
 
 </div>
 
 
 <div class="card"
-onclick="selectPackage(event,this,'Level 25 - LKR 260')">
+onclick="selectPackage(event,this,'Level 25 - LKR 250')">
 
-<img
-src="topupimages/Levelup.png"
-alt="Level Up">
+<img src="topupimages/Levelup.png" alt="Level Up">
 
 <h4>Level 25</h4>
-
-<p>LKR 260</p>
+<p>LKR 250</p>
 
 </div>
 
@@ -409,13 +350,23 @@ alt="Level Up">
 <div class="card"
 onclick="selectPackage(event,this,'Level 30 - LKR 380')">
 
-<img
-src="topupimages/Levelup.png"
-alt="Level Up">
+<img src="topupimages/Levelup.png" alt="Level Up">
 
 <h4>Level 30</h4>
-
 <p>LKR 380</p>
+
+</div>
+
+
+<div class="card"
+onclick="selectPackage(event,this,'Full Pass - LKR 1500')">
+
+<span class="badge">FULL PASS</span>
+
+<img src="topupimages/Levelup.png" alt="Full Pass">
+
+<h4>Full Pass</h4>
+<p>LKR 1500</p>
 
 </div>
 
@@ -428,16 +379,12 @@ alt="Level Up">
 
 <div class="grid">
 
-
 <div class="card"
 onclick="selectPackage(event,this,'E Badge 3 - LKR 250')">
 
-<img
-src="topupimages/Evo.png"
-alt="EVO">
+<img src="topupimages/Evo.png" alt="EVO">
 
 <h4>E Badge 3</h4>
-
 <p>LKR 250</p>
 
 </div>
@@ -446,12 +393,9 @@ alt="EVO">
 <div class="card"
 onclick="selectPackage(event,this,'E Badge 7 - LKR 350')">
 
-<img
-src="topupimages/Evo.png"
-alt="EVO">
+<img src="topupimages/Evo.png" alt="EVO">
 
 <h4>E Badge 7</h4>
-
 <p>LKR 350</p>
 
 </div>
@@ -460,12 +404,9 @@ alt="EVO">
 <div class="card"
 onclick="selectPackage(event,this,'E Badge 30 - LKR 1100')">
 
-<img
-src="topupimages/Evo.png"
-alt="EVO">
+<img src="topupimages/Evo.png" alt="EVO">
 
 <h4>E Badge 30</h4>
-
 <p>LKR 1100</p>
 
 </div>
@@ -479,16 +420,12 @@ alt="EVO">
 
 <div class="grid">
 
-
 <div class="card"
 onclick="selectPackage(event,this,'25 Diamonds - LKR 150')">
 
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>25 Diamonds</h4>
-
 <p>LKR 150</p>
 
 </div>
@@ -497,12 +434,9 @@ alt="Diamonds">
 <div class="card"
 onclick="selectPackage(event,this,'100 Diamonds - LKR 380')">
 
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>100 Diamonds</h4>
-
 <p>LKR 380</p>
 
 </div>
@@ -511,12 +445,9 @@ alt="Diamonds">
 <div class="card"
 onclick="selectPackage(event,this,'310 Diamonds - LKR 1150')">
 
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>310 Diamonds</h4>
-
 <p>LKR 1150</p>
 
 </div>
@@ -527,12 +458,9 @@ onclick="selectPackage(event,this,'520 Diamonds - LKR 1800')">
 
 <span class="badge">BEST</span>
 
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>520 Diamonds</h4>
-
 <p>LKR 1800</p>
 
 </div>
@@ -541,12 +469,9 @@ alt="Diamonds">
 <div class="card"
 onclick="selectPackage(event,this,'1060 Diamonds - LKR 3400')">
 
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>1060 Diamonds</h4>
-
 <p>LKR 3400</p>
 
 </div>
@@ -555,12 +480,9 @@ alt="Diamonds">
 <div class="card"
 onclick="selectPackage(event,this,'2180 Diamonds - LKR 6500')">
 
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>2180 Diamonds</h4>
-
 <p>LKR 6500</p>
 
 </div>
@@ -569,12 +491,9 @@ alt="Diamonds">
 <div class="card"
 onclick="selectPackage(event,this,'5600 Diamonds - LKR 16500')">
 
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>5600 Diamonds</h4>
-
 <p>LKR 16500</p>
 
 </div>
@@ -583,12 +502,9 @@ alt="Diamonds">
 <div class="card"
 onclick="selectPackage(event,this,'11500 Diamonds - LKR 35000')">
 
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
+<img src="topupimages/Diamond.png" alt="Diamonds">
 
 <h4>11500 Diamonds</h4>
-
 <p>LKR 35000</p>
 
 </div>
@@ -600,8 +516,6 @@ alt="Diamonds">
 
 <script>
 
-/* WEEKLY LITE IMAGE FALLBACK */
-
 function weeklyLiteFallback(img){
 
 if(img.dataset.fallback === "1"){
@@ -611,7 +525,6 @@ return;
 if(img.src.includes("Weekly-Lite.png")){
 
 img.dataset.fallback = "1";
-
 img.src = "topupimages/Weekly-lite.png";
 
 return;
@@ -621,7 +534,6 @@ return;
 if(img.src.includes("Weekly-lite.png")){
 
 img.dataset.fallback = "2";
-
 img.src = "topupimages/weekly-lite.png";
 
 return;
@@ -631,16 +543,9 @@ return;
 }
 
 
-/* PACKAGE SELECTION */
-
-function selectPackage(e, card, name){
-
-/* Save selected package */
+function selectPackage(e,card,name){
 
 localStorage.setItem("package",name);
-
-
-/* Ripple */
 
 let ripple=document.createElement("span");
 
@@ -649,7 +554,6 @@ ripple.className="ripple";
 let rect=card.getBoundingClientRect();
 
 ripple.style.width="120px";
-
 ripple.style.height="120px";
 
 ripple.style.left=
@@ -659,9 +563,6 @@ ripple.style.top=
 (e.clientY-rect.top-60)+"px";
 
 card.appendChild(ripple);
-
-
-/* Go to payment */
 
 setTimeout(function(){
 
@@ -676,3 +577,4 @@ window.location.href="payment.html";
 </body>
 
 </html>
+```
