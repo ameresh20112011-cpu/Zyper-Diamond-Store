@@ -1,86 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
 <title>Zyper Admin Login</title>
-
 <link rel="stylesheet" href="admin.css">
-
 </head>
-
 
 <body class="login-page">
 
-
 <div class="login-box">
 
-    <div class="logo">
-        💎
-    </div>
+<div class="logo">💎</div>
 
-    <h1>
-        Zyper Diamond Store
-    </h1>
+<h1>Zyper Diamond Store</h1>
+<h3>Admin Login</h3>
 
-    <h3>
-        Admin Login
-    </h3>
+<input id="email" placeholder="Email" required>
+<input id="password" type="password" placeholder="Password" required>
 
+<button id="login">LOGIN</button>
 
-    <form id="adminLoginForm">
-
-        <input
-            id="email"
-            type="email"
-            placeholder="Admin Email"
-            autocomplete="email"
-            required
-        >
-
-
-        <input
-            id="password"
-            type="password"
-            placeholder="Password"
-            autocomplete="current-password"
-            required
-        >
-
-
-        <button
-            type="submit"
-            id="login"
-        >
-            LOGIN
-        </button>
-
-
-    </form>
-
-
-    <button
-        type="button"
-        id="forgotPassword"
-        class="forgot-btn"
-    >
-        Forgot Password?
-    </button>
-
-
-    <p id="msg"></p>
-
+<p id="msg"></p>
 
 </div>
-
 
 <script type="module" src="admin.js"></script>
 
 </body>
-
 </html>
