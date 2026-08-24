@@ -914,47 +914,59 @@ class="home-button">
 
 <script type="module">
 
+
+/* =========================================
+FIREBASE
+========================================= */
+
 import {
-auth,
-db
+    auth,
+    db
 }
 from "./firebase.js";
 
 
 import {
-onAuthStateChanged
+    onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 import {
-doc,
-setDoc
+    doc,
+    setDoc
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* WORKER */
+/* =========================================
+WORKER
+========================================= */
 
 const WORKER_URL =
 "https://zyper-order.ameresh20112011.workers.dev/";
 
 
-/* WHATSAPP */
+/* =========================================
+WHATSAPP
+========================================= */
 
 const WHATSAPP_NUMBER =
 "94751483909";
 
 
-/* PACKAGES */
+/* =========================================
+PACKAGES
+========================================= */
 
 const PACKAGES = {
 
 "Weekly":560,
 "Monthly":2720,
 "Weekly Lite":150,
+
 "VIP Bundle":3280,
 "SVIP Bundle":4960,
 
@@ -982,9 +994,25 @@ const PACKAGES = {
 };
 
 
+/* =========================================
+ELEMENTS
+========================================= */
+
 const errorBox =
 document.getElementById("error");
 
+
+const sendButton =
+document.getElementById("send");
+
+
+const loading =
+document.getElementById("loading");
+
+
+/* =========================================
+ERROR
+========================================= */
 
 function showError(message){
 
@@ -1010,17 +1038,20 @@ errorBox.style.display =
 }
 
 
-/* ===============================
+/* =========================================
 PACKAGE
-=============================== */
+========================================= */
 
 function getSelectedPackage(){
 
 const raw =
 localStorage.getItem("package");
 
-if(!raw)
+if(!raw){
+
 return null;
+
+}
 
 const separator =
 " - LKR ";
@@ -1028,11 +1059,18 @@ const separator =
 const index =
 raw.lastIndexOf(separator);
 
-if(index === -1)
+if(index === -1){
+
 return null;
 
+}
+
 const name =
-raw.substring(0,index).trim();
+raw.substring(
+0,
+index
+).trim();
+
 
 const price =
 Number(
@@ -1041,16 +1079,27 @@ index + separator.length
 ).trim()
 );
 
+
 if(
 !Object.prototype.hasOwnProperty.call(
 PACKAGES,
 name
 )
-)
+){
+
 return null;
 
-if(PACKAGES[name] !== price)
+}
+
+
+if(
+PACKAGES[name] !== price
+){
+
 return null;
+
+}
+
 
 return {
 name:name,
@@ -1071,22 +1120,22 @@ document
 .textContent =
 "No Package Selected";
 
+
 document
 .getElementById("packagePrice")
 .textContent =
 "LKR 0";
 
-document
-.getElementById("send")
-.disabled =
+
+sendButton.disabled =
 true;
 
 }
 
 
-/* ===============================
+/* =========================================
 CUSTOMER LOGIN CHECK
-=============================== */
+========================================= */
 
 onAuthStateChanged(
 auth,
@@ -1099,22 +1148,25 @@ document
 .style.display =
 "none";
 
+
 document
 .getElementById("loginMessage")
 .style.display =
 "block";
+
 
 return;
 
 }
 
 
-/* LOGGED IN */
+/* USER LOGGED IN */
 
 document
 .getElementById("formArea")
 .style.display =
 "block";
+
 
 document
 .getElementById("loginMessage")
@@ -1129,6 +1181,7 @@ document
 .textContent =
 selected.name;
 
+
 document
 .getElementById("packagePrice")
 .textContent =
@@ -1140,7 +1193,9 @@ selected.price.toLocaleString("en-US");
 });
 
 
-/* LOGIN BUTTON */
+/* =========================================
+LOGIN BUTTON
+========================================= */
 
 document
 .getElementById("loginButton")
@@ -1153,9 +1208,9 @@ window.location.href =
 };
 
 
-/* ===============================
+/* =========================================
 RECEIPT
-=============================== */
+========================================= */
 
 document
 .getElementById("receipt")
@@ -1168,15 +1223,20 @@ hideError();
 const file =
 this.files[0];
 
-if(!file)
+
+if(!file){
+
 return;
+
+}
+
 
 if(
 file.type !== "image/jpeg" &&
 file.type !== "image/png"
 ){
 
-this.value="";
+this.value = "";
 
 showError(
 "❌ Only JPG and PNG receipts are allowed."
@@ -1186,11 +1246,12 @@ return;
 
 }
 
+
 if(
 file.size > 5 * 1024 * 1024
 ){
 
-this.value="";
+this.value = "";
 
 showError(
 "❌ Receipt image must be 5 MB or smaller."
@@ -1200,46 +1261,53 @@ return;
 
 }
 
+
 const preview =
 document.getElementById("preview");
+
 
 preview.src =
 URL.createObjectURL(file);
 
+
 preview.style.display =
 "block";
+
 
 document
 .getElementById("uploadLabel")
 .classList
 .add("active");
 
+
 document
 .getElementById("uploadTitle")
 .textContent =
 "✅ Receipt Selected";
+
 
 document
 .getElementById("uploadText")
 .textContent =
 file.name;
 
-}
-);
+});
 
 
-/* ===============================
+/* =========================================
 SUBMIT
-=============================== */
+========================================= */
 
-document
-.getElementById("send")
-.addEventListener(
+sendButton.addEventListener(
 "click",
 async function(){
 
 hideError();
 
+
+/* =========================================
+CHECK LOGIN
+========================================= */
 
 const user =
 auth.currentUser;
@@ -1247,18 +1315,31 @@ auth.currentUser;
 
 if(!user){
 
-window.location.href =
-"index.html";
+document
+.getElementById("formArea")
+.style.display =
+"none";
+
+
+document
+.getElementById("loginMessage")
+.style.display =
+"block";
+
 
 return;
 
 }
 
 
+/* =========================================
+PACKAGE CHECK
+========================================= */
+
 if(!selected){
 
 showError(
-"Please select a package first."
+"❌ Please select a package first."
 );
 
 return;
@@ -1266,9 +1347,9 @@ return;
 }
 
 
-const button =
-document.getElementById("send");
-
+/* =========================================
+VALUES
+========================================= */
 
 const uid =
 document
@@ -1297,6 +1378,10 @@ document
 .files[0];
 
 
+/* =========================================
+UID
+========================================= */
+
 if(
 !/^[0-9]{6,15}$/.test(uid)
 ){
@@ -1305,10 +1390,18 @@ showError(
 "❌ Please enter a valid Free Fire UID (6-15 digits)."
 );
 
+document
+.getElementById("uid")
+.focus();
+
 return;
 
 }
 
+
+/* =========================================
+CUSTOMER NAME
+========================================= */
 
 if(
 playerName.length < 2 ||
@@ -1319,10 +1412,18 @@ showError(
 "❌ Customer Name must be between 2 and 50 characters."
 );
 
+document
+.getElementById("playerName")
+.focus();
+
 return;
 
 }
 
+
+/* =========================================
+PHONE
+========================================= */
 
 const cleanPhone =
 phone.replace(
@@ -1332,17 +1433,27 @@ phone.replace(
 
 
 if(
-!/^\+?[0-9]{9,15}$/.test(cleanPhone)
+!/^\+?[0-9]{9,15}$/.test(
+cleanPhone
+)
 ){
 
 showError(
 "❌ Please enter a valid WhatsApp / Phone number."
 );
 
+document
+.getElementById("phone")
+.focus();
+
 return;
 
 }
 
+
+/* =========================================
+RECEIPT
+========================================= */
 
 if(!receipt){
 
@@ -1382,24 +1493,43 @@ return;
 }
 
 
-button.disabled =
+/* =========================================
+LOADING
+========================================= */
+
+sendButton.disabled =
 true;
 
-button.textContent =
+sendButton.textContent =
 "⏳ Sending Order...";
 
-document
-.getElementById("loading")
-.style.display =
+loading.style.display =
 "block";
 
 
 try{
 
 
-/* ===============================
-SEND TO WORKER
-=============================== */
+/* =========================================
+GET FRESH FIREBASE TOKEN
+========================================= */
+
+const idToken =
+await user.getIdToken(true);
+
+
+if(!idToken){
+
+throw new Error(
+"Firebase login token could not be created."
+);
+
+}
+
+
+/* =========================================
+FORM DATA
+========================================= */
 
 const formData =
 new FormData();
@@ -1412,20 +1542,24 @@ selected.name +
 selected.price
 );
 
+
 formData.append(
 "uid",
 uid
 );
+
 
 formData.append(
 "playerName",
 playerName
 );
 
+
 formData.append(
 "phone",
 phone
 );
+
 
 formData.append(
 "receipt",
@@ -1434,17 +1568,35 @@ receipt.name
 );
 
 
+/* =========================================
+SEND TO CLOUDFLARE WORKER
+WITH FIREBASE TOKEN
+========================================= */
+
 const response =
 await fetch(
 WORKER_URL,
 {
+
 method:"POST",
+
+headers:{
+    "Authorization":
+        "Bearer " + idToken
+},
+
 body:formData
+
 }
 );
 
 
+/* =========================================
+READ RESPONSE
+========================================= */
+
 let result;
+
 
 try{
 
@@ -1460,6 +1612,10 @@ throw new Error(
 }
 
 
+/* =========================================
+SERVER ERROR
+========================================= */
+
 if(
 !response.ok ||
 !result.success
@@ -1473,13 +1629,19 @@ result.message ||
 }
 
 
-/* ===============================
-SAVE ORDER TO FIRESTORE
-=============================== */
+/* =========================================
+ORDER ID
+========================================= */
 
 const orderId =
 result.orderId;
 
+
+/* =========================================
+SAVE ORDER TO FIRESTORE
+========================================= */
+
+try{
 
 await setDoc(
 doc(
@@ -1518,10 +1680,25 @@ createdAt:new Date()
 }
 );
 
+}catch(firestoreError){
 
-/* ===============================
-WHATSAPP
-=============================== */
+console.error(
+"Firestore save error:",
+firestoreError
+);
+
+/*
+The Worker already accepted the order.
+Do not show the customer a false failure
+if Firestore saving fails after Telegram succeeds.
+*/
+
+}
+
+
+/* =========================================
+WHATSAPP MESSAGE
+========================================= */
 
 const whatsappMessage =
 
@@ -1550,6 +1727,10 @@ const whatsappMessage =
 Please check and process this order.`;
 
 
+/* =========================================
+WHATSAPP URL
+========================================= */
+
 const whatsappURL =
 "https://wa.me/" +
 WHATSAPP_NUMBER +
@@ -1559,21 +1740,31 @@ whatsappMessage
 );
 
 
+/* =========================================
+SET WHATSAPP
+========================================= */
+
 document
 .getElementById("whatsappButton")
 .href =
 whatsappURL;
 
 
+/* =========================================
+SUCCESS
+========================================= */
+
 document
 .getElementById("formArea")
 .style.display =
 "none";
 
+
 document
 .getElementById("success")
 .style.display =
 "block";
+
 
 document
 .getElementById("orderId")
@@ -1581,18 +1772,25 @@ document
 orderId;
 
 
+/* CLEAR PACKAGE */
+
 localStorage.removeItem(
 "package"
 );
 
 
 window.scrollTo({
+
 top:0,
+
 behavior:"smooth"
+
 });
 
 
-/* OPEN WHATSAPP */
+/* =========================================
+OPEN WHATSAPP
+========================================= */
 
 setTimeout(
 function(){
@@ -1607,27 +1805,32 @@ whatsappURL;
 
 }catch(error){
 
-console.error(error);
+console.error(
+"Order error:",
+error
+);
+
 
 showError(
 "❌ " +
 (
 error.message ||
-"Something went wrong."
+"Something went wrong. Please try again."
 )
 );
 
-button.disabled =
+
+sendButton.disabled =
 false;
 
-button.textContent =
+
+sendButton.textContent =
 "🚀 Place Order";
+
 
 }finally{
 
-document
-.getElementById("loading")
-.style.display =
+loading.style.display =
 "none";
 
 }
