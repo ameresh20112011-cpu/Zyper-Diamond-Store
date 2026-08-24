@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,11 +8,9 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Zyper Admin Dashboard</title>
+<title>Zyper Dashboard</title>
 
-<link
-rel="stylesheet"
-href="admin.css">
+<link rel="stylesheet" href="admin.css">
 
 </head>
 
@@ -21,471 +18,209 @@ href="admin.css">
 <body>
 
 
-<!-- ==========================================
+<!-- =================================
      ADMIN APP
-========================================== -->
+================================= -->
 
-<div
-id="app"
-style="display:none;">
+<div id="app" style="display:none;">
 
 
-<!-- ==========================================
-     TOP BAR
-========================================== -->
+<!-- SIDEBAR -->
 
-<header class="topbar">
+<div class="sidebar">
+
+    <h1>
+        💎 Zyper
+    </h1>
+
+    <h3>
+        Admin Panel
+    </h3>
 
 
-<div class="brand-area">
-
-<div class="brand">
-💎 Zyper
-</div>
-
-<div class="admin-label">
-ADMIN DASHBOARD
-</div>
+    <button id="logout">
+        Logout
+    </button>
 
 </div>
 
 
-<div class="top-actions">
 
-<button
-id="refresh"
-class="refresh">
+<!-- MAIN -->
 
-🔄 Refresh
+<div class="main">
 
-</button>
-
-
-<button
-id="logout"
-class="logout">
-
-🚪 Logout
-
-</button>
-
-</div>
-
-
-</header>
-
-
-
-<!-- ==========================================
-     MAIN
-========================================== -->
-
-<main class="main">
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-
-<div>
 
 <h1>
-Orders Dashboard
+    Orders Dashboard
 </h1>
 
-<p>
-Manage and monitor customer orders
-</p>
-
-</div>
 
 
-</section>
+<!-- CARDS -->
+
+<div class="cards">
 
 
+    <div class="card">
 
-<!-- ==========================================
-     STATISTICS
-========================================== -->
+        <h3>
+            Orders
+        </h3>
 
-<section class="cards">
+        <h2 id="totalOrders">
+            0
+        </h2>
 
-
-<div class="stat-card">
-
-
-<div class="stat-icon">
-📦
-</div>
-
-
-<div>
-
-<span>
-Total Orders
-</span>
-
-
-<strong
-id="totalOrders">
-
-0
-
-</strong>
-
-</div>
-
-
-</div>
+    </div>
 
 
 
-<div class="stat-card">
+    <div class="card">
+
+        <h3>
+            Revenue
+        </h3>
+
+        <h2>
+            Rs. <span id="revenue">0</span>
+        </h2>
+
+    </div>
 
 
-<div class="stat-icon">
-💰
-</div>
+
+    <div class="card">
+
+        <h3>
+            Pending
+        </h3>
+
+        <h2 id="pendingOrders">
+            0
+        </h2>
+
+    </div>
 
 
-<div>
 
-<span>
-Revenue
-</span>
+    <div class="card">
 
+        <h3>
+            Success
+        </h3>
 
-<strong>
+        <h2 id="successOrders">
+            0
+        </h2>
 
-LKR
-
-<span id="revenue">
-0
-</span>
-
-</strong>
-
-</div>
+    </div>
 
 
 </div>
 
-
-
-<div class="stat-card">
-
-
-<div class="stat-icon">
-⏳
-</div>
-
-
-<div>
-
-<span>
-Pending
-</span>
-
-
-<strong
-id="pendingOrders">
-
-0
-
-</strong>
-
-</div>
-
-
-</div>
-
-
-
-<div class="stat-card">
-
-
-<div class="stat-icon">
-✅
-</div>
-
-
-<div>
-
-<span>
-Success
-</span>
-
-
-<strong
-id="successOrders">
-
-0
-
-</strong>
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-<!-- ==========================================
-     FILTER PANEL
-========================================== -->
-
-<section class="panel">
-
-
-<div class="panel-title">
-
-
-<div>
-
-<h2>
-Order Management
-</h2>
-
-
-<p>
-Search orders or select a specific date.
-</p>
-
-</div>
-
-
-<button
-id="clearFilter"
-class="clear">
-
-📋 All Orders
-
-</button>
-
-
-</div>
-
-
-
-<div class="filters">
 
 
 <!-- SEARCH -->
 
-<input
-id="search"
-type="search"
-placeholder="🔎 Search Order ID, UID, name, email..."
-autocomplete="off"
->
+<div class="search-area">
 
-
-<!-- DATE -->
-
-<input
-id="dateFilter"
-type="date"
->
-
-
-<!-- STATUS -->
-
-<select
-id="statusFilter">
-
-
-<option value="all">
-All Status
-</option>
-
-
-<option value="Pending">
-Pending
-</option>
-
-
-<option value="Success">
-Success
-</option>
-
-
-<option value="Rejected">
-Rejected
-</option>
-
-
-</select>
-
-
-</div>
-
-
-</section>
-
-
-
-<!-- ==========================================
-     ORDERS TABLE
-========================================== -->
-
-<section class="table-panel">
-
-
-<div class="table-header">
-
-
-<div>
-
-<h2>
-📋 Orders
-</h2>
-
-<p>
-Customer order history
-</p>
-
-</div>
-
-
-<div
-id="filterInfo"
-class="filter-info">
-
-All Orders
-
-</div>
-
+    <input
+        id="search"
+        type="text"
+        placeholder="Search order, customer, UID, game UID..."
+        autocomplete="off"
+    >
 
 </div>
 
 
 
-<div class="table-scroll">
+<!-- ORDERS TABLE -->
 
+<div class="table-container">
 
 <table>
 
 
 <thead>
 
-
 <tr>
-
 
 <th>
 Order ID
 </th>
 
-
 <th>
 Customer
 </th>
-
-
-<th>
-Email
-</th>
-
 
 <th>
 Firebase UID
 </th>
 
-
 <th>
 Game UID
 </th>
-
 
 <th>
 Product
 </th>
 
-
 <th>
 Price
 </th>
-
 
 <th>
 Payment
 </th>
 
-
 <th>
-Date / Time
+Date Time
 </th>
 
+<th>
+Total
+</th>
 
 <th>
 Status
 </th>
 
-
 <th>
 Action
 </th>
 
-
 </tr>
-
 
 </thead>
 
 
-
-<tbody
-id="orders">
-
+<tbody id="orders">
 
 <tr>
 
-
-<td
-colspan="11">
-
-⏳ Loading orders...
-
+<td colspan="11">
+Loading...
 </td>
 
-
 </tr>
-
 
 </tbody>
 
 
 </table>
 
-
 </div>
-
-
-</section>
-
-
-</main>
 
 
 </div>
 
+</div>
 
 
-<!-- ==========================================
-     ADMIN JAVASCRIPT
-========================================== -->
-
-<script
-type="module"
-src="admin.js">
-</script>
-
+<script type="module" src="admin.js"></script>
 
 </body>
 
 </html>
-```
