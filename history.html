@@ -13,15 +13,27 @@ content="width=device-width, initial-scale=1.0">
 
 <style>
 
+*{
+box-sizing:border-box;
+}
+
 body{
 
 margin:0;
 
 font-family:Arial,sans-serif;
 
-background:#0f172a;
+background:
+linear-gradient(
+135deg,
+#020617,
+#0f172a,
+#312e81
+);
 
 color:white;
+
+min-height:100vh;
 
 }
 
@@ -33,11 +45,14 @@ color:#60a5fa;
 
 margin-top:20px;
 
+margin-bottom:25px;
+
 }
 
 .order-card{
 
-background:#1e293b;
+background:
+rgba(30,41,59,.95);
 
 margin:20px;
 
@@ -45,7 +60,27 @@ padding:20px;
 
 border-radius:15px;
 
-box-shadow:0 0 15px rgba(0,0,0,0.3);
+box-shadow:
+0 0 15px rgba(0,0,0,0.3);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+}
+
+.order-card h3{
+
+margin-top:0;
+
+color:#c084fc;
+
+}
+
+.order-card p{
+
+line-height:1.6;
+
+color:#e2e8f0;
 
 }
 
@@ -55,6 +90,10 @@ font-weight:bold;
 
 font-size:18px;
 
+display:inline-block;
+
+margin-left:5px;
+
 }
 
 .pending{
@@ -63,7 +102,7 @@ color:#facc15;
 
 }
 
-.approved{
+.success{
 
 color:#22c55e;
 
@@ -100,13 +139,24 @@ font-weight:bold;
 
 cursor:pointer;
 
+transition:.2s;
+
 }
 
 .track-btn{
 
 width:100%;
 
-margin-top:10px;
+margin-top:15px;
+
+}
+
+.track-btn:hover,
+.home-btn:hover{
+
+transform:translateY(-2px);
+
+opacity:.9;
 
 }
 
@@ -117,6 +167,10 @@ text-align:center;
 margin-top:50px;
 
 font-size:18px;
+
+color:#cbd5e1;
+
+padding:20px;
 
 }
 
@@ -162,7 +216,7 @@ id="homeButton">
 
 
 /* =========================================
-USE THE SAME FIREBASE.JS
+FIREBASE
 ========================================= */
 
 import {
@@ -198,7 +252,7 @@ document.getElementById("homeButton");
 
 
 /* =========================================
-HOME
+HOME BUTTON
 ========================================= */
 
 homeButton.onclick =
@@ -219,6 +273,7 @@ onAuthStateChanged(
 auth,
 
 async function(user){
+
 
 /* =========================================
 NOT LOGGED IN
@@ -244,15 +299,24 @@ id="loginButton">
 
 `;
 
-document
-.getElementById("loginButton")
-.onclick =
+
+const loginButton =
+document.getElementById(
+"loginButton"
+);
+
+
+if(loginButton){
+
+loginButton.onclick =
 function(){
 
 window.location.href =
 "index.html";
 
 };
+
+}
 
 return;
 
@@ -264,6 +328,7 @@ LOGGED IN
 ========================================= */
 
 try{
+
 
 ordersDiv.innerHTML = `
 
@@ -277,7 +342,7 @@ ordersDiv.innerHTML = `
 
 
 /* =========================================
-FIRESTORE QUERY
+FIRESTORE
 ========================================= */
 
 const ordersRef =
@@ -331,7 +396,7 @@ return;
 
 
 /* =========================================
-CLEAR LOADING
+CLEAR
 ========================================= */
 
 ordersDiv.innerHTML = "";
@@ -349,16 +414,28 @@ const data =
 orderSnapshot.data();
 
 
+/* =========================================
+ORDER ID
+========================================= */
+
 const orderId =
 data.orderId ||
 orderSnapshot.id;
 
+
+/* =========================================
+UID
+========================================= */
 
 const gameUID =
 data.gameUID ||
 data.uid ||
 "-";
 
+
+/* =========================================
+PACKAGE
+========================================= */
 
 const packageName =
 data.package ||
@@ -367,21 +444,31 @@ data.product ||
 "-";
 
 
+/* =========================================
+PRICE
+========================================= */
+
 const price =
-data.price ||
-data.productPrice ||
-data.total ||
+data.price ??
+data.productPrice ??
+data.total ??
 0;
-
-
-const status =
-data.status ||
-"Pending";
 
 
 /* =========================================
 STATUS
 ========================================= */
+
+const rawStatus =
+String(
+data.status ||
+"Pending"
+).trim();
+
+
+const normalizedStatus =
+rawStatus.toLowerCase();
+
 
 let statusClass =
 "pending";
@@ -390,22 +477,42 @@ let statusText =
 "⏳ Pending";
 
 
+/*
+=========================================
+APPROVED = SUCCESS
+=========================================
+*/
+
 if(
-status === "Approved" ||
-status === "Success"
+
+normalizedStatus ===
+"approved" ||
+
+normalizedStatus ===
+"success"
+
 ){
 
 statusClass =
-"approved";
+"success";
 
 statusText =
-"✅ Approved";
+"✅ Success";
 
 }
 
 
-if(
-status === "Rejected"
+/*
+=========================================
+REJECTED
+=========================================
+*/
+
+else if(
+
+normalizedStatus ===
+"rejected"
+
 ){
 
 statusClass =
@@ -413,6 +520,46 @@ statusClass =
 
 statusText =
 "❌ Rejected";
+
+}
+
+
+/*
+=========================================
+PENDING
+=========================================
+*/
+
+else if(
+
+normalizedStatus ===
+"pending"
+
+){
+
+statusClass =
+"pending";
+
+statusText =
+"⏳ Pending";
+
+}
+
+
+/*
+=========================================
+OTHER STATUS
+=========================================
+*/
+
+else{
+
+statusClass =
+"pending";
+
+statusText =
+"⏳ " +
+escapeHTML(rawStatus);
 
 }
 
@@ -429,9 +576,16 @@ if(data.createdAt){
 
 try{
 
+
+/*
+Firestore Timestamp
+*/
+
 if(
+
 typeof data.createdAt.toDate ===
 "function"
+
 ){
 
 orderDate =
@@ -439,16 +593,49 @@ data.createdAt
 .toDate()
 .toLocaleString();
 
-}else{
+}
+
+
+/*
+Timestamp object
+*/
+
+else if(
+
+data.createdAt.seconds
+
+){
+
+orderDate =
+new Date(
+data.createdAt.seconds * 1000
+)
+.toLocaleString();
+
+}
+
+
+/*
+Normal date/string
+*/
+
+else{
 
 orderDate =
 new Date(
 data.createdAt
-).toLocaleString();
+)
+.toLocaleString();
 
 }
 
-}catch{
+
+}catch(error){
+
+console.error(
+"Date error:",
+error
+);
 
 orderDate = "";
 
@@ -465,6 +652,7 @@ ordersDiv.innerHTML += `
 
 <div class="order-card">
 
+
 <h3>
 💎 Diamond Order
 </h3>
@@ -472,7 +660,9 @@ ordersDiv.innerHTML += `
 
 <p>
 
-<b>Order ID:</b><br>
+<b>Order ID:</b>
+
+<br>
 
 ${escapeHTML(orderId)}
 
@@ -481,7 +671,9 @@ ${escapeHTML(orderId)}
 
 <p>
 
-<b>Game UID:</b><br>
+<b>Game UID:</b>
+
+<br>
 
 ${escapeHTML(gameUID)}
 
@@ -490,7 +682,9 @@ ${escapeHTML(gameUID)}
 
 <p>
 
-<b>Package:</b><br>
+<b>Package:</b>
+
+<br>
 
 ${escapeHTML(packageName)}
 
@@ -499,7 +693,9 @@ ${escapeHTML(packageName)}
 
 <p>
 
-<b>Price:</b><br>
+<b>Price:</b>
+
+<br>
 
 LKR ${Number(price).toLocaleString("en-US")}
 
@@ -524,13 +720,17 @@ ${
 orderDate
 ?
 `
+
 <p>
 
-<b>Order Date:</b><br>
+<b>Order Date:</b>
+
+<br>
 
 ${escapeHTML(orderDate)}
 
 </p>
+
 `
 :
 ""
@@ -581,12 +781,11 @@ encodeURIComponent(id);
 
 );
 
-}
-
-);
+});
 
 
 }catch(error){
+
 
 console.error(
 "History error:",
@@ -616,7 +815,7 @@ error.message
 
 
 /* =========================================
-SECURITY DISPLAY HELPER
+ESCAPE HTML
 ========================================= */
 
 function escapeHTML(value){
