@@ -1,22 +1,8 @@
-```css
-/* =====================================================
-   GLOBAL
-===================================================== */
-
-*{
-
-box-sizing:border-box;
-
-}
-
-
 body{
 
 margin:0;
 
-font-family:
-Arial,
-sans-serif;
+font-family:Arial;
 
 background:#020617;
 
@@ -25,9 +11,6 @@ color:white;
 }
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
 
 .login-page{
 
@@ -40,6 +23,7 @@ justify-content:center;
 align-items:center;
 
 }
+
 
 
 .login-box{
@@ -57,11 +41,13 @@ width:350px;
 }
 
 
+
 .logo{
 
 font-size:60px;
 
 }
+
 
 
 input{
@@ -76,9 +62,8 @@ border-radius:10px;
 
 border:none;
 
-outline:none;
-
 }
+
 
 
 button{
@@ -95,35 +80,25 @@ color:white;
 
 cursor:pointer;
 
-transition:.2s;
-
 }
+
 
 
 button:hover{
 
-transform:translateY(-1px);
-
-opacity:.9;
+opacity:.85;
 
 }
 
 
-/* =====================================================
-   SIDEBAR
-===================================================== */
 
 .sidebar{
 
 position:fixed;
 
-left:0;
-
-top:0;
-
 width:220px;
 
-height:100vh;
+height:100%;
 
 background:#111827;
 
@@ -132,38 +107,10 @@ padding:25px;
 }
 
 
-.sidebar h1{
-
-margin-top:0;
-
-}
-
-
-.sidebar h3{
-
-color:#94a3b8;
-
-}
-
-
-.sidebar button{
-
-margin-top:20px;
-
-background:#ef4444;
-
-width:100%;
-
-}
-
-
-/* =====================================================
-   MAIN
-===================================================== */
 
 .main{
 
-margin-left:220px;
+margin-left:270px;
 
 padding:30px;
 
@@ -172,20 +119,17 @@ overflow-x:auto;
 }
 
 
-/* =====================================================
-   DASHBOARD CARDS
-===================================================== */
 
 .cards{
 
 display:grid;
 
-grid-template-columns:
-repeat(4,1fr);
+grid-template-columns:repeat(4,1fr);
 
 gap:20px;
 
 }
+
 
 
 .card{
@@ -196,75 +140,16 @@ padding:20px;
 
 border-radius:20px;
 
-box-shadow:
-0 10px 30px
-rgba(0,0,0,.2);
-
 }
 
-
-.card h3{
-
-margin-top:0;
-
-color:#cbd5e1;
-
-}
 
 
 .card h2{
 
 color:#38bdf8;
 
-margin-bottom:0;
-
 }
 
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-.search{
-
-width:100%;
-
-max-width:500px;
-
-margin-top:30px;
-
-margin-left:0;
-
-background:#1e293b;
-
-color:white;
-
-border:
-1px solid #334155;
-
-font-size:15px;
-
-}
-
-
-.search::placeholder{
-
-color:#94a3b8;
-
-}
-
-
-/* =====================================================
-   TABLE
-===================================================== */
-
-.table-wrapper{
-
-width:100%;
-
-overflow-x:auto;
-
-}
 
 
 table{
@@ -277,346 +162,91 @@ border-collapse:collapse;
 
 background:#1e293b;
 
-min-width:1300px;
-
 }
 
 
-td,
-th{
+
+td,th{
 
 padding:12px;
 
-border:
-1px solid #475569;
+border:1px solid #475569;
 
 text-align:center;
-
-vertical-align:middle;
-
-}
-
-
-th{
-
-background:#0f172a;
-
-color:#cbd5e1;
 
 white-space:nowrap;
 
 }
 
 
-tr:hover{
-
-background:
-rgba(56,189,248,.04);
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
 
 .Pending{
 
-color:#f59e0b;
-
-font-weight:bold;
+color:orange;
 
 }
 
 
-.Success,
-.Successful{
+
+.Success{
 
 color:#22c55e;
 
-font-weight:bold;
-
 }
+
 
 
 .Rejected{
 
-color:#ef4444;
-
-font-weight:bold;
+color:red;
 
 }
 
 
-.status-cell{
 
-font-weight:bold;
+.action-success{
 
-}
+background:#22c55e;
 
-
-/* =====================================================
-   ACTION BOX
-===================================================== */
-
-.action-box{
-
-display:flex;
-
-flex-direction:column;
-
-gap:8px;
-
-min-width:210px;
+margin:3px;
 
 }
 
 
-/* =====================================================
-   RECEIPT PASTE BOX
-===================================================== */
 
-.receipt-paste{
+.action-reject{
 
-width:200px;
+background:#ef4444;
 
-min-height:75px;
-
-padding:12px;
-
-border:
-2px dashed #38bdf8;
-
-border-radius:12px;
-
-background:
-rgba(56,189,248,.05);
-
-color:#94a3b8;
-
-font-size:12px;
-
-cursor:text;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-text-align:center;
-
-flex-direction:column;
-
-transition:.2s;
+margin:3px;
 
 }
 
 
-.receipt-paste:hover{
 
-border-color:#a78bfa;
+#msg{
 
-background:
-rgba(167,139,250,.08);
+color:#f87171;
 
-}
-
-
-.receipt-paste:focus{
-
-outline:none;
-
-border-color:#22c55e;
-
-box-shadow:
-0 0 0 3px
-rgba(34,197,94,.12);
+margin-top:15px;
 
 }
 
 
-.receipt-paste b{
 
-color:#38bdf8;
+/* MOBILE */
 
-}
-
-
-/* =====================================================
-   RECEIPT PREVIEW
-===================================================== */
-
-.paste-preview{
-
-width:100%;
-
-margin-top:8px;
-
-}
-
-
-.paste-preview img{
-
-display:block;
-
-width:100%;
-
-max-height:140px;
-
-object-fit:contain;
-
-border-radius:8px;
-
-border:
-1px solid #334155;
-
-}
-
-
-.paste-preview div{
-
-margin-top:5px;
-
-color:#22c55e;
-
-font-size:11px;
-
-}
-
-
-/* =====================================================
-   RECEIPT PASTED
-===================================================== */
-
-.receipt-pasted{
-
-border-color:#22c55e;
-
-background:
-rgba(34,197,94,.08);
-
-}
-
-
-/* =====================================================
-   SUCCESS BUTTON
-===================================================== */
-
-.success-btn{
-
-width:100%;
-
-background:
-linear-gradient(
-90deg,
-#16a34a,
-#22c55e
-);
-
-font-weight:bold;
-
-padding:10px;
-
-}
-
-
-.success-btn:hover{
-
-box-shadow:
-0 5px 15px
-rgba(34,197,94,.25);
-
-}
-
-
-/* =====================================================
-   REJECT BUTTON
-===================================================== */
-
-.reject-btn{
-
-width:100%;
-
-background:
-linear-gradient(
-90deg,
-#dc2626,
-#ef4444
-);
-
-font-weight:bold;
-
-padding:10px;
-
-}
-
-
-.reject-btn:hover{
-
-box-shadow:
-0 5px 15px
-rgba(239,68,68,.25);
-
-}
-
-
-/* =====================================================
-   COMPLETED ACTION
-===================================================== */
-
-.completed-action{
-
-font-weight:bold;
-
-padding:10px;
-
-border-radius:10px;
-
-background:#0f172a;
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(
-max-width:900px
-){
+@media(max-width:800px){
 
 .sidebar{
 
 position:relative;
 
-width:100%;
+width:auto;
 
 height:auto;
 
-padding:15px;
-
 }
-
-
-.sidebar h1,
-.sidebar h3{
-
-display:inline-block;
-
-margin-right:15px;
-
-}
-
-
-.sidebar button{
-
-width:auto;
-
-margin-top:0;
-
-}
-
 
 .main{
 
@@ -626,59 +256,10 @@ padding:15px;
 
 }
 
-
 .cards{
 
-grid-template-columns:
-repeat(2,1fr);
-
-gap:12px;
+grid-template-columns:repeat(2,1fr);
 
 }
 
-
 }
-
-
-@media(
-max-width:550px
-){
-
-.cards{
-
-grid-template-columns:
-1fr 1fr;
-
-}
-
-
-.card{
-
-padding:15px;
-
-}
-
-
-.card h3{
-
-font-size:13px;
-
-}
-
-
-.card h2{
-
-font-size:22px;
-
-}
-
-
-.main h1{
-
-font-size:24px;
-
-}
-
-
-}
-```
