@@ -1,189 +1,119 @@
-body{
+// ================================
+// FIREBASE APP
+// ================================
 
-margin:0;
-
-font-family:Arial;
-
-background:#020617;
-
-color:white;
-
+import {
+    initializeApp
 }
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 
+// ================================
+// FIREBASE AUTHENTICATION
+// ================================
 
-.login-page{
-
-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
+import {
+    getAuth
 }
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
+// ================================
+// FIRESTORE
+// ================================
 
-.login-box{
-
-background:#1e293b;
-
-padding:40px;
-
-border-radius:25px;
-
-text-align:center;
-
-width:350px;
-
+import {
+    getFirestore
 }
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
+// ================================
+// FIREBASE APP CHECK
+// ================================
 
-.logo{
-
-font-size:60px;
-
+import {
+    initializeAppCheck,
+    ReCaptchaV3Provider
 }
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
 
 
+// ================================
+// FIREBASE CONFIG
+// ================================
 
-input{
+const firebaseConfig = {
 
-width:90%;
+    apiKey:
+        "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
 
-padding:14px;
+    authDomain:
+        "zyper-d-iamond-store.firebaseapp.com",
 
-margin:10px;
+    projectId:
+        "zyper-d-iamond-store",
 
-border-radius:10px;
+    storageBucket:
+        "zyper-d-iamond-store.firebasestorage.app",
 
-border:none;
+    messagingSenderId:
+        "892467477866",
 
-}
+    appId:
+        "1:892467477866:web:61e9b6ff9435798da23913",
 
+    measurementId:
+        "G-RLJFR6F2GC"
 
+};
 
-button{
 
-padding:10px 20px;
+// ================================
+// INITIALIZE FIREBASE
+// ================================
 
-background:#38bdf8;
+const app =
+    initializeApp(firebaseConfig);
 
-border:0;
 
-border-radius:10px;
+// ================================
+// APP CHECK
+// ================================
 
-color:white;
+initializeAppCheck(
 
-cursor:pointer;
+    app,
 
-}
+    {
 
+        provider:
 
+            new ReCaptchaV3Provider(
 
-.sidebar{
+                "6LfBe2QtAAAAAJsp-crpLwMXkhPn1QhvRSVWzB8P"
 
-position:fixed;
+            ),
 
-width:220px;
+        isTokenAutoRefreshEnabled:
+            true
 
-height:100%;
+    }
 
-background:#111827;
+);
 
-padding:25px;
 
-}
+// ================================
+// EXPORT SERVICES
+// ================================
 
+export const auth =
+    getAuth(app);
 
 
-.main{
-
-margin-left:270px;
-
-padding:30px;
-
-}
-
-
-
-.cards{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:20px;
-
-}
-
-
-
-.card{
-
-background:#1e293b;
-
-padding:20px;
-
-border-radius:20px;
-
-}
-
-
-
-.card h2{
-
-color:#38bdf8;
-
-}
-
-
-
-table{
-
-width:100%;
-
-margin-top:30px;
-
-border-collapse:collapse;
-
-background:#1e293b;
-
-}
-
-
-
-td,th{
-
-padding:12px;
-
-border:1px solid #475569;
-
-text-align:center;
-
-}
-
-
-
-.Pending{
-
-color:orange;
-
-}
-
-
-.Success{
-
-color:#22c55e;
-
-}
-
-
-.Rejected{
-
-color:red;
-
-}
+export const db =
+    getFirestore(app);
