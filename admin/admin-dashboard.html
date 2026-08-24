@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Zyper Dashboard</title>
+<title>
+Zyper Dashboard
+</title>
 
 <link rel="stylesheet" href="admin.css">
 
@@ -18,208 +15,224 @@ content="width=device-width, initial-scale=1.0">
 <body>
 
 
-<!-- =================================
-     ADMIN APP
-================================= -->
-
+<!-- HIDDEN UNTIL ADMIN VERIFIED -->
 <div id="app" style="display:none;">
 
 
-<!-- SIDEBAR -->
 
 <div class="sidebar">
 
-    <h1>
-        💎 Zyper
-    </h1>
 
-    <h3>
-        Admin Panel
-    </h3>
+<h1>
+💎 Zyper
+</h1>
 
 
-    <button id="logout">
-        Logout
-    </button>
+<h3>
+Admin Panel
+</h3>
+
+
+
+<button id="logout">
+Logout
+</button>
+
 
 </div>
 
 
 
-<!-- MAIN -->
+
 
 <div class="main">
 
 
 <h1>
-    Orders Dashboard
+Orders Dashboard
 </h1>
 
 
 
-<!-- CARDS -->
+
 
 <div class="cards">
 
 
-    <div class="card">
+<div class="card">
 
-        <h3>
-            Orders
-        </h3>
+<h3>
+Orders
+</h3>
 
-        <h2 id="totalOrders">
-            0
-        </h2>
+<h2 id="totalOrders">
+0
+</h2>
 
-    </div>
-
-
-
-    <div class="card">
-
-        <h3>
-            Revenue
-        </h3>
-
-        <h2>
-            Rs. <span id="revenue">0</span>
-        </h2>
-
-    </div>
+</div>
 
 
 
-    <div class="card">
-
-        <h3>
-            Pending
-        </h3>
-
-        <h2 id="pendingOrders">
-            0
-        </h2>
-
-    </div>
 
 
+<div class="card">
 
-    <div class="card">
+<h3>
+Revenue
+</h3>
 
-        <h3>
-            Success
-        </h3>
+<h2>
+$<span id="revenue">
+0
+</span>
+</h2>
 
-        <h2 id="successOrders">
-            0
-        </h2>
+</div>
 
-    </div>
+
+
+
+
+<div class="card">
+
+<h3>
+Pending
+</h3>
+
+<h2 id="pendingOrders">
+0
+</h2>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+Success
+</h3>
+
+<h2 id="successOrders">
+0
+</h2>
+
+</div>
 
 
 </div>
 
 
 
-<!-- SEARCH -->
-
-<div class="search-area">
-
-    <input
-        id="search"
-        type="text"
-        placeholder="Search order, customer, UID, game UID..."
-        autocomplete="off"
-    >
-
-</div>
 
 
 
-<!-- ORDERS TABLE -->
 
-<div class="table-container">
+
+<input 
+id="search"
+placeholder="Search order">
+
+
+
+
+
+
 
 <table>
 
 
 <thead>
 
+
 <tr>
+
 
 <th>
 Order ID
 </th>
 
+
 <th>
 Customer
 </th>
+
 
 <th>
 Firebase UID
 </th>
 
+
 <th>
 Game UID
 </th>
+
 
 <th>
 Product
 </th>
 
+
 <th>
 Price
 </th>
+
 
 <th>
 Payment
 </th>
 
+
 <th>
 Date Time
 </th>
+
 
 <th>
 Total
 </th>
 
+
 <th>
 Status
 </th>
+
 
 <th>
 Action
 </th>
 
+
 </tr>
+
 
 </thead>
 
 
+
+
 <tbody id="orders">
 
-<tr>
-
-<td colspan="11">
-Loading...
-</td>
-
-</tr>
 
 </tbody>
 
 
 </table>
 
-</div>
 
 
 </div>
 
+
 </div>
+
+
 
 
 <script type="module" src="admin.js"></script>
+
 
 </body>
 
