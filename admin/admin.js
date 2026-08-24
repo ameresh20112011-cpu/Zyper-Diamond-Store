@@ -1,57 +1,66 @@
 // ==========================================
-// ZYPER ADMIN PANEL
+// ZYPER DIAMOND STORE
+// ADMIN JAVASCRIPT
 // ==========================================
 
-import {
-    auth,
-    db
-}
-from "./firebase.js";
+import { auth, db } from "./firebase.js";
 
 
 import {
+
     signInWithEmailAndPassword,
+
     onAuthStateChanged,
+
     signOut
+
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 import {
+
     collection,
+
     getDocs,
+
     doc,
+
     getDoc,
+
     updateDoc
+
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 // ==========================================
-// ADMIN CHECK
+// CHECK ADMIN
 // ==========================================
 
 async function checkAdmin(user){
 
-    if(!user){
-
-        return false;
-
-    }
-
-
     try{
 
+        if(!user){
+
+            return false;
+
+        }
+
+
+        const adminRef =
+        doc(
+            db,
+            "users",
+            user.uid
+        );
+
+
         const adminDoc =
-            await getDoc(
-                doc(
-                    db,
-                    "users",
-                    user.uid
-                )
-            );
+        await getDoc(adminRef);
 
 
         if(!adminDoc.exists()){
@@ -61,12 +70,14 @@ async function checkAdmin(user){
         }
 
 
-        return (
-            adminDoc.data().role === "admin"
-        );
+        const data =
+        adminDoc.data();
 
-    }
-    catch(error){
+
+        return data.role === "admin";
+
+
+    }catch(error){
 
         console.error(
             "Admin check error:",
@@ -81,7 +92,7 @@ async function checkAdmin(user){
 
 
 // ==========================================
-// LOGIN
+// ADMIN LOGIN
 // ==========================================
 
 const loginButton =
@@ -90,91 +101,95 @@ document.getElementById("login");
 
 if(loginButton){
 
-    loginButton.onclick =
-    async function(){
-
-        const email =
-        document
-        .getElementById("email")
-        .value
-        .trim();
+    loginButton.addEventListener(
+        "click",
+        adminLogin
+    );
 
 
-        const password =
-        document
-        .getElementById("password")
-        .value;
+    const passwordInput =
+    document.getElementById("password");
 
 
-        const msg =
-        document
-        .getElementById("msg");
+    if(passwordInput){
 
+        passwordInput.addEventListener(
+            "keydown",
+            function(event){
 
-        msg.textContent = "";
+                if(event.key === "Enter"){
 
+                    adminLogin();
 
-        if(!email || !password){
-
-            msg.textContent =
-            "Enter email and password.";
-
-            return;
-
-        }
-
-
-        loginButton.disabled = true;
-
-        loginButton.textContent =
-        "LOGINNING...";
-
-
-        try{
-
-            const result =
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-
-
-            const admin =
-            await checkAdmin(
-                result.user
-            );
-
-
-            if(!admin){
-
-                msg.textContent =
-                "❌ This account is not an admin.";
-
-                await signOut(auth);
-
-                loginButton.disabled =
-                false;
-
-                loginButton.textContent =
-                "LOGIN";
-
-                return;
+                }
 
             }
+        );
+
+    }
+
+}
 
 
-            location.href =
-            "admin-dashboard.html";
+async function adminLogin(){
 
-        }
-        catch(error){
+    const email =
+    document
+    .getElementById("email")
+    .value
+    .trim();
 
-            console.error(error);
+
+    const password =
+    document
+    .getElementById("password")
+    .value;
+
+
+    const msg =
+    document
+    .getElementById("msg");
+
+
+    if(!email || !password){
+
+        msg.textContent =
+        "Enter email and password.";
+
+        return;
+
+    }
+
+
+    loginButton.disabled =
+    true;
+
+    loginButton.textContent =
+    "Logging in...";
+
+
+    try{
+
+        const result =
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+
+        const admin =
+        await checkAdmin(
+            result.user
+        );
+
+
+        if(!admin){
 
             msg.textContent =
-            "❌ " +
-            getFirebaseError(error);
+            "❌ This account is not an admin.";
+
+            await signOut(auth);
 
             loginButton.disabled =
             false;
@@ -182,61 +197,87 @@ if(loginButton){
             loginButton.textContent =
             "LOGIN";
 
+            return;
+
         }
 
-    };
 
-}
+        window.location.href =
+        "admin-dashboard.html";
 
 
-// ==========================================
-// FIREBASE ERROR
-// ==========================================
+    }catch(error){
 
-function getFirebaseError(error){
+        console.error(
+            "Login error:",
+            error
+        );
 
-    if(
-        error.code ===
-        "auth/invalid-credential"
-    ){
 
-        return "Invalid email or password.";
+        let message =
+        "Login failed.";
+
+
+        if(error.code ===
+        "auth/invalid-credential"){
+
+            message =
+            "❌ Incorrect email or password.";
+
+        }
+
+        else if(error.code ===
+        "auth/user-not-found"){
+
+            message =
+            "❌ User account not found.";
+
+        }
+
+        else if(error.code ===
+        "auth/wrong-password"){
+
+            message =
+            "❌ Incorrect password.";
+
+        }
+
+        else if(error.code ===
+        "auth/invalid-email"){
+
+            message =
+            "❌ Invalid email address.";
+
+        }
+
+        else if(error.code ===
+        "auth/network-request-failed"){
+
+            message =
+            "❌ Network error. Check your internet.";
+
+        }
+
+        else{
+
+            message =
+            "❌ " +
+            error.message;
+
+        }
+
+
+        msg.textContent =
+        message;
+
+
+        loginButton.disabled =
+        false;
+
+        loginButton.textContent =
+        "LOGIN";
 
     }
-
-
-    if(
-        error.code ===
-        "auth/user-not-found"
-    ){
-
-        return "User not found.";
-
-    }
-
-
-    if(
-        error.code ===
-        "auth/wrong-password"
-    ){
-
-        return "Wrong password.";
-
-    }
-
-
-    if(
-        error.code ===
-        "auth/invalid-email"
-    ){
-
-        return "Invalid email.";
-
-    }
-
-
-    return error.message ||
-    "Login failed.";
 
 }
 
@@ -261,7 +302,7 @@ if(orderTable){
 
             if(!admin){
 
-                location.href =
+                window.location.href =
                 "admin-login.html";
 
                 return;
@@ -281,7 +322,7 @@ if(orderTable){
             }
 
 
-            loadOrders();
+            await loadOrders();
 
         }
     );
@@ -290,7 +331,7 @@ if(orderTable){
 
 
 // ==========================================
-// DATE
+// FORMAT DATE
 // ==========================================
 
 function formatDate(timestamp){
@@ -302,64 +343,57 @@ function formatDate(timestamp){
     }
 
 
-    if(
-        timestamp.toDate
-    ){
+    try{
 
-        const date =
-        timestamp.toDate();
+        if(
+            typeof timestamp.toDate ===
+            "function"
+        ){
 
-
-        const hour =
-        String(
-            date.getHours()
-        ).padStart(2,"0");
+            const date =
+            timestamp.toDate();
 
 
-        const minute =
-        String(
-            date.getMinutes()
-        ).padStart(2,"0");
+            const hour =
+            String(
+                date.getHours()
+            ).padStart(2,"0");
 
 
-        const year =
-        date.getFullYear();
+            const minute =
+            String(
+                date.getMinutes()
+            ).padStart(2,"0");
 
 
-        const month =
-        String(
-            date.getMonth()+1
-        ).padStart(2,"0");
+            const year =
+            date.getFullYear();
 
 
-        const day =
-        String(
-            date.getDate()
-        ).padStart(2,"0");
+            const month =
+            String(
+                date.getMonth()+1
+            ).padStart(2,"0");
 
 
-        return `${hour}:${minute} , ${year}/${month}/${day}`;
+            const day =
+            String(
+                date.getDate()
+            ).padStart(2,"0");
+
+
+            return `${hour}:${minute} , ${year}/${month}/${day}`;
+
+        }
+
+
+        return String(timestamp);
+
+    }catch{
+
+        return "-";
 
     }
-
-
-    return String(timestamp);
-
-}
-
-
-// ==========================================
-// ESCAPE HTML
-// ==========================================
-
-function escapeHTML(value){
-
-    return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
 
 }
 
@@ -377,12 +411,24 @@ async function loadOrders(){
     document.getElementById("orders");
 
 
-    table.innerHTML =
-    `<tr>
-        <td colspan="11">
-            Loading orders...
-        </td>
-    </tr>`;
+    if(!table){
+
+        return;
+
+    }
+
+
+    table.innerHTML = `
+
+        <tr>
+
+            <td colspan="11">
+                ⏳ Loading orders...
+            </td>
+
+        </tr>
+
+    `;
 
 
     try{
@@ -417,38 +463,63 @@ async function loadOrders(){
         allOrders.sort(
             function(a,b){
 
-                const aTime =
-                a.data.createdAt?.seconds ||
-                0;
+                const dateA =
+                a.data.createdAt;
 
 
-                const bTime =
-                b.data.createdAt?.seconds ||
-                0;
+                const dateB =
+                b.data.createdAt;
 
 
-                return bTime - aTime;
+                if(
+                    dateA &&
+                    dateB &&
+                    dateA.seconds != null &&
+                    dateB.seconds != null
+                ){
+
+                    return (
+                        dateB.seconds -
+                        dateA.seconds
+                    );
+
+                }
+
+
+                return 0;
 
             }
         );
 
 
-        renderOrders(
-            allOrders
+        renderOrders(allOrders);
+
+
+    }catch(error){
+
+        console.error(
+            "Load orders error:",
+            error
         );
 
-    }
-    catch(error){
 
-        console.error(error);
+        table.innerHTML = `
 
+            <tr>
 
-        table.innerHTML =
-        `<tr>
-            <td colspan="11">
-                ❌ ${escapeHTML(error.message)}
-            </td>
-        </tr>`;
+                <td colspan="11">
+
+                    ❌ Failed to load orders
+
+                    <br><br>
+
+                    ${escapeHTML(error.message)}
+
+                </td>
+
+            </tr>
+
+        `;
 
     }
 
@@ -465,6 +536,13 @@ function renderOrders(orders){
     document.getElementById("orders");
 
 
+    if(!table){
+
+        return;
+
+    }
+
+
     table.innerHTML = "";
 
 
@@ -479,12 +557,19 @@ function renderOrders(orders){
 
     if(orders.length === 0){
 
-        table.innerHTML =
-        `<tr>
-            <td colspan="11">
-                No orders found.
-            </td>
-        </tr>`;
+        table.innerHTML = `
+
+            <tr>
+
+                <td colspan="11">
+
+                    📦 No orders found.
+
+                </td>
+
+            </tr>
+
+        `;
 
     }
 
@@ -512,7 +597,6 @@ function renderOrders(orders){
             order.gameUID ||
             order.gameUid ||
             order.gameId ||
-            order.uid ||
             "-";
 
 
@@ -535,7 +619,7 @@ function renderOrders(orders){
             const payment =
             order.paymentMethod ||
             order.payment ||
-            "Receipt";
+            "-";
 
 
             const total =
@@ -559,99 +643,100 @@ function renderOrders(orders){
 
             totalOrders++;
 
+
             revenue += total;
 
 
-            if(status === "Pending"){
+            if(
+                status.toLowerCase() ===
+                "pending"
+            ){
 
                 pending++;
 
             }
 
 
-            if(status === "Success"){
+            if(
+                status.toLowerCase() ===
+                "success" ||
+                status.toLowerCase() ===
+                "approved"
+            ){
 
                 success++;
 
             }
 
 
-            table.innerHTML += `
+            const row =
+            document.createElement("tr");
 
-            <tr>
 
-            <td>
-            ${escapeHTML(item.id)}
-            </td>
+            row.innerHTML = `
 
-            <td>
-            ${escapeHTML(customer)}
-            </td>
+                <td>
+                    ${escapeHTML(item.id)}
+                </td>
 
-            <td>
-            ${escapeHTML(firebaseUID)}
-            </td>
+                <td>
+                    ${escapeHTML(customer)}
+                </td>
 
-            <td>
-            ${escapeHTML(gameUID)}
-            </td>
+                <td>
+                    ${escapeHTML(firebaseUID)}
+                </td>
 
-            <td>
-            ${escapeHTML(product)}
-            </td>
+                <td>
+                    ${escapeHTML(gameUID)}
+                </td>
 
-            <td>
-            LKR ${price.toLocaleString("en-US")}
-            </td>
+                <td>
+                    ${escapeHTML(product)}
+                </td>
 
-            <td>
-            ${escapeHTML(payment)}
-            </td>
+                <td>
+                    LKR ${price.toLocaleString("en-US")}
+                </td>
 
-            <td>
-            ${escapeHTML(date)}
-            </td>
+                <td>
+                    ${escapeHTML(payment)}
+                </td>
 
-            <td>
-            LKR ${total.toLocaleString("en-US")}
-            </td>
+                <td>
+                    ${escapeHTML(date)}
+                </td>
 
-            <td class="${escapeHTML(status)}">
-            ${escapeHTML(status)}
-            </td>
+                <td>
+                    LKR ${total.toLocaleString("en-US")}
+                </td>
 
-            <td>
+                <td class="${escapeHTML(status)}">
+                    ${escapeHTML(status)}
+                </td>
 
-            ${
-                status === "Pending"
+                <td>
 
-                ?
+                    <button
+                        class="action-success"
+                        data-id="${escapeHTML(item.id)}"
+                        data-status="Success">
+                        ✔
+                    </button>
 
-                `
-                <button
-                class="action-success"
-                onclick="changeStatus('${item.id}','Success')">
-                ✔ Success
-                </button>
+                    <button
+                        class="action-rejected"
+                        data-id="${escapeHTML(item.id)}"
+                        data-status="Rejected">
+                        ✖
+                    </button>
 
-                <button
-                class="action-reject"
-                onclick="changeStatus('${item.id}','Rejected')">
-                ✖ Reject
-                </button>
-                `
-
-                :
-
-                `<b>${escapeHTML(status)}</b>`
-
-            }
-
-            </td>
-
-            </tr>
+                </td>
 
             `;
+
+
+            table.appendChild(row);
 
         }
     );
@@ -679,6 +764,99 @@ function renderOrders(orders){
     .getElementById("successOrders")
     .textContent =
     success;
+
+
+    // Action buttons
+
+    document
+    .querySelectorAll(
+        "[data-status]"
+    )
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    changeStatus(
+                        this.dataset.id,
+                        this.dataset.status
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// CHANGE STATUS
+// ==========================================
+
+async function changeStatus(
+    id,
+    status
+){
+
+    try{
+
+        const user =
+        auth.currentUser;
+
+
+        const admin =
+        await checkAdmin(user);
+
+
+        if(!admin){
+
+            alert(
+                "❌ Access denied."
+            );
+
+            return;
+
+        }
+
+
+        await updateDoc(
+
+            doc(
+                db,
+                "orders",
+                id
+            ),
+
+            {
+
+                status:status
+
+            }
+
+        );
+
+
+        await loadOrders();
+
+
+    }catch(error){
+
+        console.error(
+            "Status update error:",
+            error
+        );
+
+
+        alert(
+            "❌ Failed to update status:\n" +
+            error.message
+        );
+
+    }
 
 }
 
@@ -718,34 +896,42 @@ if(search){
             allOrders.filter(
                 function(item){
 
-                    const data =
+                    const order =
                     item.data;
 
 
-                    const text =
-                    [
+                    const text = [
 
                         item.id,
 
-                        data.customerName,
+                        order.customerName,
 
-                        data.playerName,
+                        order.playerName,
 
-                        data.userId,
+                        order.name,
 
-                        data.gameUID,
+                        order.userId,
 
-                        data.gameUid,
+                        order.gameUID,
 
-                        data.uid,
+                        order.gameUid,
 
-                        data.package,
+                        order.gameId,
 
-                        data.product,
+                        order.productName,
 
-                        data.status
+                        order.product,
+
+                        order.package,
+
+                        order.paymentMethod,
+
+                        order.payment,
+
+                        order.status
 
                     ]
+                    .filter(Boolean)
                     .join(" ")
                     .toLowerCase();
 
@@ -769,87 +955,6 @@ if(search){
 
 
 // ==========================================
-// CHANGE STATUS
-// ==========================================
-
-window.changeStatus =
-async function(id,status){
-
-    const user =
-    auth.currentUser;
-
-
-    const admin =
-    await checkAdmin(user);
-
-
-    if(!admin){
-
-        alert(
-            "❌ Access denied."
-        );
-
-        return;
-
-    }
-
-
-    const message =
-    status === "Success"
-
-    ? "Mark this order as SUCCESS?"
-
-    : "Mark this order as REJECTED?";
-
-
-    if(!confirm(message)){
-
-        return;
-
-    }
-
-
-    try{
-
-        await updateDoc(
-
-            doc(
-                db,
-                "orders",
-                id
-            ),
-
-            {
-
-                status:status,
-
-                updatedAt:
-                new Date()
-
-            }
-
-        );
-
-
-        await loadOrders();
-
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        alert(
-            "❌ " +
-            error.message
-        );
-
-    }
-
-};
-
-
-// ==========================================
 // LOGOUT
 // ==========================================
 
@@ -859,17 +964,56 @@ document.getElementById("logout");
 
 if(logout){
 
-    logout.onclick =
-    async function(){
+    logout.addEventListener(
+        "click",
+        async function(){
 
-        await signOut(
-            auth
-        );
+            try{
+
+                await signOut(auth);
+
+                window.location.href =
+                "admin-login.html";
+
+            }catch(error){
+
+                console.error(
+                    "Logout error:",
+                    error
+                );
+
+            }
+
+        }
+    );
+
+}
 
 
-        location.href =
-        "admin-login.html";
+// ==========================================
+// ESCAPE HTML
+// ==========================================
 
-    };
+function escapeHTML(value){
+
+    if(value === null ||
+       value === undefined){
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replaceAll("&","&amp;")
+
+        .replaceAll("<","&lt;")
+
+        .replaceAll(">","&gt;")
+
+        .replaceAll('"',"&quot;")
+
+        .replaceAll("'","&#039;");
 
 }
