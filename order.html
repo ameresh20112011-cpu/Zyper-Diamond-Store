@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+content="width=device-width,initial-scale=1.0">
 
 <title>Zyper Diamond Store - Order</title>
 
@@ -20,12 +20,7 @@ body{
 margin:0;
 font-family:'Segoe UI',Arial,sans-serif;
 background:
-linear-gradient(
-135deg,
-#020617,
-#0f172a,
-#312e81
-);
+linear-gradient(135deg,#020617,#0f172a,#312e81);
 color:white;
 min-height:100vh;
 }
@@ -39,15 +34,12 @@ justify-content:center;
 .card{
 width:100%;
 max-width:420px;
-background:
-rgba(255,255,255,0.08);
+background:rgba(255,255,255,.08);
 backdrop-filter:blur(15px);
 padding:25px;
 border-radius:25px;
-border:
-1px solid rgba(255,255,255,.15);
-box-shadow:
-0 20px 50px rgba(0,0,0,.4);
+border:1px solid rgba(255,255,255,.15);
+box-shadow:0 20px 50px rgba(0,0,0,.4);
 animation:show .5s ease;
 }
 
@@ -71,12 +63,7 @@ font-size:45px;
 text-align:center;
 font-size:26px;
 font-weight:800;
-background:
-linear-gradient(
-90deg,
-#60a5fa,
-#c084fc
-);
+background:linear-gradient(90deg,#60a5fa,#c084fc);
 -webkit-background-clip:text;
 background-clip:text;
 color:transparent;
@@ -97,8 +84,7 @@ rgba(124,58,237,.25)
 );
 padding:18px;
 border-radius:18px;
-border:
-1px solid rgba(255,255,255,.15);
+border:1px solid rgba(255,255,255,.15);
 margin-bottom:20px;
 text-align:center;
 }
@@ -137,8 +123,7 @@ input[type="text"],
 input[type="tel"]{
 width:100%;
 padding:14px;
-border:
-1px solid rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.1);
 border-radius:12px;
 background:#1e293b;
 color:white;
@@ -152,18 +137,15 @@ color:#94a3b8;
 
 input:focus{
 border-color:#60a5fa;
-box-shadow:
-0 0 0 3px rgba(96,165,250,.1);
+box-shadow:0 0 0 3px rgba(96,165,250,.1);
 }
 
 .email-box{
 margin-top:16px;
 padding:13px;
 border-radius:12px;
-background:
-rgba(30,41,59,.8);
-border:
-1px solid rgba(255,255,255,.1);
+background:rgba(30,41,59,.8);
+border:1px solid rgba(255,255,255,.1);
 }
 
 .email-label{
@@ -189,8 +171,7 @@ align-items:center;
 justify-content:center;
 padding:25px;
 border-radius:20px;
-border:
-2px dashed #60a5fa;
+border:2px dashed #60a5fa;
 background:
 linear-gradient(
 135deg,
@@ -208,8 +189,7 @@ border-color:#c084fc;
 
 .upload-label.active{
 border-color:#22c55e;
-background:
-rgba(34,197,94,.15);
+background:rgba(34,197,94,.15);
 }
 
 .upload-icon{
@@ -242,8 +222,7 @@ object-fit:contain;
 margin-top:15px;
 border-radius:15px;
 display:none;
-border:
-1px solid rgba(255,255,255,.15);
+border:1px solid rgba(255,255,255,.15);
 }
 
 button{
@@ -253,17 +232,12 @@ margin-top:20px;
 border:none;
 border-radius:15px;
 background:
-linear-gradient(
-90deg,
-#2563eb,
-#7c3aed
-);
+linear-gradient(90deg,#2563eb,#7c3aed);
 color:white;
 font-size:17px;
 font-weight:bold;
 cursor:pointer;
-box-shadow:
-0 10px 25px rgba(37,99,235,.35);
+box-shadow:0 10px 25px rgba(37,99,235,.35);
 transition:.3s;
 }
 
@@ -287,10 +261,8 @@ font-size:14px;
 
 #error{
 display:none;
-background:
-rgba(239,68,68,.12);
-border:
-1px solid rgba(239,68,68,.35);
+background:rgba(239,68,68,.12);
+border:1px solid rgba(239,68,68,.35);
 color:#fca5a5;
 padding:13px;
 border-radius:12px;
@@ -320,12 +292,7 @@ font-size:42px;
 font-weight:800;
 letter-spacing:5px;
 margin:15px 0;
-background:
-linear-gradient(
-90deg,
-#60a5fa,
-#c084fc
-);
+background:linear-gradient(90deg,#60a5fa,#c084fc);
 -webkit-background-clip:text;
 background-clip:text;
 color:transparent;
@@ -343,12 +310,7 @@ text-decoration:none;
 padding:14px;
 margin-top:20px;
 border-radius:14px;
-background:
-linear-gradient(
-90deg,
-#2563eb,
-#7c3aed
-);
+background:linear-gradient(90deg,#2563eb,#7c3aed);
 color:white;
 font-weight:bold;
 }
@@ -359,17 +321,11 @@ width:100%;
 padding:14px;
 margin-top:12px;
 border-radius:14px;
-background:
-linear-gradient(
-90deg,
-#25D366,
-#128C7E
-);
+background:linear-gradient(90deg,#25D366,#128C7E);
 color:white;
 font-weight:bold;
 text-decoration:none;
-box-shadow:
-0 10px 25px rgba(37,211,102,.25);
+box-shadow:0 10px 25px rgba(37,211,102,.25);
 transition:.3s;
 }
 
@@ -395,18 +351,14 @@ background:#475569;
 transform:translateY(-2px);
 }
 
-#checking{
+.login-message{
+display:none;
 text-align:center;
 padding:30px 10px;
 }
 
-.check-icon{
-font-size:50px;
-}
-
-#checking p{
-color:#cbd5e1;
-font-size:14px;
+.login-message h2{
+color:#60a5fa;
 }
 
 </style>
@@ -419,34 +371,24 @@ font-size:14px;
 
 <div class="card">
 
+<div id="loginMessage" class="login-message">
 
-<!-- ==========================================
-LOGIN CHECK
-========================================== -->
+<div class="logo">🔐</div>
 
-<div id="checking">
+<h2>Login Required</h2>
 
-<div class="check-icon">
-🔐
-</div>
-
-<h2>
-Checking Login...
-</h2>
-
-<p>
-Please wait...
+<p class="success-text">
+Please login to your account before placing an order.
 </p>
 
+<button id="loginButton">
+🔐 Login Now
+</button>
+
 </div>
 
 
-<!-- ==========================================
-ORDER FORM
-========================================== -->
-
-<div id="formArea"
-style="display:none;">
+<div id="formArea">
 
 <div class="logo">
 💎
@@ -462,8 +404,6 @@ Complete your diamond purchase
 
 <div id="error"></div>
 
-
-<!-- PACKAGE -->
 
 <div class="package-box">
 
@@ -484,8 +424,6 @@ LKR 0
 </div>
 
 
-<!-- EMAIL -->
-
 <div class="email-box">
 
 <div class="email-label">
@@ -499,8 +437,6 @@ Loading...
 
 </div>
 
-
-<!-- UID -->
 
 <div class="field">
 
@@ -519,8 +455,6 @@ autocomplete="off">
 </div>
 
 
-<!-- CUSTOMER NAME -->
-
 <div class="field">
 
 <label for="playerName">
@@ -537,8 +471,6 @@ autocomplete="name">
 </div>
 
 
-<!-- PHONE -->
-
 <div class="field">
 
 <label for="phone">
@@ -554,8 +486,6 @@ autocomplete="tel">
 
 </div>
 
-
-<!-- RECEIPT -->
 
 <div class="upload-box">
 
@@ -595,8 +525,6 @@ alt="Payment Receipt Preview">
 </div>
 
 
-<!-- SEND -->
-
 <button
 id="send"
 type="button">
@@ -620,10 +548,6 @@ class="back-button">
 
 </div>
 
-
-<!-- ==========================================
-SUCCESS
-========================================== -->
 
 <div id="success">
 
@@ -685,53 +609,40 @@ class="home-button">
 
 <script type="module">
 
-
-/* ==========================================
+/* =====================================================
 FIREBASE
-========================================== */
+===================================================== */
 
 import {
 auth
-}
-from "./admin/firebase.js";
+} from "./firebase.js";
 
 
 import {
 onAuthStateChanged
-}
-from
+} from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-/*
-IMPORTANT:
-
-There is NO Firestore import here.
-
-The Cloudflare Worker is responsible
-for saving the order to Firestore.
-*/
-
-
-/* ==========================================
+/* =====================================================
 WORKER
-========================================== */
+===================================================== */
 
 const WORKER_URL =
 "https://zyper-order.ameresh20112011.workers.dev/";
 
 
-/* ==========================================
+/* =====================================================
 WHATSAPP
-========================================== */
+===================================================== */
 
 const WHATSAPP_NUMBER =
 "94751483909";
 
 
-/* ==========================================
+/* =====================================================
 PACKAGES
-========================================== */
+===================================================== */
 
 const PACKAGES = {
 
@@ -784,15 +695,9 @@ const PACKAGES = {
 };
 
 
-/* ==========================================
+/* =====================================================
 ELEMENTS
-========================================== */
-
-const checking =
-document.getElementById("checking");
-
-const formArea =
-document.getElementById("formArea");
+===================================================== */
 
 const errorBox =
 document.getElementById("error");
@@ -800,13 +705,19 @@ document.getElementById("error");
 const sendButton =
 document.getElementById("send");
 
+const formArea =
+document.getElementById("formArea");
+
+const loginMessage =
+document.getElementById("loginMessage");
+
 const customerEmail =
 document.getElementById("customerEmail");
 
 
-/* ==========================================
+/* =====================================================
 ERROR
-========================================== */
+===================================================== */
 
 function showError(message){
 
@@ -817,11 +728,8 @@ errorBox.style.display =
 "block";
 
 window.scrollTo({
-
 top:0,
-
 behavior:"smooth"
-
 });
 
 }
@@ -835,9 +743,9 @@ errorBox.style.display =
 }
 
 
-/* ==========================================
-GET SELECTED PACKAGE
-========================================== */
+/* =====================================================
+PACKAGE
+===================================================== */
 
 function getSelectedPackage(){
 
@@ -863,10 +771,7 @@ return null;
 }
 
 const name =
-raw.substring(
-0,
-index
-).trim();
+raw.substring(0,index).trim();
 
 const price =
 Number(
@@ -874,7 +779,6 @@ raw.substring(
 index + separator.length
 ).trim()
 );
-
 
 if(
 !Object.prototype.hasOwnProperty.call(
@@ -887,7 +791,6 @@ return null;
 
 }
 
-
 if(
 PACKAGES[name] !== price
 ){
@@ -896,13 +799,9 @@ return null;
 
 }
 
-
 return {
-
 name:name,
-
 price:price
-
 };
 
 }
@@ -911,10 +810,6 @@ price:price
 const selected =
 getSelectedPackage();
 
-
-/* ==========================================
-PACKAGE DISPLAY
-========================================== */
 
 if(!selected){
 
@@ -934,9 +829,9 @@ true;
 }
 
 
-/* ==========================================
-FIREBASE LOGIN
-========================================== */
+/* =====================================================
+AUTH
+===================================================== */
 
 onAuthStateChanged(
 
@@ -944,106 +839,35 @@ auth,
 
 async function(user){
 
-console.log(
-"Firebase Auth State:",
-user ?
-"LOGGED IN" :
-"NOT LOGGED IN"
-);
-
-
-/* ==========================================
-NOT LOGGED IN
-========================================== */
-
 if(!user){
 
-console.log(
-"Customer not logged in."
-);
+formArea.style.display =
+"none";
 
+loginMessage.style.display =
+"block";
 
-/*
-Remember the page.
-*/
-
-localStorage.setItem(
-"returnAfterLogin",
-"order.html"
-);
-
-
-/*
-Go to existing login page.
-*/
-
-window.location.replace(
-"index.html"
-);
+customerEmail.textContent =
+"Not logged in";
 
 return;
 
 }
 
 
-/* ==========================================
-LOGGED IN
-========================================== */
-
-console.log(
-"Customer logged in:",
-user.uid
-);
-
-
-try{
-
-/*
-Get token here only to verify
-that the Firebase session is valid.
-*/
-
-const token =
-await user.getIdToken();
-
-
-if(!token){
-
-throw new Error(
-"Firebase authentication token unavailable."
-);
-
-}
-
-
-console.log(
-"Firebase authentication token ready."
-);
-
-
-/*
-Show order page.
-*/
-
-checking.style.display =
-"none";
+/* LOGGED IN */
 
 formArea.style.display =
 "block";
 
+loginMessage.style.display =
+"none";
 
-/*
-Email.
-*/
 
 customerEmail.textContent =
 user.email ||
 "Email not available";
 
-
-/*
-Package.
-*/
 
 if(selected){
 
@@ -1056,39 +880,38 @@ document
 .getElementById("packagePrice")
 .textContent =
 "LKR " +
-selected.price.toLocaleString(
-"en-US"
-);
-
-}
-
-
-}catch(error){
-
-console.error(
-"Authentication error:",
-error
-);
-
-window.location.replace(
-"index.html"
-);
+selected.price.toLocaleString("en-US");
 
 }
 
 });
 
 
-/* ==========================================
-RECEIPT PREVIEW
-========================================== */
+/* =====================================================
+LOGIN BUTTON
+===================================================== */
+
+document
+.getElementById("loginButton")
+.addEventListener(
+"click",
+function(){
+
+window.location.href =
+"index.html";
+
+}
+);
+
+
+/* =====================================================
+RECEIPT
+===================================================== */
 
 document
 .getElementById("receipt")
 .addEventListener(
-
 "change",
-
 function(){
 
 hideError();
@@ -1101,7 +924,6 @@ if(!file){
 return;
 
 }
-
 
 if(
 file.type !== "image/jpeg" &&
@@ -1118,7 +940,6 @@ return;
 
 }
 
-
 if(
 file.size >
 5 * 1024 * 1024
@@ -1134,43 +955,37 @@ return;
 
 }
 
-
 const preview =
 document.getElementById("preview");
-
 
 preview.src =
 URL.createObjectURL(file);
 
-
 preview.style.display =
 "block";
-
 
 document
 .getElementById("uploadLabel")
 .classList
 .add("active");
 
-
 document
 .getElementById("uploadTitle")
 .textContent =
 "✅ Receipt Selected";
-
 
 document
 .getElementById("uploadText")
 .textContent =
 file.name;
 
-});
+}
+);
 
 
-
-/* ==========================================
-PLACE ORDER
-========================================== */
+/* =====================================================
+SUBMIT
+===================================================== */
 
 sendButton.addEventListener(
 
@@ -1181,33 +996,22 @@ async function(){
 hideError();
 
 
-/* ==========================================
-CHECK USER
-========================================== */
-
 const user =
 auth.currentUser;
 
 
 if(!user){
 
-localStorage.setItem(
-"returnAfterLogin",
-"order.html"
-);
+formArea.style.display =
+"none";
 
-window.location.replace(
-"index.html"
-);
+loginMessage.style.display =
+"block";
 
 return;
 
 }
 
-
-/* ==========================================
-PACKAGE CHECK
-========================================== */
 
 if(!selected){
 
@@ -1220,16 +1024,11 @@ return;
 }
 
 
-/* ==========================================
-VALUES
-========================================== */
-
 const uid =
 document
 .getElementById("uid")
 .value
 .trim();
-
 
 const playerName =
 document
@@ -1237,23 +1036,17 @@ document
 .value
 .trim();
 
-
 const phone =
 document
 .getElementById("phone")
 .value
 .trim();
 
-
 const receipt =
 document
 .getElementById("receipt")
 .files[0];
 
-
-/* ==========================================
-UID VALIDATION
-========================================== */
 
 if(
 !/^[0-9]{6,15}$/.test(uid)
@@ -1263,18 +1056,10 @@ showError(
 "❌ Please enter a valid Free Fire UID (6-15 digits)."
 );
 
-document
-.getElementById("uid")
-.focus();
-
 return;
 
 }
 
-
-/* ==========================================
-NAME VALIDATION
-========================================== */
 
 if(
 playerName.length < 2 ||
@@ -1285,18 +1070,10 @@ showError(
 "❌ Customer Name must be between 2 and 50 characters."
 );
 
-document
-.getElementById("playerName")
-.focus();
-
 return;
 
 }
 
-
-/* ==========================================
-PHONE VALIDATION
-========================================== */
 
 const cleanPhone =
 phone.replace(
@@ -1306,27 +1083,17 @@ phone.replace(
 
 
 if(
-!/^\+?[0-9]{9,15}$/.test(
-cleanPhone
-)
+!/^\+?[0-9]{9,15}$/.test(cleanPhone)
 ){
 
 showError(
 "❌ Please enter a valid WhatsApp / Phone number."
 );
 
-document
-.getElementById("phone")
-.focus();
-
 return;
 
 }
 
-
-/* ==========================================
-RECEIPT VALIDATION
-========================================== */
 
 if(!receipt){
 
@@ -1367,16 +1134,15 @@ return;
 }
 
 
-/* ==========================================
+/* =====================================================
 LOADING
-========================================== */
+===================================================== */
 
 sendButton.disabled =
 true;
 
 sendButton.textContent =
 "⏳ Sending Order...";
-
 
 document
 .getElementById("loading")
@@ -1387,15 +1153,15 @@ document
 try{
 
 
-/* ==========================================
-GET FRESH FIREBASE TOKEN
-========================================== */
+/* =====================================================
+GET FRESH FIREBASE ID TOKEN
+===================================================== */
 
-const firebaseToken =
+const idToken =
 await user.getIdToken(true);
 
 
-if(!firebaseToken){
+if(!idToken){
 
 throw new Error(
 "Unable to get Firebase login token."
@@ -1404,14 +1170,9 @@ throw new Error(
 }
 
 
-console.log(
-"Firebase token obtained successfully."
-);
-
-
-/* ==========================================
+/* =====================================================
 FORM DATA
-========================================== */
+===================================================== */
 
 const formData =
 new FormData();
@@ -1424,36 +1185,30 @@ selected.name +
 selected.price
 );
 
-
 formData.append(
 "uid",
 uid
 );
-
 
 formData.append(
 "playerName",
 playerName
 );
 
-
 formData.append(
 "phone",
 phone
 );
-
 
 formData.append(
 "email",
 user.email || ""
 );
 
-
 formData.append(
 "firebaseUID",
 user.uid
 );
-
 
 formData.append(
 "receipt",
@@ -1462,9 +1217,12 @@ receipt.name
 );
 
 
-/* ==========================================
-SEND TO CLOUDFLARE WORKER
-========================================== */
+/* =====================================================
+WORKER REQUEST
+
+IMPORTANT:
+Authorization header is required.
+===================================================== */
 
 const response =
 await fetch(
@@ -1477,35 +1235,21 @@ method:"POST",
 
 headers:{
 
-/*
-IMPORTANT:
-
-Worker expects:
-
-Authorization:
-Bearer Firebase ID Token
-*/
-
 "Authorization":
-"Bearer " +
-firebaseToken
+"Bearer " + idToken
 
 },
 
 body:formData
 
-});
+}
 
-
-console.log(
-"Worker response status:",
-response.status
 );
 
 
-/* ==========================================
-READ RESPONSE
-========================================== */
+/* =====================================================
+RESPONSE
+===================================================== */
 
 let result;
 
@@ -1517,21 +1261,11 @@ await response.json();
 }catch{
 
 throw new Error(
-"Cloudflare Worker returned an invalid response."
+"Invalid response from Cloudflare Worker."
 );
 
 }
 
-
-console.log(
-"Worker response:",
-result
-);
-
-
-/* ==========================================
-CHECK RESPONSE
-========================================== */
 
 if(
 !response.ok ||
@@ -1546,19 +1280,11 @@ result.message ||
 }
 
 
-/* ==========================================
-ORDER ID
-========================================== */
-
 const orderId =
-String(result.orderId);
+String(result.orderId || "");
 
 
-if(
-!orderId ||
-orderId === "undefined" ||
-orderId === "null"
-){
+if(!orderId){
 
 throw new Error(
 "Worker did not return a valid Order ID."
@@ -1567,9 +1293,9 @@ throw new Error(
 }
 
 
-/* ==========================================
-WHATSAPP MESSAGE
-========================================== */
+/* =====================================================
+WHATSAPP
+===================================================== */
 
 const whatsappMessage =
 
@@ -1609,9 +1335,9 @@ whatsappMessage
 );
 
 
-/* ==========================================
-WHATSAPP BUTTON
-========================================== */
+/* =====================================================
+SUCCESS
+===================================================== */
 
 document
 .getElementById("whatsappButton")
@@ -1619,19 +1345,13 @@ document
 whatsappURL;
 
 
-/* ==========================================
-SHOW SUCCESS
-========================================== */
-
 formArea.style.display =
 "none";
-
 
 document
 .getElementById("success")
 .style.display =
 "block";
-
 
 document
 .getElementById("orderId")
@@ -1639,18 +1359,10 @@ document
 orderId;
 
 
-/* ==========================================
-CLEAR PACKAGE
-========================================== */
-
 localStorage.removeItem(
 "package"
 );
 
-
-/* ==========================================
-TOP
-========================================== */
 
 window.scrollTo({
 
@@ -1661,9 +1373,7 @@ behavior:"smooth"
 });
 
 
-/* ==========================================
-OPEN WHATSAPP
-========================================== */
+/* OPEN WHATSAPP */
 
 setTimeout(
 
@@ -1688,23 +1398,19 @@ error
 
 
 showError(
-
 "❌ " +
 (
 error.message ||
-"Something went wrong. Please try again."
+"Something went wrong."
 )
-
 );
 
 
 sendButton.disabled =
 false;
 
-
 sendButton.textContent =
 "🚀 Place Order";
-
 
 }finally{
 
