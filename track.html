@@ -38,23 +38,21 @@ color:white;
 
 min-height:100vh;
 
+padding:20px;
+
 }
 
 .container{
 
-padding:20px;
+width:100%;
 
-display:flex;
+max-width:450px;
 
-justify-content:center;
+margin:auto;
 
 }
 
 .card{
-
-width:100%;
-
-max-width:450px;
 
 background:
 rgba(255,255,255,.08);
@@ -62,12 +60,12 @@ rgba(255,255,255,.08);
 backdrop-filter:
 blur(15px);
 
-padding:25px;
+border:
+1px solid rgba(255,255,255,.15);
 
 border-radius:25px;
 
-border:
-1px solid rgba(255,255,255,.15);
+padding:25px;
 
 box-shadow:
 0 20px 50px rgba(0,0,0,.4);
@@ -78,7 +76,7 @@ box-shadow:
 
 text-align:center;
 
-font-size:45px;
+font-size:48px;
 
 }
 
@@ -86,7 +84,7 @@ font-size:45px;
 
 text-align:center;
 
-font-size:27px;
+font-size:26px;
 
 font-weight:800;
 
@@ -103,6 +101,8 @@ background-clip:text;
 
 color:transparent;
 
+margin-top:8px;
+
 }
 
 .subtitle{
@@ -111,51 +111,77 @@ text-align:center;
 
 color:#cbd5e1;
 
-margin-bottom:20px;
+font-size:14px;
+
+margin-bottom:25px;
 
 }
 
-.loading,
-.error{
+.loading{
 
 text-align:center;
 
-padding:20px;
+color:#93c5fd;
+
+padding:30px 5px;
 
 }
 
 .error{
+
+display:none;
 
 background:
 rgba(239,68,68,.12);
 
 border:
-1px solid rgba(239,68,68,.3);
-
-border-radius:15px;
+1px solid rgba(239,68,68,.35);
 
 color:#fca5a5;
 
+padding:15px;
+
+border-radius:12px;
+
+text-align:center;
+
+margin-bottom:15px;
+
 }
 
-.order-box{
+.order-id-box{
+
+text-align:center;
 
 background:
-rgba(15,23,42,.75);
+linear-gradient(
+135deg,
+rgba(37,99,235,.20),
+rgba(124,58,237,.20)
+);
+
+border:
+1px solid rgba(255,255,255,.12);
 
 border-radius:18px;
 
 padding:18px;
 
-margin-top:15px;
+margin-bottom:20px;
+
+}
+
+.order-label{
+
+font-size:12px;
+
+color:#94a3b8;
 
 }
 
 .order-id{
 
-text-align:center;
-
-font-size:35px;
+font-size:34px;
 
 font-weight:800;
 
@@ -163,26 +189,27 @@ letter-spacing:4px;
 
 color:#60a5fa;
 
-margin-bottom:20px;
+margin-top:7px;
 
 }
 
 .info{
 
-padding:12px 0;
+background:
+rgba(15,23,42,.7);
 
-border-bottom:
+border:
 1px solid rgba(255,255,255,.08);
 
+border-radius:15px;
+
+padding:15px;
+
+margin-top:12px;
+
 }
 
-.info:last-child{
-
-border-bottom:none;
-
-}
-
-.label{
+.info-label{
 
 font-size:12px;
 
@@ -192,7 +219,7 @@ margin-bottom:5px;
 
 }
 
-.value{
+.info-value{
 
 font-size:16px;
 
@@ -202,47 +229,39 @@ word-break:break-word;
 
 }
 
-.email{
+.status-box{
 
-color:#c084fc;
+text-align:center;
 
-}
+padding:20px;
 
-.price{
+margin-top:20px;
 
-color:#60a5fa;
+border-radius:18px;
 
-font-size:20px;
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.1);
 
 }
 
 .status{
 
-display:inline-block;
+font-size:22px;
 
-padding:7px 12px;
-
-border-radius:20px;
-
-font-size:14px;
-
-font-weight:bold;
+font-weight:800;
 
 }
 
 .pending{
 
-background:
-rgba(250,204,21,.15);
-
 color:#facc15;
 
 }
 
-.approved{
-
-background:
-rgba(34,197,94,.15);
+.success{
 
 color:#22c55e;
 
@@ -250,26 +269,47 @@ color:#22c55e;
 
 .rejected{
 
-background:
-rgba(239,68,68,.15);
-
 color:#ef4444;
 
 }
 
-.home-button{
+.status-description{
+
+color:#cbd5e1;
+
+font-size:13px;
+
+margin-top:8px;
+
+line-height:1.6;
+
+}
+
+.button{
 
 display:block;
 
-text-align:center;
-
-text-decoration:none;
+width:100%;
 
 padding:14px;
 
 margin-top:20px;
 
+border:none;
+
 border-radius:14px;
+
+text-align:center;
+
+text-decoration:none;
+
+font-size:16px;
+
+font-weight:bold;
+
+color:white;
+
+cursor:pointer;
 
 background:
 linear-gradient(
@@ -278,53 +318,17 @@ linear-gradient(
 #7c3aed
 );
 
-color:white;
+}
 
-font-weight:bold;
+.button:hover{
+
+transform:translateY(-2px);
 
 }
 
-.back-button{
-
-display:block;
-
-text-align:center;
-
-text-decoration:none;
-
-padding:13px;
-
-margin-top:12px;
-
-border-radius:14px;
+.home-button{
 
 background:#334155;
-
-color:white;
-
-font-weight:bold;
-
-}
-
-.login-button{
-
-display:block;
-
-text-align:center;
-
-text-decoration:none;
-
-padding:14px;
-
-margin-top:15px;
-
-border-radius:14px;
-
-background:#7c3aed;
-
-color:white;
-
-font-weight:bold;
 
 }
 
@@ -338,61 +342,258 @@ font-weight:bold;
 
 <div class="container">
 
+
 <div class="card">
+
 
 <div class="logo">
 💎
 </div>
 
-<h2 class="title">
-Track Your Order
-</h2>
 
-<p class="subtitle">
+<div class="title">
+Track Order
+</div>
+
+
+<div class="subtitle">
 Zyper Diamond Store
-</p>
+</div>
 
 
-<div id="content">
+<div
+id="error"
+class="error">
+</div>
 
-<div class="loading">
+
+<div
+id="loading"
+class="loading">
 
 ⏳ Loading order...
 
 </div>
 
+
+<div
+id="orderContent"
+style="display:none;">
+
+
+<!-- ORDER ID -->
+
+<div class="order-id-box">
+
+<div class="order-label">
+ORDER ID
+</div>
+
+<div
+id="orderId"
+class="order-id">
+0000
+</div>
+
 </div>
 
 
+<!-- CUSTOMER EMAIL -->
+
+<div class="info">
+
+<div class="info-label">
+📧 Customer Email
+</div>
+
+<div
+id="customerEmail"
+class="info-value">
+-
+</div>
+
+</div>
+
+
+<!-- CUSTOMER NAME -->
+
+<div class="info">
+
+<div class="info-label">
+👤 Customer Name
+</div>
+
+<div
+id="customerName"
+class="info-value">
+-
+</div>
+
+</div>
+
+
+<!-- PHONE -->
+
+<div class="info">
+
+<div class="info-label">
+📱 Phone
+</div>
+
+<div
+id="phone"
+class="info-value">
+-
+</div>
+
+</div>
+
+
+<!-- UID -->
+
+<div class="info">
+
+<div class="info-label">
+🎮 Free Fire UID
+</div>
+
+<div
+id="gameUID"
+class="info-value">
+-
+</div>
+
+</div>
+
+
+<!-- PACKAGE -->
+
+<div class="info">
+
+<div class="info-label">
+📦 Package
+</div>
+
+<div
+id="package"
+class="info-value">
+-
+</div>
+
+</div>
+
+
+<!-- PRICE -->
+
+<div class="info">
+
+<div class="info-label">
+💰 Price
+</div>
+
+<div
+id="price"
+class="info-value">
+LKR 0
+</div>
+
+</div>
+
+
+<!-- PAYMENT -->
+
+<div class="info">
+
+<div class="info-label">
+💳 Payment Method
+</div>
+
+<div
+id="paymentMethod"
+class="info-value">
+-
+</div>
+
+</div>
+
+
+<!-- DATE -->
+
+<div class="info">
+
+<div class="info-label">
+📅 Order Date
+</div>
+
+<div
+id="createdAt"
+class="info-value">
+-
+</div>
+
+</div>
+
+
+<!-- STATUS -->
+
+<div class="status-box">
+
+<div
+id="status"
+class="status pending">
+
+⏳ Pending
+
+</div>
+
+
+<div
+id="statusDescription"
+class="status-description">
+
+Your payment is being checked.
+Please wait.
+
+</div>
+
+</div>
+
+
+<!-- HOME -->
+
 <a
 href="home.html"
-class="home-button">
+class="button home-button">
 
-🏠 Home
+🏠 Back to Home
 
 </a>
 
 
+<!-- HISTORY -->
+
 <a
 href="history.html"
-class="back-button">
+class="button">
 
 📜 My Order History
 
 </a>
 
-</div>
 
 </div>
 
+</div>
+
+</div>
 
 
 <script type="module">
 
 
-/* =====================================================
+/* =========================================
 FIREBASE
-===================================================== */
+========================================= */
 
 import {
 auth,
@@ -416,53 +617,29 @@ from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* =====================================================
+/* =========================================
 ELEMENTS
-===================================================== */
+========================================= */
 
-const content =
-document.getElementById("content");
-
-
-/* =====================================================
-ESCAPE HTML
-===================================================== */
-
-function escapeHTML(value){
-
-return String(value ?? "")
-
-.replace(
-/&/g,
-"&amp;"
-)
-
-.replace(
-/</g,
-"&lt;"
-)
-
-.replace(
-/>/g,
-"&gt;"
-)
-
-.replace(
-/"/g,
-"&quot;"
-)
-
-.replace(
-/'/g,
-"&#039;"
+const loading =
+document.getElementById(
+"loading"
 );
 
-}
+const errorBox =
+document.getElementById(
+"error"
+);
+
+const orderContent =
+document.getElementById(
+"orderContent"
+);
 
 
-/* =====================================================
+/* =========================================
 GET ORDER ID
-===================================================== */
+========================================= */
 
 const params =
 new URLSearchParams(
@@ -473,33 +650,45 @@ const orderId =
 params.get("id");
 
 
-/* =====================================================
-NO ORDER ID
-===================================================== */
+/* =========================================
+ERROR
+========================================= */
 
-if(!orderId){
+function showError(message){
 
-content.innerHTML = `
+loading.style.display =
+"none";
 
-<div class="error">
+orderContent.style.display =
+"none";
 
-❌ Order ID not found.
+errorBox.textContent =
+message;
 
-<br><br>
-
-Please select an order from
-your order history.
-
-</div>
-
-`;
+errorBox.style.display =
+"block";
 
 }
 
 
-/* =====================================================
+/* =========================================
+NO ORDER ID
+========================================= */
+
+if(!orderId){
+
+showError(
+"❌ Order ID is missing."
+);
+
+}
+
+
+/* =========================================
 AUTH
-===================================================== */
+========================================= */
+
+if(orderId){
 
 onAuthStateChanged(
 
@@ -507,46 +696,24 @@ auth,
 
 async function(user){
 
-if(!orderId){
-
-return;
-
-}
-
-
-/* =====================================================
+/* =====================================
 NOT LOGGED IN
-===================================================== */
+===================================== */
 
 if(!user){
 
-content.innerHTML = `
-
-<div class="error">
-
-🔐 Please login to view
-your order.
-
-</div>
-
-<a
-href="index.html"
-class="login-button">
-
-🔐 Login Now
-
-</a>
-
-`;
+showError(
+"❌ Please login first."
+);
 
 return;
 
 }
 
 
-/* =====================================================
+/* =====================================
 LOAD ORDER
-===================================================== */
+===================================== */
 
 try{
 
@@ -564,22 +731,15 @@ orderRef
 );
 
 
+/* =====================================
+ORDER NOT FOUND
+===================================== */
+
 if(!orderSnapshot.exists()){
 
-content.innerHTML = `
-
-<div class="error">
-
-❌ Order not found.
-
-<br><br>
-
-Order ID:
-<b>${escapeHTML(orderId)}</b>
-
-</div>
-
-`;
+showError(
+"❌ Order not found."
+);
 
 return;
 
@@ -590,39 +750,40 @@ const data =
 orderSnapshot.data();
 
 
-/* =====================================================
+/* =====================================
 SECURITY
-===================================================== */
+===================================== */
 
 if(
 data.userId &&
 data.userId !== user.uid
 ){
 
-content.innerHTML = `
-
-<div class="error">
-
-❌ You are not authorized
-to view this order.
-
-</div>
-
-`;
+showError(
+"❌ You cannot view this order."
+);
 
 return;
 
 }
 
 
-/* =====================================================
-ORDER DATA
-===================================================== */
+/* =====================================
+ORDER ID
+===================================== */
 
-const displayOrderId =
+document
+.getElementById(
+"orderId"
+)
+.textContent =
 data.orderId ||
 orderId;
 
+
+/* =====================================
+EMAIL
+===================================== */
 
 const email =
 data.customerEmail ||
@@ -631,22 +792,58 @@ user.email ||
 "Email not available";
 
 
-const gameUID =
-data.gameUID ||
-data.uid ||
-"-";
+document
+.getElementById(
+"customerEmail"
+)
+.textContent =
+email;
 
 
-const customerName =
+/* =====================================
+CUSTOMER NAME
+===================================== */
+
+document
+.getElementById(
+"customerName"
+)
+.textContent =
 data.customerName ||
 data.playerName ||
 "-";
 
 
-const phone =
+/* =====================================
+PHONE
+===================================== */
+
+document
+.getElementById(
+"phone"
+)
+.textContent =
 data.phone ||
 "-";
 
+
+/* =====================================
+UID
+===================================== */
+
+document
+.getElementById(
+"gameUID"
+)
+.textContent =
+data.gameUID ||
+data.uid ||
+"-";
+
+
+/* =====================================
+PACKAGE
+===================================== */
 
 const packageName =
 data.package ||
@@ -655,72 +852,56 @@ data.product ||
 "-";
 
 
+document
+.getElementById(
+"package"
+)
+.textContent =
+packageName;
+
+
+/* =====================================
+PRICE
+===================================== */
+
 const price =
-data.price ??
-data.productPrice ??
-data.total ??
-0;
+Number(
+data.price ||
+data.productPrice ||
+data.total ||
+0
+);
 
 
-const paymentMethod =
+document
+.getElementById(
+"price"
+)
+.textContent =
+"LKR " +
+price.toLocaleString(
+"en-US"
+);
+
+
+/* =====================================
+PAYMENT METHOD
+===================================== */
+
+document
+.getElementById(
+"paymentMethod"
+)
+.textContent =
 data.paymentMethod ||
 "Payment Receipt";
 
 
-const status =
-String(
-data.status ||
-"Pending"
-).trim();
-
-
-/* =====================================================
-STATUS
-===================================================== */
-
-let statusClass =
-"pending";
-
-let statusText =
-"⏳ Pending";
-
-
-if(
-status.toLowerCase() ===
-"approved" ||
-
-status.toLowerCase() ===
-"success"
-){
-
-statusClass =
-"approved";
-
-statusText =
-"✅ Approved";
-
-}
-
-
-if(
-status.toLowerCase() ===
-"rejected"
-){
-
-statusClass =
-"rejected";
-
-statusText =
-"❌ Rejected";
-
-}
-
-
-/* =====================================================
+/* =====================================
 DATE
-===================================================== */
+===================================== */
 
-let orderDate =
+let dateText =
 "-";
 
 
@@ -733,38 +914,23 @@ typeof data.createdAt.toDate ===
 "function"
 ){
 
-orderDate =
+dateText =
 data.createdAt
 .toDate()
 .toLocaleString();
 
-}
+}else{
 
-else if(
-data.createdAt.seconds
-){
-
-orderDate =
-new Date(
-data.createdAt.seconds * 1000
-)
-.toLocaleString();
-
-}
-
-else{
-
-orderDate =
+dateText =
 new Date(
 data.createdAt
-)
-.toLocaleString();
+).toLocaleString();
 
 }
 
 }catch{
 
-orderDate =
+dateText =
 "-";
 
 }
@@ -772,164 +938,137 @@ orderDate =
 }
 
 
-/* =====================================================
-DISPLAY
-===================================================== */
+document
+.getElementById(
+"createdAt"
+)
+.textContent =
+dateText;
 
-content.innerHTML = `
 
-<div class="order-box">
+/* =====================================
+STATUS
+===================================== */
 
+const statusValue =
+String(
+data.status ||
+"Pending"
+).trim();
 
-<div class="order-id">
 
-#${escapeHTML(displayOrderId)}
+const statusElement =
+document.getElementById(
+"status"
+);
 
-</div>
 
+const descriptionElement =
+document.getElementById(
+"statusDescription"
+);
 
-<div class="info">
 
-<div class="label">
-📧 CUSTOMER EMAIL
-</div>
+/*
+================================================
+ONLY 3 STATUS:
 
-<div class="value email">
+Pending
+Success
+Rejected
 
-${escapeHTML(email)}
+NO APPROVED
+================================================
+*/
 
-</div>
 
-</div>
+if(
+statusValue.toLowerCase() ===
+"success"
+){
 
+statusElement.className =
+"status success";
 
-<div class="info">
+statusElement.textContent =
+"✅ Success";
 
-<div class="label">
-🎮 FREE FIRE UID
-</div>
+descriptionElement.textContent =
+"Your order has been successfully completed. Thank you for shopping with Zyper Diamond Store.";
 
-<div class="value">
+}
 
-${escapeHTML(gameUID)}
 
-</div>
+/* =========================================
+PENDING
+========================================= */
 
-</div>
+else if(
+statusValue.toLowerCase() ===
+"pending"
+){
 
+statusElement.className =
+"status pending";
 
-<div class="info">
+statusElement.textContent =
+"⏳ Pending";
 
-<div class="label">
-👤 CUSTOMER NAME
-</div>
+descriptionElement.textContent =
+"Your payment is being checked. Please wait.";
 
-<div class="value">
+}
 
-${escapeHTML(customerName)}
 
-</div>
+/* =========================================
+REJECTED
+========================================= */
 
-</div>
+else if(
+statusValue.toLowerCase() ===
+"rejected"
+){
 
+statusElement.className =
+"status rejected";
 
-<div class="info">
+statusElement.textContent =
+"❌ Rejected";
 
-<div class="label">
-📱 PHONE
-</div>
+descriptionElement.textContent =
+"Your order was rejected. Please contact Zyper Diamond Store if you need help.";
 
-<div class="value">
+}
 
-${escapeHTML(phone)}
 
-</div>
+/* =========================================
+UNKNOWN STATUS
+========================================= */
 
-</div>
+else{
 
+statusElement.className =
+"status pending";
 
-<div class="info">
+statusElement.textContent =
+"⏳ Pending";
 
-<div class="label">
-📦 PACKAGE
-</div>
+descriptionElement.textContent =
+"Your order is being processed.";
 
-<div class="value">
+}
 
-${escapeHTML(packageName)}
 
-</div>
+/* =====================================
+SHOW
+===================================== */
 
-</div>
+loading.style.display =
+"none";
 
+orderContent.style.display =
+"block";
 
-<div class="info">
-
-<div class="label">
-💰 PRICE
-</div>
-
-<div class="value price">
-
-LKR ${Number(price).toLocaleString("en-US")}
-
-</div>
-
-</div>
-
-
-<div class="info">
-
-<div class="label">
-💳 PAYMENT METHOD
-</div>
-
-<div class="value">
-
-${escapeHTML(paymentMethod)}
-
-</div>
-
-</div>
-
-
-<div class="info">
-
-<div class="label">
-📊 STATUS
-</div>
-
-<div class="value">
-
-<span class="status ${statusClass}">
-
-${statusText}
-
-</span>
-
-</div>
-
-</div>
-
-
-<div class="info">
-
-<div class="label">
-📅 ORDER DATE
-</div>
-
-<div class="value">
-
-${escapeHTML(orderDate)}
-
-</div>
-
-</div>
-
-
-</div>
-
-`;
 
 }catch(error){
 
@@ -938,28 +1077,19 @@ console.error(
 error
 );
 
-
-content.innerHTML = `
-
-<div class="error">
-
-❌ Unable to load order.
-
-<br><br>
-
-${escapeHTML(
+showError(
+"❌ Unable to load order: " +
 error.message
-)}
-
-</div>
-
-`;
+);
 
 }
 
 });
 
+}
+
 </script>
+
 
 </body>
 
