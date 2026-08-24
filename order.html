@@ -397,12 +397,11 @@ transform:translateY(-2px);
 
 #checking{
 text-align:center;
-padding:30px 10px;
+padding:35px 10px;
 }
 
-#checking .check-icon{
+.check-icon{
 font-size:50px;
-margin-bottom:10px;
 }
 
 #checking p{
@@ -422,7 +421,7 @@ font-size:14px;
 
 
 <!-- ==========================================
-AUTH CHECK
+CHECKING LOGIN
 ========================================== -->
 
 <div id="checking">
@@ -596,7 +595,7 @@ alt="Payment Receipt Preview">
 </div>
 
 
-<!-- SUBMIT -->
+<!-- SEND -->
 
 <button
 id="send"
@@ -743,49 +742,31 @@ PACKAGES
 const PACKAGES = {
 
 "Weekly":560,
-
 "Monthly":2720,
-
 "Weekly Lite":150,
 
 "VIP Bundle":3280,
-
 "SVIP Bundle":4960,
 
 "Level 6":130,
-
 "Level 10":250,
-
 "Level 15":250,
-
 "Level 20":250,
-
 "Level 25":250,
-
 "Level 30":380,
-
 "Full Pass":1500,
 
 "E Badge 3":250,
-
 "E Badge 7":350,
-
 "E Badge 30":1100,
 
 "25 Diamonds":150,
-
 "100 Diamonds":380,
-
 "310 Diamonds":1150,
-
 "520 Diamonds":1800,
-
 "1060 Diamonds":3400,
-
 "2180 Diamonds":6500,
-
 "5600 Diamonds":16500,
-
 "11500 Diamonds":35000
 
 };
@@ -824,11 +805,8 @@ errorBox.style.display =
 "block";
 
 window.scrollTo({
-
 top:0,
-
 behavior:"smooth"
-
 });
 
 }
@@ -843,7 +821,7 @@ errorBox.style.display =
 
 
 /* ==========================================
-GET SELECTED PACKAGE
+GET PACKAGE
 ========================================== */
 
 function getSelectedPackage(){
@@ -852,9 +830,7 @@ const raw =
 localStorage.getItem("package");
 
 if(!raw){
-
 return null;
-
 }
 
 const separator =
@@ -864,9 +840,7 @@ const index =
 raw.lastIndexOf(separator);
 
 if(index === -1){
-
 return null;
-
 }
 
 const name =
@@ -902,11 +876,8 @@ return null;
 }
 
 return {
-
 name:name,
-
 price:price
-
 };
 
 }
@@ -939,7 +910,7 @@ true;
 
 
 /* ==========================================
-FIREBASE AUTH CHECK
+FIREBASE LOGIN CHECK
 ========================================== */
 
 onAuthStateChanged(
@@ -963,13 +934,11 @@ NOT LOGGED IN
 if(!user){
 
 console.log(
-"Customer not logged in."
+"Customer is NOT logged in."
 );
 
-
 /*
-Remember that the customer wanted
-to continue to the order page.
+Save page for after login.
 */
 
 localStorage.setItem(
@@ -977,9 +946,9 @@ localStorage.setItem(
 "order.html"
 );
 
-
 /*
-Send customer to your login page.
+Send directly to your
+existing login page.
 */
 
 window.location.replace(
@@ -992,7 +961,7 @@ return;
 
 
 /* ==========================================
-LOGGED IN
+CUSTOMER LOGGED IN
 ========================================== */
 
 console.log(
@@ -1002,8 +971,45 @@ user.uid
 
 
 /*
-Show order page.
+Get Firebase token immediately.
+
+This confirms the current
+customer has a valid Firebase
+authentication session.
 */
+
+try{
+
+const token =
+await user.getIdToken();
+
+
+console.log(
+"Firebase ID token obtained:",
+token ?
+"YES" :
+"NO"
+);
+
+}catch(error){
+
+console.error(
+"Firebase token error:",
+error
+);
+
+window.location.replace(
+"index.html"
+);
+
+return;
+
+}
+
+
+/* ==========================================
+SHOW ORDER PAGE
+========================================== */
 
 checking.style.display =
 "none";
@@ -1012,18 +1018,14 @@ formArea.style.display =
 "block";
 
 
-/*
-Show email.
-*/
+/* EMAIL */
 
 customerEmail.textContent =
 user.email ||
 "Email not available";
 
 
-/*
-Show package.
-*/
+/* PACKAGE */
 
 if(selected){
 
@@ -1061,9 +1063,7 @@ const file =
 this.files[0];
 
 if(!file){
-
 return;
-
 }
 
 
@@ -1144,7 +1144,7 @@ hideError();
 
 
 /* ==========================================
-CHECK LOGIN
+CHECK USER
 ========================================== */
 
 const user =
@@ -1152,6 +1152,10 @@ auth.currentUser;
 
 
 if(!user){
+
+console.log(
+"No Firebase user at submit."
+);
 
 localStorage.setItem(
 "returnAfterLogin",
@@ -1339,7 +1343,6 @@ true;
 sendButton.textContent =
 "⏳ Sending Order...";
 
-
 document
 .getElementById("loading")
 .style.display =
@@ -1350,15 +1353,15 @@ try{
 
 
 /* ==========================================
-GET FIREBASE ID TOKEN
+FIREBASE ID TOKEN
 ==========================================
 
-THIS IS THE IMPORTANT FIX.
+IMPORTANT FIX
 
-The Worker expects:
+The Cloudflare Worker checks:
 
 Authorization:
-Bearer Firebase-ID-Token
+Bearer Firebase_ID_TOKEN
 
 ========================================== */
 
@@ -1369,10 +1372,15 @@ await user.getIdToken(true);
 if(!firebaseToken){
 
 throw new Error(
-"Unable to get Firebase login token."
+"Unable to get Firebase ID token."
 );
 
 }
+
+
+console.log(
+"Firebase token ready. Sending authenticated request..."
+);
 
 
 /* ==========================================
@@ -1429,7 +1437,7 @@ receipt.name
 
 
 /* ==========================================
-SEND TO CLOUDFLARE WORKER
+CLOUDFLARE WORKER REQUEST
 ========================================== */
 
 const response =
@@ -1441,20 +1449,17 @@ WORKER_URL,
 
 method:"POST",
 
-headers:{
-
 /*
-IMPORTANT:
+THIS IS THE IMPORTANT PART.
 
-Do NOT put this token
-inside FormData.
-
-It must be an HTTP
-Authorization header.
+The Firebase token is sent
+in the HTTP Authorization header.
 */
 
+headers:{
+
 "Authorization":
-"Bearer " + firebaseToken
+`Bearer ${firebaseToken}`
 
 },
 
@@ -1465,8 +1470,14 @@ body:formData
 );
 
 
+console.log(
+"Worker HTTP status:",
+response.status
+);
+
+
 /* ==========================================
-READ RESPONSE
+RESPONSE
 ========================================== */
 
 let result;
@@ -1479,10 +1490,16 @@ await response.json();
 }catch{
 
 throw new Error(
-"Invalid response from Cloudflare Worker."
+"Cloudflare Worker returned an invalid response."
 );
 
 }
+
+
+console.log(
+"Worker response:",
+result
+);
 
 
 /* ==========================================
@@ -1512,7 +1529,8 @@ String(result.orderId);
 
 if(
 !orderId ||
-orderId === "undefined"
+orderId === "undefined" ||
+orderId === "null"
 ){
 
 throw new Error(
@@ -1523,7 +1541,7 @@ throw new Error(
 
 
 /* ==========================================
-SAVE FIRESTORE ORDER
+SAVE FIRESTORE
 ========================================== */
 
 await setDoc(
@@ -1539,9 +1557,6 @@ orderId
 orderId:
 orderId,
 
-
-/* CUSTOMER */
-
 userId:
 user.uid,
 
@@ -1554,14 +1569,8 @@ playerName,
 phone:
 phone,
 
-
-/* GAME */
-
 gameUID:
 uid,
-
-
-/* PRODUCT */
 
 productName:
 selected.name,
@@ -1575,23 +1584,14 @@ selected.name,
 price:
 selected.price,
 
-
-/* PAYMENT */
-
 paymentMethod:
 "WhatsApp / Receipt",
 
 total:
 selected.price,
 
-
-/* STATUS */
-
 status:
 "Pending",
-
-
-/* TIMESTAMP */
 
 createdAt:
 serverTimestamp()
@@ -1602,7 +1602,7 @@ serverTimestamp()
 
 
 /* ==========================================
-WHATSAPP
+WHATSAPP MESSAGE
 ========================================== */
 
 const whatsappMessage =
@@ -1644,7 +1644,7 @@ whatsappMessage
 
 
 /* ==========================================
-WHATSAPP BUTTON
+SET WHATSAPP BUTTON
 ========================================== */
 
 document
@@ -1656,7 +1656,7 @@ whatsappURL;
 
 
 /* ==========================================
-SUCCESS
+SHOW SUCCESS
 ========================================== */
 
 formArea.style.display =
@@ -1685,7 +1685,7 @@ localStorage.removeItem(
 
 
 /* ==========================================
-SCROLL TOP
+TOP
 ========================================== */
 
 window.scrollTo({
@@ -1736,7 +1736,6 @@ error.message ||
 
 sendButton.disabled =
 false;
-
 
 sendButton.textContent =
 "🚀 Place Order";
