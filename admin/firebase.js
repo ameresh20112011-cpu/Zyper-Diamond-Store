@@ -1,6 +1,6 @@
-// ================================
+// ========================================
 // FIREBASE APP
-// ================================
+// ========================================
 
 import {
     initializeApp
@@ -9,9 +9,9 @@ from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 
-// ================================
+// ========================================
 // FIREBASE AUTHENTICATION
-// ================================
+// ========================================
 
 import {
     getAuth
@@ -20,9 +20,9 @@ from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
-// ================================
+// ========================================
 // FIRESTORE
-// ================================
+// ========================================
 
 import {
     getFirestore
@@ -31,21 +31,9 @@ from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
-// ================================
-// FIREBASE APP CHECK
-// ================================
-
-import {
-    initializeAppCheck,
-    ReCaptchaV3Provider
-}
-from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
-
-
-// ================================
+// ========================================
 // FIREBASE CONFIG
-// ================================
+// ========================================
 
 const firebaseConfig = {
 
@@ -73,43 +61,17 @@ const firebaseConfig = {
 };
 
 
-// ================================
+// ========================================
 // INITIALIZE FIREBASE
-// ================================
+// ========================================
 
 const app =
     initializeApp(firebaseConfig);
 
 
-// ================================
-// APP CHECK
-// ================================
-
-initializeAppCheck(
-
-    app,
-
-    {
-
-        provider:
-
-            new ReCaptchaV3Provider(
-
-                "6LfBe2QtAAAAAJsp-crpLwMXkhPn1QhvRSVWzB8P"
-
-            ),
-
-        isTokenAutoRefreshEnabled:
-            true
-
-    }
-
-);
-
-
-// ================================
-// EXPORT SERVICES
-// ================================
+// ========================================
+// FIREBASE SERVICES
+// ========================================
 
 export const auth =
     getAuth(app);
