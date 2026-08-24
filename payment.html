@@ -8,6 +8,9 @@
 
 <title>Zyper Diamond Store - Payment</title>
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 
 *{
@@ -17,34 +20,52 @@ box-sizing:border-box;
 body{
 
 margin:0;
+
 font-family:'Segoe UI',Arial,sans-serif;
 
 background:
 linear-gradient(135deg,#020617,#0f172a,#1e1b4b);
 
 color:white;
+
 min-height:100vh;
 
+padding-bottom:90px;
+
 }
+
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
 
 padding:20px;
 
 display:flex;
+
 justify-content:center;
 
 }
 
+
+/* =========================
+   CARD
+========================= */
+
 .card{
 
 width:100%;
+
 max-width:420px;
 
 background:
 rgba(255,255,255,0.08);
 
 backdrop-filter:blur(15px);
+
+-webkit-backdrop-filter:blur(15px);
 
 border:1px solid rgba(255,255,255,0.15);
 
@@ -59,11 +80,13 @@ animation:show .5s ease;
 
 }
 
+
 @keyframes show{
 
 from{
 
 transform:translateY(30px);
+
 opacity:0;
 
 }
@@ -71,38 +94,55 @@ opacity:0;
 to{
 
 transform:translateY(0);
+
 opacity:1;
 
 }
 
 }
 
+
+/* =========================
+   LOGO
+========================= */
+
 .logo{
 
 text-align:center;
+
 font-size:40px;
 
 }
 
+
+/* =========================
+   TITLE
+========================= */
+
 .title{
 
 text-align:center;
+
 font-size:26px;
+
 font-weight:800;
 
 background:
 linear-gradient(90deg,#60a5fa,#c084fc);
 
 -webkit-background-clip:text;
+
 background-clip:text;
 
 color:transparent;
 
 }
 
+
 .subtitle{
 
 text-align:center;
+
 color:#cbd5e1;
 
 margin-bottom:25px;
@@ -110,7 +150,9 @@ margin-bottom:25px;
 }
 
 
-/* SELECTED PACKAGE */
+/* =========================
+   SELECTED PACKAGE
+========================= */
 
 .package{
 
@@ -133,6 +175,7 @@ text-align:center;
 
 }
 
+
 .package-label{
 
 font-size:12px;
@@ -143,6 +186,7 @@ margin-bottom:5px;
 
 }
 
+
 .package-name{
 
 font-size:20px;
@@ -150,6 +194,7 @@ font-size:20px;
 font-weight:bold;
 
 }
+
 
 .package-price{
 
@@ -164,7 +209,9 @@ color:#60a5fa;
 }
 
 
-/* PAYMENT METHOD */
+/* =========================
+   PAYMENT METHOD
+========================= */
 
 .method{
 
@@ -183,6 +230,7 @@ border:1px solid rgba(255,255,255,.15);
 
 }
 
+
 .method h3{
 
 margin-top:0;
@@ -190,7 +238,9 @@ margin-top:0;
 }
 
 
-/* INFO */
+/* =========================
+   INFO
+========================= */
 
 .info{
 
@@ -210,11 +260,13 @@ gap:10px;
 
 }
 
+
 .label{
 
 color:#cbd5e1;
 
 }
+
 
 .value{
 
@@ -229,7 +281,9 @@ word-break:break-word;
 }
 
 
-/* INSTRUCTIONS */
+/* =========================
+   INSTRUCTIONS
+========================= */
 
 .instruction{
 
@@ -247,6 +301,7 @@ color:#e2e8f0;
 
 }
 
+
 .instruction h3{
 
 margin-top:0;
@@ -254,7 +309,9 @@ margin-top:0;
 }
 
 
-/* BUTTON */
+/* =========================
+   BUTTON
+========================= */
 
 button{
 
@@ -290,11 +347,13 @@ transition:.3s;
 
 }
 
+
 button:hover{
 
 transform:translateY(-3px);
 
 }
+
 
 button:active{
 
@@ -303,7 +362,26 @@ transform:scale(.98);
 }
 
 
-/* BACK BUTTON */
+/* =========================
+   DISABLED BUTTON
+========================= */
+
+button:disabled{
+
+opacity:.5;
+
+cursor:not-allowed;
+
+transform:none;
+
+box-shadow:none;
+
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
 
 .back{
 
@@ -314,7 +392,9 @@ box-shadow:none;
 }
 
 
-/* ERROR */
+/* =========================
+   ERROR
+========================= */
 
 .error{
 
@@ -339,7 +419,9 @@ font-size:13px;
 }
 
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 .footer{
 
@@ -354,7 +436,87 @@ font-size:13px;
 }
 
 
-/* MOBILE */
+/* =====================================================
+   BOTTOM NAVIGATION
+===================================================== */
+
+.bottom-nav{
+
+position:fixed;
+
+bottom:0;
+
+left:0;
+
+width:100%;
+
+height:70px;
+
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+background:rgba(255,255,255,0.1);
+
+backdrop-filter:blur(15px);
+
+-webkit-backdrop-filter:blur(15px);
+
+border-top:1px solid rgba(255,255,255,.2);
+
+z-index:1000;
+
+}
+
+
+/* NAV ITEM */
+
+.nav-item{
+
+text-align:center;
+
+text-decoration:none;
+
+color:#aaa;
+
+font-size:12px;
+
+flex:1;
+
+-webkit-tap-highlight-color:transparent;
+
+}
+
+
+/* ICON */
+
+.nav-item i{
+
+display:block;
+
+font-size:22px;
+
+margin-bottom:4px;
+
+}
+
+
+/* ACTIVE */
+
+.nav-item:hover,
+
+.nav-item.active{
+
+color:#00eaff;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:500px){
 
@@ -385,6 +547,29 @@ font-size:23px;
 .info{
 
 font-size:13px;
+
+}
+
+
+/* NAV */
+
+.bottom-nav{
+
+height:70px;
+
+}
+
+.nav-item{
+
+font-size:11px;
+
+}
+
+.nav-item i{
+
+font-size:21px;
+
+margin-bottom:3px;
 
 }
 
@@ -587,6 +772,81 @@ onclick="history.back()">
 </div>
 
 
+<!-- =====================================================
+     BOTTOM NAVIGATION
+===================================================== -->
+
+<div class="bottom-nav">
+
+
+<a
+href="home.html"
+class="nav-item">
+
+<i class="fas fa-home"></i>
+
+<span>
+Home
+</span>
+
+</a>
+
+
+<a
+href="topup.html"
+class="nav-item">
+
+<i class="fas fa-gem"></i>
+
+<span>
+Shop
+</span>
+
+</a>
+
+
+<a
+href="payment.html"
+class="nav-item active">
+
+<i class="fas fa-bolt"></i>
+
+<span>
+Payment
+</span>
+
+</a>
+
+
+<a
+href="history.html"
+class="nav-item">
+
+<i class="fas fa-clock"></i>
+
+<span>
+History
+</span>
+
+</a>
+
+
+<a
+href="profile.html"
+class="nav-item">
+
+<i class="fas fa-user"></i>
+
+<span>
+Profile
+</span>
+
+</a>
+
+
+</div>
+
+
 <script>
 
 
@@ -666,7 +926,6 @@ return null;
 Expected:
 
 Weekly - LKR 560
-
 */
 
 const separator =
@@ -696,7 +955,7 @@ index + separator.length
 );
 
 
-/* Check package */
+/* CHECK PACKAGE */
 
 if(
 !Object.prototype.hasOwnProperty.call(
@@ -710,7 +969,7 @@ return null;
 }
 
 
-/* Check price */
+/* CHECK PRICE */
 
 if(
 PACKAGES[name] !== price
@@ -797,7 +1056,6 @@ window.location.href=
 "order.html";
 
 }
-
 
 </script>
 
