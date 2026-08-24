@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,138 +5,74 @@
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
+<meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Zyper Admin Dashboard</title>
+<title>Zyper Diamond Store - Admin Dashboard</title>
 
-<link
-rel="stylesheet"
-href="admin.css">
+<link rel="stylesheet" href="./admin.css">
 
 </head>
 
-
 <body>
-
 
 <div id="app" style="display:none;">
 
-
-<!-- =====================================
-SIDEBAR
-===================================== -->
-
-<aside class="sidebar">
-
+<header class="topbar">
 
 <div class="brand">
 
-<span>💎</span>
+<span class="brand-icon">💎</span>
 
 <div>
 
-<strong>Zyper</strong>
+<strong>ZYPER</strong>
 
-<small>
-Diamond Store
-</small>
+<small>DIAMOND STORE</small>
 
 </div>
 
 </div>
 
+<div class="top-actions">
 
-<nav>
+<span id="adminEmail">
+Admin
+</span>
 
-<button
-class="nav-btn active"
-id="allOrdersBtn">
-
-📦 All Orders
-
+<button id="logout">
+Logout
 </button>
 
+</div>
 
-<button
-class="nav-btn"
-id="pendingBtn">
-
-⏳ Pending
-
-</button>
+</header>
 
 
-<button
-class="nav-btn"
-id="successBtn">
+<main class="dashboard">
 
-✅ Success
-
-</button>
-
-
-<button
-class="nav-btn"
-id="rejectedBtn">
-
-❌ Rejected
-
-</button>
-
-</nav>
-
-
-<button
-id="logout"
-class="logout-btn">
-
-🚪 Logout
-
-</button>
-
-
-</aside>
-
-
-<!-- =====================================
-MAIN
-===================================== -->
-
-<main class="main">
-
-
-<div class="topbar">
+<div class="welcome">
 
 <div>
 
-<h1>
-Orders Dashboard
-</h1>
+<h1>Orders Dashboard</h1>
 
 <p>
-Manage your Zyper Diamond Store orders
+Manage and monitor your customer orders.
 </p>
 
 </div>
 
-
-<div class="admin-badge">
-
-👑 Admin
-
+<div class="live-badge">
+● LIVE
 </div>
 
 </div>
 
 
-<!-- =====================================
-STATISTICS
-===================================== -->
+<!-- STATISTICS -->
 
 <section class="stats">
-
 
 <div class="stat-card">
 
@@ -147,33 +82,10 @@ STATISTICS
 
 <div>
 
-<span>
-Total Orders
-</span>
+<span>Total Orders</span>
 
 <strong id="totalOrders">
 0
-</strong>
-
-</div>
-
-</div>
-
-
-<div class="stat-card">
-
-<div class="stat-icon">
-💰
-</div>
-
-<div>
-
-<span>
-Revenue
-</span>
-
-<strong>
-LKR <span id="revenue">0</span>
 </strong>
 
 </div>
@@ -189,9 +101,7 @@ LKR <span id="revenue">0</span>
 
 <div>
 
-<span>
-Pending
-</span>
+<span>Pending</span>
 
 <strong id="pendingOrders">
 0
@@ -210,9 +120,7 @@ Pending
 
 <div>
 
-<span>
-Success
-</span>
+<span>Success</span>
 
 <strong id="successOrders">
 0
@@ -223,58 +131,96 @@ Success
 </div>
 
 
+<div class="stat-card">
+
+<div class="stat-icon">
+❌
+</div>
+
+<div>
+
+<span>Rejected</span>
+
+<strong id="rejectedOrders">
+0
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+💰
+</div>
+
+<div>
+
+<span>Revenue</span>
+
+<strong>
+LKR <span id="revenue">0</span>
+</strong>
+
+</div>
+
+</div>
+
 </section>
 
 
-<!-- =====================================
-FILTER AREA
-===================================== -->
+<!-- FILTER PANEL -->
 
-<section class="filter-card">
-
+<section class="filter-panel">
 
 <div class="filter-title">
 
-🔎 Order Search & Filter
+<h2>
+📅 Order Filter
+</h2>
+
+<button
+id="clearFilter"
+type="button">
+
+Clear
+
+</button>
 
 </div>
 
 
 <div class="filters">
 
+<div class="filter-item">
 
-<input
-id="search"
-type="text"
-placeholder="Search Order ID, UID, customer, email..."
-autocomplete="off">
-
-
-<div>
-
-<label>
-From Date
-</label>
+<label>From Date</label>
 
 <input
 id="fromDate"
-type="date">
+type="date"
+>
 
 </div>
 
 
-<div>
+<div class="filter-item">
 
-<label>
-To Date
-</label>
+<label>To Date</label>
 
 <input
 id="toDate"
-type="date">
+type="date"
+>
 
 </div>
 
+
+<div class="filter-item">
+
+<label>Status</label>
 
 <select id="statusFilter">
 
@@ -296,60 +242,74 @@ Rejected
 
 </select>
 
-
-<button
-id="clearFilter"
-class="clear-btn">
-
-Clear
-
-</button>
-
-
 </div>
 
 
-<div
-id="filterInfo"
+<div class="filter-item search-box">
+
+<label>Search</label>
+
+<input
+id="search"
+type="text"
+placeholder="Order ID, UID, customer..."
+autocomplete="off"
+>
+
+</div>
+
+</div>
+
+<div id="filterInfo"
 class="filter-info">
 
 Showing all orders
 
 </div>
 
-
 </section>
 
 
-<!-- =====================================
-ORDERS
-===================================== -->
+<!-- ORDERS -->
 
-<section class="orders-card">
-
+<section class="orders-panel">
 
 <div class="orders-header">
+
+<div>
 
 <h2>
 📋 Orders
 </h2>
 
+<p id="ordersCount">
+0 orders
+</p>
+
+</div>
+
 <button
 id="refresh"
-class="refresh-btn">
+class="refresh-btn"
+type="button">
 
-🔄 Refresh
+↻ Refresh
 
 </button>
 
 </div>
 
 
-<div class="table-wrap">
+<div
+id="errorBox"
+class="error-box"
+style="display:none;">
+</div>
 
+
+<div class="table-container">
 
 <table>
-
 
 <thead>
 
@@ -371,7 +331,7 @@ class="refresh-btn">
 
 <th>Phone</th>
 
-<th>Date</th>
+<th>Date / Time</th>
 
 <th>Status</th>
 
@@ -381,15 +341,19 @@ class="refresh-btn">
 
 </thead>
 
-
 <tbody id="orders">
 
 <tr>
 
-<td colspan="11"
-class="loading">
+<td colspan="11">
 
-⏳ Loading orders...
+<div class="loading">
+
+<div class="spinner"></div>
+
+Loading orders...
+
+</div>
 
 </td>
 
@@ -397,29 +361,22 @@ class="loading">
 
 </tbody>
 
-
 </table>
-
 
 </div>
 
-
 </section>
 
-
 </main>
-
 
 </div>
 
 
 <script
 type="module"
-src="admin.js">
+src="./admin.js">
 </script>
-
 
 </body>
 
 </html>
-```
