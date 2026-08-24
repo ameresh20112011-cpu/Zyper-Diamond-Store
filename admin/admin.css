@@ -1,265 +1,482 @@
+/* ==========================================
+   ZYPER ADMIN PANEL
+========================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+
 body{
 
-margin:0;
+    margin:0;
 
-font-family:Arial;
+    font-family:Arial,sans-serif;
 
-background:#020617;
+    background:#020617;
 
-color:white;
+    color:white;
 
 }
 
 
+/* ==========================================
+   LOGIN
+========================================== */
 
 .login-page{
 
-height:100vh;
+    min-height:100vh;
 
-display:flex;
+    display:flex;
 
-justify-content:center;
+    justify-content:center;
 
-align-items:center;
+    align-items:center;
+
+    padding:20px;
 
 }
-
 
 
 .login-box{
 
-background:#1e293b;
+    background:#1e293b;
 
-padding:40px;
+    padding:40px;
 
-border-radius:25px;
+    border-radius:25px;
 
-text-align:center;
+    text-align:center;
 
-width:350px;
+    width:350px;
+
+    max-width:100%;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.4);
 
 }
-
 
 
 .logo{
 
-font-size:60px;
+    font-size:60px;
 
 }
 
 
+.login-box h1{
 
-input{
-
-width:90%;
-
-padding:14px;
-
-margin:10px;
-
-border-radius:10px;
-
-border:none;
+    margin-bottom:10px;
 
 }
 
+
+.login-box h3{
+
+    color:#94a3b8;
+
+}
+
+
+.login-box input{
+
+    width:90%;
+
+    padding:14px;
+
+    margin:10px;
+
+    border-radius:10px;
+
+    border:none;
+
+    outline:none;
+
+    background:#0f172a;
+
+    color:white;
+
+}
+
+
+.login-box input:focus{
+
+    box-shadow:
+    0 0 0 2px #38bdf8;
+
+}
 
 
 button{
 
-padding:10px 20px;
+    padding:10px 20px;
 
-background:#38bdf8;
+    background:#38bdf8;
 
-border:0;
+    border:0;
 
-border-radius:10px;
+    border-radius:10px;
 
-color:white;
+    color:white;
 
-cursor:pointer;
+    cursor:pointer;
+
+    font-weight:bold;
 
 }
-
 
 
 button:hover{
 
-opacity:.85;
+    opacity:.9;
 
 }
 
 
+button:disabled{
 
-.sidebar{
+    opacity:.6;
 
-position:fixed;
-
-width:220px;
-
-height:100%;
-
-background:#111827;
-
-padding:25px;
+    cursor:not-allowed;
 
 }
-
-
-
-.main{
-
-margin-left:270px;
-
-padding:30px;
-
-overflow-x:auto;
-
-}
-
-
-
-.cards{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:20px;
-
-}
-
-
-
-.card{
-
-background:#1e293b;
-
-padding:20px;
-
-border-radius:20px;
-
-}
-
-
-
-.card h2{
-
-color:#38bdf8;
-
-}
-
-
-
-table{
-
-width:100%;
-
-margin-top:30px;
-
-border-collapse:collapse;
-
-background:#1e293b;
-
-}
-
-
-
-td,th{
-
-padding:12px;
-
-border:1px solid #475569;
-
-text-align:center;
-
-white-space:nowrap;
-
-}
-
-
-
-.Pending{
-
-color:orange;
-
-}
-
-
-
-.Success{
-
-color:#22c55e;
-
-}
-
-
-
-.Rejected{
-
-color:red;
-
-}
-
-
-
-.action-success{
-
-background:#22c55e;
-
-margin:3px;
-
-}
-
-
-
-.action-reject{
-
-background:#ef4444;
-
-margin:3px;
-
-}
-
 
 
 #msg{
 
-color:#f87171;
+    min-height:20px;
 
-margin-top:15px;
+    color:#f87171;
+
+    margin-top:15px;
 
 }
 
 
-
-/* MOBILE */
-
-@media(max-width:800px){
+/* ==========================================
+   SIDEBAR
+========================================== */
 
 .sidebar{
 
-position:relative;
+    position:fixed;
 
-width:auto;
+    left:0;
 
-height:auto;
+    top:0;
+
+    width:220px;
+
+    height:100vh;
+
+    background:#111827;
+
+    padding:25px;
 
 }
+
+
+.sidebar h1{
+
+    margin-top:0;
+
+}
+
+
+.sidebar h3{
+
+    color:#94a3b8;
+
+}
+
+
+.sidebar button{
+
+    margin-top:25px;
+
+    background:#ef4444;
+
+    width:100%;
+
+}
+
+
+/* ==========================================
+   MAIN
+========================================== */
 
 .main{
 
-margin-left:0;
+    margin-left:220px;
 
-padding:15px;
+    padding:30px;
 
 }
+
+
+.main > h1{
+
+    margin-top:0;
+
+}
+
+
+/* ==========================================
+   CARDS
+========================================== */
 
 .cards{
 
-grid-template-columns:repeat(2,1fr);
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:20px;
 
 }
+
+
+.card{
+
+    background:#1e293b;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.2);
+
+}
+
+
+.card h3{
+
+    color:#94a3b8;
+
+    margin-top:0;
+
+}
+
+
+.card h2{
+
+    color:#38bdf8;
+
+    font-size:28px;
+
+}
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+.search{
+
+    width:100%;
+
+    max-width:450px;
+
+    padding:14px;
+
+    margin-top:25px;
+
+    border-radius:10px;
+
+    border:none;
+
+    outline:none;
+
+    background:#1e293b;
+
+    color:white;
+
+}
+
+
+.search:focus{
+
+    box-shadow:
+    0 0 0 2px #38bdf8;
+
+}
+
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.table-container{
+
+    width:100%;
+
+    overflow-x:auto;
+
+}
+
+
+table{
+
+    width:100%;
+
+    min-width:1100px;
+
+    margin-top:30px;
+
+    border-collapse:collapse;
+
+    background:#1e293b;
+
+}
+
+
+td,
+th{
+
+    padding:12px;
+
+    border:1px solid #475569;
+
+    text-align:center;
+
+    white-space:nowrap;
+
+}
+
+
+th{
+
+    background:#0f172a;
+
+    color:#60a5fa;
+
+}
+
+
+tr:hover td{
+
+    background:#263449;
+
+}
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.Pending{
+
+    color:orange;
+
+    font-weight:bold;
+
+}
+
+
+.Success{
+
+    color:#22c55e;
+
+    font-weight:bold;
+
+}
+
+
+.Rejected{
+
+    color:red;
+
+    font-weight:bold;
+
+}
+
+
+/* ==========================================
+   ACTION BUTTONS
+========================================== */
+
+.action-success{
+
+    background:#22c55e;
+
+    margin:2px;
+
+}
+
+
+.action-rejected{
+
+    background:#ef4444;
+
+    margin:2px;
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:900px){
+
+    .sidebar{
+
+        position:relative;
+
+        width:100%;
+
+        height:auto;
+
+        padding:15px;
+
+    }
+
+
+    .sidebar button{
+
+        width:auto;
+
+        margin-top:5px;
+
+    }
+
+
+    .main{
+
+        margin-left:0;
+
+        padding:15px;
+
+    }
+
+
+    .cards{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width:500px){
+
+    .cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .login-box{
+
+        padding:25px;
+
+    }
 
 }
