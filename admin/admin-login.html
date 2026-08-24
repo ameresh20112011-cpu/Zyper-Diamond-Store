@@ -8,67 +8,100 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Zyper Diamond Store - Admin Login</title>
+<title>Zyper Admin Login</title>
 
-<link rel="stylesheet" href="./admin.css">
+<link rel="stylesheet"
+href="admin.css">
 
 </head>
 
+
 <body class="login-page">
 
-<div class="login-box">
+
+<div class="login-background">
+
+<div class="glow glow-one"></div>
+<div class="glow glow-two"></div>
+
+
+<div class="login-card">
+
 
 <div class="login-logo">
 💎
 </div>
 
-<h1>Zyper Diamond Store</h1>
 
-<div class="login-subtitle">
-ADMIN PANEL
+<h1>
+Zyper Diamond Store
+</h1>
+
+
+<p class="login-subtitle">
+Administrator Panel
+</p>
+
+
+<div id="msg"
+class="login-message">
 </div>
+
 
 <div class="input-group">
 
-<label>Email</label>
+<label>
+📧 Admin Email
+</label>
 
 <input
-id="email"
 type="email"
+id="email"
 placeholder="Enter admin email"
-autocomplete="username"
->
+autocomplete="username">
 
 </div>
+
 
 <div class="input-group">
 
-<label>Password</label>
+<label>
+🔐 Password
+</label>
 
 <input
-id="password"
 type="password"
+id="password"
 placeholder="Enter password"
-autocomplete="current-password"
->
+autocomplete="current-password">
 
 </div>
+
 
 <button
 id="login"
-type="button">
+class="login-button">
 
-LOGIN TO DASHBOARD
+🔐 LOGIN TO DASHBOARD
 
 </button>
 
-<div id="msg"></div>
+
+<div class="security-note">
+
+🔒 Secure Firebase Authentication
 
 </div>
 
+
+</div>
+
+</div>
+
+
 <script
 type="module"
-src="./admin.js">
+src="admin.js">
 </script>
 
 </body>
