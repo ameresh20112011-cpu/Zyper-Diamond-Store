@@ -9,9 +9,7 @@
 name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>
-My Orders - Zyper Diamond Store
-</title>
+<title>My Orders - Zyper Diamond Store</title>
 
 <style>
 
@@ -27,7 +25,6 @@ color:white;
 
 }
 
-
 h2{
 
 text-align:center;
@@ -37,7 +34,6 @@ color:#60a5fa;
 margin-top:20px;
 
 }
-
 
 .order-card{
 
@@ -49,11 +45,9 @@ padding:20px;
 
 border-radius:15px;
 
-box-shadow:
-0 0 15px rgba(0,0,0,0.3);
+box-shadow:0 0 15px rgba(0,0,0,0.3);
 
 }
-
 
 .status{
 
@@ -63,13 +57,11 @@ font-size:18px;
 
 }
 
-
 .pending{
 
 color:#facc15;
 
 }
-
 
 .approved{
 
@@ -77,13 +69,11 @@ color:#22c55e;
 
 }
 
-
 .rejected{
 
 color:#ef4444;
 
 }
-
 
 .track-btn,
 .home-btn{
@@ -108,8 +98,9 @@ font-size:16px;
 
 font-weight:bold;
 
-}
+cursor:pointer;
 
+}
 
 .track-btn{
 
@@ -119,7 +110,6 @@ margin-top:10px;
 
 }
 
-
 .empty{
 
 text-align:center;
@@ -127,6 +117,12 @@ text-align:center;
 margin-top:50px;
 
 font-size:18px;
+
+}
+
+.login-btn{
+
+background:#7c3aed;
 
 }
 
@@ -154,7 +150,7 @@ font-size:18px;
 
 <button
 class="home-btn"
-onclick="goHome()">
+id="homeButton">
 
 🏠 Go Home
 
@@ -165,91 +161,68 @@ onclick="goHome()">
 <script type="module">
 
 
-import {
-initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
+/* =========================================
+USE THE SAME FIREBASE.JS
+========================================= */
 
 import {
+auth,
+db
+} from "./firebase.js";
 
-getFirestore,
+
+import {
+onAuthStateChanged
+} from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+import {
 collection,
 query,
 where,
 getDocs
-
-}
-from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+} from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-import {
+/* =========================================
+ELEMENTS
+========================================= */
 
-getAuth,
-onAuthStateChanged
+const ordersDiv =
+document.getElementById("orders");
 
-}
-from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
+const homeButton =
+document.getElementById("homeButton");
 
 
-/* =====================================
-FIREBASE
-===================================== */
+/* =========================================
+HOME
+========================================= */
 
-const firebaseConfig = {
+homeButton.onclick =
+function(){
 
-apiKey:
-"AIzaSyCd_2LplLOl4TOGJQWqndwHNGzPh2PEHM",
-
-authDomain:
-"zyper-d-iamond-store.firebaseapp.com",
-
-projectId:
-"zyper-d-iamond-store",
-
-messagingSenderId:
-"892467477866",
-
-appId:
-"1:892467477866:web:61e9b6ff9435798da23913"
+window.location.href =
+"index.html";
 
 };
 
 
-const app =
-initializeApp(
-firebaseConfig
-);
-
-
-const db =
-getFirestore(app);
-
-
-const auth =
-getAuth(app);
-
-
-const ordersDiv =
-document.getElementById(
-"orders"
-);
-
-
-
-/* =====================================
-AUTH
-===================================== */
+/* =========================================
+AUTH CHECK
+========================================= */
 
 onAuthStateChanged(
 
 auth,
 
 async function(user){
+
+/* =========================================
+NOT LOGGED IN
+========================================= */
 
 if(!user){
 
@@ -261,22 +234,63 @@ ordersDiv.innerHTML = `
 
 </p>
 
+<button
+class="home-btn login-btn"
+id="loginButton">
+
+🔐 Login Now
+
+</button>
+
 `;
+
+document
+.getElementById("loginButton")
+.onclick =
+function(){
+
+window.location.href =
+"index.html";
+
+};
 
 return;
 
 }
 
 
+/* =========================================
+LOGGED IN
+========================================= */
+
 try{
+
+ordersDiv.innerHTML = `
+
+<p class="empty">
+
+⏳ Loading your orders...
+
+</p>
+
+`;
+
+
+/* =========================================
+FIRESTORE QUERY
+========================================= */
+
+const ordersRef =
+collection(
+db,
+"orders"
+);
+
 
 const q =
 query(
 
-collection(
-db,
-"orders"
-),
+ordersRef,
 
 where(
 "userId",
@@ -291,6 +305,10 @@ const snapshot =
 await getDocs(q);
 
 
+/* =========================================
+NO ORDERS
+========================================= */
+
 if(snapshot.empty){
 
 ordersDiv.innerHTML = `
@@ -298,6 +316,10 @@ ordersDiv.innerHTML = `
 <p class="empty">
 
 📦 No Orders Found
+
+<br><br>
+
+You haven't placed any orders yet.
 
 </p>
 
@@ -308,10 +330,19 @@ return;
 }
 
 
+/* =========================================
+CLEAR LOADING
+========================================= */
+
 ordersDiv.innerHTML = "";
 
 
+/* =========================================
+DISPLAY ORDERS
+========================================= */
+
 snapshot.forEach(
+
 function(orderSnapshot){
 
 const data =
@@ -319,34 +350,63 @@ orderSnapshot.data();
 
 
 const orderId =
+data.orderId ||
 orderSnapshot.id;
 
 
-let status =
+const gameUID =
+data.gameUID ||
+data.uid ||
+"-";
+
+
+const packageName =
+data.package ||
+data.productName ||
+data.product ||
+"-";
+
+
+const price =
+data.price ||
+data.productPrice ||
+data.total ||
+0;
+
+
+const status =
 data.status ||
 "Pending";
 
 
+/* =========================================
+STATUS
+========================================= */
+
 let statusClass =
 "pending";
-
 
 let statusText =
 "⏳ Pending";
 
 
-if(status === "Success"){
+if(
+status === "Approved" ||
+status === "Success"
+){
 
 statusClass =
 "approved";
 
 statusText =
-"✅ Success";
+"✅ Approved";
 
 }
 
 
-if(status === "Rejected"){
+if(
+status === "Rejected"
+){
 
 statusClass =
 "rejected";
@@ -357,25 +417,53 @@ statusText =
 }
 
 
-const gameUID =
-data.gameUID ||
-data.gameUid ||
-data.gameId ||
-data.uid ||
-"-";
+/* =========================================
+DATE
+========================================= */
+
+let orderDate =
+"";
 
 
-const packageName =
-data.package ||
-data.product ||
-data.productName ||
-"-";
+if(data.createdAt){
 
+try{
+
+if(
+typeof data.createdAt.toDate ===
+"function"
+){
+
+orderDate =
+data.createdAt
+.toDate()
+.toLocaleString();
+
+}else{
+
+orderDate =
+new Date(
+data.createdAt
+).toLocaleString();
+
+}
+
+}catch{
+
+orderDate = "";
+
+}
+
+}
+
+
+/* =========================================
+ORDER CARD
+========================================= */
 
 ordersDiv.innerHTML += `
 
 <div class="order-card">
-
 
 <h3>
 💎 Diamond Order
@@ -386,7 +474,7 @@ ordersDiv.innerHTML += `
 
 <b>Order ID:</b><br>
 
-${orderId}
+${escapeHTML(orderId)}
 
 </p>
 
@@ -395,7 +483,7 @@ ${orderId}
 
 <b>Game UID:</b><br>
 
-${gameUID}
+${escapeHTML(gameUID)}
 
 </p>
 
@@ -404,7 +492,16 @@ ${gameUID}
 
 <b>Package:</b><br>
 
-${packageName}
+${escapeHTML(packageName)}
+
+</p>
+
+
+<p>
+
+<b>Price:</b><br>
+
+LKR ${Number(price).toLocaleString("en-US")}
 
 </p>
 
@@ -413,7 +510,8 @@ ${packageName}
 
 <b>Status:</b>
 
-<span class="status ${statusClass}">
+<span
+class="status ${statusClass}">
 
 ${statusText}
 
@@ -422,9 +520,26 @@ ${statusText}
 </p>
 
 
+${
+orderDate
+?
+`
+<p>
+
+<b>Order Date:</b><br>
+
+${escapeHTML(orderDate)}
+
+</p>
+`
+:
+""
+}
+
+
 <button
 class="track-btn"
-onclick="trackOrder('${orderId}')">
+data-order-id="${escapeHTML(orderId)}">
 
 🔎 Track Order
 
@@ -438,17 +553,58 @@ onclick="trackOrder('${orderId}')">
 });
 
 
+/* =========================================
+TRACK BUTTONS
+========================================= */
+
+document
+.querySelectorAll(".track-btn")
+.forEach(
+
+function(button){
+
+button.addEventListener(
+
+"click",
+
+function(){
+
+const id =
+button.dataset.orderId;
+
+
+window.location.href =
+"track.html?id=" +
+encodeURIComponent(id);
+
+}
+
+);
+
+}
+
+);
+
 
 }catch(error){
 
-console.error(error);
+console.error(
+"History error:",
+error
+);
 
 
 ordersDiv.innerHTML = `
 
 <p class="empty">
 
-❌ ${error.message}
+❌ Unable to load orders.
+
+<br><br>
+
+${escapeHTML(
+error.message
+)}
 
 </p>
 
@@ -459,33 +615,40 @@ ordersDiv.innerHTML = `
 });
 
 
+/* =========================================
+SECURITY DISPLAY HELPER
+========================================= */
 
-/* =====================================
-TRACK
-===================================== */
+function escapeHTML(value){
 
-window.trackOrder =
-function(id){
+return String(value)
 
-window.location.href =
-"track.html?id=" +
-encodeURIComponent(id);
+.replace(
+/&/g,
+"&amp;"
+)
 
-};
+.replace(
+/</g,
+"&lt;"
+)
 
+.replace(
+/>/g,
+"&gt;"
+)
 
+.replace(
+/"/g,
+"&quot;"
+)
 
-/* =====================================
-HOME
-===================================== */
+.replace(
+/'/g,
+"&#039;"
+);
 
-window.goHome =
-function(){
-
-window.location.href =
-"home.html";
-
-};
+}
 
 </script>
 
