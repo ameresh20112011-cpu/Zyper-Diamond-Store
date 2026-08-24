@@ -5,34 +5,20 @@
 
 import { auth, db } from "./firebase.js";
 
-
 import {
-
     signInWithEmailAndPassword,
-
     onAuthStateChanged,
-
     signOut
-
-}
-from
+} from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-
 import {
-
     collection,
-
     getDocs,
-
     doc,
-
     getDoc,
-
     updateDoc
-
-}
-from
+} from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
@@ -40,44 +26,31 @@ from
 // CHECK ADMIN
 // ==========================================
 
-async function checkAdmin(user){
+async function checkAdmin(user) {
 
-    try{
+    try {
 
-        if(!user){
-
+        if (!user) {
             return false;
-
         }
 
-
-        const adminRef =
-        doc(
+        const adminRef = doc(
             db,
             "users",
             user.uid
         );
 
+        const adminDoc = await getDoc(adminRef);
 
-        const adminDoc =
-        await getDoc(adminRef);
-
-
-        if(!adminDoc.exists()){
-
+        if (!adminDoc.exists()) {
             return false;
-
         }
 
-
-        const data =
-        adminDoc.data();
-
+        const data = adminDoc.data();
 
         return data.role === "admin";
 
-
-    }catch(error){
+    } catch (error) {
 
         console.error(
             "Admin check error:",
@@ -85,9 +58,7 @@ async function checkAdmin(user){
         );
 
         return false;
-
     }
-
 }
 
 
@@ -96,189 +67,154 @@ async function checkAdmin(user){
 // ==========================================
 
 const loginButton =
-document.getElementById("login");
+    document.getElementById("login");
 
-
-if(loginButton){
+if (loginButton) {
 
     loginButton.addEventListener(
         "click",
         adminLogin
     );
 
-
     const passwordInput =
-    document.getElementById("password");
+        document.getElementById("password");
 
-
-    if(passwordInput){
+    if (passwordInput) {
 
         passwordInput.addEventListener(
             "keydown",
-            function(event){
+            function (event) {
 
-                if(event.key === "Enter"){
-
+                if (event.key === "Enter") {
                     adminLogin();
-
                 }
 
             }
         );
-
     }
-
 }
 
 
-async function adminLogin(){
+async function adminLogin() {
 
     const email =
-    document
-    .getElementById("email")
-    .value
-    .trim();
-
+        document
+        .getElementById("email")
+        .value
+        .trim();
 
     const password =
-    document
-    .getElementById("password")
-    .value;
-
+        document
+        .getElementById("password")
+        .value;
 
     const msg =
-    document
-    .getElementById("msg");
+        document
+        .getElementById("msg");
 
-
-    if(!email || !password){
+    if (!email || !password) {
 
         msg.textContent =
-        "Enter email and password.";
+            "Enter email and password.";
 
         return;
-
     }
 
+    loginButton.disabled = true;
+    loginButton.textContent = "Logging in...";
 
-    loginButton.disabled =
-    true;
-
-    loginButton.textContent =
-    "Logging in...";
-
-
-    try{
+    try {
 
         const result =
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
 
         const admin =
-        await checkAdmin(
-            result.user
-        );
+            await checkAdmin(
+                result.user
+            );
 
-
-        if(!admin){
+        if (!admin) {
 
             msg.textContent =
-            "❌ This account is not an admin.";
+                "❌ This account is not an admin.";
 
             await signOut(auth);
 
-            loginButton.disabled =
-            false;
-
-            loginButton.textContent =
-            "LOGIN";
+            loginButton.disabled = false;
+            loginButton.textContent = "LOGIN";
 
             return;
-
         }
 
-
         window.location.href =
-        "admin-dashboard.html";
+            "admin-dashboard.html";
 
-
-    }catch(error){
+    } catch (error) {
 
         console.error(
             "Login error:",
             error
         );
 
-
         let message =
-        "Login failed.";
+            "Login failed.";
 
-
-        if(error.code ===
-        "auth/invalid-credential"){
-
-            message =
-            "❌ Incorrect email or password.";
-
-        }
-
-        else if(error.code ===
-        "auth/user-not-found"){
+        if (
+            error.code ===
+            "auth/invalid-credential"
+        ) {
 
             message =
-            "❌ User account not found.";
+                "❌ Incorrect email or password.";
 
-        }
-
-        else if(error.code ===
-        "auth/wrong-password"){
-
-            message =
-            "❌ Incorrect password.";
-
-        }
-
-        else if(error.code ===
-        "auth/invalid-email"){
+        } else if (
+            error.code ===
+            "auth/user-not-found"
+        ) {
 
             message =
-            "❌ Invalid email address.";
+                "❌ User account not found.";
 
-        }
-
-        else if(error.code ===
-        "auth/network-request-failed"){
-
-            message =
-            "❌ Network error. Check your internet.";
-
-        }
-
-        else{
+        } else if (
+            error.code ===
+            "auth/wrong-password"
+        ) {
 
             message =
-            "❌ " +
-            error.message;
+                "❌ Incorrect password.";
 
+        } else if (
+            error.code ===
+            "auth/invalid-email"
+        ) {
+
+            message =
+                "❌ Invalid email address.";
+
+        } else if (
+            error.code ===
+            "auth/network-request-failed"
+        ) {
+
+            message =
+                "❌ Network error. Check your internet.";
+
+        } else {
+
+            message =
+                "❌ " +
+                error.message;
         }
 
+        msg.textContent = message;
 
-        msg.textContent =
-        message;
-
-
-        loginButton.disabled =
-        false;
-
-        loginButton.textContent =
-        "LOGIN";
-
+        loginButton.disabled = false;
+        loginButton.textContent = "LOGIN";
     }
-
 }
 
 
@@ -287,46 +223,35 @@ async function adminLogin(){
 // ==========================================
 
 const orderTable =
-document.getElementById("orders");
+    document.getElementById("orders");
 
-
-if(orderTable){
+if (orderTable) {
 
     onAuthStateChanged(
         auth,
-        async function(user){
+        async function (user) {
 
             const admin =
-            await checkAdmin(user);
+                await checkAdmin(user);
 
-
-            if(!admin){
+            if (!admin) {
 
                 window.location.href =
-                "admin-login.html";
+                    "admin-login.html";
 
                 return;
-
             }
-
 
             const app =
-            document.getElementById("app");
+                document.getElementById("app");
 
-
-            if(app){
-
-                app.style.display =
-                "block";
-
+            if (app) {
+                app.style.display = "block";
             }
 
-
             await loadOrders();
-
         }
     );
-
 }
 
 
@@ -334,67 +259,91 @@ if(orderTable){
 // FORMAT DATE
 // ==========================================
 
-function formatDate(timestamp){
+function formatDate(timestamp) {
 
-    if(!timestamp){
-
+    if (!timestamp) {
         return "-";
-
     }
 
+    try {
 
-    try{
-
-        if(
+        if (
             typeof timestamp.toDate ===
             "function"
-        ){
+        ) {
 
             const date =
-            timestamp.toDate();
-
+                timestamp.toDate();
 
             const hour =
-            String(
-                date.getHours()
-            ).padStart(2,"0");
-
+                String(
+                    date.getHours()
+                ).padStart(2, "0");
 
             const minute =
-            String(
-                date.getMinutes()
-            ).padStart(2,"0");
-
+                String(
+                    date.getMinutes()
+                ).padStart(2, "0");
 
             const year =
-            date.getFullYear();
-
+                date.getFullYear();
 
             const month =
-            String(
-                date.getMonth()+1
-            ).padStart(2,"0");
-
+                String(
+                    date.getMonth() + 1
+                ).padStart(2, "0");
 
             const day =
-            String(
-                date.getDate()
-            ).padStart(2,"0");
-
+                String(
+                    date.getDate()
+                ).padStart(2, "0");
 
             return `${hour}:${minute} , ${year}/${month}/${day}`;
-
         }
-
 
         return String(timestamp);
 
-    }catch{
+    } catch {
 
         return "-";
+    }
+}
 
+
+// ==========================================
+// NORMALIZE STATUS
+// ==========================================
+// Converts old "Approved" orders to "Success"
+// ==========================================
+
+function normalizeStatus(status) {
+
+    if (!status) {
+        return "Pending";
     }
 
+    const value =
+        String(status)
+        .trim()
+        .toLowerCase();
+
+    if (value === "approved") {
+        return "Success";
+    }
+
+    if (value === "success") {
+        return "Success";
+    }
+
+    if (value === "rejected") {
+        return "Rejected";
+    }
+
+    if (value === "pending") {
+        return "Pending";
+    }
+
+    return "Pending";
 }
 
 
@@ -404,19 +353,14 @@ function formatDate(timestamp){
 
 let allOrders = [];
 
-
-async function loadOrders(){
+async function loadOrders() {
 
     const table =
-    document.getElementById("orders");
+        document.getElementById("orders");
 
-
-    if(!table){
-
+    if (!table) {
         return;
-
     }
-
 
     table.innerHTML = `
 
@@ -430,78 +374,66 @@ async function loadOrders(){
 
     `;
 
-
-    try{
+    try {
 
         const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "orders"
-            )
-        );
-
+            await getDocs(
+                collection(
+                    db,
+                    "orders"
+                )
+            );
 
         allOrders = [];
 
-
         snapshot.forEach(
-            function(document){
+            function (document) {
 
                 allOrders.push({
 
-                    id:document.id,
+                    id: document.id,
 
-                    data:document.data()
+                    data: document.data()
 
                 });
 
             }
         );
 
-
         allOrders.sort(
-            function(a,b){
+            function (a, b) {
 
                 const dateA =
-                a.data.createdAt;
-
+                    a.data.createdAt;
 
                 const dateB =
-                b.data.createdAt;
+                    b.data.createdAt;
 
-
-                if(
+                if (
                     dateA &&
                     dateB &&
                     dateA.seconds != null &&
                     dateB.seconds != null
-                ){
+                ) {
 
                     return (
                         dateB.seconds -
                         dateA.seconds
                     );
-
                 }
 
-
                 return 0;
-
             }
         );
 
-
         renderOrders(allOrders);
 
-
-    }catch(error){
+    } catch (error) {
 
         console.error(
             "Load orders error:",
             error
         );
-
 
         table.innerHTML = `
 
@@ -520,9 +452,7 @@ async function loadOrders(){
             </tr>
 
         `;
-
     }
-
 }
 
 
@@ -530,32 +460,23 @@ async function loadOrders(){
 // RENDER ORDERS
 // ==========================================
 
-function renderOrders(orders){
+function renderOrders(orders) {
 
     const table =
-    document.getElementById("orders");
+        document.getElementById("orders");
 
-
-    if(!table){
-
+    if (!table) {
         return;
-
     }
-
 
     table.innerHTML = "";
 
-
     let totalOrders = 0;
-
     let revenue = 0;
-
     let pending = 0;
-
     let success = 0;
 
-
-    if(orders.length === 0){
+    if (orders.length === 0) {
 
         table.innerHTML = `
 
@@ -570,107 +491,96 @@ function renderOrders(orders){
             </tr>
 
         `;
-
     }
 
 
     orders.forEach(
-        function(item){
+        function (item) {
 
             const order =
-            item.data;
+                item.data;
 
 
             const customer =
-            order.customerName ||
-            order.playerName ||
-            order.name ||
-            "-";
+                order.customerName ||
+                order.playerName ||
+                order.name ||
+                "-";
 
 
             const firebaseUID =
-            order.userId ||
-            "-";
+                order.userId ||
+                "-";
 
 
             const gameUID =
-            order.gameUID ||
-            order.gameUid ||
-            order.gameId ||
-            "-";
+                order.gameUID ||
+                order.gameUid ||
+                order.gameId ||
+                "-";
 
 
             const product =
-            order.productName ||
-            order.product ||
-            order.package ||
-            order.plan ||
-            "-";
+                order.productName ||
+                order.product ||
+                order.package ||
+                order.plan ||
+                "-";
 
 
             const price =
-            Number(
-                order.productPrice ||
-                order.price ||
-                0
-            );
+                Number(
+                    order.productPrice ||
+                    order.price ||
+                    0
+                );
 
 
             const payment =
-            order.paymentMethod ||
-            order.payment ||
-            "-";
+                order.paymentMethod ||
+                order.payment ||
+                "-";
 
 
             const total =
-            Number(
-                order.total ||
-                order.amount ||
-                price
-            );
+                Number(
+                    order.total ||
+                    order.amount ||
+                    price
+                );
 
 
             const date =
-            formatDate(
-                order.createdAt
-            );
+                formatDate(
+                    order.createdAt
+                );
 
 
+            // IMPORTANT
+            // Old Approved = Success
             const status =
-            order.status ||
-            "Pending";
+                normalizeStatus(
+                    order.status
+                );
 
 
             totalOrders++;
 
-
             revenue += total;
 
 
-            if(
-                status.toLowerCase() ===
-                "pending"
-            ){
-
+            if (status === "Pending") {
                 pending++;
-
             }
 
 
-            if(
-                status.toLowerCase() ===
-                "success" ||
-                status.toLowerCase() ===
-                "approved"
-            ){
-
+            if (status === "Success") {
                 success++;
-
             }
 
 
             const row =
-            document.createElement("tr");
+                document.createElement("tr");
 
 
             row.innerHTML = `
@@ -711,8 +621,15 @@ function renderOrders(orders){
                     LKR ${total.toLocaleString("en-US")}
                 </td>
 
-                <td class="${escapeHTML(status)}">
-                    ${escapeHTML(status)}
+                <td class="status-${status.toLowerCase()}">
+
+                    ${status === "Pending"
+                        ? "⏳ Pending"
+                        : status === "Success"
+                        ? "✅ Success"
+                        : "❌ Rejected"
+                    }
+
                 </td>
 
                 <td>
@@ -721,20 +638,24 @@ function renderOrders(orders){
                         class="action-success"
                         data-id="${escapeHTML(item.id)}"
                         data-status="Success">
-                        ✔
+
+                        ✔ Success
+
                     </button>
+
 
                     <button
                         class="action-rejected"
                         data-id="${escapeHTML(item.id)}"
                         data-status="Rejected">
-                        ✖
+
+                        ✖ Reject
+
                     </button>
 
                 </td>
 
             `;
-
 
             table.appendChild(row);
 
@@ -742,54 +663,75 @@ function renderOrders(orders){
     );
 
 
+    const totalElement =
+        document.getElementById(
+            "totalOrders"
+        );
+
+    if (totalElement) {
+        totalElement.textContent =
+            totalOrders;
+    }
+
+
+    const revenueElement =
+        document.getElementById(
+            "revenue"
+        );
+
+    if (revenueElement) {
+        revenueElement.textContent =
+            revenue.toLocaleString("en-US");
+    }
+
+
+    const pendingElement =
+        document.getElementById(
+            "pendingOrders"
+        );
+
+    if (pendingElement) {
+        pendingElement.textContent =
+            pending;
+    }
+
+
+    const successElement =
+        document.getElementById(
+            "successOrders"
+        );
+
+    if (successElement) {
+        successElement.textContent =
+            success;
+    }
+
+
+    // ======================================
+    // ACTION BUTTONS
+    // ======================================
+
     document
-    .getElementById("totalOrders")
-    .textContent =
-    totalOrders;
+        .querySelectorAll(
+            "[data-status]"
+        )
+        .forEach(
+            function (button) {
 
+                button.addEventListener(
+                    "click",
+                    function () {
 
-    document
-    .getElementById("revenue")
-    .textContent =
-    revenue.toLocaleString("en-US");
+                        changeStatus(
+                            this.dataset.id,
+                            this.dataset.status
+                        );
 
+                    }
+                );
 
-    document
-    .getElementById("pendingOrders")
-    .textContent =
-    pending;
-
-
-    document
-    .getElementById("successOrders")
-    .textContent =
-    success;
-
-
-    // Action buttons
-
-    document
-    .querySelectorAll(
-        "[data-status]"
-    )
-    .forEach(
-        function(button){
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    changeStatus(
-                        this.dataset.id,
-                        this.dataset.status
-                    );
-
-                }
-            );
-
-        }
-    );
-
+            }
+        );
 }
 
 
@@ -800,26 +742,39 @@ function renderOrders(orders){
 async function changeStatus(
     id,
     status
-){
+) {
 
-    try{
+    try {
 
         const user =
-        auth.currentUser;
+            auth.currentUser;
 
 
         const admin =
-        await checkAdmin(user);
+            await checkAdmin(user);
 
 
-        if(!admin){
+        if (!admin) {
 
             alert(
                 "❌ Access denied."
             );
 
             return;
+        }
 
+
+        // ONLY THESE STATUS VALUES
+        if (
+            status !== "Success" &&
+            status !== "Rejected"
+        ) {
+
+            alert(
+                "❌ Invalid status."
+            );
+
+            return;
         }
 
 
@@ -833,31 +788,30 @@ async function changeStatus(
 
             {
 
-                status:status
+                status: status
 
             }
 
         );
 
 
+        // Reload dashboard
+
         await loadOrders();
 
 
-    }catch(error){
+    } catch (error) {
 
         console.error(
             "Status update error:",
             error
         );
 
-
         alert(
             "❌ Failed to update status:\n" +
             error.message
         );
-
     }
-
 }
 
 
@@ -866,82 +820,90 @@ async function changeStatus(
 // ==========================================
 
 const search =
-document.getElementById("search");
+    document.getElementById("search");
 
-
-if(search){
+if (search) {
 
     search.addEventListener(
         "input",
-        function(){
+        function () {
 
             const value =
-            this.value
-            .trim()
-            .toLowerCase();
+                this.value
+                .trim()
+                .toLowerCase();
 
 
-            if(!value){
+            if (!value) {
 
                 renderOrders(
                     allOrders
                 );
 
                 return;
-
             }
 
 
             const filtered =
-            allOrders.filter(
-                function(item){
+                allOrders.filter(
+                    function (item) {
 
-                    const order =
-                    item.data;
-
-
-                    const text = [
-
-                        item.id,
-
-                        order.customerName,
-
-                        order.playerName,
-
-                        order.name,
-
-                        order.userId,
-
-                        order.gameUID,
-
-                        order.gameUid,
-
-                        order.gameId,
-
-                        order.productName,
-
-                        order.product,
-
-                        order.package,
-
-                        order.paymentMethod,
-
-                        order.payment,
-
-                        order.status
-
-                    ]
-                    .filter(Boolean)
-                    .join(" ")
-                    .toLowerCase();
+                        const order =
+                            item.data;
 
 
-                    return text.includes(
-                        value
-                    );
+                        const text = [
 
-                }
-            );
+                            item.id,
+
+                            order.customerName,
+
+                            order.playerName,
+
+                            order.name,
+
+                            order.userId,
+
+                            order.gameUID,
+
+                            order.gameUid,
+
+                            order.gameId,
+
+                            order.productName,
+
+                            order.product,
+
+                            order.package,
+
+                            order.paymentMethod,
+
+                            order.payment,
+
+                            order.status
+
+                        ]
+                        .filter(Boolean)
+                        .join(" ")
+                        .toLowerCase();
+
+
+                        // Also make "approved"
+                        // searchable as "success"
+
+                        const normalizedText =
+                            text.replace(
+                                /approved/g,
+                                "success"
+                            );
+
+
+                        return normalizedText.includes(
+                            value
+                        );
+
+                    }
+                );
 
 
             renderOrders(
@@ -950,7 +912,6 @@ if(search){
 
         }
     );
-
 }
 
 
@@ -959,23 +920,22 @@ if(search){
 // ==========================================
 
 const logout =
-document.getElementById("logout");
+    document.getElementById("logout");
 
-
-if(logout){
+if (logout) {
 
     logout.addEventListener(
         "click",
-        async function(){
+        async function () {
 
-            try{
+            try {
 
                 await signOut(auth);
 
                 window.location.href =
-                "admin-login.html";
+                    "admin-login.html";
 
-            }catch(error){
+            } catch (error) {
 
                 console.error(
                     "Logout error:",
@@ -986,7 +946,6 @@ if(logout){
 
         }
     );
-
 }
 
 
@@ -994,26 +953,41 @@ if(logout){
 // ESCAPE HTML
 // ==========================================
 
-function escapeHTML(value){
+function escapeHTML(value) {
 
-    if(value === null ||
-       value === undefined){
+    if (
+        value === null ||
+        value === undefined
+    ) {
 
         return "";
-
     }
 
 
     return String(value)
 
-        .replaceAll("&","&amp;")
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
 
-        .replaceAll("<","&lt;")
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
 
-        .replaceAll(">","&gt;")
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
 
-        .replaceAll('"',"&quot;")
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
 
-        .replaceAll("'","&#039;");
-
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 }
