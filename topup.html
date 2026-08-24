@@ -19,15 +19,11 @@ box-sizing:border-box;
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
-
 background:
 linear-gradient(135deg,#020617,#0f172a,#1e1b4b);
-
 color:white;
 min-height:100vh;
 }
-
-/* CONTAINER */
 
 .container{
 padding:15px;
@@ -371,10 +367,18 @@ padding:4px 6px;
 
 <div class="container">
 
-<!-- HOME BUTTON -->
+<!-- =====================================
+     HOME
+     GOES DIRECTLY TO home.html
+====================================== -->
 
-<a href="home.html" class="home-btn">
+<a
+href="home.html"
+class="home-btn"
+id="homeButton">
+
 ⬅️ Home
+
 </a>
 
 
@@ -398,13 +402,11 @@ Membership
 
 <div
 class="card"
-onclick="selectPackage(event,this,'Weekly - LKR 560')"
->
+onclick="selectPackage(event,this,'Weekly - LKR 560')">
 
 <img
 src="topupimages/Weekly.png"
-alt="Weekly"
->
+alt="Weekly">
 
 <h4>
 Weekly
@@ -421,13 +423,11 @@ LKR 560
 
 <div
 class="card"
-onclick="selectPackage(event,this,'Monthly - LKR 2720')"
->
+onclick="selectPackage(event,this,'Monthly - LKR 2720')">
 
 <img
 src="topupimages/Monthly.png"
-alt="Monthly"
->
+alt="Monthly">
 
 <h4>
 Monthly
@@ -444,14 +444,12 @@ LKR 2720
 
 <div
 class="card"
-onclick="selectPackage(event,this,'Weekly Lite - LKR 150')"
->
+onclick="selectPackage(event,this,'Weekly Lite - LKR 150')">
 
 <img
 src="topupimages/Weekly-Lite.png"
 alt="Weekly Lite"
-onerror="weeklyLiteFallback(this)"
->
+onerror="weeklyLiteFallback(this)">
 
 <h4>
 Weekly Lite
@@ -481,13 +479,11 @@ VIP Bundles
 
 <div
 class="card"
-onclick="selectPackage(event,this,'VIP Bundle - LKR 3280')"
->
+onclick="selectPackage(event,this,'VIP Bundle - LKR 3280')">
 
 <img
 src="topupimages/Vip.png"
-alt="VIP"
->
+alt="VIP">
 
 <h4>
 VIP Bundle
@@ -504,13 +500,11 @@ LKR 3280
 
 <div
 class="card"
-onclick="selectPackage(event,this,'SVIP Bundle - LKR 4960')"
->
+onclick="selectPackage(event,this,'SVIP Bundle - LKR 4960')">
 
 <img
 src="topupimages/Svip.png"
-alt="SVIP"
->
+alt="SVIP">
 
 <h4>
 SVIP Bundle
@@ -540,13 +534,11 @@ Level Up Pass
 
 <div
 class="card"
-onclick="selectPackage(event,this,'Level 6 - LKR 130')"
->
+onclick="selectPackage(event,this,'Level 6 - LKR 130')">
 
 <img
 src="topupimages/Levelup.png"
-alt="Level Up"
->
+alt="Level Up">
 
 <h4>
 Level 6
@@ -563,13 +555,11 @@ LKR 130
 
 <div
 class="card"
-onclick="selectPackage(event,this,'Level 10 - LKR 250')"
->
+onclick="selectPackage(event,this,'Level 10 - LKR 250')">
 
 <img
 src="topupimages/Levelup.png"
-alt="Level Up"
->
+alt="Level Up">
 
 <h4>
 Level 10
@@ -586,13 +576,11 @@ LKR 250
 
 <div
 class="card"
-onclick="selectPackage(event,this,'Level 15 - LKR 250')"
->
+onclick="selectPackage(event,this,'Level 15 - LKR 250')">
 
 <img
 src="topupimages/Levelup.png"
-alt="Level Up"
->
+alt="Level Up">
 
 <h4>
 Level 15
@@ -609,13 +597,11 @@ LKR 250
 
 <div
 class="card"
-onclick="selectPackage(event,this,'Level 20 - LKR 250')"
->
+onclick="selectPackage(event,this,'Level 20 - LKR 250')">
 
 <img
 src="topupimages/Levelup.png"
-alt="Level Up"
->
+alt="Level Up">
 
 <h4>
 Level 20
@@ -632,13 +618,11 @@ LKR 250
 
 <div
 class="card"
-onclick="selectPackage(event,this,'Level 25 - LKR 250')"
->
+onclick="selectPackage(event,this,'Level 25 - LKR 250')">
 
 <img
 src="topupimages/Levelup.png"
-alt="Level Up"
->
+alt="Level Up">
 
 <h4>
 Level 25
@@ -655,13 +639,11 @@ LKR 250
 
 <div
 class="card"
-onclick="selectPackage(event,this,'Level 30 - LKR 380')"
->
+onclick="selectPackage(event,this,'Level 30 - LKR 380')">
 
 <img
 src="topupimages/Levelup.png"
-alt="Level 30"
->
+alt="Level 30">
 
 <h4>
 Level 30
@@ -678,13 +660,11 @@ LKR 380
 
 <div
 class="card"
-onclick="selectPackage(event,this,'Full Pass - LKR 1500')"
->
+onclick="selectPackage(event,this,'Full Pass - LKR 1500')">
 
 <img
 src="topupimages/Levelup.png"
-alt="Full Pass"
->
+alt="Full Pass">
 
 <h4>
 Full Pass
@@ -714,13 +694,11 @@ EVO Access
 
 <div
 class="card"
-onclick="selectPackage(event,this,'E Badge 3 - LKR 250')"
->
+onclick="selectPackage(event,this,'E Badge 3 - LKR 250')">
 
 <img
 src="topupimages/Evo.png"
-alt="EVO"
->
+alt="EVO">
 
 <h4>
 E Badge 3
@@ -737,13 +715,11 @@ LKR 250
 
 <div
 class="card"
-onclick="selectPackage(event,this,'E Badge 7 - LKR 350')"
->
+onclick="selectPackage(event,this,'E Badge 7 - LKR 350')">
 
 <img
 src="topupimages/Evo.png"
-alt="EVO"
->
+alt="EVO">
 
 <h4>
 E Badge 7
@@ -760,13 +736,11 @@ LKR 350
 
 <div
 class="card"
-onclick="selectPackage(event,this,'E Badge 30 - LKR 1100')"
->
+onclick="selectPackage(event,this,'E Badge 30 - LKR 1100')">
 
 <img
 src="topupimages/Evo.png"
-alt="EVO"
->
+alt="EVO">
 
 <h4>
 E Badge 30
@@ -796,13 +770,11 @@ LKR 1100
 
 <div
 class="card"
-onclick="selectPackage(event,this,'25 Diamonds - LKR 150')"
->
+onclick="selectPackage(event,this,'25 Diamonds - LKR 150')">
 
 <img
 src="topupimages/Diamond.png"
-alt="Diamonds"
->
+alt="Diamonds">
 
 <h4>
 25 Diamonds
@@ -819,13 +791,11 @@ LKR 150
 
 <div
 class="card"
-onclick="selectPackage(event,this,'100 Diamonds - LKR 380')"
->
+onclick="selectPackage(event,this,'100 Diamonds - LKR 380')">
 
 <img
 src="topupimages/Diamond.png"
-alt="Diamonds"
->
+alt="Diamonds">
 
 <h4>
 100 Diamonds
@@ -842,13 +812,11 @@ LKR 380
 
 <div
 class="card"
-onclick="selectPackage(event,this,'310 Diamonds - LKR 1150')"
->
+onclick="selectPackage(event,this,'310 Diamonds - LKR 1150')">
 
 <img
 src="topupimages/Diamond.png"
-alt="Diamonds"
->
+alt="Diamonds">
 
 <h4>
 310 Diamonds
@@ -865,8 +833,7 @@ LKR 1150
 
 <div
 class="card"
-onclick="selectPackage(event,this,'520 Diamonds - LKR 1800')"
->
+onclick="selectPackage(event,this,'520 Diamonds - LKR 1800')">
 
 <span class="badge">
 BEST
@@ -874,8 +841,7 @@ BEST
 
 <img
 src="topupimages/Diamond.png"
-alt="Diamonds"
->
+alt="Diamonds">
 
 <h4>
 520 Diamonds
@@ -892,13 +858,11 @@ LKR 1800
 
 <div
 class="card"
-onclick="selectPackage(event,this,'1060 Diamonds - LKR 3400')"
->
+onclick="selectPackage(event,this,'1060 Diamonds - LKR 3400')">
 
 <img
 src="topupimages/Diamond.png"
-alt="Diamonds"
->
+alt="Diamonds">
 
 <h4>
 1060 Diamonds
@@ -915,13 +879,11 @@ LKR 3400
 
 <div
 class="card"
-onclick="selectPackage(event,this,'2180 Diamonds - LKR 6500')"
->
+onclick="selectPackage(event,this,'2180 Diamonds - LKR 6500')">
 
 <img
 src="topupimages/Diamond.png"
-alt="Diamonds"
->
+alt="Diamonds">
 
 <h4>
 2180 Diamonds
@@ -938,13 +900,11 @@ LKR 6500
 
 <div
 class="card"
-onclick="selectPackage(event,this,'5600 Diamonds - LKR 16500')"
->
+onclick="selectPackage(event,this,'5600 Diamonds - LKR 16500')">
 
 <img
 src="topupimages/Diamond.png"
-alt="Diamonds"
->
+alt="Diamonds">
 
 <h4>
 5600 Diamonds
@@ -961,13 +921,11 @@ LKR 16500
 
 <div
 class="card"
-onclick="selectPackage(event,this,'11500 Diamonds - LKR 35000')"
->
+onclick="selectPackage(event,this,'11500 Diamonds - LKR 35000')">
 
 <img
 src="topupimages/Diamond.png"
-alt="Diamonds"
->
+alt="Diamonds">
 
 <h4>
 11500 Diamonds
@@ -986,9 +944,25 @@ LKR 35000
 
 <script>
 
-/* ===============================
+/* =========================================
+   HOME BUTTON
+   ALWAYS GO TO home.html
+========================================= */
+
+document
+.getElementById("homeButton")
+.addEventListener("click", function(event){
+
+event.preventDefault();
+
+window.location.replace("home.html");
+
+});
+
+
+/* =========================================
    WEEKLY LITE IMAGE FALLBACK
-================================ */
+========================================= */
 
 function weeklyLiteFallback(img){
 
@@ -1025,9 +999,9 @@ return;
 }
 
 
-/* ===============================
+/* =========================================
    PACKAGE SELECTION
-================================ */
+========================================= */
 
 function selectPackage(e,card,name){
 
