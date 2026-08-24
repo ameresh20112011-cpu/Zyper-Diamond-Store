@@ -1,4 +1,7 @@
-// admin/firebase.js
+// ==========================================
+// ZYPER DIAMOND STORE
+// Firebase Configuration
+// ==========================================
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -9,6 +12,10 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+
+// ==========================================
+// FIREBASE CONFIG
+// ==========================================
 
 const firebaseConfig = {
 
@@ -29,7 +36,16 @@ const firebaseConfig = {
 };
 
 
+// ==========================================
+// INITIALIZE FIREBASE
+// ==========================================
+
 const app = initializeApp(firebaseConfig);
+
+
+// ==========================================
+// FIREBASE SERVICES
+// ==========================================
 
 export const auth = getAuth(app);
 
