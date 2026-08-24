@@ -5,8 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Diamond Store - Order</title>
 
@@ -17,11 +16,8 @@ box-sizing:border-box;
 }
 
 body{
-
 margin:0;
-
 font-family:'Segoe UI',Arial,sans-serif;
-
 background:
 linear-gradient(
 135deg,
@@ -29,633 +25,372 @@ linear-gradient(
 #0f172a,
 #312e81
 );
-
 color:white;
-
 min-height:100vh;
-
 }
 
 .container{
-
 padding:20px;
-
 display:flex;
-
 justify-content:center;
-
 }
 
 .card{
-
 width:100%;
-
 max-width:420px;
-
 background:
 rgba(255,255,255,0.08);
-
 backdrop-filter:blur(15px);
-
 padding:25px;
-
 border-radius:25px;
-
 border:
 1px solid rgba(255,255,255,.15);
-
 box-shadow:
 0 20px 50px rgba(0,0,0,.4);
-
 animation:show .5s ease;
-
 }
 
 @keyframes show{
-
 from{
-
 opacity:0;
-
 transform:translateY(25px);
-
 }
-
 to{
-
 opacity:1;
-
 transform:translateY(0);
-
 }
-
 }
 
 .logo{
-
 text-align:center;
-
 font-size:45px;
-
 }
 
 .title{
-
 text-align:center;
-
 font-size:26px;
-
 font-weight:800;
-
 background:
 linear-gradient(
 90deg,
 #60a5fa,
 #c084fc
 );
-
 -webkit-background-clip:text;
-
 background-clip:text;
-
 color:transparent;
-
 }
 
 .subtitle{
-
 text-align:center;
-
 color:#cbd5e1;
-
 margin-bottom:20px;
-
 }
 
-
-/* PACKAGE */
-
 .package-box{
-
 background:
 linear-gradient(
 135deg,
 rgba(37,99,235,.25),
 rgba(124,58,237,.25)
 );
-
 padding:18px;
-
 border-radius:18px;
-
 border:
 1px solid rgba(255,255,255,.15);
-
 margin-bottom:20px;
-
 text-align:center;
-
 }
 
 .package-label{
-
 font-size:12px;
-
 color:#94a3b8;
-
 }
 
 .package-name{
-
 font-size:20px;
-
 font-weight:bold;
-
 margin-top:5px;
-
 }
 
 .package-price{
-
 font-size:24px;
-
 font-weight:bold;
-
 color:#60a5fa;
-
 margin-top:5px;
-
 }
 
-
-/* INPUT */
-
 .field{
-
 margin-top:16px;
-
 }
 
 .field label{
-
 display:block;
-
 font-size:13px;
-
 font-weight:600;
-
 color:#cbd5e1;
-
 margin-bottom:7px;
-
 }
 
 input[type="text"],
 input[type="tel"]{
-
 width:100%;
-
 padding:14px;
-
 border:
 1px solid rgba(255,255,255,.1);
-
 border-radius:12px;
-
 background:#1e293b;
-
 color:white;
-
 font-size:15px;
-
 outline:none;
-
 }
 
 input::placeholder{
-
 color:#94a3b8;
-
 }
 
 input:focus{
-
 border-color:#60a5fa;
-
 box-shadow:
 0 0 0 3px rgba(96,165,250,.1);
-
 }
 
-
-/* UPLOAD */
-
 .upload-box{
-
 margin-top:20px;
-
 }
 
 .upload-label{
-
 display:flex;
-
 flex-direction:column;
-
 align-items:center;
-
 justify-content:center;
-
 padding:25px;
-
 border-radius:20px;
-
 border:
 2px dashed #60a5fa;
-
 background:
 linear-gradient(
 135deg,
 rgba(37,99,235,.25),
 rgba(124,58,237,.25)
 );
-
 cursor:pointer;
-
 transition:.3s;
-
 }
 
 .upload-label:hover{
-
 transform:scale(1.02);
-
 border-color:#c084fc;
-
 }
 
 .upload-label.active{
-
 border-color:#22c55e;
-
 background:
 rgba(34,197,94,.15);
-
 }
 
 .upload-icon{
-
 font-size:50px;
-
 }
 
 .upload-text{
-
 text-align:center;
-
 }
 
 .upload-text h3{
-
 margin:10px 0 5px;
-
 }
 
 .upload-text p{
-
 color:#cbd5e1;
-
 font-size:13px;
-
 margin:0;
-
 word-break:break-word;
-
 }
 
 #receipt{
-
 display:none;
-
 }
-
-
-/* PREVIEW */
 
 .preview{
-
 width:100%;
-
 max-height:300px;
-
 object-fit:contain;
-
 margin-top:15px;
-
 border-radius:15px;
-
 display:none;
-
 border:
 1px solid rgba(255,255,255,.15);
-
 }
 
-
-/* BUTTON */
-
 button{
-
 width:100%;
-
 padding:15px;
-
 margin-top:20px;
-
 border:none;
-
 border-radius:15px;
-
 background:
 linear-gradient(
 90deg,
 #2563eb,
 #7c3aed
 );
-
 color:white;
-
 font-size:17px;
-
 font-weight:bold;
-
 cursor:pointer;
-
 box-shadow:
 0 10px 25px rgba(37,99,235,.35);
-
 transition:.3s;
-
 }
 
 button:hover{
-
 transform:translateY(-2px);
-
 }
 
 button:disabled{
-
 opacity:.6;
-
 cursor:not-allowed;
-
 transform:none;
-
 }
-
-
-/* LOADING */
 
 #loading{
-
 display:none;
-
 text-align:center;
-
 color:#93c5fd;
-
 margin-top:15px;
-
 font-size:14px;
-
 }
-
-
-/* ERROR */
 
 #error{
-
 display:none;
-
 background:
 rgba(239,68,68,.12);
-
 border:
 1px solid rgba(239,68,68,.35);
-
 color:#fca5a5;
-
 padding:13px;
-
 border-radius:12px;
-
 margin-bottom:15px;
-
 font-size:13px;
-
 text-align:center;
-
 }
 
-
-/* SUCCESS */
-
 #success{
-
 display:none;
-
 text-align:center;
-
 }
 
 .success-icon{
-
 font-size:65px;
-
 margin-top:10px;
-
 }
 
 .success-title{
-
 font-size:25px;
-
 font-weight:bold;
-
 margin-top:10px;
-
 }
 
 .order-id{
-
 font-size:42px;
-
 font-weight:800;
-
 letter-spacing:5px;
-
 margin:15px 0;
-
 background:
 linear-gradient(
 90deg,
 #60a5fa,
 #c084fc
 );
-
 -webkit-background-clip:text;
-
 background-clip:text;
-
 color:transparent;
-
 }
 
 .success-text{
-
 color:#cbd5e1;
-
 font-size:13px;
-
 line-height:1.7;
-
 }
 
 .home-button{
-
 display:block;
-
 text-decoration:none;
-
 padding:14px;
-
 margin-top:20px;
-
 border-radius:14px;
-
 background:
 linear-gradient(
 90deg,
 #2563eb,
 #7c3aed
 );
-
 color:white;
-
 font-weight:bold;
-
 }
 
-
-/* WHATSAPP */
-
 .whatsapp-button{
-
 display:block;
-
 width:100%;
-
 padding:14px;
-
 margin-top:12px;
-
 border-radius:14px;
-
 background:
 linear-gradient(
 90deg,
 #25D366,
 #128C7E
 );
-
 color:white;
-
 font-weight:bold;
-
 text-decoration:none;
-
 box-shadow:
 0 10px 25px rgba(37,211,102,.25);
-
 transition:.3s;
-
 }
 
 .whatsapp-button:hover{
-
 transform:translateY(-2px);
-
 }
 
-
-/* BACK */
-
 .back-button{
-
 display:block;
-
 text-decoration:none;
-
 padding:13px;
-
 margin-top:12px;
-
 border-radius:14px;
-
 background:#334155;
-
 color:white;
-
 font-weight:bold;
-
 text-align:center;
-
 transition:.3s;
-
 }
 
 .back-button:hover{
-
 background:#475569;
-
 transform:translateY(-2px);
-
 }
 
-
-/* LOGIN MESSAGE */
-
 .login-message{
-
 display:none;
-
 text-align:center;
-
 padding:30px 10px;
-
 }
 
 .login-message h2{
-
 color:#60a5fa;
-
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <div class="container">
 
 <div class="card">
-
-
-<!-- LOGIN CHECK -->
 
 <div id="loginMessage" class="login-message">
 
@@ -664,42 +399,31 @@ color:#60a5fa;
 <h2>Login Required</h2>
 
 <p class="success-text">
-
 Please login to your account before placing an order.
-
 </p>
 
 <button id="loginButton">
-
 🔐 Login Now
-
 </button>
 
 </div>
 
 
-<!-- ORDER -->
-
 <div id="formArea">
-
 
 <div class="logo">
 💎
 </div>
 
-
 <h2 class="title">
 Place Your Order
 </h2>
-
 
 <p class="subtitle">
 Complete your diamond purchase
 </p>
 
-
 <div id="error"></div>
-
 
 <div class="package-box">
 
@@ -707,20 +431,12 @@ Complete your diamond purchase
 SELECTED PACKAGE
 </div>
 
-<div
-id="packageName"
-class="package-name">
-
+<div id="packageName" class="package-name">
 Loading...
-
 </div>
 
-<div
-id="packagePrice"
-class="package-price">
-
+<div id="packagePrice" class="package-price">
 LKR 0
-
 </div>
 
 </div>
@@ -805,7 +521,6 @@ JPG or PNG • Maximum 5 MB
 
 </label>
 
-
 <img
 id="preview"
 class="preview"
@@ -836,24 +551,18 @@ class="back-button">
 
 </a>
 
-
 </div>
 
 
-<!-- SUCCESS -->
-
 <div id="success">
-
 
 <div class="success-icon">
 ✅
 </div>
 
-
 <div class="success-title">
 Order Submitted!
 </div>
-
 
 <p class="success-text">
 
@@ -862,15 +571,9 @@ to Zyper Diamond Store.
 
 </p>
 
-
-<div
-id="orderId"
-class="order-id">
-
+<div id="orderId" class="order-id">
 0000
-
 </div>
-
 
 <p class="success-text">
 
@@ -881,7 +584,6 @@ class="order-id">
 Please save your Order ID.
 
 </p>
-
 
 <a
 id="whatsappButton"
@@ -894,7 +596,6 @@ rel="noopener">
 
 </a>
 
-
 <a
 href="topup.html"
 class="home-button">
@@ -903,9 +604,7 @@ class="home-button">
 
 </a>
 
-
 </div>
-
 
 </div>
 
@@ -914,59 +613,39 @@ class="home-button">
 
 <script type="module">
 
-
-/* =========================================
-FIREBASE
-========================================= */
-
 import {
-    auth,
-    db
+auth,
+db
 }
 from "./firebase.js";
 
-
 import {
-    onAuthStateChanged
+onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-
 import {
-    doc,
-    setDoc
+doc,
+setDoc
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* =========================================
-WORKER
-========================================= */
-
 const WORKER_URL =
 "https://zyper-order.ameresh20112011.workers.dev/";
 
 
-/* =========================================
-WHATSAPP
-========================================= */
-
 const WHATSAPP_NUMBER =
 "94751483909";
 
-
-/* =========================================
-PACKAGES
-========================================= */
 
 const PACKAGES = {
 
 "Weekly":560,
 "Monthly":2720,
 "Weekly Lite":150,
-
 "VIP Bundle":3280,
 "SVIP Bundle":4960,
 
@@ -994,33 +673,15 @@ const PACKAGES = {
 };
 
 
-/* =========================================
-ELEMENTS
-========================================= */
-
 const errorBox =
 document.getElementById("error");
 
 
-const sendButton =
-document.getElementById("send");
-
-
-const loading =
-document.getElementById("loading");
-
-
-/* =========================================
-ERROR
-========================================= */
-
 function showError(message){
 
-errorBox.textContent =
-message;
+errorBox.textContent = message;
 
-errorBox.style.display =
-"block";
+errorBox.style.display = "block";
 
 window.scrollTo({
 top:0,
@@ -1032,26 +693,18 @@ behavior:"smooth"
 
 function hideError(){
 
-errorBox.style.display =
-"none";
+errorBox.style.display = "none";
 
 }
 
-
-/* =========================================
-PACKAGE
-========================================= */
 
 function getSelectedPackage(){
 
 const raw =
 localStorage.getItem("package");
 
-if(!raw){
-
+if(!raw)
 return null;
-
-}
 
 const separator =
 " - LKR ";
@@ -1059,18 +712,11 @@ const separator =
 const index =
 raw.lastIndexOf(separator);
 
-if(index === -1){
-
+if(index === -1)
 return null;
 
-}
-
 const name =
-raw.substring(
-0,
-index
-).trim();
-
+raw.substring(0,index).trim();
 
 const price =
 Number(
@@ -1079,27 +725,16 @@ index + separator.length
 ).trim()
 );
 
-
 if(
 !Object.prototype.hasOwnProperty.call(
 PACKAGES,
 name
 )
-){
-
+)
 return null;
 
-}
-
-
-if(
-PACKAGES[name] !== price
-){
-
+if(PACKAGES[name] !== price)
 return null;
-
-}
-
 
 return {
 name:name,
@@ -1115,27 +750,17 @@ getSelectedPackage();
 
 if(!selected){
 
-document
-.getElementById("packageName")
-.textContent =
+document.getElementById("packageName").textContent =
 "No Package Selected";
 
-
-document
-.getElementById("packagePrice")
-.textContent =
+document.getElementById("packagePrice").textContent =
 "LKR 0";
 
-
-sendButton.disabled =
+document.getElementById("send").disabled =
 true;
 
 }
 
-
-/* =========================================
-CUSTOMER LOGIN CHECK
-========================================= */
 
 onAuthStateChanged(
 auth,
@@ -1143,48 +768,28 @@ auth,
 
 if(!user){
 
-document
-.getElementById("formArea")
-.style.display =
+document.getElementById("formArea").style.display =
 "none";
 
-
-document
-.getElementById("loginMessage")
-.style.display =
+document.getElementById("loginMessage").style.display =
 "block";
-
 
 return;
 
 }
 
-
-/* USER LOGGED IN */
-
-document
-.getElementById("formArea")
-.style.display =
+document.getElementById("formArea").style.display =
 "block";
 
-
-document
-.getElementById("loginMessage")
-.style.display =
+document.getElementById("loginMessage").style.display =
 "none";
-
 
 if(selected){
 
-document
-.getElementById("packageName")
-.textContent =
+document.getElementById("packageName").textContent =
 selected.name;
 
-
-document
-.getElementById("packagePrice")
-.textContent =
+document.getElementById("packagePrice").textContent =
 "LKR " +
 selected.price.toLocaleString("en-US");
 
@@ -1193,50 +798,31 @@ selected.price.toLocaleString("en-US");
 });
 
 
-/* =========================================
-LOGIN BUTTON
-========================================= */
-
-document
-.getElementById("loginButton")
-.onclick =
+document.getElementById("loginButton").onclick =
 function(){
 
-window.location.href =
-"index.html";
+window.location.href = "index.html";
 
 };
 
 
-/* =========================================
-RECEIPT
-========================================= */
-
-document
-.getElementById("receipt")
-.addEventListener(
+document.getElementById("receipt").addEventListener(
 "change",
 function(){
 
 hideError();
 
-const file =
-this.files[0];
+const file = this.files[0];
 
-
-if(!file){
-
+if(!file)
 return;
-
-}
-
 
 if(
 file.type !== "image/jpeg" &&
 file.type !== "image/png"
 ){
 
-this.value = "";
+this.value="";
 
 showError(
 "❌ Only JPG and PNG receipts are allowed."
@@ -1246,12 +832,9 @@ return;
 
 }
 
+if(file.size > 5 * 1024 * 1024){
 
-if(
-file.size > 5 * 1024 * 1024
-){
-
-this.value = "";
+this.value="";
 
 showError(
 "❌ Receipt image must be 5 MB or smaller."
@@ -1261,30 +844,24 @@ return;
 
 }
 
-
 const preview =
 document.getElementById("preview");
-
 
 preview.src =
 URL.createObjectURL(file);
 
-
 preview.style.display =
 "block";
-
 
 document
 .getElementById("uploadLabel")
 .classList
 .add("active");
 
-
 document
 .getElementById("uploadTitle")
 .textContent =
 "✅ Receipt Selected";
-
 
 document
 .getElementById("uploadText")
@@ -1294,114 +871,60 @@ file.name;
 });
 
 
-/* =========================================
-SUBMIT
-========================================= */
-
-sendButton.addEventListener(
+document.getElementById("send").addEventListener(
 "click",
 async function(){
 
 hideError();
 
-
-/* =========================================
-CHECK LOGIN
-========================================= */
-
 const user =
 auth.currentUser;
 
-
 if(!user){
 
-document
-.getElementById("formArea")
-.style.display =
-"none";
-
-
-document
-.getElementById("loginMessage")
-.style.display =
-"block";
-
+window.location.href =
+"index.html";
 
 return;
 
 }
 
-
-/* =========================================
-PACKAGE CHECK
-========================================= */
-
 if(!selected){
 
 showError(
-"❌ Please select a package first."
+"Please select a package first."
 );
 
 return;
 
 }
 
-
-/* =========================================
-VALUES
-========================================= */
+const button =
+document.getElementById("send");
 
 const uid =
-document
-.getElementById("uid")
-.value
-.trim();
-
+document.getElementById("uid").value.trim();
 
 const playerName =
-document
-.getElementById("playerName")
-.value
-.trim();
-
+document.getElementById("playerName").value.trim();
 
 const phone =
-document
-.getElementById("phone")
-.value
-.trim();
-
+document.getElementById("phone").value.trim();
 
 const receipt =
-document
-.getElementById("receipt")
-.files[0];
+document.getElementById("receipt").files[0];
 
 
-/* =========================================
-UID
-========================================= */
-
-if(
-!/^[0-9]{6,15}$/.test(uid)
-){
+if(!/^[0-9]{6,15}$/.test(uid)){
 
 showError(
 "❌ Please enter a valid Free Fire UID (6-15 digits)."
 );
 
-document
-.getElementById("uid")
-.focus();
-
 return;
 
 }
 
-
-/* =========================================
-CUSTOMER NAME
-========================================= */
 
 if(
 playerName.length < 2 ||
@@ -1412,18 +935,10 @@ showError(
 "❌ Customer Name must be between 2 and 50 characters."
 );
 
-document
-.getElementById("playerName")
-.focus();
-
 return;
 
 }
 
-
-/* =========================================
-PHONE
-========================================= */
 
 const cleanPhone =
 phone.replace(
@@ -1431,29 +946,18 @@ phone.replace(
 ""
 );
 
-
 if(
-!/^\+?[0-9]{9,15}$/.test(
-cleanPhone
-)
+!/^\+?[0-9]{9,15}$/.test(cleanPhone)
 ){
 
 showError(
 "❌ Please enter a valid WhatsApp / Phone number."
 );
 
-document
-.getElementById("phone")
-.focus();
-
 return;
 
 }
 
-
-/* =========================================
-RECEIPT
-========================================= */
 
 if(!receipt){
 
@@ -1480,9 +984,7 @@ return;
 }
 
 
-if(
-receipt.size > 5 * 1024 * 1024
-){
+if(receipt.size > 5 * 1024 * 1024){
 
 showError(
 "❌ Receipt must be 5 MB or smaller."
@@ -1493,47 +995,19 @@ return;
 }
 
 
-/* =========================================
-LOADING
-========================================= */
+button.disabled = true;
 
-sendButton.disabled =
-true;
-
-sendButton.textContent =
+button.textContent =
 "⏳ Sending Order...";
 
-loading.style.display =
+document.getElementById("loading").style.display =
 "block";
 
 
 try{
 
-
-/* =========================================
-GET FRESH FIREBASE TOKEN
-========================================= */
-
-const idToken =
-await user.getIdToken(true);
-
-
-if(!idToken){
-
-throw new Error(
-"Firebase login token could not be created."
-);
-
-}
-
-
-/* =========================================
-FORM DATA
-========================================= */
-
 const formData =
 new FormData();
-
 
 formData.append(
 "package",
@@ -1542,24 +1016,20 @@ selected.name +
 selected.price
 );
 
-
 formData.append(
 "uid",
 uid
 );
-
 
 formData.append(
 "playerName",
 playerName
 );
 
-
 formData.append(
 "phone",
 phone
 );
-
 
 formData.append(
 "receipt",
@@ -1568,35 +1038,17 @@ receipt.name
 );
 
 
-/* =========================================
-SEND TO CLOUDFLARE WORKER
-WITH FIREBASE TOKEN
-========================================= */
-
 const response =
 await fetch(
 WORKER_URL,
 {
-
 method:"POST",
-
-headers:{
-    "Authorization":
-        "Bearer " + idToken
-},
-
 body:formData
-
 }
 );
 
 
-/* =========================================
-READ RESPONSE
-========================================= */
-
 let result;
-
 
 try{
 
@@ -1612,10 +1064,6 @@ throw new Error(
 }
 
 
-/* =========================================
-SERVER ERROR
-========================================= */
-
 if(
 !response.ok ||
 !result.success
@@ -1629,19 +1077,15 @@ result.message ||
 }
 
 
-/* =========================================
-ORDER ID
-========================================= */
-
 const orderId =
 result.orderId;
 
 
-/* =========================================
-SAVE ORDER TO FIRESTORE
-========================================= */
-
-try{
+/*
+=========================================
+SAVE COMPLETE CUSTOMER INFORMATION
+=========================================
+*/
 
 await setDoc(
 doc(
@@ -1654,6 +1098,8 @@ orderId
 orderId:orderId,
 
 userId:user.uid,
+
+email:user.email || "",
 
 customerName:playerName,
 
@@ -1680,25 +1126,6 @@ createdAt:new Date()
 }
 );
 
-}catch(firestoreError){
-
-console.error(
-"Firestore save error:",
-firestoreError
-);
-
-/*
-The Worker already accepted the order.
-Do not show the customer a false failure
-if Firestore saving fails after Telegram succeeds.
-*/
-
-}
-
-
-/* =========================================
-WHATSAPP MESSAGE
-========================================= */
 
 const whatsappMessage =
 
@@ -1716,6 +1143,8 @@ const whatsappMessage =
 
 👤 Player: ${playerName}
 
+📧 Email: ${user.email || "Not available"}
+
 📱 Customer Phone: ${phone}
 
 📸 Payment Receipt: Sent to Telegram
@@ -1727,10 +1156,6 @@ const whatsappMessage =
 Please check and process this order.`;
 
 
-/* =========================================
-WHATSAPP URL
-========================================= */
-
 const whatsappURL =
 "https://wa.me/" +
 WHATSAPP_NUMBER +
@@ -1740,57 +1165,25 @@ whatsappMessage
 );
 
 
-/* =========================================
-SET WHATSAPP
-========================================= */
-
-document
-.getElementById("whatsappButton")
-.href =
+document.getElementById("whatsappButton").href =
 whatsappURL;
 
-
-/* =========================================
-SUCCESS
-========================================= */
-
-document
-.getElementById("formArea")
-.style.display =
+document.getElementById("formArea").style.display =
 "none";
 
-
-document
-.getElementById("success")
-.style.display =
+document.getElementById("success").style.display =
 "block";
 
-
-document
-.getElementById("orderId")
-.textContent =
+document.getElementById("orderId").textContent =
 orderId;
 
-
-/* CLEAR PACKAGE */
-
-localStorage.removeItem(
-"package"
-);
-
+localStorage.removeItem("package");
 
 window.scrollTo({
-
 top:0,
-
 behavior:"smooth"
-
 });
 
-
-/* =========================================
-OPEN WHATSAPP
-========================================= */
 
 setTimeout(
 function(){
@@ -1810,27 +1203,22 @@ console.error(
 error
 );
 
-
 showError(
 "❌ " +
 (
 error.message ||
-"Something went wrong. Please try again."
+"Something went wrong."
 )
 );
 
+button.disabled = false;
 
-sendButton.disabled =
-false;
-
-
-sendButton.textContent =
+button.textContent =
 "🚀 Place Order";
-
 
 }finally{
 
-loading.style.display =
+document.getElementById("loading").style.display =
 "none";
 
 }
