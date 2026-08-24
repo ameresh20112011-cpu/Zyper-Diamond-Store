@@ -4,11 +4,16 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Diamond Store - Top Up</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
@@ -16,70 +21,46 @@
 box-sizing:border-box;
 }
 
-body{
-margin:0;
-font-family:'Poppins',sans-serif;
-background:
-linear-gradient(135deg,#020617,#0f172a,#1e1b4b);
-color:white;
-min-height:100vh;
-padding-bottom:90px;
-}
-
-.container{
-padding:15px;
-max-width:900px;
-margin:auto;
-}
 
 /* =========================
-   TOP OLD HOME BUTTON
+   BODY
 ========================= */
 
-.home-btn{
-display:inline-flex;
-align-items:center;
-gap:8px;
+body{
 
-padding:10px 16px;
-margin-bottom:8px;
+margin:0;
 
-text-decoration:none;
-color:white;
-
-background:rgba(255,255,255,.08);
-
-border:1px solid rgba(255,255,255,.15);
-
-border-radius:12px;
-
-font-size:14px;
-font-weight:600;
-
-backdrop-filter:blur(10px);
-
-box-shadow:
-0 5px 20px rgba(0,0,0,.25);
-
-transition:.25s;
-
--webkit-tap-highlight-color:transparent;
-}
-
-.home-btn:hover{
-transform:translateY(-2px);
+font-family:'Poppins',sans-serif;
 
 background:
-rgba(96,165,250,.18);
+linear-gradient(
+135deg,
+#020617,
+#0f172a,
+#1e1b4b
+);
 
-border-color:#60a5fa;
+color:white;
 
-box-shadow:
-0 8px 25px rgba(96,165,250,.2);
+min-height:100vh;
+
+padding-bottom:100px;
+
 }
 
-.home-btn:active{
-transform:scale(.95);
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+
+padding:15px;
+
+max-width:900px;
+
+margin:auto;
+
 }
 
 
@@ -88,9 +69,11 @@ transform:scale(.95);
 ========================= */
 
 h2{
+
 text-align:center;
 
 font-size:28px;
+
 font-weight:700;
 
 background:
@@ -101,25 +84,30 @@ linear-gradient(
 );
 
 -webkit-background-clip:text;
+
 background-clip:text;
 
 color:transparent;
 
-margin:5px 0 25px;
+margin:10px 0 25px;
+
 }
 
 
 /* =========================
-   SECTION
+   SECTION TITLE
 ========================= */
 
 h3{
+
 margin-top:25px;
+
 margin-bottom:15px;
 
 color:#cbd5e1;
 
 font-size:18px;
+
 }
 
 
@@ -128,12 +116,17 @@ font-size:18px;
 ========================= */
 
 .grid{
+
 display:grid;
 
 grid-template-columns:
-repeat(auto-fit,minmax(150px,1fr));
+repeat(
+auto-fit,
+minmax(150px,1fr)
+);
 
 gap:15px;
+
 }
 
 
@@ -154,9 +147,11 @@ border-radius:18px;
 padding:15px;
 
 display:flex;
+
 flex-direction:column;
 
 justify-content:center;
+
 align-items:center;
 
 text-align:center;
@@ -176,7 +171,9 @@ box-shadow .3s;
 -webkit-tap-highlight-color:transparent;
 
 user-select:none;
+
 }
+
 
 .card:hover{
 
@@ -184,13 +181,17 @@ transform:
 translateY(-6px);
 
 box-shadow:
-0 12px 30px rgba(0,0,0,.25);
+0 12px 30px
+rgba(0,0,0,.25);
+
 }
+
 
 .card:active{
 
 transform:
 scale(.95);
+
 }
 
 
@@ -201,38 +202,44 @@ scale(.95);
 .card img{
 
 width:100px;
+
 height:100px;
 
 object-fit:contain;
 
 margin-bottom:10px;
+
 }
 
 
-/* MEMBERSHIP IMAGES */
+/* MEMBERSHIP */
 
 .card img[src*="Weekly"],
 .card img[src*="Monthly"]{
 
 width:150px;
+
 height:150px;
+
 }
 
 
-/* VIP IMAGES */
+/* VIP */
 
 .card img[src*="Vip"],
 .card img[src*="Svip"]{
 
 width:150px;
+
 height:150px;
 
 object-fit:contain;
+
 }
 
 
 /* =========================
-   TEXT
+   CARD TEXT
 ========================= */
 
 .card h4{
@@ -242,7 +249,9 @@ margin:5px 0;
 font-size:15px;
 
 font-weight:600;
+
 }
+
 
 .card p{
 
@@ -253,6 +262,7 @@ font-size:13px;
 color:#475569;
 
 font-weight:500;
+
 }
 
 
@@ -265,6 +275,7 @@ font-weight:500;
 position:absolute;
 
 top:8px;
+
 right:8px;
 
 background:#facc15;
@@ -280,6 +291,7 @@ border-radius:8px;
 font-weight:bold;
 
 z-index:2;
+
 }
 
 
@@ -302,14 +314,15 @@ animation:
 ripple .6s linear;
 
 pointer-events:none;
+
 }
+
 
 @keyframes ripple{
 
 to{
 
-transform:
-scale(4);
+transform:scale(4);
 
 opacity:0;
 
@@ -347,8 +360,8 @@ justify-content:space-around;
 background:
 rgba(15,23,42,.88);
 
-border:1px solid
-rgba(255,255,255,.14);
+border:
+1px solid rgba(255,255,255,.14);
 
 border-radius:22px;
 
@@ -357,12 +370,21 @@ backdrop-filter:blur(18px);
 -webkit-backdrop-filter:blur(18px);
 
 box-shadow:
-0 10px 35px rgba(0,0,0,.45),
-0 0 25px rgba(96,165,250,.08);
+
+0 10px 35px
+rgba(0,0,0,.45),
+
+0 0 25px
+rgba(96,165,250,.08);
 
 z-index:9999;
+
 }
 
+
+/* =========================
+   NAV LINKS
+========================= */
 
 .bottom-nav a{
 
@@ -391,8 +413,13 @@ border-radius:16px;
 transition:.25s;
 
 -webkit-tap-highlight-color:transparent;
+
 }
 
+
+/* =========================
+   NAV TEXT
+========================= */
 
 .bottom-nav a span{
 
@@ -401,8 +428,13 @@ font-size:10px;
 font-weight:600;
 
 letter-spacing:.2px;
+
 }
 
+
+/* =========================
+   NAV HOVER
+========================= */
 
 .bottom-nav a:hover{
 
@@ -414,13 +446,9 @@ rgba(96,165,250,.10);
 }
 
 
-.bottom-nav a:active{
-
-transform:scale(.90);
-}
-
-
-/* ACTIVE SHOP */
+/* =========================
+   NAV ACTIVE
+========================= */
 
 .bottom-nav a.active{
 
@@ -430,6 +458,7 @@ background:
 rgba(96,165,250,.12);
 
 box-shadow:
+
 inset 0 0 15px
 rgba(96,165,250,.08);
 
@@ -439,31 +468,58 @@ rgba(96,165,250,.08);
 .bottom-nav a.active span{
 
 color:#60a5fa;
+
 }
 
 
 /* =========================
-   MOBILE
+   NAV ACTIVE ICON
 ========================= */
+
+.bottom-nav a.active i{
+
+color:#60a5fa;
+
+}
+
+
+/* =========================
+   NAV CLICK
+========================= */
+
+.bottom-nav a:active{
+
+transform:scale(.90);
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:500px){
 
 .container{
+
 padding:12px;
+
 }
 
-.home-btn{
-font-size:13px;
-padding:9px 14px;
-}
 
 h2{
+
 font-size:25px;
+
 }
 
+
 h3{
+
 font-size:17px;
+
 }
+
 
 .grid{
 
@@ -471,46 +527,68 @@ grid-template-columns:
 repeat(2,1fr);
 
 gap:12px;
+
 }
+
 
 .card{
 
 padding:10px;
 
 border-radius:15px;
+
 }
+
 
 .card img{
 
 width:85px;
+
 height:85px;
+
 }
+
 
 .card img[src*="Weekly"],
 .card img[src*="Monthly"]{
 
 width:110px;
+
 height:110px;
+
 }
+
 
 .card img[src*="Vip"],
 .card img[src*="Svip"]{
 
 width:110px;
+
 height:110px;
+
 }
+
 
 .card h4{
+
 font-size:13px;
+
 }
+
 
 .card p{
+
 font-size:12px;
+
 }
 
+
 .badge{
+
 font-size:9px;
+
 padding:4px 6px;
+
 }
 
 
@@ -526,35 +604,45 @@ calc(100% - 16px);
 height:64px;
 
 border-radius:20px;
+
 }
+
 
 .bottom-nav a{
 
 height:54px;
 
 font-size:19px;
+
 }
+
 
 .bottom-nav a span{
 
 font-size:9px;
-}
 
 }
 
+}
 
-/* SMALL PHONES */
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
 
 @media(max-width:350px){
 
 .bottom-nav a{
 
 font-size:17px;
+
 }
+
 
 .bottom-nav a span{
 
 font-size:8px;
+
 }
 
 }
@@ -568,20 +656,6 @@ font-size:8px;
 
 
 <div class="container">
-
-
-<!-- =====================================
-     OLD HOME BUTTON
-====================================== -->
-
-<a
-href="home.html"
-class="home-btn"
-id="homeButton">
-
-⬅️ Home
-
-</a>
 
 
 <h2>
@@ -732,8 +806,6 @@ Level Up Pass
 <div class="grid">
 
 
-<!-- LEVEL 6 -->
-
 <div
 class="card"
 onclick="selectPackage(event,this,'Level 6 - LKR 130')">
@@ -752,8 +824,6 @@ LKR 130
 
 </div>
 
-
-<!-- LEVEL 10 -->
 
 <div
 class="card"
@@ -774,8 +844,6 @@ LKR 250
 </div>
 
 
-<!-- LEVEL 15 -->
-
 <div
 class="card"
 onclick="selectPackage(event,this,'Level 15 - LKR 250')">
@@ -794,8 +862,6 @@ LKR 250
 
 </div>
 
-
-<!-- LEVEL 20 -->
 
 <div
 class="card"
@@ -816,8 +882,6 @@ LKR 250
 </div>
 
 
-<!-- LEVEL 25 -->
-
 <div
 class="card"
 onclick="selectPackage(event,this,'Level 25 - LKR 250')">
@@ -836,8 +900,6 @@ LKR 250
 
 </div>
 
-
-<!-- LEVEL 30 -->
 
 <div
 class="card"
@@ -858,11 +920,13 @@ LKR 380
 </div>
 
 
-<!-- FULL PASS -->
-
 <div
 class="card"
 onclick="selectPackage(event,this,'Full Pass - LKR 1500')">
+
+<span class="badge">
+FULL PASS
+</span>
 
 <img
 src="topupimages/Levelup.png"
@@ -892,8 +956,6 @@ EVO Access
 <div class="grid">
 
 
-<!-- E BADGE 3 -->
-
 <div
 class="card"
 onclick="selectPackage(event,this,'E Badge 3 - LKR 250')">
@@ -913,8 +975,6 @@ LKR 250
 </div>
 
 
-<!-- E BADGE 7 -->
-
 <div
 class="card"
 onclick="selectPackage(event,this,'E Badge 7 - LKR 350')">
@@ -933,8 +993,6 @@ LKR 350
 
 </div>
 
-
-<!-- E BADGE 30 -->
 
 <div
 class="card"
@@ -968,8 +1026,6 @@ LKR 1100
 <div class="grid">
 
 
-<!-- 25 -->
-
 <div
 class="card"
 onclick="selectPackage(event,this,'25 Diamonds - LKR 150')">
@@ -988,8 +1044,6 @@ LKR 150
 
 </div>
 
-
-<!-- 100 -->
 
 <div
 class="card"
@@ -1010,8 +1064,6 @@ LKR 380
 </div>
 
 
-<!-- 310 -->
-
 <div
 class="card"
 onclick="selectPackage(event,this,'310 Diamonds - LKR 1150')">
@@ -1030,8 +1082,6 @@ LKR 1150
 
 </div>
 
-
-<!-- 520 -->
 
 <div
 class="card"
@@ -1056,8 +1106,6 @@ LKR 1800
 </div>
 
 
-<!-- 1060 -->
-
 <div
 class="card"
 onclick="selectPackage(event,this,'1060 Diamonds - LKR 3400')">
@@ -1076,8 +1124,6 @@ LKR 3400
 
 </div>
 
-
-<!-- 2180 -->
 
 <div
 class="card"
@@ -1098,8 +1144,6 @@ LKR 6500
 </div>
 
 
-<!-- 5600 -->
-
 <div
 class="card"
 onclick="selectPackage(event,this,'5600 Diamonds - LKR 16500')">
@@ -1118,8 +1162,6 @@ LKR 16500
 
 </div>
 
-
-<!-- 11500 -->
 
 <div
 class="card"
@@ -1150,9 +1192,10 @@ LKR 35000
 
 <nav class="bottom-nav">
 
+
 <a href="home.html">
 
-🏠
+<i class="fas fa-home"></i>
 
 <span>
 Home
@@ -1161,9 +1204,11 @@ Home
 </a>
 
 
-<a href="topup.html" class="active">
+<a
+href="topup.html"
+class="active">
 
-🛒
+<i class="fas fa-gem"></i>
 
 <span>
 Shop
@@ -1174,7 +1219,7 @@ Shop
 
 <a href="payment.html">
 
-💳
+<i class="fas fa-bolt"></i>
 
 <span>
 Payment
@@ -1185,7 +1230,7 @@ Payment
 
 <a href="history.html">
 
-📜
+<i class="fas fa-clock"></i>
 
 <span>
 History
@@ -1196,7 +1241,7 @@ History
 
 <a href="profile.html">
 
-👤
+<i class="fas fa-user"></i>
 
 <span>
 Profile
@@ -1204,26 +1249,11 @@ Profile
 
 </a>
 
+
 </nav>
 
 
 <script>
-
-/* =========================================
-   HOME BUTTON
-   ALWAYS GO TO home.html
-========================================= */
-
-document
-.getElementById("homeButton")
-.addEventListener("click", function(event){
-
-event.preventDefault();
-
-window.location.replace("home.html");
-
-});
-
 
 /* =========================================
    WEEKLY LITE IMAGE FALLBACK
@@ -1232,29 +1262,33 @@ window.location.replace("home.html");
 function weeklyLiteFallback(img){
 
 if(img.dataset.fallback === "1"){
+
 return;
+
 }
+
 
 if(
 img.src.includes("Weekly-Lite.png")
 ){
 
-img.dataset.fallback = "1";
+img.dataset.fallback="1";
 
-img.src =
+img.src=
 "topupimages/Weekly-lite.png";
 
 return;
 
 }
 
+
 if(
 img.src.includes("Weekly-lite.png")
 ){
 
-img.dataset.fallback = "2";
+img.dataset.fallback="2";
 
-img.src =
+img.src=
 "topupimages/weekly-lite.png";
 
 return;
@@ -1270,7 +1304,7 @@ return;
 
 function selectPackage(e,card,name){
 
-/* SAVE SELECTED PACKAGE */
+/* SAVE PACKAGE */
 
 localStorage.setItem(
 "package",
@@ -1278,51 +1312,50 @@ name
 );
 
 
-/* RIPPLE EFFECT */
+/* RIPPLE */
 
-let ripple =
+let ripple=
 document.createElement("span");
 
-ripple.className =
+ripple.className=
 "ripple";
 
 
-let rect =
+let rect=
 card.getBoundingClientRect();
 
 
-let x =
-e.clientX -
-rect.left -
-60;
-
-let y =
-e.clientY -
-rect.top -
-60;
-
-
-ripple.style.width =
+ripple.style.width=
 "120px";
 
-ripple.style.height =
+ripple.style.height=
 "120px";
 
-ripple.style.left =
-x + "px";
 
-ripple.style.top =
-y + "px";
+ripple.style.left=
+(
+e.clientX-
+rect.left-
+60
+)+"px";
+
+
+ripple.style.top=
+(
+e.clientY-
+rect.top-
+60
+)+"px";
 
 
 card.appendChild(ripple);
 
 
-/* GO TO PAYMENT */
+/* GO PAYMENT */
 
 setTimeout(function(){
 
-window.location.href =
+window.location.href=
 "payment.html";
 
 },250);
@@ -1330,6 +1363,7 @@ window.location.href =
 }
 
 </script>
+
 
 </body>
 
