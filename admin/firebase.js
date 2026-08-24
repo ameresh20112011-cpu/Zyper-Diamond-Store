@@ -1,30 +1,56 @@
-// ==========================================
-// ZYPER DIAMOND STORE
-// ADMIN FIREBASE CONFIGURATION
-// ==========================================
+// ================================
+// FIREBASE APP
+// ================================
 
 import {
-    initializeApp,
-    getApps
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+// ================================
+// FIREBASE AUTHENTICATION
+// ================================
 
 import {
     getAuth
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+
+// ================================
+// FIRESTORE
+// ================================
 
 import {
     getFirestore
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
-// ==========================================
-// YOUR FIREBASE CONFIG
-// ==========================================
+// ================================
+// FIREBASE APP CHECK
+// ================================
+
+import {
+    initializeAppCheck,
+    ReCaptchaV3Provider
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
+
+
+// ================================
+// FIREBASE CONFIG
+// ================================
 
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyCd_2LplLOl4TOGJQWqndwHNGzPh2PEHM",
+        "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
 
     authDomain:
         "zyper-d-iamond-store.firebaseapp.com",
@@ -32,38 +58,62 @@ const firebaseConfig = {
     projectId:
         "zyper-d-iamond-store",
 
+    storageBucket:
+        "zyper-d-iamond-store.firebasestorage.app",
+
     messagingSenderId:
         "892467477866",
 
     appId:
-        "1:892467477866:web:61e9b6ff9435798da23913"
+        "1:892467477866:web:61e9b6ff9435798da23913",
+
+    measurementId:
+        "G-RLJFR6F2GC"
 
 };
 
 
-// ==========================================
-// INITIALIZE
-// ==========================================
+// ================================
+// INITIALIZE FIREBASE
+// ================================
 
 const app =
-    getApps().length
-        ? getApps()[0]
-        : initializeApp(firebaseConfig);
+    initializeApp(firebaseConfig);
 
 
-// ==========================================
-// EXPORT
-// ==========================================
+// ================================
+// APP CHECK
+// ================================
 
-const auth =
+initializeAppCheck(
+
+    app,
+
+    {
+
+        provider:
+
+            new ReCaptchaV3Provider(
+
+                "6LfBe2QtAAAAAJsp-crpLwMXkhPn1QhvRSVWzB8P"
+
+            ),
+
+        isTokenAutoRefreshEnabled:
+            true
+
+    }
+
+);
+
+
+// ================================
+// EXPORT SERVICES
+// ================================
+
+export const auth =
     getAuth(app);
 
-const db =
+
+export const db =
     getFirestore(app);
-
-
-export {
-    app,
-    auth,
-    db
-};
