@@ -9,7 +9,7 @@
 
 <title>Zyper Admin Login</title>
 
-<link rel="stylesheet" href="admin.css">
+<link rel="stylesheet" href="./admin.css">
 
 </head>
 
@@ -19,32 +19,47 @@
 
 <div class="login-box">
 
-    <div class="logo">💎</div>
+    <div class="logo">
+        💎
+    </div>
 
-    <h1>Zyper Diamond Store</h1>
+    <h1>
+        Zyper Diamond Store
+    </h1>
 
-    <h3>Admin Login</h3>
-
-
-    <input
-        id="email"
-        type="email"
-        placeholder="Email"
-        autocomplete="email"
-    >
+    <h3>
+        Admin Login
+    </h3>
 
 
-    <input
-        id="password"
-        type="password"
-        placeholder="Password"
-        autocomplete="current-password"
-    >
+    <form id="loginForm">
+
+        <input
+            id="email"
+            type="email"
+            placeholder="Email"
+            autocomplete="email"
+            required
+        >
 
 
-    <button id="login">
-        LOGIN
-    </button>
+        <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            required
+        >
+
+
+        <button
+            id="login"
+            type="submit"
+        >
+            LOGIN
+        </button>
+
+    </form>
 
 
     <p id="msg"></p>
@@ -52,7 +67,11 @@
 </div>
 
 
-<script type="module" src="admin.js"></script>
+<script
+    type="module"
+    src="./admin.js">
+</script>
+
 
 </body>
 
