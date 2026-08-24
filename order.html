@@ -120,7 +120,9 @@ margin-bottom:20px;
 }
 
 
-/* PACKAGE */
+/* =========================
+   PACKAGE
+========================= */
 
 .package-box{
 
@@ -174,7 +176,9 @@ margin-top:5px;
 }
 
 
-/* INPUT */
+/* =========================
+   INPUT
+========================= */
 
 .field{
 
@@ -233,7 +237,9 @@ box-shadow:
 }
 
 
-/* UPLOAD */
+/* =========================
+   UPLOAD
+========================= */
 
 .upload-box{
 
@@ -324,7 +330,9 @@ display:none;
 }
 
 
-/* PREVIEW */
+/* =========================
+   PREVIEW
+========================= */
 
 .preview{
 
@@ -345,7 +353,9 @@ border:1px solid rgba(255,255,255,.15);
 }
 
 
-/* BUTTON */
+/* =========================
+   BUTTON
+========================= */
 
 button{
 
@@ -398,7 +408,9 @@ transform:none;
 }
 
 
-/* LOADING */
+/* =========================
+   LOADING
+========================= */
 
 #loading{
 
@@ -415,7 +427,9 @@ font-size:14px;
 }
 
 
-/* ERROR */
+/* =========================
+   ERROR
+========================= */
 
 #error{
 
@@ -440,7 +454,9 @@ text-align:center;
 }
 
 
-/* SUCCESS */
+/* =========================
+   SUCCESS
+========================= */
 
 #success{
 
@@ -524,6 +540,43 @@ font-weight:bold;
 
 }
 
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-button{
+
+display:block;
+
+text-decoration:none;
+
+padding:13px;
+
+margin-top:12px;
+
+border-radius:14px;
+
+background:#334155;
+
+color:white;
+
+font-weight:bold;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.back-button:hover{
+
+background:#475569;
+
+transform:translateY(-2px);
+
+}
+
 </style>
 
 </head>
@@ -533,7 +586,6 @@ font-weight:bold;
 
 
 <div class="container">
-
 
 <div class="card">
 
@@ -563,7 +615,9 @@ Complete your diamond purchase
 <div id="error"></div>
 
 
-<!-- PACKAGE -->
+<!-- =========================
+     PACKAGE
+========================= -->
 
 <div class="package-box">
 
@@ -590,7 +644,9 @@ LKR 0
 </div>
 
 
-<!-- UID -->
+<!-- =========================
+     UID
+========================= -->
 
 <div class="field">
 
@@ -610,26 +666,30 @@ autocomplete="off"
 </div>
 
 
-<!-- PLAYER NAME -->
+<!-- =========================
+     CUSTOMER NAME
+========================= -->
 
 <div class="field">
 
 <label for="playerName">
-👤 Coustomer Name
+👤 Customer Name
 </label>
 
 <input
 type="text"
-id="CoustomerName"
+id="playerName"
 maxlength="50"
-placeholder="Enter your Coustomer Name"
+placeholder="Enter your Customer Name"
 autocomplete="name"
 >
 
 </div>
 
 
-<!-- PHONE -->
+<!-- =========================
+     PHONE
+========================= -->
 
 <div class="field">
 
@@ -648,7 +708,9 @@ autocomplete="tel"
 </div>
 
 
-<!-- RECEIPT -->
+<!-- =========================
+     RECEIPT
+========================= -->
 
 <div class="upload-box">
 
@@ -693,7 +755,9 @@ alt="Payment Receipt Preview"
 </div>
 
 
-<!-- SUBMIT -->
+<!-- =========================
+     SUBMIT
+========================= -->
 
 <button
 id="send"
@@ -707,6 +771,17 @@ type="button">
 <p id="loading">
 ⏳ Sending Order...
 </p>
+
+
+<!-- BACK -->
+
+<a
+href="topup.html"
+class="back-button">
+
+⬅️ Back to Top Up
+
+</a>
 
 
 </div>
@@ -778,7 +853,7 @@ class="home-button">
 
 
 /* =========================================
-   CLOUDFLARE WORKER
+   CLOUDFLARE WORKER URL
 ========================================= */
 
 const WORKER_URL =
@@ -786,7 +861,7 @@ const WORKER_URL =
 
 
 /* =========================================
-   FINAL PACKAGE PRICES
+   PACKAGE PRICES
 ========================================= */
 
 const PACKAGES = {
@@ -841,14 +916,56 @@ const PACKAGES = {
 
 
 /* =========================================
-   GET PACKAGE
+   ERROR ELEMENT
+========================================= */
+
+const errorBox =
+document.getElementById("error");
+
+
+/* =========================================
+   SHOW ERROR
+========================================= */
+
+function showError(message){
+
+errorBox.textContent =
+message;
+
+errorBox.style.display =
+"block";
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+}
+
+
+/* =========================================
+   HIDE ERROR
+========================================= */
+
+function hideError(){
+
+errorBox.style.display =
+"none";
+
+}
+
+
+/* =========================================
+   GET SELECTED PACKAGE
 ========================================= */
 
 function getSelectedPackage(){
 
 const raw =
 localStorage.getItem("package");
-
 
 if(!raw){
 
@@ -873,17 +990,18 @@ return null;
 
 
 const name =
-raw.substring(
-0,
-index
-).trim();
+raw
+.substring(0,index)
+.trim();
 
 
 const price =
 Number(
-raw.substring(
+raw
+.substring(
 index + separator.length
-).trim()
+)
+.trim()
 );
 
 
@@ -920,7 +1038,7 @@ price:price
 
 
 /* =========================================
-   PACKAGE
+   LOAD PACKAGE
 ========================================= */
 
 const selected =
@@ -929,18 +1047,35 @@ getSelectedPackage();
 
 if(!selected){
 
-showError(
-"Package information is missing. Please select a package again."
-);
+document
+.getElementById("packageName")
+.textContent =
+"No Package Selected";
 
-document.getElementById("send").disabled=true;
+document
+.getElementById("packagePrice")
+.textContent =
+"LKR 0";
+
+document
+.getElementById("send")
+.disabled =
+true;
+
+showError(
+"Package information is missing. Please go back and select a package."
+);
 
 }else{
 
-document.getElementById("packageName").textContent=
+document
+.getElementById("packageName")
+.textContent =
 selected.name;
 
-document.getElementById("packagePrice").textContent=
+document
+.getElementById("packagePrice")
+.textContent =
 "LKR " +
 selected.price.toLocaleString("en-US");
 
@@ -948,30 +1083,7 @@ selected.price.toLocaleString("en-US");
 
 
 /* =========================================
-   ERROR
-========================================= */
-
-function showError(message){
-
-const error =
-document.getElementById("error");
-
-error.textContent =
-message;
-
-error.style.display =
-"block";
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-
-/* =========================================
-   RECEIPT
+   RECEIPT UPLOAD
 ========================================= */
 
 document
@@ -980,9 +1092,10 @@ document
 "change",
 function(){
 
+hideError();
+
 const file =
 this.files[0];
-
 
 if(!file){
 
@@ -991,7 +1104,7 @@ return;
 }
 
 
-/* FILE TYPE */
+/* TYPE */
 
 if(
 file.type !== "image/jpeg" &&
@@ -1001,7 +1114,7 @@ file.type !== "image/png"
 this.value="";
 
 showError(
-"Only JPG and PNG receipts are allowed."
+"❌ Only JPG and PNG receipts are allowed."
 );
 
 return;
@@ -1009,7 +1122,7 @@ return;
 }
 
 
-/* FILE SIZE */
+/* SIZE */
 
 if(
 file.size > 5 * 1024 * 1024
@@ -1018,7 +1131,7 @@ file.size > 5 * 1024 * 1024
 this.value="";
 
 showError(
-"Receipt image must be 5 MB or smaller."
+"❌ Receipt image must be 5 MB or smaller."
 );
 
 return;
@@ -1032,9 +1145,19 @@ const preview =
 document.getElementById("preview");
 
 
+if(
+preview.src
+){
+
+URL.revokeObjectURL(
+preview.src
+);
+
+}
+
+
 preview.src =
 URL.createObjectURL(file);
-
 
 preview.style.display =
 "block";
@@ -1071,6 +1194,11 @@ document
 "click",
 async function(){
 
+hideError();
+
+
+/* PACKAGE CHECK */
+
 if(!selected){
 
 showError(
@@ -1082,7 +1210,7 @@ return;
 }
 
 
-/* PREVENT DOUBLE CLICK */
+/* BUTTON */
 
 const button =
 document.getElementById("send");
@@ -1095,7 +1223,7 @@ return;
 }
 
 
-/* GET VALUES */
+/* VALUES */
 
 const uid =
 document
@@ -1124,22 +1252,26 @@ document
 .files[0];
 
 
-/* UID */
+/* UID VALIDATION */
 
 if(
 !/^[0-9]{6,15}$/.test(uid)
 ){
 
 showError(
-"Please enter a valid Free Fire UID."
+"❌ Please enter a valid Free Fire UID (6-15 digits)."
 );
+
+document
+.getElementById("uid")
+.focus();
 
 return;
 
 }
 
 
-/* PLAYER NAME */
+/* CUSTOMER NAME */
 
 if(
 playerName.length < 2 ||
@@ -1147,8 +1279,12 @@ playerName.length > 50
 ){
 
 showError(
-"Player Name must be between 2 and 50 characters."
+"❌ Customer Name must be between 2 and 50 characters."
 );
+
+document
+.getElementById("playerName")
+.focus();
 
 return;
 
@@ -1171,8 +1307,12 @@ cleanPhone
 ){
 
 showError(
-"Please enter a valid WhatsApp / Phone number."
+"❌ Please enter a valid WhatsApp / Phone number."
 );
+
+document
+.getElementById("phone")
+.focus();
 
 return;
 
@@ -1184,7 +1324,7 @@ return;
 if(!receipt){
 
 showError(
-"Please upload your payment receipt."
+"❌ Please upload your payment receipt."
 );
 
 return;
@@ -1198,7 +1338,7 @@ receipt.type !== "image/png"
 ){
 
 showError(
-"Receipt must be JPG or PNG."
+"❌ Receipt must be JPG or PNG."
 );
 
 return;
@@ -1211,7 +1351,7 @@ receipt.size > 5 * 1024 * 1024
 ){
 
 showError(
-"Receipt must be 5 MB or smaller."
+"❌ Receipt must be 5 MB or smaller."
 );
 
 return;
@@ -1220,7 +1360,7 @@ return;
 
 
 /* =========================================
-   START LOADING
+   LOADING
 ========================================= */
 
 button.disabled =
@@ -1228,6 +1368,7 @@ true;
 
 button.textContent =
 "⏳ Sending Order...";
+
 
 document
 .getElementById("loading")
@@ -1280,7 +1421,7 @@ receipt.name
 
 
 /* =========================================
-   SEND TO WORKER
+   SEND TO CLOUDFLARE WORKER
 ========================================= */
 
 const response =
@@ -1297,7 +1438,7 @@ body:formData
 
 
 /* =========================================
-   RESPONSE
+   READ RESPONSE
 ========================================= */
 
 let result;
@@ -1317,7 +1458,7 @@ throw new Error(
 
 
 /* =========================================
-   ERROR
+   SERVER ERROR
 ========================================= */
 
 if(
@@ -1375,17 +1516,22 @@ behavior:"smooth"
 
 }catch(error){
 
-console.error(error);
+console.error(
+"Order error:",
+error
+);
 
 showError(
+"❌ " +
+(
 error.message ||
 "Something went wrong. Please try again."
+)
 );
 
 
 button.disabled =
 false;
-
 
 button.textContent =
 "🚀 Place Order";
