@@ -11,12 +11,10 @@ content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Diamond Store - Profile</title>
 
-
 <link rel="stylesheet" href="ep.css">
 
 <link rel="stylesheet" href="media.css">
 
-<!-- ZYPER NAVIGATION -->
 <link rel="stylesheet" href="zyper-nav.css">
 
 
@@ -144,7 +142,7 @@ pointer-events:none;
 
 
 /* =====================================================
-   PROFILE IMAGE AREA
+   PROFILE IMAGE
 ===================================================== */
 
 .avatar-container{
@@ -190,7 +188,7 @@ rgba(168,85,247,.35);
 
 
 /* =====================================================
-   ONLINE DOT
+   ONLINE
 ===================================================== */
 
 .online-dot{
@@ -220,7 +218,7 @@ rgba(34,197,94,.9);
 
 
 /* =====================================================
-   COMPANY BADGE
+   BADGE
 ===================================================== */
 
 .company-badge{
@@ -282,10 +280,6 @@ word-break:break-word;
 }
 
 
-/* =====================================================
-   ACCOUNT TEXT
-===================================================== */
-
 .account-text{
 
 margin:
@@ -299,7 +293,7 @@ color:#94a3b8;
 
 
 /* =====================================================
-   USER INFO
+   INFO
 ===================================================== */
 
 .info-box{
@@ -367,7 +361,7 @@ margin-top:3px;
 
 
 /* =====================================================
-   BUTTONS
+   BUTTON
 ===================================================== */
 
 .profile-button{
@@ -502,7 +496,7 @@ translateY(0);
 
 
 /* =====================================================
-   EDIT LABEL
+   LABEL
 ===================================================== */
 
 .edit-label{
@@ -522,7 +516,7 @@ color:#cbd5e1;
 
 
 /* =====================================================
-   NAME INPUT
+   NAME
 ===================================================== */
 
 .name-input{
@@ -560,7 +554,7 @@ rgba(96,165,250,.15);
 
 
 /* =====================================================
-   FILE INPUT
+   FILE
 ===================================================== */
 
 .file-input{
@@ -585,7 +579,7 @@ font-size:12px;
 
 
 /* =====================================================
-   IMAGE PREVIEW
+   PREVIEW
 ===================================================== */
 
 .preview-title{
@@ -618,7 +612,7 @@ border:
 
 
 /* =====================================================
-   SAVE / CANCEL
+   ACTIONS
 ===================================================== */
 
 .edit-actions{
@@ -814,7 +808,7 @@ gap:7px;
 
 
 <!-- =====================================================
-     PROFILE CARD
+     PROFILE
 ===================================================== -->
 
 <div class="profile-card">
@@ -981,6 +975,7 @@ alt="Preview"
 
 
 <button
+type="button"
 class="save-button"
 onclick="saveProfile()">
 
@@ -990,6 +985,7 @@ onclick="saveProfile()">
 
 
 <button
+type="button"
 class="cancel-button"
 onclick="cancelEdit()">
 
@@ -1004,8 +1000,6 @@ onclick="cancelEdit()">
 <div
 id="profileMessage"
 class="profile-message">
-
-Profile saved successfully.
 
 </div>
 
@@ -1030,7 +1024,7 @@ onclick="logout()">
 
 
 <!-- =====================================================
-     ZYPER NAVIGATION BAR
+     ZYPER NAVIGATION
 ===================================================== -->
 
 <div id="zyper-navigation"></div>
@@ -1111,24 +1105,16 @@ const auth =
 getAuth(app);
 
 
-/* =====================================================
-   CURRENT USER
-===================================================== */
-
 let currentUser =
 null;
 
-
-/* =====================================================
-   DEFAULT COMPANY LOGO
-===================================================== */
 
 const DEFAULT_IMAGE =
 "1.jpg";
 
 
 /* =====================================================
-   AUTH CHECK
+   AUTH
 ===================================================== */
 
 onAuthStateChanged(
@@ -1157,7 +1143,7 @@ user.uid;
 
 
 /* =====================================================
-   LOAD CUSTOMER NAME
+   LOAD NAME
 ===================================================== */
 
 let savedName =
@@ -1165,11 +1151,6 @@ localStorage.getItem(
 uid + "_name"
 );
 
-
-/*
-If customer has no saved name,
-use Firebase displayName if available.
-*/
 
 if(!savedName){
 
@@ -1181,7 +1162,7 @@ user.displayName ||
 
 
 /* =====================================================
-   LOAD CUSTOMER IMAGE
+   LOAD IMAGE
 ===================================================== */
 
 let savedImage =
@@ -1189,11 +1170,6 @@ localStorage.getItem(
 uid + "_img"
 );
 
-
-/*
-If customer has no custom image,
-show company logo 1.jpg.
-*/
 
 if(!savedImage){
 
@@ -1203,8 +1179,14 @@ DEFAULT_IMAGE;
 }
 
 
+localStorage.setItem(
+uid + "_img",
+savedImage
+);
+
+
 /* =====================================================
-   DISPLAY PROFILE
+   DISPLAY
 ===================================================== */
 
 document
@@ -1218,10 +1200,6 @@ document
 .src =
 savedImage;
 
-
-/* =====================================================
-   EDIT INPUT
-===================================================== */
 
 document
 .getElementById("nameInput")
@@ -1251,12 +1229,6 @@ return;
 }
 
 
-const panel =
-document.getElementById(
-"editPanel"
-);
-
-
 const uid =
 currentUser.uid;
 
@@ -1276,12 +1248,6 @@ currentUser.displayName ||
 }
 
 
-document
-.getElementById("nameInput")
-.value =
-savedName;
-
-
 let savedImage =
 localStorage.getItem(
 uid + "_img"
@@ -1297,18 +1263,32 @@ DEFAULT_IMAGE;
 
 
 document
+.getElementById("nameInput")
+.value =
+savedName;
+
+
+document
 .getElementById("imagePreview")
 .src =
 savedImage;
 
 
-panel.classList.add("show");
+document
+.getElementById("imageInput")
+.value =
+"";
+
+
+document
+.getElementById("editPanel")
+.classList.add("show");
 
 };
 
 
 /* =====================================================
-   IMAGE SELECT
+   IMAGE PREVIEW
 ===================================================== */
 
 document
@@ -1330,14 +1310,31 @@ return;
 }
 
 
-/*
-Maximum 2MB
-*/
+/* MAX 2MB */
 
-if(file.size > 2 * 1024 * 1024){
+if(
+file.size >
+2 * 1024 * 1024
+){
 
 alert(
 "Please select an image smaller than 2MB."
+);
+
+event.target.value =
+"";
+
+return;
+
+}
+
+
+if(
+!file.type.startsWith("image/")
+){
+
+alert(
+"Please select a valid image."
 );
 
 event.target.value =
@@ -1393,10 +1390,6 @@ document
 .trim();
 
 
-/*
-Default name
-*/
-
 if(!name){
 
 name =
@@ -1404,10 +1397,6 @@ name =
 
 }
 
-
-/*
-Limit name length
-*/
 
 if(name.length > 40){
 
@@ -1446,15 +1435,19 @@ new FileReader();
 reader.onload =
 function(){
 
+const imageData =
+reader.result;
+
+
 localStorage.setItem(
 uid + "_img",
-reader.result
+imageData
 );
 
 
 finishProfileSave(
 name,
-reader.result
+imageData
 );
 
 };
@@ -1465,13 +1458,6 @@ reader.readAsDataURL(file);
 }
 
 else{
-
-
-/*
-Keep existing image.
-
-If none exists, use 1.jpg.
-*/
 
 let existingImage =
 localStorage.getItem(
@@ -1503,7 +1489,8 @@ existingImage
 
 
 /* =====================================================
-   FINISH SAVE
+   SAVE FINISHED
+   SAVE → CLOSE EDIT PANEL
 ===================================================== */
 
 function finishProfileSave(
@@ -1511,11 +1498,8 @@ name,
 image
 ){
 
-document
-.getElementById("username")
-.innerText =
-name;
 
+/* UPDATE PROFILE IMAGE */
 
 document
 .getElementById("profileImage")
@@ -1523,11 +1507,23 @@ document
 image;
 
 
+/* UPDATE NAME */
+
+document
+.getElementById("username")
+.innerText =
+name;
+
+
+/* UPDATE PREVIEW */
+
 document
 .getElementById("imagePreview")
 .src =
 image;
 
+
+/* CLEAR FILE */
 
 document
 .getElementById("imageInput")
@@ -1535,24 +1531,110 @@ document
 "";
 
 
+/* =====================================================
+   IMPORTANT:
+   CLOSE EDIT PANEL AFTER SAVE
+===================================================== */
+
+document
+.getElementById("editPanel")
+.classList.remove("show");
+
+
+/* =====================================================
+   SHOW SUCCESS MESSAGE
+===================================================== */
+
 const message =
 document
 .getElementById("profileMessage");
 
 
-message.classList.add("show");
-
-
 message.innerText =
+"";
+
+
+/*
+Message is inside edit panel,
+so create temporary message
+outside the panel.
+*/
+
+const savedNotice =
+document.createElement("div");
+
+
+savedNotice.style.position =
+"fixed";
+
+savedNotice.style.left =
+"50%";
+
+savedNotice.style.bottom =
+"95px";
+
+savedNotice.style.transform =
+"translateX(-50%)";
+
+savedNotice.style.zIndex =
+"10001";
+
+savedNotice.style.padding =
+"12px 20px";
+
+savedNotice.style.borderRadius =
+"14px";
+
+savedNotice.style.background =
+"rgba(22,163,74,.95)";
+
+savedNotice.style.border =
+"1px solid rgba(134,239,172,.5)";
+
+savedNotice.style.color =
+"white";
+
+savedNotice.style.fontSize =
+"13px";
+
+savedNotice.style.fontWeight =
+"bold";
+
+savedNotice.style.boxShadow =
+"0 10px 30px rgba(0,0,0,.4)";
+
+savedNotice.innerText =
 "✅ Profile saved successfully";
+
+
+document.body.appendChild(
+savedNotice
+);
+
+
+/* REMOVE NOTICE */
+
+setTimeout(
+
+function(){
+
+savedNotice.style.opacity =
+"0";
+
+savedNotice.style.transition =
+"opacity .3s";
 
 
 setTimeout(
 
 function(){
 
-message.classList.remove(
-"show"
+savedNotice.remove();
+
+},
+
+300
+
 );
 
 },
@@ -1565,27 +1647,70 @@ message.classList.remove(
 
 
 /* =====================================================
-   CANCEL EDIT
+   CANCEL
 ===================================================== */
 
 window.cancelEdit =
 function(){
 
-const panel =
-document.getElementById(
-"editPanel"
-);
-
-
-panel.classList.remove(
-"show"
-);
+document
+.getElementById("editPanel")
+.classList.remove("show");
 
 
 document
 .getElementById("imageInput")
 .value =
 "";
+
+
+if(currentUser){
+
+const uid =
+currentUser.uid;
+
+
+let savedName =
+localStorage.getItem(
+uid + "_name"
+);
+
+
+let savedImage =
+localStorage.getItem(
+uid + "_img"
+);
+
+
+if(!savedName){
+
+savedName =
+currentUser.displayName ||
+"Zyper Customer";
+
+}
+
+
+if(!savedImage){
+
+savedImage =
+DEFAULT_IMAGE;
+
+}
+
+
+document
+.getElementById("nameInput")
+.value =
+savedName;
+
+
+document
+.getElementById("imagePreview")
+.src =
+savedImage;
+
+}
 
 };
 
