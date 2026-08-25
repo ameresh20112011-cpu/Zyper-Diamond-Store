@@ -8,217 +8,27 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-<title>Zyper Diamond Store</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link rel="stylesheet" href="media.css">
-
-<link rel="stylesheet" href="zyper-nav.css">
+<title>Zyper Diamond Store | Free Fire Top Up</title>
 
 <link rel="icon" href="1.jpg">
 
-<link rel="stylesheet"
+<link rel="stylesheet" href="home.css">
+
+<link rel="stylesheet" href="zyper-nav.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
-<style>
-
-*{
-box-sizing:border-box;
-}
-
-
-body{
-
-margin:0;
-
-font-family:'Segoe UI',sans-serif;
-
-background:#0f172a;
-
-color:white;
-
-padding-bottom:80px;
-
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-.header{
-
-padding:20px;
-
-font-size:22px;
-
-font-weight:bold;
-
-text-align:center;
-
-background:#020617;
-
-border-bottom:1px solid #1e293b;
-
-text-shadow:
-
-0 0 10px #17b8c0,
-
-0 0 20px #17b8c0,
-
-0 0 40px #17b8c0;
-
-letter-spacing:2px;
-
-}
-
-
-/* =========================
-   CONTAINER
-========================= */
-
-.container{
-
-padding:30px;
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(250px,1fr));
-
-gap:20px;
-
-}
-
-
-/* =========================
-   CARD
-========================= */
-
-.card{
-
-background:#1e293b;
-
-padding:25px;
-
-border-radius:20px;
-
-text-align:center;
-
-cursor:pointer;
-
-border:1px solid #334155;
-
-transition:.3s;
-
-}
-
-
-.card:hover{
-
-transform:translateY(-5px);
-
-background:#334155;
-
-}
-
-
-.card:active{
-
-transform:scale(.97);
-
-}
-
-
-.card h2{
-
-margin-bottom:10px;
-
-}
-
-
-.card p{
-
-color:#94a3b8;
-
-}
-
-
-/* =========================
-   ERROR BOX
-========================= */
-
-.firebase-error{
-
-display:none;
-
-margin:20px;
-
-padding:15px;
-
-border-radius:12px;
-
-background:
-rgba(239,68,68,.15);
-
-border:1px solid
-rgba(239,68,68,.4);
-
-color:#fca5a5;
-
-text-align:center;
-
-font-size:13px;
-
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px){
-
-.container{
-
-padding:15px;
-
-grid-template-columns:1fr;
-
-gap:15px;
-
-}
-
-
-.header{
-
-font-size:19px;
-
-padding:18px;
-
-}
-
-
-.card{
-
-padding:22px;
-
-}
-
-}
-
-
-/* =========================
-   SMALL MOBILE
-========================= */
-
-@media(max-width:350px){
-
-}
-
-</style>
 
 </head>
 
@@ -226,135 +36,609 @@ padding:22px;
 <body>
 
 
-<!-- =========================
+<!-- ==================================================
+     BACKGROUND VIDEO
+================================================== -->
+
+<div class="video-background">
+
+<video
+id="heroVideo"
+autoplay
+muted
+loop
+playsinline
+preload="auto">
+
+<source
+src="assets/freefire-bg.mp4"
+type="video/mp4">
+
+</video>
+
+</div>
+
+
+<div class="video-overlay"></div>
+
+
+<!-- ==================================================
+     GAMING EFFECTS
+================================================== -->
+
+<div class="gaming-light light-one"></div>
+
+<div class="gaming-light light-two"></div>
+
+<div class="gaming-light light-three"></div>
+
+
+<div class="particles">
+
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+
+<!-- ==================================================
      HEADER
-========================= -->
+================================================== -->
 
-<div class="header">
+<header class="top-header">
 
-💎 Zyper Diamond Store
+
+<div class="brand">
+
+<div class="brand-icon">
+💎
+</div>
+
+
+<div class="brand-text">
+
+<div class="brand-name">
+ZYPER
+</div>
+
+<div class="brand-sub">
+DIAMOND STORE
+</div>
+
+</div>
 
 </div>
 
 
-<!-- =========================
-     FIREBASE ERROR
-========================= -->
+<div class="online-status">
 
-<div
-id="firebaseError"
-class="firebase-error">
+<span></span>
 
-Unable to check your login status.
-Please refresh the page.
+ONLINE STORE
 
 </div>
 
 
-<!-- =========================
-     MAIN CONTENT
-========================= -->
+</header>
 
-<div class="container">
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<section class="hero">
+
+
+<div class="hero-content">
+
+
+<div class="small-title">
+
+<i class="fa-solid fa-fire"></i>
+
+GARENA FREE FIRE TOP UP
+
+</div>
+
+
+<h1>
+
+LEVEL UP
+
+<br>
+
+<span>YOUR GAME</span>
+
+</h1>
+
+
+<p class="hero-description">
+
+Fast, secure and reliable Free Fire
+diamond top-ups from Zyper Diamond Store.
+
+</p>
+
+
+<div class="hero-buttons">
+
+
+<button
+class="primary-button"
+onclick="goTopup()">
+
+<i class="fa-solid fa-gem"></i>
+
+TOP UP NOW
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</button>
+
+
+<button
+class="secondary-button"
+onclick="goHistory()">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+MY ORDERS
+
+</button>
+
+
+</div>
+
+
+<div class="trust-row">
+
+
+<div>
+
+<i class="fa-solid fa-bolt"></i>
+
+<span>FAST DELIVERY</span>
+
+</div>
+
+
+<div>
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<span>SECURE PAYMENT</span>
+
+</div>
+
+
+<div>
+
+<i class="fa-solid fa-headset"></i>
+
+<span>SUPPORT</span>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- ==================================================
+     FREE FIRE CHARACTER
+================================================== -->
+
+<div class="hero-character">
+
+<div class="character-glow"></div>
+
+<img
+src="assets/freefire-character.png"
+alt="Free Fire Character">
+
+</div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     SERVICE SECTION
+================================================== -->
+
+<section class="services-section">
+
+
+<div class="section-heading">
+
+
+<div>
+
+<span>ZYper STORE</span>
+
+<h2>
+WHAT DO YOU NEED?
+</h2>
+
+</div>
+
+
+<div class="heading-line"></div>
+
+
+</div>
+
+
+
+<div class="service-grid">
 
 
 <!-- TOP UP -->
 
 <div
-class="card"
+class="service-card featured"
 onclick="goTopup()">
 
-<h2>
 
-💎 Top-up Shop
+<div class="card-image">
 
-</h2>
+
+<img
+src="assets/freefire-hero.jpg"
+alt="Free Fire Top Up">
+
+
+<div class="card-image-overlay"></div>
+
+
+<div class="card-icon">
+
+<i class="fa-solid fa-gem"></i>
+
+</div>
+
+
+<div class="popular-tag">
+
+POPULAR
+
+</div>
+
+
+</div>
+
+
+<div class="card-content">
+
+
+<h3>
+Diamond Top Up
+</h3>
+
 
 <p>
 
-Buy diamonds easily
+Choose your Free Fire diamond package
+and complete your order quickly.
 
 </p>
 
+
+<div class="card-action">
+
+TOP UP NOW
+
+<i class="fa-solid fa-arrow-right"></i>
+
 </div>
+
+
+</div>
+
+</div>
+
 
 
 <!-- PAYMENT -->
 
 <div
-class="card"
+class="service-card"
 onclick="goPayment()">
 
-<h2>
 
-💳 Payment Methods
+<div class="simple-card-icon payment-icon">
 
-</h2>
+<i class="fa-solid fa-credit-card"></i>
+
+</div>
+
+
+<div class="card-content">
+
+
+<h3>
+Payment Methods
+</h3>
+
 
 <p>
 
-View bank details & upload receipt
+View available payment methods and
+submit your payment receipt.
 
 </p>
 
+
+<div class="card-action">
+
+VIEW PAYMENT
+
+<i class="fa-solid fa-arrow-right"></i>
+
 </div>
+
+
+</div>
+
+</div>
+
 
 
 <!-- HISTORY -->
 
 <div
-class="card"
+class="service-card"
 onclick="goHistory()">
 
-<h2>
 
-📜 Order History
+<div class="simple-card-icon history-icon">
 
-</h2>
+<i class="fa-solid fa-receipt"></i>
+
+</div>
+
+
+<div class="card-content">
+
+
+<h3>
+Order History
+</h3>
+
 
 <p>
 
-View all your previous orders
+Check your previous orders and
+view your order information.
 
 </p>
 
+
+<div class="card-action">
+
+VIEW ORDERS
+
+<i class="fa-solid fa-arrow-right"></i>
+
 </div>
+
+
+</div>
+
+</div>
+
 
 
 <!-- WHATSAPP -->
 
 <div
-class="card"
+class="service-card"
 onclick="goWhatsApp()">
 
-<h2>
 
-📲 WhatsApp Contact
+<div class="simple-card-icon whatsapp-icon">
 
-</h2>
+<i class="fa-brands fa-whatsapp"></i>
+
+</div>
+
+
+<div class="card-content">
+
+
+<h3>
+Customer Support
+</h3>
+
 
 <p>
 
-Chat directly for support
+Need help? Contact Zyper Diamond Store
+directly through WhatsApp.
 
 </p>
 
+
+<div class="card-action">
+
+CONTACT US
+
+<i class="fa-solid fa-arrow-right"></i>
+
 </div>
 
 
 </div>
 
+</div>
 
-<!-- =========================
-     ZYPER NAVIGATION BAR
-========================= -->
+
+</div>
+
+</section>
+
+
+
+<!-- ==================================================
+     FREE FIRE BANNER
+================================================== -->
+
+<section class="ff-banner">
+
+
+<div class="ff-banner-image">
+
+<img
+src="assets/freefire-banner.jpg"
+alt="Free Fire Banner">
+
+</div>
+
+
+<div class="ff-banner-overlay"></div>
+
+
+<div class="ff-banner-content">
+
+
+<div class="banner-label">
+
+FREE FIRE
+
+</div>
+
+
+<h2>
+
+READY FOR
+
+<br>
+
+THE <span>BATTLE?</span>
+
+</h2>
+
+
+<p>
+
+Get your diamonds and unlock your
+next gaming experience.
+
+</p>
+
+
+<button
+onclick="goTopup()">
+
+GET DIAMONDS
+
+<i class="fa-solid fa-gem"></i>
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     STATS
+================================================== -->
+
+<section class="stats-section">
+
+
+<div class="stat">
+
+<i class="fa-solid fa-users"></i>
+
+<strong>
+1000+
+</strong>
+
+<span>
+PLAYERS
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<i class="fa-solid fa-gem"></i>
+
+<strong>
+DIAMONDS
+</strong>
+
+<span>
+TOP UP SERVICE
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<i class="fa-solid fa-bolt"></i>
+
+<strong>
+FAST
+</strong>
+
+<span>
+DELIVERY
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<strong>
+SECURE
+</strong>
+
+<span>
+PAYMENTS
+</span>
+
+</div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     NAVIGATION
+================================================== -->
 
 <div id="zyper-navigation"></div>
 
 
-<!-- =========================
+
+<!-- ==================================================
      FIREBASE
-========================= -->
+================================================== -->
 
 <script type="module">
 
@@ -372,10 +656,6 @@ onAuthStateChanged
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-
-/* =========================
-   FIREBASE CONFIG
-========================= */
 
 const firebaseConfig = {
 
@@ -403,11 +683,7 @@ measurementId:
 };
 
 
-/* =========================
-   INITIALIZE FIREBASE
-========================= */
-
-try{
+try {
 
 const app =
 initializeApp(firebaseConfig);
@@ -416,15 +692,11 @@ const auth =
 getAuth(app);
 
 
-/* =========================
-   LOGIN CHECK
-========================= */
-
 onAuthStateChanged(
 auth,
-(user)=>{
+(user) => {
 
-if(!user){
+if (!user) {
 
 window.location.href =
 "index.html";
@@ -434,63 +706,23 @@ window.location.href =
 });
 
 }
-catch(error){
+
+catch(error) {
 
 console.error(
 "Firebase Error:",
 error
 );
 
-document
-.getElementById("firebaseError")
-.style.display="block";
-
 }
-
-
-/* =========================
-   NAVIGATION FUNCTIONS
-========================= */
-
-window.goTopup=function(){
-
-window.location.href=
-"topup.html";
-
-};
-
-
-window.goPayment=function(){
-
-window.location.href=
-"payment.html";
-
-};
-
-
-window.goHistory=function(){
-
-window.location.href=
-"history.html";
-
-};
-
-
-window.goWhatsApp=function(){
-
-window.location.href=
-"whatsapp.html";
-
-};
 
 </script>
 
 
-<!-- =========================
-     ZYPER NAVIGATION SCRIPT
-========================= -->
 
 <script src="zyper-nav.js"></script>
+
+<script src="home.js"></script>
 
 
 </body>
