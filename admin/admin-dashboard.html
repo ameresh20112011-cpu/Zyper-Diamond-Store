@@ -2,24 +2,128 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+      content="width=device-width, initial-scale=1.0">
 
-<title>Zyper Dashboard</title>
+<title>Zyper Admin Dashboard</title>
 
 <link rel="stylesheet" href="./admin.css">
 
-</head>
+<style>
+.wallet-panel,
+.redeem-panel {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18);
+}
 
+.wallet-panel h2,
+.redeem-panel h2 {
+    margin-top: 0;
+}
+
+.wallet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.wallet-stat {
+    padding: 18px;
+    border-radius: 14px;
+    background: rgba(0,0,0,.2);
+}
+
+.wallet-stat small {
+    display: block;
+    opacity: .7;
+    margin-bottom: 7px;
+}
+
+.wallet-stat strong {
+    font-size: 22px;
+}
+
+.redeem-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.redeem-form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(0,0,0,.25);
+    color: white;
+    outline: none;
+}
+
+.redeem-form button,
+.wallet-button {
+    border: 0;
+    border-radius: 10px;
+    padding: 13px 18px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.create-redeem-btn {
+    background: #22c55e;
+    color: white;
+}
+
+.check-redeem-btn {
+    background: #3b82f6;
+    color: white;
+}
+
+.redeem-result {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(0,0,0,.25);
+    display: none;
+    word-break: break-word;
+}
+
+.redeem-code-display {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 10px 0;
+}
+
+.copy-code {
+    background: #8b5cf6;
+    color: white;
+}
+
+@media(max-width:900px) {
+    .wallet-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .redeem-form {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+</head>
 
 <body>
 
-
 <div id="app" style="display:none;">
-
 
 <aside class="sidebar">
 
@@ -38,37 +142,113 @@ content="width=device-width, initial-scale=1.0">
 </aside>
 
 
-
 <main class="main">
-
 
 <div class="topbar">
 
     <div>
-
-        <h1>
-            Orders Dashboard
-        </h1>
+        <h1>Orders Dashboard</h1>
 
         <p class="subtitle">
             Zyper Diamond Store
         </p>
-
     </div>
 
-
-    <button
-        id="refresh"
-        class="refresh-btn"
-    >
+    <button id="refresh"
+            class="refresh-btn">
         ↻ Refresh
     </button>
 
 </div>
 
 
+<!-- =========================================
+     WALLET ADMIN
+========================================= -->
 
-<!-- DATE SEARCH -->
+<div class="wallet-panel">
+
+    <h2>💰 Customer Wallet</h2>
+
+    <p>
+        Create a secure redeem code and assign wallet
+        money to a specific Firebase customer.
+    </p>
+
+    <div class="redeem-form">
+
+        <input
+            type="text"
+            id="walletUserId"
+            placeholder="Customer Firebase UID">
+
+        <input
+            type="email"
+            id="walletEmail"
+            placeholder="Customer Email (optional)">
+
+        <input
+            type="number"
+            id="walletAmount"
+            placeholder="Amount LKR"
+            min="1"
+            max="1000000">
+
+        <button
+            id="createRedeem"
+            class="create-redeem-btn">
+            🎟️ Create Code
+        </button>
+
+    </div>
+
+
+    <div
+        id="redeemResult"
+        class="redeem-result">
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     CHECK REDEEM CODE
+========================================= -->
+
+<div class="redeem-panel">
+
+    <h2>🔎 Check Redeem Code</h2>
+
+    <div class="redeem-form">
+
+        <input
+            type="text"
+            id="checkCode"
+            placeholder="XXXX-XXXX-XXXX"
+            maxlength="14">
+
+        <button
+            id="checkRedeem"
+            class="check-redeem-btn">
+            🔎 Check Code
+        </button>
+
+    </div>
+
+
+    <div
+        id="checkResult"
+        class="redeem-result">
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     DATE SEARCH
+========================================= -->
 
 <div class="date-search">
 
@@ -76,42 +256,34 @@ content="width=device-width, initial-scale=1.0">
         📅 Order Date
     </div>
 
-
     <input
         type="date"
-        id="orderDate"
-    >
-
+        id="orderDate">
 
     <button
         id="dateSearch"
-        class="date-search-btn"
-    >
+        class="date-search-btn">
         🔎 Search
     </button>
 
-
     <button
         id="todayButton"
-        class="today-btn"
-    >
+        class="today-btn">
         Today
     </button>
 
 </div>
 
 
-
-<!-- DASHBOARD CARDS -->
+<!-- =========================================
+     DASHBOARD CARDS
+========================================= -->
 
 <div class="cards">
 
-
 <div class="card">
 
-    <h3>
-        Orders
-    </h3>
+    <h3>Orders</h3>
 
     <h2 id="totalOrders">
         0
@@ -120,12 +292,9 @@ content="width=device-width, initial-scale=1.0">
 </div>
 
 
-
 <div class="card">
 
-    <h3>
-        Revenue
-    </h3>
+    <h3>Revenue</h3>
 
     <h2>
         Rs.
@@ -137,12 +306,9 @@ content="width=device-width, initial-scale=1.0">
 </div>
 
 
-
 <div class="card">
 
-    <h3>
-        Pending
-    </h3>
+    <h3>Pending</h3>
 
     <h2 id="pendingOrders">
         0
@@ -151,12 +317,9 @@ content="width=device-width, initial-scale=1.0">
 </div>
 
 
-
 <div class="card">
 
-    <h3>
-        Success
-    </h3>
+    <h3>Success</h3>
 
     <h2 id="successOrders">
         0
@@ -164,240 +327,26 @@ content="width=device-width, initial-scale=1.0">
 
 </div>
 
-
 </div>
 
 
-
-<!-- TEXT SEARCH -->
+<!-- =========================================
+     SEARCH
+========================================= -->
 
 <div class="search-box">
 
     <input
         id="search"
         type="text"
-        placeholder="Search Order ID, UID, customer, product..."
-    >
+        placeholder="Search Order ID, UID, customer, product...">
 
 </div>
 
 
-
-<!-- =====================================================
-     CUSTOMER WALLET / REDEEM CODE
-     ===================================================== -->
-
-<section class="wallet-admin">
-
-    <div class="wallet-admin-header">
-
-        <div>
-
-            <h2>
-                💰 Customer Wallet
-            </h2>
-
-            <p>
-                Add approved payment amount to a customer's wallet
-                using a secure redeem code.
-            </p>
-
-        </div>
-
-    </div>
-
-
-
-    <div class="wallet-form">
-
-
-        <!-- CUSTOMER FIREBASE UID -->
-
-        <div class="wallet-field">
-
-            <label for="walletUserId">
-                Customer Firebase UID
-            </label>
-
-            <input
-                type="text"
-                id="walletUserId"
-                placeholder="Enter customer Firebase UID"
-                autocomplete="off"
-            >
-
-        </div>
-
-
-
-        <!-- CUSTOMER EMAIL -->
-
-        <div class="wallet-field">
-
-            <label for="walletEmail">
-                Customer Email
-            </label>
-
-            <input
-                type="email"
-                id="walletEmail"
-                placeholder="Enter customer email"
-                autocomplete="off"
-            >
-
-        </div>
-
-
-
-        <!-- AMOUNT -->
-
-        <div class="wallet-field">
-
-            <label for="walletAmount">
-                Amount (LKR)
-            </label>
-
-            <input
-                type="number"
-                id="walletAmount"
-                placeholder="Example: 1000"
-                min="1"
-                max="1000000"
-                step="1"
-            >
-
-        </div>
-
-
-
-        <!-- CREATE CODE -->
-
-        <button
-            type="button"
-            id="createRedeemBtn"
-            class="create-redeem-btn"
-        >
-            🔐 Create Redeem Code
-        </button>
-
-
-    </div>
-
-
-
-    <!-- RESULT -->
-
-    <div
-        id="redeemResult"
-        class="redeem-result"
-        style="display:none;"
-    >
-
-
-        <h3>
-            ✅ Redeem Code Created
-        </h3>
-
-
-
-        <div class="redeem-code-box">
-
-            <span id="generatedRedeemCode">
-                XXXX-XXXX-XXXX
-            </span>
-
-
-            <button
-                type="button"
-                id="copyRedeemCode"
-            >
-                📋 Copy
-            </button>
-
-        </div>
-
-
-
-        <div class="redeem-details">
-
-            <p>
-
-                Amount:
-
-                <strong>
-                    LKR
-                    <span id="generatedAmount">
-                        0
-                    </span>
-                </strong>
-
-            </p>
-
-
-            <p>
-
-                Customer:
-
-                <strong id="generatedEmail">
-                    -
-                </strong>
-
-            </p>
-
-
-            <p>
-
-                Firebase UID:
-
-                <strong id="generatedUserId">
-                    -
-                </strong>
-
-            </p>
-
-
-            <p>
-
-                Status:
-
-                <strong>
-                    AVAILABLE
-                </strong>
-
-            </p>
-
-        </div>
-
-
-
-        <p class="redeem-warning">
-
-            ⚠️ Send this redeem code only to the customer
-            who made the verified payment.
-
-        </p>
-
-
-    </div>
-
-
-
-    <!-- ERROR / SUCCESS MESSAGE -->
-
-    <div
-        id="walletMessage"
-        class="wallet-message"
-        style="display:none;"
-    ></div>
-
-
-</section>
-
-
-
-<!-- =====================================================
-     ORDERS TABLE
-     ===================================================== -->
+<!-- =========================================
+     ORDERS
+========================================= -->
 
 <div class="table-container">
 
@@ -445,22 +394,14 @@ content="width=device-width, initial-scale=1.0">
 
 </main>
 
-
 </div>
 
 
-
-<!-- =====================================================
-     ADMIN JAVASCRIPT
-     ===================================================== -->
-
 <script
-type="module"
-src="./admin.js">
+    type="module"
+    src="./admin.js">
 </script>
-
 
 </body>
 
 </html>
-::: 
