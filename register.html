@@ -15,36 +15,293 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
 <link rel="icon" href="1.jpg">
 
+
+<style>
+
+/* =================================
+   REGISTER LOGO FIX
+================================= */
+
+.login-header{
+    text-align:center;
+    margin-bottom:28px;
+}
+
+
+/* LOGO CONTAINER */
+
+.company-logo{
+    width:76px !important;
+    height:76px !important;
+
+    min-width:76px !important;
+    min-height:76px !important;
+
+    max-width:76px !important;
+    max-height:76px !important;
+
+    margin:0 auto 14px !important;
+
+    padding:0 !important;
+
+    border-radius:50% !important;
+
+    overflow:hidden !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+    justify-content:center !important;
+
+    background:#ffffff;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.18),
+        inset 0 0 0 3px rgba(255,255,255,.8);
+
+    flex-shrink:0 !important;
+
+}
+
+
+/* ACTUAL LOGO IMAGE */
+
+.company-logo img{
+
+    width:76px !important;
+    height:76px !important;
+
+    min-width:76px !important;
+    min-height:76px !important;
+
+    max-width:76px !important;
+    max-height:76px !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    display:block !important;
+
+    object-fit:cover !important;
+
+    border-radius:50% !important;
+
+}
+
+
+/* BRAND NAME */
+
+.brand-name{
+
+    margin:0;
+
+    font-size:24px;
+
+    font-weight:800;
+
+    line-height:1.2;
+
+    letter-spacing:.4px;
+
+}
+
+
+/* SUBTITLE */
+
+.brand-subtitle{
+
+    margin:7px 0 0;
+
+    font-size:13px;
+
+    opacity:.7;
+
+    line-height:1.5;
+
+}
+
+
+/* SMALL LINE */
+
+.logo-glow{
+
+    width:45px;
+
+    height:3px;
+
+    margin:12px auto 0;
+
+    border-radius:10px;
+
+    background:currentColor;
+
+    opacity:.35;
+
+}
+
+
+/* =================================
+   PASSWORD
+================================= */
+
+.password-group{
+    position:relative;
+}
+
+
+.password-group input{
+
+    padding-right:55px !important;
+
+}
+
+
+.password-toggle{
+
+    position:absolute;
+
+    right:9px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:transparent;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:10;
+
+}
+
+
+.password-toggle svg{
+
+    width:20px;
+
+    height:20px;
+
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media(max-width:500px){
+
+    .company-logo{
+
+        width:68px !important;
+        height:68px !important;
+
+        min-width:68px !important;
+        min-height:68px !important;
+
+        max-width:68px !important;
+        max-height:68px !important;
+
+    }
+
+
+    .company-logo img{
+
+        width:68px !important;
+        height:68px !important;
+
+        min-width:68px !important;
+        min-height:68px !important;
+
+        max-width:68px !important;
+        max-height:68px !important;
+
+    }
+
+
+    .brand-name{
+
+        font-size:21px;
+
+    }
+
+
+    .brand-subtitle{
+
+        font-size:12px;
+
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
+
 <div class="login-container">
+
 
 <div class="login-card">
 
 
-<!-- HEADER -->
+<!-- =================================
+     HEADER
+================================= -->
 
 <div class="login-header">
+
+
+<!-- SMALL CIRCLE LOGO -->
 
 <div class="company-logo">
 
 <img
 src="1.jpg"
-alt="Zyper Diamond Store">
-
-</div>
-
-<h2>Create Account</h2>
-
-<p>Create your Zyper Diamond Store account</p>
+alt="Zyper Diamond Store Logo">
 
 </div>
 
 
+<h2 class="brand-name">
 
-<!-- FORM -->
+Zyper Diamond Store
+
+</h2>
+
+
+<p class="brand-subtitle">
+
+Create your account to continue
+
+</p>
+
+
+<div class="logo-glow"></div>
+
+</div>
+
+
+
+<!-- =================================
+     REGISTER FORM
+================================= -->
 
 <form
 id="registerForm"
@@ -58,18 +315,24 @@ novalidate>
 
 <div class="input-group neu-input">
 
+
 <input
 type="text"
 id="username"
+name="username"
 required
 autocomplete="username"
 placeholder=" "
 minlength="3"
 maxlength="30">
 
+
 <label for="username">
+
 Username
+
 </label>
+
 
 <div class="input-icon">
 
@@ -103,17 +366,23 @@ r="4"/>
 
 <div class="input-group neu-input">
 
+
 <input
 type="tel"
 id="phone"
+name="phone"
 required
 autocomplete="tel"
 placeholder=" "
 maxlength="15">
 
+
 <label for="phone">
+
 Phone Number
+
 </label>
+
 
 <div class="input-icon">
 
@@ -152,16 +421,22 @@ y2="18"/>
 
 <div class="input-group neu-input">
 
+
 <input
 type="email"
 id="email"
+name="email"
 required
 autocomplete="email"
 placeholder=" ">
 
+
 <label for="email">
+
 Email Address
+
 </label>
+
 
 <div class="input-icon">
 
@@ -193,16 +468,21 @@ points="22,6 12,13 2,6"/>
 
 <div class="input-group neu-input password-group">
 
+
 <input
 type="password"
 id="password"
+name="password"
 required
 autocomplete="new-password"
 placeholder=" "
 minlength="6">
 
+
 <label for="password">
+
 Password
+
 </label>
 
 
@@ -229,10 +509,15 @@ d="M7 11V7a5 5 0 0110 0v4"/>
 </div>
 
 
+
+<!-- SHOW PASSWORD -->
+
 <button
 type="button"
 id="passwordToggle"
-class="password-toggle neu-toggle">
+class="password-toggle"
+aria-label="Show password">
+
 
 <svg
 class="eye-open"
@@ -282,16 +567,20 @@ y2="23"/>
 
 
 
-<!-- BUTTON -->
+<!-- CREATE ACCOUNT -->
 
 <button
 type="submit"
 class="neu-button login-btn"
 id="registerButton">
 
+
 <span id="buttonText">
+
 Create Account
+
 </span>
+
 
 <span
 id="buttonLoading"
@@ -300,6 +589,7 @@ style="display:none;">
 Creating Account...
 
 </span>
+
 
 </button>
 
@@ -335,7 +625,9 @@ Account Created Successfully ✅
 Already have an account?
 
 <a href="index.html">
+
 Login
+
 </a>
 
 </p>
@@ -349,7 +641,9 @@ Login
 
 
 
-<!-- FIREBASE -->
+<!-- =================================
+     FIREBASE
+================================= -->
 
 <script type="module">
 
@@ -410,6 +704,8 @@ appId:
 
 
 
+/* INITIALIZE */
+
 const app =
 initializeApp(firebaseConfig);
 
@@ -455,37 +751,58 @@ document.getElementById("successMsg");
 
 
 
-/* PASSWORD SHOW/HIDE */
+/* =================================
+   SHOW / HIDE PASSWORD
+================================= */
 
 toggle.addEventListener(
 "click",
-() => {
+()=>{
 
-if(password.type === "password"){
+if(
+password.type ===
+"password"
+){
 
-password.type = "text";
+password.type =
+"text";
 
 toggle.querySelector(
 ".eye-open"
-).style.display = "none";
+).style.display =
+"none";
 
 toggle.querySelector(
 ".eye-closed"
-).style.display = "block";
+).style.display =
+"block";
+
+toggle.setAttribute(
+"aria-label",
+"Hide password"
+);
 
 }
 
 else{
 
-password.type = "password";
+password.type =
+"password";
 
 toggle.querySelector(
 ".eye-open"
-).style.display = "block";
+).style.display =
+"block";
 
 toggle.querySelector(
 ".eye-closed"
-).style.display = "none";
+).style.display =
+"none";
+
+toggle.setAttribute(
+"aria-label",
+"Show password"
+);
 
 }
 
@@ -493,7 +810,9 @@ toggle.querySelector(
 
 
 
-/* REGISTER */
+/* =================================
+   REGISTER
+================================= */
 
 form.addEventListener(
 "submit",
@@ -515,60 +834,83 @@ const passwordValue =
 password.value;
 
 
-if(usernameValue.length < 3){
+if(
+usernameValue.length < 3
+){
 
 alert(
 "Username must be at least 3 characters."
 );
 
+username.focus();
+
 return;
 
 }
 
 
-if(!/^[0-9+\-\s]{7,15}$/.test(phoneValue)){
+if(
+!/^[0-9+\-\s]{7,15}$/
+.test(phoneValue)
+){
 
 alert(
 "Please enter a valid phone number."
 );
 
+phone.focus();
+
 return;
 
 }
 
 
-if(passwordValue.length < 6){
+if(
+passwordValue.length < 6
+){
 
 alert(
 "Password must be at least 6 characters."
 );
 
+password.focus();
+
 return;
 
 }
 
 
+try{
+
 
 /* CHECK USERNAME */
 
-try{
-
 const usernameQuery =
 query(
-collection(db,"users"),
+collection(
+db,
+"users"
+),
+
 where(
 "username",
 "==",
 usernameValue
 ),
+
 limit(1)
 );
 
+
 const usernameResult =
-await getDocs(usernameQuery);
+await getDocs(
+usernameQuery
+);
 
 
-if(!usernameResult.empty){
+if(
+!usernameResult.empty
+){
 
 alert(
 "This username is already taken."
@@ -579,10 +921,10 @@ return;
 }
 
 
-
 /* LOADING */
 
-registerButton.disabled = true;
+registerButton.disabled =
+true;
 
 buttonText.style.display =
 "none";
@@ -591,8 +933,7 @@ buttonLoading.style.display =
 "inline";
 
 
-
-/* CREATE AUTH ACCOUNT */
+/* CREATE ACCOUNT */
 
 const credential =
 await createUserWithEmailAndPassword(
@@ -606,8 +947,7 @@ const user =
 credential.user;
 
 
-
-/* SAVE FIRESTORE */
+/* SAVE USER */
 
 await setDoc(
 doc(
@@ -617,20 +957,23 @@ user.uid
 ),
 {
 
-uid:user.uid,
+uid:
+user.uid,
 
-username:usernameValue,
+username:
+usernameValue,
 
-phone:phoneValue,
+phone:
+phoneValue,
 
-email:emailValue,
+email:
+emailValue,
 
 createdAt:
 serverTimestamp()
 
 }
 );
-
 
 
 /* SUCCESS */
@@ -716,4 +1059,5 @@ error.message
 </script>
 
 </body>
+
 </html>
