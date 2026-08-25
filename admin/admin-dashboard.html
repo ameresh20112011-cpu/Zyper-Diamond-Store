@@ -102,6 +102,8 @@ content="width=device-width, initial-scale=1.0">
 
 
 
+<!-- DASHBOARD CARDS -->
+
 <div class="cards">
 
 
@@ -181,6 +183,222 @@ content="width=device-width, initial-scale=1.0">
 
 
 
+<!-- =====================================================
+     CUSTOMER WALLET / REDEEM CODE
+     ===================================================== -->
+
+<section class="wallet-admin">
+
+    <div class="wallet-admin-header">
+
+        <div>
+
+            <h2>
+                💰 Customer Wallet
+            </h2>
+
+            <p>
+                Add approved payment amount to a customer's wallet
+                using a secure redeem code.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="wallet-form">
+
+
+        <!-- CUSTOMER FIREBASE UID -->
+
+        <div class="wallet-field">
+
+            <label for="walletUserId">
+                Customer Firebase UID
+            </label>
+
+            <input
+                type="text"
+                id="walletUserId"
+                placeholder="Enter customer Firebase UID"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+
+        <!-- CUSTOMER EMAIL -->
+
+        <div class="wallet-field">
+
+            <label for="walletEmail">
+                Customer Email
+            </label>
+
+            <input
+                type="email"
+                id="walletEmail"
+                placeholder="Enter customer email"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+
+        <!-- AMOUNT -->
+
+        <div class="wallet-field">
+
+            <label for="walletAmount">
+                Amount (LKR)
+            </label>
+
+            <input
+                type="number"
+                id="walletAmount"
+                placeholder="Example: 1000"
+                min="1"
+                max="1000000"
+                step="1"
+            >
+
+        </div>
+
+
+
+        <!-- CREATE CODE -->
+
+        <button
+            type="button"
+            id="createRedeemBtn"
+            class="create-redeem-btn"
+        >
+            🔐 Create Redeem Code
+        </button>
+
+
+    </div>
+
+
+
+    <!-- RESULT -->
+
+    <div
+        id="redeemResult"
+        class="redeem-result"
+        style="display:none;"
+    >
+
+
+        <h3>
+            ✅ Redeem Code Created
+        </h3>
+
+
+
+        <div class="redeem-code-box">
+
+            <span id="generatedRedeemCode">
+                XXXX-XXXX-XXXX
+            </span>
+
+
+            <button
+                type="button"
+                id="copyRedeemCode"
+            >
+                📋 Copy
+            </button>
+
+        </div>
+
+
+
+        <div class="redeem-details">
+
+            <p>
+
+                Amount:
+
+                <strong>
+                    LKR
+                    <span id="generatedAmount">
+                        0
+                    </span>
+                </strong>
+
+            </p>
+
+
+            <p>
+
+                Customer:
+
+                <strong id="generatedEmail">
+                    -
+                </strong>
+
+            </p>
+
+
+            <p>
+
+                Firebase UID:
+
+                <strong id="generatedUserId">
+                    -
+                </strong>
+
+            </p>
+
+
+            <p>
+
+                Status:
+
+                <strong>
+                    AVAILABLE
+                </strong>
+
+            </p>
+
+        </div>
+
+
+
+        <p class="redeem-warning">
+
+            ⚠️ Send this redeem code only to the customer
+            who made the verified payment.
+
+        </p>
+
+
+    </div>
+
+
+
+    <!-- ERROR / SUCCESS MESSAGE -->
+
+    <div
+        id="walletMessage"
+        class="wallet-message"
+        style="display:none;"
+    ></div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     ORDERS TABLE
+     ===================================================== -->
+
 <div class="table-container">
 
 <table>
@@ -231,6 +449,11 @@ content="width=device-width, initial-scale=1.0">
 </div>
 
 
+
+<!-- =====================================================
+     ADMIN JAVASCRIPT
+     ===================================================== -->
+
 <script
 type="module"
 src="./admin.js">
@@ -240,3 +463,4 @@ src="./admin.js">
 </body>
 
 </html>
+::: 
