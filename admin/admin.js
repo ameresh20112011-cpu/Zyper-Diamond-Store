@@ -15,21 +15,36 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
-/* =========================================
+/* =====================================================
    CLOUDFLARE WORKER
-========================================= */
+===================================================== */
 
 const WORKER_URL =
     "https://zyper-order.ameresh20112011.workers.dev";
+
+
+/*
+   IMPORTANT:
+
+   DO NOT put ADMIN_SECRET inside this JavaScript file.
+
+   The secret must stay in Cloudflare Worker secrets.
+
+   admin.js only sends the secret if you have created
+   a secure way to provide it.
+
+   For now the wallet/redeem admin functions below
+   will use the Cloudflare endpoint normally.
+*/
 
 
 let allOrders = [];
 let selectedDate = "";
 
 
-/* =========================================
+/* =====================================================
    ADMIN CHECK
-========================================= */
+===================================================== */
 
 async function checkAdmin(user) {
 
@@ -39,38 +54,28 @@ async function checkAdmin(user) {
 
     try {
 
-        const adminDoc =
-            await getDoc(
-                doc(
-                    db,
-                    "users",
-                    user.uid
-                )
-            );
+        const adminDoc = await getDoc(
+            doc(db, "users", user.uid)
+        );
 
         if (!adminDoc.exists()) {
             return false;
         }
 
-        return (
-            adminDoc.data().role === "admin"
-        );
+        return adminDoc.data().role === "admin";
 
     } catch (error) {
 
-        console.error(
-            "Admin check error:",
-            error
-        );
+        console.error("Admin check error:", error);
 
         return false;
     }
 }
 
 
-/* =========================================
+/* =====================================================
    LOGIN
-========================================= */
+===================================================== */
 
 const loginForm =
     document.getElementById("loginForm");
@@ -80,41 +85,40 @@ if (loginForm) {
 
     loginForm.addEventListener(
         "submit",
-        async function(e) {
+        async function (e) {
 
             e.preventDefault();
 
             const email =
-                document
-                .getElementById("email")
-                .value
-                .trim();
+                document.getElementById("email")
+                    ?.value.trim();
 
             const password =
-                document
-                .getElementById("password")
-                .value;
+                document.getElementById("password")
+                    ?.value;
 
             const msg =
-                document
-                .getElementById("msg");
+                document.getElementById("msg");
 
             const button =
-                document
-                .getElementById("login");
+                document.getElementById("login");
 
 
             if (!email || !password) {
 
-                msg.textContent =
-                    "Enter email and password";
+                if (msg) {
+                    msg.textContent =
+                        "Enter email and password";
+                }
 
                 return;
             }
 
 
-            button.disabled = true;
-            button.textContent = "LOGIN...";
+            if (button) {
+                button.disabled = true;
+                button.textContent = "LOGIN...";
+            }
 
 
             try {
@@ -128,20 +132,22 @@ if (loginForm) {
 
 
                 const admin =
-                    await checkAdmin(
-                        result.user
-                    );
+                    await checkAdmin(result.user);
 
 
                 if (!admin) {
 
                     await signOut(auth);
 
-                    msg.textContent =
-                        "❌ You are not admin";
+                    if (msg) {
+                        msg.textContent =
+                            "❌ You are not admin";
+                    }
 
-                    button.disabled = false;
-                    button.textContent = "LOGIN";
+                    if (button) {
+                        button.disabled = false;
+                        button.textContent = "LOGIN";
+                    }
 
                     return;
                 }
@@ -151,26 +157,30 @@ if (loginForm) {
                     "./admin-dashboard.html";
 
 
-            } catch(error) {
+            } catch (error) {
 
                 console.error(error);
 
-                msg.textContent =
-                    error.message;
+                if (msg) {
+                    msg.textContent =
+                        error.message ||
+                        "Login failed.";
+                }
 
-                button.disabled = false;
-                button.textContent = "LOGIN";
+                if (button) {
+                    button.disabled = false;
+                    button.textContent = "LOGIN";
+                }
             }
 
         }
     );
-
 }
 
 
-/* =========================================
+/* =====================================================
    DASHBOARD AUTH
-========================================= */
+===================================================== */
 
 const orderTable =
     document.getElementById("orders");
@@ -180,7 +190,7 @@ if (orderTable) {
 
     onAuthStateChanged(
         auth,
-        async function(user) {
+        async function (user) {
 
             if (!user) {
 
@@ -206,32 +216,39 @@ if (orderTable) {
             }
 
 
-            document
-                .getElementById("app")
-                .style.display = "block";
+            const app =
+                document.getElementById("app");
+
+
+            if (app) {
+                app.style.display = "block";
+            }
 
 
             selectedDate =
                 getTodayString();
 
 
-            document
-                .getElementById("orderDate")
-                .value =
-                selectedDate;
+            const dateInput =
+                document.getElementById("orderDate");
+
+
+            if (dateInput) {
+                dateInput.value =
+                    selectedDate;
+            }
 
 
             await loadOrders();
 
         }
     );
-
 }
 
 
-/* =========================================
-   TODAY
-========================================= */
+/* =====================================================
+   GET TODAY
+===================================================== */
 
 function getTodayString() {
 
@@ -241,22 +258,20 @@ function getTodayString() {
         now.getFullYear();
 
     const month =
-        String(
-            now.getMonth() + 1
-        ).padStart(2, "0");
+        String(now.getMonth() + 1)
+            .padStart(2, "0");
 
     const day =
-        String(
-            now.getDate()
-        ).padStart(2, "0");
+        String(now.getDate())
+            .padStart(2, "0");
 
     return `${year}-${month}-${day}`;
 }
 
 
-/* =========================================
-   FIRESTORE DATE
-========================================= */
+/* =====================================================
+   FIREBASE TIMESTAMP → DATE
+===================================================== */
 
 function convertToDate(value) {
 
@@ -266,19 +281,16 @@ function convertToDate(value) {
 
 
     if (
-        typeof value.toDate ===
-        "function"
+        typeof value.toDate === "function"
     ) {
 
         return value.toDate();
-
     }
 
 
     if (value instanceof Date) {
 
         return value;
-
     }
 
 
@@ -289,7 +301,6 @@ function convertToDate(value) {
         return new Date(
             Number(value.seconds) * 1000
         );
-
     }
 
 
@@ -298,13 +309,10 @@ function convertToDate(value) {
 
 
     if (
-        !isNaN(
-            date.getTime()
-        )
+        !isNaN(date.getTime())
     ) {
 
         return date;
-
     }
 
 
@@ -312,9 +320,9 @@ function convertToDate(value) {
 }
 
 
-/* =========================================
+/* =====================================================
    DATE STRING
-========================================= */
+===================================================== */
 
 function getDateString(value) {
 
@@ -331,23 +339,21 @@ function getDateString(value) {
         date.getFullYear();
 
     const month =
-        String(
-            date.getMonth() + 1
-        ).padStart(2, "0");
+        String(date.getMonth() + 1)
+            .padStart(2, "0");
 
     const day =
-        String(
-            date.getDate()
-        ).padStart(2, "0");
+        String(date.getDate())
+            .padStart(2, "0");
 
 
     return `${year}-${month}-${day}`;
 }
 
 
-/* =========================================
+/* =====================================================
    FORMAT DATE
-========================================= */
+===================================================== */
 
 function formatDate(timestamp) {
 
@@ -361,36 +367,32 @@ function formatDate(timestamp) {
 
 
     const hour =
-        String(
-            date.getHours()
-        ).padStart(2, "0");
+        String(date.getHours())
+            .padStart(2, "0");
 
     const minute =
-        String(
-            date.getMinutes()
-        ).padStart(2, "0");
+        String(date.getMinutes())
+            .padStart(2, "0");
 
     const year =
         date.getFullYear();
 
     const month =
-        String(
-            date.getMonth() + 1
-        ).padStart(2, "0");
+        String(date.getMonth() + 1)
+            .padStart(2, "0");
 
     const day =
-        String(
-            date.getDate()
-        ).padStart(2, "0");
+        String(date.getDate())
+            .padStart(2, "0");
 
 
     return `${hour}:${minute} , ${year}/${month}/${day}`;
 }
 
 
-/* =========================================
-   TIME
-========================================= */
+/* =====================================================
+   GET TIME
+===================================================== */
 
 function getTime(timestamp) {
 
@@ -407,9 +409,9 @@ function getTime(timestamp) {
 }
 
 
-/* =========================================
+/* =====================================================
    LOAD ORDERS
-========================================= */
+===================================================== */
 
 async function loadOrders() {
 
@@ -435,10 +437,7 @@ async function loadOrders() {
 
         const snapshot =
             await getDocs(
-                collection(
-                    db,
-                    "orders"
-                )
+                collection(db, "orders")
             );
 
 
@@ -446,7 +445,7 @@ async function loadOrders() {
 
 
         snapshot.forEach(
-            function(item) {
+            function (item) {
 
                 allOrders.push({
 
@@ -461,16 +460,11 @@ async function loadOrders() {
 
 
         allOrders.sort(
-            function(a,b) {
+            function (a, b) {
 
                 return (
-                    getTime(
-                        b.data.createdAt
-                    )
-                    -
-                    getTime(
-                        a.data.createdAt
-                    )
+                    getTime(b.data.createdAt) -
+                    getTime(a.data.createdAt)
                 );
 
             }
@@ -479,7 +473,8 @@ async function loadOrders() {
 
         filterOrders();
 
-    } catch(error) {
+
+    } catch (error) {
 
         console.error(
             "Load orders error:",
@@ -498,25 +493,25 @@ async function loadOrders() {
 }
 
 
-/* =========================================
+/* =====================================================
    FILTER ORDERS
-========================================= */
+===================================================== */
 
 function filterOrders() {
 
-    const input =
+    const dateInput =
         document.getElementById(
             "orderDate"
         );
 
 
-    if (!input) {
+    if (!dateInput) {
         return;
     }
 
 
     selectedDate =
-        input.value;
+        dateInput.value;
 
 
     if (!selectedDate) {
@@ -529,36 +524,35 @@ function filterOrders() {
 
     const filtered =
         allOrders.filter(
-            function(item) {
+            function (item) {
 
                 return (
                     getDateString(
                         item.data.createdAt
-                    )
-                    ===
-                    selectedDate
+                    ) === selectedDate
                 );
 
             }
         );
 
 
-    renderOrders(
-        filtered
-    );
+    renderOrders(filtered);
 }
 
 
-/* =========================================
+/* =====================================================
    RENDER ORDERS
-========================================= */
+===================================================== */
 
 function renderOrders(orders) {
 
     const table =
-        document.getElementById(
-            "orders"
-        );
+        document.getElementById("orders");
+
+
+    if (!table) {
+        return;
+    }
 
 
     let total = 0;
@@ -593,7 +587,7 @@ function renderOrders(orders) {
 
 
     orders.forEach(
-        function(item) {
+        function (item) {
 
             const order =
                 item.data;
@@ -635,8 +629,8 @@ function renderOrders(orders) {
 
             const price =
                 Number(
-                    order.productPrice ||
-                    order.price ||
+                    order.productPrice ??
+                    order.price ??
                     0
                 );
 
@@ -649,9 +643,9 @@ function renderOrders(orders) {
 
             const amount =
                 Number(
-                    order.total ||
-                    order.amount ||
-                    price ||
+                    order.total ??
+                    order.amount ??
+                    price ??
                     0
                 );
 
@@ -672,27 +666,25 @@ function renderOrders(orders) {
             revenue += amount;
 
 
-            if (
+            const lowerStatus =
                 String(status)
-                .toLowerCase()
-                ===
-                "pending"
+                    .toLowerCase();
+
+
+            if (
+                lowerStatus === "pending"
             ) {
 
                 pending++;
-
             }
 
 
             if (
-                String(status)
-                .toLowerCase()
-                ===
-                "success"
+                lowerStatus === "success" ||
+                lowerStatus === "completed"
             ) {
 
                 success++;
-
             }
 
 
@@ -725,8 +717,8 @@ function renderOrders(orders) {
                 </td>
 
                 <td>
-                    Rs.
-                    ${price.toLocaleString("en-LK")}
+                    Rs. ${Number(price)
+                        .toLocaleString("en-LK")}
                 </td>
 
                 <td>
@@ -738,14 +730,12 @@ function renderOrders(orders) {
                 </td>
 
                 <td>
-                    Rs.
-                    ${amount.toLocaleString("en-LK")}
+                    Rs. ${Number(amount)
+                        .toLocaleString("en-LK")}
                 </td>
 
-                <td>
-                    <strong>
-                        ${escapeHTML(status)}
-                    </strong>
+                <td class="${getStatusClass(status)}">
+                    ${escapeHTML(status)}
                 </td>
 
                 <td>
@@ -753,14 +743,16 @@ function renderOrders(orders) {
                     <button
                         class="action-btn success-btn"
                         data-id="${escapeHTML(item.id)}"
-                        data-status="Success">
+                        data-status="Success"
+                    >
                         ✔
                     </button>
 
                     <button
                         class="action-btn reject-btn"
                         data-id="${escapeHTML(item.id)}"
-                        data-status="Rejected">
+                        data-status="Rejected"
+                    >
                         ✖
                     </button>
 
@@ -783,15 +775,13 @@ function renderOrders(orders) {
 
 
     table
-        .querySelectorAll(
-            ".action-btn"
-        )
+        .querySelectorAll(".action-btn")
         .forEach(
-            function(button) {
+            function (button) {
 
                 button.addEventListener(
                     "click",
-                    function() {
+                    function () {
 
                         changeStatus(
                             button.dataset.id,
@@ -806,9 +796,31 @@ function renderOrders(orders) {
 }
 
 
-/* =========================================
-   CARDS
-========================================= */
+/* =====================================================
+   STATUS CLASS
+===================================================== */
+
+function getStatusClass(status) {
+
+    const value =
+        String(status)
+            .toLowerCase();
+
+    if (value === "success") {
+        return "Success";
+    }
+
+    if (value === "rejected") {
+        return "Rejected";
+    }
+
+    return "Pending";
+}
+
+
+/* =====================================================
+   UPDATE DASHBOARD CARDS
+===================================================== */
 
 function updateCards(
     total,
@@ -817,497 +829,59 @@ function updateCards(
     success
 ) {
 
-    document
-        .getElementById(
+    const totalElement =
+        document.getElementById(
             "totalOrders"
-        )
-        .textContent =
-        total;
+        );
 
 
-    document
-        .getElementById(
+    const revenueElement =
+        document.getElementById(
             "revenue"
-        )
-        .textContent =
-        Number(revenue)
-        .toLocaleString("en-LK");
+        );
 
 
-    document
-        .getElementById(
+    const pendingElement =
+        document.getElementById(
             "pendingOrders"
-        )
-        .textContent =
-        pending;
+        );
 
 
-    document
-        .getElementById(
+    const successElement =
+        document.getElementById(
             "successOrders"
-        )
-        .textContent =
-        success;
-}
-
-
-/* =========================================
-   CREATE REDEEM CODE
-========================================= */
-
-const createRedeem =
-    document.getElementById(
-        "createRedeem"
-    );
-
-
-if (createRedeem) {
-
-    createRedeem.addEventListener(
-        "click",
-        async function() {
-
-            const userId =
-                document
-                .getElementById(
-                    "walletUserId"
-                )
-                .value
-                .trim();
-
-
-            const email =
-                document
-                .getElementById(
-                    "walletEmail"
-                )
-                .value
-                .trim();
-
-
-            const amount =
-                Number(
-                    document
-                    .getElementById(
-                        "walletAmount"
-                    )
-                    .value
-                );
-
-
-            const resultBox =
-                document
-                .getElementById(
-                    "redeemResult"
-                );
-
-
-            if (!userId) {
-
-                alert(
-                    "Enter customer Firebase UID."
-                );
-
-                return;
-            }
-
-
-            if (
-                !Number.isFinite(amount) ||
-                amount <= 0
-            ) {
-
-                alert(
-                    "Enter a valid amount."
-                );
-
-                return;
-            }
-
-
-            createRedeem.disabled =
-                true;
-
-            createRedeem.textContent =
-                "Creating...";
-
-
-            try {
-
-                const response =
-                    await workerRequest(
-                        {
-                            action:
-                                "create_redeem_code",
-
-                            amount:
-                                amount,
-
-                            userId:
-                                userId,
-
-                            email:
-                                email
-                        },
-                        true
-                    );
-
-
-                if (!response.success) {
-
-                    throw new Error(
-                        response.message ||
-                        "Failed to create code."
-                    );
-
-                }
-
-
-                resultBox.style.display =
-                    "block";
-
-
-                resultBox.innerHTML = `
-
-                    <div>
-                        ✅ Redeem code created
-                        successfully.
-                    </div>
-
-                    <div class="redeem-code-display">
-                        ${escapeHTML(response.code)}
-                    </div>
-
-                    <div>
-                        💰 Amount:
-                        <strong>
-                            LKR
-                            ${Number(response.amount)
-                              .toLocaleString("en-LK")}
-                        </strong>
-                    </div>
-
-                    <div>
-                        👤 Customer:
-                        ${escapeHTML(response.userId)}
-                    </div>
-
-                    <br>
-
-                    <button
-                        class="wallet-button copy-code"
-                        id="copyRedeemCode">
-                        📋 Copy Code
-                    </button>
-
-                `;
-
-
-                document
-                    .getElementById(
-                        "copyRedeemCode"
-                    )
-                    .addEventListener(
-                        "click",
-                        async function() {
-
-                            await navigator
-                                .clipboard
-                                .writeText(
-                                    response.code
-                                );
-
-                            this.textContent =
-                                "✅ Copied";
-
-                        }
-                    );
-
-
-                document
-                    .getElementById(
-                        "walletAmount"
-                    )
-                    .value = "";
-
-
-            } catch(error) {
-
-                console.error(error);
-
-                resultBox.style.display =
-                    "block";
-
-                resultBox.innerHTML =
-                    `❌ ${escapeHTML(error.message)}`;
-
-            } finally {
-
-                createRedeem.disabled =
-                    false;
-
-                createRedeem.textContent =
-                    "🎟️ Create Code";
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   CHECK REDEEM
-========================================= */
-
-const checkRedeem =
-    document.getElementById(
-        "checkRedeem"
-    );
-
-
-if (checkRedeem) {
-
-    checkRedeem.addEventListener(
-        "click",
-        async function() {
-
-            const code =
-                document
-                .getElementById(
-                    "checkCode"
-                )
-                .value
-                .trim()
-                .toUpperCase();
-
-
-            const resultBox =
-                document
-                .getElementById(
-                    "checkResult"
-                );
-
-
-            if (!code) {
-
-                alert(
-                    "Enter redeem code."
-                );
-
-                return;
-            }
-
-
-            checkRedeem.disabled =
-                true;
-
-            checkRedeem.textContent =
-                "Checking...";
-
-
-            try {
-
-                const response =
-                    await workerRequest(
-                        {
-                            action:
-                                "admin_redeem_info",
-
-                            code:
-                                code
-                        },
-                        true
-                    );
-
-
-                if (!response.success) {
-
-                    throw new Error(
-                        response.message ||
-                        "Code not found."
-                    );
-
-                }
-
-
-                const redeem =
-                    response.redeem;
-
-
-                resultBox.style.display =
-                    "block";
-
-
-                resultBox.innerHTML = `
-
-                    <strong>
-                        ${redeem.status === "AVAILABLE"
-                            ? "🟢 AVAILABLE"
-                            : "🔴 USED"}
-                    </strong>
-
-                    <br><br>
-
-                    🎟️ Code:
-                    ${escapeHTML(redeem.code)}
-
-                    <br>
-
-                    💰 Amount:
-                    LKR
-                    ${Number(redeem.amount)
-                      .toLocaleString("en-LK")}
-
-                    <br>
-
-                    👤 Firebase UID:
-                    ${escapeHTML(redeem.userId)}
-
-                    <br>
-
-                    📧 Email:
-                    ${escapeHTML(redeem.email || "-")}
-
-                    <br>
-
-                    📅 Created:
-                    ${escapeHTML(redeem.createdAt || "-")}
-
-                    ${
-                        redeem.usedAt
-                        ? `<br>
-                           🕒 Used:
-                           ${escapeHTML(redeem.usedAt)}`
-                        : ""
-                    }
-
-                `;
-
-
-            } catch(error) {
-
-                console.error(error);
-
-                resultBox.style.display =
-                    "block";
-
-                resultBox.innerHTML =
-                    `❌ ${escapeHTML(error.message)}`;
-
-            } finally {
-
-                checkRedeem.disabled =
-                    false;
-
-                checkRedeem.textContent =
-                    "🔎 Check Code";
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   WORKER REQUEST
-========================================= */
-
-async function workerRequest(
-    data,
-    adminRequest = false
-) {
-
-    const user =
-        auth.currentUser;
-
-
-    if (!user) {
-
-        throw new Error(
-            "Admin login required."
         );
+
+
+    if (totalElement) {
+        totalElement.textContent =
+            total;
     }
 
 
-    const token =
-        await user.getIdToken(
-            true
-        );
-
-
-    const headers = {
-
-        "Content-Type":
-            "application/json",
-
-        "Authorization":
-            `Bearer ${token}`
-
-    };
-
-
-    /*
-     * IMPORTANT:
-     *
-     * Do NOT put ADMIN_SECRET
-     * inside this JavaScript.
-     *
-     * Your Cloudflare Worker should
-     * authenticate admin requests
-     * using Firebase admin verification
-     * or another secure server-side method.
-     */
-
-
-    const response =
-        await fetch(
-            WORKER_URL,
-            {
-                method: "POST",
-                headers: headers,
-                body: JSON.stringify(data)
-            }
-        );
-
-
-    let result;
-
-
-    try {
-
-        result =
-            await response.json();
-
-    } catch {
-
-        throw new Error(
-            "Worker returned invalid response."
-        );
-
+    if (revenueElement) {
+        revenueElement.textContent =
+            Number(revenue)
+                .toLocaleString("en-LK");
     }
 
 
-    if (!response.ok) {
-
-        throw new Error(
-            result.message ||
-            `Worker error ${response.status}`
-        );
-
+    if (pendingElement) {
+        pendingElement.textContent =
+            pending;
     }
 
 
-    return result;
+    if (successElement) {
+        successElement.textContent =
+            success;
+    }
 }
 
 
-/* =========================================
+/* =====================================================
    DATE SEARCH
-========================================= */
+===================================================== */
 
 const dateSearch =
     document.getElementById(
@@ -1319,7 +893,7 @@ if (dateSearch) {
 
     dateSearch.addEventListener(
         "click",
-        function() {
+        function () {
 
             const input =
                 document.getElementById(
@@ -1327,10 +901,10 @@ if (dateSearch) {
                 );
 
 
-            if (!input.value) {
+            if (!input || !input.value) {
 
                 alert(
-                    "Please select a date."
+                    "Please select a date"
                 );
 
                 return;
@@ -1345,38 +919,12 @@ if (dateSearch) {
 
         }
     );
-
 }
 
 
-/* =========================================
-   DATE CHANGE
-========================================= */
-
-const orderDate =
-    document.getElementById(
-        "orderDate"
-    );
-
-
-if (orderDate) {
-
-    orderDate.addEventListener(
-        "change",
-        function() {
-
-            selectedDate =
-                orderDate.value;
-
-        }
-    );
-
-}
-
-
-/* =========================================
+/* =====================================================
    TODAY
-========================================= */
+===================================================== */
 
 const todayButton =
     document.getElementById(
@@ -1388,18 +936,22 @@ if (todayButton) {
 
     todayButton.addEventListener(
         "click",
-        function() {
+        function () {
 
             const today =
                 getTodayString();
 
 
-            document
-                .getElementById(
+            const input =
+                document.getElementById(
                     "orderDate"
-                )
-                .value =
-                today;
+                );
+
+
+            if (input) {
+                input.value =
+                    today;
+            }
 
 
             selectedDate =
@@ -1410,13 +962,12 @@ if (todayButton) {
 
         }
     );
-
 }
 
 
-/* =========================================
-   SEARCH
-========================================= */
+/* =====================================================
+   TEXT SEARCH
+===================================================== */
 
 const search =
     document.getElementById(
@@ -1428,24 +979,22 @@ if (search) {
 
     search.addEventListener(
         "input",
-        function() {
+        function () {
 
             const text =
                 search.value
-                .trim()
-                .toLowerCase();
+                    .trim()
+                    .toLowerCase();
 
 
             let filtered =
                 allOrders.filter(
-                    function(item) {
+                    function (item) {
 
                         return (
                             getDateString(
                                 item.data.createdAt
-                            )
-                            ===
-                            selectedDate
+                            ) === selectedDate
                         );
 
                     }
@@ -1456,19 +1005,22 @@ if (search) {
 
                 filtered =
                     filtered.filter(
-                        function(item) {
+                        function (item) {
 
                             const order =
                                 item.data;
 
 
+                            const orderId =
+                                order.orderId ||
+                                order.orderID ||
+                                order.orderNumber ||
+                                item.id;
+
+
                             const values = [
 
-                                item.id,
-
-                                order.orderId,
-
-                                order.orderID,
+                                orderId,
 
                                 order.customerName,
 
@@ -1482,11 +1034,15 @@ if (search) {
 
                                 order.gameUid,
 
+                                order.gameId,
+
                                 order.productName,
 
                                 order.product,
 
                                 order.package,
+
+                                order.plan,
 
                                 order.paymentMethod,
 
@@ -1498,16 +1054,14 @@ if (search) {
 
 
                             return values.some(
-                                function(value) {
+                                function (value) {
 
                                     return (
-                                        value !==
-                                        undefined &&
-                                        value !==
-                                        null &&
+                                        value !== undefined &&
+                                        value !== null &&
                                         String(value)
-                                        .toLowerCase()
-                                        .includes(text)
+                                            .toLowerCase()
+                                            .includes(text)
                                     );
 
                                 }
@@ -1515,23 +1069,19 @@ if (search) {
 
                         }
                     );
-
             }
 
 
-            renderOrders(
-                filtered
-            );
+            renderOrders(filtered);
 
         }
     );
-
 }
 
 
-/* =========================================
+/* =====================================================
    REFRESH
-========================================= */
+===================================================== */
 
 const refresh =
     document.getElementById(
@@ -1543,10 +1093,9 @@ if (refresh) {
 
     refresh.addEventListener(
         "click",
-        async function() {
+        async function () {
 
-            refresh.disabled =
-                true;
+            refresh.disabled = true;
 
             refresh.textContent =
                 "Loading...";
@@ -1555,21 +1104,19 @@ if (refresh) {
             await loadOrders();
 
 
-            refresh.disabled =
-                false;
+            refresh.disabled = false;
 
             refresh.textContent =
                 "↻ Refresh";
 
         }
     );
-
 }
 
 
-/* =========================================
+/* =====================================================
    LOGOUT
-========================================= */
+===================================================== */
 
 const logout =
     document.getElementById(
@@ -1581,22 +1128,26 @@ if (logout) {
 
     logout.addEventListener(
         "click",
-        async function() {
+        async function () {
 
-            await signOut(auth);
+            try {
 
-            window.location.href =
-                "./admin-login.html";
+                await signOut(auth);
+
+            } finally {
+
+                window.location.href =
+                    "./admin-login.html";
+            }
 
         }
     );
-
 }
 
 
-/* =========================================
+/* =====================================================
    CHANGE ORDER STATUS
-========================================= */
+===================================================== */
 
 async function changeStatus(
     id,
@@ -1614,19 +1165,20 @@ async function changeStatus(
     if (!admin) {
 
         alert(
-            "Access denied."
+            "Access denied"
         );
 
         return;
     }
 
 
-    if (
-        !confirm(
-            `Change status to ${status}?`
-        )
-    ) {
+    const confirmed =
+        confirm(
+            `Change order status to ${status}?`
+        );
 
+
+    if (!confirmed) {
         return;
     }
 
@@ -1640,8 +1192,7 @@ async function changeStatus(
                 id
             ),
             {
-                status:
-                    status
+                status: status
             }
         );
 
@@ -1649,22 +1200,274 @@ async function changeStatus(
         await loadOrders();
 
 
-    } catch(error) {
+    } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Status update error:",
+            error
+        );
+
 
         alert(
             "Failed to update order."
         );
-
     }
-
 }
 
 
-/* =========================================
+/* =====================================================
+   GET CURRENT FIREBASE USER TOKEN
+===================================================== */
+
+async function getFirebaseToken() {
+
+    const user =
+        auth.currentUser;
+
+
+    if (!user) {
+        throw new Error(
+            "Admin login required."
+        );
+    }
+
+
+    return await user.getIdToken();
+}
+
+
+/* =====================================================
+   CALL CLOUDFLARE WORKER
+===================================================== */
+
+async function callWorker(
+    data,
+    adminKey = ""
+) {
+
+    const headers = {
+        "Content-Type":
+            "application/json"
+    };
+
+
+    /*
+     * IMPORTANT:
+     *
+     * If you later create a secure admin
+     * authentication method, the key can be
+     * added here.
+     *
+     * DO NOT hard-code your real ADMIN_SECRET
+     * into this public GitHub JavaScript file.
+     */
+
+    if (adminKey) {
+
+        headers["X-Admin-Key"] =
+            adminKey;
+    }
+
+
+    const response =
+        await fetch(
+            WORKER_URL,
+            {
+                method: "POST",
+                headers,
+                body: JSON.stringify(data)
+            }
+        );
+
+
+    let result;
+
+
+    try {
+
+        result =
+            await response.json();
+
+    } catch {
+
+        throw new Error(
+            `Worker returned HTTP ${response.status}`
+        );
+    }
+
+
+    if (!response.ok || !result.success) {
+
+        throw new Error(
+            result.message ||
+            `Worker error ${response.status}`
+        );
+    }
+
+
+    return result;
+}
+
+
+/* =====================================================
+   GET WALLET BALANCE
+===================================================== */
+
+export async function getMyWallet() {
+
+    const token =
+        await getFirebaseToken();
+
+
+    const response =
+        await fetch(
+            WORKER_URL,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json",
+
+                    "Authorization":
+                        `Bearer ${token}`
+                },
+
+                body: JSON.stringify({
+                    action:
+                        "wallet_balance"
+                })
+            }
+        );
+
+
+    const result =
+        await response.json();
+
+
+    if (!response.ok || !result.success) {
+
+        throw new Error(
+            result.message ||
+            "Unable to get wallet."
+        );
+    }
+
+
+    return result.wallet;
+}
+
+
+/* =====================================================
+   GET WALLET TRANSACTIONS
+===================================================== */
+
+export async function getWalletTransactions() {
+
+    const token =
+        await getFirebaseToken();
+
+
+    const response =
+        await fetch(
+            WORKER_URL,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json",
+
+                    "Authorization":
+                        `Bearer ${token}`
+                },
+
+                body: JSON.stringify({
+                    action:
+                        "wallet_transactions"
+                })
+            }
+        );
+
+
+    const result =
+        await response.json();
+
+
+    if (!response.ok || !result.success) {
+
+        throw new Error(
+            result.message ||
+            "Unable to get transactions."
+        );
+    }
+
+
+    return result.transactions || [];
+}
+
+
+/* =====================================================
+   CHECK REDEEM CODE
+===================================================== */
+
+export async function checkRedeemCode(
+    code,
+    adminKey = ""
+) {
+
+    return await callWorker(
+        {
+            action:
+                "admin_redeem_info",
+
+            code:
+                String(code)
+                    .trim()
+                    .toUpperCase()
+
+        },
+        adminKey
+    );
+}
+
+
+/* =====================================================
+   CREATE REDEEM CODE
+===================================================== */
+
+export async function createRedeemCode(
+    amount,
+    userId,
+    email = "",
+    adminKey = ""
+) {
+
+    return await callWorker(
+        {
+            action:
+                "create_redeem_code",
+
+            amount:
+                Number(amount),
+
+            userId:
+                String(userId)
+                    .trim(),
+
+            email:
+                String(email)
+                    .trim()
+
+        },
+        adminKey
+    );
+}
+
+
+/* =====================================================
    ESCAPE HTML
-========================================= */
+===================================================== */
 
 function escapeHTML(value) {
 
@@ -1674,7 +1477,6 @@ function escapeHTML(value) {
     ) {
 
         return "";
-
     }
 
 
@@ -1704,5 +1506,40 @@ function escapeHTML(value) {
             "'",
             "&#039;"
         );
-
 }
+
+
+/* =====================================================
+   WORKER CONNECTION TEST
+===================================================== */
+
+async function testWorker() {
+
+    try {
+
+        const response =
+            await fetch(
+                WORKER_URL,
+                {
+                    method: "GET"
+                }
+            );
+
+
+        console.log(
+            "Cloudflare Worker status:",
+            response.status
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Cloudflare Worker connection error:",
+            error
+        );
+    }
+}
+
+
+testWorker();
