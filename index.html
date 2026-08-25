@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Zyper Diamond Store - Login</title>
 
 <link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="media.css">
-
 <link rel="icon" href="1.jpg">
 
 <style>
-
-/* ================= LOGO ================= */
-
 .login-header{
     text-align:center;
     margin-bottom:28px;
@@ -27,52 +19,26 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 .company-logo{
     width:76px !important;
     height:76px !important;
-
     min-width:76px !important;
     min-height:76px !important;
-
     max-width:76px !important;
     max-height:76px !important;
-
     margin:0 auto 15px !important;
-
     padding:0 !important;
-
     border-radius:50% !important;
-
     overflow:hidden !important;
-
     display:flex !important;
-
     align-items:center !important;
     justify-content:center !important;
-
     background:#fff;
-
-    box-shadow:
-    0 8px 25px rgba(0,0,0,.20);
-
-    flex-shrink:0 !important;
+    box-shadow:0 8px 25px rgba(0,0,0,.20);
 }
 
 .company-logo img{
-
-    width:76px !important;
-    height:76px !important;
-
-    min-width:76px !important;
-    min-height:76px !important;
-
-    max-width:76px !important;
-    max-height:76px !important;
-
-    margin:0 !important;
-    padding:0 !important;
-
+    width:100% !important;
+    height:100% !important;
     display:block !important;
-
     object-fit:cover !important;
-
     border-radius:50% !important;
 }
 
@@ -88,9 +54,6 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     opacity:.7;
 }
 
-
-/* ================= PASSWORD ================= */
-
 .password-group{
     position:relative;
 }
@@ -100,28 +63,18 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 }
 
 .password-toggle{
-
     position:absolute;
-
     right:8px;
     top:50%;
-
     transform:translateY(-50%);
-
     width:40px;
     height:40px;
-
     border:0;
-
     background:transparent;
-
     cursor:pointer;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     z-index:20;
 }
 
@@ -130,47 +83,21 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     height:21px;
 }
 
-
-/* ================= STATUS ================= */
-
 .login-status{
-
     display:none;
-
     text-align:center;
-
     margin-top:15px;
-
     font-size:14px;
-
     font-weight:600;
 }
-
-
-/* ================= MOBILE ================= */
 
 @media(max-width:500px){
 
     .company-logo{
-
         width:68px !important;
         height:68px !important;
-
         min-width:68px !important;
         min-height:68px !important;
-
-        max-width:68px !important;
-        max-height:68px !important;
-    }
-
-    .company-logo img{
-
-        width:68px !important;
-        height:68px !important;
-
-        min-width:68px !important;
-        min-height:68px !important;
-
         max-width:68px !important;
         max-height:68px !important;
     }
@@ -178,39 +105,25 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     .brand-name{
         font-size:21px;
     }
-
 }
-
 </style>
-
 </head>
 
-
 <body>
-
 
 <div class="login-container">
 
 <div class="login-card">
 
-
-<!-- ================= HEADER ================= -->
-
 <div class="login-header">
 
 <div class="company-logo">
-
-<img
-src="1.jpg"
-alt="Zyper Diamond Store">
-
+<img src="1.jpg" alt="Zyper Diamond Store">
 </div>
-
 
 <h2 class="brand-name">
 Zyper Diamond Store
 </h2>
-
 
 <p class="brand-subtitle">
 Welcome back! Sign in to continue
@@ -219,16 +132,7 @@ Welcome back! Sign in to continue
 </div>
 
 
-
-<!-- ================= LOGIN FORM ================= -->
-
-<form
-class="login-form"
-id="loginForm"
-novalidate>
-
-
-<!-- EMAIL -->
+<form id="loginForm" class="login-form" novalidate>
 
 <div class="form-group">
 
@@ -251,14 +155,9 @@ Email Address
 </div>
 
 
-
-<!-- PASSWORD -->
-
 <div class="form-group">
 
-<div
-class="input-group neu-input password-group">
-
+<div class="input-group neu-input password-group">
 
 <input
 type="password"
@@ -268,7 +167,6 @@ required
 autocomplete="current-password"
 placeholder=" ">
 
-
 <label for="password">
 Password
 </label>
@@ -276,12 +174,9 @@ Password
 
 <button
 type="button"
-class="password-toggle"
 id="passwordToggle"
+class="password-toggle"
 aria-label="Show password">
-
-
-<!-- OPEN EYE -->
 
 <svg
 id="eyeOpen"
@@ -290,18 +185,11 @@ fill="none"
 stroke="currentColor"
 stroke-width="2">
 
-<path
-d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-
-<circle
-cx="12"
-cy="12"
-r="3"/>
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+<circle cx="12" cy="12" r="3"/>
 
 </svg>
 
-
-<!-- CLOSED EYE -->
 
 <svg
 id="eyeClosed"
@@ -311,17 +199,9 @@ stroke="currentColor"
 stroke-width="2"
 style="display:none;">
 
-<path
-d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8"/>
-
-<path
-d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8"/>
-
-<line
-x1="1"
-y1="1"
-x2="23"
-y2="23"/>
+<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8"/>
+<path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8"/>
+<line x1="1" y1="1" x2="23" y2="23"/>
 
 </svg>
 
@@ -332,11 +212,7 @@ y2="23"/>
 </div>
 
 
-
-<!-- ================= OPTIONS ================= -->
-
 <div class="form-options">
-
 
 <div class="remember-wrapper">
 
@@ -344,7 +220,6 @@ y2="23"/>
 type="checkbox"
 id="remember"
 name="remember">
-
 
 <label
 for="remember"
@@ -358,8 +233,7 @@ fill="none"
 stroke="currentColor"
 stroke-width="3">
 
-<polyline
-points="20 6 9 17 4 12"/>
+<polyline points="20 6 9 17 4 12"/>
 
 </svg>
 
@@ -380,12 +254,8 @@ Forgot password?
 
 </a>
 
-
 </div>
 
-
-
-<!-- ================= LOGIN BUTTON ================= -->
 
 <button
 type="submit"
@@ -407,20 +277,13 @@ Signing in...
 </button>
 
 
-
-<!-- STATUS -->
-
 <div
 id="loginStatus"
 class="login-status">
 </div>
 
-
 </form>
 
-
-
-<!-- ================= REGISTER ================= -->
 
 <div class="signup-link">
 
@@ -436,18 +299,12 @@ Create Account
 
 </div>
 
-
 </div>
 
 </div>
-
 
 
 <script type="module">
-
-/* ==========================================
-   FIREBASE APP
-========================================== */
 
 import {
     initializeApp
@@ -456,22 +313,13 @@ from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
-/* ==========================================
-   FIREBASE AUTH
-========================================== */
-
 import {
     getAuth,
-    signInWithEmailAndPassword,
-    onAuthStateChanged
+    signInWithEmailAndPassword
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-
-/* ==========================================
-   FIREBASE CONFIG
-========================================== */
 
 const firebaseConfig = {
 
@@ -496,28 +344,18 @@ const firebaseConfig = {
 };
 
 
-/* ==========================================
-   INITIALIZE
-========================================== */
+const app = initializeApp(firebaseConfig);
 
-const app =
-initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-const auth =
-getAuth(app);
-
-
-/* ==========================================
-   ELEMENTS
-========================================== */
 
 const loginForm =
 document.getElementById("loginForm");
 
-const emailInput =
+const email =
 document.getElementById("email");
 
-const passwordInput =
+const password =
 document.getElementById("password");
 
 const passwordToggle =
@@ -542,260 +380,169 @@ const loginStatus =
 document.getElementById("loginStatus");
 
 
-/* ==========================================
-   SHOW / HIDE PASSWORD
-========================================== */
+/* SHOW / HIDE PASSWORD */
 
-passwordToggle.addEventListener(
-    "click",
-    function(){
+passwordToggle.addEventListener("click", () => {
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+        eyeOpen.style.display = "none";
+        eyeClosed.style.display = "block";
+
+        passwordToggle.setAttribute(
+            "aria-label",
+            "Hide password"
+        );
+
+    }else{
+
+        password.type = "password";
+
+        eyeOpen.style.display = "block";
+        eyeClosed.style.display = "none";
+
+        passwordToggle.setAttribute(
+            "aria-label",
+            "Show password"
+        );
+
+    }
+
+});
+
+
+/* LOGIN */
+
+loginForm.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+
+    const emailValue =
+        email.value.trim();
+
+    const passwordValue =
+        password.value;
+
+
+    if(!emailValue){
+
+        alert("Please enter your email.");
+
+        email.focus();
+
+        return;
+
+    }
+
+
+    if(!passwordValue){
+
+        alert("Please enter your password.");
+
+        password.focus();
+
+        return;
+
+    }
+
+
+    try{
+
+        loginButton.disabled = true;
+
+        loginText.style.display = "none";
+
+        loginLoading.style.display = "inline";
+
+
+        await signInWithEmailAndPassword(
+            auth,
+            emailValue,
+            passwordValue
+        );
+
+
+        loginStatus.style.display = "block";
+
+        loginStatus.style.color = "#00c853";
+
+        loginStatus.textContent =
+            "Login successful ✓";
+
+
+        setTimeout(() => {
+
+            window.location.href =
+                "home.html";
+
+        },700);
+
+
+    }catch(error){
+
+        console.error(
+            "LOGIN ERROR:",
+            error
+        );
+
+
+        loginButton.disabled = false;
+
+        loginText.style.display = "inline";
+
+        loginLoading.style.display = "none";
+
 
         if(
-            passwordInput.type ===
-            "password"
+            error.code ===
+            "auth/invalid-credential" ||
+            error.code ===
+            "auth/wrong-password"
         ){
 
-            passwordInput.type =
-            "text";
+            alert(
+                "Incorrect email or password."
+            );
 
-            eyeOpen.style.display =
-            "none";
+        }
 
-            eyeClosed.style.display =
-            "block";
+        else if(
+            error.code ===
+            "auth/user-not-found"
+        ){
 
-            passwordToggle.setAttribute(
-                "aria-label",
-                "Hide password"
+            alert(
+                "No account found with this email."
+            );
+
+        }
+
+        else if(
+            error.code ===
+            "auth/invalid-email"
+        ){
+
+            alert(
+                "Please enter a valid email."
             );
 
         }
 
         else{
 
-            passwordInput.type =
-            "password";
-
-            eyeOpen.style.display =
-            "block";
-
-            eyeClosed.style.display =
-            "none";
-
-            passwordToggle.setAttribute(
-                "aria-label",
-                "Show password"
-            );
-
-        }
-
-    }
-);
-
-
-/* ==========================================
-   CHECK CURRENT LOGIN
-========================================== */
-
-onAuthStateChanged(
-    auth,
-    function(user){
-
-        if(user){
-
-            window.location.href =
-            "home.html";
-
-        }
-
-    }
-);
-
-
-/* ==========================================
-   LOGIN
-========================================== */
-
-loginForm.addEventListener(
-    "submit",
-    async function(e){
-
-        e.preventDefault();
-
-
-        const email =
-        emailInput.value.trim();
-
-        const password =
-        passwordInput.value;
-
-
-        /* VALIDATION */
-
-        if(!email){
-
             alert(
-                "Please enter your email address."
+                "Login failed:\n\n" +
+                error.message
             );
-
-            emailInput.focus();
-
-            return;
-
-        }
-
-
-        if(!password){
-
-            alert(
-                "Please enter your password."
-            );
-
-            passwordInput.focus();
-
-            return;
-
-        }
-
-
-        try{
-
-            /* LOADING */
-
-            loginButton.disabled =
-            true;
-
-            loginText.style.display =
-            "none";
-
-            loginLoading.style.display =
-            "inline";
-
-
-            /* FIREBASE LOGIN */
-
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-
-
-            /* SUCCESS */
-
-            loginStatus.style.display =
-            "block";
-
-            loginStatus.style.color =
-            "#00c853";
-
-            loginStatus.textContent =
-            "Login successful ✓";
-
-
-            /* REDIRECT */
-
-            setTimeout(
-                function(){
-
-                    window.location.href =
-                    "home.html";
-
-                },
-                700
-            );
-
-
-        }
-
-        catch(error){
-
-            console.error(
-                "LOGIN ERROR:",
-                error
-            );
-
-
-            loginButton.disabled =
-            false;
-
-            loginText.style.display =
-            "inline";
-
-            loginLoading.style.display =
-            "none";
-
-
-            /* ERROR HANDLING */
-
-            if(
-                error.code ===
-                "auth/invalid-credential"
-            ){
-
-                alert(
-                    "Incorrect email or password."
-                );
-
-            }
-
-            else if(
-                error.code ===
-                "auth/user-not-found"
-            ){
-
-                alert(
-                    "No account found with this email."
-                );
-
-            }
-
-            else if(
-                error.code ===
-                "auth/wrong-password"
-            ){
-
-                alert(
-                    "Incorrect password."
-                );
-
-            }
-
-            else if(
-                error.code ===
-                "auth/invalid-email"
-            ){
-
-                alert(
-                    "Please enter a valid email address."
-                );
-
-            }
-
-            else if(
-                error.code ===
-                "auth/too-many-requests"
-            ){
-
-                alert(
-                    "Too many login attempts. Please try again later."
-                );
-
-            }
-
-            else{
-
-                alert(
-                    "Login failed:\n\n" +
-                    error.message
-                );
-
-            }
 
         }
 
     }
-);
+
+});
 
 </script>
 
