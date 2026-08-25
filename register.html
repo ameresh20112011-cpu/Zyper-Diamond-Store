@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Zyper Diamond Store</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Zyper Diamond Store - Register</title>
 
 <link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="media.css">
+
 <link rel="icon" href="1.jpg">
 
 </head>
@@ -14,135 +20,696 @@
 <body>
 
 <div class="login-container">
-  <div class="login-card">
 
-    <div class="login-header">
-      <h2>Create Account</h2>
-      <p>Sign up to continue</p>
-    </div>
+<div class="login-card">
 
-    <form id="registerForm" class="login-form">
 
-      <div class="form-group">
-        <div class="input-group neu-input">
-          <input type="email" id="email" required placeholder=" ">
-          <label>Email address</label>
-        </div>
-      </div>
+<!-- HEADER -->
 
-      <div class="form-group">
-        <div class="input-group neu-input">
-          <input type="password" id="password" required placeholder=" ">
-          <label>Password</label>
-        </div>
-      </div>
+<div class="login-header">
 
-      <button type="submit" class="neu-button login-btn">
-        Create Account
-      </button>
+<div class="company-logo">
 
-      <p id="successMsg" class="success-msg" style="display:none; color:rgb(255, 0, 0);">
-        Account Created Successfully ✅
-      </p>
+<img
+src="1.jpg"
+alt="Zyper Diamond Store">
 
-    </form>
+</div>
 
-    <div class="signup-link">
-      <p>Already have an account? <a href="index.html">Login</a></p>
-    </div>
+<h2>Create Account</h2>
 
-  </div>
+<p>Create your Zyper Diamond Store account</p>
+
 </div>
 
 
-<!-- 🔥 Firebase + Firestore Script -->
+
+<!-- FORM -->
+
+<form
+id="registerForm"
+class="login-form"
+novalidate>
+
+
+<!-- USERNAME -->
+
+<div class="form-group">
+
+<div class="input-group neu-input">
+
+<input
+type="text"
+id="username"
+required
+autocomplete="username"
+placeholder=" "
+minlength="3"
+maxlength="30">
+
+<label for="username">
+Username
+</label>
+
+<div class="input-icon">
+
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2">
+
+<path
+d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+
+<circle
+cx="12"
+cy="7"
+r="4"/>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- PHONE -->
+
+<div class="form-group">
+
+<div class="input-group neu-input">
+
+<input
+type="tel"
+id="phone"
+required
+autocomplete="tel"
+placeholder=" "
+maxlength="15">
+
+<label for="phone">
+Phone Number
+</label>
+
+<div class="input-icon">
+
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2">
+
+<rect
+x="5"
+y="2"
+width="14"
+height="20"
+rx="2"/>
+
+<line
+x1="12"
+y1="18"
+x2="12"
+y2="18"/>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- EMAIL -->
+
+<div class="form-group">
+
+<div class="input-group neu-input">
+
+<input
+type="email"
+id="email"
+required
+autocomplete="email"
+placeholder=" ">
+
+<label for="email">
+Email Address
+</label>
+
+<div class="input-icon">
+
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2">
+
+<path
+d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+
+<polyline
+points="22,6 12,13 2,6"/>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- PASSWORD -->
+
+<div class="form-group">
+
+<div class="input-group neu-input password-group">
+
+<input
+type="password"
+id="password"
+required
+autocomplete="new-password"
+placeholder=" "
+minlength="6">
+
+<label for="password">
+Password
+</label>
+
+
+<div class="input-icon">
+
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2">
+
+<rect
+x="3"
+y="11"
+width="18"
+height="11"
+rx="2"/>
+
+<path
+d="M7 11V7a5 5 0 0110 0v4"/>
+
+</svg>
+
+</div>
+
+
+<button
+type="button"
+id="passwordToggle"
+class="password-toggle neu-toggle">
+
+<svg
+class="eye-open"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2">
+
+<path
+d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+
+<circle
+cx="12"
+cy="12"
+r="3"/>
+
+</svg>
+
+
+<svg
+class="eye-closed"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+style="display:none;">
+
+<path
+d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+
+<path
+d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+
+<line
+x1="1"
+y1="1"
+x2="23"
+y2="23"/>
+
+</svg>
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- BUTTON -->
+
+<button
+type="submit"
+class="neu-button login-btn"
+id="registerButton">
+
+<span id="buttonText">
+Create Account
+</span>
+
+<span
+id="buttonLoading"
+style="display:none;">
+
+Creating Account...
+
+</span>
+
+</button>
+
+
+
+<!-- SUCCESS -->
+
+<p
+id="successMsg"
+style="
+display:none;
+text-align:center;
+margin-top:15px;
+color:#00c853;
+font-weight:600;
+">
+
+Account Created Successfully ✅
+
+</p>
+
+
+</form>
+
+
+
+<!-- LOGIN -->
+
+<div class="signup-link">
+
+<p>
+
+Already have an account?
+
+<a href="index.html">
+Login
+</a>
+
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- FIREBASE -->
+
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import { 
-  getAuth, 
-  createUserWithEmailAndPassword 
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
-  getFirestore,
-  doc,
-  setDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+getAuth,
+createUserWithEmailAndPassword
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-// ✅ Your Firebase Config
+import {
+getFirestore,
+doc,
+setDoc,
+serverTimestamp,
+collection,
+query,
+where,
+getDocs,
+limit
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+/* FIREBASE CONFIG */
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
-  authDomain: "zyper-d-iamond-store.firebaseapp.com",
-  projectId: "zyper-d-iamond-store",
-  storageBucket: "zyper-d-iamond-store.firebasestorage.app",
-  messagingSenderId: "892467477866",
-  appId: "1:892467477866:web:61e9b6ff9435798da23913",
+
+apiKey:
+"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
+
+authDomain:
+"zyper-d-iamond-store.firebaseapp.com",
+
+projectId:
+"zyper-d-iamond-store",
+
+storageBucket:
+"zyper-d-iamond-store.firebasestorage.app",
+
+messagingSenderId:
+"892467477866",
+
+appId:
+"1:892467477866:web:61e9b6ff9435798da23913"
+
 };
 
 
-// ✅ Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
+
+const db =
+getFirestore(app);
 
 
-// ✅ Get elements
-const form = document.getElementById("registerForm");
-const msg = document.getElementById("successMsg");
+
+/* ELEMENTS */
+
+const form =
+document.getElementById("registerForm");
+
+const username =
+document.getElementById("username");
+
+const phone =
+document.getElementById("phone");
+
+const email =
+document.getElementById("email");
+
+const password =
+document.getElementById("password");
+
+const toggle =
+document.getElementById("passwordToggle");
+
+const registerButton =
+document.getElementById("registerButton");
+
+const buttonText =
+document.getElementById("buttonText");
+
+const buttonLoading =
+document.getElementById("buttonLoading");
+
+const successMsg =
+document.getElementById("successMsg");
 
 
-// ✅ Register function
-form.addEventListener("submit", async (e) => {
 
-  e.preventDefault();
+/* PASSWORD SHOW/HIDE */
 
-  const email = document.querySelector("#email").value.trim();
-  const password = document.querySelector("#password").value.trim();
+toggle.addEventListener(
+"click",
+() => {
 
-  // Password validation
-  if (password.length < 6) {
-    alert("Password must be at least 6 characters");
-    return;
-  }
+if(password.type === "password"){
 
-  try {
+password.type = "text";
 
-    // ✅ Create user in Authentication
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+toggle.querySelector(
+".eye-open"
+).style.display = "none";
 
-    const user = userCredential.user;
+toggle.querySelector(
+".eye-closed"
+).style.display = "block";
 
+}
 
-    // 🔥 Save user to Firestore
-    await setDoc(doc(db, "users", user.uid), {
+else{
 
-      uid: user.uid,
-      email: user.email,
-      createdAt: new Date()
+password.type = "password";
 
-    });
+toggle.querySelector(
+".eye-open"
+).style.display = "block";
 
+toggle.querySelector(
+".eye-closed"
+).style.display = "none";
 
-    // ✅ Show success message
-    msg.style.display = "block";
+}
+
+});
 
 
-    // ✅ Redirect after 2 seconds
-    setTimeout(() => {
-      window.location.href = "index.html";
-    }, 2000);
+
+/* REGISTER */
+
+form.addEventListener(
+"submit",
+async(e)=>{
+
+e.preventDefault();
 
 
-  } catch (error) {
-    alert(error.message);
-  }
+const usernameValue =
+username.value.trim();
+
+const phoneValue =
+phone.value.trim();
+
+const emailValue =
+email.value.trim();
+
+const passwordValue =
+password.value;
+
+
+if(usernameValue.length < 3){
+
+alert(
+"Username must be at least 3 characters."
+);
+
+return;
+
+}
+
+
+if(!/^[0-9+\-\s]{7,15}$/.test(phoneValue)){
+
+alert(
+"Please enter a valid phone number."
+);
+
+return;
+
+}
+
+
+if(passwordValue.length < 6){
+
+alert(
+"Password must be at least 6 characters."
+);
+
+return;
+
+}
+
+
+
+/* CHECK USERNAME */
+
+try{
+
+const usernameQuery =
+query(
+collection(db,"users"),
+where(
+"username",
+"==",
+usernameValue
+),
+limit(1)
+);
+
+const usernameResult =
+await getDocs(usernameQuery);
+
+
+if(!usernameResult.empty){
+
+alert(
+"This username is already taken."
+);
+
+return;
+
+}
+
+
+
+/* LOADING */
+
+registerButton.disabled = true;
+
+buttonText.style.display =
+"none";
+
+buttonLoading.style.display =
+"inline";
+
+
+
+/* CREATE AUTH ACCOUNT */
+
+const credential =
+await createUserWithEmailAndPassword(
+auth,
+emailValue,
+passwordValue
+);
+
+
+const user =
+credential.user;
+
+
+
+/* SAVE FIRESTORE */
+
+await setDoc(
+doc(
+db,
+"users",
+user.uid
+),
+{
+
+uid:user.uid,
+
+username:usernameValue,
+
+phone:phoneValue,
+
+email:emailValue,
+
+createdAt:
+serverTimestamp()
+
+}
+);
+
+
+
+/* SUCCESS */
+
+successMsg.style.display =
+"block";
+
+
+setTimeout(
+()=>{
+
+window.location.href =
+"index.html";
+
+},
+1800
+);
+
+
+}
+
+catch(error){
+
+console.error(error);
+
+
+registerButton.disabled =
+false;
+
+buttonText.style.display =
+"inline";
+
+buttonLoading.style.display =
+"none";
+
+
+if(
+error.code ===
+"auth/email-already-in-use"
+){
+
+alert(
+"This email is already registered. Please login."
+);
+
+}
+
+else if(
+error.code ===
+"auth/invalid-email"
+){
+
+alert(
+"Please enter a valid email address."
+);
+
+}
+
+else if(
+error.code ===
+"auth/weak-password"
+){
+
+alert(
+"Password must be at least 6 characters."
+);
+
+}
+
+else{
+
+alert(
+"Registration failed: " +
+error.message
+);
+
+}
+
+}
 
 });
 
