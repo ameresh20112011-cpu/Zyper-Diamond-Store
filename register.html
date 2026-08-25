@@ -15,20 +15,14 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
 <link rel="icon" href="1.jpg">
 
-
 <style>
 
-/* =================================
-   REGISTER LOGO FIX
-================================= */
+/* ================= LOGO ================= */
 
 .login-header{
     text-align:center;
     margin-bottom:28px;
 }
-
-
-/* LOGO CONTAINER */
 
 .company-logo{
     width:76px !important;
@@ -41,33 +35,25 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     max-height:76px !important;
 
     margin:0 auto 14px !important;
-
     padding:0 !important;
 
     border-radius:50% !important;
-
     overflow:hidden !important;
 
     display:flex !important;
-
     align-items:center !important;
     justify-content:center !important;
 
-    background:#ffffff;
+    background:#fff;
 
     box-shadow:
         0 8px 20px rgba(0,0,0,.18),
         inset 0 0 0 3px rgba(255,255,255,.8);
 
     flex-shrink:0 !important;
-
 }
 
-
-/* ACTUAL LOGO IMAGE */
-
 .company-logo img{
-
     width:76px !important;
     height:76px !important;
 
@@ -77,101 +63,61 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     max-width:76px !important;
     max-height:76px !important;
 
+    display:block !important;
+
     margin:0 !important;
     padding:0 !important;
-
-    display:block !important;
 
     object-fit:cover !important;
 
     border-radius:50% !important;
-
 }
-
-
-/* BRAND NAME */
 
 .brand-name{
-
     margin:0;
-
     font-size:24px;
-
     font-weight:800;
-
     line-height:1.2;
-
-    letter-spacing:.4px;
-
 }
-
-
-/* SUBTITLE */
 
 .brand-subtitle{
-
     margin:7px 0 0;
-
     font-size:13px;
-
     opacity:.7;
-
-    line-height:1.5;
-
 }
-
-
-/* SMALL LINE */
 
 .logo-glow{
-
     width:45px;
-
     height:3px;
-
     margin:12px auto 0;
-
     border-radius:10px;
-
     background:currentColor;
-
     opacity:.35;
-
 }
 
 
-/* =================================
-   PASSWORD
-================================= */
+/* ================= PASSWORD ================= */
 
 .password-group{
     position:relative;
 }
 
-
 .password-group input{
-
     padding-right:55px !important;
-
 }
 
-
 .password-toggle{
-
     position:absolute;
 
     right:9px;
-
     top:50%;
 
     transform:translateY(-50%);
 
     width:38px;
-
     height:38px;
 
     border:none;
-
     border-radius:50%;
 
     background:transparent;
@@ -179,33 +125,38 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     cursor:pointer;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     z-index:10;
-
 }
-
 
 .password-toggle svg{
-
     width:20px;
-
     height:20px;
-
 }
 
 
-/* =================================
-   MOBILE
-================================= */
+/* ================= STATUS ================= */
+
+.status-message{
+    display:none;
+
+    margin-top:15px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    font-weight:600;
+}
+
+
+/* ================= MOBILE ================= */
 
 @media(max-width:500px){
 
     .company-logo{
-
         width:68px !important;
         height:68px !important;
 
@@ -214,12 +165,9 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
         max-width:68px !important;
         max-height:68px !important;
-
     }
-
 
     .company-logo img{
-
         width:68px !important;
         height:68px !important;
 
@@ -228,21 +176,10 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
         max-width:68px !important;
         max-height:68px !important;
-
     }
-
 
     .brand-name{
-
         font-size:21px;
-
-    }
-
-
-    .brand-subtitle{
-
-        font-size:12px;
-
     }
 
 }
@@ -257,41 +194,28 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
 <div class="login-container">
 
-
 <div class="login-card">
 
 
-<!-- =================================
-     HEADER
-================================= -->
+<!-- ================= HEADER ================= -->
 
 <div class="login-header">
-
-
-<!-- SMALL CIRCLE LOGO -->
 
 <div class="company-logo">
 
 <img
 src="1.jpg"
-alt="Zyper Diamond Store Logo">
+alt="Zyper Diamond Store">
 
 </div>
 
-
 <h2 class="brand-name">
-
 Zyper Diamond Store
-
 </h2>
 
-
 <p class="brand-subtitle">
-
-Create your account to continue
-
+Create your account
 </p>
-
 
 <div class="logo-glow"></div>
 
@@ -299,9 +223,7 @@ Create your account to continue
 
 
 
-<!-- =================================
-     REGISTER FORM
-================================= -->
+<!-- ================= REGISTER FORM ================= -->
 
 <form
 id="registerForm"
@@ -315,44 +237,18 @@ novalidate>
 
 <div class="input-group neu-input">
 
-
 <input
 type="text"
 id="username"
-name="username"
 required
 autocomplete="username"
 placeholder=" "
 minlength="3"
-maxlength="30">
-
+maxlength="20">
 
 <label for="username">
-
 Username
-
 </label>
-
-
-<div class="input-icon">
-
-<svg
-viewBox="0 0 24 24"
-fill="none"
-stroke="currentColor"
-stroke-width="2">
-
-<path
-d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-
-<circle
-cx="12"
-cy="7"
-r="4"/>
-
-</svg>
-
-</div>
 
 </div>
 
@@ -366,48 +262,17 @@ r="4"/>
 
 <div class="input-group neu-input">
 
-
 <input
 type="tel"
 id="phone"
-name="phone"
 required
 autocomplete="tel"
 placeholder=" "
 maxlength="15">
 
-
 <label for="phone">
-
 Phone Number
-
 </label>
-
-
-<div class="input-icon">
-
-<svg
-viewBox="0 0 24 24"
-fill="none"
-stroke="currentColor"
-stroke-width="2">
-
-<rect
-x="5"
-y="2"
-width="14"
-height="20"
-rx="2"/>
-
-<line
-x1="12"
-y1="18"
-x2="12"
-y2="18"/>
-
-</svg>
-
-</div>
 
 </div>
 
@@ -421,40 +286,16 @@ y2="18"/>
 
 <div class="input-group neu-input">
 
-
 <input
 type="email"
 id="email"
-name="email"
 required
 autocomplete="email"
 placeholder=" ">
 
-
 <label for="email">
-
 Email Address
-
 </label>
-
-
-<div class="input-icon">
-
-<svg
-viewBox="0 0 24 24"
-fill="none"
-stroke="currentColor"
-stroke-width="2">
-
-<path
-d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-
-<polyline
-points="22,6 12,13 2,6"/>
-
-</svg>
-
-</div>
 
 </div>
 
@@ -468,49 +309,18 @@ points="22,6 12,13 2,6"/>
 
 <div class="input-group neu-input password-group">
 
-
 <input
 type="password"
 id="password"
-name="password"
 required
 autocomplete="new-password"
 placeholder=" "
 minlength="6">
 
-
 <label for="password">
-
 Password
-
 </label>
 
-
-<div class="input-icon">
-
-<svg
-viewBox="0 0 24 24"
-fill="none"
-stroke="currentColor"
-stroke-width="2">
-
-<rect
-x="3"
-y="11"
-width="18"
-height="11"
-rx="2"/>
-
-<path
-d="M7 11V7a5 5 0 0110 0v4"/>
-
-</svg>
-
-</div>
-
-
-
-<!-- SHOW PASSWORD -->
 
 <button
 type="button"
@@ -567,20 +377,16 @@ y2="23"/>
 
 
 
-<!-- CREATE ACCOUNT -->
+<!-- REGISTER BUTTON -->
 
 <button
 type="submit"
 class="neu-button login-btn"
 id="registerButton">
 
-
 <span id="buttonText">
-
 Create Account
-
 </span>
-
 
 <span
 id="buttonLoading"
@@ -590,26 +396,16 @@ Creating Account...
 
 </span>
 
-
 </button>
 
 
 
-<!-- SUCCESS -->
+<!-- STATUS -->
 
-<p
-id="successMsg"
-style="
-display:none;
-text-align:center;
-margin-top:15px;
-color:#00c853;
-font-weight:600;
-">
-
-Account Created Successfully ✅
-
-</p>
+<div
+id="statusMessage"
+class="status-message">
+</div>
 
 
 </form>
@@ -625,9 +421,7 @@ Account Created Successfully ✅
 Already have an account?
 
 <a href="index.html">
-
 Login
-
 </a>
 
 </p>
@@ -641,10 +435,6 @@ Login
 
 
 
-<!-- =================================
-     FIREBASE
-================================= -->
-
 <script type="module">
 
 import {
@@ -656,7 +446,8 @@ from
 
 import {
 getAuth,
-createUserWithEmailAndPassword
+createUserWithEmailAndPassword,
+updateProfile
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -666,19 +457,14 @@ import {
 getFirestore,
 doc,
 setDoc,
-serverTimestamp,
-collection,
-query,
-where,
-getDocs,
-limit
+getDoc,
+serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-
-/* FIREBASE CONFIG */
+/* ================= FIREBASE ================= */
 
 const firebaseConfig = {
 
@@ -703,9 +489,6 @@ appId:
 };
 
 
-
-/* INITIALIZE */
-
 const app =
 initializeApp(firebaseConfig);
 
@@ -716,28 +499,27 @@ const db =
 getFirestore(app);
 
 
-
-/* ELEMENTS */
+/* ================= ELEMENTS ================= */
 
 const form =
 document.getElementById("registerForm");
 
-const username =
+const usernameInput =
 document.getElementById("username");
 
-const phone =
+const phoneInput =
 document.getElementById("phone");
 
-const email =
+const emailInput =
 document.getElementById("email");
 
-const password =
+const passwordInput =
 document.getElementById("password");
 
-const toggle =
+const passwordToggle =
 document.getElementById("passwordToggle");
 
-const registerButton =
+const button =
 document.getElementById("registerButton");
 
 const buttonText =
@@ -746,318 +528,324 @@ document.getElementById("buttonText");
 const buttonLoading =
 document.getElementById("buttonLoading");
 
-const successMsg =
-document.getElementById("successMsg");
+const status =
+document.getElementById("statusMessage");
 
 
+/* ================= PASSWORD SHOW ================= */
 
-/* =================================
-   SHOW / HIDE PASSWORD
-================================= */
+passwordToggle.addEventListener("click", () => {
 
-toggle.addEventListener(
-"click",
-()=>{
+    if(passwordInput.type === "password"){
 
-if(
-password.type ===
-"password"
-){
+        passwordInput.type = "text";
 
-password.type =
-"text";
+        passwordToggle
+        .querySelector(".eye-open")
+        .style.display = "none";
 
-toggle.querySelector(
-".eye-open"
-).style.display =
-"none";
+        passwordToggle
+        .querySelector(".eye-closed")
+        .style.display = "block";
 
-toggle.querySelector(
-".eye-closed"
-).style.display =
-"block";
+    }else{
 
-toggle.setAttribute(
-"aria-label",
-"Hide password"
-);
+        passwordInput.type = "password";
 
-}
+        passwordToggle
+        .querySelector(".eye-open")
+        .style.display = "block";
 
-else{
+        passwordToggle
+        .querySelector(".eye-closed")
+        .style.display = "none";
 
-password.type =
-"password";
-
-toggle.querySelector(
-".eye-open"
-).style.display =
-"block";
-
-toggle.querySelector(
-".eye-closed"
-).style.display =
-"none";
-
-toggle.setAttribute(
-"aria-label",
-"Show password"
-);
-
-}
+    }
 
 });
 
 
+/* ================= REGISTER ================= */
 
-/* =================================
-   REGISTER
-================================= */
+form.addEventListener("submit", async (e) => {
 
-form.addEventListener(
-"submit",
-async(e)=>{
+    e.preventDefault();
 
-e.preventDefault();
 
+    const username =
+        usernameInput.value.trim();
 
-const usernameValue =
-username.value.trim();
+    const phone =
+        phoneInput.value.trim();
 
-const phoneValue =
-phone.value.trim();
+    const email =
+        emailInput.value.trim();
 
-const emailValue =
-email.value.trim();
+    const password =
+        passwordInput.value;
 
-const passwordValue =
-password.value;
 
+    /* VALIDATION */
 
-if(
-usernameValue.length < 3
-){
+    if(username.length < 3){
 
-alert(
-"Username must be at least 3 characters."
-);
+        alert("Username must be at least 3 characters.");
 
-username.focus();
+        usernameInput.focus();
 
-return;
+        return;
 
-}
+    }
 
 
-if(
-!/^[0-9+\-\s]{7,15}$/
-.test(phoneValue)
-){
+    if(!/^[a-zA-Z0-9_]+$/.test(username)){
 
-alert(
-"Please enter a valid phone number."
-);
+        alert(
+            "Username can only contain letters, numbers and _"
+        );
 
-phone.focus();
+        usernameInput.focus();
 
-return;
+        return;
 
-}
+    }
 
 
-if(
-passwordValue.length < 6
-){
+    if(!phone){
 
-alert(
-"Password must be at least 6 characters."
-);
+        alert("Please enter your phone number.");
 
-password.focus();
+        phoneInput.focus();
 
-return;
+        return;
 
-}
+    }
 
 
-try{
+    if(password.length < 6){
 
+        alert(
+            "Password must be at least 6 characters."
+        );
 
-/* CHECK USERNAME */
+        passwordInput.focus();
 
-const usernameQuery =
-query(
-collection(
-db,
-"users"
-),
+        return;
 
-where(
-"username",
-"==",
-usernameValue
-),
+    }
 
-limit(1)
-);
 
+    try{
 
-const usernameResult =
-await getDocs(
-usernameQuery
-);
 
+        /* =================
+           CHECK USERNAME
+           WITHOUT SEARCHING
+           USERS COLLECTION
+        ================= */
 
-if(
-!usernameResult.empty
-){
+        const usernameRef =
+            doc(
+                db,
+                "usernames",
+                username.toLowerCase()
+            );
 
-alert(
-"This username is already taken."
-);
 
-return;
+        const usernameDoc =
+            await getDoc(usernameRef);
 
-}
 
+        if(usernameDoc.exists()){
 
-/* LOADING */
+            alert(
+                "This username is already taken."
+            );
 
-registerButton.disabled =
-true;
+            return;
 
-buttonText.style.display =
-"none";
+        }
 
-buttonLoading.style.display =
-"inline";
 
+        /* LOADING */
 
-/* CREATE ACCOUNT */
+        button.disabled = true;
 
-const credential =
-await createUserWithEmailAndPassword(
-auth,
-emailValue,
-passwordValue
-);
+        buttonText.style.display = "none";
 
+        buttonLoading.style.display = "inline";
 
-const user =
-credential.user;
 
+        /* =================
+           CREATE AUTH USER
+        ================= */
 
-/* SAVE USER */
+        const credential =
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
 
-await setDoc(
-doc(
-db,
-"users",
-user.uid
-),
-{
 
-uid:
-user.uid,
+        const user =
+            credential.user;
 
-username:
-usernameValue,
 
-phone:
-phoneValue,
+        /* =================
+           DISPLAY NAME
+        ================= */
 
-email:
-emailValue,
+        await updateProfile(
+            user,
+            {
+                displayName: username
+            }
+        );
 
-createdAt:
-serverTimestamp()
 
-}
-);
+        /* =================
+           USER PROFILE
+        ================= */
 
+        await setDoc(
+            doc(
+                db,
+                "users",
+                user.uid
+            ),
+            {
 
-/* SUCCESS */
+                uid:
+                    user.uid,
 
-successMsg.style.display =
-"block";
+                username:
+                    username,
 
+                phone:
+                    phone,
 
-setTimeout(
-()=>{
+                email:
+                    email,
 
-window.location.href =
-"index.html";
+                role:
+                    "customer",
 
-},
-1800
-);
+                walletBalance:
+                    0,
 
+                createdAt:
+                    serverTimestamp()
 
-}
+            }
+        );
 
-catch(error){
 
-console.error(error);
+        /* =================
+           USERNAME LOOKUP
+        ================= */
 
+        await setDoc(
+            usernameRef,
+            {
 
-registerButton.disabled =
-false;
+                uid:
+                    user.uid,
 
-buttonText.style.display =
-"inline";
+                email:
+                    email,
 
-buttonLoading.style.display =
-"none";
+                username:
+                    username
 
+            }
+        );
 
-if(
-error.code ===
-"auth/email-already-in-use"
-){
 
-alert(
-"This email is already registered. Please login."
-);
+        /* SUCCESS */
 
-}
+        status.style.display = "block";
 
-else if(
-error.code ===
-"auth/invalid-email"
-){
+        status.style.color = "#00c853";
 
-alert(
-"Please enter a valid email address."
-);
+        status.textContent =
+            "Account created successfully! Redirecting...";
 
-}
 
-else if(
-error.code ===
-"auth/weak-password"
-){
+        setTimeout(() => {
 
-alert(
-"Password must be at least 6 characters."
-);
+            window.location.href =
+                "home.html";
 
-}
+        }, 1200);
 
-else{
 
-alert(
-"Registration failed: " +
-error.message
-);
+    }catch(error){
 
-}
+        console.error(error);
 
-}
+
+        button.disabled = false;
+
+        buttonText.style.display = "inline";
+
+        buttonLoading.style.display = "none";
+
+
+        if(
+            error.code ===
+            "auth/email-already-in-use"
+        ){
+
+            alert(
+                "This email is already registered."
+            );
+
+        }
+        else if(
+            error.code ===
+            "auth/invalid-email"
+        ){
+
+            alert(
+                "Please enter a valid email."
+            );
+
+        }
+        else if(
+            error.code ===
+            "auth/weak-password"
+        ){
+
+            alert(
+                "Password must be at least 6 characters."
+            );
+
+        }
+        else if(
+            error.code ===
+            "permission-denied"
+        ){
+
+            alert(
+                "Firestore permission denied. Check your Firestore Rules."
+            );
+
+        }
+        else{
+
+            alert(
+                "Registration failed: " +
+                error.message
+            );
+
+        }
+
+    }
 
 });
 
 </script>
 
 </body>
-
 </html>
