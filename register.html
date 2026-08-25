@@ -1,40 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Diamond Store - Register</title>
 
 <link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="media.css">
+
 <link rel="icon" href="1.jpg">
 
 <style>
+
 .login-header{
     text-align:center;
     margin-bottom:28px;
 }
 
 .company-logo{
-    width:75px !important;
-    height:75px !important;
+    width:76px !important;
+    height:76px !important;
+
+    min-width:76px !important;
+    min-height:76px !important;
+
+    max-width:76px !important;
+    max-height:76px !important;
+
     margin:0 auto 15px !important;
     padding:0 !important;
+
     border-radius:50% !important;
     overflow:hidden !important;
+
     display:flex !important;
+
     align-items:center !important;
     justify-content:center !important;
+
     background:#fff;
-    box-shadow:0 8px 25px rgba(0,0,0,.2);
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.20);
 }
 
 .company-logo img{
     width:100% !important;
     height:100% !important;
-    object-fit:cover !important;
+
     display:block !important;
+
+    object-fit:cover !important;
+
     border-radius:50% !important;
 }
 
@@ -58,18 +80,28 @@
 }
 
 .password-toggle{
+
     position:absolute;
+
     right:8px;
     top:50%;
+
     transform:translateY(-50%);
+
     width:40px;
     height:40px;
+
     border:0;
+
     background:transparent;
+
     cursor:pointer;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     z-index:20;
 }
 
@@ -79,13 +111,18 @@
 }
 
 .status{
+
     display:none;
+
     text-align:center;
+
     margin-top:15px;
+
     font-weight:600;
 }
 
 @media(max-width:500px){
+
     .company-logo{
         width:68px !important;
         height:68px !important;
@@ -94,8 +131,11 @@
     .brand-name{
         font-size:21px;
     }
+
 }
+
 </style>
+
 </head>
 
 <body>
@@ -104,15 +144,22 @@
 
 <div class="login-card">
 
+
 <div class="login-header">
 
 <div class="company-logo">
-<img src="1.jpg" alt="Zyper Diamond Store">
+
+<img
+src="1.jpg"
+alt="Zyper Diamond Store">
+
 </div>
+
 
 <h2 class="brand-name">
 Zyper Diamond Store
 </h2>
+
 
 <p class="brand-subtitle">
 Create your account
@@ -121,7 +168,11 @@ Create your account
 </div>
 
 
-<form id="registerForm" class="login-form" novalidate>
+
+<form
+id="registerForm"
+class="login-form"
+novalidate>
 
 
 <!-- USERNAME -->
@@ -135,8 +186,8 @@ type="text"
 id="username"
 required
 placeholder=" "
-autocomplete="username"
-maxlength="20">
+maxlength="20"
+autocomplete="username">
 
 <label for="username">
 Username
@@ -158,8 +209,8 @@ type="tel"
 id="phone"
 required
 placeholder=" "
-autocomplete="tel"
-maxlength="15">
+maxlength="15"
+autocomplete="tel">
 
 <label for="phone">
 Phone Number
@@ -203,8 +254,8 @@ type="password"
 id="password"
 required
 placeholder=" "
-autocomplete="new-password"
-minlength="6">
+minlength="6"
+autocomplete="new-password">
 
 <label for="password">
 Password
@@ -214,7 +265,9 @@ Password
 <button
 type="button"
 id="passwordToggle"
-class="password-toggle">
+class="password-toggle"
+aria-label="Show password">
+
 
 <svg
 id="eyeOpen"
@@ -224,7 +277,11 @@ stroke="currentColor"
 stroke-width="2">
 
 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-<circle cx="12" cy="12" r="3"/>
+
+<circle
+cx="12"
+cy="12"
+r="3"/>
 
 </svg>
 
@@ -237,9 +294,15 @@ stroke="currentColor"
 stroke-width="2"
 style="display:none;">
 
-<path d="M17.94 17.94A10 10 0 0 1 12 20c-7 0-11-8-11-8"/>
-<path d="M1 1l22 22"/>
-<path d="M9.9 4.24A10 10 0 0 1 12 4c7 0 11 8 11 8"/>
+<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8"/>
+
+<path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8"/>
+
+<line
+x1="1"
+y1="1"
+x2="23"
+y2="23"/>
 
 </svg>
 
@@ -255,12 +318,12 @@ type="submit"
 class="neu-button login-btn"
 id="registerButton">
 
-<span id="normalText">
+<span id="registerText">
 Create Account
 </span>
 
 <span
-id="loadingText"
+id="registerLoading"
 style="display:none;">
 
 Creating Account...
@@ -275,22 +338,29 @@ id="status"
 class="status">
 </div>
 
+
 </form>
 
 
 <div class="signup-link">
 
 <p>
+
 Already have an account?
+
 <a href="index.html">
 Login
 </a>
+
 </p>
 
 </div>
 
+
 </div>
+
 </div>
+
 
 
 <script type="module">
@@ -320,8 +390,6 @@ serverTimestamp
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
-/* ================= FIREBASE ================= */
 
 const firebaseConfig = {
 
@@ -356,8 +424,6 @@ const db =
 getFirestore(app);
 
 
-/* ================= ELEMENTS ================= */
-
 const form =
 document.getElementById("registerForm");
 
@@ -385,25 +451,26 @@ document.getElementById("eyeClosed");
 const button =
 document.getElementById("registerButton");
 
-const normalText =
-document.getElementById("normalText");
+const registerText =
+document.getElementById("registerText");
 
-const loadingText =
-document.getElementById("loadingText");
+const registerLoading =
+document.getElementById("registerLoading");
 
 const status =
 document.getElementById("status");
 
 
-/* ================= SHOW PASSWORD ================= */
+/* SHOW PASSWORD */
 
-toggle.addEventListener("click", function(){
+toggle.addEventListener("click", () => {
 
     if(password.type === "password"){
 
         password.type = "text";
 
         eyeOpen.style.display = "none";
+
         eyeClosed.style.display = "block";
 
     }else{
@@ -411,6 +478,7 @@ toggle.addEventListener("click", function(){
         password.type = "password";
 
         eyeOpen.style.display = "block";
+
         eyeClosed.style.display = "none";
 
     }
@@ -418,9 +486,9 @@ toggle.addEventListener("click", function(){
 });
 
 
-/* ================= REGISTER ================= */
+/* REGISTER */
 
-form.addEventListener("submit", async function(e){
+form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
@@ -438,23 +506,10 @@ form.addEventListener("submit", async function(e){
         password.value;
 
 
-    /* VALIDATION */
-
     if(usernameValue.length < 3){
 
         alert(
             "Username must contain at least 3 characters."
-        );
-
-        return;
-
-    }
-
-
-    if(!/^[a-zA-Z0-9_]+$/.test(usernameValue)){
-
-        alert(
-            "Username can contain only letters, numbers and _"
         );
 
         return;
@@ -497,18 +552,14 @@ form.addEventListener("submit", async function(e){
 
     try{
 
-        /* LOADING */
-
         button.disabled = true;
 
-        normalText.style.display = "none";
+        registerText.style.display = "none";
 
-        loadingText.style.display = "inline";
+        registerLoading.style.display = "inline";
 
 
-        /* =========================
-           CREATE FIREBASE ACCOUNT
-        ========================= */
+        /* CREATE AUTH ACCOUNT */
 
         const result =
             await createUserWithEmailAndPassword(
@@ -522,21 +573,18 @@ form.addEventListener("submit", async function(e){
             result.user;
 
 
-        /* =========================
-           SAVE DISPLAY NAME
-        ========================= */
+        /* SAVE USERNAME */
 
         await updateProfile(
             user,
             {
-                displayName: usernameValue
+                displayName:
+                usernameValue
             }
         );
 
 
-        /* =========================
-           CREATE USER DOCUMENT
-        ========================= */
+        /* SAVE USER PROFILE */
 
         await setDoc(
             doc(
@@ -547,28 +595,26 @@ form.addEventListener("submit", async function(e){
             {
 
                 uid:
-                    user.uid,
+                user.uid,
 
                 username:
-                    usernameValue,
+                usernameValue,
 
                 phone:
-                    phoneValue,
+                phoneValue,
 
                 email:
-                    emailValue,
+                emailValue,
 
                 role:
-                    "customer",
+                "customer",
 
                 createdAt:
-                    serverTimestamp()
+                serverTimestamp()
 
             }
         );
 
-
-        /* SUCCESS */
 
         status.style.display =
             "block";
@@ -576,36 +622,34 @@ form.addEventListener("submit", async function(e){
         status.style.color =
             "#00c853";
 
-        status.innerHTML =
-            "Account created successfully ✅";
+        status.textContent =
+            "Account created successfully ✓";
 
 
-        setTimeout(function(){
+        setTimeout(() => {
 
             window.location.href =
                 "home.html";
 
-        },1500);
+        },1200);
 
 
     }catch(error){
 
         console.error(
-            "REGISTER ERROR:",
+            "REGISTRATION ERROR:",
             error
         );
 
 
         button.disabled = false;
 
-        normalText.style.display =
+        registerText.style.display =
             "inline";
 
-        loadingText.style.display =
+        registerLoading.style.display =
             "none";
 
-
-        /* AUTH ERRORS */
 
         if(
             error.code ===
@@ -642,22 +686,13 @@ form.addEventListener("submit", async function(e){
 
         else if(
             error.code ===
-            "auth/operation-not-allowed"
-        ){
-
-            alert(
-                "Email/Password login is not enabled in Firebase Authentication."
-            );
-
-        }
-
-        else if(
+            "permission-denied" ||
             error.code ===
-            "permission-denied"
+            "firestore/permission-denied"
         ){
 
             alert(
-                "Firestore permission denied. Please check your Firestore Rules."
+                "Firestore permission denied. Check your Firestore Rules."
             );
 
         }
