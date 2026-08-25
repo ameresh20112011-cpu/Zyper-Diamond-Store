@@ -11,6 +11,9 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<!-- Zyper Navigation Bar -->
+<link rel="stylesheet" href="zyper-nav.css">
+
 <style>
 
 *{
@@ -436,84 +439,6 @@ font-size:13px;
 }
 
 
-/* =====================================================
-   BOTTOM NAVIGATION
-===================================================== */
-
-.bottom-nav{
-
-position:fixed;
-
-bottom:0;
-
-left:0;
-
-width:100%;
-
-height:70px;
-
-display:flex;
-
-justify-content:space-around;
-
-align-items:center;
-
-background:rgba(255,255,255,0.1);
-
-backdrop-filter:blur(15px);
-
--webkit-backdrop-filter:blur(15px);
-
-border-top:1px solid rgba(255,255,255,.2);
-
-z-index:1000;
-
-}
-
-
-/* NAV ITEM */
-
-.nav-item{
-
-text-align:center;
-
-text-decoration:none;
-
-color:#aaa;
-
-font-size:12px;
-
-flex:1;
-
--webkit-tap-highlight-color:transparent;
-
-}
-
-
-/* ICON */
-
-.nav-item i{
-
-display:block;
-
-font-size:22px;
-
-margin-bottom:4px;
-
-}
-
-
-/* ACTIVE */
-
-.nav-item:hover,
-
-.nav-item.active{
-
-color:#00eaff;
-
-}
-
-
 /* =========================
    MOBILE
 ========================= */
@@ -547,29 +472,6 @@ font-size:23px;
 .info{
 
 font-size:13px;
-
-}
-
-
-/* NAV */
-
-.bottom-nav{
-
-height:70px;
-
-}
-
-.nav-item{
-
-font-size:11px;
-
-}
-
-.nav-item i{
-
-font-size:21px;
-
-margin-bottom:3px;
 
 }
 
@@ -772,79 +674,11 @@ onclick="history.back()">
 </div>
 
 
-<!-- =====================================================
-     BOTTOM NAVIGATION
-===================================================== -->
+<!-- =========================
+     ZYPER NAVIGATION BAR
+========================= -->
 
-<div class="bottom-nav">
-
-
-<a
-href="home.html"
-class="nav-item">
-
-<i class="fas fa-home"></i>
-
-<span>
-Home
-</span>
-
-</a>
-
-
-<a
-href="topup.html"
-class="nav-item">
-
-<i class="fas fa-gem"></i>
-
-<span>
-Shop
-</span>
-
-</a>
-
-
-<a
-href="payment.html"
-class="nav-item active">
-
-<i class="fas fa-bolt"></i>
-
-<span>
-Payment
-</span>
-
-</a>
-
-
-<a
-href="history.html"
-class="nav-item">
-
-<i class="fas fa-clock"></i>
-
-<span>
-History
-</span>
-
-</a>
-
-
-<a
-href="profile.html"
-class="nav-item">
-
-<i class="fas fa-user"></i>
-
-<span>
-Profile
-</span>
-
-</a>
-
-
-</div>
+<div id="zyper-navigation"></div>
 
 
 <script>
@@ -1058,6 +892,11 @@ window.location.href=
 }
 
 </script>
+
+
+<!-- Zyper Navigation Script -->
+
+<script src="zyper-nav.js"></script>
 
 
 </body>
