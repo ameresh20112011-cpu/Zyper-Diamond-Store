@@ -1,75 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Diamond Store - Register</title>
 
 <link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="media.css">
-
 <link rel="icon" href="1.jpg">
 
 <style>
-
-/* ================= LOGO ================= */
-
 .login-header{
     text-align:center;
     margin-bottom:28px;
 }
 
 .company-logo{
-    width:76px !important;
-    height:76px !important;
-
-    min-width:76px !important;
-    min-height:76px !important;
-
-    max-width:76px !important;
-    max-height:76px !important;
-
-    margin:0 auto 14px !important;
+    width:75px !important;
+    height:75px !important;
+    margin:0 auto 15px !important;
     padding:0 !important;
-
     border-radius:50% !important;
     overflow:hidden !important;
-
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
-
     background:#fff;
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,.18),
-        inset 0 0 0 3px rgba(255,255,255,.8);
-
-    flex-shrink:0 !important;
+    box-shadow:0 8px 25px rgba(0,0,0,.2);
 }
 
 .company-logo img{
-    width:76px !important;
-    height:76px !important;
-
-    min-width:76px !important;
-    min-height:76px !important;
-
-    max-width:76px !important;
-    max-height:76px !important;
-
-    display:block !important;
-
-    margin:0 !important;
-    padding:0 !important;
-
+    width:100% !important;
+    height:100% !important;
     object-fit:cover !important;
-
+    display:block !important;
     border-radius:50% !important;
 }
 
@@ -77,26 +42,12 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     margin:0;
     font-size:24px;
     font-weight:800;
-    line-height:1.2;
 }
 
 .brand-subtitle{
     margin:7px 0 0;
-    font-size:13px;
     opacity:.7;
 }
-
-.logo-glow{
-    width:45px;
-    height:3px;
-    margin:12px auto 0;
-    border-radius:10px;
-    background:currentColor;
-    opacity:.35;
-}
-
-
-/* ================= PASSWORD ================= */
 
 .password-group{
     position:relative;
@@ -108,105 +59,55 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
 .password-toggle{
     position:absolute;
-
-    right:9px;
+    right:8px;
     top:50%;
-
     transform:translateY(-50%);
-
-    width:38px;
-    height:38px;
-
-    border:none;
-    border-radius:50%;
-
+    width:40px;
+    height:40px;
+    border:0;
     background:transparent;
-
     cursor:pointer;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
-    z-index:10;
+    z-index:20;
 }
 
 .password-toggle svg{
-    width:20px;
-    height:20px;
+    width:21px;
+    height:21px;
 }
 
-
-/* ================= STATUS ================= */
-
-.status-message{
+.status{
     display:none;
-
-    margin-top:15px;
-
     text-align:center;
-
-    font-size:14px;
-
+    margin-top:15px;
     font-weight:600;
 }
 
-
-/* ================= MOBILE ================= */
-
 @media(max-width:500px){
-
     .company-logo{
         width:68px !important;
         height:68px !important;
-
-        min-width:68px !important;
-        min-height:68px !important;
-
-        max-width:68px !important;
-        max-height:68px !important;
-    }
-
-    .company-logo img{
-        width:68px !important;
-        height:68px !important;
-
-        min-width:68px !important;
-        min-height:68px !important;
-
-        max-width:68px !important;
-        max-height:68px !important;
     }
 
     .brand-name{
         font-size:21px;
     }
-
 }
-
 </style>
-
 </head>
 
-
 <body>
-
 
 <div class="login-container">
 
 <div class="login-card">
 
-
-<!-- ================= HEADER ================= -->
-
 <div class="login-header">
 
 <div class="company-logo">
-
-<img
-src="1.jpg"
-alt="Zyper Diamond Store">
-
+<img src="1.jpg" alt="Zyper Diamond Store">
 </div>
 
 <h2 class="brand-name">
@@ -217,18 +118,10 @@ Zyper Diamond Store
 Create your account
 </p>
 
-<div class="logo-glow"></div>
-
 </div>
 
 
-
-<!-- ================= REGISTER FORM ================= -->
-
-<form
-id="registerForm"
-class="login-form"
-novalidate>
+<form id="registerForm" class="login-form" novalidate>
 
 
 <!-- USERNAME -->
@@ -241,9 +134,8 @@ novalidate>
 type="text"
 id="username"
 required
-autocomplete="username"
 placeholder=" "
-minlength="3"
+autocomplete="username"
 maxlength="20">
 
 <label for="username">
@@ -253,7 +145,6 @@ Username
 </div>
 
 </div>
-
 
 
 <!-- PHONE -->
@@ -266,8 +157,8 @@ Username
 type="tel"
 id="phone"
 required
-autocomplete="tel"
 placeholder=" "
+autocomplete="tel"
 maxlength="15">
 
 <label for="phone">
@@ -277,7 +168,6 @@ Phone Number
 </div>
 
 </div>
-
 
 
 <!-- EMAIL -->
@@ -290,8 +180,8 @@ Phone Number
 type="email"
 id="email"
 required
-autocomplete="email"
-placeholder=" ">
+placeholder=" "
+autocomplete="email">
 
 <label for="email">
 Email Address
@@ -300,7 +190,6 @@ Email Address
 </div>
 
 </div>
-
 
 
 <!-- PASSWORD -->
@@ -313,8 +202,8 @@ Email Address
 type="password"
 id="password"
 required
-autocomplete="new-password"
 placeholder=" "
+autocomplete="new-password"
 minlength="6">
 
 <label for="password">
@@ -325,47 +214,32 @@ Password
 <button
 type="button"
 id="passwordToggle"
-class="password-toggle"
-aria-label="Show password">
-
+class="password-toggle">
 
 <svg
-class="eye-open"
+id="eyeOpen"
 viewBox="0 0 24 24"
 fill="none"
 stroke="currentColor"
 stroke-width="2">
 
-<path
-d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-
-<circle
-cx="12"
-cy="12"
-r="3"/>
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+<circle cx="12" cy="12" r="3"/>
 
 </svg>
 
 
 <svg
-class="eye-closed"
+id="eyeClosed"
 viewBox="0 0 24 24"
 fill="none"
 stroke="currentColor"
 stroke-width="2"
 style="display:none;">
 
-<path
-d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
-
-<path
-d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
-
-<line
-x1="1"
-y1="1"
-x2="23"
-y2="23"/>
+<path d="M17.94 17.94A10 10 0 0 1 12 20c-7 0-11-8-11-8"/>
+<path d="M1 1l22 22"/>
+<path d="M9.9 4.24A10 10 0 0 1 12 4c7 0 11 8 11 8"/>
 
 </svg>
 
@@ -376,20 +250,17 @@ y2="23"/>
 </div>
 
 
-
-<!-- REGISTER BUTTON -->
-
 <button
 type="submit"
 class="neu-button login-btn"
 id="registerButton">
 
-<span id="buttonText">
+<span id="normalText">
 Create Account
 </span>
 
 <span
-id="buttonLoading"
+id="loadingText"
 style="display:none;">
 
 Creating Account...
@@ -399,40 +270,27 @@ Creating Account...
 </button>
 
 
-
-<!-- STATUS -->
-
 <div
-id="statusMessage"
-class="status-message">
+id="status"
+class="status">
 </div>
-
 
 </form>
 
 
-
-<!-- LOGIN -->
-
 <div class="signup-link">
 
 <p>
-
 Already have an account?
-
 <a href="index.html">
 Login
 </a>
-
 </p>
 
 </div>
 
-
 </div>
-
 </div>
-
 
 
 <script type="module">
@@ -457,7 +315,6 @@ import {
 getFirestore,
 doc,
 setDoc,
-getDoc,
 serverTimestamp
 }
 from
@@ -504,61 +361,57 @@ getFirestore(app);
 const form =
 document.getElementById("registerForm");
 
-const usernameInput =
+const username =
 document.getElementById("username");
 
-const phoneInput =
+const phone =
 document.getElementById("phone");
 
-const emailInput =
+const email =
 document.getElementById("email");
 
-const passwordInput =
+const password =
 document.getElementById("password");
 
-const passwordToggle =
+const toggle =
 document.getElementById("passwordToggle");
+
+const eyeOpen =
+document.getElementById("eyeOpen");
+
+const eyeClosed =
+document.getElementById("eyeClosed");
 
 const button =
 document.getElementById("registerButton");
 
-const buttonText =
-document.getElementById("buttonText");
+const normalText =
+document.getElementById("normalText");
 
-const buttonLoading =
-document.getElementById("buttonLoading");
+const loadingText =
+document.getElementById("loadingText");
 
 const status =
-document.getElementById("statusMessage");
+document.getElementById("status");
 
 
-/* ================= PASSWORD SHOW ================= */
+/* ================= SHOW PASSWORD ================= */
 
-passwordToggle.addEventListener("click", () => {
+toggle.addEventListener("click", function(){
 
-    if(passwordInput.type === "password"){
+    if(password.type === "password"){
 
-        passwordInput.type = "text";
+        password.type = "text";
 
-        passwordToggle
-        .querySelector(".eye-open")
-        .style.display = "none";
-
-        passwordToggle
-        .querySelector(".eye-closed")
-        .style.display = "block";
+        eyeOpen.style.display = "none";
+        eyeClosed.style.display = "block";
 
     }else{
 
-        passwordInput.type = "password";
+        password.type = "password";
 
-        passwordToggle
-        .querySelector(".eye-open")
-        .style.display = "block";
-
-        passwordToggle
-        .querySelector(".eye-closed")
-        .style.display = "none";
+        eyeOpen.style.display = "block";
+        eyeClosed.style.display = "none";
 
     }
 
@@ -567,68 +420,75 @@ passwordToggle.addEventListener("click", () => {
 
 /* ================= REGISTER ================= */
 
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", async function(e){
 
     e.preventDefault();
 
 
-    const username =
-        usernameInput.value.trim();
+    const usernameValue =
+        username.value.trim();
 
-    const phone =
-        phoneInput.value.trim();
+    const phoneValue =
+        phone.value.trim();
 
-    const email =
-        emailInput.value.trim();
+    const emailValue =
+        email.value.trim();
 
-    const password =
-        passwordInput.value;
+    const passwordValue =
+        password.value;
 
 
     /* VALIDATION */
 
-    if(username.length < 3){
-
-        alert("Username must be at least 3 characters.");
-
-        usernameInput.focus();
-
-        return;
-
-    }
-
-
-    if(!/^[a-zA-Z0-9_]+$/.test(username)){
+    if(usernameValue.length < 3){
 
         alert(
-            "Username can only contain letters, numbers and _"
+            "Username must contain at least 3 characters."
         );
 
-        usernameInput.focus();
+        return;
+
+    }
+
+
+    if(!/^[a-zA-Z0-9_]+$/.test(usernameValue)){
+
+        alert(
+            "Username can contain only letters, numbers and _"
+        );
 
         return;
 
     }
 
 
-    if(!phone){
+    if(!phoneValue){
 
-        alert("Please enter your phone number.");
-
-        phoneInput.focus();
+        alert(
+            "Please enter your phone number."
+        );
 
         return;
 
     }
 
 
-    if(password.length < 6){
+    if(!emailValue){
+
+        alert(
+            "Please enter your email."
+        );
+
+        return;
+
+    }
+
+
+    if(passwordValue.length < 6){
 
         alert(
             "Password must be at least 6 characters."
         );
-
-        passwordInput.focus();
 
         return;
 
@@ -637,76 +497,46 @@ form.addEventListener("submit", async (e) => {
 
     try{
 
-
-        /* =================
-           CHECK USERNAME
-           WITHOUT SEARCHING
-           USERS COLLECTION
-        ================= */
-
-        const usernameRef =
-            doc(
-                db,
-                "usernames",
-                username.toLowerCase()
-            );
-
-
-        const usernameDoc =
-            await getDoc(usernameRef);
-
-
-        if(usernameDoc.exists()){
-
-            alert(
-                "This username is already taken."
-            );
-
-            return;
-
-        }
-
-
         /* LOADING */
 
         button.disabled = true;
 
-        buttonText.style.display = "none";
+        normalText.style.display = "none";
 
-        buttonLoading.style.display = "inline";
+        loadingText.style.display = "inline";
 
 
-        /* =================
-           CREATE AUTH USER
-        ================= */
+        /* =========================
+           CREATE FIREBASE ACCOUNT
+        ========================= */
 
-        const credential =
+        const result =
             await createUserWithEmailAndPassword(
                 auth,
-                email,
-                password
+                emailValue,
+                passwordValue
             );
 
 
         const user =
-            credential.user;
+            result.user;
 
 
-        /* =================
-           DISPLAY NAME
-        ================= */
+        /* =========================
+           SAVE DISPLAY NAME
+        ========================= */
 
         await updateProfile(
             user,
             {
-                displayName: username
+                displayName: usernameValue
             }
         );
 
 
-        /* =================
-           USER PROFILE
-        ================= */
+        /* =========================
+           CREATE USER DOCUMENT
+        ========================= */
 
         await setDoc(
             doc(
@@ -720,19 +550,16 @@ form.addEventListener("submit", async (e) => {
                     user.uid,
 
                 username:
-                    username,
+                    usernameValue,
 
                 phone:
-                    phone,
+                    phoneValue,
 
                 email:
-                    email,
+                    emailValue,
 
                 role:
                     "customer",
-
-                walletBalance:
-                    0,
 
                 createdAt:
                     serverTimestamp()
@@ -741,56 +568,44 @@ form.addEventListener("submit", async (e) => {
         );
 
 
-        /* =================
-           USERNAME LOOKUP
-        ================= */
-
-        await setDoc(
-            usernameRef,
-            {
-
-                uid:
-                    user.uid,
-
-                email:
-                    email,
-
-                username:
-                    username
-
-            }
-        );
-
-
         /* SUCCESS */
 
-        status.style.display = "block";
+        status.style.display =
+            "block";
 
-        status.style.color = "#00c853";
+        status.style.color =
+            "#00c853";
 
-        status.textContent =
-            "Account created successfully! Redirecting...";
+        status.innerHTML =
+            "Account created successfully ✅";
 
 
-        setTimeout(() => {
+        setTimeout(function(){
 
             window.location.href =
                 "home.html";
 
-        }, 1200);
+        },1500);
 
 
     }catch(error){
 
-        console.error(error);
+        console.error(
+            "REGISTER ERROR:",
+            error
+        );
 
 
         button.disabled = false;
 
-        buttonText.style.display = "inline";
+        normalText.style.display =
+            "inline";
 
-        buttonLoading.style.display = "none";
+        loadingText.style.display =
+            "none";
 
+
+        /* AUTH ERRORS */
 
         if(
             error.code ===
@@ -802,16 +617,18 @@ form.addEventListener("submit", async (e) => {
             );
 
         }
+
         else if(
             error.code ===
             "auth/invalid-email"
         ){
 
             alert(
-                "Please enter a valid email."
+                "Invalid email address."
             );
 
         }
+
         else if(
             error.code ===
             "auth/weak-password"
@@ -822,20 +639,33 @@ form.addEventListener("submit", async (e) => {
             );
 
         }
+
+        else if(
+            error.code ===
+            "auth/operation-not-allowed"
+        ){
+
+            alert(
+                "Email/Password login is not enabled in Firebase Authentication."
+            );
+
+        }
+
         else if(
             error.code ===
             "permission-denied"
         ){
 
             alert(
-                "Firestore permission denied. Check your Firestore Rules."
+                "Firestore permission denied. Please check your Firestore Rules."
             );
 
         }
+
         else{
 
             alert(
-                "Registration failed: " +
+                "Registration failed:\n\n" +
                 error.message
             );
 
