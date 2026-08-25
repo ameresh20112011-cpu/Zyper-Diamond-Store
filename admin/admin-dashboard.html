@@ -6,501 +6,297 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+      content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Admin Dashboard</title>
 
 <link rel="stylesheet" href="./admin.css">
 
-<style>
-
-.worker-panel{
-    margin:25px 0;
-    padding:25px;
-    background:rgba(15,23,42,.96);
-    border:1px solid rgba(96,165,250,.25);
-    border-radius:18px;
-    box-shadow:0 10px 30px rgba(0,0,0,.25);
-}
-
-.worker-panel h2{
-    margin:0 0 8px;
-}
-
-.worker-panel > p{
-    color:#94a3b8;
-    margin-bottom:20px;
-}
-
-.worker-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-}
-
-.worker-box{
-    padding:18px;
-    border-radius:15px;
-    background:rgba(30,41,59,.8);
-}
-
-.worker-box label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:600;
-}
-
-.worker-box input{
-    width:100%;
-    box-sizing:border-box;
-    padding:12px;
-    border-radius:10px;
-    border:1px solid #334155;
-    background:#0f172a;
-    color:white;
-    outline:none;
-}
-
-.worker-box input:focus{
-    border-color:#60a5fa;
-}
-
-.worker-button{
-    width:100%;
-    margin-top:10px;
-    padding:12px;
-    border:0;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:700;
-    color:white;
-    background:#2563eb;
-}
-
-.worker-button:hover{
-    opacity:.9;
-}
-
-.worker-button:disabled{
-    opacity:.5;
-    cursor:not-allowed;
-}
-
-.worker-button.green{
-    background:#16a34a;
-}
-
-.worker-result{
-    margin-top:20px;
-    padding:15px;
-    border-radius:12px;
-    background:#020617;
-    color:#cbd5e1;
-    white-space:pre-wrap;
-    word-break:break-word;
-    min-height:30px;
-}
-
-.secret-warning{
-    margin-top:10px;
-    color:#fbbf24;
-    font-size:13px;
-    line-height:1.5;
-}
-
-@media(max-width:700px){
-
-    .worker-panel{
-        padding:16px;
-    }
-
-    .worker-grid{
-        grid-template-columns:1fr;
-    }
-
-}
-
-</style>
-
 </head>
-
 
 <body>
 
-
 <div id="app" style="display:none;">
 
+    <aside class="sidebar">
 
-<aside class="sidebar">
+        <h1>💎 Zyper</h1>
 
-    <h1>💎 Zyper</h1>
+        <h3>Admin Panel</h3>
 
-    <h3>Admin Panel</h3>
+        <div class="sidebar-line"></div>
 
-    <div class="sidebar-line"></div>
+        <p>🛡️ Administrator</p>
 
-    <p>🛡️ Administrator</p>
+        <button id="logout">
+            Logout
+        </button>
 
-    <button id="logout">
-        Logout
-    </button>
+    </aside>
 
-</aside>
 
+    <main class="main">
 
+        <div class="topbar">
 
-<main class="main">
+            <div>
 
+                <h1>
+                    Orders Dashboard
+                </h1>
 
-<div class="topbar">
+                <p class="subtitle">
+                    Zyper Diamond Store
+                </p>
 
-    <div>
+            </div>
 
-        <h1>
-            Orders Dashboard
-        </h1>
+            <button
+                id="refresh"
+                class="refresh-btn">
+                ↻ Refresh
+            </button>
 
-        <p class="subtitle">
-            Zyper Diamond Store
-        </p>
+        </div>
 
-    </div>
 
+        <!-- =========================================
+             REDEEM CODE
+        ========================================== -->
 
-    <button
-        id="refresh"
-        class="refresh-btn"
-    >
-        ↻ Refresh
-    </button>
+        <section class="redeem-admin">
 
-</div>
+            <h2>💰 Create Wallet Redeem Code</h2>
 
+            <p>
+                Enter your Admin Secret Key and amount.
+                No customer email or Firebase UID is required.
+            </p>
 
 
-<!-- DATE SEARCH -->
+            <div class="redeem-form">
 
-<div class="date-search">
+                <input
+                    type="password"
+                    id="adminSecret"
+                    placeholder="Enter Admin Secret Key"
+                    autocomplete="off"
+                >
 
-    <div class="date-title">
-        📅 Order Date
-    </div>
 
-    <input
-        type="date"
-        id="orderDate"
-    >
+                <input
+                    type="number"
+                    id="redeemAmount"
+                    placeholder="Amount (LKR)"
+                    min="1"
+                    max="1000000"
+                    step="1"
+                >
 
-    <button
-        id="dateSearch"
-        class="date-search-btn"
-    >
-        🔎 Search
-    </button>
 
-    <button
-        id="todayButton"
-        class="today-btn"
-    >
-        Today
-    </button>
+                <button
+                    id="createRedeem"
+                    type="button">
+                    💎 Create Redeem Code
+                </button>
 
-</div>
+            </div>
 
 
+            <div
+                id="redeemResult"
+                class="redeem-result"
+                style="display:none;">
 
-<!-- STATISTICS -->
+                <div>
+                    <strong>Redeem Code</strong>
+                </div>
 
-<div class="cards">
+                <div
+                    id="redeemCode"
+                    class="redeem-code">
+                </div>
 
-    <div class="card">
+                <div
+                    id="redeemValue"
+                    class="redeem-value">
+                </div>
 
-        <h3>
-            Orders
-        </h3>
+                <button
+                    id="copyRedeem"
+                    type="button">
+                    📋 Copy Code
+                </button>
 
-        <h2 id="totalOrders">
-            0
-        </h2>
+            </div>
 
-    </div>
+        </section>
 
 
-    <div class="card">
+        <!-- =========================================
+             DATE SEARCH
+        ========================================== -->
 
-        <h3>
-            Revenue
-        </h3>
+        <div class="date-search">
 
-        <h2>
-            Rs.
-            <span id="revenue">
-                0
-            </span>
-        </h2>
-
-    </div>
-
-
-    <div class="card">
-
-        <h3>
-            Pending
-        </h3>
-
-        <h2 id="pendingOrders">
-            0
-        </h2>
-
-    </div>
-
-
-    <div class="card">
-
-        <h3>
-            Success
-        </h3>
-
-        <h2 id="successOrders">
-            0
-        </h2>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================
-     WALLET / REDEEM
-===================================== -->
-
-<div class="worker-panel">
-
-    <h2>
-        💰 Wallet & Redeem Code
-    </h2>
-
-    <p>
-        Create and check customer wallet redeem codes.
-    </p>
-
-
-    <div class="worker-grid">
-
-
-        <!-- ADMIN SECRET -->
-
-        <div class="worker-box">
-
-            <label for="adminSecret">
-                🔐 Admin Secret
-            </label>
+            <div class="date-title">
+                📅 Order Date
+            </div>
 
             <input
-                type="password"
-                id="adminSecret"
-                placeholder="Enter ADMIN_SECRET"
-                autocomplete="off"
+                type="date"
+                id="orderDate"
             >
 
-            <div class="secret-warning">
+            <button
+                id="dateSearch"
+                class="date-search-btn">
+                🔎 Search
+            </button>
 
-                Your ADMIN_SECRET is not stored in
-                admin.js. Enter it here when performing
-                an admin action.
+            <button
+                id="todayButton"
+                class="today-btn">
+                Today
+            </button>
+
+        </div>
+
+
+        <!-- =========================================
+             CARDS
+        ========================================== -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>
+                    Orders
+                </h3>
+
+                <h2 id="totalOrders">
+                    0
+                </h2>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    Revenue
+                </h3>
+
+                <h2>
+                    Rs.
+                    <span id="revenue">
+                        0
+                    </span>
+                </h2>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    Pending
+                </h3>
+
+                <h2 id="pendingOrders">
+                    0
+                </h2>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    Success
+                </h3>
+
+                <h2 id="successOrders">
+                    0
+                </h2>
 
             </div>
 
         </div>
 
 
-        <!-- USER ID -->
+        <!-- =========================================
+             SEARCH
+        ========================================== -->
 
-        <div class="worker-box">
-
-            <label for="redeemUserId">
-                👤 Customer Firebase UID
-            </label>
+        <div class="search-box">
 
             <input
+                id="search"
                 type="text"
-                id="redeemUserId"
-                placeholder="Customer Firebase UID"
-                autocomplete="off"
+                placeholder="Search Order ID, UID, customer, product..."
             >
 
         </div>
 
 
-        <!-- EMAIL -->
+        <!-- =========================================
+             ORDERS
+        ========================================== -->
 
-        <div class="worker-box">
+        <div class="table-container">
 
-            <label for="redeemEmail">
-                📧 Customer Email
-            </label>
+            <table>
 
-            <input
-                type="email"
-                id="redeemEmail"
-                placeholder="Customer email"
-                autocomplete="off"
-            >
+                <thead>
 
-        </div>
+                    <tr>
 
+                        <th>Order ID</th>
 
-        <!-- AMOUNT -->
+                        <th>Customer</th>
 
-        <div class="worker-box">
+                        <th>Firebase UID</th>
 
-            <label for="redeemAmount">
-                💰 Amount (LKR)
-            </label>
+                        <th>Game UID</th>
 
-            <input
-                type="number"
-                id="redeemAmount"
-                placeholder="Example: 1000"
-                min="1"
-                max="1000000"
-            >
+                        <th>Product</th>
 
-        </div>
+                        <th>Price</th>
 
-    </div>
+                        <th>Payment</th>
 
+                        <th>Date Time</th>
 
+                        <th>Total</th>
 
-    <div class="worker-grid"
-         style="margin-top:15px;">
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
 
 
-        <!-- CREATE -->
+                <tbody id="orders">
 
-        <div class="worker-box">
+                </tbody>
 
-            <button
-                id="createRedeem"
-                class="worker-button green"
-            >
-                🎟️ Create Redeem Code
-            </button>
+            </table>
 
         </div>
 
-
-        <!-- CHECK -->
-
-        <div class="worker-box">
-
-            <label for="checkRedeemCode">
-                🔎 Redeem Code
-            </label>
-
-            <input
-                type="text"
-                id="checkRedeemCode"
-                placeholder="XXXX-XXXX-XXXX"
-                maxlength="14"
-                autocomplete="off"
-            >
-
-            <button
-                id="checkRedeem"
-                class="worker-button"
-            >
-                🔎 Check Redeem Code
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div
-        id="workerResult"
-        class="worker-result"
-    >
-        Worker result will appear here.
-    </div>
-
-</div>
-
-
-
-<!-- TEXT SEARCH -->
-
-<div class="search-box">
-
-    <input
-        id="search"
-        type="text"
-        placeholder="Search Order ID, UID, customer, product..."
-    >
-
-</div>
-
-
-
-<!-- ORDERS -->
-
-<div class="table-container">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Order ID</th>
-
-<th>Customer</th>
-
-<th>Firebase UID</th>
-
-<th>Game UID</th>
-
-<th>Product</th>
-
-<th>Price</th>
-
-<th>Payment</th>
-
-<th>Date Time</th>
-
-<th>Total</th>
-
-<th>Status</th>
-
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-
-<tbody id="orders">
-
-</tbody>
-
-</table>
-
-</div>
-
-
-</main>
-
+    </main>
 
 </div>
 
 
 <script
-type="module"
-src="./admin.js">
+    type="module"
+    src="./admin.js">
 </script>
-
 
 </body>
 
