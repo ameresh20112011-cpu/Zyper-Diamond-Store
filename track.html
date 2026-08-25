@@ -11,6 +11,9 @@ content="width=device-width, initial-scale=1.0">
 
 <title>Track Order - Zyper Diamond Store</title>
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 
 *{
@@ -39,6 +42,8 @@ color:white;
 min-height:100vh;
 
 padding:20px;
+
+padding-bottom:100px;
 
 }
 
@@ -288,6 +293,11 @@ line-height:1.6;
 
 }
 
+
+/* =========================================
+   HISTORY BUTTON
+========================================= */
+
 .button{
 
 display:block;
@@ -321,11 +331,260 @@ linear-gradient(
 #7c3aed
 );
 
+transition:.25s;
+
 }
 
 .button:hover{
 
 transform:translateY(-2px);
+
+}
+
+
+/* =========================================
+   ZYPER BOTTOM NAVIGATION
+========================================= */
+
+.bottom-nav{
+
+position:fixed;
+
+left:50%;
+
+bottom:12px;
+
+transform:translateX(-50%);
+
+width:calc(100% - 24px);
+
+max-width:600px;
+
+height:68px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-around;
+
+background:
+rgba(15,23,42,.90);
+
+border:
+1px solid rgba(255,255,255,.14);
+
+border-radius:22px;
+
+backdrop-filter:blur(18px);
+
+-webkit-backdrop-filter:blur(18px);
+
+box-shadow:
+
+0 10px 35px
+rgba(0,0,0,.45),
+
+0 0 25px
+rgba(96,165,250,.08);
+
+z-index:9999;
+
+}
+
+
+/* NAV LINK */
+
+.bottom-nav a{
+
+flex:1;
+
+height:58px;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+gap:3px;
+
+text-decoration:none;
+
+color:#94a3b8;
+
+font-size:20px;
+
+border-radius:16px;
+
+transition:.25s;
+
+-webkit-tap-highlight-color:transparent;
+
+}
+
+
+/* NAV TEXT */
+
+.bottom-nav a span{
+
+font-size:10px;
+
+font-weight:600;
+
+letter-spacing:.2px;
+
+}
+
+
+/* NAV HOVER */
+
+.bottom-nav a:hover{
+
+color:white;
+
+background:
+rgba(96,165,250,.10);
+
+}
+
+
+/* ACTIVE */
+
+.bottom-nav a.active{
+
+color:#60a5fa;
+
+background:
+rgba(96,165,250,.12);
+
+box-shadow:
+
+inset 0 0 15px
+rgba(96,165,250,.08),
+
+0 0 12px
+rgba(96,165,250,.12);
+
+}
+
+
+/* ACTIVE ICON */
+
+.bottom-nav a.active i{
+
+color:#60a5fa;
+
+text-shadow:
+
+0 0 8px #60a5fa,
+
+0 0 16px rgba(96,165,250,.6);
+
+}
+
+
+/* CLICK */
+
+.bottom-nav a:active{
+
+transform:scale(.90);
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:500px){
+
+body{
+
+padding:15px;
+
+padding-bottom:95px;
+
+}
+
+.card{
+
+padding:20px;
+
+}
+
+.title{
+
+font-size:23px;
+
+}
+
+.order-id{
+
+font-size:30px;
+
+}
+
+.info{
+
+font-size:13px;
+
+}
+
+
+/* MOBILE NAV */
+
+.bottom-nav{
+
+bottom:8px;
+
+width:calc(100% - 16px);
+
+height:64px;
+
+border-radius:20px;
+
+}
+
+
+.bottom-nav a{
+
+height:54px;
+
+font-size:19px;
+
+}
+
+
+.bottom-nav a span{
+
+font-size:9px;
+
+}
+
+}
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media(max-width:350px){
+
+.bottom-nav a{
+
+font-size:17px;
+
+}
+
+
+.bottom-nav a span{
+
+font-size:8px;
+
+}
 
 }
 
@@ -556,7 +815,7 @@ Please wait.
 </div>
 
 
-<!-- HISTORY ONLY -->
+<!-- HISTORY -->
 
 <a
 href="history.html"
@@ -574,11 +833,82 @@ class="button">
 </div>
 
 
+<!-- =========================================
+     BOTTOM NAVIGATION
+========================================= -->
+
+<nav class="bottom-nav">
+
+
+<a
+href="home.html">
+
+<i class="fas fa-home"></i>
+
+<span>
+Home
+</span>
+
+</a>
+
+
+<a
+href="topup.html">
+
+<i class="fas fa-gem"></i>
+
+<span>
+Shop
+</span>
+
+</a>
+
+
+<a
+href="payment.html">
+
+<i class="fas fa-bolt"></i>
+
+<span>
+Payment
+</span>
+
+</a>
+
+
+<a
+href="history.html"
+class="active">
+
+<i class="fas fa-clock"></i>
+
+<span>
+History
+</span>
+
+</a>
+
+
+<a
+href="profile.html">
+
+<i class="fas fa-user"></i>
+
+<span>
+Profile
+</span>
+
+</a>
+
+
+</nav>
+
+
 <script type="module">
 
 
 /* =========================================
-FIREBASE
+   FIREBASE
 ========================================= */
 
 import {
@@ -604,7 +934,7 @@ from
 
 
 /* =========================================
-ELEMENTS
+   ELEMENTS
 ========================================= */
 
 const loading =
@@ -624,7 +954,7 @@ document.getElementById(
 
 
 /* =========================================
-GET ORDER ID
+   GET ORDER ID
 ========================================= */
 
 const params =
@@ -637,7 +967,7 @@ params.get("id");
 
 
 /* =========================================
-ERROR
+   ERROR
 ========================================= */
 
 function showError(message){
@@ -658,7 +988,7 @@ errorBox.style.display =
 
 
 /* =========================================
-NO ORDER ID
+   NO ORDER ID
 ========================================= */
 
 if(!orderId){
@@ -671,7 +1001,7 @@ showError(
 
 
 /* =========================================
-AUTH
+   AUTH
 ========================================= */
 
 if(orderId){
@@ -683,7 +1013,7 @@ auth,
 async function(user){
 
 /* =====================================
-NOT LOGGED IN
+   NOT LOGGED IN
 ===================================== */
 
 if(!user){
@@ -698,7 +1028,7 @@ return;
 
 
 /* =====================================
-LOAD ORDER
+   LOAD ORDER
 ===================================== */
 
 try{
@@ -718,7 +1048,7 @@ orderRef
 
 
 /* =====================================
-ORDER NOT FOUND
+   ORDER NOT FOUND
 ===================================== */
 
 if(!orderSnapshot.exists()){
@@ -737,7 +1067,7 @@ orderSnapshot.data();
 
 
 /* =====================================
-SECURITY
+   SECURITY
 ===================================== */
 
 if(
@@ -755,7 +1085,7 @@ return;
 
 
 /* =====================================
-ORDER ID
+   ORDER ID
 ===================================== */
 
 document
@@ -768,7 +1098,7 @@ orderId;
 
 
 /* =====================================
-EMAIL
+   EMAIL
 ===================================== */
 
 const email =
@@ -787,7 +1117,7 @@ email;
 
 
 /* =====================================
-CUSTOMER NAME
+   CUSTOMER NAME
 ===================================== */
 
 document
@@ -801,7 +1131,7 @@ data.playerName ||
 
 
 /* =====================================
-PHONE
+   PHONE
 ===================================== */
 
 document
@@ -814,7 +1144,7 @@ data.phone ||
 
 
 /* =====================================
-UID
+   UID
 ===================================== */
 
 document
@@ -828,7 +1158,7 @@ data.uid ||
 
 
 /* =====================================
-PACKAGE
+   PACKAGE
 ===================================== */
 
 const packageName =
@@ -847,7 +1177,7 @@ packageName;
 
 
 /* =====================================
-PRICE
+   PRICE
 ===================================== */
 
 const price =
@@ -871,7 +1201,7 @@ price.toLocaleString(
 
 
 /* =====================================
-PAYMENT METHOD
+   PAYMENT METHOD
 ===================================== */
 
 document
@@ -884,7 +1214,7 @@ data.paymentMethod ||
 
 
 /* =====================================
-DATE
+   DATE
 ===================================== */
 
 let dateText =
@@ -933,7 +1263,7 @@ dateText;
 
 
 /* =====================================
-STATUS
+   STATUS
 ===================================== */
 
 const statusValue =
@@ -955,21 +1285,8 @@ document.getElementById(
 );
 
 
-/*
-================================================
-ONLY 3 STATUS:
-
-Pending
-Success
-Rejected
-
-NO APPROVED
-================================================
-*/
-
-
 /* =========================================
-SUCCESS
+   SUCCESS
 ========================================= */
 
 if(
@@ -990,7 +1307,7 @@ descriptionElement.textContent =
 
 
 /* =========================================
-PENDING
+   PENDING
 ========================================= */
 
 else if(
@@ -1011,7 +1328,7 @@ descriptionElement.textContent =
 
 
 /* =========================================
-REJECTED
+   REJECTED
 ========================================= */
 
 else if(
@@ -1032,7 +1349,7 @@ descriptionElement.textContent =
 
 
 /* =========================================
-UNKNOWN STATUS
+   UNKNOWN
 ========================================= */
 
 else{
@@ -1050,7 +1367,7 @@ descriptionElement.textContent =
 
 
 /* =========================================
-SHOW
+   SHOW
 ========================================= */
 
 loading.style.display =
