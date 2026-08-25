@@ -2,21 +2,19 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
 
-<meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+    <title>Zyper Admin Dashboard</title>
 
-<title>Zyper Admin Dashboard</title>
-
-<link rel="stylesheet" href="./admin.css">
-
+    <link rel="stylesheet" href="./admin.css">
 </head>
 
 <body>
 
-<div id="app" style="display:none;">
+<div id="app" style="display: none;">
 
     <aside class="sidebar">
 
@@ -28,7 +26,7 @@
 
         <p>🛡️ Administrator</p>
 
-        <button id="logout">
+        <button id="logout" type="button">
             Logout
         </button>
 
@@ -40,29 +38,24 @@
         <div class="topbar">
 
             <div>
-
-                <h1>
-                    Orders Dashboard
-                </h1>
+                <h1>Orders Dashboard</h1>
 
                 <p class="subtitle">
                     Zyper Diamond Store
                 </p>
-
             </div>
 
             <button
                 id="refresh"
-                class="refresh-btn">
+                class="refresh-btn"
+                type="button">
                 ↻ Refresh
             </button>
 
         </div>
 
 
-        <!-- =========================================
-             REDEEM CODE
-        ========================================== -->
+        <!-- WALLET REDEEM CODE -->
 
         <section class="redeem-admin">
 
@@ -70,7 +63,7 @@
 
             <p>
                 Enter your Admin Secret Key and amount.
-                No customer email or Firebase UID is required.
+                Customer email or Firebase UID is not required.
             </p>
 
 
@@ -79,10 +72,9 @@
                 <input
                     type="password"
                     id="adminSecret"
-                    placeholder="Enter Admin Secret Key"
+                    placeholder="Admin Secret Key"
                     autocomplete="off"
                 >
-
 
                 <input
                     type="number"
@@ -92,7 +84,6 @@
                     max="1000000"
                     step="1"
                 >
-
 
                 <button
                     id="createRedeem"
@@ -106,11 +97,9 @@
             <div
                 id="redeemResult"
                 class="redeem-result"
-                style="display:none;">
+                style="display: none;">
 
-                <div>
-                    <strong>Redeem Code</strong>
-                </div>
+                <strong>Redeem Code</strong>
 
                 <div
                     id="redeemCode"
@@ -133,9 +122,7 @@
         </section>
 
 
-        <!-- =========================================
-             DATE SEARCH
-        ========================================== -->
+        <!-- DATE SEARCH -->
 
         <div class="date-search">
 
@@ -150,30 +137,28 @@
 
             <button
                 id="dateSearch"
-                class="date-search-btn">
+                class="date-search-btn"
+                type="button">
                 🔎 Search
             </button>
 
             <button
                 id="todayButton"
-                class="today-btn">
+                class="today-btn"
+                type="button">
                 Today
             </button>
 
         </div>
 
 
-        <!-- =========================================
-             CARDS
-        ========================================== -->
+        <!-- DASHBOARD CARDS -->
 
         <div class="cards">
 
             <div class="card">
 
-                <h3>
-                    Orders
-                </h3>
+                <h3>Orders</h3>
 
                 <h2 id="totalOrders">
                     0
@@ -184,9 +169,7 @@
 
             <div class="card">
 
-                <h3>
-                    Revenue
-                </h3>
+                <h3>Revenue</h3>
 
                 <h2>
                     Rs.
@@ -200,9 +183,7 @@
 
             <div class="card">
 
-                <h3>
-                    Pending
-                </h3>
+                <h3>Pending</h3>
 
                 <h2 id="pendingOrders">
                     0
@@ -213,9 +194,7 @@
 
             <div class="card">
 
-                <h3>
-                    Success
-                </h3>
+                <h3>Success</h3>
 
                 <h2 id="successOrders">
                     0
@@ -226,9 +205,7 @@
         </div>
 
 
-        <!-- =========================================
-             SEARCH
-        ========================================== -->
+        <!-- SEARCH -->
 
         <div class="search-box">
 
@@ -241,9 +218,7 @@
         </div>
 
 
-        <!-- =========================================
-             ORDERS
-        ========================================== -->
+        <!-- ORDERS TABLE -->
 
         <div class="table-container">
 
