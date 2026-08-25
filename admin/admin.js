@@ -15,13 +15,21 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
+/* =========================================
+   CLOUDFLARE WORKER
+========================================= */
+
+const WORKER_URL =
+    "https://zyper-order.ameresh20112011.workers.dev";
+
+
 let allOrders = [];
 let selectedDate = "";
 
 
-/* =====================================
+/* =========================================
    ADMIN CHECK
-===================================== */
+========================================= */
 
 async function checkAdmin(user) {
 
@@ -31,118 +39,138 @@ async function checkAdmin(user) {
 
     try {
 
-        const adminDoc = await getDoc(
-            doc(
-                db,
-                "users",
-                user.uid
-            )
-        );
+        const adminDoc =
+            await getDoc(
+                doc(
+                    db,
+                    "users",
+                    user.uid
+                )
+            );
 
         if (!adminDoc.exists()) {
             return false;
         }
 
-        return adminDoc.data().role === "admin";
+        return (
+            adminDoc.data().role === "admin"
+        );
 
     } catch (error) {
 
-        console.error("Admin check error:", error);
+        console.error(
+            "Admin check error:",
+            error
+        );
 
         return false;
     }
 }
 
 
-/* =====================================
+/* =========================================
    LOGIN
-===================================== */
+========================================= */
 
-const loginForm = document.getElementById("loginForm");
+const loginForm =
+    document.getElementById("loginForm");
+
 
 if (loginForm) {
 
-    loginForm.addEventListener("submit", async function (e) {
+    loginForm.addEventListener(
+        "submit",
+        async function(e) {
 
-        e.preventDefault();
+            e.preventDefault();
 
-        const email =
-            document.getElementById("email").value.trim();
+            const email =
+                document
+                .getElementById("email")
+                .value
+                .trim();
 
-        const password =
-            document.getElementById("password").value;
+            const password =
+                document
+                .getElementById("password")
+                .value;
 
-        const msg =
-            document.getElementById("msg");
+            const msg =
+                document
+                .getElementById("msg");
 
-        const button =
-            document.getElementById("login");
-
-
-        if (!email || !password) {
-
-            msg.textContent =
-                "Enter email and password";
-
-            return;
-        }
-
-
-        button.disabled = true;
-        button.textContent = "LOGIN...";
+            const button =
+                document
+                .getElementById("login");
 
 
-        try {
-
-            const result =
-                await signInWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
-
-
-            const admin =
-                await checkAdmin(result.user);
-
-
-            if (!admin) {
-
-                await signOut(auth);
+            if (!email || !password) {
 
                 msg.textContent =
-                    "❌ You are not admin";
-
-                button.disabled = false;
-                button.textContent = "LOGIN";
+                    "Enter email and password";
 
                 return;
             }
 
 
-            window.location.href =
-                "./admin-dashboard.html";
+            button.disabled = true;
+            button.textContent = "LOGIN...";
 
 
-        } catch (error) {
+            try {
 
-            console.error(error);
+                const result =
+                    await signInWithEmailAndPassword(
+                        auth,
+                        email,
+                        password
+                    );
 
-            msg.textContent =
-                error.message;
 
-            button.disabled = false;
-            button.textContent = "LOGIN";
+                const admin =
+                    await checkAdmin(
+                        result.user
+                    );
+
+
+                if (!admin) {
+
+                    await signOut(auth);
+
+                    msg.textContent =
+                        "❌ You are not admin";
+
+                    button.disabled = false;
+                    button.textContent = "LOGIN";
+
+                    return;
+                }
+
+
+                window.location.href =
+                    "./admin-dashboard.html";
+
+
+            } catch(error) {
+
+                console.error(error);
+
+                msg.textContent =
+                    error.message;
+
+                button.disabled = false;
+                button.textContent = "LOGIN";
+            }
+
         }
-
-    });
+    );
 
 }
 
 
-/* =====================================
+/* =========================================
    DASHBOARD AUTH
-===================================== */
+========================================= */
 
 const orderTable =
     document.getElementById("orders");
@@ -152,7 +180,7 @@ if (orderTable) {
 
     onAuthStateChanged(
         auth,
-        async function (user) {
+        async function(user) {
 
             if (!user) {
 
@@ -178,20 +206,19 @@ if (orderTable) {
             }
 
 
-            document.getElementById("app")
+            document
+                .getElementById("app")
                 .style.display = "block";
 
-
-            /*
-             * AUTOMATICALLY SELECT TODAY
-             */
 
             selectedDate =
                 getTodayString();
 
 
-            document.getElementById("orderDate")
-                .value = selectedDate;
+            document
+                .getElementById("orderDate")
+                .value =
+                selectedDate;
 
 
             await loadOrders();
@@ -202,9 +229,9 @@ if (orderTable) {
 }
 
 
-/* =====================================
-   GET TODAY
-===================================== */
+/* =========================================
+   TODAY
+========================================= */
 
 function getTodayString() {
 
@@ -223,14 +250,13 @@ function getTodayString() {
             now.getDate()
         ).padStart(2, "0");
 
-
     return `${year}-${month}-${day}`;
 }
 
 
-/* =====================================
-   FIREBASE TIMESTAMP → DATE
-===================================== */
+/* =========================================
+   FIRESTORE DATE
+========================================= */
 
 function convertToDate(value) {
 
@@ -239,12 +265,9 @@ function convertToDate(value) {
     }
 
 
-    /*
-     * Firebase Timestamp
-     */
-
     if (
-        typeof value.toDate === "function"
+        typeof value.toDate ===
+        "function"
     ) {
 
         return value.toDate();
@@ -252,20 +275,12 @@ function convertToDate(value) {
     }
 
 
-    /*
-     * JavaScript Date
-     */
-
     if (value instanceof Date) {
 
         return value;
 
     }
 
-
-    /*
-     * Firestore timestamp object
-     */
 
     if (
         value.seconds !== undefined
@@ -277,10 +292,6 @@ function convertToDate(value) {
 
     }
 
-
-    /*
-     * String / number
-     */
 
     const date =
         new Date(value);
@@ -301,9 +312,9 @@ function convertToDate(value) {
 }
 
 
-/* =====================================
-   GET DATE YYYY-MM-DD
-===================================== */
+/* =========================================
+   DATE STRING
+========================================= */
 
 function getDateString(value) {
 
@@ -316,20 +327,13 @@ function getDateString(value) {
     }
 
 
-    /*
-     * IMPORTANT:
-     * Uses local Sri Lankan time.
-     */
-
     const year =
         date.getFullYear();
-
 
     const month =
         String(
             date.getMonth() + 1
         ).padStart(2, "0");
-
 
     const day =
         String(
@@ -341,9 +345,9 @@ function getDateString(value) {
 }
 
 
-/* =====================================
+/* =========================================
    FORMAT DATE
-===================================== */
+========================================= */
 
 function formatDate(timestamp) {
 
@@ -361,22 +365,18 @@ function formatDate(timestamp) {
             date.getHours()
         ).padStart(2, "0");
 
-
     const minute =
         String(
             date.getMinutes()
         ).padStart(2, "0");
 
-
     const year =
         date.getFullYear();
-
 
     const month =
         String(
             date.getMonth() + 1
         ).padStart(2, "0");
-
 
     const day =
         String(
@@ -388,9 +388,9 @@ function formatDate(timestamp) {
 }
 
 
-/* =====================================
-   SORT TIME
-===================================== */
+/* =========================================
+   TIME
+========================================= */
 
 function getTime(timestamp) {
 
@@ -407,9 +407,9 @@ function getTime(timestamp) {
 }
 
 
-/* =====================================
-   LOAD ALL ORDERS
-===================================== */
+/* =========================================
+   LOAD ORDERS
+========================================= */
 
 async function loadOrders() {
 
@@ -446,7 +446,7 @@ async function loadOrders() {
 
 
         snapshot.forEach(
-            function (item) {
+            function(item) {
 
                 allOrders.push({
 
@@ -460,12 +460,8 @@ async function loadOrders() {
         );
 
 
-        /*
-         * NEWEST FIRST
-         */
-
         allOrders.sort(
-            function (a, b) {
+            function(a,b) {
 
                 return (
                     getTime(
@@ -481,13 +477,9 @@ async function loadOrders() {
         );
 
 
-        /*
-         * SHOW SELECTED DATE
-         */
-
         filterOrders();
 
-    } catch (error) {
+    } catch(error) {
 
         console.error(
             "Load orders error:",
@@ -506,36 +498,25 @@ async function loadOrders() {
 }
 
 
-/* =====================================
-   FILTER BY DATE
-===================================== */
+/* =========================================
+   FILTER ORDERS
+========================================= */
 
 function filterOrders() {
 
-    /*
-     * Always read the date directly
-     * from the date input.
-     */
-
-    const dateInput =
+    const input =
         document.getElementById(
             "orderDate"
         );
 
 
-    if (!dateInput) {
+    if (!input) {
         return;
     }
 
 
     selectedDate =
-        dateInput.value;
-
-
-    console.log(
-        "Selected date:",
-        selectedDate
-    );
+        input.value;
 
 
     if (!selectedDate) {
@@ -548,35 +529,18 @@ function filterOrders() {
 
     const filtered =
         allOrders.filter(
-            function (item) {
-
-                const orderDate =
-                    getDateString(
-                        item.data.createdAt
-                    );
-
-
-                console.log(
-                    "Order:",
-                    item.id,
-                    "Date:",
-                    orderDate
-                );
-
+            function(item) {
 
                 return (
-                    orderDate ===
+                    getDateString(
+                        item.data.createdAt
+                    )
+                    ===
                     selectedDate
                 );
 
             }
         );
-
-
-    console.log(
-        "Orders found:",
-        filtered.length
-    );
 
 
     renderOrders(
@@ -585,31 +549,26 @@ function filterOrders() {
 }
 
 
-/* =====================================
+/* =========================================
    RENDER ORDERS
-===================================== */
+========================================= */
 
 function renderOrders(orders) {
 
     const table =
-        document.getElementById("orders");
+        document.getElementById(
+            "orders"
+        );
 
 
     let total = 0;
-
     let revenue = 0;
-
     let pending = 0;
-
     let success = 0;
 
 
     table.innerHTML = "";
 
-
-    /*
-     * NO ORDERS
-     */
 
     if (orders.length === 0) {
 
@@ -629,21 +588,16 @@ function renderOrders(orders) {
             0
         );
 
-
         return;
     }
 
 
     orders.forEach(
-        function (item) {
+        function(item) {
 
             const order =
                 item.data;
 
-
-            /*
-             * ORDER ID
-             */
 
             const orderId =
                 order.orderId ||
@@ -652,29 +606,17 @@ function renderOrders(orders) {
                 item.id;
 
 
-            /*
-             * CUSTOMER
-             */
-
             const customer =
                 order.customerName ||
                 order.name ||
                 "-";
 
 
-            /*
-             * FIREBASE UID
-             */
-
-            const uid =
+            const firebaseUID =
                 order.userId ||
                 order.uid ||
                 "-";
 
-
-            /*
-             * GAME UID
-             */
 
             const gameUID =
                 order.gameUID ||
@@ -682,10 +624,6 @@ function renderOrders(orders) {
                 order.gameId ||
                 "-";
 
-
-            /*
-             * PRODUCT
-             */
 
             const product =
                 order.productName ||
@@ -695,10 +633,6 @@ function renderOrders(orders) {
                 "-";
 
 
-            /*
-             * PRICE
-             */
-
             const price =
                 Number(
                     order.productPrice ||
@@ -707,19 +641,11 @@ function renderOrders(orders) {
                 );
 
 
-            /*
-             * PAYMENT
-             */
-
             const payment =
                 order.paymentMethod ||
                 order.payment ||
                 "-";
 
-
-            /*
-             * TOTAL
-             */
 
             const amount =
                 Number(
@@ -730,19 +656,11 @@ function renderOrders(orders) {
                 );
 
 
-            /*
-             * DATE
-             */
-
             const date =
                 formatDate(
                     order.createdAt
                 );
 
-
-            /*
-             * STATUS
-             */
 
             const status =
                 order.status ||
@@ -755,20 +673,26 @@ function renderOrders(orders) {
 
 
             if (
-                String(status).toLowerCase()
-                === "pending"
+                String(status)
+                .toLowerCase()
+                ===
+                "pending"
             ) {
 
                 pending++;
+
             }
 
 
             if (
-                String(status).toLowerCase()
-                === "success"
+                String(status)
+                .toLowerCase()
+                ===
+                "success"
             ) {
 
                 success++;
+
             }
 
 
@@ -784,73 +708,63 @@ function renderOrders(orders) {
                     </strong>
                 </td>
 
-
                 <td>
                     ${escapeHTML(customer)}
                 </td>
 
-
                 <td>
-                    ${escapeHTML(uid)}
+                    ${escapeHTML(firebaseUID)}
                 </td>
-
 
                 <td>
                     ${escapeHTML(gameUID)}
                 </td>
 
-
                 <td>
                     ${escapeHTML(product)}
                 </td>
 
-
                 <td>
-                    Rs. ${price}
+                    Rs.
+                    ${price.toLocaleString("en-LK")}
                 </td>
-
 
                 <td>
                     ${escapeHTML(payment)}
                 </td>
 
-
                 <td>
                     ${escapeHTML(date)}
                 </td>
 
+                <td>
+                    Rs.
+                    ${amount.toLocaleString("en-LK")}
+                </td>
 
                 <td>
-                    Rs. ${amount}
+                    <strong>
+                        ${escapeHTML(status)}
+                    </strong>
                 </td>
-
-
-                <td class="${escapeHTML(status)}">
-                    ${escapeHTML(status)}
-                </td>
-
 
                 <td>
 
                     <button
                         class="action-btn success-btn"
                         data-id="${escapeHTML(item.id)}"
-                        data-status="Success"
-                    >
+                        data-status="Success">
                         ✔
                     </button>
-
 
                     <button
                         class="action-btn reject-btn"
                         data-id="${escapeHTML(item.id)}"
-                        data-status="Rejected"
-                    >
+                        data-status="Rejected">
                         ✖
                     </button>
 
                 </td>
-
             `;
 
 
@@ -868,20 +782,16 @@ function renderOrders(orders) {
     );
 
 
-    /*
-     * STATUS BUTTONS
-     */
-
     table
         .querySelectorAll(
             ".action-btn"
         )
         .forEach(
-            function (button) {
+            function(button) {
 
                 button.addEventListener(
                     "click",
-                    function () {
+                    function() {
 
                         changeStatus(
                             button.dataset.id,
@@ -896,9 +806,9 @@ function renderOrders(orders) {
 }
 
 
-/* =====================================
-   UPDATE CARDS
-===================================== */
+/* =========================================
+   CARDS
+========================================= */
 
 function updateCards(
     total,
@@ -907,32 +817,497 @@ function updateCards(
     success
 ) {
 
-    document.getElementById(
-        "totalOrders"
-    ).textContent = total;
+    document
+        .getElementById(
+            "totalOrders"
+        )
+        .textContent =
+        total;
 
 
-    document.getElementById(
-        "revenue"
-    ).textContent =
+    document
+        .getElementById(
+            "revenue"
+        )
+        .textContent =
         Number(revenue)
         .toLocaleString("en-LK");
 
 
-    document.getElementById(
-        "pendingOrders"
-    ).textContent = pending;
+    document
+        .getElementById(
+            "pendingOrders"
+        )
+        .textContent =
+        pending;
 
 
-    document.getElementById(
-        "successOrders"
-    ).textContent = success;
+    document
+        .getElementById(
+            "successOrders"
+        )
+        .textContent =
+        success;
 }
 
 
-/* =====================================
-   DATE SEARCH BUTTON
-===================================== */
+/* =========================================
+   CREATE REDEEM CODE
+========================================= */
+
+const createRedeem =
+    document.getElementById(
+        "createRedeem"
+    );
+
+
+if (createRedeem) {
+
+    createRedeem.addEventListener(
+        "click",
+        async function() {
+
+            const userId =
+                document
+                .getElementById(
+                    "walletUserId"
+                )
+                .value
+                .trim();
+
+
+            const email =
+                document
+                .getElementById(
+                    "walletEmail"
+                )
+                .value
+                .trim();
+
+
+            const amount =
+                Number(
+                    document
+                    .getElementById(
+                        "walletAmount"
+                    )
+                    .value
+                );
+
+
+            const resultBox =
+                document
+                .getElementById(
+                    "redeemResult"
+                );
+
+
+            if (!userId) {
+
+                alert(
+                    "Enter customer Firebase UID."
+                );
+
+                return;
+            }
+
+
+            if (
+                !Number.isFinite(amount) ||
+                amount <= 0
+            ) {
+
+                alert(
+                    "Enter a valid amount."
+                );
+
+                return;
+            }
+
+
+            createRedeem.disabled =
+                true;
+
+            createRedeem.textContent =
+                "Creating...";
+
+
+            try {
+
+                const response =
+                    await workerRequest(
+                        {
+                            action:
+                                "create_redeem_code",
+
+                            amount:
+                                amount,
+
+                            userId:
+                                userId,
+
+                            email:
+                                email
+                        },
+                        true
+                    );
+
+
+                if (!response.success) {
+
+                    throw new Error(
+                        response.message ||
+                        "Failed to create code."
+                    );
+
+                }
+
+
+                resultBox.style.display =
+                    "block";
+
+
+                resultBox.innerHTML = `
+
+                    <div>
+                        ✅ Redeem code created
+                        successfully.
+                    </div>
+
+                    <div class="redeem-code-display">
+                        ${escapeHTML(response.code)}
+                    </div>
+
+                    <div>
+                        💰 Amount:
+                        <strong>
+                            LKR
+                            ${Number(response.amount)
+                              .toLocaleString("en-LK")}
+                        </strong>
+                    </div>
+
+                    <div>
+                        👤 Customer:
+                        ${escapeHTML(response.userId)}
+                    </div>
+
+                    <br>
+
+                    <button
+                        class="wallet-button copy-code"
+                        id="copyRedeemCode">
+                        📋 Copy Code
+                    </button>
+
+                `;
+
+
+                document
+                    .getElementById(
+                        "copyRedeemCode"
+                    )
+                    .addEventListener(
+                        "click",
+                        async function() {
+
+                            await navigator
+                                .clipboard
+                                .writeText(
+                                    response.code
+                                );
+
+                            this.textContent =
+                                "✅ Copied";
+
+                        }
+                    );
+
+
+                document
+                    .getElementById(
+                        "walletAmount"
+                    )
+                    .value = "";
+
+
+            } catch(error) {
+
+                console.error(error);
+
+                resultBox.style.display =
+                    "block";
+
+                resultBox.innerHTML =
+                    `❌ ${escapeHTML(error.message)}`;
+
+            } finally {
+
+                createRedeem.disabled =
+                    false;
+
+                createRedeem.textContent =
+                    "🎟️ Create Code";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   CHECK REDEEM
+========================================= */
+
+const checkRedeem =
+    document.getElementById(
+        "checkRedeem"
+    );
+
+
+if (checkRedeem) {
+
+    checkRedeem.addEventListener(
+        "click",
+        async function() {
+
+            const code =
+                document
+                .getElementById(
+                    "checkCode"
+                )
+                .value
+                .trim()
+                .toUpperCase();
+
+
+            const resultBox =
+                document
+                .getElementById(
+                    "checkResult"
+                );
+
+
+            if (!code) {
+
+                alert(
+                    "Enter redeem code."
+                );
+
+                return;
+            }
+
+
+            checkRedeem.disabled =
+                true;
+
+            checkRedeem.textContent =
+                "Checking...";
+
+
+            try {
+
+                const response =
+                    await workerRequest(
+                        {
+                            action:
+                                "admin_redeem_info",
+
+                            code:
+                                code
+                        },
+                        true
+                    );
+
+
+                if (!response.success) {
+
+                    throw new Error(
+                        response.message ||
+                        "Code not found."
+                    );
+
+                }
+
+
+                const redeem =
+                    response.redeem;
+
+
+                resultBox.style.display =
+                    "block";
+
+
+                resultBox.innerHTML = `
+
+                    <strong>
+                        ${redeem.status === "AVAILABLE"
+                            ? "🟢 AVAILABLE"
+                            : "🔴 USED"}
+                    </strong>
+
+                    <br><br>
+
+                    🎟️ Code:
+                    ${escapeHTML(redeem.code)}
+
+                    <br>
+
+                    💰 Amount:
+                    LKR
+                    ${Number(redeem.amount)
+                      .toLocaleString("en-LK")}
+
+                    <br>
+
+                    👤 Firebase UID:
+                    ${escapeHTML(redeem.userId)}
+
+                    <br>
+
+                    📧 Email:
+                    ${escapeHTML(redeem.email || "-")}
+
+                    <br>
+
+                    📅 Created:
+                    ${escapeHTML(redeem.createdAt || "-")}
+
+                    ${
+                        redeem.usedAt
+                        ? `<br>
+                           🕒 Used:
+                           ${escapeHTML(redeem.usedAt)}`
+                        : ""
+                    }
+
+                `;
+
+
+            } catch(error) {
+
+                console.error(error);
+
+                resultBox.style.display =
+                    "block";
+
+                resultBox.innerHTML =
+                    `❌ ${escapeHTML(error.message)}`;
+
+            } finally {
+
+                checkRedeem.disabled =
+                    false;
+
+                checkRedeem.textContent =
+                    "🔎 Check Code";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   WORKER REQUEST
+========================================= */
+
+async function workerRequest(
+    data,
+    adminRequest = false
+) {
+
+    const user =
+        auth.currentUser;
+
+
+    if (!user) {
+
+        throw new Error(
+            "Admin login required."
+        );
+    }
+
+
+    const token =
+        await user.getIdToken(
+            true
+        );
+
+
+    const headers = {
+
+        "Content-Type":
+            "application/json",
+
+        "Authorization":
+            `Bearer ${token}`
+
+    };
+
+
+    /*
+     * IMPORTANT:
+     *
+     * Do NOT put ADMIN_SECRET
+     * inside this JavaScript.
+     *
+     * Your Cloudflare Worker should
+     * authenticate admin requests
+     * using Firebase admin verification
+     * or another secure server-side method.
+     */
+
+
+    const response =
+        await fetch(
+            WORKER_URL,
+            {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(data)
+            }
+        );
+
+
+    let result;
+
+
+    try {
+
+        result =
+            await response.json();
+
+    } catch {
+
+        throw new Error(
+            "Worker returned invalid response."
+        );
+
+    }
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            result.message ||
+            `Worker error ${response.status}`
+        );
+
+    }
+
+
+    return result;
+}
+
+
+/* =========================================
+   DATE SEARCH
+========================================= */
 
 const dateSearch =
     document.getElementById(
@@ -944,12 +1319,7 @@ if (dateSearch) {
 
     dateSearch.addEventListener(
         "click",
-        function () {
-
-            console.log(
-                "DATE SEARCH CLICKED"
-            );
-
+        function() {
 
             const input =
                 document.getElementById(
@@ -957,20 +1327,10 @@ if (dateSearch) {
                 );
 
 
-            if (!input) {
-
-                alert(
-                    "Date input not found"
-                );
-
-                return;
-            }
-
-
             if (!input.value) {
 
                 alert(
-                    "Please select a date"
+                    "Please select a date."
                 );
 
                 return;
@@ -981,20 +1341,17 @@ if (dateSearch) {
                 input.value;
 
 
-            /*
-             * Search immediately.
-             */
-
             filterOrders();
 
         }
     );
+
 }
 
 
-/* =====================================
+/* =========================================
    DATE CHANGE
-===================================== */
+========================================= */
 
 const orderDate =
     document.getElementById(
@@ -1006,21 +1363,20 @@ if (orderDate) {
 
     orderDate.addEventListener(
         "change",
-        function () {
+        function() {
 
-            console.log(
-                "Date selected:",
-                orderDate.value
-            );
+            selectedDate =
+                orderDate.value;
 
         }
     );
+
 }
 
 
-/* =====================================
-   TODAY BUTTON
-===================================== */
+/* =========================================
+   TODAY
+========================================= */
 
 const todayButton =
     document.getElementById(
@@ -1032,15 +1388,17 @@ if (todayButton) {
 
     todayButton.addEventListener(
         "click",
-        async function () {
+        function() {
 
             const today =
                 getTodayString();
 
 
-            document.getElementById(
-                "orderDate"
-            ).value =
+            document
+                .getElementById(
+                    "orderDate"
+                )
+                .value =
                 today;
 
 
@@ -1048,20 +1406,17 @@ if (todayButton) {
                 today;
 
 
-            /*
-             * Use existing loaded orders.
-             */
-
             filterOrders();
 
         }
     );
+
 }
 
 
-/* =====================================
-   TEXT SEARCH
-===================================== */
+/* =========================================
+   SEARCH
+========================================= */
 
 const search =
     document.getElementById(
@@ -1073,7 +1428,7 @@ if (search) {
 
     search.addEventListener(
         "input",
-        function () {
+        function() {
 
             const text =
                 search.value
@@ -1081,13 +1436,9 @@ if (search) {
                 .toLowerCase();
 
 
-            /*
-             * FIRST DATE FILTER
-             */
-
             let filtered =
                 allOrders.filter(
-                    function (item) {
+                    function(item) {
 
                         return (
                             getDateString(
@@ -1101,30 +1452,23 @@ if (search) {
                 );
 
 
-            /*
-             * THEN TEXT FILTER
-             */
-
             if (text) {
 
                 filtered =
                     filtered.filter(
-                        function (item) {
+                        function(item) {
 
                             const order =
                                 item.data;
 
 
-                            const orderId =
-                                order.orderId ||
-                                order.orderID ||
-                                order.orderNumber ||
-                                item.id;
-
-
                             const values = [
 
-                                orderId,
+                                item.id,
+
+                                order.orderId,
+
+                                order.orderID,
 
                                 order.customerName,
 
@@ -1138,15 +1482,11 @@ if (search) {
 
                                 order.gameUid,
 
-                                order.gameId,
-
                                 order.productName,
 
                                 order.product,
 
                                 order.package,
-
-                                order.plan,
 
                                 order.paymentMethod,
 
@@ -1158,14 +1498,16 @@ if (search) {
 
 
                             return values.some(
-                                function (value) {
+                                function(value) {
 
                                     return (
-                                        value !== undefined &&
-                                        value !== null &&
+                                        value !==
+                                        undefined &&
+                                        value !==
+                                        null &&
                                         String(value)
-                                            .toLowerCase()
-                                            .includes(text)
+                                        .toLowerCase()
+                                        .includes(text)
                                     );
 
                                 }
@@ -1183,12 +1525,13 @@ if (search) {
 
         }
     );
+
 }
 
 
-/* =====================================
+/* =========================================
    REFRESH
-===================================== */
+========================================= */
 
 const refresh =
     document.getElementById(
@@ -1200,9 +1543,10 @@ if (refresh) {
 
     refresh.addEventListener(
         "click",
-        async function () {
+        async function() {
 
-            refresh.disabled = true;
+            refresh.disabled =
+                true;
 
             refresh.textContent =
                 "Loading...";
@@ -1211,19 +1555,21 @@ if (refresh) {
             await loadOrders();
 
 
-            refresh.disabled = false;
+            refresh.disabled =
+                false;
 
             refresh.textContent =
                 "↻ Refresh";
 
         }
     );
+
 }
 
 
-/* =====================================
+/* =========================================
    LOGOUT
-===================================== */
+========================================= */
 
 const logout =
     document.getElementById(
@@ -1235,7 +1581,7 @@ if (logout) {
 
     logout.addEventListener(
         "click",
-        async function () {
+        async function() {
 
             await signOut(auth);
 
@@ -1244,12 +1590,13 @@ if (logout) {
 
         }
     );
+
 }
 
 
-/* =====================================
-   STATUS CHANGE
-===================================== */
+/* =========================================
+   CHANGE ORDER STATUS
+========================================= */
 
 async function changeStatus(
     id,
@@ -1267,7 +1614,7 @@ async function changeStatus(
     if (!admin) {
 
         alert(
-            "Access denied"
+            "Access denied."
         );
 
         return;
@@ -1276,9 +1623,7 @@ async function changeStatus(
 
     if (
         !confirm(
-            "Change status to " +
-            status +
-            "?"
+            `Change status to ${status}?`
         )
     ) {
 
@@ -1295,27 +1640,31 @@ async function changeStatus(
                 id
             ),
             {
-                status: status
+                status:
+                    status
             }
         );
 
 
         await loadOrders();
 
-    } catch (error) {
+
+    } catch(error) {
 
         console.error(error);
 
         alert(
-            "Failed to update order"
+            "Failed to update order."
         );
+
     }
+
 }
 
 
-/* =====================================
+/* =========================================
    ESCAPE HTML
-===================================== */
+========================================= */
 
 function escapeHTML(value) {
 
@@ -1325,6 +1674,7 @@ function escapeHTML(value) {
     ) {
 
         return "";
+
     }
 
 
@@ -1354,4 +1704,5 @@ function escapeHTML(value) {
             "'",
             "&#039;"
         );
+
 }
