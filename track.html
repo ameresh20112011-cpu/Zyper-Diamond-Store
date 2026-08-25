@@ -11,8 +11,6 @@ content="width=device-width, initial-scale=1.0">
 
 <title>Track Order - Zyper Diamond Store</title>
 
-<link rel="stylesheet" href="zyper-nav.css">
-
 <style>
 
 *{
@@ -41,8 +39,6 @@ color:white;
 min-height:100vh;
 
 padding:20px;
-
-padding-bottom:100px;
 
 }
 
@@ -325,19 +321,11 @@ linear-gradient(
 #7c3aed
 );
 
-transition:.2s;
-
 }
 
 .button:hover{
 
 transform:translateY(-2px);
-
-}
-
-.home-button{
-
-background:#334155;
 
 }
 
@@ -568,18 +556,7 @@ Please wait.
 </div>
 
 
-<!-- HOME -->
-
-<a
-href="home.html"
-class="button home-button">
-
-🏠 Back to Home
-
-</a>
-
-
-<!-- HISTORY -->
+<!-- HISTORY ONLY -->
 
 <a
 href="history.html"
@@ -595,13 +572,6 @@ class="button">
 </div>
 
 </div>
-
-
-<!-- =====================================================
-     ZYPER NAVIGATION
-===================================================== -->
-
-<div id="zyper-navigation"></div>
 
 
 <script type="module">
@@ -711,7 +681,6 @@ onAuthStateChanged(
 auth,
 
 async function(user){
-
 
 /* =====================================
 NOT LOGGED IN
@@ -986,9 +955,22 @@ document.getElementById(
 );
 
 
-/* =====================================
+/*
+================================================
+ONLY 3 STATUS:
+
+Pending
+Success
+Rejected
+
+NO APPROVED
+================================================
+*/
+
+
+/* =========================================
 SUCCESS
-===================================== */
+========================================= */
 
 if(
 statusValue.toLowerCase() ===
@@ -1007,9 +989,9 @@ descriptionElement.textContent =
 }
 
 
-/* =====================================
+/* =========================================
 PENDING
-===================================== */
+========================================= */
 
 else if(
 statusValue.toLowerCase() ===
@@ -1028,9 +1010,9 @@ descriptionElement.textContent =
 }
 
 
-/* =====================================
+/* =========================================
 REJECTED
-===================================== */
+========================================= */
 
 else if(
 statusValue.toLowerCase() ===
@@ -1049,9 +1031,9 @@ descriptionElement.textContent =
 }
 
 
-/* =====================================
+/* =========================================
 UNKNOWN STATUS
-===================================== */
+========================================= */
 
 else{
 
@@ -1067,9 +1049,9 @@ descriptionElement.textContent =
 }
 
 
-/* =====================================
+/* =========================================
 SHOW
-===================================== */
+========================================= */
 
 loading.style.display =
 "none";
@@ -1097,13 +1079,6 @@ error.message
 }
 
 </script>
-
-
-<!-- =====================================================
-     ZYPER NAVIGATION SCRIPT
-===================================================== -->
-
-<script src="zyper-nav.js"></script>
 
 
 </body>
