@@ -11,7 +11,6 @@ content="width=device-width, initial-scale=1.0">
 
 <title>My Orders - Zyper Diamond Store</title>
 
-<!-- Zyper Navigation Bar -->
 <link rel="stylesheet" href="zyper-nav.css">
 
 <style>
@@ -119,12 +118,11 @@ color:#ef4444;
 
 }
 
-.track-btn,
-.home-btn{
+.track-btn{
 
-width:90%;
+width:100%;
 
-margin:15px auto;
+margin-top:15px;
 
 display:block;
 
@@ -148,20 +146,17 @@ transition:.2s;
 
 }
 
-.track-btn{
-
-width:100%;
-
-margin-top:15px;
-
-}
-
-.track-btn:hover,
-.home-btn:hover{
+.track-btn:hover{
 
 transform:translateY(-2px);
 
 opacity:.9;
+
+}
+
+.track-btn:active{
+
+transform:scale(.97);
 
 }
 
@@ -179,9 +174,26 @@ padding:20px;
 
 }
 
-.login-btn{
 
-background:#7c3aed;
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:500px){
+
+.order-card{
+
+margin:15px;
+
+padding:17px;
+
+}
+
+h2{
+
+font-size:22px;
+
+}
 
 }
 
@@ -207,19 +219,8 @@ background:#7c3aed;
 </div>
 
 
-<!-- HOME BUTTON -->
-
-<button
-class="home-btn"
-id="homeButton">
-
-🏠 Go Home
-
-</button>
-
-
 <!-- =====================================================
-     ZYPER NAVIGATION BAR
+     ZYPER NAVIGATION
 ===================================================== -->
 
 <div id="zyper-navigation"></div>
@@ -263,33 +264,6 @@ ELEMENTS
 const ordersDiv =
 document.getElementById("orders");
 
-const homeButton =
-document.getElementById("homeButton");
-
-
-/* =========================================
-GO HOME
-========================================= */
-
-/*
-IMPORTANT:
-
-Your actual website Home page is:
-
-home.html
-
-So DO NOT send the customer
-to index.html from this button.
-*/
-
-homeButton.onclick =
-function(){
-
-window.location.href =
-"home.html";
-
-};
-
 
 /* =========================================
 AUTH CHECK
@@ -317,8 +291,9 @@ ordersDiv.innerHTML = `
 </p>
 
 <button
-class="home-btn login-btn"
-id="loginButton">
+class="track-btn"
+id="loginButton"
+style="max-width:300px;margin:20px auto;background:#7c3aed;">
 
 🔐 Login Now
 
@@ -337,10 +312,6 @@ if(loginButton){
 
 loginButton.onclick =
 function(){
-
-/*
-INDEX.HTML = LOGIN PAGE
-*/
 
 window.location.href =
 "index.html";
@@ -916,7 +887,9 @@ return String(value)
 </script>
 
 
-<!-- Zyper Navigation Script -->
+<!-- =====================================================
+     ZYPER NAVIGATION SCRIPT
+===================================================== -->
 
 <script src="zyper-nav.js"></script>
 
