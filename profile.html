@@ -1,75 +1,1644 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profile</title>
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Zyper Diamond Store - Profile</title>
+
+
 <link rel="stylesheet" href="ep.css">
+
 <link rel="stylesheet" href="media.css">
+
+<!-- ZYPER NAVIGATION -->
+<link rel="stylesheet" href="zyper-nav.css">
+
+
+<style>
+
+/* =====================================================
+   PROFILE PAGE
+===================================================== */
+
+*{
+box-sizing:border-box;
+}
+
+
+body{
+
+margin:0;
+
+min-height:100vh;
+
+font-family:
+'Segoe UI',
+Arial,
+sans-serif;
+
+background:
+radial-gradient(
+circle at top,
+#172554,
+#020617 55%,
+#000 100%
+);
+
+color:white;
+
+padding:
+25px
+20px
+110px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:flex-start;
+
+}
+
+
+/* =====================================================
+   PROFILE CARD
+===================================================== */
+
+.profile-card{
+
+width:100%;
+
+max-width:430px;
+
+margin-top:25px;
+
+padding:30px 22px;
+
+border-radius:28px;
+
+background:
+rgba(15,23,42,.78);
+
+border:
+1px solid rgba(255,255,255,.14);
+
+backdrop-filter:
+blur(20px);
+
+-webkit-backdrop-filter:
+blur(20px);
+
+box-shadow:
+
+0 20px 60px
+rgba(0,0,0,.5),
+
+0 0 35px
+rgba(96,165,250,.12);
+
+text-align:center;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+
+/* =====================================================
+   TOP GLOW
+===================================================== */
+
+.profile-card::before{
+
+content:"";
+
+position:absolute;
+
+top:-100px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:260px;
+
+height:200px;
+
+background:
+radial-gradient(
+circle,
+rgba(59,130,246,.30),
+transparent 70%
+);
+
+pointer-events:none;
+
+}
+
+
+/* =====================================================
+   PROFILE IMAGE AREA
+===================================================== */
+
+.avatar-container{
+
+position:relative;
+
+width:125px;
+
+height:125px;
+
+margin:
+5px auto 18px;
+
+}
+
+
+.avatar{
+
+width:125px;
+
+height:125px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+display:block;
+
+border:
+4px solid #60a5fa;
+
+background:#0f172a;
+
+box-shadow:
+
+0 0 15px
+rgba(96,165,250,.8),
+
+0 0 35px
+rgba(168,85,247,.35);
+
+}
+
+
+/* =====================================================
+   ONLINE DOT
+===================================================== */
+
+.online-dot{
+
+position:absolute;
+
+right:5px;
+
+bottom:8px;
+
+width:20px;
+
+height:20px;
+
+border-radius:50%;
+
+background:#22c55e;
+
+border:
+3px solid #0f172a;
+
+box-shadow:
+0 0 12px
+rgba(34,197,94,.9);
+
+}
+
+
+/* =====================================================
+   COMPANY BADGE
+===================================================== */
+
+.company-badge{
+
+display:inline-block;
+
+margin-bottom:8px;
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-size:11px;
+
+font-weight:bold;
+
+letter-spacing:1px;
+
+color:#bfdbfe;
+
+background:
+rgba(59,130,246,.12);
+
+border:
+1px solid rgba(96,165,250,.25);
+
+}
+
+
+/* =====================================================
+   USERNAME
+===================================================== */
+
+#username{
+
+margin:
+5px 0 5px;
+
+font-size:26px;
+
+font-weight:800;
+
+background:
+linear-gradient(
+90deg,
+#60a5fa,
+#c084fc,
+#22d3ee
+);
+
+-webkit-background-clip:text;
+
+background-clip:text;
+
+color:transparent;
+
+word-break:break-word;
+
+}
+
+
+/* =====================================================
+   ACCOUNT TEXT
+===================================================== */
+
+.account-text{
+
+margin:
+0 0 22px;
+
+font-size:13px;
+
+color:#94a3b8;
+
+}
+
+
+/* =====================================================
+   USER INFO
+===================================================== */
+
+.info-box{
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:10px;
+
+margin-bottom:20px;
+
+}
+
+
+.info-item{
+
+padding:14px 8px;
+
+border-radius:15px;
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+}
+
+
+.info-icon{
+
+font-size:20px;
+
+margin-bottom:5px;
+
+}
+
+
+.info-title{
+
+font-size:10px;
+
+color:#94a3b8;
+
+text-transform:uppercase;
+
+letter-spacing:.6px;
+
+}
+
+
+.info-value{
+
+font-size:12px;
+
+font-weight:bold;
+
+color:#e2e8f0;
+
+margin-top:3px;
+
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.profile-button{
+
+width:100%;
+
+padding:14px;
+
+margin-top:10px;
+
+border:none;
+
+border-radius:15px;
+
+font-size:15px;
+
+font-weight:700;
+
+color:white;
+
+cursor:pointer;
+
+transition:
+transform .2s,
+box-shadow .2s,
+opacity .2s;
+
+-webkit-tap-highlight-color:transparent;
+
+}
+
+
+.profile-button:active{
+
+transform:scale(.96);
+
+}
+
+
+.edit-button{
+
+background:
+linear-gradient(
+90deg,
+#2563eb,
+#7c3aed
+);
+
+box-shadow:
+0 8px 25px
+rgba(37,99,235,.3);
+
+}
+
+
+.logout-button{
+
+background:
+rgba(239,68,68,.12);
+
+border:
+1px solid rgba(239,68,68,.3);
+
+color:#fca5a5;
+
+}
+
+
+.profile-button:hover{
+
+transform:translateY(-2px);
+
+}
+
+
+/* =====================================================
+   EDIT PANEL
+===================================================== */
+
+.edit-panel{
+
+display:none;
+
+margin-top:20px;
+
+padding:18px;
+
+border-radius:18px;
+
+background:
+rgba(2,6,23,.65);
+
+border:
+1px solid rgba(255,255,255,.10);
+
+text-align:left;
+
+animation:
+editOpen .25s ease;
+
+}
+
+
+.edit-panel.show{
+
+display:block;
+
+}
+
+
+@keyframes editOpen{
+
+from{
+
+opacity:0;
+
+transform:
+translateY(10px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:
+translateY(0);
+
+}
+
+}
+
+
+/* =====================================================
+   EDIT LABEL
+===================================================== */
+
+.edit-label{
+
+display:block;
+
+margin:
+12px 0 7px;
+
+font-size:12px;
+
+font-weight:bold;
+
+color:#cbd5e1;
+
+}
+
+
+/* =====================================================
+   NAME INPUT
+===================================================== */
+
+.name-input{
+
+width:100%;
+
+padding:13px;
+
+border-radius:12px;
+
+border:
+1px solid rgba(255,255,255,.12);
+
+outline:none;
+
+background:
+rgba(255,255,255,.06);
+
+color:white;
+
+font-size:14px;
+
+}
+
+
+.name-input:focus{
+
+border-color:#60a5fa;
+
+box-shadow:
+0 0 12px
+rgba(96,165,250,.15);
+
+}
+
+
+/* =====================================================
+   FILE INPUT
+===================================================== */
+
+.file-input{
+
+width:100%;
+
+padding:10px;
+
+border-radius:12px;
+
+border:
+1px dashed rgba(96,165,250,.4);
+
+background:
+rgba(96,165,250,.06);
+
+color:#cbd5e1;
+
+font-size:12px;
+
+}
+
+
+/* =====================================================
+   IMAGE PREVIEW
+===================================================== */
+
+.preview-title{
+
+font-size:11px;
+
+color:#94a3b8;
+
+margin-top:14px;
+
+}
+
+
+.image-preview{
+
+width:70px;
+
+height:70px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+margin-top:8px;
+
+border:
+2px solid #60a5fa;
+
+}
+
+
+/* =====================================================
+   SAVE / CANCEL
+===================================================== */
+
+.edit-actions{
+
+display:flex;
+
+gap:10px;
+
+margin-top:15px;
+
+}
+
+
+.save-button{
+
+flex:1;
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+background:
+linear-gradient(
+90deg,
+#16a34a,
+#059669
+);
+
+color:white;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+.cancel-button{
+
+flex:1;
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+background:#334155;
+
+color:white;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.profile-message{
+
+display:none;
+
+margin-top:12px;
+
+padding:10px;
+
+border-radius:10px;
+
+font-size:12px;
+
+text-align:center;
+
+background:
+rgba(34,197,94,.12);
+
+border:
+1px solid rgba(34,197,94,.25);
+
+color:#86efac;
+
+}
+
+
+.profile-message.show{
+
+display:block;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:500px){
+
+body{
+
+padding:
+15px
+12px
+105px;
+
+}
+
+
+.profile-card{
+
+margin-top:10px;
+
+padding:25px 18px;
+
+border-radius:24px;
+
+}
+
+
+.avatar-container{
+
+width:110px;
+
+height:110px;
+
+}
+
+
+.avatar{
+
+width:110px;
+
+height:110px;
+
+}
+
+
+#username{
+
+font-size:23px;
+
+}
+
+
+.info-item{
+
+padding:12px 6px;
+
+}
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media(max-width:350px){
+
+.profile-card{
+
+padding:
+22px 14px;
+
+}
+
+
+#username{
+
+font-size:21px;
+
+}
+
+
+.info-box{
+
+gap:7px;
+
+}
+
+}
+
+</style>
 
 </head>
 
+
 <body>
 
-<div class="profile-card">
-  <img id="profileImage" class="avatar">
-  <h2 id="username">User Name</h2>
 
-  <button onclick="editProfile()">Edit Profile</button>
-  <button onclick="logout()">Logout</button>
+<!-- =====================================================
+     PROFILE CARD
+===================================================== -->
+
+<div class="profile-card">
+
+
+<div class="company-badge">
+
+💎 ZYPER CUSTOMER
+
 </div>
+
+
+<!-- PROFILE IMAGE -->
+
+<div class="avatar-container">
+
+<img
+id="profileImage"
+class="avatar"
+src="1.jpg"
+alt="Profile Image"
+>
+
+<div class="online-dot"></div>
+
+</div>
+
+
+<!-- USERNAME -->
+
+<h2 id="username">
+
+User Name
+
+</h2>
+
+
+<p class="account-text">
+
+Your Zyper Diamond Store account
+
+</p>
+
+
+<!-- =====================================================
+     ACCOUNT INFO
+===================================================== -->
+
+<div class="info-box">
+
+
+<div class="info-item">
+
+<div class="info-icon">
+👤
+</div>
+
+<div class="info-title">
+Account
+</div>
+
+<div
+id="accountStatus"
+class="info-value">
+
+Active
+
+</div>
+
+</div>
+
+
+<div class="info-item">
+
+<div class="info-icon">
+💎
+</div>
+
+<div class="info-title">
+Store
+</div>
+
+<div class="info-value">
+
+Zyper Store
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     EDIT BUTTON
+===================================================== -->
+
+<button
+class="profile-button edit-button"
+onclick="editProfile()">
+
+✏️ Edit Profile
+
+</button>
+
+
+<!-- =====================================================
+     EDIT PANEL
+===================================================== -->
+
+<div
+id="editPanel"
+class="edit-panel">
+
+
+<label class="edit-label">
+
+👤 Change Name
+
+</label>
+
+
+<input
+id="nameInput"
+class="name-input"
+type="text"
+maxlength="40"
+placeholder="Enter your name"
+>
+
+
+<label class="edit-label">
+
+🖼️ Change Profile Image
+
+</label>
+
+
+<input
+id="imageInput"
+class="file-input"
+type="file"
+accept="image/*"
+>
+
+
+<div class="preview-title">
+
+Image Preview
+
+</div>
+
+
+<img
+id="imagePreview"
+class="image-preview"
+src="1.jpg"
+alt="Preview"
+>
+
+
+<div class="edit-actions">
+
+
+<button
+class="save-button"
+onclick="saveProfile()">
+
+💾 Save
+
+</button>
+
+
+<button
+class="cancel-button"
+onclick="cancelEdit()">
+
+❌ Cancel
+
+</button>
+
+
+</div>
+
+
+<div
+id="profileMessage"
+class="profile-message">
+
+Profile saved successfully.
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     LOGOUT
+===================================================== -->
+
+<button
+class="profile-button logout-button"
+onclick="logout()">
+
+🚪 Logout
+
+</button>
+
+
+</div>
+
+
+<!-- =====================================================
+     ZYPER NAVIGATION BAR
+===================================================== -->
+
+<div id="zyper-navigation"></div>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-// 🔥 UN FIREBASE CONFIG ADD PANNU
+import {
+
+initializeApp
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+
+getAuth,
+
+onAuthStateChanged,
+
+signOut
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
-  authDomain: "zyper-d-iamond-store.firebaseapp.com",
-  projectId: "zyper-d-iamond-store",
-  storageBucket: "zyper-d-iamond-store.firebasestorage.app",
-  messagingSenderId: "892467477866",
-  appId: "1:892467477866:web:61e9b6ff9435798da23913",
-  measurementId: "G-RLJFR6F2GC"
+
+apiKey:
+"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
+
+authDomain:
+"zyper-d-iamond-store.firebaseapp.com",
+
+projectId:
+"zyper-d-iamond-store",
+
+storageBucket:
+"zyper-d-iamond-store.firebasestorage.app",
+
+messagingSenderId:
+"892467477866",
+
+appId:
+"1:892467477866:web:61e9b6ff9435798da23913",
+
+measurementId:
+"G-RLJFR6F2GC"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 
-onAuthStateChanged(auth, (user) => {
-  if(user){
-    let uid = user.uid;
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
-    let name = localStorage.getItem(uid + "_name");
-    let img = localStorage.getItem(uid + "_img");
+const app =
+initializeApp(firebaseConfig);
 
-    if(name){
-      document.getElementById("username").innerText = name;
-    }
 
-    if(img){
-      document.getElementById("profileImage").src = img;
-    } else {
-      document.getElementById("profileImage").src = "";
-    }
+const auth =
+getAuth(app);
 
-  } else {
-    window.location.href = "index.html";
-  }
+
+/* =====================================================
+   CURRENT USER
+===================================================== */
+
+let currentUser =
+null;
+
+
+/* =====================================================
+   DEFAULT COMPANY LOGO
+===================================================== */
+
+const DEFAULT_IMAGE =
+"1.jpg";
+
+
+/* =====================================================
+   AUTH CHECK
+===================================================== */
+
+onAuthStateChanged(
+
+auth,
+
+(user) => {
+
+
+if(!user){
+
+window.location.href =
+"index.html";
+
+return;
+
+}
+
+
+currentUser =
+user;
+
+
+const uid =
+user.uid;
+
+
+/* =====================================================
+   LOAD CUSTOMER NAME
+===================================================== */
+
+let savedName =
+localStorage.getItem(
+uid + "_name"
+);
+
+
+/*
+If customer has no saved name,
+use Firebase displayName if available.
+*/
+
+if(!savedName){
+
+savedName =
+user.displayName ||
+"Zyper Customer";
+
+}
+
+
+/* =====================================================
+   LOAD CUSTOMER IMAGE
+===================================================== */
+
+let savedImage =
+localStorage.getItem(
+uid + "_img"
+);
+
+
+/*
+If customer has no custom image,
+show company logo 1.jpg.
+*/
+
+if(!savedImage){
+
+savedImage =
+DEFAULT_IMAGE;
+
+}
+
+
+/* =====================================================
+   DISPLAY PROFILE
+===================================================== */
+
+document
+.getElementById("username")
+.innerText =
+savedName;
+
+
+document
+.getElementById("profileImage")
+.src =
+savedImage;
+
+
+/* =====================================================
+   EDIT INPUT
+===================================================== */
+
+document
+.getElementById("nameInput")
+.value =
+savedName;
+
+
+document
+.getElementById("imagePreview")
+.src =
+savedImage;
+
 });
 
-window.logout = function(){
-  signOut(auth);
-  window.location.href = "index.html";
+
+/* =====================================================
+   EDIT PROFILE
+===================================================== */
+
+window.editProfile =
+function(){
+
+if(!currentUser){
+
+return;
+
 }
 
-window.editProfile = function(){
-  window.location.href = "edit.html";
+
+const panel =
+document.getElementById(
+"editPanel"
+);
+
+
+const uid =
+currentUser.uid;
+
+
+let savedName =
+localStorage.getItem(
+uid + "_name"
+);
+
+
+if(!savedName){
+
+savedName =
+currentUser.displayName ||
+"Zyper Customer";
+
 }
+
+
+document
+.getElementById("nameInput")
+.value =
+savedName;
+
+
+let savedImage =
+localStorage.getItem(
+uid + "_img"
+);
+
+
+if(!savedImage){
+
+savedImage =
+DEFAULT_IMAGE;
+
+}
+
+
+document
+.getElementById("imagePreview")
+.src =
+savedImage;
+
+
+panel.classList.add("show");
+
+};
+
+
+/* =====================================================
+   IMAGE SELECT
+===================================================== */
+
+document
+.getElementById("imageInput")
+.addEventListener(
+
+"change",
+
+function(event){
+
+const file =
+event.target.files[0];
+
+
+if(!file){
+
+return;
+
+}
+
+
+/*
+Maximum 2MB
+*/
+
+if(file.size > 2 * 1024 * 1024){
+
+alert(
+"Please select an image smaller than 2MB."
+);
+
+event.target.value =
+"";
+
+return;
+
+}
+
+
+const reader =
+new FileReader();
+
+
+reader.onload =
+function(){
+
+document
+.getElementById("imagePreview")
+.src =
+reader.result;
+
+};
+
+
+reader.readAsDataURL(file);
+
+});
+
+
+/* =====================================================
+   SAVE PROFILE
+===================================================== */
+
+window.saveProfile =
+function(){
+
+if(!currentUser){
+
+return;
+
+}
+
+
+const uid =
+currentUser.uid;
+
+
+let name =
+document
+.getElementById("nameInput")
+.value
+.trim();
+
+
+/*
+Default name
+*/
+
+if(!name){
+
+name =
+"Zyper Customer";
+
+}
+
+
+/*
+Limit name length
+*/
+
+if(name.length > 40){
+
+name =
+name.substring(0,40);
+
+}
+
+
+/* =====================================================
+   SAVE NAME
+===================================================== */
+
+localStorage.setItem(
+uid + "_name",
+name
+);
+
+
+/* =====================================================
+   SAVE IMAGE
+===================================================== */
+
+const file =
+document
+.getElementById("imageInput")
+.files[0];
+
+
+if(file){
+
+const reader =
+new FileReader();
+
+
+reader.onload =
+function(){
+
+localStorage.setItem(
+uid + "_img",
+reader.result
+);
+
+
+finishProfileSave(
+name,
+reader.result
+);
+
+};
+
+
+reader.readAsDataURL(file);
+
+}
+
+else{
+
+
+/*
+Keep existing image.
+
+If none exists, use 1.jpg.
+*/
+
+let existingImage =
+localStorage.getItem(
+uid + "_img"
+);
+
+
+if(!existingImage){
+
+existingImage =
+DEFAULT_IMAGE;
+
+localStorage.setItem(
+uid + "_img",
+DEFAULT_IMAGE
+);
+
+}
+
+
+finishProfileSave(
+name,
+existingImage
+);
+
+}
+
+};
+
+
+/* =====================================================
+   FINISH SAVE
+===================================================== */
+
+function finishProfileSave(
+name,
+image
+){
+
+document
+.getElementById("username")
+.innerText =
+name;
+
+
+document
+.getElementById("profileImage")
+.src =
+image;
+
+
+document
+.getElementById("imagePreview")
+.src =
+image;
+
+
+document
+.getElementById("imageInput")
+.value =
+"";
+
+
+const message =
+document
+.getElementById("profileMessage");
+
+
+message.classList.add("show");
+
+
+message.innerText =
+"✅ Profile saved successfully";
+
+
+setTimeout(
+
+function(){
+
+message.classList.remove(
+"show"
+);
+
+},
+
+2000
+
+);
+
+}
+
+
+/* =====================================================
+   CANCEL EDIT
+===================================================== */
+
+window.cancelEdit =
+function(){
+
+const panel =
+document.getElementById(
+"editPanel"
+);
+
+
+panel.classList.remove(
+"show"
+);
+
+
+document
+.getElementById("imageInput")
+.value =
+"";
+
+};
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+window.logout =
+function(){
+
+signOut(auth)
+
+.then(
+
+function(){
+
+window.location.href =
+"index.html";
+
+}
+
+)
+
+.catch(
+
+function(error){
+
+console.error(
+"Logout error:",
+error
+);
+
+alert(
+"Logout failed. Please try again."
+);
+
+}
+
+);
+
+};
 
 </script>
 
+
+<!-- =====================================================
+     ZYPER NAVIGATION SCRIPT
+===================================================== -->
+
+<script src="zyper-nav.js"></script>
+
+
 </body>
+
 </html>
