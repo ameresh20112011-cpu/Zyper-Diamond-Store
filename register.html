@@ -8,15 +8,16 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title>Zyper Diamond Store - Login</title>
+<title>Zyper Diamond Store - Register</title>
 
 <link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="media.css">
 
 <link rel="icon" href="1.jpg">
 
-
 <style>
+
+/* ================= LOGO ================= */
 
 .login-header{
     text-align:center;
@@ -40,9 +41,8 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     overflow:hidden !important;
 
     display:flex !important;
-
-    align-items:center;
-    justify-content:center;
+    align-items:center !important;
+    justify-content:center !important;
 
     background:#fff;
 
@@ -77,6 +77,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     margin:0;
     font-size:24px;
     font-weight:800;
+    line-height:1.2;
 }
 
 .brand-subtitle{
@@ -93,6 +94,9 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     background:currentColor;
     opacity:.35;
 }
+
+
+/* ================= PASSWORD ================= */
 
 .password-group{
     position:relative;
@@ -132,17 +136,23 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     height:20px;
 }
 
-.login-status{
+
+/* ================= STATUS ================= */
+
+.status-message{
     display:none;
 
-    text-align:center;
-
     margin-top:15px;
+
+    text-align:center;
 
     font-size:14px;
 
     font-weight:600;
 }
+
+
+/* ================= MOBILE ================= */
 
 @media(max-width:500px){
 
@@ -187,7 +197,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 <div class="login-card">
 
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
 
 <div class="login-header">
 
@@ -204,7 +214,7 @@ Zyper Diamond Store
 </h2>
 
 <p class="brand-subtitle">
-Welcome back! Sign in to continue
+Create your account
 </p>
 
 <div class="logo-glow"></div>
@@ -213,15 +223,15 @@ Welcome back! Sign in to continue
 
 
 
-<!-- LOGIN -->
+<!-- ================= REGISTER FORM ================= -->
 
 <form
-id="loginForm"
+id="registerForm"
 class="login-form"
 novalidate>
 
 
-<!-- USERNAME / EMAIL -->
+<!-- USERNAME -->
 
 <div class="form-group">
 
@@ -229,13 +239,62 @@ novalidate>
 
 <input
 type="text"
-id="loginAccount"
+id="username"
 required
 autocomplete="username"
+placeholder=" "
+minlength="3"
+maxlength="20">
+
+<label for="username">
+Username
+</label>
+
+</div>
+
+</div>
+
+
+
+<!-- PHONE -->
+
+<div class="form-group">
+
+<div class="input-group neu-input">
+
+<input
+type="tel"
+id="phone"
+required
+autocomplete="tel"
+placeholder=" "
+maxlength="15">
+
+<label for="phone">
+Phone Number
+</label>
+
+</div>
+
+</div>
+
+
+
+<!-- EMAIL -->
+
+<div class="form-group">
+
+<div class="input-group neu-input">
+
+<input
+type="email"
+id="email"
+required
+autocomplete="email"
 placeholder=" ">
 
-<label for="loginAccount">
-Username or Email
+<label for="email">
+Email Address
 </label>
 
 </div>
@@ -254,8 +313,9 @@ Username or Email
 type="password"
 id="password"
 required
-autocomplete="current-password"
-placeholder=" ">
+autocomplete="new-password"
+placeholder=" "
+minlength="6">
 
 <label for="password">
 Password
@@ -317,79 +377,34 @@ y2="23"/>
 
 
 
-<!-- OPTIONS -->
-
-<div class="form-options">
-
-<div class="remember-wrapper">
-
-<input
-type="checkbox"
-id="remember">
-
-<label
-for="remember"
-class="checkbox-label">
-
-<div class="neu-checkbox">
-
-<svg
-viewBox="0 0 24 24"
-fill="none"
-stroke="currentColor"
-stroke-width="3">
-
-<polyline
-points="20 6 9 17 4 12"/>
-
-</svg>
-
-</div>
-
-Remember me
-
-</label>
-
-</div>
-
-
-<a
-href="forgot-password.html"
-class="forgot-link">
-
-Forgot password?
-
-</a>
-
-</div>
-
-
-
-<!-- LOGIN BUTTON -->
+<!-- REGISTER BUTTON -->
 
 <button
 type="submit"
 class="neu-button login-btn"
-id="loginButton">
+id="registerButton">
 
-<span id="loginText">
-Sign In
+<span id="buttonText">
+Create Account
 </span>
 
 <span
-id="loginLoading"
+id="buttonLoading"
 style="display:none;">
 
-Signing in...
+Creating Account...
 
 </span>
 
 </button>
 
 
+
+<!-- STATUS -->
+
 <div
-id="loginStatus"
-class="login-status">
+id="statusMessage"
+class="status-message">
 </div>
 
 
@@ -397,16 +412,16 @@ class="login-status">
 
 
 
-<!-- REGISTER -->
+<!-- LOGIN -->
 
 <div class="signup-link">
 
 <p>
 
-Don't have an account?
+Already have an account?
 
-<a href="register.html">
-Create Account
+<a href="index.html">
+Login
 </a>
 
 </p>
@@ -431,8 +446,8 @@ from
 
 import {
 getAuth,
-signInWithEmailAndPassword,
-onAuthStateChanged
+createUserWithEmailAndPassword,
+updateProfile
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -441,13 +456,15 @@ from
 import {
 getFirestore,
 doc,
-getDoc
+setDoc,
+getDoc,
+serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* FIREBASE */
+/* ================= FIREBASE ================= */
 
 const firebaseConfig = {
 
@@ -482,106 +499,136 @@ const db =
 getFirestore(app);
 
 
-/* ELEMENTS */
+/* ================= ELEMENTS ================= */
 
 const form =
-document.getElementById("loginForm");
+document.getElementById("registerForm");
 
-const account =
-document.getElementById("loginAccount");
+const usernameInput =
+document.getElementById("username");
 
-const password =
+const phoneInput =
+document.getElementById("phone");
+
+const emailInput =
+document.getElementById("email");
+
+const passwordInput =
 document.getElementById("password");
 
-const toggle =
+const passwordToggle =
 document.getElementById("passwordToggle");
 
 const button =
-document.getElementById("loginButton");
+document.getElementById("registerButton");
 
-const loginText =
-document.getElementById("loginText");
+const buttonText =
+document.getElementById("buttonText");
 
-const loading =
-document.getElementById("loginLoading");
+const buttonLoading =
+document.getElementById("buttonLoading");
 
 const status =
-document.getElementById("loginStatus");
+document.getElementById("statusMessage");
 
 
-/* PASSWORD */
+/* ================= PASSWORD SHOW ================= */
 
-toggle.addEventListener("click", () => {
+passwordToggle.addEventListener("click", () => {
 
-    if(password.type === "password"){
+    if(passwordInput.type === "password"){
 
-        password.type = "text";
+        passwordInput.type = "text";
 
-        toggle.querySelector(".eye-open")
-            .style.display = "none";
+        passwordToggle
+        .querySelector(".eye-open")
+        .style.display = "none";
 
-        toggle.querySelector(".eye-closed")
-            .style.display = "block";
+        passwordToggle
+        .querySelector(".eye-closed")
+        .style.display = "block";
 
     }else{
 
-        password.type = "password";
+        passwordInput.type = "password";
 
-        toggle.querySelector(".eye-open")
-            .style.display = "block";
+        passwordToggle
+        .querySelector(".eye-open")
+        .style.display = "block";
 
-        toggle.querySelector(".eye-closed")
-            .style.display = "none";
-
-    }
-
-});
-
-
-/* AUTH CHECK */
-
-onAuthStateChanged(auth, (user) => {
-
-    if(user){
-
-        window.location.href =
-            "home.html";
+        passwordToggle
+        .querySelector(".eye-closed")
+        .style.display = "none";
 
     }
 
 });
 
 
-/* LOGIN */
+/* ================= REGISTER ================= */
 
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
 
-    const loginValue =
-        account.value.trim();
+    const username =
+        usernameInput.value.trim();
 
-    const passwordValue =
-        password.value;
+    const phone =
+        phoneInput.value.trim();
+
+    const email =
+        emailInput.value.trim();
+
+    const password =
+        passwordInput.value;
 
 
-    if(!loginValue){
+    /* VALIDATION */
 
-        alert(
-            "Enter your username or email."
-        );
+    if(username.length < 3){
+
+        alert("Username must be at least 3 characters.");
+
+        usernameInput.focus();
 
         return;
 
     }
 
 
-    if(!passwordValue){
+    if(!/^[a-zA-Z0-9_]+$/.test(username)){
 
         alert(
-            "Enter your password."
+            "Username can only contain letters, numbers and _"
         );
+
+        usernameInput.focus();
+
+        return;
+
+    }
+
+
+    if(!phone){
+
+        alert("Please enter your phone number.");
+
+        phoneInput.focus();
+
+        return;
+
+    }
+
+
+    if(password.length < 6){
+
+        alert(
+            "Password must be at least 6 characters."
+        );
+
+        passwordInput.focus();
 
         return;
 
@@ -590,69 +637,139 @@ form.addEventListener("submit", async (e) => {
 
     try{
 
-        button.disabled = true;
 
-        loginText.style.display =
-            "none";
+        /* =================
+           CHECK USERNAME
+           WITHOUT SEARCHING
+           USERS COLLECTION
+        ================= */
 
-        loading.style.display =
-            "inline";
-
-
-        let email = loginValue;
-
-
-        /* USERNAME LOGIN */
-
-        if(!loginValue.includes("@")){
-
-            const usernameRef =
-                doc(
-                    db,
-                    "usernames",
-                    loginValue.toLowerCase()
-                );
+        const usernameRef =
+            doc(
+                db,
+                "usernames",
+                username.toLowerCase()
+            );
 
 
-            const usernameDoc =
-                await getDoc(
-                    usernameRef
-                );
+        const usernameDoc =
+            await getDoc(usernameRef);
 
 
-            if(!usernameDoc.exists()){
+        if(usernameDoc.exists()){
 
-                throw {
-                    code:
-                    "auth/user-not-found"
-                };
+            alert(
+                "This username is already taken."
+            );
 
-            }
-
-
-            email =
-                usernameDoc.data().email;
+            return;
 
         }
 
 
-        /* FIREBASE LOGIN */
+        /* LOADING */
 
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            passwordValue
+        button.disabled = true;
+
+        buttonText.style.display = "none";
+
+        buttonLoading.style.display = "inline";
+
+
+        /* =================
+           CREATE AUTH USER
+        ================= */
+
+        const credential =
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        const user =
+            credential.user;
+
+
+        /* =================
+           DISPLAY NAME
+        ================= */
+
+        await updateProfile(
+            user,
+            {
+                displayName: username
+            }
         );
 
 
-        status.style.display =
-            "block";
+        /* =================
+           USER PROFILE
+        ================= */
 
-        status.style.color =
-            "#00c853";
+        await setDoc(
+            doc(
+                db,
+                "users",
+                user.uid
+            ),
+            {
+
+                uid:
+                    user.uid,
+
+                username:
+                    username,
+
+                phone:
+                    phone,
+
+                email:
+                    email,
+
+                role:
+                    "customer",
+
+                walletBalance:
+                    0,
+
+                createdAt:
+                    serverTimestamp()
+
+            }
+        );
+
+
+        /* =================
+           USERNAME LOOKUP
+        ================= */
+
+        await setDoc(
+            usernameRef,
+            {
+
+                uid:
+                    user.uid,
+
+                email:
+                    email,
+
+                username:
+                    username
+
+            }
+        );
+
+
+        /* SUCCESS */
+
+        status.style.display = "block";
+
+        status.style.color = "#00c853";
 
         status.textContent =
-            "Login successful!";
+            "Account created successfully! Redirecting...";
 
 
         setTimeout(() => {
@@ -660,7 +777,7 @@ form.addEventListener("submit", async (e) => {
             window.location.href =
                 "home.html";
 
-        }, 700);
+        }, 1200);
 
 
     }catch(error){
@@ -670,24 +787,38 @@ form.addEventListener("submit", async (e) => {
 
         button.disabled = false;
 
-        loginText.style.display =
-            "inline";
+        buttonText.style.display = "inline";
 
-        loading.style.display =
-            "none";
+        buttonLoading.style.display = "none";
 
 
         if(
             error.code ===
-            "auth/invalid-credential" ||
-            error.code ===
-            "auth/wrong-password" ||
-            error.code ===
-            "auth/user-not-found"
+            "auth/email-already-in-use"
         ){
 
             alert(
-                "Username/Email or password is incorrect."
+                "This email is already registered."
+            );
+
+        }
+        else if(
+            error.code ===
+            "auth/invalid-email"
+        ){
+
+            alert(
+                "Please enter a valid email."
+            );
+
+        }
+        else if(
+            error.code ===
+            "auth/weak-password"
+        ){
+
+            alert(
+                "Password must be at least 6 characters."
             );
 
         }
@@ -697,14 +828,14 @@ form.addEventListener("submit", async (e) => {
         ){
 
             alert(
-                "Login permission denied. Check Firestore Rules."
+                "Firestore permission denied. Check your Firestore Rules."
             );
 
         }
         else{
 
             alert(
-                "Login failed: " +
+                "Registration failed: " +
                 error.message
             );
 
