@@ -15,8 +15,9 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
 <link rel="icon" href="1.jpg">
 
-
 <style>
+
+/* ================= LOGO ================= */
 
 .login-header{
     text-align:center;
@@ -33,27 +34,29 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     max-width:76px !important;
     max-height:76px !important;
 
-    margin:0 auto 14px !important;
+    margin:0 auto 15px !important;
+
     padding:0 !important;
 
     border-radius:50% !important;
+
     overflow:hidden !important;
 
     display:flex !important;
 
-    align-items:center;
-    justify-content:center;
+    align-items:center !important;
+    justify-content:center !important;
 
     background:#fff;
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,.18),
-        inset 0 0 0 3px rgba(255,255,255,.8);
+    0 8px 25px rgba(0,0,0,.20);
 
     flex-shrink:0 !important;
 }
 
 .company-logo img{
+
     width:76px !important;
     height:76px !important;
 
@@ -63,10 +66,10 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     max-width:76px !important;
     max-height:76px !important;
 
-    display:block !important;
-
     margin:0 !important;
     padding:0 !important;
+
+    display:block !important;
 
     object-fit:cover !important;
 
@@ -85,14 +88,8 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     opacity:.7;
 }
 
-.logo-glow{
-    width:45px;
-    height:3px;
-    margin:12px auto 0;
-    border-radius:10px;
-    background:currentColor;
-    opacity:.35;
-}
+
+/* ================= PASSWORD ================= */
 
 .password-group{
     position:relative;
@@ -103,36 +100,41 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 }
 
 .password-toggle{
+
     position:absolute;
 
-    right:9px;
+    right:8px;
     top:50%;
 
     transform:translateY(-50%);
 
-    width:38px;
-    height:38px;
+    width:40px;
+    height:40px;
 
-    border:none;
-    border-radius:50%;
+    border:0;
 
     background:transparent;
 
     cursor:pointer;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    z-index:10;
+    z-index:20;
 }
 
 .password-toggle svg{
-    width:20px;
-    height:20px;
+    width:21px;
+    height:21px;
 }
 
+
+/* ================= STATUS ================= */
+
 .login-status{
+
     display:none;
 
     text-align:center;
@@ -144,9 +146,13 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     font-weight:600;
 }
 
+
+/* ================= MOBILE ================= */
+
 @media(max-width:500px){
 
     .company-logo{
+
         width:68px !important;
         height:68px !important;
 
@@ -158,6 +164,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     }
 
     .company-logo img{
+
         width:68px !important;
         height:68px !important;
 
@@ -187,7 +194,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 <div class="login-card">
 
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
 
 <div class="login-header">
 
@@ -199,43 +206,44 @@ alt="Zyper Diamond Store">
 
 </div>
 
+
 <h2 class="brand-name">
 Zyper Diamond Store
 </h2>
+
 
 <p class="brand-subtitle">
 Welcome back! Sign in to continue
 </p>
 
-<div class="logo-glow"></div>
-
 </div>
 
 
 
-<!-- LOGIN -->
+<!-- ================= LOGIN FORM ================= -->
 
 <form
-id="loginForm"
 class="login-form"
+id="loginForm"
 novalidate>
 
 
-<!-- USERNAME / EMAIL -->
+<!-- EMAIL -->
 
 <div class="form-group">
 
 <div class="input-group neu-input">
 
 <input
-type="text"
-id="loginAccount"
+type="email"
+id="email"
+name="email"
 required
-autocomplete="username"
+autocomplete="email"
 placeholder=" ">
 
-<label for="loginAccount">
-Username or Email
+<label for="email">
+Email Address
 </label>
 
 </div>
@@ -248,14 +256,18 @@ Username or Email
 
 <div class="form-group">
 
-<div class="input-group neu-input password-group">
+<div
+class="input-group neu-input password-group">
+
 
 <input
 type="password"
 id="password"
+name="password"
 required
 autocomplete="current-password"
 placeholder=" ">
+
 
 <label for="password">
 Password
@@ -264,13 +276,15 @@ Password
 
 <button
 type="button"
-id="passwordToggle"
 class="password-toggle"
+id="passwordToggle"
 aria-label="Show password">
 
 
+<!-- OPEN EYE -->
+
 <svg
-class="eye-open"
+id="eyeOpen"
 viewBox="0 0 24 24"
 fill="none"
 stroke="currentColor"
@@ -287,8 +301,10 @@ r="3"/>
 </svg>
 
 
+<!-- CLOSED EYE -->
+
 <svg
-class="eye-closed"
+id="eyeClosed"
 viewBox="0 0 24 24"
 fill="none"
 stroke="currentColor"
@@ -296,10 +312,10 @@ stroke-width="2"
 style="display:none;">
 
 <path
-d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8"/>
 
 <path
-d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8"/>
 
 <line
 x1="1"
@@ -317,15 +333,18 @@ y2="23"/>
 
 
 
-<!-- OPTIONS -->
+<!-- ================= OPTIONS ================= -->
 
 <div class="form-options">
+
 
 <div class="remember-wrapper">
 
 <input
 type="checkbox"
-id="remember">
+id="remember"
+name="remember">
+
 
 <label
 for="remember"
@@ -361,11 +380,12 @@ Forgot password?
 
 </a>
 
+
 </div>
 
 
 
-<!-- LOGIN BUTTON -->
+<!-- ================= LOGIN BUTTON ================= -->
 
 <button
 type="submit"
@@ -387,6 +407,9 @@ Signing in...
 </button>
 
 
+
+<!-- STATUS -->
+
 <div
 id="loginStatus"
 class="login-status">
@@ -397,7 +420,7 @@ class="login-status">
 
 
 
-<!-- REGISTER -->
+<!-- ================= REGISTER ================= -->
 
 <div class="signup-link">
 
@@ -422,55 +445,60 @@ Create Account
 
 <script type="module">
 
+/* ==========================================
+   FIREBASE APP
+========================================== */
+
 import {
-initializeApp
+    initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
+/* ==========================================
+   FIREBASE AUTH
+========================================== */
+
 import {
-getAuth,
-signInWithEmailAndPassword,
-onAuthStateChanged
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-import {
-getFirestore,
-doc,
-getDoc
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-/* FIREBASE */
+/* ==========================================
+   FIREBASE CONFIG
+========================================== */
 
 const firebaseConfig = {
 
-apiKey:
-"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
+    apiKey:
+    "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
 
-authDomain:
-"zyper-d-iamond-store.firebaseapp.com",
+    authDomain:
+    "zyper-d-iamond-store.firebaseapp.com",
 
-projectId:
-"zyper-d-iamond-store",
+    projectId:
+    "zyper-d-iamond-store",
 
-storageBucket:
-"zyper-d-iamond-store.firebasestorage.app",
+    storageBucket:
+    "zyper-d-iamond-store.firebasestorage.app",
 
-messagingSenderId:
-"892467477866",
+    messagingSenderId:
+    "892467477866",
 
-appId:
-"1:892467477866:web:61e9b6ff9435798da23913"
+    appId:
+    "1:892467477866:web:61e9b6ff9435798da23913"
 
 };
 
+
+/* ==========================================
+   INITIALIZE
+========================================== */
 
 const app =
 initializeApp(firebaseConfig);
@@ -478,241 +506,296 @@ initializeApp(firebaseConfig);
 const auth =
 getAuth(app);
 
-const db =
-getFirestore(app);
 
+/* ==========================================
+   ELEMENTS
+========================================== */
 
-/* ELEMENTS */
-
-const form =
+const loginForm =
 document.getElementById("loginForm");
 
-const account =
-document.getElementById("loginAccount");
+const emailInput =
+document.getElementById("email");
 
-const password =
+const passwordInput =
 document.getElementById("password");
 
-const toggle =
+const passwordToggle =
 document.getElementById("passwordToggle");
 
-const button =
+const eyeOpen =
+document.getElementById("eyeOpen");
+
+const eyeClosed =
+document.getElementById("eyeClosed");
+
+const loginButton =
 document.getElementById("loginButton");
 
 const loginText =
 document.getElementById("loginText");
 
-const loading =
+const loginLoading =
 document.getElementById("loginLoading");
 
-const status =
+const loginStatus =
 document.getElementById("loginStatus");
 
 
-/* PASSWORD */
+/* ==========================================
+   SHOW / HIDE PASSWORD
+========================================== */
 
-toggle.addEventListener("click", () => {
+passwordToggle.addEventListener(
+    "click",
+    function(){
 
-    if(password.type === "password"){
+        if(
+            passwordInput.type ===
+            "password"
+        ){
 
-        password.type = "text";
+            passwordInput.type =
+            "text";
 
-        toggle.querySelector(".eye-open")
-            .style.display = "none";
-
-        toggle.querySelector(".eye-closed")
-            .style.display = "block";
-
-    }else{
-
-        password.type = "password";
-
-        toggle.querySelector(".eye-open")
-            .style.display = "block";
-
-        toggle.querySelector(".eye-closed")
-            .style.display = "none";
-
-    }
-
-});
-
-
-/* AUTH CHECK */
-
-onAuthStateChanged(auth, (user) => {
-
-    if(user){
-
-        window.location.href =
-            "home.html";
-
-    }
-
-});
-
-
-/* LOGIN */
-
-form.addEventListener("submit", async (e) => {
-
-    e.preventDefault();
-
-
-    const loginValue =
-        account.value.trim();
-
-    const passwordValue =
-        password.value;
-
-
-    if(!loginValue){
-
-        alert(
-            "Enter your username or email."
-        );
-
-        return;
-
-    }
-
-
-    if(!passwordValue){
-
-        alert(
-            "Enter your password."
-        );
-
-        return;
-
-    }
-
-
-    try{
-
-        button.disabled = true;
-
-        loginText.style.display =
+            eyeOpen.style.display =
             "none";
 
-        loading.style.display =
+            eyeClosed.style.display =
+            "block";
+
+            passwordToggle.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        }
+
+        else{
+
+            passwordInput.type =
+            "password";
+
+            eyeOpen.style.display =
+            "block";
+
+            eyeClosed.style.display =
+            "none";
+
+            passwordToggle.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   CHECK CURRENT LOGIN
+========================================== */
+
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        if(user){
+
+            window.location.href =
+            "home.html";
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   LOGIN
+========================================== */
+
+loginForm.addEventListener(
+    "submit",
+    async function(e){
+
+        e.preventDefault();
+
+
+        const email =
+        emailInput.value.trim();
+
+        const password =
+        passwordInput.value;
+
+
+        /* VALIDATION */
+
+        if(!email){
+
+            alert(
+                "Please enter your email address."
+            );
+
+            emailInput.focus();
+
+            return;
+
+        }
+
+
+        if(!password){
+
+            alert(
+                "Please enter your password."
+            );
+
+            passwordInput.focus();
+
+            return;
+
+        }
+
+
+        try{
+
+            /* LOADING */
+
+            loginButton.disabled =
+            true;
+
+            loginText.style.display =
+            "none";
+
+            loginLoading.style.display =
             "inline";
 
 
-        let email = loginValue;
+            /* FIREBASE LOGIN */
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
 
 
-        /* USERNAME LOGIN */
+            /* SUCCESS */
 
-        if(!loginValue.includes("@")){
+            loginStatus.style.display =
+            "block";
 
-            const usernameRef =
-                doc(
-                    db,
-                    "usernames",
-                    loginValue.toLowerCase()
+            loginStatus.style.color =
+            "#00c853";
+
+            loginStatus.textContent =
+            "Login successful ✓";
+
+
+            /* REDIRECT */
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                    "home.html";
+
+                },
+                700
+            );
+
+
+        }
+
+        catch(error){
+
+            console.error(
+                "LOGIN ERROR:",
+                error
+            );
+
+
+            loginButton.disabled =
+            false;
+
+            loginText.style.display =
+            "inline";
+
+            loginLoading.style.display =
+            "none";
+
+
+            /* ERROR HANDLING */
+
+            if(
+                error.code ===
+                "auth/invalid-credential"
+            ){
+
+                alert(
+                    "Incorrect email or password."
                 );
-
-
-            const usernameDoc =
-                await getDoc(
-                    usernameRef
-                );
-
-
-            if(!usernameDoc.exists()){
-
-                throw {
-                    code:
-                    "auth/user-not-found"
-                };
 
             }
 
+            else if(
+                error.code ===
+                "auth/user-not-found"
+            ){
 
-            email =
-                usernameDoc.data().email;
+                alert(
+                    "No account found with this email."
+                );
 
-        }
+            }
 
+            else if(
+                error.code ===
+                "auth/wrong-password"
+            ){
 
-        /* FIREBASE LOGIN */
+                alert(
+                    "Incorrect password."
+                );
 
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            passwordValue
-        );
+            }
 
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ){
 
-        status.style.display =
-            "block";
+                alert(
+                    "Please enter a valid email address."
+                );
 
-        status.style.color =
-            "#00c853";
+            }
 
-        status.textContent =
-            "Login successful!";
+            else if(
+                error.code ===
+                "auth/too-many-requests"
+            ){
 
+                alert(
+                    "Too many login attempts. Please try again later."
+                );
 
-        setTimeout(() => {
+            }
 
-            window.location.href =
-                "home.html";
+            else{
 
-        }, 700);
+                alert(
+                    "Login failed:\n\n" +
+                    error.message
+                );
 
-
-    }catch(error){
-
-        console.error(error);
-
-
-        button.disabled = false;
-
-        loginText.style.display =
-            "inline";
-
-        loading.style.display =
-            "none";
-
-
-        if(
-            error.code ===
-            "auth/invalid-credential" ||
-            error.code ===
-            "auth/wrong-password" ||
-            error.code ===
-            "auth/user-not-found"
-        ){
-
-            alert(
-                "Username/Email or password is incorrect."
-            );
-
-        }
-        else if(
-            error.code ===
-            "permission-denied"
-        ){
-
-            alert(
-                "Login permission denied. Check Firestore Rules."
-            );
-
-        }
-        else{
-
-            alert(
-                "Login failed: " +
-                error.message
-            );
+            }
 
         }
 
     }
-
-});
+);
 
 </script>
 
