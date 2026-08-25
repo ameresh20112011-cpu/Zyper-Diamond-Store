@@ -15,353 +15,567 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
 <link rel="icon" href="1.jpg">
 
+<style>
+
+/* ===============================
+   ZYPER LOGIN HEADER
+================================ */
+
+.login-header{
+    text-align:center;
+    margin-bottom:28px;
+}
+
+
+/* LOGO */
+
+.company-logo{
+    width:76px;
+    height:76px;
+
+    margin:0 auto 14px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#ffffff;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.18),
+        inset 0 0 0 3px rgba(255,255,255,.8);
+
+    flex-shrink:0;
+}
+
+
+/* ACTUAL IMAGE */
+
+.company-logo img{
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    max-width:100%;
+    max-height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+}
+
+
+/* STORE NAME */
+
+.brand-name{
+    margin:0;
+
+    font-size:24px;
+
+    font-weight:800;
+
+    letter-spacing:.5px;
+
+    line-height:1.2;
+}
+
+
+/* SUBTITLE */
+
+.brand-subtitle{
+    margin:7px 0 0;
+
+    font-size:13px;
+
+    opacity:.7;
+
+    line-height:1.5;
+}
+
+
+/* SMALL GLOW UNDER LOGO */
+
+.logo-glow{
+    width:45px;
+    height:3px;
+
+    margin:12px auto 0;
+
+    border-radius:10px;
+
+    background:currentColor;
+
+    opacity:.35;
+}
+
+
+/* PASSWORD BUTTON */
+
+.password-group{
+    position:relative;
+}
+
+
+.password-toggle{
+    position:absolute;
+
+    right:10px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:38px;
+    height:38px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:transparent;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:5;
+}
+
+
+.password-toggle svg{
+    width:20px;
+    height:20px;
+}
+
+
+/* Make sure password input leaves room */
+
+.password-group input{
+    padding-right:55px !important;
+}
+
+
+/* FORGOT LINK */
+
+.forgot-link{
+    text-decoration:none;
+    font-weight:600;
+}
+
+
+/* LOGIN MESSAGE */
+
+#loginMessage{
+    font-size:14px;
+    font-weight:600;
+}
+
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+    .company-logo{
+        width:68px;
+        height:68px;
+    }
+
+    .brand-name{
+        font-size:21px;
+    }
+
+    .brand-subtitle{
+        font-size:12px;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
+
 <div class="login-container">
 
-    <div class="login-card">
+<div class="login-card">
 
-        <!-- COMPANY LOGO -->
 
-        <div class="login-header">
+<!-- ================= HEADER ================= -->
 
-            <div class="company-logo">
+<div class="login-header">
 
-                <img
-                src="1.jpg"
-                alt="Zyper Diamond Store">
 
-            </div>
+<!-- SMALL CIRCLE LOGO -->
 
-            <h2>Welcome Back</h2>
+<div class="company-logo">
 
-            <p>Login to Zyper Diamond Store</p>
-
-        </div>
-
-
-        <!-- LOGIN FORM -->
-
-        <form
-        class="login-form"
-        id="loginForm"
-        novalidate>
-
-
-            <!-- USERNAME / EMAIL -->
-
-            <div class="form-group">
-
-                <div class="input-group neu-input">
-
-                    <input
-                    type="text"
-                    id="loginAccount"
-                    name="loginAccount"
-                    required
-                    autocomplete="username"
-                    placeholder=" ">
-
-                    <label for="loginAccount">
-                        Username or Email
-                    </label>
-
-                    <div class="input-icon">
-
-                        <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2">
-
-                            <path
-                            d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-
-                            <circle
-                            cx="12"
-                            cy="7"
-                            r="4"/>
-
-                        </svg>
-
-                    </div>
-
-                </div>
-
-                <span
-                class="error-message"
-                id="accountError"></span>
-
-            </div>
-
-
-            <!-- PASSWORD -->
-
-            <div class="form-group">
-
-                <div class="input-group neu-input password-group">
-
-                    <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    required
-                    autocomplete="current-password"
-                    placeholder=" ">
-
-                    <label for="password">
-                        Password
-                    </label>
-
-
-                    <div class="input-icon">
-
-                        <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2">
-
-                            <rect
-                            x="3"
-                            y="11"
-                            width="18"
-                            height="11"
-                            rx="2"/>
-
-                            <path
-                            d="M7 11V7a5 5 0 0110 0v4"/>
-
-                        </svg>
-
-                    </div>
-
-
-                    <!-- PASSWORD BUTTON -->
-
-                    <button
-                    type="button"
-                    id="passwordToggle"
-                    class="password-toggle neu-toggle"
-                    aria-label="Show password">
-
-                        <svg
-                        class="eye-open"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2">
-
-                            <path
-                            d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-
-                            <circle
-                            cx="12"
-                            cy="12"
-                            r="3"/>
-
-                        </svg>
-
-
-                        <svg
-                        class="eye-closed"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        style="display:none;">
-
-                            <path
-                            d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
-
-                            <path
-                            d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
-
-                            <line
-                            x1="1"
-                            y1="1"
-                            x2="23"
-                            y2="23"/>
-
-                        </svg>
-
-                    </button>
-
-                </div>
-
-                <span
-                class="error-message"
-                id="passwordError"></span>
-
-            </div>
-
-
-            <!-- OPTIONS -->
-
-            <div class="form-options">
-
-                <div class="remember-wrapper">
-
-                    <input
-                    type="checkbox"
-                    id="remember"
-                    name="remember">
-
-                    <label
-                    for="remember"
-                    class="checkbox-label">
-
-                        <div class="neu-checkbox">
-
-                            <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="3">
-
-                                <polyline
-                                points="20 6 9 17 4 12"/>
-
-                            </svg>
-
-                        </div>
-
-                        Remember me
-
-                    </label>
-
-                </div>
-
-
-                <a
-                href="forgot-password.html"
-                class="forgot-link">
-
-                    Forgot password?
-
-                </a>
-
-            </div>
-
-
-            <!-- LOGIN BUTTON -->
-
-            <button
-            type="submit"
-            class="neu-button login-btn"
-            id="loginButton">
-
-                <span id="loginText">
-                    Sign In
-                </span>
-
-                <span
-                id="loginLoading"
-                style="display:none;">
-
-                    Signing in...
-
-                </span>
-
-            </button>
-
-
-            <!-- MESSAGE -->
-
-            <p
-            id="loginMessage"
-            style="
-            display:none;
-            text-align:center;
-            margin-top:15px;
-            ">
-
-            </p>
-
-        </form>
-
-
-        <!-- REGISTER -->
-
-        <div class="signup-link">
-
-            <p>
-
-                Don't have an account?
-
-                <a href="register.html">
-                    Sign up
-                </a>
-
-            </p>
-
-        </div>
-
-
-    </div>
+<img
+src="1.jpg"
+alt="Zyper Diamond Store Logo">
 
 </div>
 
 
-<!-- FIREBASE -->
+<h2 class="brand-name">
+Zyper Diamond Store
+</h2>
+
+
+<p class="brand-subtitle">
+Welcome back! Sign in to continue
+</p>
+
+
+<div class="logo-glow"></div>
+
+</div>
+
+
+
+<!-- ================= LOGIN FORM ================= -->
+
+<form
+class="login-form"
+id="loginForm"
+novalidate>
+
+
+<!-- USERNAME / EMAIL -->
+
+<div class="form-group">
+
+<div class="input-group neu-input">
+
+<input
+type="text"
+id="loginAccount"
+name="loginAccount"
+required
+autocomplete="username"
+placeholder=" ">
+
+<label for="loginAccount">
+Username or Email
+</label>
+
+
+<div class="input-icon">
+
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2">
+
+<path
+d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+
+<circle
+cx="12"
+cy="7"
+r="4"/>
+
+</svg>
+
+</div>
+
+</div>
+
+<span
+class="error-message"
+id="accountError"></span>
+
+</div>
+
+
+
+<!-- PASSWORD -->
+
+<div class="form-group">
+
+<div class="input-group neu-input password-group">
+
+
+<input
+type="password"
+id="password"
+name="password"
+required
+autocomplete="current-password"
+placeholder=" ">
+
+
+<label for="password">
+Password
+</label>
+
+
+<div class="input-icon">
+
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2">
+
+<rect
+x="3"
+y="11"
+width="18"
+height="11"
+rx="2"/>
+
+<path
+d="M7 11V7a5 5 0 0110 0v4"/>
+
+</svg>
+
+</div>
+
+
+
+<!-- SHOW PASSWORD -->
+
+<button
+type="button"
+id="passwordToggle"
+class="password-toggle"
+aria-label="Show password">
+
+
+<svg
+class="eye-open"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2">
+
+<path
+d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+
+<circle
+cx="12"
+cy="12"
+r="3"/>
+
+</svg>
+
+
+<svg
+class="eye-closed"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+style="display:none;">
+
+<path
+d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+
+<path
+d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+
+<line
+x1="1"
+y1="1"
+x2="23"
+y2="23"/>
+
+</svg>
+
+</button>
+
+</div>
+
+<span
+class="error-message"
+id="passwordError"></span>
+
+</div>
+
+
+
+<!-- ================= OPTIONS ================= -->
+
+<div class="form-options">
+
+
+<div class="remember-wrapper">
+
+<input
+type="checkbox"
+id="remember"
+name="remember">
+
+
+<label
+for="remember"
+class="checkbox-label">
+
+<div class="neu-checkbox">
+
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="3">
+
+<polyline
+points="20 6 9 17 4 12"/>
+
+</svg>
+
+</div>
+
+Remember me
+
+</label>
+
+</div>
+
+
+<a
+href="forgot-password.html"
+class="forgot-link">
+
+Forgot password?
+
+</a>
+
+
+</div>
+
+
+
+<!-- ================= LOGIN BUTTON ================= -->
+
+<button
+type="submit"
+class="neu-button login-btn"
+id="loginButton">
+
+<span id="loginText">
+Sign In
+</span>
+
+<span
+id="loginLoading"
+style="display:none;">
+
+Signing in...
+
+</span>
+
+</button>
+
+
+<!-- MESSAGE -->
+
+<p
+id="loginMessage"
+style="display:none;">
+
+</p>
+
+
+</form>
+
+
+
+<!-- ================= REGISTER ================= -->
+
+<div class="signup-link">
+
+<p>
+
+Don't have an account?
+
+<a href="register.html">
+Create Account
+</a>
+
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ================= FIREBASE ================= -->
 
 <script type="module">
 
 import {
-    initializeApp
+initializeApp
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
 import {
-    getAuth,
-    signInWithEmailAndPassword,
-    onAuthStateChanged
+getAuth,
+signInWithEmailAndPassword,
+onAuthStateChanged
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 import {
-    getFirestore,
-    collection,
-    query,
-    where,
-    getDocs,
-    limit
+getFirestore,
+collection,
+query,
+where,
+getDocs,
+limit
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 
-/* ================= FIREBASE CONFIG ================= */
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
-    apiKey:
-    "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
+apiKey:
+"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
 
-    authDomain:
-    "zyper-d-iamond-store.firebaseapp.com",
+authDomain:
+"zyper-d-iamond-store.firebaseapp.com",
 
-    projectId:
-    "zyper-d-iamond-store",
+projectId:
+"zyper-d-iamond-store",
 
-    storageBucket:
-    "zyper-d-iamond-store.firebasestorage.app",
+storageBucket:
+"zyper-d-iamond-store.firebasestorage.app",
 
-    messagingSenderId:
-    "892467477866",
+messagingSenderId:
+"892467477866",
 
-    appId:
-    "1:892467477866:web:61e9b6ff9435798da23913"
+appId:
+"1:892467477866:web:61e9b6ff9435798da23913"
 
 };
 
 
 
-/* ================= INITIALIZE ================= */
+/* INITIALIZE */
 
 const app =
 initializeApp(firebaseConfig);
@@ -374,7 +588,7 @@ getFirestore(app);
 
 
 
-/* ================= ELEMENTS ================= */
+/* ELEMENTS */
 
 const form =
 document.getElementById("loginForm");
@@ -387,12 +601,6 @@ document.getElementById("password");
 
 const passwordToggle =
 document.getElementById("passwordToggle");
-
-const eyeOpen =
-passwordToggle.querySelector(".eye-open");
-
-const eyeClosed =
-passwordToggle.querySelector(".eye-closed");
 
 const loginButton =
 document.getElementById("loginButton");
@@ -414,111 +622,118 @@ passwordToggle.addEventListener(
 "click",
 () => {
 
-    if (
-        passwordInput.type ===
-        "password"
-    ) {
+if(
+passwordInput.type ===
+"password"
+){
 
-        passwordInput.type =
-        "text";
+passwordInput.type =
+"text";
 
-        eyeOpen.style.display =
-        "none";
+passwordToggle
+.querySelector(".eye-open")
+.style.display =
+"none";
 
-        eyeClosed.style.display =
-        "block";
+passwordToggle
+.querySelector(".eye-closed")
+.style.display =
+"block";
 
-        passwordToggle.setAttribute(
-            "aria-label",
-            "Hide password"
-        );
+passwordToggle.setAttribute(
+"aria-label",
+"Hide password"
+);
 
-    }
+}
 
-    else {
+else{
 
-        passwordInput.type =
-        "password";
+passwordInput.type =
+"password";
 
-        eyeOpen.style.display =
-        "block";
+passwordToggle
+.querySelector(".eye-open")
+.style.display =
+"block";
 
-        eyeClosed.style.display =
-        "none";
+passwordToggle
+.querySelector(".eye-closed")
+.style.display =
+"none";
 
-        passwordToggle.setAttribute(
-            "aria-label",
-            "Show password"
-        );
+passwordToggle.setAttribute(
+"aria-label",
+"Show password"
+);
 
-    }
+}
 
 });
 
 
 
-/* ================= CHECK EXISTING LOGIN ================= */
+/* ================= AUTH CHECK ================= */
 
 onAuthStateChanged(
 auth,
-(user) => {
+(user)=>{
 
-    if (user) {
+if(user){
 
-        window.location.href =
-        "home.html";
+window.location.href =
+"home.html";
 
-    }
+}
 
 });
 
 
 
-/* ================= FIND EMAIL FROM USERNAME ================= */
+/* ================= USERNAME → EMAIL ================= */
 
-async function getEmailFromUsername(
+async function
+getEmailFromUsername(
 username
-) {
+){
 
-    const usersRef =
-    collection(
-        db,
-        "users"
-    );
-
-
-    const usernameQuery =
-    query(
-        usersRef,
-        where(
-            "username",
-            "==",
-            username
-        ),
-        limit(1)
-    );
+const usersRef =
+collection(
+db,
+"users"
+);
 
 
-    const snapshot =
-    await getDocs(
-        usernameQuery
-    );
+const usernameQuery =
+query(
+usersRef,
+
+where(
+"username",
+"==",
+username
+),
+
+limit(1)
+);
 
 
-    if (
-        snapshot.empty
-    ) {
-
-        return null;
-
-    }
+const snapshot =
+await getDocs(
+usernameQuery
+);
 
 
-    const userData =
-    snapshot.docs[0].data();
+if(snapshot.empty){
+
+return null;
+
+}
 
 
-    return userData.email || null;
+return snapshot.docs[0]
+.data()
+.email || null;
 
 }
 
@@ -528,172 +743,171 @@ username
 
 form.addEventListener(
 "submit",
-async (e) => {
+async(e)=>{
 
-    e.preventDefault();
-
-
-    const account =
-    accountInput.value.trim();
-
-    const password =
-    passwordInput.value;
+e.preventDefault();
 
 
-    if (!account) {
+const account =
+accountInput.value.trim();
 
-        alert(
-            "Please enter your username or email."
-        );
-
-        accountInput.focus();
-
-        return;
-
-    }
+const password =
+passwordInput.value;
 
 
-    if (!password) {
+if(!account){
 
-        alert(
-            "Please enter your password."
-        );
+alert(
+"Please enter your username or email."
+);
 
-        passwordInput.focus();
+return;
 
-        return;
-
-    }
+}
 
 
-    loginButton.disabled =
-    true;
+if(!password){
 
-    loginText.style.display =
-    "none";
+alert(
+"Please enter your password."
+);
 
-    loginLoading.style.display =
-    "inline";
+return;
 
-
-    try {
-
-        let email =
-        account;
+}
 
 
-        /* USERNAME LOGIN */
+loginButton.disabled =
+true;
 
-        if (
-            !account.includes("@")
-        ) {
+loginText.style.display =
+"none";
 
-            email =
-            await getEmailFromUsername(
-                account
-            );
+loginLoading.style.display =
+"inline";
 
 
-            if (!email) {
+try{
 
-                throw {
-                    code:
-                    "user-not-found"
-                };
-
-            }
-
-        }
+let email =
+account;
 
 
-        /* FIREBASE LOGIN */
+/* LOGIN USING USERNAME */
 
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
+if(
+!account.includes("@")
+){
 
-
-        loginMessage.textContent =
-        "Login successful! Redirecting...";
-
-        loginMessage.style.display =
-        "block";
-
-        loginMessage.style.color =
-        "#00c853";
+email =
+await getEmailFromUsername(
+account
+);
 
 
-        setTimeout(
-        () => {
+if(!email){
 
-            window.location.href =
-            "home.html";
+throw {
+code:
+"user-not-found"
+};
 
-        },
-        800
-        );
+}
 
-
-    }
-
-    catch (error) {
-
-        console.error(error);
+}
 
 
-        loginButton.disabled =
-        false;
+/* FIREBASE LOGIN */
 
-        loginText.style.display =
-        "inline";
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
 
-        loginLoading.style.display =
-        "none";
+
+loginMessage.textContent =
+"Login successful! Redirecting...";
+
+loginMessage.style.display =
+"block";
+
+loginMessage.style.color =
+"#00c853";
 
 
-        if (
-            error.code ===
-            "auth/invalid-credential" ||
-            error.code ===
-            "auth/wrong-password" ||
-            error.code ===
-            "auth/user-not-found"
-        ) {
+setTimeout(
+()=>{
 
-            alert(
-                "Username/Email or password is incorrect."
-            );
+window.location.href =
+"home.html";
 
-        }
+},
+800
+);
 
-        else if (
-            error.code ===
-            "auth/too-many-requests"
-        ) {
 
-            alert(
-                "Too many login attempts. Please try again later."
-            );
+}
 
-        }
+catch(error){
 
-        else {
+console.error(error);
 
-            alert(
-                "Login failed: " +
-                (error.message ||
-                "Unknown error")
-            );
 
-        }
+loginButton.disabled =
+false;
 
-    }
+loginText.style.display =
+"inline";
+
+loginLoading.style.display =
+"none";
+
+
+if(
+error.code ===
+"auth/invalid-credential" ||
+
+error.code ===
+"auth/wrong-password" ||
+
+error.code ===
+"user-not-found"
+){
+
+alert(
+"Username/Email or password is incorrect."
+);
+
+}
+
+else if(
+error.code ===
+"auth/too-many-requests"
+){
+
+alert(
+"Too many login attempts. Please try again later."
+);
+
+}
+
+else{
+
+alert(
+"Login failed: " +
+(error.message ||
+"Unknown error")
+);
+
+}
+
+}
 
 });
 
 </script>
 
 </body>
+
 </html>
