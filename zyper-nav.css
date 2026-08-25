@@ -1,0 +1,385 @@
+/* =====================================================
+   ZYPER NAVIGATION BAR
+   Premium Gaming / Neon / Glassmorphism
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* Space for fixed navigation */
+
+body {
+    padding-bottom: 100px !important;
+}
+
+
+/* =====================================================
+   MAIN BAR
+===================================================== */
+
+.zyper-nav {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 12px;
+
+    transform: translateX(-50%);
+
+    width: calc(100% - 24px);
+
+    max-width: 650px;
+
+    height: 72px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-around;
+
+    padding: 6px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(15, 23, 42, .94),
+            rgba(30, 27, 75, .94)
+        );
+
+    border:
+
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius: 24px;
+
+    backdrop-filter: blur(20px);
+
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+
+        0 15px 45px
+        rgba(0,0,0,.55),
+
+        0 0 25px
+        rgba(96,165,250,.12);
+
+    z-index: 999999;
+
+    overflow: hidden;
+
+}
+
+
+/* =====================================================
+   TOP LIGHT
+===================================================== */
+
+.zyper-nav::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 10%;
+
+    width: 80%;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #60a5fa,
+            #c084fc,
+            #22d3ee,
+            transparent
+        );
+
+    opacity: .8;
+
+}
+
+
+/* =====================================================
+   NAV ITEM
+===================================================== */
+
+.zyper-nav-item {
+
+    position: relative;
+
+    flex: 1;
+
+    height: 60px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 2px;
+
+    text-decoration: none;
+
+    color: #94a3b8;
+
+    border-radius: 18px;
+
+    transition:
+        transform .25s ease,
+        color .25s ease,
+        background .25s ease;
+
+    -webkit-tap-highlight-color: transparent;
+
+}
+
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.zyper-icon {
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    transition:
+
+        transform .25s ease,
+
+        filter .25s ease;
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.zyper-label {
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    letter-spacing: .3px;
+
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.zyper-nav-item:hover {
+
+    color: white;
+
+    background:
+        rgba(96,165,250,.10);
+
+}
+
+
+.zyper-nav-item:hover .zyper-icon {
+
+    transform:
+        translateY(-2px)
+        scale(1.08);
+
+}
+
+
+/* =====================================================
+   ACTIVE ITEM
+===================================================== */
+
+.zyper-nav-item.active {
+
+    color: #60a5fa;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.20),
+            rgba(139,92,246,.20)
+        );
+
+    box-shadow:
+
+        inset 0 0 18px
+        rgba(96,165,250,.10),
+
+        0 0 15px
+        rgba(96,165,250,.08);
+
+}
+
+
+/* =====================================================
+   ACTIVE ICON
+===================================================== */
+
+.zyper-nav-item.active .zyper-icon {
+
+    transform:
+        translateY(-2px)
+        scale(1.12);
+
+    filter:
+
+        drop-shadow(
+            0 0 6px
+            rgba(96,165,250,.8)
+        );
+
+}
+
+
+/* =====================================================
+   ACTIVE LIGHT
+===================================================== */
+
+.zyper-nav-item.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    bottom: 4px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 22px;
+
+    height: 3px;
+
+    border-radius: 10px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #60a5fa,
+            #c084fc
+        );
+
+    box-shadow:
+
+        0 0 8px #60a5fa,
+
+        0 0 15px #c084fc;
+
+}
+
+
+/* =====================================================
+   CLICK ANIMATION
+===================================================== */
+
+.zyper-nav-item:active {
+
+    transform: scale(.88);
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 500px) {
+
+    .zyper-nav {
+
+        width:
+            calc(100% - 16px);
+
+        bottom: 8px;
+
+        height: 66px;
+
+        border-radius: 21px;
+
+    }
+
+
+    .zyper-nav-item {
+
+        height: 56px;
+
+        border-radius: 16px;
+
+    }
+
+
+    .zyper-icon {
+
+        font-size: 20px;
+
+    }
+
+
+    .zyper-label {
+
+        font-size: 9px;
+
+    }
+
+}
+
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media (max-width: 350px) {
+
+    .zyper-nav {
+
+        height: 62px;
+
+    }
+
+
+    .zyper-nav-item {
+
+        height: 52px;
+
+    }
+
+
+    .zyper-icon {
+
+        font-size: 18px;
+
+    }
+
+
+    .zyper-label {
+
+        font-size: 8px;
+
+    }
+
+}
