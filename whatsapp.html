@@ -1,70 +1,1379 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Contact us</title>
-  <link rel="icon" href="1.jpg">
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Contact Support - Zyper Diamond Store</title>
+
+<link rel="icon" href="1.jpg">
+
 <link rel="stylesheet" href="whatsapp.css">
-  <style>
-    body {
-      margin:0;
-      font-family:'Poppins',sans-serif;
-      background: linear-gradient(135deg,#0f172a,#1e293b);
-      color:white;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-    }
 
-    .box {
-      text-align:center;
-      background: rgba(255,255,255,0.05);
-      padding:40px;
-      border-radius:20px;
-      backdrop-filter: blur(15px);
-    }
+<!-- EXISTING ZYPER NAVIGATION -->
+<link rel="stylesheet" href="zyper-nav.css">
 
-    button {
-      padding:12px 25px;
-      border:none;
-      border-radius:12px;
-      background:linear-gradient(45deg,#25D366,#128C7E);
-      color:white;
-      font-size:16px;
-      cursor:pointer;
-    }
+<script src="zyper-nav.js" defer></script>
 
-  </style>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+margin:0;
+
+font-family:
+'Poppins',
+'Segoe UI',
+Arial,
+sans-serif;
+
+background:
+radial-gradient(
+circle at top,
+#172554 0%,
+#0f172a 45%,
+#020617 100%
+);
+
+color:white;
+
+min-height:100vh;
+
+padding:25px 15px 110px;
+
+}
+
+
+/* =========================================
+   BACKGROUND GLOW
+========================================= */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+width:300px;
+
+height:300px;
+
+top:-100px;
+
+left:-100px;
+
+background:#25D366;
+
+filter:blur(130px);
+
+opacity:.08;
+
+border-radius:50%;
+
+pointer-events:none;
+
+}
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+width:300px;
+
+height:300px;
+
+right:-120px;
+
+bottom:100px;
+
+background:#7c3aed;
+
+filter:blur(140px);
+
+opacity:.12;
+
+border-radius:50%;
+
+pointer-events:none;
+
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.support-container{
+
+width:100%;
+
+max-width:520px;
+
+margin:0 auto;
+
+position:relative;
+
+z-index:2;
+
+}
+
+
+/* =========================================
+   BRAND HEADER
+========================================= */
+
+.brand{
+
+text-align:center;
+
+margin-bottom:20px;
+
+animation:fadeDown .6s ease;
+
+}
+
+.brand-logo{
+
+width:75px;
+
+height:75px;
+
+object-fit:cover;
+
+border-radius:22px;
+
+border:2px solid rgba(255,255,255,.2);
+
+box-shadow:
+
+0 0 20px rgba(96,165,250,.25),
+
+0 10px 30px rgba(0,0,0,.35);
+
+}
+
+.brand-name{
+
+margin:12px 0 4px;
+
+font-size:22px;
+
+font-weight:800;
+
+letter-spacing:.5px;
+
+background:
+
+linear-gradient(
+90deg,
+#60a5fa,
+#c084fc,
+#22d3ee
+);
+
+-webkit-background-clip:text;
+
+background-clip:text;
+
+color:transparent;
+
+}
+
+.brand-subtitle{
+
+margin:0;
+
+font-size:13px;
+
+color:#94a3b8;
+
+}
+
+
+/* =========================================
+   MAIN CARD
+========================================= */
+
+.support-card{
+
+background:
+
+rgba(15,23,42,.72);
+
+border:
+
+1px solid rgba(255,255,255,.12);
+
+border-radius:28px;
+
+padding:25px;
+
+backdrop-filter:blur(20px);
+
+-webkit-backdrop-filter:blur(20px);
+
+box-shadow:
+
+0 25px 70px rgba(0,0,0,.45),
+
+inset 0 1px 0 rgba(255,255,255,.08);
+
+animation:fadeUp .6s ease;
+
+}
+
+
+/* =========================================
+   SUPPORT ICON
+========================================= */
+
+.support-icon{
+
+width:85px;
+
+height:85px;
+
+margin:0 auto 15px;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:42px;
+
+background:
+
+linear-gradient(
+135deg,
+#25D366,
+#128C7E
+);
+
+box-shadow:
+
+0 0 0 8px rgba(37,211,102,.07),
+
+0 0 35px rgba(37,211,102,.3);
+
+animation:
+
+pulse 2.5s infinite;
+
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.support-title{
+
+text-align:center;
+
+font-size:27px;
+
+font-weight:800;
+
+margin:5px 0 8px;
+
+}
+
+.support-description{
+
+text-align:center;
+
+font-size:14px;
+
+line-height:1.7;
+
+color:#94a3b8;
+
+margin:0 auto 20px;
+
+max-width:390px;
+
+}
+
+
+/* =========================================
+   ONLINE STATUS
+========================================= */
+
+.status{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:8px;
+
+margin:0 auto 22px;
+
+width:max-content;
+
+padding:7px 13px;
+
+border-radius:50px;
+
+background:
+
+rgba(34,197,94,.1);
+
+border:
+
+1px solid rgba(34,197,94,.2);
+
+color:#86efac;
+
+font-size:12px;
+
+font-weight:600;
+
+}
+
+.status-dot{
+
+width:8px;
+
+height:8px;
+
+background:#22c55e;
+
+border-radius:50%;
+
+box-shadow:
+0 0 10px #22c55e;
+
+animation:
+statusPulse 1.5s infinite;
+
+}
+
+
+/* =========================================
+   PRIMARY WHATSAPP BUTTON
+========================================= */
+
+.whatsapp-main{
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:16px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:10px;
+
+background:
+
+linear-gradient(
+135deg,
+#25D366,
+#128C7E
+);
+
+color:white;
+
+font-size:17px;
+
+font-weight:800;
+
+cursor:pointer;
+
+box-shadow:
+
+0 12px 30px
+rgba(37,211,102,.25);
+
+transition:.25s;
+
+}
+
+.whatsapp-main i{
+
+font-size:23px;
+
+}
+
+.whatsapp-main:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+
+0 18px 35px
+rgba(37,211,102,.35);
+
+}
+
+.whatsapp-main:active{
+
+transform:scale(.97);
+
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+.section-title{
+
+margin:25px 0 12px;
+
+font-size:14px;
+
+font-weight:700;
+
+color:#cbd5e1;
+
+}
+
+
+/* =========================================
+   QUICK MESSAGE GRID
+========================================= */
+
+.quick-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(2,1fr);
+
+gap:10px;
+
+}
+
+.quick-btn{
+
+border:1px solid rgba(255,255,255,.1);
+
+background:
+
+rgba(255,255,255,.05);
+
+color:#e2e8f0;
+
+padding:13px 10px;
+
+border-radius:14px;
+
+cursor:pointer;
+
+font-size:12px;
+
+font-weight:600;
+
+transition:.25s;
+
+}
+
+.quick-btn:hover{
+
+background:
+
+rgba(96,165,250,.12);
+
+border-color:
+
+rgba(96,165,250,.3);
+
+transform:translateY(-2px);
+
+}
+
+.quick-btn:active{
+
+transform:scale(.96);
+
+}
+
+
+/* =========================================
+   CONTACT INFORMATION
+========================================= */
+
+.contact-box{
+
+margin-top:15px;
+
+background:
+
+rgba(2,6,23,.5);
+
+border:
+
+1px solid rgba(255,255,255,.08);
+
+border-radius:16px;
+
+padding:15px;
+
+}
+
+.contact-row{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:10px;
+
+}
+
+.contact-left{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+min-width:0;
+
+}
+
+.contact-icon{
+
+width:40px;
+
+height:40px;
+
+border-radius:12px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+background:
+
+rgba(37,211,102,.1);
+
+color:#25D366;
+
+font-size:18px;
+
+}
+
+.contact-label{
+
+font-size:11px;
+
+color:#64748b;
+
+}
+
+.contact-number{
+
+font-size:14px;
+
+font-weight:700;
+
+color:#e2e8f0;
+
+margin-top:2px;
+
+}
+
+.copy-btn{
+
+border:none;
+
+padding:9px 12px;
+
+border-radius:10px;
+
+background:#1e293b;
+
+color:#cbd5e1;
+
+cursor:pointer;
+
+font-size:11px;
+
+font-weight:600;
+
+transition:.2s;
+
+}
+
+.copy-btn:hover{
+
+background:#334155;
+
+}
+
+.copy-btn:active{
+
+transform:scale(.94);
+
+}
+
+
+/* =========================================
+   INFO CARDS
+========================================= */
+
+.info-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:10px;
+
+margin-top:15px;
+
+}
+
+.info-card{
+
+text-align:center;
+
+padding:13px 7px;
+
+border-radius:14px;
+
+background:
+
+rgba(255,255,255,.04);
+
+border:
+
+1px solid rgba(255,255,255,.07);
+
+}
+
+.info-card-icon{
+
+font-size:20px;
+
+margin-bottom:5px;
+
+}
+
+.info-card-title{
+
+font-size:10px;
+
+font-weight:700;
+
+color:#e2e8f0;
+
+}
+
+.info-card-text{
+
+font-size:9px;
+
+color:#64748b;
+
+margin-top:3px;
+
+}
+
+
+/* =========================================
+   NOTICE
+========================================= */
+
+.notice{
+
+margin-top:18px;
+
+padding:13px;
+
+border-radius:14px;
+
+background:
+
+rgba(96,165,250,.06);
+
+border:
+
+1px solid rgba(96,165,250,.12);
+
+color:#94a3b8;
+
+font-size:11px;
+
+line-height:1.6;
+
+text-align:center;
+
+}
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+.toast{
+
+position:fixed;
+
+left:50%;
+
+bottom:95px;
+
+transform:
+translate(-50%,20px);
+
+background:
+
+rgba(15,23,42,.95);
+
+border:
+
+1px solid rgba(255,255,255,.15);
+
+color:white;
+
+padding:11px 17px;
+
+border-radius:12px;
+
+font-size:12px;
+
+opacity:0;
+
+pointer-events:none;
+
+transition:.3s;
+
+z-index:10001;
+
+white-space:nowrap;
+
+}
+
+.toast.show{
+
+opacity:1;
+
+transform:
+translate(-50%,0);
+
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(25px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes fadeDown{
+
+from{
+
+opacity:0;
+
+transform:translateY(-15px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes pulse{
+
+0%,100%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.04);
+
+}
+
+}
+
+@keyframes statusPulse{
+
+0%,100%{
+
+opacity:1;
+
+}
+
+50%{
+
+opacity:.35;
+
+}
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:500px){
+
+body{
+
+padding-top:18px;
+
+}
+
+.support-card{
+
+padding:20px;
+
+border-radius:24px;
+
+}
+
+.support-title{
+
+font-size:24px;
+
+}
+
+.support-description{
+
+font-size:13px;
+
+}
+
+.quick-btn{
+
+padding:12px 7px;
+
+font-size:11px;
+
+}
+
+}
+
+
+/* =========================================
+   VERY SMALL PHONES
+========================================= */
+
+@media(max-width:350px){
+
+.support-card{
+
+padding:16px;
+
+}
+
+.quick-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.info-grid{
+
+gap:6px;
+
+}
+
+.info-card{
+
+padding:10px 4px;
+
+}
+
+.brand-logo{
+
+width:65px;
+
+height:65px;
+
+}
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-    <button class="back" onclick="goBack()">⬅ Back</button>
 
-<script>
-function goBack(){
-  window.location.href = "home.html";
-}
-</script>
+<!-- =========================================
+     ZYPER NAVIGATION
+========================================= -->
 
-<div class="box">
+<div id="zyper-navigation"></div>
 
-<h2>📲 Contact Support</h2>
 
-<button onclick="chat()">Chat on WhatsApp</button>
+<!-- =========================================
+     SUPPORT PAGE
+========================================= -->
+
+<main class="support-container">
+
+
+<!-- BRAND -->
+
+<div class="brand">
+
+<img
+src="1.jpg"
+class="brand-logo"
+alt="Zyper Diamond Store">
+
+<div class="brand-name">
+Zyper Diamond Store
+</div>
+
+<p class="brand-subtitle">
+Premium Free Fire Top Up Support
+</p>
 
 </div>
 
-<script>
-function chat(){
-  const num="94751483909";
-  const msg="Hi Bro Web";
 
-  window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`);
+<!-- SUPPORT CARD -->
+
+<section class="support-card">
+
+
+<div class="support-icon">
+
+💬
+
+</div>
+
+
+<h1 class="support-title">
+Contact Support
+</h1>
+
+
+<p class="support-description">
+
+Need help with your order, payment, diamonds,
+or anything else? Our support team is ready
+to help you.
+
+</p>
+
+
+<!-- ONLINE STATUS -->
+
+<div class="status">
+
+<span class="status-dot"></span>
+
+Support Available
+
+</div>
+
+
+<!-- MAIN BUTTON -->
+
+<button
+class="whatsapp-main"
+onclick="openWhatsApp('general')">
+
+<i class="fab fa-whatsapp"></i>
+
+Chat on WhatsApp
+
+</button>
+
+
+<!-- QUICK MESSAGES -->
+
+<div class="section-title">
+
+⚡ Quick Support
+
+</div>
+
+
+<div class="quick-grid">
+
+
+<button
+class="quick-btn"
+onclick="openWhatsApp('order')">
+
+📦 Order Help
+
+</button>
+
+
+<button
+class="quick-btn"
+onclick="openWhatsApp('payment')">
+
+💳 Payment Help
+
+</button>
+
+
+<button
+class="quick-btn"
+onclick="openWhatsApp('topup')">
+
+💎 Top Up Help
+
+</button>
+
+
+<button
+class="quick-btn"
+onclick="openWhatsApp('other')">
+
+❓ Other Question
+
+</button>
+
+
+</div>
+
+
+<!-- CONTACT NUMBER -->
+
+<div class="section-title">
+
+📱 Contact Number
+
+</div>
+
+
+<div class="contact-box">
+
+
+<div class="contact-row">
+
+
+<div class="contact-left">
+
+<div class="contact-icon">
+
+<i class="fab fa-whatsapp"></i>
+
+</div>
+
+
+<div>
+
+<div class="contact-label">
+WhatsApp Support
+</div>
+
+<div class="contact-number">
++94 75 148 3909
+</div>
+
+</div>
+
+</div>
+
+
+<button
+class="copy-btn"
+onclick="copyNumber()">
+
+📋 Copy
+
+</button>
+
+
+</div>
+
+</div>
+
+
+<!-- INFO -->
+
+<div class="info-grid">
+
+
+<div class="info-card">
+
+<div class="info-card-icon">
+⚡
+</div>
+
+<div class="info-card-title">
+Fast Reply
+</div>
+
+<div class="info-card-text">
+Quick support
+</div>
+
+</div>
+
+
+<div class="info-card">
+
+<div class="info-card-icon">
+🔒
+</div>
+
+<div class="info-card-title">
+Secure
+</div>
+
+<div class="info-card-text">
+Trusted support
+</div>
+
+</div>
+
+
+<div class="info-card">
+
+<div class="info-card-icon">
+💎
+</div>
+
+<div class="info-card-title">
+Top Up
+</div>
+
+<div class="info-card-text">
+Game support
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- NOTICE -->
+
+<div class="notice">
+
+💡 Please include your <b>Order ID</b> when
+contacting us about an existing order.
+This helps us assist you faster.
+
+</div>
+
+
+</section>
+
+</main>
+
+
+<!-- TOAST -->
+
+<div
+id="toast"
+class="toast">
+
+Copied successfully
+
+</div>
+
+
+<script>
+
+/* =========================================
+   WHATSAPP SETTINGS
+========================================= */
+
+const WHATSAPP_NUMBER =
+"94751483909";
+
+
+/* =========================================
+   OPEN WHATSAPP
+========================================= */
+
+function openWhatsApp(type){
+
+let message =
+"Hi Zyper Diamond Store!";
+
+
+if(type === "order"){
+
+message =
+"Hi Zyper Diamond Store! I need help with my order. My Order ID is: ";
+
 }
+
+else if(type === "payment"){
+
+message =
+"Hi Zyper Diamond Store! I need help with my payment.";
+
+}
+
+else if(type === "topup"){
+
+message =
+"Hi Zyper Diamond Store! I need help with a Free Fire top up.";
+
+}
+
+else if(type === "other"){
+
+message =
+"Hi Zyper Diamond Store! I have a question.";
+
+}
+
+
+const url =
+"https://wa.me/" +
+WHATSAPP_NUMBER +
+"?text=" +
+encodeURIComponent(message);
+
+
+window.open(
+url,
+"_blank"
+);
+
+}
+
+
+/* =========================================
+   COPY NUMBER
+========================================= */
+
+async function copyNumber(){
+
+try{
+
+await navigator.clipboard.writeText(
+"+" + WHATSAPP_NUMBER
+);
+
+showToast(
+"📋 WhatsApp number copied"
+);
+
+}catch(error){
+
+/* Fallback */
+
+const textarea =
+document.createElement("textarea");
+
+textarea.value =
+"+" + WHATSAPP_NUMBER;
+
+document.body.appendChild(
+textarea
+);
+
+textarea.select();
+
+document.execCommand("copy");
+
+textarea.remove();
+
+showToast(
+"📋 WhatsApp number copied"
+);
+
+}
+
+}
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+const toast =
+document.getElementById("toast");
+
+toast.textContent =
+message;
+
+toast.classList.add("show");
+
+clearTimeout(toastTimer);
+
+toastTimer =
+setTimeout(function(){
+
+toast.classList.remove("show");
+
+},2000);
+
+}
+
 </script>
 
+
 </body>
+
 </html>
