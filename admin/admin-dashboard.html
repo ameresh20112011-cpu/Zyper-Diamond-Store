@@ -2,128 +2,134 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Admin Dashboard</title>
 
 <link rel="stylesheet" href="./admin.css">
 
 <style>
-.wallet-panel,
-.redeem-panel {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 18px;
-    padding: 22px;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.18);
+
+.worker-panel{
+    margin:25px 0;
+    padding:25px;
+    background:rgba(15,23,42,.96);
+    border:1px solid rgba(96,165,250,.25);
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
-.wallet-panel h2,
-.redeem-panel h2 {
-    margin-top: 0;
+.worker-panel h2{
+    margin:0 0 8px;
 }
 
-.wallet-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 15px;
+.worker-panel > p{
+    color:#94a3b8;
+    margin-bottom:20px;
 }
 
-.wallet-stat {
-    padding: 18px;
-    border-radius: 14px;
-    background: rgba(0,0,0,.2);
+.worker-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
 }
 
-.wallet-stat small {
-    display: block;
-    opacity: .7;
-    margin-bottom: 7px;
+.worker-box{
+    padding:18px;
+    border-radius:15px;
+    background:rgba(30,41,59,.8);
 }
 
-.wallet-stat strong {
-    font-size: 22px;
+.worker-box label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
 }
 
-.redeem-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr auto;
-    gap: 12px;
-    margin-top: 15px;
+.worker-box input{
+    width:100%;
+    box-sizing:border-box;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #334155;
+    background:#0f172a;
+    color:white;
+    outline:none;
 }
 
-.redeem-form input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 13px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,.15);
-    background: rgba(0,0,0,.25);
-    color: white;
-    outline: none;
+.worker-box input:focus{
+    border-color:#60a5fa;
 }
 
-.redeem-form button,
-.wallet-button {
-    border: 0;
-    border-radius: 10px;
-    padding: 13px 18px;
-    cursor: pointer;
-    font-weight: 700;
+.worker-button{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:0;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
+    color:white;
+    background:#2563eb;
 }
 
-.create-redeem-btn {
-    background: #22c55e;
-    color: white;
+.worker-button:hover{
+    opacity:.9;
 }
 
-.check-redeem-btn {
-    background: #3b82f6;
-    color: white;
+.worker-button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
 }
 
-.redeem-result {
-    margin-top: 15px;
-    padding: 15px;
-    border-radius: 10px;
-    background: rgba(0,0,0,.25);
-    display: none;
-    word-break: break-word;
+.worker-button.green{
+    background:#16a34a;
 }
 
-.redeem-code-display {
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    margin: 10px 0;
+.worker-result{
+    margin-top:20px;
+    padding:15px;
+    border-radius:12px;
+    background:#020617;
+    color:#cbd5e1;
+    white-space:pre-wrap;
+    word-break:break-word;
+    min-height:30px;
 }
 
-.copy-code {
-    background: #8b5cf6;
-    color: white;
+.secret-warning{
+    margin-top:10px;
+    color:#fbbf24;
+    font-size:13px;
+    line-height:1.5;
 }
 
-@media(max-width:900px) {
-    .wallet-grid {
-        grid-template-columns: 1fr;
+@media(max-width:700px){
+
+    .worker-panel{
+        padding:16px;
     }
 
-    .redeem-form {
-        grid-template-columns: 1fr;
+    .worker-grid{
+        grid-template-columns:1fr;
     }
+
 }
+
 </style>
 
 </head>
 
+
 <body>
 
+
 <div id="app" style="display:none;">
+
 
 <aside class="sidebar">
 
@@ -142,113 +148,37 @@
 </aside>
 
 
+
 <main class="main">
+
 
 <div class="topbar">
 
     <div>
-        <h1>Orders Dashboard</h1>
+
+        <h1>
+            Orders Dashboard
+        </h1>
 
         <p class="subtitle">
             Zyper Diamond Store
         </p>
+
     </div>
 
-    <button id="refresh"
-            class="refresh-btn">
+
+    <button
+        id="refresh"
+        class="refresh-btn"
+    >
         ↻ Refresh
     </button>
 
 </div>
 
 
-<!-- =========================================
-     WALLET ADMIN
-========================================= -->
 
-<div class="wallet-panel">
-
-    <h2>💰 Customer Wallet</h2>
-
-    <p>
-        Create a secure redeem code and assign wallet
-        money to a specific Firebase customer.
-    </p>
-
-    <div class="redeem-form">
-
-        <input
-            type="text"
-            id="walletUserId"
-            placeholder="Customer Firebase UID">
-
-        <input
-            type="email"
-            id="walletEmail"
-            placeholder="Customer Email (optional)">
-
-        <input
-            type="number"
-            id="walletAmount"
-            placeholder="Amount LKR"
-            min="1"
-            max="1000000">
-
-        <button
-            id="createRedeem"
-            class="create-redeem-btn">
-            🎟️ Create Code
-        </button>
-
-    </div>
-
-
-    <div
-        id="redeemResult"
-        class="redeem-result">
-
-    </div>
-
-</div>
-
-
-<!-- =========================================
-     CHECK REDEEM CODE
-========================================= -->
-
-<div class="redeem-panel">
-
-    <h2>🔎 Check Redeem Code</h2>
-
-    <div class="redeem-form">
-
-        <input
-            type="text"
-            id="checkCode"
-            placeholder="XXXX-XXXX-XXXX"
-            maxlength="14">
-
-        <button
-            id="checkRedeem"
-            class="check-redeem-btn">
-            🔎 Check Code
-        </button>
-
-    </div>
-
-
-    <div
-        id="checkResult"
-        class="redeem-result">
-
-    </div>
-
-</div>
-
-
-<!-- =========================================
-     DATE SEARCH
-========================================= -->
+<!-- DATE SEARCH -->
 
 <div class="date-search">
 
@@ -258,95 +188,263 @@
 
     <input
         type="date"
-        id="orderDate">
+        id="orderDate"
+    >
 
     <button
         id="dateSearch"
-        class="date-search-btn">
+        class="date-search-btn"
+    >
         🔎 Search
     </button>
 
     <button
         id="todayButton"
-        class="today-btn">
+        class="today-btn"
+    >
         Today
     </button>
 
 </div>
 
 
-<!-- =========================================
-     DASHBOARD CARDS
-========================================= -->
+
+<!-- STATISTICS -->
 
 <div class="cards">
 
-<div class="card">
+    <div class="card">
 
-    <h3>Orders</h3>
+        <h3>
+            Orders
+        </h3>
 
-    <h2 id="totalOrders">
-        0
-    </h2>
+        <h2 id="totalOrders">
+            0
+        </h2>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            Revenue
+        </h3>
+
+        <h2>
+            Rs.
+            <span id="revenue">
+                0
+            </span>
+        </h2>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            Pending
+        </h3>
+
+        <h2 id="pendingOrders">
+            0
+        </h2>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            Success
+        </h3>
+
+        <h2 id="successOrders">
+            0
+        </h2>
+
+    </div>
 
 </div>
 
 
-<div class="card">
 
-    <h3>Revenue</h3>
+<!-- =====================================
+     WALLET / REDEEM
+===================================== -->
+
+<div class="worker-panel">
 
     <h2>
-        Rs.
-        <span id="revenue">
-            0
-        </span>
+        💰 Wallet & Redeem Code
     </h2>
 
+    <p>
+        Create and check customer wallet redeem codes.
+    </p>
+
+
+    <div class="worker-grid">
+
+
+        <!-- ADMIN SECRET -->
+
+        <div class="worker-box">
+
+            <label for="adminSecret">
+                🔐 Admin Secret
+            </label>
+
+            <input
+                type="password"
+                id="adminSecret"
+                placeholder="Enter ADMIN_SECRET"
+                autocomplete="off"
+            >
+
+            <div class="secret-warning">
+
+                Your ADMIN_SECRET is not stored in
+                admin.js. Enter it here when performing
+                an admin action.
+
+            </div>
+
+        </div>
+
+
+        <!-- USER ID -->
+
+        <div class="worker-box">
+
+            <label for="redeemUserId">
+                👤 Customer Firebase UID
+            </label>
+
+            <input
+                type="text"
+                id="redeemUserId"
+                placeholder="Customer Firebase UID"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="worker-box">
+
+            <label for="redeemEmail">
+                📧 Customer Email
+            </label>
+
+            <input
+                type="email"
+                id="redeemEmail"
+                placeholder="Customer email"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <!-- AMOUNT -->
+
+        <div class="worker-box">
+
+            <label for="redeemAmount">
+                💰 Amount (LKR)
+            </label>
+
+            <input
+                type="number"
+                id="redeemAmount"
+                placeholder="Example: 1000"
+                min="1"
+                max="1000000"
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <div class="worker-grid"
+         style="margin-top:15px;">
+
+
+        <!-- CREATE -->
+
+        <div class="worker-box">
+
+            <button
+                id="createRedeem"
+                class="worker-button green"
+            >
+                🎟️ Create Redeem Code
+            </button>
+
+        </div>
+
+
+        <!-- CHECK -->
+
+        <div class="worker-box">
+
+            <label for="checkRedeemCode">
+                🔎 Redeem Code
+            </label>
+
+            <input
+                type="text"
+                id="checkRedeemCode"
+                placeholder="XXXX-XXXX-XXXX"
+                maxlength="14"
+                autocomplete="off"
+            >
+
+            <button
+                id="checkRedeem"
+                class="worker-button"
+            >
+                🔎 Check Redeem Code
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="workerResult"
+        class="worker-result"
+    >
+        Worker result will appear here.
+    </div>
+
 </div>
 
 
-<div class="card">
 
-    <h3>Pending</h3>
-
-    <h2 id="pendingOrders">
-        0
-    </h2>
-
-</div>
-
-
-<div class="card">
-
-    <h3>Success</h3>
-
-    <h2 id="successOrders">
-        0
-    </h2>
-
-</div>
-
-</div>
-
-
-<!-- =========================================
-     SEARCH
-========================================= -->
+<!-- TEXT SEARCH -->
 
 <div class="search-box">
 
     <input
         id="search"
         type="text"
-        placeholder="Search Order ID, UID, customer, product...">
+        placeholder="Search Order ID, UID, customer, product..."
+    >
 
 </div>
 
 
-<!-- =========================================
-     ORDERS
-========================================= -->
+
+<!-- ORDERS -->
 
 <div class="table-container">
 
@@ -394,13 +492,15 @@
 
 </main>
 
+
 </div>
 
 
 <script
-    type="module"
-    src="./admin.js">
+type="module"
+src="./admin.js">
 </script>
+
 
 </body>
 
