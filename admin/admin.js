@@ -1,7 +1,6 @@
 import { auth, db } from "./firebase.js";
 
 import {
-    signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -16,7 +15,7 @@ import {
 
 
 /* =====================================================
-   CLOUDFLARE WORKER
+   SETTINGS
 ===================================================== */
 
 const WORKER_URL =
@@ -24,7 +23,6 @@ const WORKER_URL =
 
 
 let allOrders = [];
-
 let selectedDate = "";
 
 
@@ -67,115 +65,6 @@ async function checkAdmin(user) {
 
 
 /* =====================================================
-   LOGIN
-===================================================== */
-
-const loginForm =
-    document.getElementById("loginForm");
-
-
-if (loginForm) {
-
-    loginForm.addEventListener(
-        "submit",
-        async function (e) {
-
-            e.preventDefault();
-
-            const email =
-                document.getElementById(
-                    "email"
-                ).value.trim();
-
-            const password =
-                document.getElementById(
-                    "password"
-                ).value;
-
-            const msg =
-                document.getElementById(
-                    "msg"
-                );
-
-            const button =
-                document.getElementById(
-                    "login"
-                );
-
-
-            if (!email || !password) {
-
-                msg.textContent =
-                    "Enter email and password.";
-
-                return;
-            }
-
-
-            button.disabled = true;
-
-            button.textContent =
-                "LOGIN...";
-
-
-            try {
-
-                const result =
-                    await signInWithEmailAndPassword(
-                        auth,
-                        email,
-                        password
-                    );
-
-
-                const admin =
-                    await checkAdmin(
-                        result.user
-                    );
-
-
-                if (!admin) {
-
-                    await signOut(auth);
-
-                    msg.textContent =
-                        "❌ You are not an admin.";
-
-                    button.disabled =
-                        false;
-
-                    button.textContent =
-                        "LOGIN";
-
-                    return;
-                }
-
-
-                window.location.href =
-                    "./admin-dashboard.html";
-
-
-            } catch (error) {
-
-                console.error(error);
-
-                msg.textContent =
-                    error.message;
-
-                button.disabled =
-                    false;
-
-                button.textContent =
-                    "LOGIN";
-            }
-
-        }
-    );
-
-}
-
-
-/* =====================================================
    DASHBOARD AUTH
 ===================================================== */
 
@@ -213,12 +102,13 @@ if (orderTable) {
             }
 
 
-            document.getElementById("app")
-                .style.display = "block";
+            const app =
+                document.getElementById("app");
 
 
-            selectedDate =
-                getTodayString();
+            if (app) {
+                app.style.display = "block";
+            }
 
 
             const dateInput =
@@ -227,265 +117,17 @@ if (orderTable) {
                 );
 
 
-            if (dateInput) {
+            selectedDate =
+                getTodayString();
 
+
+            if (dateInput) {
                 dateInput.value =
                     selectedDate;
-
             }
 
 
             await loadOrders();
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   CREATE REDEEM CODE
-===================================================== */
-
-const createRedeem =
-    document.getElementById(
-        "createRedeem"
-    );
-
-
-if (createRedeem) {
-
-    createRedeem.addEventListener(
-        "click",
-        async function () {
-
-            const secret =
-                document.getElementById(
-                    "adminSecret"
-                ).value.trim();
-
-
-            const amount =
-                Number(
-                    document.getElementById(
-                        "redeemAmount"
-                    ).value
-                );
-
-
-            const resultBox =
-                document.getElementById(
-                    "redeemResult"
-                );
-
-
-            const codeBox =
-                document.getElementById(
-                    "redeemCode"
-                );
-
-
-            const valueBox =
-                document.getElementById(
-                    "redeemValue"
-                );
-
-
-            if (!secret) {
-
-                alert(
-                    "Please enter Admin Secret Key."
-                );
-
-                return;
-            }
-
-
-            if (
-                !Number.isFinite(amount) ||
-                amount <= 0
-            ) {
-
-                alert(
-                    "Please enter a valid amount."
-                );
-
-                return;
-            }
-
-
-            if (amount > 1000000) {
-
-                alert(
-                    "Maximum amount is LKR 1,000,000."
-                );
-
-                return;
-            }
-
-
-            createRedeem.disabled =
-                true;
-
-            createRedeem.textContent =
-                "Creating...";
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        WORKER_URL,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json",
-
-                                "X-Admin-Key":
-                                    secret
-                            },
-
-                            body:
-                                JSON.stringify({
-                                    action:
-                                        "create_redeem_code",
-
-                                    amount:
-                                        amount
-                                })
-                        }
-                    );
-
-
-                const result =
-                    await response.json();
-
-
-                if (
-                    !response.ok ||
-                    !result.success
-                ) {
-
-                    throw new Error(
-                        result.message ||
-                        "Failed to create redeem code."
-                    );
-
-                }
-
-
-                codeBox.textContent =
-                    result.code;
-
-
-                valueBox.textContent =
-                    "Value: LKR " +
-                    Number(
-                        result.amount
-                    ).toLocaleString(
-                        "en-LK"
-                    );
-
-
-                resultBox.style.display =
-                    "block";
-
-
-                /*
-                 * Clear amount.
-                 */
-
-                document.getElementById(
-                    "redeemAmount"
-                ).value = "";
-
-
-            } catch (error) {
-
-                console.error(
-                    "Redeem error:",
-                    error
-                );
-
-
-                alert(
-                    error.message
-                );
-
-            } finally {
-
-                createRedeem.disabled =
-                    false;
-
-                createRedeem.textContent =
-                    "💎 Create Redeem Code";
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   COPY REDEEM CODE
-===================================================== */
-
-const copyRedeem =
-    document.getElementById(
-        "copyRedeem"
-    );
-
-
-if (copyRedeem) {
-
-    copyRedeem.addEventListener(
-        "click",
-        async function () {
-
-            const code =
-                document.getElementById(
-                    "redeemCode"
-                ).textContent.trim();
-
-
-            if (!code) {
-                return;
-            }
-
-
-            try {
-
-                await navigator.clipboard.writeText(
-                    code
-                );
-
-                copyRedeem.textContent =
-                    "✅ Copied!";
-
-
-                setTimeout(
-                    function () {
-
-                        copyRedeem.textContent =
-                            "📋 Copy Code";
-
-                    },
-                    1500
-                );
-
-
-            } catch {
-
-                alert(
-                    "Copy failed. Code: " +
-                    code
-                );
-
-            }
 
         }
     );
@@ -499,8 +141,7 @@ if (copyRedeem) {
 
 function getTodayString() {
 
-    const now =
-        new Date();
+    const now = new Date();
 
     const year =
         now.getFullYear();
@@ -508,31 +149,20 @@ function getTodayString() {
     const month =
         String(
             now.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
+        ).padStart(2, "0");
 
     const day =
         String(
             now.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
+        ).padStart(2, "0");
 
-    return (
-        year +
-        "-" +
-        month +
-        "-" +
-        day
-    );
+
+    return `${year}-${month}-${day}`;
 }
 
 
 /* =====================================================
-   CONVERT FIREBASE DATE
+   FIREBASE TIMESTAMP → DATE
 ===================================================== */
 
 function convertToDate(value) {
@@ -543,8 +173,7 @@ function convertToDate(value) {
 
 
     if (
-        typeof value.toDate ===
-        "function"
+        typeof value.toDate === "function"
     ) {
 
         return value.toDate();
@@ -552,9 +181,7 @@ function convertToDate(value) {
     }
 
 
-    if (
-        value instanceof Date
-    ) {
+    if (value instanceof Date) {
 
         return value;
 
@@ -566,9 +193,7 @@ function convertToDate(value) {
     ) {
 
         return new Date(
-            Number(
-                value.seconds
-            ) * 1000
+            Number(value.seconds) * 1000
         );
 
     }
@@ -614,27 +239,15 @@ function getDateString(value) {
     const month =
         String(
             date.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
+        ).padStart(2, "0");
 
     const day =
         String(
             date.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
+        ).padStart(2, "0");
 
 
-    return (
-        year +
-        "-" +
-        month +
-        "-" +
-        day
-    );
+    return `${year}-${month}-${day}`;
 }
 
 
@@ -656,18 +269,12 @@ function formatDate(timestamp) {
     const hour =
         String(
             date.getHours()
-        ).padStart(
-            2,
-            "0"
-        );
+        ).padStart(2, "0");
 
     const minute =
         String(
             date.getMinutes()
-        ).padStart(
-            2,
-            "0"
-        );
+        ).padStart(2, "0");
 
     const year =
         date.getFullYear();
@@ -675,36 +282,20 @@ function formatDate(timestamp) {
     const month =
         String(
             date.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
+        ).padStart(2, "0");
 
     const day =
         String(
             date.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
+        ).padStart(2, "0");
 
 
-    return (
-        hour +
-        ":" +
-        minute +
-        " , " +
-        year +
-        "/" +
-        month +
-        "/" +
-        day
-    );
+    return `${hour}:${minute} , ${year}/${month}/${day}`;
 }
 
 
 /* =====================================================
-   GET TIME
+   SORT TIME
 ===================================================== */
 
 function getTime(timestamp) {
@@ -767,11 +358,9 @@ async function loadOrders() {
 
                 allOrders.push({
 
-                    id:
-                        item.id,
+                    id: item.id,
 
-                    data:
-                        item.data()
+                    data: item.data()
 
                 });
 
@@ -785,7 +374,8 @@ async function loadOrders() {
                 return (
                     getTime(
                         b.data.createdAt
-                    ) -
+                    )
+                    -
                     getTime(
                         a.data.createdAt
                     )
@@ -796,7 +386,6 @@ async function loadOrders() {
 
 
         filterOrders();
-
 
     } catch (error) {
 
@@ -813,7 +402,6 @@ async function loadOrders() {
                 </td>
             </tr>
         `;
-
     }
 }
 
@@ -824,19 +412,19 @@ async function loadOrders() {
 
 function filterOrders() {
 
-    const input =
+    const dateInput =
         document.getElementById(
             "orderDate"
         );
 
 
-    if (!input) {
+    if (!dateInput) {
         return;
     }
 
 
     selectedDate =
-        input.value;
+        dateInput.value;
 
 
     if (!selectedDate) {
@@ -854,7 +442,8 @@ function filterOrders() {
                 return (
                     getDateString(
                         item.data.createdAt
-                    ) ===
+                    )
+                    ===
                     selectedDate
                 );
 
@@ -880,12 +469,14 @@ function renderOrders(orders) {
         );
 
 
+    if (!table) {
+        return;
+    }
+
+
     let total = 0;
-
     let revenue = 0;
-
     let pending = 0;
-
     let success = 0;
 
 
@@ -909,6 +500,7 @@ function renderOrders(orders) {
             0,
             0
         );
+
 
         return;
     }
@@ -934,7 +526,7 @@ function renderOrders(orders) {
                 "-";
 
 
-            const uid =
+            const firebaseUID =
                 order.userId ||
                 order.uid ||
                 "-";
@@ -995,9 +587,8 @@ function renderOrders(orders) {
 
 
             if (
-                String(status)
-                    .toLowerCase() ===
-                "pending"
+                String(status).toLowerCase()
+                === "pending"
             ) {
 
                 pending++;
@@ -1006,9 +597,8 @@ function renderOrders(orders) {
 
 
             if (
-                String(status)
-                    .toLowerCase() ===
-                "success"
+                String(status).toLowerCase()
+                === "success"
             ) {
 
                 success++;
@@ -1035,7 +625,7 @@ function renderOrders(orders) {
                 </td>
 
                 <td>
-                    ${escapeHTML(uid)}
+                    ${escapeHTML(firebaseUID)}
                 </td>
 
                 <td>
@@ -1047,7 +637,8 @@ function renderOrders(orders) {
                 </td>
 
                 <td>
-                    Rs. ${price.toLocaleString("en-LK")}
+                    Rs.
+                    ${price.toLocaleString("en-LK")}
                 </td>
 
                 <td>
@@ -1059,10 +650,11 @@ function renderOrders(orders) {
                 </td>
 
                 <td>
-                    Rs. ${amount.toLocaleString("en-LK")}
+                    Rs.
+                    ${amount.toLocaleString("en-LK")}
                 </td>
 
-                <td>
+                <td class="${escapeHTML(status)}">
                     ${escapeHTML(status)}
                 </td>
 
@@ -1071,14 +663,16 @@ function renderOrders(orders) {
                     <button
                         class="action-btn success-btn"
                         data-id="${escapeHTML(item.id)}"
-                        data-status="Success">
+                        data-status="Success"
+                        type="button">
                         ✔
                     </button>
 
                     <button
                         class="action-btn reject-btn"
                         data-id="${escapeHTML(item.id)}"
-                        data-status="Rejected">
+                        data-status="Rejected"
+                        type="button">
                         ✖
                     </button>
 
@@ -1127,7 +721,7 @@ function renderOrders(orders) {
 
 
 /* =====================================================
-   UPDATE CARDS
+   UPDATE DASHBOARD CARDS
 ===================================================== */
 
 function updateCards(
@@ -1137,32 +731,61 @@ function updateCards(
     success
 ) {
 
-    document.getElementById(
-        "totalOrders"
-    ).textContent =
-        total;
+    const totalElement =
+        document.getElementById(
+            "totalOrders"
+        );
 
+    const revenueElement =
+        document.getElementById(
+            "revenue"
+        );
 
-    document.getElementById(
-        "revenue"
-    ).textContent =
-        Number(
-            revenue
-        ).toLocaleString(
-            "en-LK"
+    const pendingElement =
+        document.getElementById(
+            "pendingOrders"
+        );
+
+    const successElement =
+        document.getElementById(
+            "successOrders"
         );
 
 
-    document.getElementById(
-        "pendingOrders"
-    ).textContent =
-        pending;
+    if (totalElement) {
+
+        totalElement.textContent =
+            total;
+
+    }
 
 
-    document.getElementById(
-        "successOrders"
-    ).textContent =
-        success;
+    if (revenueElement) {
+
+        revenueElement.textContent =
+            Number(
+                revenue
+            ).toLocaleString(
+                "en-LK"
+            );
+
+    }
+
+
+    if (pendingElement) {
+
+        pendingElement.textContent =
+            pending;
+
+    }
+
+
+    if (successElement) {
+
+        successElement.textContent =
+            success;
+
+    }
 }
 
 
@@ -1188,7 +811,7 @@ if (dateSearch) {
                 );
 
 
-            if (!input.value) {
+            if (!input || !input.value) {
 
                 alert(
                     "Please select a date."
@@ -1206,7 +829,6 @@ if (dateSearch) {
 
         }
     );
-
 }
 
 
@@ -1233,12 +855,11 @@ if (orderDate) {
 
         }
     );
-
 }
 
 
 /* =====================================================
-   TODAY
+   TODAY BUTTON
 ===================================================== */
 
 const todayButton =
@@ -1257,8 +878,18 @@ if (todayButton) {
                 getTodayString();
 
 
-            orderDate.value =
-                today;
+            const input =
+                document.getElementById(
+                    "orderDate"
+                );
+
+
+            if (input) {
+
+                input.value =
+                    today;
+
+            }
 
 
             selectedDate =
@@ -1269,7 +900,6 @@ if (todayButton) {
 
         }
     );
-
 }
 
 
@@ -1302,7 +932,8 @@ if (search) {
                         return (
                             getDateString(
                                 item.data.createdAt
-                            ) ===
+                            )
+                            ===
                             selectedDate
                         );
 
@@ -1320,9 +951,16 @@ if (search) {
                                 item.data;
 
 
+                            const orderId =
+                                order.orderId ||
+                                order.orderID ||
+                                order.orderNumber ||
+                                item.id;
+
+
                             const values = [
 
-                                order.orderId,
+                                orderId,
 
                                 order.customerName,
 
@@ -1359,10 +997,8 @@ if (search) {
                                 function (value) {
 
                                     return (
-                                        value !==
-                                        undefined &&
-                                        value !==
-                                        null &&
+                                        value !== undefined &&
+                                        value !== null &&
                                         String(value)
                                             .toLowerCase()
                                             .includes(text)
@@ -1383,7 +1019,6 @@ if (search) {
 
         }
     );
-
 }
 
 
@@ -1403,8 +1038,7 @@ if (refresh) {
         "click",
         async function () {
 
-            refresh.disabled =
-                true;
+            refresh.disabled = true;
 
             refresh.textContent =
                 "Loading...";
@@ -1413,15 +1047,13 @@ if (refresh) {
             await loadOrders();
 
 
-            refresh.disabled =
-                false;
+            refresh.disabled = false;
 
             refresh.textContent =
                 "↻ Refresh";
 
         }
     );
-
 }
 
 
@@ -1441,17 +1073,21 @@ if (logout) {
         "click",
         async function () {
 
-            await signOut(
-                auth
-            );
+            try {
 
+                await signOut(
+                    auth
+                );
 
-            window.location.href =
-                "./admin-login.html";
+            } finally {
+
+                window.location.href =
+                    "./admin-login.html";
+
+            }
 
         }
     );
-
 }
 
 
@@ -1513,10 +1149,10 @@ async function changeStatus(
 
         await loadOrders();
 
-
     } catch (error) {
 
         console.error(
+            "Status update error:",
             error
         );
 
@@ -1524,8 +1160,407 @@ async function changeStatus(
         alert(
             "Failed to update order."
         );
-
     }
+}
+
+
+/* =====================================================
+   CREATE WALLET REDEEM CODE
+===================================================== */
+
+const createRedeem =
+    document.getElementById(
+        "createRedeem"
+    );
+
+
+if (createRedeem) {
+
+    createRedeem.addEventListener(
+        "click",
+        async function () {
+
+            const secretInput =
+                document.getElementById(
+                    "adminSecret"
+                );
+
+
+            const amountInput =
+                document.getElementById(
+                    "redeemAmount"
+                );
+
+
+            const resultBox =
+                document.getElementById(
+                    "redeemResult"
+                );
+
+
+            const codeBox =
+                document.getElementById(
+                    "redeemCode"
+                );
+
+
+            const valueBox =
+                document.getElementById(
+                    "redeemValue"
+                );
+
+
+            if (!secretInput) {
+                return;
+            }
+
+
+            if (!amountInput) {
+                return;
+            }
+
+
+            const secret =
+                secretInput.value.trim();
+
+
+            const amount =
+                Number(
+                    amountInput.value
+                );
+
+
+            if (!secret) {
+
+                alert(
+                    "Please enter your Admin Secret Key."
+                );
+
+                secretInput.focus();
+
+                return;
+            }
+
+
+            if (
+                !Number.isFinite(amount) ||
+                amount <= 0 ||
+                amount > 1000000
+            ) {
+
+                alert(
+                    "Enter a valid amount between LKR 1 and LKR 1,000,000."
+                );
+
+                amountInput.focus();
+
+                return;
+            }
+
+
+            createRedeem.disabled =
+                true;
+
+
+            createRedeem.textContent =
+                "⏳ Creating...";
+
+
+            if (resultBox) {
+
+                resultBox.style.display =
+                    "none";
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        WORKER_URL,
+                        {
+                            method:
+                                "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "X-Admin-Key":
+                                    secret
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    action:
+                                        "create_redeem_code",
+
+                                    amount:
+                                        amount
+
+                                })
+
+                        }
+                    );
+
+
+                let data = null;
+
+
+                try {
+
+                    data =
+                        await response.json();
+
+                } catch {
+
+                    data = null;
+
+                }
+
+
+                if (
+                    !response.ok ||
+                    !data ||
+                    !data.success
+                ) {
+
+                    const message =
+                        data &&
+                        data.message
+                            ? data.message
+                            : `Server error (${response.status})`;
+
+
+                    throw new Error(
+                        message
+                    );
+                }
+
+
+                if (!data.code) {
+
+                    throw new Error(
+                        "Server did not return a redeem code."
+                    );
+                }
+
+
+                if (codeBox) {
+
+                    codeBox.textContent =
+                        data.code;
+
+                }
+
+
+                if (valueBox) {
+
+                    valueBox.textContent =
+                        `Wallet Value: LKR ${Number(
+                            data.amount
+                        ).toLocaleString("en-LK")}`;
+
+                }
+
+
+                if (resultBox) {
+
+                    resultBox.style.display =
+                        "block";
+
+                }
+
+
+                /*
+                 * Clear sensitive secret
+                 * from the input after success.
+                 */
+
+                secretInput.value =
+                    "";
+
+
+                amountInput.value =
+                    "";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Redeem creation error:",
+                    error
+                );
+
+
+                alert(
+                    error.message ||
+                    "Failed to create redeem code."
+                );
+
+            } finally {
+
+                createRedeem.disabled =
+                    false;
+
+                createRedeem.textContent =
+                    "💎 Create Redeem Code";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   COPY REDEEM CODE
+===================================================== */
+
+const copyRedeem =
+    document.getElementById(
+        "copyRedeem"
+    );
+
+
+if (copyRedeem) {
+
+    copyRedeem.addEventListener(
+        "click",
+        async function () {
+
+            const codeBox =
+                document.getElementById(
+                    "redeemCode"
+                );
+
+
+            if (!codeBox) {
+                return;
+            }
+
+
+            const code =
+                codeBox.textContent.trim();
+
+
+            if (!code) {
+
+                alert(
+                    "No redeem code available."
+                );
+
+                return;
+            }
+
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    code
+                );
+
+
+                const oldText =
+                    copyRedeem.textContent;
+
+
+                copyRedeem.textContent =
+                    "✅ Copied!";
+
+
+                setTimeout(
+                    function () {
+
+                        copyRedeem.textContent =
+                            oldText;
+
+                    },
+                    1500
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Copy error:",
+                    error
+                );
+
+
+                /*
+                 * Fallback for browsers
+                 * that block clipboard API.
+                 */
+
+                const textarea =
+                    document.createElement(
+                        "textarea"
+                    );
+
+
+                textarea.value =
+                    code;
+
+
+                textarea.style.position =
+                    "fixed";
+
+                textarea.style.opacity =
+                    "0";
+
+
+                document.body.appendChild(
+                    textarea
+                );
+
+
+                textarea.focus();
+
+                textarea.select();
+
+
+                try {
+
+                    document.execCommand(
+                        "copy"
+                    );
+
+                    copyRedeem.textContent =
+                        "✅ Copied!";
+
+
+                    setTimeout(
+                        function () {
+
+                            copyRedeem.textContent =
+                                "📋 Copy Code";
+
+                        },
+                        1500
+                    );
+
+                } catch {
+
+                    alert(
+                        "Copy failed. Please copy the code manually."
+                    );
+
+                }
+
+
+                textarea.remove();
+
+            }
+
+        }
+    );
+
 }
 
 
@@ -1541,7 +1576,6 @@ function escapeHTML(value) {
     ) {
 
         return "";
-
     }
 
 
