@@ -1,0 +1,1199 @@
+/* =====================================================
+   ZYPER RECHARGE PAYMENT PAGE
+===================================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+
+:root{
+
+    --bg:#f5f6f8;
+
+    --white:#ffffff;
+
+    --text:#24272b;
+
+    --muted:#7b8490;
+
+    --purple:#a64fc4;
+
+    --purple-dark:#8e36ae;
+
+    --purple-soft:#f8effc;
+
+    --border:#e5e7eb;
+
+    --green:#22c55e;
+
+    --shadow:
+        0 12px 35px
+        rgba(15,23,42,.08);
+
+}
+
+
+body{
+
+    margin:0;
+
+    min-height:100vh;
+
+    padding-bottom:95px !important;
+
+    font-family:
+        "Poppins",
+        Arial,
+        sans-serif;
+
+    background:
+        var(--bg);
+
+    color:
+        var(--text);
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.recharge-header{
+
+    width:100%;
+
+    min-height:105px;
+
+    padding:
+        18px 6%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:18px;
+
+    background:#ffffff;
+
+    border-bottom:
+        1px solid
+        #eceff3;
+
+}
+
+
+.recharge-brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.brand-logo{
+
+    width:50px;
+
+    height:50px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:15px;
+
+    font-size:24px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #20c8f2,
+            #755cf7
+        );
+
+    box-shadow:
+        0 8px 22px
+        rgba(86,104,240,.25);
+
+}
+
+
+.brand-text{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.brand-text strong{
+
+    color:#111827;
+
+    font-size:22px;
+
+    line-height:1;
+
+    letter-spacing:3px;
+
+}
+
+
+.brand-text span{
+
+    margin-top:5px;
+
+    color:#71809b;
+
+    font-size:9px;
+
+    font-weight:600;
+
+    letter-spacing:4px;
+
+}
+
+
+/* =====================================================
+   HEADER WALLET
+===================================================== */
+
+.header-wallet{
+
+    width:fit-content;
+
+    height:48px;
+
+    padding:
+        0 16px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    border-radius:999px;
+
+    color:#ffffff;
+
+    text-decoration:none;
+
+    white-space:nowrap;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ad4fca,
+            #963db7
+        );
+
+    box-shadow:
+        0 5px 14px
+        rgba(134,54,171,.22);
+
+}
+
+
+.wallet-icon{
+
+    font-size:17px;
+
+}
+
+
+#headerWalletBalance{
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.recharge-page{
+
+    width:100%;
+
+    max-width:760px;
+
+    margin:auto;
+
+    padding:
+        30px 20px 40px;
+
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.page-heading{
+
+    margin-bottom:24px;
+
+}
+
+
+.mini-title{
+
+    color:
+        var(--purple);
+
+    font-size:10px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+}
+
+
+.page-heading h1{
+
+    margin:
+        5px 0 6px;
+
+    font-size:31px;
+
+    line-height:1.1;
+
+}
+
+
+.page-heading p{
+
+    margin:0;
+
+    color:
+        var(--muted);
+
+    font-size:13px;
+
+    line-height:1.6;
+
+}
+
+
+/* =====================================================
+   METHOD PANEL
+===================================================== */
+
+.method-panel{
+
+    padding:25px;
+
+    border-radius:26px;
+
+    background:#ffffff;
+
+    box-shadow:
+        var(--shadow);
+
+}
+
+
+.method-panel > h2{
+
+    margin:
+        0 0 18px;
+
+    font-size:21px;
+
+}
+
+
+/* =====================================================
+   REDEEM METHOD BUTTON
+===================================================== */
+
+.redeem-method{
+
+    width:100%;
+
+    min-height:105px;
+
+    padding:
+        18px 20px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    border:
+        2px solid
+        #eadcef;
+
+    border-radius:22px;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #fcf8fe
+        );
+
+    color:
+        var(--text);
+
+    text-align:left;
+
+    transition:.25s ease;
+
+}
+
+
+.redeem-method:hover{
+
+    border-color:
+        #c885db;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.redeem-method.active{
+
+    border-color:
+        var(--purple);
+
+    background:
+        var(--purple-soft);
+
+}
+
+
+.redeem-method-icon{
+
+    width:60px;
+
+    height:60px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:17px;
+
+    color:white;
+
+    font-size:25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b75ad0,
+            #963db7
+        );
+
+}
+
+
+.redeem-method-text{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.redeem-method-text strong{
+
+    font-size:19px;
+
+}
+
+
+.redeem-method-text span{
+
+    margin-top:5px;
+
+    color:
+        var(--muted);
+
+    font-size:11px;
+
+}
+
+
+.method-arrow{
+
+    font-size:25px;
+
+    color:
+        var(--purple);
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.redeem-method.active
+.method-arrow{
+
+    transform:
+        rotate(90deg);
+
+}
+
+
+/* =====================================================
+   PAYMENT CONTENT
+===================================================== */
+
+.payment-content{
+
+    display:none;
+
+    margin-top:22px;
+
+    animation:
+        showContent .3s ease;
+
+}
+
+
+.payment-content.show{
+
+    display:block;
+
+}
+
+
+@keyframes showContent{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(-8px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.bank-card,
+.steps-card,
+.customer-card{
+
+    padding:20px;
+
+    margin-bottom:16px;
+
+    border-radius:18px;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:#ffffff;
+
+}
+
+
+/* =====================================================
+   SECTION HEADING
+===================================================== */
+
+.section-heading{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    margin-bottom:17px;
+
+}
+
+
+.heading-icon{
+
+    width:41px;
+
+    height:41px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:
+        var(--purple-soft);
+
+}
+
+
+.section-heading h3{
+
+    margin:0;
+
+    font-size:17px;
+
+}
+
+
+.section-heading p{
+
+    margin:
+        3px 0 0;
+
+    color:
+        var(--muted);
+
+    font-size:10px;
+
+}
+
+
+/* =====================================================
+   BANK DETAILS
+===================================================== */
+
+.bank-row{
+
+    width:100%;
+
+    min-height:64px;
+
+    padding:
+        10px 12px;
+
+    margin-top:9px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    border-radius:13px;
+
+    background:#f7f8fa;
+
+}
+
+
+.bank-row > div{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.bank-row span{
+
+    color:
+        var(--muted);
+
+    font-size:10px;
+
+}
+
+
+.bank-row strong{
+
+    margin-top:3px;
+
+    font-size:15px;
+
+}
+
+
+/* =====================================================
+   COPY
+===================================================== */
+
+.copy-btn{
+
+    width:39px;
+
+    height:39px;
+
+    flex-shrink:0;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    color:
+        var(--purple);
+
+    background:#efe4f4;
+
+    transition:.2s ease;
+
+}
+
+
+.copy-btn:hover{
+
+    transform:
+        scale(1.05);
+
+    background:#e6d5ed;
+
+}
+
+
+.copy-btn:active{
+
+    transform:
+        scale(.94);
+
+}
+
+
+/* =====================================================
+   STEPS
+===================================================== */
+
+.step{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:12px;
+
+    padding:
+        13px 0;
+
+    border-bottom:
+        1px solid
+        #f0f1f3;
+
+}
+
+
+.step:last-child{
+
+    border-bottom:none;
+
+}
+
+
+.step-number{
+
+    width:30px;
+
+    height:30px;
+
+    flex:
+        0 0 30px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    color:white;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ad4fca,
+            #963db7
+        );
+
+}
+
+
+.step strong{
+
+    font-size:13px;
+
+}
+
+
+.step p{
+
+    margin:
+        4px 0 0;
+
+    color:
+        var(--muted);
+
+    font-size:11px;
+
+    line-height:1.5;
+
+}
+
+
+/* =====================================================
+   CUSTOMER
+===================================================== */
+
+.customer-title{
+
+    margin-bottom:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:
+        var(--purple-dark);
+
+    font-size:14px;
+
+    font-weight:700;
+
+}
+
+
+.customer-row{
+
+    padding:
+        10px 0;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    border-bottom:
+        1px solid
+        #f0f1f3;
+
+}
+
+
+.customer-row:last-child{
+
+    border-bottom:none;
+
+}
+
+
+.customer-row span{
+
+    color:
+        var(--muted);
+
+    font-size:10px;
+
+}
+
+
+.customer-row strong{
+
+    max-width:65%;
+
+    text-align:right;
+
+    font-size:10px;
+
+    word-break:break-all;
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+.whatsapp-btn{
+
+    width:100%;
+
+    min-height:55px;
+
+    padding:
+        12px 16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    border:none;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #25D366,
+            #16a34a
+        );
+
+    box-shadow:
+        0 9px 24px
+        rgba(37,211,102,.22);
+
+    transition:.2s ease;
+
+}
+
+
+.whatsapp-btn:hover{
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.whatsapp-btn span{
+
+    font-size:20px;
+
+}
+
+
+/* =====================================================
+   NOTE
+===================================================== */
+
+.important-note{
+
+    margin-top:15px;
+
+    padding:14px;
+
+    border-radius:13px;
+
+    color:#854d0e;
+
+    background:#fffbeb;
+
+    border:
+        1px solid
+        #fde68a;
+
+}
+
+
+.important-note strong{
+
+    font-size:12px;
+
+}
+
+
+.important-note p{
+
+    margin:
+        5px 0 0;
+
+    font-size:10px;
+
+    line-height:1.5;
+
+}
+
+
+/* =====================================================
+   BACK
+===================================================== */
+
+.back-wallet{
+
+    width:100%;
+
+    min-height:49px;
+
+    margin-top:17px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    color:
+        var(--text);
+
+    text-decoration:none;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    background:#ffffff;
+
+    border:
+        1px solid
+        var(--border);
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    body{
+
+        padding-bottom:
+            88px !important;
+
+    }
+
+
+    .recharge-header{
+
+        min-height:86px;
+
+        padding:
+            14px 15px;
+
+    }
+
+
+    .brand-logo{
+
+        width:43px;
+
+        height:43px;
+
+        border-radius:13px;
+
+        font-size:20px;
+
+    }
+
+
+    .brand-text strong{
+
+        font-size:17px;
+
+        letter-spacing:2px;
+
+    }
+
+
+    .brand-text span{
+
+        font-size:7px;
+
+        letter-spacing:2.5px;
+
+    }
+
+
+    .header-wallet{
+
+        height:42px;
+
+        padding:
+            0 12px;
+
+    }
+
+
+    #headerWalletBalance{
+
+        font-size:11px;
+
+    }
+
+
+    .recharge-page{
+
+        padding:
+            22px 14px 30px;
+
+    }
+
+
+    .page-heading h1{
+
+        font-size:26px;
+
+    }
+
+
+    .method-panel{
+
+        padding:17px;
+
+        border-radius:21px;
+
+    }
+
+
+    .method-panel > h2{
+
+        font-size:18px;
+
+    }
+
+
+    .redeem-method{
+
+        min-height:88px;
+
+        padding:
+            14px;
+
+        gap:12px;
+
+        border-radius:18px;
+
+    }
+
+
+    .redeem-method-icon{
+
+        width:52px;
+
+        height:52px;
+
+        border-radius:14px;
+
+        font-size:22px;
+
+    }
+
+
+    .redeem-method-text strong{
+
+        font-size:16px;
+
+    }
+
+
+    .bank-card,
+    .steps-card,
+    .customer-card{
+
+        padding:16px;
+
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONE
+===================================================== */
+
+@media(max-width:370px){
+
+    .brand-text span{
+
+        display:none;
+
+    }
+
+
+    .header-wallet{
+
+        padding:
+            0 9px;
+
+    }
+
+
+    .wallet-icon{
+
+        display:none;
+
+    }
+
+
+    .recharge-page{
+
+        padding-left:10px;
+
+        padding-right:10px;
+
+    }
+
+}
