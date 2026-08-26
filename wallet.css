@@ -1,125 +1,147 @@
-*{
-    box-sizing:border-box;
+/* =====================================================
+   ZYPER WALLET
+   PROFESSIONAL RESPONSIVE DESIGN
+===================================================== */
+
+* {
+    box-sizing: border-box;
 }
 
 
-:root{
+:root {
 
-    --bg:#050816;
+    --bg: #050816;
 
-    --card:#0f172a;
+    --card: rgba(15, 23, 42, .94);
 
-    --card2:#111827;
+    --card-soft: rgba(17, 24, 39, .88);
 
-    --border:rgba(255,255,255,.08);
+    --border: rgba(255, 255, 255, .08);
 
-    --text:#f8fafc;
+    --text: #f8fafc;
 
-    --muted:#94a3b8;
+    --muted: #94a3b8;
 
-    --blue:#3b82f6;
+    --blue: #3b82f6;
 
-    --purple:#8b5cf6;
+    --purple: #8b5cf6;
 
-    --green:#22c55e;
+    --green: #22c55e;
 
-    --red:#ef4444;
+    --red: #ef4444;
 
-    --yellow:#facc15;
+    --yellow: #facc15;
 
 }
 
 
-body{
+/* =====================================================
+   BODY
+===================================================== */
 
-    margin:0;
+body {
 
-    min-height:100vh;
+    margin: 0;
+
+    min-height: 100vh;
+
+    padding-bottom: 100px;
 
     font-family:
+        "Poppins",
         Arial,
         Helvetica,
         sans-serif;
 
-    color:var(--text);
+    color: var(--text);
 
     background:
 
         radial-gradient(
-            circle at 10% 10%,
-            rgba(59,130,246,.15),
+            circle at 12% 8%,
+            rgba(59,130,246,.14),
             transparent 30%
         ),
 
         radial-gradient(
-            circle at 90% 90%,
-            rgba(139,92,246,.15),
-            transparent 30%
+            circle at 88% 90%,
+            rgba(139,92,246,.14),
+            transparent 32%
         ),
 
-        var(--bg);
+        linear-gradient(
+            180deg,
+            #050816,
+            #020617
+        );
 
 }
 
 
-.wallet-page{
+/* =====================================================
+   PAGE
+===================================================== */
 
-    width:100%;
+.wallet-page {
 
-    max-width:850px;
+    width: 100%;
 
-    margin:auto;
+    max-width: 900px;
 
-    padding:22px;
+    margin: auto;
+
+    padding: 22px;
 
 }
 
 
-/* ===============================
+/* =====================================================
    HEADER
-================================ */
+===================================================== */
 
-.wallet-header{
+.wallet-header {
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    justify-content:space-between;
+    justify-content: space-between;
 
-    gap:20px;
+    gap: 18px;
 
-    margin-bottom:30px;
-
-}
-
-
-.brand{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:13px;
+    margin-bottom: 26px;
 
 }
 
 
-.logo{
+.brand {
 
-    width:52px;
+    display: flex;
 
-    height:52px;
+    align-items: center;
 
-    display:flex;
+    gap: 12px;
 
-    align-items:center;
+}
 
-    justify-content:center;
 
-    border-radius:16px;
+.logo {
 
-    font-size:25px;
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 15px;
+
+    font-size: 23px;
 
     background:
 
@@ -131,43 +153,143 @@ body{
 
     box-shadow:
 
-        0 10px 30px
-        rgba(56,189,248,.2);
+        0 8px 24px
+        rgba(56,189,248,.20);
 
 }
 
 
-.brand h1{
+.brand h1 {
 
-    margin:0;
+    margin: 0;
 
-    font-size:23px;
+    font-size: 22px;
 
-}
-
-
-.brand p{
-
-    margin:4px 0 0;
-
-    color:var(--muted);
-
-    font-size:12px;
+    line-height: 1.1;
 
 }
 
 
-.home-btn{
+.brand p {
 
-    color:white;
+    margin: 5px 0 0;
 
-    text-decoration:none;
+    color: var(--muted);
 
-    padding:10px 15px;
+    font-size: 11px;
 
-    border-radius:10px;
+}
 
-    border:1px solid var(--border);
+
+.home-btn {
+
+    flex-shrink: 0;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    padding: 9px 13px;
+
+    border-radius: 10px;
+
+    border: 1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.04);
+
+    font-size: 12px;
+
+    transition: .2s ease;
+
+}
+
+
+.home-btn:hover {
+
+    background:
+        rgba(255,255,255,.08);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* =====================================================
+   BALANCE CARD
+===================================================== */
+
+.balance-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 24px;
+
+    border-radius: 22px;
+
+    margin-bottom: 18px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #2563eb 0%,
+            #6d28d9 55%,
+            #7c3aed 100%
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    box-shadow:
+
+        0 18px 45px
+        rgba(37,99,235,.20);
+
+}
+
+
+.balance-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 180px;
+
+    top: -90px;
+
+    right: -70px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.08);
+
+}
+
+
+.balance-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 130px;
+
+    height: 130px;
+
+    bottom: -70px;
+
+    left: -50px;
+
+    border-radius: 50%;
 
     background:
         rgba(255,255,255,.05);
@@ -175,262 +297,321 @@ body{
 }
 
 
-/* ===============================
-   BALANCE
-================================ */
+.balance-top {
 
-.balance-card{
+    position: relative;
 
-    padding:28px;
+    z-index: 2;
 
-    border-radius:24px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    color:
+        rgba(255,255,255,.88);
+
+    font-size: 13px;
+
+}
+
+
+.balance-top button {
+
+    width: 34px;
+
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 10px;
+
+    color: #fff;
+
+    background:
+        rgba(255,255,255,.14);
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    transition: .2s ease;
+
+}
+
+
+.balance-top button:hover {
+
+    background:
+        rgba(255,255,255,.22);
+
+    transform:
+        rotate(30deg);
+
+}
+
+
+.balance {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin: 21px 0 22px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 9px;
+
+}
+
+
+.balance span {
+
+    font-size: 14px;
+
+    opacity: .80;
+
+    margin-bottom: 6px;
+
+}
+
+
+.balance strong {
+
+    font-size: 41px;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    letter-spacing: -.5px;
+
+}
+
+
+.wallet-stats {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+    gap: 10px;
+
+}
+
+
+.wallet-stats > div {
+
+    padding: 13px 14px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+}
+
+
+.wallet-stats small {
+
+    display: block;
+
+    opacity: .72;
+
+    margin-bottom: 5px;
+
+    font-size: 10px;
+
+}
+
+
+.wallet-stats strong {
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+   GENERAL CARD
+===================================================== */
+
+.redeem-card,
+.transactions-card {
+
+    padding: 22px;
+
+    border-radius: 19px;
+
+    background:
+        var(--card);
+
+    border:
+        1px solid
+        var(--border);
+
+    box-shadow:
+
+        0 14px 35px
+        rgba(0,0,0,.18);
+
+    margin-bottom: 18px;
+
+    backdrop-filter:
+        blur(14px);
+
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.section-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
 
     background:
 
         linear-gradient(
             135deg,
-            rgba(37,99,235,.95),
-            rgba(124,58,237,.90)
+            rgba(59,130,246,.16),
+            rgba(139,92,246,.10)
         );
 
-    box-shadow:
+    border:
+        1px solid
+        rgba(96,165,250,.12);
 
-        0 25px 60px
-        rgba(37,99,235,.25);
-
-    margin-bottom:22px;
-
-}
-
-
-.balance-top{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    color:rgba(255,255,255,.85);
+    font-size: 18px;
 
 }
 
 
-.balance-top button{
+.section-title h2 {
 
-    width:38px;
+    margin: 0;
 
-    height:38px;
-
-    border:none;
-
-    border-radius:10px;
-
-    color:white;
-
-    background:
-        rgba(255,255,255,.15);
-
-    cursor:pointer;
+    font-size: 18px;
 
 }
 
 
-.balance{
+.section-title p {
 
-    margin:24px 0;
+    margin: 4px 0 0;
 
-    display:flex;
+    color: var(--muted);
 
-    align-items:flex-end;
-
-    gap:10px;
+    font-size: 11px;
 
 }
 
 
-.balance span{
+/* =====================================================
+   REDEEM BOX
+===================================================== */
 
-    font-size:15px;
+.redeem-box {
 
-    opacity:.8;
+    display: flex;
 
-    margin-bottom:7px;
+    align-items: stretch;
 
-}
+    gap: 9px;
 
-
-.balance strong{
-
-    font-size:45px;
-
-    line-height:1;
+    margin-top: 19px;
 
 }
 
 
-.wallet-stats{
+.redeem-box input {
 
-    display:grid;
+    flex: 1;
 
-    grid-template-columns:
-        repeat(2,1fr);
+    min-width: 0;
 
-    gap:12px;
+    height: 48px;
 
-}
+    padding: 0 14px;
 
-
-.wallet-stats > div{
-
-    padding:14px;
-
-    border-radius:14px;
-
-    background:
-        rgba(255,255,255,.10);
-
-}
-
-
-.wallet-stats small{
-
-    display:block;
-
-    opacity:.75;
-
-    margin-bottom:6px;
-
-}
-
-
-.wallet-stats strong{
-
-    font-size:14px;
-
-}
-
-
-/* ===============================
-   REDEEM
-================================ */
-
-.redeem-card,
-.transactions-card{
-
-    padding:24px;
-
-    border-radius:21px;
-
-    background:
-        rgba(15,23,42,.92);
+    border-radius: 11px;
 
     border:
-        1px solid var(--border);
-
-    box-shadow:
-
-        0 18px 45px
-        rgba(0,0,0,.20);
-
-    margin-bottom:22px;
-
-}
-
-
-.section-title{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:13px;
-
-}
-
-
-.section-icon{
-
-    width:45px;
-
-    height:45px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:13px;
+        1px solid
+        #334155;
 
     background:
-        rgba(59,130,246,.12);
+        rgba(2,6,23,.88);
+
+    color: #fff;
+
+    font-size: 14px;
+
+    letter-spacing: .7px;
+
+    outline: none;
+
+    text-transform: uppercase;
+
+    transition: .2s ease;
 
 }
 
 
-.section-title h2{
+.redeem-box input::placeholder {
 
-    margin:0;
-
-    font-size:19px;
+    color: #64748b;
 
 }
 
 
-.section-title p{
+.redeem-box input:focus {
 
-    margin:4px 0 0;
-
-    color:var(--muted);
-
-    font-size:12px;
-
-}
-
-
-.redeem-box{
-
-    display:flex;
-
-    gap:10px;
-
-    margin-top:22px;
-
-}
-
-
-.redeem-box input{
-
-    flex:1;
-
-    min-width:0;
-
-    padding:15px;
-
-    border-radius:12px;
-
-    border:
-        1px solid #334155;
-
-    background:#020617;
-
-    color:white;
-
-    font-size:16px;
-
-    letter-spacing:1px;
-
-    outline:none;
-
-    text-transform:uppercase;
-
-}
-
-
-.redeem-box input:focus{
-
-    border-color:#60a5fa;
+    border-color:
+        #60a5fa;
 
     box-shadow:
 
@@ -440,19 +621,23 @@ body{
 }
 
 
-.redeem-box button{
+.redeem-box button {
 
-    border:none;
+    min-width: 112px;
 
-    border-radius:12px;
+    height: 48px;
 
-    padding:0 24px;
+    border: none;
 
-    color:white;
+    border-radius: 11px;
 
-    font-weight:bold;
+    padding: 0 20px;
 
-    cursor:pointer;
+    color: #fff;
+
+    font-weight: 700;
+
+    cursor: pointer;
 
     background:
 
@@ -462,34 +647,63 @@ body{
             #16a34a
         );
 
-}
+    box-shadow:
 
+        0 8px 20px
+        rgba(34,197,94,.15);
 
-.redeem-box button:disabled{
-
-    opacity:.6;
-
-    cursor:not-allowed;
+    transition: .2s ease;
 
 }
 
 
-.redeem-message{
+.redeem-box button:hover {
 
-    margin-top:15px;
+    transform:
+        translateY(-1px);
 
-    padding:13px;
+    box-shadow:
 
-    border-radius:10px;
-
-    font-size:13px;
+        0 10px 24px
+        rgba(34,197,94,.22);
 
 }
 
 
-.redeem-message.success{
+.redeem-box button:disabled {
 
-    color:#86efac;
+    opacity: .55;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+}
+
+
+/* =====================================================
+   REDEEM MESSAGE
+===================================================== */
+
+.redeem-message {
+
+    margin-top: 13px;
+
+    padding: 12px 13px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+.redeem-message.success {
+
+    color:
+        #86efac;
 
     background:
         rgba(34,197,94,.08);
@@ -501,9 +715,10 @@ body{
 }
 
 
-.redeem-message.error{
+.redeem-message.error {
 
-    color:#fca5a5;
+    color:
+        #fca5a5;
 
     background:
         rgba(239,68,68,.08);
@@ -515,73 +730,96 @@ body{
 }
 
 
-/* ===============================
-   TRANSACTIONS
-================================ */
+/* =====================================================
+   TRANSACTIONS HEADER
+===================================================== */
 
-.transactions-header{
+.transactions-header {
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    justify-content:space-between;
+    justify-content: space-between;
 
-    margin-bottom:20px;
+    gap: 15px;
 
-}
-
-
-.transactions-header h2{
-
-    margin:0;
-
-    font-size:19px;
+    margin-bottom: 17px;
 
 }
 
 
-.transactions-header p{
+.transactions-header h2 {
 
-    margin:5px 0 0;
+    margin: 0;
 
-    color:var(--muted);
-
-    font-size:12px;
+    font-size: 18px;
 
 }
 
 
-.transactions-header button{
+.transactions-header p {
 
-    padding:9px 13px;
+    margin: 5px 0 0;
 
-    border-radius:9px;
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+.transactions-header button {
+
+    flex-shrink: 0;
+
+    padding: 8px 11px;
+
+    border-radius: 9px;
 
     border:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
     background:
         rgba(255,255,255,.04);
 
-    color:white;
+    color: #fff;
 
-    cursor:pointer;
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition: .2s ease;
 
 }
 
 
-.transaction{
+.transactions-header button:hover {
 
-    display:flex;
+    background:
+        rgba(255,255,255,.08);
 
-    align-items:center;
+}
 
-    justify-content:space-between;
 
-    gap:15px;
+/* =====================================================
+   TRANSACTION ITEM
+===================================================== */
 
-    padding:16px 0;
+.transaction {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    min-height: 67px;
+
+    padding: 13px 0;
 
     border-bottom:
         1px solid
@@ -590,179 +828,565 @@ body{
 }
 
 
-.transaction:last-child{
+.transaction:last-child {
 
-    border-bottom:none;
-
-}
-
-
-.transaction-left{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
+    border-bottom: none;
 
 }
 
 
-.transaction-icon{
+.transaction-left {
 
-    width:42px;
+    min-width: 0;
 
-    height:42px;
+    display: flex;
 
-    flex-shrink:0;
+    align-items: center;
 
-    display:flex;
+    gap: 11px;
 
-    align-items:center;
+}
 
-    justify-content:center;
 
-    border-radius:12px;
+.transaction-icon {
+
+    width: 39px;
+
+    height: 39px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
 
     background:
         rgba(34,197,94,.09);
 
-}
+    border:
+        1px solid
+        rgba(34,197,94,.08);
 
-
-.transaction-title{
-
-    font-weight:bold;
-
-    font-size:14px;
+    font-size: 16px;
 
 }
 
 
-.transaction-date{
+.transaction-title {
 
-    color:var(--muted);
+    font-weight: 700;
 
-    font-size:11px;
-
-    margin-top:5px;
+    font-size: 13px;
 
 }
 
 
-.transaction-code{
+.transaction-date {
 
-    color:#64748b;
+    color:
+        var(--muted);
 
-    font-size:10px;
+    font-size: 10px;
 
-    margin-top:4px;
-
-}
-
-
-.transaction-amount{
-
-    text-align:right;
-
-    font-weight:bold;
+    margin-top: 4px;
 
 }
 
 
-.transaction-amount.deposit{
+.transaction-code {
 
-    color:#4ade80;
+    color: #64748b;
+
+    font-size: 9px;
+
+    margin-top: 3px;
+
+    word-break: break-all;
 
 }
 
 
-.transaction-amount.spend{
+.transaction-amount {
 
-    color:#f87171;
+    flex-shrink: 0;
+
+    text-align: right;
+
+    font-size: 13px;
+
+    font-weight: 700;
 
 }
 
+
+.transaction-amount.deposit {
+
+    color:
+        #4ade80;
+
+}
+
+
+.transaction-amount.spend {
+
+    color:
+        #f87171;
+
+}
+
+
+/* =====================================================
+   EMPTY / LOADING
+===================================================== */
 
 .loading,
-.empty{
+.empty {
 
-    padding:30px;
+    padding: 28px 12px;
 
-    text-align:center;
+    text-align: center;
 
-    color:var(--muted);
+    color:
+        var(--muted);
+
+    font-size: 12px;
 
 }
 
 
-/* ===============================
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media(max-width:800px) {
+
+    .wallet-page {
+
+        max-width: 720px;
+
+    }
+
+}
+
+
+/* =====================================================
    MOBILE
-================================ */
+===================================================== */
 
-@media(max-width:600px){
+@media(max-width:600px) {
 
-    .wallet-page{
+    body {
 
-        padding:15px;
-
-    }
-
-
-    .wallet-header{
-
-        align-items:flex-start;
+        padding-bottom:
+            92px;
 
     }
 
 
-    .brand h1{
+    .wallet-page {
 
-        font-size:19px;
-
-    }
-
-
-    .home-btn{
-
-        font-size:12px;
-
-        padding:9px 11px;
+        padding:
+            14px;
 
     }
 
 
-    .balance-card{
+    .wallet-header {
 
-        padding:22px;
+        margin-bottom:
+            20px;
 
-    }
-
-
-    .balance strong{
-
-        font-size:37px;
+        gap:
+            10px;
 
     }
 
 
-    .redeem-box{
+    .logo {
 
-        flex-direction:column;
+        width:
+            42px;
+
+        height:
+            42px;
+
+        border-radius:
+            13px;
+
+        font-size:
+            20px;
 
     }
 
 
-    .redeem-box button{
+    .brand {
 
-        height:48px;
+        gap:
+            9px;
 
     }
 
 
-    .transaction{
+    .brand h1 {
 
-        align-items:flex-start;
+        font-size:
+            18px;
+
+    }
+
+
+    .brand p {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .home-btn {
+
+        font-size:
+            10px;
+
+        padding:
+            8px 9px;
+
+    }
+
+
+    .balance-card {
+
+        padding:
+            20px;
+
+        border-radius:
+            19px;
+
+        margin-bottom:
+            14px;
+
+    }
+
+
+    .balance-top {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .balance-top button {
+
+        width:
+            31px;
+
+        height:
+            31px;
+
+        font-size:
+            14px;
+
+    }
+
+
+    .balance {
+
+        margin:
+            18px 0;
+
+    }
+
+
+    .balance span {
+
+        font-size:
+            12px;
+
+        margin-bottom:
+            5px;
+
+    }
+
+
+    .balance strong {
+
+        font-size:
+            34px;
+
+    }
+
+
+    .wallet-stats {
+
+        gap:
+            8px;
+
+    }
+
+
+    .wallet-stats > div {
+
+        padding:
+            11px;
+
+    }
+
+
+    .wallet-stats small {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .wallet-stats strong {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .redeem-card,
+    .transactions-card {
+
+        padding:
+            18px;
+
+        border-radius:
+            16px;
+
+        margin-bottom:
+            14px;
+
+    }
+
+
+    .section-icon {
+
+        width:
+            38px;
+
+        height:
+            38px;
+
+        font-size:
+            16px;
+
+    }
+
+
+    .section-title h2 {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .section-title p {
+
+        font-size:
+            10px;
+
+    }
+
+
+    .redeem-box {
+
+        flex-direction:
+            column;
+
+        gap:
+            8px;
+
+        margin-top:
+            16px;
+
+    }
+
+
+    .redeem-box input {
+
+        height:
+            46px;
+
+        font-size:
+            13px;
+
+    }
+
+
+    .redeem-box button {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        height:
+            46px;
+
+        font-size:
+            13px;
+
+    }
+
+
+    .transactions-header {
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .transactions-header h2 {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .transactions-header p {
+
+        font-size:
+            10px;
+
+    }
+
+
+    .transactions-header button {
+
+        padding:
+            7px 9px;
+
+        font-size:
+            9px;
+
+    }
+
+
+    .transaction {
+
+        align-items:
+            flex-start;
+
+        gap:
+            10px;
+
+        padding:
+            12px 0;
+
+    }
+
+
+    .transaction-icon {
+
+        width:
+            36px;
+
+        height:
+            36px;
+
+        font-size:
+            15px;
+
+    }
+
+
+    .transaction-title {
+
+        font-size:
+            12px;
+
+    }
+
+
+    .transaction-date {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .transaction-code {
+
+        font-size:
+            8px;
+
+    }
+
+
+    .transaction-amount {
+
+        font-size:
+            11px;
+
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONE
+===================================================== */
+
+@media(max-width:360px) {
+
+    .wallet-page {
+
+        padding:
+            10px;
+
+    }
+
+
+    .brand h1 {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .home-btn {
+
+        padding:
+            7px;
+
+    }
+
+
+    .balance strong {
+
+        font-size:
+            30px;
+
+    }
+
+
+    .wallet-stats {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .transaction {
+
+        gap:
+            8px;
 
     }
 
