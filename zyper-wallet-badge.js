@@ -25,7 +25,7 @@ const WALLET_STYLE = {
         paddingX: 10,
         icon: 17,
         font: 11,
-        fontWeight: 700,
+        fontWeight: 500,
         gap: 5,
         top: 8,
         right: 10
@@ -36,7 +36,7 @@ const WALLET_STYLE = {
         paddingX: 13,
         icon: 18,
         font: 12,
-        fontWeight: 700,
+        fontWeight: 500,
         gap: 7,
         top: 12,
         right: 12
