@@ -337,79 +337,6 @@ opacity:0;
 
 
 /* =====================================================
-   WALLET BALANCE
-===================================================== */
-
-.wallet-page-balance{
-
-width:100%;
-
-max-width:900px;
-
-margin:
-12px auto 0;
-
-padding:
-0 15px;
-
-display:flex;
-
-justify-content:flex-end;
-
-}
-
-
-.wallet-page-balance-box{
-
-display:inline-flex;
-
-align-items:center;
-
-justify-content:center;
-
-gap:7px;
-
-height:40px;
-
-padding:
-0 13px;
-
-border-radius:999px;
-
-background:
-linear-gradient(
-135deg,
-#a64fc4,
-#963db5
-);
-
-color:white;
-
-font-size:12px;
-
-font-weight:600;
-
-text-decoration:none;
-
-box-shadow:
-0 4px 14px
-rgba(115,45,145,.28);
-
-}
-
-
-.wallet-page-balance-box svg{
-
-width:18px;
-
-height:18px;
-
-flex-shrink:0;
-
-}
-
-
-/* =====================================================
    WALLET PACKAGE STATUS
 ===================================================== */
 
@@ -579,37 +506,6 @@ padding:
 }
 
 
-.wallet-page-balance{
-
-padding:
-0 12px;
-
-margin-top:8px;
-
-}
-
-
-.wallet-page-balance-box{
-
-height:35px;
-
-padding:
-0 10px;
-
-font-size:11px;
-
-gap:5px;
-
-}
-
-
-.wallet-page-balance-box svg{
-
-width:17px;
-
-height:17px;
-
-}
 
 
 .wallet-status{
@@ -628,15 +524,6 @@ padding:
    SMALL PHONES
 ===================================================== */
 
-@media(max-width:350px){
-
-.wallet-page-balance-box{
-
-font-size:10px;
-
-}
-
-}
 
 </style>
 
@@ -644,42 +531,6 @@ font-size:10px;
 
 
 <body>
-
-
-<!-- =====================================================
-     LIVE WALLET BALANCE
-===================================================== -->
-
-<div class="wallet-page-balance">
-
-<a
-href="wallet.html"
-class="wallet-page-balance-box">
-
-<svg
-viewBox="0 0 32 32"
-fill="none"
-xmlns="http://www.w3.org/2000/svg">
-
-<path
-d="M6 9.5H24.5C26.4 9.5 28 11.1 28 13V24C28 25.9 26.4 27.5 24.5 27.5H7.5C5.6 27.5 4 25.9 4 24V10.5C4 8.6 5.4 7.1 7.2 6.7L21.5 3.5C22.5 3.3 23.5 4 23.7 5L24.6 9.5"
-stroke="currentColor"
-stroke-width="2"
-stroke-linecap="round"
-stroke-linejoin="round"
-/>
-
-</svg>
-
-
-<span id="topupWalletBalance">
-... LKR
-</span>
-
-</a>
-
-</div>
-
 
 
 <div class="container">
@@ -1492,7 +1343,7 @@ status.classList.add(
 
 
 status.textContent =
-"CAN BUY ✓";
+"READY ✓";
 
 }
 
@@ -1532,12 +1383,6 @@ status
 async function loadWalletBalance(
 user
 ){
-
-const balanceElement =
-document.getElementById(
-"topupWalletBalance"
-);
-
 
 try{
 
@@ -1605,19 +1450,6 @@ result.wallet?.balance ||
 );
 
 
-if(balanceElement){
-
-balanceElement.textContent =
-
-formatMoney(
-currentWalletBalance
-)
-
-+
-
-" LKR";
-
-}
 
 
 /* SAVE CURRENT BALANCE */
@@ -1648,12 +1480,6 @@ currentWalletBalance =
 0;
 
 
-if(balanceElement){
-
-balanceElement.textContent =
-"0.00 LKR";
-
-}
 
 
 localStorage.setItem(
@@ -1888,6 +1714,16 @@ img.src =
 
 </script>
 
+
+
+<!-- =====================================================
+     SHARED LIVE WALLET BADGE
+===================================================== -->
+
+<script
+type="module"
+src="./zyper-wallet-badge.js?v=50000">
+</script>
 
 
 <!-- =====================================================
