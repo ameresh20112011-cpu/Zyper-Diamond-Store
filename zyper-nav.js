@@ -45,6 +45,11 @@
         }
 
 
+        if (file === "wallet.html") {
+            return "wallet";
+        }
+
+
         if (file === "history.html") {
             return "history";
         }
