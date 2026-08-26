@@ -1,1085 +1,599 @@
-/* =====================================================
-   ZYPER RECHARGE PAYMENT PAGE
-===================================================== */
+<!DOCTYPE html>
+<html lang="en">
 
-* {
-    box-sizing: border-box;
-}
+<head>
 
-:root {
-    --bg: #f5f6f8;
-    --white: #ffffff;
-    --text: #24272b;
-    --muted: #7b8490;
-    --purple: #a64fc4;
-    --purple-dark: #8e36ae;
-    --purple-soft: #f8effc;
-    --border: #e5e7eb;
-    --green: #22c55e;
+<meta charset="UTF-8">
 
-    --shadow:
-        0 12px 35px
-        rgba(15, 23, 42, .08);
-}
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
+<title>Zyper Wallet Recharge</title>
 
-/* =====================================================
-   BODY
-===================================================== */
+<link
+rel="icon"
+href="./1.jpg"
+>
 
-body {
-    margin: 0;
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com"
+>
 
-    min-height: 100vh;
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin
+>
 
-    padding-bottom: 95px !important;
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+rel="stylesheet"
+>
 
-    font-family:
-        "Poppins",
-        Arial,
-        sans-serif;
+<link
+rel="stylesheet"
+href="./recharge-payment.css?v=1001"
+>
 
-    background: var(--bg);
+<link
+rel="stylesheet"
+href="./zyper-nav.css?v=1001"
+>
 
-    color: var(--text);
-}
+</head>
 
 
-/* =====================================================
-   HEADER
-===================================================== */
+<body>
 
-.recharge-header {
-    width: 100%;
 
-    min-height: 105px;
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    padding: 18px 6%;
+<header class="recharge-header">
 
-    display: flex;
 
-    align-items: center;
+    <div class="recharge-brand">
 
-    justify-content: space-between;
 
-    gap: 18px;
+        <div class="brand-logo">
+            💎
+        </div>
 
-    background: #ffffff;
 
-    border-bottom:
-        1px solid #eceff3;
-}
+        <div class="brand-text">
 
+            <strong>
+                ZYPER
+            </strong>
 
-.recharge-brand {
-    display: flex;
+            <span>
+                DIAMOND STORE
+            </span>
 
-    align-items: center;
+        </div>
 
-    gap: 12px;
-}
 
+    </div>
 
-.brand-logo {
-    width: 50px;
 
-    height: 50px;
 
-    display: flex;
+    <a
+        href="./wallet.html"
+        class="header-wallet"
+    >
 
-    align-items: center;
+        <span class="wallet-icon">
+            💰
+        </span>
 
-    justify-content: center;
+        <span id="headerWalletBalance">
+            0.00 LKR
+        </span>
 
-    border-radius: 15px;
+    </a>
 
-    font-size: 24px;
 
-    color: white;
+</header>
 
-    background:
-        linear-gradient(
-            135deg,
-            #20c8f2,
-            #755cf7
-        );
 
-    box-shadow:
-        0 8px 22px
-        rgba(86, 104, 240, .25);
-}
 
+<!-- =====================================================
+     MAIN PAGE
+===================================================== -->
 
-.brand-text {
-    display: flex;
+<main class="recharge-page">
 
-    flex-direction: column;
-}
 
+    <!-- PAGE HEADING -->
 
-.brand-text strong {
-    color: #111827;
+    <section class="page-heading">
 
-    font-size: 22px;
+        <span class="mini-title">
+            ZYPER WALLET
+        </span>
 
-    line-height: 1;
+        <h1>
+            Recharge Wallet
+        </h1>
 
-    letter-spacing: 3px;
-}
+        <p>
+            Transfer money to our bank account,
+            then send your payment receipt through WhatsApp.
+        </p>
 
+    </section>
 
-.brand-text span {
-    margin-top: 5px;
 
-    color: #71809b;
 
-    font-size: 9px;
+    <!-- =================================================
+         PAYMENT METHOD
+    ================================================== -->
 
-    font-weight: 600;
+    <section class="method-panel">
 
-    letter-spacing: 4px;
-}
 
+        <h2>
+            Select Payment Method
+        </h2>
 
-/* =====================================================
-   TOP WALLET BALANCE
-===================================================== */
 
-.header-wallet {
-    width: fit-content;
+        <button
+            type="button"
+            class="redeem-method"
+            id="redeemMethod"
+        >
 
-    height: 42px;
 
-    display: inline-flex;
+            <span class="redeem-method-icon">
+                🎟️
+            </span>
 
-    align-items: center;
 
-    justify-content: center;
+            <span class="redeem-method-text">
 
-    gap: 7px;
+                <strong>
+                    Redeem Code
+                </strong>
 
-    padding: 0 14px;
+                <span>
+                    Bank Transfer
+                </span>
 
-    border-radius: 999px;
+            </span>
 
-    color: #ffffff;
 
-    text-decoration: none;
+            <span class="method-arrow">
+                ›
+            </span>
 
-    background:
-        linear-gradient(
-            135deg,
-            #ad4fca,
-            #963db7
-        );
 
-    box-shadow:
-        0 5px 14px
-        rgba(134, 54, 171, .22);
+        </button>
 
-    white-space: nowrap;
-}
 
 
-.header-wallet svg {
-    width: 21px;
+        <!-- =============================================
+             HIDDEN DETAILS
+        ============================================== -->
 
-    height: 21px;
+        <div
+            class="payment-content"
+            id="paymentContent"
+        >
 
-    flex-shrink: 0;
-}
 
+            <!-- BANK DETAILS -->
 
-.header-wallet span {
-    font-size: 13px;
+            <section class="bank-card">
 
-    font-weight: 600;
-}
 
+                <div class="section-heading">
 
-/* =====================================================
-   MAIN PAGE
-===================================================== */
+                    <div class="heading-icon">
+                        🏦
+                    </div>
 
-.recharge-page {
-    width: 100%;
 
-    max-width: 760px;
+                    <div>
 
-    margin: auto;
+                        <h3>
+                            Bank Details
+                        </h3>
 
-    padding: 30px 20px 40px;
-}
+                        <p>
+                            Transfer any amount you want to add
+                            to your Zyper Wallet.
+                        </p>
 
+                    </div>
 
-/* =====================================================
-   PAGE TITLE
-===================================================== */
+                </div>
 
-.page-heading {
-    margin-bottom: 24px;
-}
 
 
-.mini-title {
-    color: var(--purple);
+                <!-- BANK -->
 
-    font-size: 10px;
+                <div class="bank-row">
 
-    font-weight: 700;
 
-    letter-spacing: 2px;
-}
+                    <div>
 
+                        <span>
+                            Bank
+                        </span>
 
-.page-heading h1 {
-    margin: 5px 0 6px;
+                        <strong id="bankName">
+                            BOC
+                        </strong>
 
-    font-size: 31px;
+                    </div>
 
-    line-height: 1.1;
-}
 
+                    <button
+                        type="button"
+                        class="copy-btn"
+                        data-copy="BOC"
+                    >
+                        📋
+                    </button>
 
-.page-heading p {
-    margin: 0;
 
-    color: var(--muted);
+                </div>
 
-    font-size: 13px;
 
-    line-height: 1.6;
-}
 
+                <!-- ACCOUNT NUMBER -->
 
-/* =====================================================
-   MAIN METHOD PANEL
-===================================================== */
+                <div class="bank-row">
 
-.method-panel {
-    padding: 25px;
 
-    border-radius: 26px;
+                    <div>
 
-    background: #ffffff;
+                        <span>
+                            Account Number
+                        </span>
 
-    box-shadow: var(--shadow);
-}
+                        <strong id="accountNumber">
+                            94946893
+                        </strong>
 
+                    </div>
 
-.method-panel > h2 {
-    margin: 0 0 18px;
 
-    font-size: 21px;
-}
+                    <button
+                        type="button"
+                        class="copy-btn"
+                        data-copy="94946893"
+                    >
+                        📋
+                    </button>
 
 
-/* =====================================================
-   REDEEM CODE BUTTON
-===================================================== */
+                </div>
 
-.redeem-method {
-    width: 100%;
 
-    min-height: 105px;
 
-    padding: 18px 20px;
+                <!-- ACCOUNT NAME -->
 
-    display: flex;
+                <div class="bank-row">
 
-    align-items: center;
 
-    gap: 16px;
+                    <div>
 
-    border:
-        2px solid #eadcef;
+                        <span>
+                            Account Name
+                        </span>
 
-    border-radius: 22px;
+                        <strong id="accountName">
+                            Ameresh R
+                        </strong>
 
-    cursor: pointer;
+                    </div>
 
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #fcf8fe
-        );
 
-    color: var(--text);
+                    <button
+                        type="button"
+                        class="copy-btn"
+                        data-copy="Ameresh R"
+                    >
+                        📋
+                    </button>
 
-    text-align: left;
 
-    transition: .2s ease;
-}
+                </div>
 
 
-.redeem-method:hover {
-    border-color: #c885db;
+            </section>
 
-    transform:
-        translateY(-1px);
-}
 
 
-.redeem-method.active {
-    border-color: var(--purple);
+            <!-- =========================================
+                 STEPS
+            ========================================== -->
 
-    background: var(--purple-soft);
-}
+            <section class="steps-card">
 
 
-.redeem-method-icon {
-    width: 60px;
+                <div class="section-heading">
 
-    height: 60px;
+                    <div class="heading-icon">
+                        📋
+                    </div>
 
-    flex-shrink: 0;
 
-    display: flex;
+                    <div>
 
-    align-items: center;
+                        <h3>
+                            How To Recharge
+                        </h3>
 
-    justify-content: center;
+                        <p>
+                            Follow these simple steps
+                        </p>
 
-    border-radius: 17px;
+                    </div>
 
-    color: white;
+                </div>
 
-    font-size: 25px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #b75ad0,
-            #963db7
-        );
-}
 
+                <div class="step">
 
-.redeem-method-text {
-    flex: 1;
 
-    display: flex;
+                    <span class="step-number">
+                        1
+                    </span>
 
-    flex-direction: column;
-}
 
+                    <div>
 
-.redeem-method-text strong {
-    font-size: 19px;
-}
+                        <strong>
+                            Transfer Money
+                        </strong>
 
+                        <p>
+                            Send the amount you want to add
+                            to the BOC account shown above.
+                        </p>
 
-.redeem-method-text span {
-    margin-top: 5px;
+                    </div>
 
-    color: var(--muted);
 
-    font-size: 11px;
-}
+                </div>
 
 
-.method-arrow {
-    color: var(--purple);
 
-    transition:
-        transform .25s ease;
-}
+                <div class="step">
 
 
-.redeem-method.active
-.method-arrow {
-    transform:
-        rotate(180deg);
-}
+                    <span class="step-number">
+                        2
+                    </span>
 
 
-/* =====================================================
-   HIDDEN PAYMENT CONTENT
-===================================================== */
+                    <div>
 
-.payment-content {
-    display: none;
+                        <strong>
+                            Take Screenshot
+                        </strong>
 
-    margin-top: 22px;
+                        <p>
+                            After payment is successful,
+                            take a clear screenshot of your receipt.
+                        </p>
 
-    animation:
-        showContent .3s ease;
-}
+                    </div>
 
 
-.payment-content.show {
-    display: block;
-}
+                </div>
 
 
-@keyframes showContent {
 
-    from {
-        opacity: 0;
+                <div class="step">
 
-        transform:
-            translateY(-8px);
-    }
 
-    to {
-        opacity: 1;
+                    <span class="step-number">
+                        3
+                    </span>
 
-        transform:
-            translateY(0);
-    }
-}
 
+                    <div>
 
-/* =====================================================
-   BANK / STEPS / CUSTOMER CARDS
-===================================================== */
+                        <strong>
+                            Send Receipt
+                        </strong>
 
-.bank-card,
-.steps-card,
-.customer-card {
-    padding: 20px;
+                        <p>
+                            Tap the WhatsApp button below
+                            and send your payment receipt to us.
+                        </p>
 
-    margin-bottom: 16px;
+                    </div>
 
-    border-radius: 18px;
 
-    border:
-        1px solid var(--border);
+                </div>
 
-    background: #ffffff;
-}
 
 
-.section-heading {
-    display: flex;
+                <div class="step">
 
-    align-items: center;
 
-    gap: 11px;
+                    <span class="step-number">
+                        4
+                    </span>
 
-    margin-bottom: 17px;
-}
 
+                    <div>
 
-.heading-icon {
-    width: 41px;
+                        <strong>
+                            Receive Redeem Code
+                        </strong>
 
-    height: 41px;
+                        <p>
+                            After we verify your payment,
+                            we will send you a Zyper redeem code.
+                        </p>
 
-    display: flex;
+                    </div>
 
-    align-items: center;
 
-    justify-content: center;
+                </div>
 
-    flex-shrink: 0;
 
-    border-radius: 12px;
 
-    background: var(--purple-soft);
-}
+                <div class="step">
 
 
-.section-heading h3 {
-    margin: 0;
+                    <span class="step-number">
+                        5
+                    </span>
 
-    font-size: 17px;
-}
 
+                    <div>
 
-.section-heading p {
-    margin: 3px 0 0;
+                        <strong>
+                            Redeem In Wallet
+                        </strong>
 
-    color: var(--muted);
+                        <p>
+                            Open your Wallet page,
+                            enter the code and tap Redeem.
+                            Your balance will be added.
+                        </p>
 
-    font-size: 10px;
-}
+                    </div>
 
 
-/* =====================================================
-   BANK DETAILS
-===================================================== */
+                </div>
 
-.bank-row {
-    width: 100%;
 
-    min-height: 64px;
+            </section>
 
-    padding: 10px 12px;
 
-    margin-top: 9px;
 
-    display: flex;
+            <!-- =========================================
+                 CUSTOMER INFORMATION
+            ========================================== -->
 
-    align-items: center;
+            <section class="customer-card">
 
-    justify-content: space-between;
 
-    gap: 10px;
+                <div class="customer-title">
+                    👤 Your Information
+                </div>
 
-    border-radius: 13px;
 
-    background: #f7f8fa;
-}
 
+                <div class="customer-row">
 
-.bank-row > div {
-    display: flex;
+                    <span>
+                        Email
+                    </span>
 
-    flex-direction: column;
-}
+                    <strong id="customerEmail">
+                        Loading...
+                    </strong>
 
+                </div>
 
-.bank-row span {
-    color: var(--muted);
 
-    font-size: 10px;
-}
 
+                <div class="customer-row">
 
-.bank-row strong {
-    margin-top: 3px;
+                    <span>
+                        Firebase UID
+                    </span>
 
-    font-size: 15px;
-}
+                    <strong id="customerUid">
+                        Loading...
+                    </strong>
 
+                </div>
 
-/* =====================================================
-   COPY BUTTON
-===================================================== */
 
-.copy-btn {
-    width: 37px;
+            </section>
 
-    height: 37px;
 
-    flex-shrink: 0;
 
-    border: none;
+            <!-- =========================================
+                 WHATSAPP
+            ========================================== -->
 
-    border-radius: 10px;
+            <button
+                type="button"
+                class="whatsapp-btn"
+                id="whatsappButton"
+            >
 
-    cursor: pointer;
+                <span>
+                    💬
+                </span>
 
-    color: var(--purple);
+                Send Payment Receipt on WhatsApp
 
-    background: #efe4f4;
+            </button>
 
-    transition: .2s ease;
-}
 
 
-.copy-btn:hover {
-    transform: scale(1.05);
+            <div class="important-note">
 
-    background: #e6d5ed;
-}
+                <strong>
+                    ⚠️ Important
+                </strong>
 
+                <p>
+                    Do not send your redeem code to another person.
+                    Each valid code can only be redeemed once.
+                </p>
 
-.copy-btn:active {
-    transform: scale(.94);
-}
+            </div>
 
 
-/* =====================================================
-   STEPS
-===================================================== */
+        </div>
 
-.step {
-    display: flex;
 
-    align-items: flex-start;
+    </section>
 
-    gap: 12px;
 
-    padding: 13px 0;
 
-    border-bottom:
-        1px solid #f0f1f3;
-}
+    <!-- =================================================
+         BACK TO WALLET
+    ================================================== -->
 
+    <a
+        href="./wallet.html"
+        class="back-wallet"
+    >
+        ← Back to Wallet
+    </a>
 
-.step:last-child {
-    border-bottom: none;
-}
 
+</main>
 
-.step-number {
-    width: 30px;
 
-    height: 30px;
 
-    flex:
-        0 0 30px;
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
 
-    display: flex;
+<div id="zyper-navigation"></div>
 
-    align-items: center;
 
-    justify-content: center;
 
-    border-radius: 50%;
+<script
+src="./zyper-nav.js?v=1001"
+></script>
 
-    color: white;
 
-    font-size: 11px;
+<script
+type="module"
+src="./recharge-payment.js?v=1001"
+></script>
 
-    font-weight: 700;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ad4fca,
-            #963db7
-        );
-}
+</body>
 
-
-.step strong {
-    font-size: 13px;
-}
-
-
-.step p {
-    margin: 4px 0 0;
-
-    color: var(--muted);
-
-    font-size: 10px;
-
-    line-height: 1.55;
-}
-
-
-/* =====================================================
-   CUSTOMER INFORMATION
-===================================================== */
-
-.customer-title {
-    margin-bottom: 14px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    color: var(--purple-dark);
-
-    font-size: 14px;
-
-    font-weight: 700;
-}
-
-
-.customer-row {
-    padding: 10px 0;
-
-    display: flex;
-
-    align-items: flex-start;
-
-    justify-content: space-between;
-
-    gap: 15px;
-
-    border-bottom:
-        1px solid #f0f1f3;
-}
-
-
-.customer-row:last-child {
-    border-bottom: none;
-}
-
-
-.customer-row span {
-    color: var(--muted);
-
-    font-size: 10px;
-}
-
-
-.customer-row strong {
-    max-width: 65%;
-
-    text-align: right;
-
-    font-size: 10px;
-
-    word-break: break-all;
-}
-
-
-/* =====================================================
-   WHATSAPP RECEIPT BUTTON
-===================================================== */
-
-.whatsapp-btn {
-    width: 100%;
-
-    min-height: 55px;
-
-    padding: 12px 16px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 10px;
-
-    border: none;
-
-    border-radius: 15px;
-
-    cursor: pointer;
-
-    color: white;
-
-    font-family: inherit;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    background:
-        linear-gradient(
-            135deg,
-            #25D366,
-            #16a34a
-        );
-
-    box-shadow:
-        0 9px 24px
-        rgba(37, 211, 102, .22);
-
-    transition: .2s ease;
-}
-
-
-.whatsapp-btn:hover {
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 13px 28px
-        rgba(37, 211, 102, .28);
-}
-
-
-.whatsapp-btn:active {
-    transform:
-        scale(.98);
-}
-
-
-.whatsapp-btn i {
-    font-size: 22px;
-}
-
-
-.whatsapp-btn:disabled {
-    opacity: .55;
-
-    cursor: not-allowed;
-
-    transform: none;
-}
-
-
-/* =====================================================
-   RECEIPT NOTE
-===================================================== */
-
-.receipt-note {
-    margin-top: 12px;
-
-    padding: 12px;
-
-    display: flex;
-
-    align-items: flex-start;
-
-    gap: 8px;
-
-    border-radius: 12px;
-
-    color: #8a6b17;
-
-    background: #fff9e8;
-
-    font-size: 9px;
-
-    line-height: 1.55;
-}
-
-
-/* =====================================================
-   OPEN WALLET BUTTON
-===================================================== */
-
-.open-wallet-btn {
-    width: 100%;
-
-    min-height: 48px;
-
-    margin-top: 12px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    border-radius: 14px;
-
-    text-decoration: none;
-
-    color: #4b5563;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    border:
-        1px solid var(--border);
-
-    background: #f8f9fa;
-
-    transition: .2s ease;
-}
-
-
-.open-wallet-btn:hover {
-    background: #f1f2f4;
-}
-
-
-/* =====================================================
-   COPY TOAST
-===================================================== */
-
-.toast {
-    position: fixed;
-
-    left: 50%;
-
-    bottom: 105px;
-
-    transform:
-        translateX(-50%)
-        translateY(15px);
-
-    padding: 9px 15px;
-
-    border-radius: 999px;
-
-    color: white;
-
-    background: #111827;
-
-    font-size: 11px;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition: .2s ease;
-
-    z-index: 9999999;
-}
-
-
-.toast.show {
-    opacity: 1;
-
-    visibility: visible;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
-}
-
-
-/* =====================================================
-   TABLET
-===================================================== */
-
-@media(max-width:700px) {
-
-    .recharge-header {
-        padding:
-            16px 20px;
-    }
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:600px) {
-
-    .recharge-header {
-        min-height: 88px;
-
-        padding:
-            13px 14px;
-    }
-
-
-    .brand-logo {
-        width: 43px;
-
-        height: 43px;
-
-        border-radius: 13px;
-
-        font-size: 20px;
-    }
-
-
-    .brand-text strong {
-        font-size: 17px;
-
-        letter-spacing: 2px;
-    }
-
-
-    .brand-text span {
-        font-size: 7px;
-
-        letter-spacing: 2.8px;
-    }
-
-
-    .header-wallet {
-        height: 37px;
-
-        padding:
-            0 11px;
-
-        gap: 6px;
-    }
-
-
-    .header-wallet svg {
-        width: 18px;
-
-        height: 18px;
-    }
-
-
-    .header-wallet span {
-        font-size: 11px;
-    }
-
-
-    .recharge-page {
-        padding:
-            23px 13px 35px;
-    }
-
-
-    .page-heading h1 {
-        font-size: 26px;
-    }
-
-
-    .page-heading p {
-        font-size: 11px;
-    }
-
-
-    .method-panel {
-        padding: 17px;
-
-        border-radius: 21px;
-    }
-
-
-    .method-panel > h2 {
-        font-size: 18px;
-    }
-
-
-    .redeem-method {
-        min-height: 92px;
-
-        padding: 14px;
-
-        border-radius: 18px;
-    }
-
-
-    .redeem-method-icon {
-        width: 52px;
-
-        height: 52px;
-
-        font-size: 22px;
-    }
-
-
-    .redeem-method-text strong {
-        font-size: 16px;
-    }
-
-
-    .redeem-method-text span {
-        font-size: 9px;
-    }
-
-
-    .bank-card,
-    .steps-card,
-    .customer-card {
-        padding: 16px;
-    }
-
-
-    .bank-row {
-        min-height: 58px;
-    }
-
-
-    .whatsapp-btn {
-        min-height: 52px;
-    }
-
-}
-
-
-/* =====================================================
-   VERY SMALL MOBILE
-===================================================== */
-
-@media(max-width:370px) {
-
-    .brand-text span {
-        display: none;
-    }
-
-
-    .header-wallet {
-        padding:
-            0 9px;
-    }
-
-
-    .header-wallet span {
-        font-size: 10px;
-    }
-
-
-    .recharge-method-text strong {
-        font-size: 14px;
-    }
-
-}
+</html>
