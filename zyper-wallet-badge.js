@@ -1,6 +1,6 @@
 /* =====================================================
    ZYPER DIAMOND STORE
-   MEDIUM WALLET BALANCE BADGE
+   WALLET BALANCE BADGE
 ===================================================== */
 
 import { auth } from "./firebase.js";
@@ -12,11 +12,23 @@ from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
 /* =====================================================
-   CLOUDFLARE WORKER
+   SETTINGS
 ===================================================== */
 
 const WORKER_URL =
     "https://zyper-order.ameresh20112011.workers.dev";
+
+
+/*
+   CHANGE ONLY THESE IF YOU WANT SIZE DIFFERENT
+*/
+
+const BADGE_HEIGHT = 30;
+
+const BADGE_FONT_SIZE = 10;
+
+const ICON_SIZE = 13;
+
 
 
 /* =====================================================
@@ -25,40 +37,55 @@ const WORKER_URL =
 
 function formatMoney(amount) {
 
-    const value =
-        Number(amount || 0);
-
-    return value.toLocaleString(
+    return Number(
+        amount || 0
+    ).toLocaleString(
         "en-LK",
         {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         }
     );
+
 }
 
 
+
 /* =====================================================
-   CREATE WALLET BADGE
+   REMOVE OLD / DUPLICATE BADGES
+===================================================== */
+
+function removeOldBadges() {
+
+    document
+        .querySelectorAll(
+            "#zyperWalletBadge, .zyper-wallet-badge"
+        )
+        .forEach(
+            function(element) {
+
+                element.remove();
+
+            }
+        );
+
+}
+
+
+
+/* =====================================================
+   CREATE BADGE
 ===================================================== */
 
 function createWalletBadge() {
 
-    const oldBadge =
-        document.getElementById(
-            "zyperWalletBadge"
-        );
-
-
-    if (oldBadge) {
-
-        oldBadge.remove();
-
-    }
+    removeOldBadges();
 
 
     const badge =
-        document.createElement("a");
+        document.createElement(
+            "a"
+        );
 
 
     badge.id =
@@ -75,17 +102,18 @@ function createWalletBadge() {
     );
 
 
-    /* =================================================
-       MEDIUM SIZE
-    ================================================= */
+    /*
+       INLINE STYLE
+       This overrides other CSS.
+    */
 
     badge.style.cssText = `
 
         position: fixed !important;
 
-        top: 9px !important;
+        top: 10px !important;
 
-        right: 9px !important;
+        right: 10px !important;
 
         left: auto !important;
 
@@ -96,17 +124,17 @@ function createWalletBadge() {
 
         min-width: 0 !important;
 
-        max-width: max-content !important;
+        max-width: fit-content !important;
 
 
-        height: 32px !important;
+        height: ${BADGE_HEIGHT}px !important;
 
-        min-height: 32px !important;
+        min-height: ${BADGE_HEIGHT}px !important;
 
-        max-height: 32px !important;
+        max-height: ${BADGE_HEIGHT}px !important;
 
 
-        padding: 0 11px !important;
+        padding: 0 10px !important;
 
         margin: 0 !important;
 
@@ -120,54 +148,60 @@ function createWalletBadge() {
         justify-content: center !important;
 
 
-        gap: 6px !important;
+        gap: 5px !important;
 
 
         border-radius: 999px !important;
 
 
         border:
-
             1px solid
             rgba(255,255,255,.18)
-
             !important;
 
 
         background:
-
             linear-gradient(
                 135deg,
                 #a855c7,
-                #8434a8
+                #8b3daf
             )
-
             !important;
 
 
         box-shadow:
-
             0 4px 12px
-            rgba(108,45,145,.28)
-
+            rgba(0,0,0,.22)
             !important;
 
 
-        color: white !important;
+        color: #ffffff !important;
 
 
         text-decoration: none !important;
 
 
         font-family:
-
             Arial,
             sans-serif
-
             !important;
 
 
-        line-height: 1 !important;
+        font-size:
+            ${BADGE_FONT_SIZE}px
+            !important;
+
+
+        font-weight:
+            700 !important;
+
+
+        line-height:
+            1 !important;
+
+
+        white-space:
+            nowrap !important;
 
 
         box-sizing:
@@ -178,24 +212,12 @@ function createWalletBadge() {
             hidden !important;
 
 
-        white-space:
-            nowrap !important;
-
-
-        cursor:
-            pointer !important;
-
-
         z-index:
             2147483647 !important;
 
 
-        transition:
-
-            transform .2s ease,
-            box-shadow .2s ease
-
-            !important;
+        cursor:
+            pointer !important;
 
 
         -webkit-tap-highlight-color:
@@ -204,25 +226,19 @@ function createWalletBadge() {
     `;
 
 
-    /* =================================================
-       CONTENT
-    ================================================= */
-
     badge.innerHTML = `
 
         <span
-            id="zyperWalletMiniIcon">
-
+            id="zyperWalletBadgeIcon"
+        >
             👛
-
         </span>
 
 
         <span
-            id="zyperWalletBalance">
-
+            id="zyperWalletBalance"
+        >
             ... LKR
-
         </span>
 
     `;
@@ -234,80 +250,64 @@ function createWalletBadge() {
 
 
     /* =================================================
-       ICON SIZE
+       FORCE ICON SIZE
     ================================================= */
 
     const icon =
         document.getElementById(
-            "zyperWalletMiniIcon"
+            "zyperWalletBadgeIcon"
         );
 
 
-    if (icon) {
+    icon.style.cssText = `
 
-        icon.style.cssText = `
+        display: inline-flex !important;
 
-            display:
-                inline-flex !important;
+        align-items: center !important;
 
-            align-items:
-                center !important;
-
-            justify-content:
-                center !important;
+        justify-content: center !important;
 
 
-            width:
-                auto !important;
+        width: auto !important;
 
-            min-width:
-                0 !important;
+        height: auto !important;
 
 
-            height:
-                auto !important;
+        min-width: 0 !important;
 
-            min-height:
-                0 !important;
+        min-height: 0 !important;
 
 
-            margin:
-                0 !important;
+        padding: 0 !important;
 
-            padding:
-                0 !important;
+        margin: 0 !important;
 
 
-            background:
-                transparent !important;
+        background: transparent !important;
+
+        border: none !important;
+
+        box-shadow: none !important;
 
 
-            border:
-                none !important;
+        font-size:
+            ${ICON_SIZE}px
+            !important;
 
 
-            box-shadow:
-                none !important;
+        line-height:
+            1 !important;
 
 
-            font-size:
-                14px !important;
+        flex:
+            none !important;
 
+    `;
 
-            line-height:
-                1 !important;
-
-
-            flex:
-                none !important;
-
-        `;
-
-    }
 
 
     /* =================================================
-       BALANCE TEXT SIZE
+       FORCE BALANCE SIZE
     ================================================= */
 
     const balance =
@@ -316,114 +316,62 @@ function createWalletBadge() {
         );
 
 
-    if (balance) {
+    balance.style.cssText = `
 
-        balance.style.cssText = `
-
-            display:
-                inline-block !important;
+        display: inline-block !important;
 
 
-            width:
-                auto !important;
+        width: auto !important;
 
-            min-width:
-                0 !important;
+        min-width: 0 !important;
 
 
-            height:
-                auto !important;
+        height: auto !important;
 
 
-            margin:
-                0 !important;
+        padding: 0 !important;
 
-            padding:
-                0 !important;
+        margin: 0 !important;
 
 
-            color:
-                #ffffff !important;
+        color: #ffffff !important;
 
 
-            background:
-                transparent !important;
+        background:
+            transparent !important;
 
 
-            border:
-                none !important;
+        border:
+            none !important;
 
 
-            box-shadow:
-                none !important;
+        font-size:
+            ${BADGE_FONT_SIZE}px
+            !important;
 
 
-            font-family:
-
-                Arial,
-                sans-serif
-
-                !important;
+        font-weight:
+            700 !important;
 
 
-            font-size:
-                11px !important;
+        line-height:
+            1 !important;
 
 
-            font-weight:
-                700 !important;
+        letter-spacing:
+            0 !important;
 
 
-            line-height:
-                1 !important;
+        white-space:
+            nowrap !important;
 
-
-            letter-spacing:
-                .1px !important;
-
-
-            white-space:
-                nowrap !important;
-
-        `;
-
-    }
-
-
-    /* =================================================
-       HOVER
-    ================================================= */
-
-    badge.addEventListener(
-        "mouseenter",
-        function () {
-
-            badge.style.transform =
-                "translateY(-1px)";
-
-            badge.style.boxShadow =
-                "0 6px 16px rgba(108,45,145,.34)";
-
-        }
-    );
-
-
-    badge.addEventListener(
-        "mouseleave",
-        function () {
-
-            badge.style.transform =
-                "none";
-
-            badge.style.boxShadow =
-                "0 4px 12px rgba(108,45,145,.28)";
-
-        }
-    );
+    `;
 
 
     return badge;
+
 }
+
 
 
 /* =====================================================
@@ -487,29 +435,26 @@ async function loadWalletBalance(user) {
             );
 
 
-        const data =
+        const result =
             await response.json();
 
 
         if (
             !response.ok ||
-            !data.success
+            !result.success
         ) {
 
             throw new Error(
-
-                data.message ||
-
-                "Unable to load wallet balance."
-
+                result.message ||
+                "Unable to load wallet."
             );
 
         }
 
 
-        const walletBalance =
+        const balance =
             Number(
-                data.wallet?.balance ||
+                result.wallet?.balance ||
                 0
             );
 
@@ -517,7 +462,7 @@ async function loadWalletBalance(user) {
         balanceElement.textContent =
 
             formatMoney(
-                walletBalance
+                balance
             )
 
             +
@@ -525,10 +470,10 @@ async function loadWalletBalance(user) {
             " LKR";
 
 
-    } catch (error) {
+    } catch(error) {
 
         console.error(
-            "Wallet balance error:",
+            "Wallet Badge Error:",
             error
         );
 
@@ -541,8 +486,9 @@ async function loadWalletBalance(user) {
 }
 
 
+
 /* =====================================================
-   START WALLET BADGE
+   START
 ===================================================== */
 
 function startWalletBadge() {
@@ -558,22 +504,24 @@ function startWalletBadge() {
 
             if (!user) {
 
-                badge.style.setProperty(
-                    "display",
-                    "none",
-                    "important"
-                );
+                badge.style
+                    .setProperty(
+                        "display",
+                        "none",
+                        "important"
+                    );
 
                 return;
 
             }
 
 
-            badge.style.setProperty(
-                "display",
-                "inline-flex",
-                "important"
-            );
+            badge.style
+                .setProperty(
+                    "display",
+                    "inline-flex",
+                    "important"
+                );
 
 
             await loadWalletBalance(
@@ -586,8 +534,9 @@ function startWalletBadge() {
 }
 
 
+
 /* =====================================================
-   START
+   START AFTER PAGE LOAD
 ===================================================== */
 
 if (
@@ -605,3 +554,4 @@ if (
     startWalletBadge();
 
 }
+
