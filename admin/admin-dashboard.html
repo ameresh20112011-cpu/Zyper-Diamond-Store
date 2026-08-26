@@ -1,20 +1,293 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Zyper Admin Dashboard</title>
+    <title>Zyper Diamond Store - Admin Dashboard</title>
 
     <link rel="stylesheet" href="./admin.css">
+
+    <style>
+
+        /* =========================================
+           REDEEM CODE ADMIN PANEL
+        ========================================= */
+
+        .redeem-admin {
+            margin: 25px 0;
+            padding: 28px;
+            border-radius: 22px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(30, 41, 59, 0.98),
+                    rgba(15, 23, 42, 0.98)
+                );
+            border: 1px solid rgba(96, 165, 250, 0.25);
+            box-shadow:
+                0 15px 45px rgba(0,0,0,0.25),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        .redeem-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 22px;
+        }
+
+        .redeem-title-area h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 24px;
+        }
+
+        .redeem-title-area p {
+            margin: 7px 0 0;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .redeem-badge {
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(34,197,94,0.12);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #4ade80;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .redeem-form {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr auto;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .redeem-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 15px 17px;
+            border-radius: 13px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: #fff;
+            outline: none;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .redeem-input::placeholder {
+            color: #64748b;
+        }
+
+        .redeem-input:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96,165,250,0.12);
+        }
+
+        .create-redeem-btn {
+            min-height: 50px;
+            padding: 0 22px;
+            border: 0;
+            border-radius: 13px;
+            cursor: pointer;
+            color: white;
+            font-weight: 700;
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+            box-shadow:
+                0 8px 25px rgba(37,99,235,0.25);
+            transition: 0.2s ease;
+        }
+
+        .create-redeem-btn:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 12px 30px rgba(37,99,235,0.35);
+        }
+
+        .create-redeem-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .redeem-status {
+            margin-top: 15px;
+            min-height: 20px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        .redeem-result {
+            margin-top: 22px;
+            padding: 22px;
+            border-radius: 18px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(16,185,129,0.10),
+                    rgba(15,23,42,0.8)
+                );
+            border: 1px solid rgba(16,185,129,0.28);
+        }
+
+        .redeem-result-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .redeem-result-title {
+            color: #4ade80;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .redeem-generated-time {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .redeem-code-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .redeem-code {
+            flex: 1;
+            padding: 17px;
+            border-radius: 13px;
+            background: #020617;
+            border: 1px dashed #475569;
+            color: #f8fafc;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            user-select: all;
+        }
+
+        .copy-redeem-btn {
+            min-height: 57px;
+            padding: 0 20px;
+            border: 0;
+            border-radius: 13px;
+            cursor: pointer;
+            background: #334155;
+            color: white;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .copy-redeem-btn:hover {
+            background: #475569;
+        }
+
+        .redeem-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .redeem-detail {
+            padding: 14px;
+            border-radius: 12px;
+            background: rgba(15,23,42,0.7);
+            border: 1px solid rgba(148,163,184,0.1);
+        }
+
+        .redeem-detail-label {
+            display: block;
+            color: #64748b;
+            font-size: 11px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .redeem-detail-value {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .customer-note {
+            margin-top: 15px;
+            padding: 13px 15px;
+            border-radius: 12px;
+            background: rgba(59,130,246,0.08);
+            color: #93c5fd;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 850px) {
+
+            .redeem-form {
+                grid-template-columns: 1fr;
+            }
+
+            .redeem-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .redeem-code-box {
+                flex-direction: column;
+            }
+
+            .redeem-code {
+                width: 100%;
+                box-sizing: border-box;
+                font-size: 20px;
+            }
+
+            .copy-redeem-btn {
+                width: 100%;
+            }
+
+            .redeem-details {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<div id="app" style="display: none;">
+
+<div id="app" style="display:none;">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
 
     <aside class="sidebar">
 
@@ -26,139 +299,279 @@
 
         <p>🛡️ Administrator</p>
 
-        <button id="logout" type="button">
+        <button
+            id="logout"
+            type="button">
             Logout
         </button>
 
     </aside>
 
 
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
     <main class="main">
+
+
+        <!-- TOP BAR -->
 
         <div class="topbar">
 
             <div>
-                <h1>Orders Dashboard</h1>
+
+                <h1>
+                    Orders Dashboard
+                </h1>
 
                 <p class="subtitle">
                     Zyper Diamond Store
                 </p>
+
             </div>
+
 
             <button
                 id="refresh"
                 class="refresh-btn"
                 type="button">
+
                 ↻ Refresh
+
             </button>
 
         </div>
 
 
-        <!-- WALLET REDEEM CODE -->
+        <!-- =====================================
+             PROFESSIONAL REDEEM CODE SECTION
+        ====================================== -->
 
         <section class="redeem-admin">
 
-            <h2>💰 Create Wallet Redeem Code</h2>
 
-            <p>
-                Enter your Admin Secret Key and amount.
-                Customer email or Firebase UID is not required.
-            </p>
+            <div class="redeem-header">
 
+
+                <div class="redeem-title-area">
+
+                    <h2>
+                        💰 Wallet Redeem Center
+                    </h2>
+
+                    <p>
+                        Generate a secure wallet balance code for a customer.
+                    </p>
+
+                </div>
+
+
+                <div class="redeem-badge">
+                    🔐 ADMIN ONLY
+                </div>
+
+
+            </div>
+
+
+            <!-- FORM -->
 
             <div class="redeem-form">
+
 
                 <input
                     type="password"
                     id="adminSecret"
-                    placeholder="Admin Secret Key"
+                    class="redeem-input"
+                    placeholder="Enter Admin Secret Key"
                     autocomplete="off"
                 >
+
 
                 <input
                     type="number"
                     id="redeemAmount"
+                    class="redeem-input"
                     placeholder="Amount (LKR)"
                     min="1"
                     max="1000000"
                     step="1"
                 >
 
+
                 <button
                     id="createRedeem"
+                    class="create-redeem-btn"
                     type="button">
-                    💎 Create Redeem Code
+
+                    💎 Create Code
+
                 </button>
+
 
             </div>
 
+
+            <!-- STATUS -->
+
+            <div
+                id="redeemStatus"
+                class="redeem-status">
+            </div>
+
+
+            <!-- RESULT -->
 
             <div
                 id="redeemResult"
                 class="redeem-result"
-                style="display: none;">
+                style="display:none;">
 
-                <strong>Redeem Code</strong>
 
-                <div
-                    id="redeemCode"
-                    class="redeem-code">
+                <div class="redeem-result-top">
+
+
+                    <div class="redeem-result-title">
+                        ✅ Redeem Code Created
+                    </div>
+
+
+                    <div
+                        id="redeemGeneratedTime"
+                        class="redeem-generated-time">
+                    </div>
+
+
                 </div>
 
-                <div
-                    id="redeemValue"
-                    class="redeem-value">
+
+                <div class="redeem-code-box">
+
+
+                    <div
+                        id="redeemCode"
+                        class="redeem-code">
+                    </div>
+
+
+                    <button
+                        id="copyRedeem"
+                        class="copy-redeem-btn"
+                        type="button">
+
+                        📋 Copy Code
+
+                    </button>
+
+
                 </div>
 
-                <button
-                    id="copyRedeem"
-                    type="button">
-                    📋 Copy Code
-                </button>
+
+                <div class="redeem-details">
+
+
+                    <div class="redeem-detail">
+
+                        <span class="redeem-detail-label">
+                            Wallet Value
+                        </span>
+
+                        <span
+                            id="redeemValue"
+                            class="redeem-detail-value">
+                            LKR 0
+                        </span>
+
+                    </div>
+
+
+                    <div class="redeem-detail">
+
+                        <span class="redeem-detail-label">
+                            Status
+                        </span>
+
+                        <span
+                            class="redeem-detail-value">
+                            AVAILABLE
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="customer-note">
+
+                    💡 <strong>Customer:</strong>
+                    Send this redeem code to the customer.
+                    The customer can enter it in their wallet page
+                    while logged into their own account.
+
+                </div>
+
 
             </div>
+
 
         </section>
 
 
-        <!-- DATE SEARCH -->
+        <!-- =====================================
+             DATE SEARCH
+        ====================================== -->
 
         <div class="date-search">
+
 
             <div class="date-title">
                 📅 Order Date
             </div>
+
 
             <input
                 type="date"
                 id="orderDate"
             >
 
+
             <button
                 id="dateSearch"
                 class="date-search-btn"
                 type="button">
+
                 🔎 Search
+
             </button>
+
 
             <button
                 id="todayButton"
                 class="today-btn"
                 type="button">
+
                 Today
+
             </button>
+
 
         </div>
 
 
-        <!-- DASHBOARD CARDS -->
+        <!-- =====================================
+             DASHBOARD CARDS
+        ====================================== -->
 
         <div class="cards">
 
+
             <div class="card">
 
-                <h3>Orders</h3>
+                <h3>
+                    Orders
+                </h3>
 
                 <h2 id="totalOrders">
                     0
@@ -169,13 +582,18 @@
 
             <div class="card">
 
-                <h3>Revenue</h3>
+                <h3>
+                    Revenue
+                </h3>
 
                 <h2>
+
                     Rs.
+
                     <span id="revenue">
                         0
                     </span>
+
                 </h2>
 
             </div>
@@ -183,7 +601,9 @@
 
             <div class="card">
 
-                <h3>Pending</h3>
+                <h3>
+                    Pending
+                </h3>
 
                 <h2 id="pendingOrders">
                     0
@@ -194,7 +614,9 @@
 
             <div class="card">
 
-                <h3>Success</h3>
+                <h3>
+                    Success
+                </h3>
 
                 <h2 id="successOrders">
                     0
@@ -202,12 +624,16 @@
 
             </div>
 
+
         </div>
 
 
-        <!-- SEARCH -->
+        <!-- =====================================
+             SEARCH
+        ====================================== -->
 
         <div class="search-box">
+
 
             <input
                 id="search"
@@ -215,40 +641,67 @@
                 placeholder="Search Order ID, UID, customer, product..."
             >
 
+
         </div>
 
 
-        <!-- ORDERS TABLE -->
+        <!-- =====================================
+             ORDERS TABLE
+        ====================================== -->
 
         <div class="table-container">
 
+
             <table>
+
 
                 <thead>
 
                     <tr>
 
-                        <th>Order ID</th>
+                        <th>
+                            Order ID
+                        </th>
 
-                        <th>Customer</th>
+                        <th>
+                            Customer
+                        </th>
 
-                        <th>Firebase UID</th>
+                        <th>
+                            Firebase UID
+                        </th>
 
-                        <th>Game UID</th>
+                        <th>
+                            Game UID
+                        </th>
 
-                        <th>Product</th>
+                        <th>
+                            Product
+                        </th>
 
-                        <th>Price</th>
+                        <th>
+                            Price
+                        </th>
 
-                        <th>Payment</th>
+                        <th>
+                            Payment
+                        </th>
 
-                        <th>Date Time</th>
+                        <th>
+                            Date Time
+                        </th>
 
-                        <th>Total</th>
+                        <th>
+                            Total
+                        </th>
 
-                        <th>Status</th>
+                        <th>
+                            Status
+                        </th>
 
-                        <th>Action</th>
+                        <th>
+                            Action
+                        </th>
 
                     </tr>
 
@@ -259,20 +712,209 @@
 
                 </tbody>
 
+
             </table>
+
 
         </div>
 
+
     </main>
+
 
 </div>
 
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
 
 <script
     type="module"
     src="./admin.js">
 </script>
 
+
+<!-- =========================================
+     REDEEM UI HELPER
+========================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    const createButton =
+        document.getElementById("createRedeem");
+
+
+    const copyButton =
+        document.getElementById("copyRedeem");
+
+
+    const secretInput =
+        document.getElementById("adminSecret");
+
+
+    const amountInput =
+        document.getElementById("redeemAmount");
+
+
+    const resultBox =
+        document.getElementById("redeemResult");
+
+
+    const codeBox =
+        document.getElementById("redeemCode");
+
+
+    const valueBox =
+        document.getElementById("redeemValue");
+
+
+    const statusBox =
+        document.getElementById("redeemStatus");
+
+
+    const timeBox =
+        document.getElementById("redeemGeneratedTime");
+
+
+    if (!createButton) {
+        return;
+    }
+
+
+    /*
+     * The actual API request is handled
+     * by admin.js.
+     *
+     * This section only improves the UI
+     * and listens for the generated result.
+     */
+
+
+    createButton.addEventListener(
+        "click",
+        function () {
+
+            resultBox.style.display = "none";
+
+            statusBox.textContent =
+                "🔐 Preparing secure redeem code...";
+
+        }
+    );
+
+
+    /*
+     * Allow Enter key.
+     */
+
+    amountInput.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                createButton.click();
+
+            }
+
+        }
+    );
+
+
+    /*
+     * Copy generated code.
+     */
+
+    copyButton.addEventListener(
+        "click",
+        async function () {
+
+            const code =
+                codeBox.textContent.trim();
+
+
+            if (!code) {
+                return;
+            }
+
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    code
+                );
+
+
+                copyButton.textContent =
+                    "✅ Copied!";
+
+
+                setTimeout(
+                    function () {
+
+                        copyButton.textContent =
+                            "📋 Copy Code";
+
+                    },
+                    1800
+                );
+
+
+            } catch (error) {
+
+                alert(
+                    "Copy failed. Please select the code manually."
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+     * This function can be used by
+     * admin.js after successful API response.
+     */
+
+    window.showRedeemResult =
+        function (code, amount) {
+
+            codeBox.textContent =
+                code;
+
+
+            valueBox.textContent =
+                "LKR " +
+                Number(amount)
+                    .toLocaleString("en-LK");
+
+
+            timeBox.textContent =
+                new Date()
+                    .toLocaleString("en-LK");
+
+
+            resultBox.style.display =
+                "block";
+
+
+            statusBox.textContent =
+                "✅ Redeem code created successfully.";
+
+        };
+
+
+});
+
+</script>
+
+
 </body>
 
 </html>
+```
