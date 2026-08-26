@@ -11,26 +11,17 @@
 :root {
 
     --bg: #050816;
-
     --card: rgba(15, 23, 42, .94);
-
     --card-soft: rgba(17, 24, 39, .88);
-
     --border: rgba(255, 255, 255, .08);
-
     --text: #f8fafc;
-
     --muted: #94a3b8;
-
     --blue: #3b82f6;
-
     --purple: #8b5cf6;
-
     --green: #22c55e;
-
     --red: #ef4444;
-
     --yellow: #facc15;
+
 }
 
 
@@ -73,6 +64,7 @@ body {
             #050816,
             #020617
         );
+
 }
 
 
@@ -89,6 +81,7 @@ body {
     margin: auto;
 
     padding: 22px;
+
 }
 
 
@@ -107,6 +100,7 @@ body {
     gap: 18px;
 
     margin-bottom: 26px;
+
 }
 
 
@@ -117,6 +111,7 @@ body {
     align-items: center;
 
     gap: 12px;
+
 }
 
 
@@ -148,6 +143,7 @@ body {
     box-shadow:
         0 8px 24px
         rgba(56,189,248,.20);
+
 }
 
 
@@ -158,6 +154,7 @@ body {
     font-size: 22px;
 
     line-height: 1.1;
+
 }
 
 
@@ -168,6 +165,7 @@ body {
     color: var(--muted);
 
     font-size: 11px;
+
 }
 
 
@@ -191,6 +189,7 @@ body {
     font-size: 12px;
 
     transition: .2s ease;
+
 }
 
 
@@ -201,6 +200,7 @@ body {
 
     transform:
         translateY(-1px);
+
 }
 
 
@@ -235,6 +235,7 @@ body {
     box-shadow:
         0 18px 45px
         rgba(37,99,235,.20);
+
 }
 
 
@@ -256,6 +257,7 @@ body {
 
     background:
         rgba(255,255,255,.08);
+
 }
 
 
@@ -277,6 +279,7 @@ body {
 
     background:
         rgba(255,255,255,.05);
+
 }
 
 
@@ -296,6 +299,7 @@ body {
         rgba(255,255,255,.88);
 
     font-size: 13px;
+
 }
 
 
@@ -325,6 +329,7 @@ body {
     font-size: 16px;
 
     transition: .2s ease;
+
 }
 
 
@@ -335,6 +340,7 @@ body {
 
     transform:
         rotate(30deg);
+
 }
 
 
@@ -351,6 +357,7 @@ body {
     align-items: flex-end;
 
     gap: 9px;
+
 }
 
 
@@ -361,6 +368,7 @@ body {
     opacity: .80;
 
     margin-bottom: 6px;
+
 }
 
 
@@ -373,6 +381,7 @@ body {
     line-height: 1;
 
     letter-spacing: -.5px;
+
 }
 
 
@@ -392,6 +401,7 @@ body {
         repeat(2, minmax(0,1fr));
 
     gap: 10px;
+
 }
 
 
@@ -407,6 +417,7 @@ body {
     border:
         1px solid
         rgba(255,255,255,.07);
+
 }
 
 
@@ -419,17 +430,19 @@ body {
     margin-bottom: 5px;
 
     font-size: 10px;
+
 }
 
 
 .wallet-stats strong {
 
     font-size: 13px;
+
 }
 
 
 /* =====================================================
-   GENERAL CARDS
+   CARDS
 ===================================================== */
 
 .redeem-card,
@@ -454,11 +467,12 @@ body {
 
     backdrop-filter:
         blur(14px);
+
 }
 
 
 /* =====================================================
-   REDEEM SECTION TITLE
+   SECTION TITLE
 ===================================================== */
 
 .section-title {
@@ -468,14 +482,15 @@ body {
     align-items: center;
 
     gap: 12px;
+
 }
 
 
 .section-icon {
 
-    width: 45px;
+    width: 42px;
 
-    height: 45px;
+    height: 42px;
 
     display: flex;
 
@@ -485,7 +500,7 @@ body {
 
     flex-shrink: 0;
 
-    border-radius: 13px;
+    border-radius: 12px;
 
     background:
         linear-gradient(
@@ -498,7 +513,8 @@ body {
         1px solid
         rgba(96,165,250,.12);
 
-    font-size: 19px;
+    font-size: 18px;
+
 }
 
 
@@ -506,101 +522,108 @@ body {
 
     margin: 0;
 
-    font-size: 19px;
+    font-size: 18px;
+
 }
 
 
 .section-title p {
 
-    margin: 5px 0 0;
+    margin: 4px 0 0;
 
     color: var(--muted);
 
-    font-size: 12px;
+    font-size: 11px;
+
 }
 
 
 /* =====================================================
-   BIG REDEEM CODE BOX
+   REDEEM BOX
 ===================================================== */
 
 .redeem-box {
 
     display: flex;
 
-    align-items: stretch;
+    align-items: center;
 
-    gap: 11px;
+    gap: 10px;
 
-    margin-top: 22px;
+    margin-top: 19px;
+
 }
 
 
 /* =====================================================
-   BIG REDEEM INPUT
+   BIG REDEEM CODE INPUT
+   ONLY THIS INPUT IS MADE BIGGER
 ===================================================== */
 
 .redeem-box input {
 
     flex: 1;
 
-    min-width: 0;
-
     width: 100%;
 
-    height: 64px;
+    min-width: 0;
 
-    padding: 0 20px;
+    height: 85px !important;
 
-    border-radius: 15px;
+    min-height: 85px !important;
+
+    padding: 0 25px !important;
+
+    border-radius: 16px;
 
     border:
         2px solid
         #334155;
 
     background:
-        rgba(2,6,23,.96);
+        #020617;
 
-    color: #ffffff;
+    color:
+        #ffffff;
 
     font-family:
         "Poppins",
         Arial,
         sans-serif;
 
-    font-size: 18px;
+    font-size:
+        20px !important;
 
-    font-weight: 600;
+    font-weight:
+        600;
 
-    letter-spacing: 1.5px;
+    letter-spacing:
+        1.5px;
 
-    outline: none;
+    outline:
+        none;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 
     transition:
         border-color .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
+        box-shadow .2s ease;
+
 }
 
 
 .redeem-box input::placeholder {
 
-    color: #64748b;
+    color:
+        #64748b;
 
-    font-size: 16px;
+    font-size:
+        17px;
 
-    font-weight: 500;
+    letter-spacing:
+        1px;
 
-    letter-spacing: 1px;
-}
-
-
-.redeem-box input:hover {
-
-    border-color:
-        #475569;
 }
 
 
@@ -609,38 +632,43 @@ body {
     border-color:
         #60a5fa;
 
-    background:
-        #020617;
-
     box-shadow:
-        0 0 0 4px rgba(96,165,250,.10),
-        0 0 22px rgba(59,130,246,.08);
+        0 0 0 4px
+        rgba(96,165,250,.10);
+
 }
 
 
 /* =====================================================
    REDEEM BUTTON
+   ORIGINAL SIZE
 ===================================================== */
 
 .redeem-box button {
 
-    min-width: 135px;
+    min-width:
+        112px;
 
-    height: 64px;
+    height:
+        48px;
 
-    padding: 0 24px;
+    border:
+        none;
 
-    border: none;
+    border-radius:
+        11px;
 
-    border-radius: 15px;
+    padding:
+        0 20px;
 
-    color: #ffffff;
+    color:
+        #fff;
 
-    font-size: 15px;
+    font-weight:
+        700;
 
-    font-weight: 700;
-
-    cursor: pointer;
+    cursor:
+        pointer;
 
     background:
         linear-gradient(
@@ -651,11 +679,11 @@ body {
 
     box-shadow:
         0 8px 20px
-        rgba(34,197,94,.16);
+        rgba(34,197,94,.15);
 
     transition:
-        transform .2s ease,
-        box-shadow .2s ease;
+        .2s ease;
+
 }
 
 
@@ -665,27 +693,23 @@ body {
         translateY(-1px);
 
     box-shadow:
-        0 11px 26px
-        rgba(34,197,94,.24);
-}
+        0 10px 24px
+        rgba(34,197,94,.22);
 
-
-.redeem-box button:active {
-
-    transform:
-        scale(.98);
 }
 
 
 .redeem-box button:disabled {
 
-    opacity: .55;
+    opacity:
+        .55;
 
-    cursor: not-allowed;
+    cursor:
+        not-allowed;
 
-    transform: none;
+    transform:
+        none;
 
-    box-shadow: none;
 }
 
 
@@ -695,15 +719,21 @@ body {
 
 .redeem-message {
 
-    margin-top: 14px;
+    margin-top:
+        13px;
 
-    padding: 13px 14px;
+    padding:
+        12px 13px;
 
-    border-radius: 11px;
+    border-radius:
+        10px;
 
-    font-size: 12px;
+    font-size:
+        12px;
 
-    line-height: 1.5;
+    line-height:
+        1.5;
+
 }
 
 
@@ -718,6 +748,7 @@ body {
     border:
         1px solid
         rgba(34,197,94,.18);
+
 }
 
 
@@ -732,6 +763,7 @@ body {
     border:
         1px solid
         rgba(239,68,68,.18);
+
 }
 
 
@@ -741,43 +773,59 @@ body {
 
 .transactions-header {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    gap: 15px;
+    gap:
+        15px;
 
-    margin-bottom: 17px;
+    margin-bottom:
+        17px;
+
 }
 
 
 .transactions-header h2 {
 
-    margin: 0;
+    margin:
+        0;
 
-    font-size: 18px;
+    font-size:
+        18px;
+
 }
 
 
 .transactions-header p {
 
-    margin: 5px 0 0;
+    margin:
+        5px 0 0;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 11px;
+    font-size:
+        11px;
+
 }
 
 
 .transactions-header button {
 
-    flex-shrink: 0;
+    flex-shrink:
+        0;
 
-    padding: 8px 11px;
+    padding:
+        8px 11px;
 
-    border-radius: 9px;
+    border-radius:
+        9px;
 
     border:
         1px solid
@@ -786,13 +834,18 @@ body {
     background:
         rgba(255,255,255,.04);
 
-    color: #fff;
+    color:
+        #fff;
 
-    font-size: 11px;
+    font-size:
+        11px;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    transition: .2s ease;
+    transition:
+        .2s ease;
+
 }
 
 
@@ -800,66 +853,88 @@ body {
 
     background:
         rgba(255,255,255,.08);
+
 }
 
 
 /* =====================================================
-   TRANSACTION ITEM
+   TRANSACTION
 ===================================================== */
 
 .transaction {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    gap: 15px;
+    gap:
+        15px;
 
-    min-height: 67px;
+    min-height:
+        67px;
 
-    padding: 13px 0;
+    padding:
+        13px 0;
 
     border-bottom:
         1px solid
         rgba(255,255,255,.05);
+
 }
 
 
 .transaction:last-child {
 
-    border-bottom: none;
+    border-bottom:
+        none;
+
 }
 
 
 .transaction-left {
 
-    min-width: 0;
+    min-width:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 11px;
+    gap:
+        11px;
+
 }
 
 
 .transaction-icon {
 
-    width: 39px;
+    width:
+        39px;
 
-    height: 39px;
+    height:
+        39px;
 
-    flex-shrink: 0;
+    flex-shrink:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    border-radius: 11px;
+    border-radius:
+        11px;
 
     background:
         rgba(34,197,94,.09);
@@ -868,15 +943,20 @@ body {
         1px solid
         rgba(34,197,94,.08);
 
-    font-size: 16px;
+    font-size:
+        16px;
+
 }
 
 
 .transaction-title {
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    font-size: 13px;
+    font-size:
+        13px;
+
 }
 
 
@@ -885,33 +965,46 @@ body {
     color:
         var(--muted);
 
-    font-size: 10px;
+    font-size:
+        10px;
 
-    margin-top: 4px;
+    margin-top:
+        4px;
+
 }
 
 
 .transaction-code {
 
-    color: #64748b;
+    color:
+        #64748b;
 
-    font-size: 9px;
+    font-size:
+        9px;
 
-    margin-top: 3px;
+    margin-top:
+        3px;
 
-    word-break: break-all;
+    word-break:
+        break-all;
+
 }
 
 
 .transaction-amount {
 
-    flex-shrink: 0;
+    flex-shrink:
+        0;
 
-    text-align: right;
+    text-align:
+        right;
 
-    font-size: 13px;
+    font-size:
+        13px;
 
-    font-weight: 700;
+    font-weight:
+        700;
+
 }
 
 
@@ -919,6 +1012,7 @@ body {
 
     color:
         #4ade80;
+
 }
 
 
@@ -926,24 +1020,29 @@ body {
 
     color:
         #f87171;
+
 }
 
 
 /* =====================================================
-   EMPTY / LOADING
+   LOADING / EMPTY
 ===================================================== */
 
 .loading,
 .empty {
 
-    padding: 28px 12px;
+    padding:
+        28px 12px;
 
-    text-align: center;
+    text-align:
+        center;
 
     color:
         var(--muted);
 
-    font-size: 12px;
+    font-size:
+        12px;
+
 }
 
 
@@ -955,7 +1054,9 @@ body {
 
     .wallet-page {
 
-        max-width: 720px;
+        max-width:
+            720px;
+
     }
 
 }
@@ -969,13 +1070,17 @@ body {
 
     body {
 
-        padding-bottom: 92px;
+        padding-bottom:
+            92px;
+
     }
 
 
     .wallet-page {
 
-        padding: 14px;
+        padding:
+            14px;
+
     }
 
 
@@ -983,47 +1088,64 @@ body {
 
     .wallet-header {
 
-        margin-bottom: 20px;
+        margin-bottom:
+            20px;
 
-        gap: 10px;
+        gap:
+            10px;
+
     }
 
 
     .logo {
 
-        width: 42px;
+        width:
+            42px;
 
-        height: 42px;
+        height:
+            42px;
 
-        border-radius: 13px;
+        border-radius:
+            13px;
 
-        font-size: 20px;
+        font-size:
+            20px;
+
     }
 
 
     .brand {
 
-        gap: 9px;
+        gap:
+            9px;
+
     }
 
 
     .brand h1 {
 
-        font-size: 18px;
+        font-size:
+            18px;
+
     }
 
 
     .brand p {
 
-        font-size: 9px;
+        font-size:
+            9px;
+
     }
 
 
     .home-btn {
 
-        font-size: 10px;
+        font-size:
+            10px;
 
-        padding: 8px 9px;
+        padding:
+            8px 9px;
+
     }
 
 
@@ -1031,27 +1153,37 @@ body {
 
     .balance-card {
 
-        padding: 20px;
+        padding:
+            20px;
 
-        border-radius: 19px;
+        border-radius:
+            19px;
 
-        margin-bottom: 14px;
+        margin-bottom:
+            14px;
+
     }
 
 
     .balance-top {
 
-        font-size: 11px;
+        font-size:
+            11px;
+
     }
 
 
     .balance-top button {
 
-        width: 31px;
+        width:
+            31px;
 
-        height: 31px;
+        height:
+            31px;
 
-        font-size: 14px;
+        font-size:
+            14px;
+
     }
 
 
@@ -1059,44 +1191,58 @@ body {
 
         margin:
             18px 0;
+
     }
 
 
     .balance span {
 
-        font-size: 12px;
+        font-size:
+            12px;
 
-        margin-bottom: 5px;
+        margin-bottom:
+            5px;
+
     }
 
 
     .balance strong {
 
-        font-size: 34px;
+        font-size:
+            34px;
+
     }
 
 
     .wallet-stats {
 
-        gap: 8px;
+        gap:
+            8px;
+
     }
 
 
     .wallet-stats > div {
 
-        padding: 11px;
+        padding:
+            11px;
+
     }
 
 
     .wallet-stats small {
 
-        font-size: 9px;
+        font-size:
+            9px;
+
     }
 
 
     .wallet-stats strong {
 
-        font-size: 11px;
+        font-size:
+            11px;
+
     }
 
 
@@ -1105,90 +1251,119 @@ body {
     .redeem-card,
     .transactions-card {
 
-        padding: 18px;
+        padding:
+            18px;
 
-        border-radius: 16px;
+        border-radius:
+            16px;
 
-        margin-bottom: 14px;
+        margin-bottom:
+            14px;
+
     }
 
 
     .section-icon {
 
-        width: 40px;
+        width:
+            38px;
 
-        height: 40px;
+        height:
+            38px;
 
-        font-size: 17px;
+        font-size:
+            16px;
+
     }
 
 
     .section-title h2 {
 
-        font-size: 17px;
+        font-size:
+            16px;
+
     }
 
 
     .section-title p {
 
-        font-size: 10px;
+        font-size:
+            10px;
+
     }
 
 
     /* ===============================================
-       MOBILE BIG REDEEM AREA
+       REDEEM AREA
     =============================================== */
 
     .redeem-box {
 
-        flex-direction: column;
+        flex-direction:
+            column;
 
-        gap: 10px;
+        gap:
+            10px;
 
-        margin-top: 19px;
+        margin-top:
+            16px;
+
     }
 
 
+    /*
+       ONLY THE CODE ENTER BOX IS BIG
+    */
+
     .redeem-box input {
 
-        width: 100%;
+        width:
+            100% !important;
 
-        height: 62px;
+        height:
+            85px !important;
 
-        min-height: 62px;
+        min-height:
+            85px !important;
 
         padding:
-            0 17px;
+            0 20px !important;
 
-        border-radius: 14px;
+        font-size:
+            18px !important;
 
-        font-size: 17px;
+        border-radius:
+            16px;
 
-        font-weight: 600;
-
-        letter-spacing: 1.2px;
     }
 
 
     .redeem-box input::placeholder {
 
-        font-size: 14px;
+        font-size:
+            15px;
 
-        letter-spacing: .7px;
     }
 
 
+    /*
+       BUTTON REMAINS NORMAL
+    */
+
     .redeem-box button {
 
-        width: 100%;
+        width:
+            100%;
 
-        min-width: 0;
+        min-width:
+            0;
 
-        height: 55px;
+        height:
+            48px;
 
-        border-radius: 14px;
+        font-size:
+            13px;
 
-        font-size: 14px;
     }
 
 
@@ -1196,126 +1371,173 @@ body {
 
     .transactions-header {
 
-        align-items: flex-start;
+        align-items:
+            flex-start;
+
     }
 
 
     .transactions-header h2 {
 
-        font-size: 16px;
+        font-size:
+            16px;
+
     }
 
 
     .transactions-header p {
 
-        font-size: 10px;
+        font-size:
+            10px;
+
     }
 
 
     .transactions-header button {
 
-        padding: 7px 9px;
+        padding:
+            7px 9px;
 
-        font-size: 9px;
+        font-size:
+            9px;
+
     }
 
 
     .transaction {
 
-        align-items: flex-start;
+        align-items:
+            flex-start;
 
-        gap: 10px;
+        gap:
+            10px;
 
-        padding: 12px 0;
+        padding:
+            12px 0;
+
     }
 
 
     .transaction-icon {
 
-        width: 36px;
+        width:
+            36px;
 
-        height: 36px;
+        height:
+            36px;
 
-        font-size: 15px;
+        font-size:
+            15px;
+
     }
 
 
     .transaction-title {
 
-        font-size: 12px;
+        font-size:
+            12px;
+
     }
 
 
     .transaction-date {
 
-        font-size: 9px;
+        font-size:
+            9px;
+
     }
 
 
     .transaction-code {
 
-        font-size: 8px;
+        font-size:
+            8px;
+
     }
 
 
     .transaction-amount {
 
-        font-size: 11px;
+        font-size:
+            11px;
+
     }
 
 }
 
 
 /* =====================================================
-   VERY SMALL PHONES
+   VERY SMALL PHONE
 ===================================================== */
 
 @media(max-width:360px) {
 
     .wallet-page {
 
-        padding: 10px;
+        padding:
+            10px;
+
     }
 
 
     .brand h1 {
 
-        font-size: 16px;
+        font-size:
+            16px;
+
     }
 
 
     .home-btn {
 
-        padding: 7px;
+        padding:
+            7px;
+
     }
 
 
     .balance strong {
 
-        font-size: 30px;
+        font-size:
+            30px;
+
     }
 
 
     .wallet-stats {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
+
     }
 
 
+    /*
+       KEEP REDEEM INPUT BIG
+    */
+
     .redeem-box input {
 
-        height: 60px;
+        height:
+            85px !important;
 
-        font-size: 15px;
+        min-height:
+            85px !important;
+
+        font-size:
+            16px !important;
 
         padding:
-            0 14px;
+            0 16px !important;
+
     }
 
 
     .transaction {
 
-        gap: 8px;
+        gap:
+            8px;
+
     }
 
 }
