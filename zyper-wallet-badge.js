@@ -28,7 +28,7 @@ const WALLET_STYLE = {
 
         font: 11,
 
-        fontWeight: 2000,
+        fontWeight: 900,
 
         gap: 7,
 
@@ -49,7 +49,7 @@ const WALLET_STYLE = {
 
         font: 12,
 
-        fontWeight: 2000,
+        fontWeight: 900,
 
         gap: 7,
 
