@@ -5,405 +5,895 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
-<title>Zyper Diamond Store - Order</title>
+<title>Zyper Diamond Store - Wallet Order</title>
+
+<link rel="icon" href="1.jpg">
 
 <style>
 
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 body{
-margin:0;
-font-family:'Segoe UI',Arial,sans-serif;
-background:
-linear-gradient(135deg,#020617,#0f172a,#312e81);
-color:white;
-min-height:100vh;
+
+    margin:0;
+
+    min-height:100vh;
+
+    font-family:
+    'Segoe UI',
+    Arial,
+    sans-serif;
+
+    color:white;
+
+    background:
+    radial-gradient(
+        circle at 10% 10%,
+        rgba(37,99,235,.18),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 90% 90%,
+        rgba(124,58,237,.18),
+        transparent 30%
+    ),
+    linear-gradient(
+        135deg,
+        #020617,
+        #0f172a,
+        #312e81
+    );
+
 }
+
 
 .container{
-padding:20px;
-display:flex;
-justify-content:center;
+
+    width:100%;
+
+    padding:20px;
+
+    display:flex;
+
+    justify-content:center;
+
 }
+
 
 .card{
-width:100%;
-max-width:420px;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(15px);
-padding:25px;
-border-radius:25px;
-border:1px solid rgba(255,255,255,.15);
-box-shadow:0 20px 50px rgba(0,0,0,.4);
-animation:show .5s ease;
+
+    width:100%;
+
+    max-width:440px;
+
+    padding:24px;
+
+    border-radius:24px;
+
+    background:
+    rgba(15,23,42,.90);
+
+    border:
+    1px solid
+    rgba(255,255,255,.12);
+
+    backdrop-filter:
+    blur(18px);
+
+    box-shadow:
+    0 20px 55px
+    rgba(0,0,0,.42);
+
 }
 
-@keyframes show{
-from{
-opacity:0;
-transform:translateY(25px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
 
 .logo{
-text-align:center;
-font-size:45px;
+
+    text-align:center;
+
+    font-size:42px;
+
 }
+
 
 .title{
-text-align:center;
-font-size:26px;
-font-weight:800;
-background:linear-gradient(90deg,#60a5fa,#c084fc);
--webkit-background-clip:text;
-background-clip:text;
-color:transparent;
+
+    margin:
+    6px 0 0;
+
+    text-align:center;
+
+    font-size:25px;
+
+    font-weight:800;
+
+    background:
+    linear-gradient(
+        90deg,
+        #60a5fa,
+        #c084fc
+    );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+
 }
+
 
 .subtitle{
-text-align:center;
-color:#cbd5e1;
-margin-bottom:20px;
+
+    margin:
+    5px 0 20px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:12px;
+
 }
+
+
+/* =====================================================
+   PACKAGE
+===================================================== */
 
 .package-box{
-background:
-linear-gradient(
-135deg,
-rgba(37,99,235,.25),
-rgba(124,58,237,.25)
-);
-padding:18px;
-border-radius:18px;
-border:1px solid rgba(255,255,255,.15);
-margin-bottom:20px;
-text-align:center;
+
+    padding:16px;
+
+    margin-bottom:15px;
+
+    border-radius:16px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(37,99,235,.16),
+        rgba(124,58,237,.13)
+    );
+
+    border:
+    1px solid
+    rgba(255,255,255,.09);
+
+    text-align:center;
+
 }
+
 
 .package-label{
-font-size:12px;
-color:#94a3b8;
+
+    color:#94a3b8;
+
+    font-size:10px;
+
+    letter-spacing:.7px;
+
 }
+
 
 .package-name{
-font-size:20px;
-font-weight:bold;
-margin-top:5px;
+
+    margin-top:5px;
+
+    font-size:18px;
+
+    font-weight:700;
+
 }
+
 
 .package-price{
-font-size:24px;
-font-weight:bold;
-color:#60a5fa;
-margin-top:5px;
+
+    margin-top:5px;
+
+    color:#60a5fa;
+
+    font-size:22px;
+
+    font-weight:800;
+
 }
 
-.field{
-margin-top:16px;
+
+/* =====================================================
+   WALLET
+===================================================== */
+
+.wallet-box{
+
+    padding:16px;
+
+    margin-bottom:16px;
+
+    border-radius:16px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(34,197,94,.10),
+        rgba(15,23,42,.75)
+    );
+
+    border:
+    1px solid
+    rgba(34,197,94,.16);
+
 }
 
-.field label{
-display:block;
-font-size:13px;
-font-weight:600;
-color:#cbd5e1;
-margin-bottom:7px;
+
+.wallet-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    margin-bottom:12px;
+
+    font-size:14px;
+
+    font-weight:700;
+
 }
 
-input[type="text"],
-input[type="tel"]{
-width:100%;
-padding:14px;
-border:1px solid rgba(255,255,255,.1);
-border-radius:12px;
-background:#1e293b;
-color:white;
-font-size:15px;
-outline:none;
+
+.wallet-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:8px 0;
+
+    border-bottom:
+    1px solid
+    rgba(255,255,255,.05);
+
 }
 
-input::placeholder{
-color:#94a3b8;
+
+.wallet-row:last-of-type{
+
+    border-bottom:none;
+
 }
 
-input:focus{
-border-color:#60a5fa;
-box-shadow:0 0 0 3px rgba(96,165,250,.1);
+
+.wallet-row span{
+
+    color:#94a3b8;
+
+    font-size:11px;
+
 }
+
+
+.wallet-row strong{
+
+    font-size:13px;
+
+}
+
+
+.green{
+
+    color:#4ade80;
+
+}
+
+
+.red{
+
+    color:#f87171;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.wallet-status{
+
+    margin-top:12px;
+
+    padding:11px;
+
+    border-radius:10px;
+
+    font-size:11px;
+
+    line-height:1.5;
+
+}
+
+
+.wallet-status.loading{
+
+    color:#bfdbfe;
+
+    background:
+    rgba(59,130,246,.08);
+
+    border:
+    1px solid
+    rgba(59,130,246,.16);
+
+}
+
+
+.wallet-status.success{
+
+    color:#86efac;
+
+    background:
+    rgba(34,197,94,.08);
+
+    border:
+    1px solid
+    rgba(34,197,94,.18);
+
+}
+
+
+.wallet-status.error{
+
+    color:#fca5a5;
+
+    background:
+    rgba(239,68,68,.08);
+
+    border:
+    1px solid
+    rgba(239,68,68,.18);
+
+}
+
+
+/* =====================================================
+   EMAIL
+===================================================== */
 
 .email-box{
-margin-top:16px;
-padding:13px;
-border-radius:12px;
-background:rgba(30,41,59,.8);
-border:1px solid rgba(255,255,255,.1);
+
+    margin-top:14px;
+
+    padding:12px;
+
+    border-radius:11px;
+
+    background:
+    rgba(30,41,59,.70);
+
+    border:
+    1px solid
+    rgba(255,255,255,.07);
+
 }
+
 
 .email-label{
-font-size:12px;
-color:#94a3b8;
-margin-bottom:5px;
+
+    color:#94a3b8;
+
+    font-size:10px;
+
 }
+
 
 .email-value{
-font-size:14px;
-color:#e2e8f0;
-word-break:break-word;
+
+    margin-top:4px;
+
+    font-size:12px;
+
+    word-break:break-word;
+
 }
 
-.upload-box{
-margin-top:20px;
+
+/* =====================================================
+   FIELDS
+===================================================== */
+
+.field{
+
+    margin-top:14px;
+
 }
 
-.upload-label{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-padding:25px;
-border-radius:20px;
-border:2px dashed #60a5fa;
-background:
-linear-gradient(
-135deg,
-rgba(37,99,235,.25),
-rgba(124,58,237,.25)
-);
-cursor:pointer;
-transition:.3s;
+
+.field label{
+
+    display:block;
+
+    margin-bottom:6px;
+
+    color:#cbd5e1;
+
+    font-size:12px;
+
+    font-weight:600;
+
 }
 
-.upload-label:hover{
-transform:scale(1.02);
-border-color:#c084fc;
+
+.field input{
+
+    width:100%;
+
+    height:48px;
+
+    padding:
+    0 14px;
+
+    border-radius:11px;
+
+    border:
+    1px solid
+    rgba(255,255,255,.10);
+
+    background:#1e293b;
+
+    color:white;
+
+    font-size:14px;
+
+    outline:none;
+
 }
 
-.upload-label.active{
-border-color:#22c55e;
-background:rgba(34,197,94,.15);
+
+.field input::placeholder{
+
+    color:#64748b;
+
 }
 
-.upload-icon{
-font-size:50px;
+
+.field input:focus{
+
+    border-color:#60a5fa;
+
+    box-shadow:
+    0 0 0 3px
+    rgba(96,165,250,.08);
+
 }
 
-.upload-text{
-text-align:center;
-}
 
-.upload-text h3{
-margin:10px 0 5px;
-}
-
-.upload-text p{
-color:#cbd5e1;
-font-size:13px;
-margin:0;
-word-break:break-word;
-}
-
-#receipt{
-display:none;
-}
-
-.preview{
-width:100%;
-max-height:300px;
-object-fit:contain;
-margin-top:15px;
-border-radius:15px;
-display:none;
-border:1px solid rgba(255,255,255,.15);
-}
-
-button{
-width:100%;
-padding:15px;
-margin-top:20px;
-border:none;
-border-radius:15px;
-background:
-linear-gradient(90deg,#2563eb,#7c3aed);
-color:white;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
-box-shadow:0 10px 25px rgba(37,99,235,.35);
-transition:.3s;
-}
-
-button:hover{
-transform:translateY(-2px);
-}
-
-button:disabled{
-opacity:.6;
-cursor:not-allowed;
-transform:none;
-}
-
-#loading{
-display:none;
-text-align:center;
-color:#93c5fd;
-margin-top:15px;
-font-size:14px;
-}
+/* =====================================================
+   ERROR
+===================================================== */
 
 #error{
-display:none;
-background:rgba(239,68,68,.12);
-border:1px solid rgba(239,68,68,.35);
-color:#fca5a5;
-padding:13px;
-border-radius:12px;
-margin-bottom:15px;
-font-size:13px;
-text-align:center;
+
+    display:none;
+
+    margin-bottom:14px;
+
+    padding:12px;
+
+    border-radius:11px;
+
+    text-align:center;
+
+    color:#fca5a5;
+
+    font-size:12px;
+
+    background:
+    rgba(239,68,68,.08);
+
+    border:
+    1px solid
+    rgba(239,68,68,.18);
+
 }
 
-#success{
-display:none;
-text-align:center;
-}
 
-.success-icon{
-font-size:65px;
-margin-top:10px;
-}
+/* =====================================================
+   BUTTONS
+===================================================== */
 
-.success-title{
-font-size:25px;
-font-weight:bold;
-margin-top:10px;
-}
-
-.order-id{
-font-size:42px;
-font-weight:800;
-letter-spacing:5px;
-margin:15px 0;
-background:linear-gradient(90deg,#60a5fa,#c084fc);
--webkit-background-clip:text;
-background-clip:text;
-color:transparent;
-}
-
-.success-text{
-color:#cbd5e1;
-font-size:13px;
-line-height:1.7;
-}
-
+button,
+.recharge-button,
+.back-button,
 .home-button{
-display:block;
-text-decoration:none;
-padding:14px;
-margin-top:20px;
-border-radius:14px;
-background:linear-gradient(90deg,#2563eb,#7c3aed);
-color:white;
-font-weight:bold;
+
+    width:100%;
+
+    min-height:49px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:13px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    text-decoration:none;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:white;
+
 }
 
-.whatsapp-button{
-display:block;
-width:100%;
-padding:14px;
-margin-top:12px;
-border-radius:14px;
-background:linear-gradient(90deg,#25D366,#128C7E);
-color:white;
-font-weight:bold;
-text-decoration:none;
-box-shadow:0 10px 25px rgba(37,211,102,.25);
-transition:.3s;
+
+#send{
+
+    margin-top:18px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    box-shadow:
+    0 10px 25px
+    rgba(37,99,235,.25);
+
 }
 
-.whatsapp-button:hover{
-transform:translateY(-2px);
+
+#send:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
 }
+
+
+.recharge-button{
+
+    display:none;
+
+    margin-top:10px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #22c55e,
+        #15803d
+    );
+
+}
+
+
+.recharge-button.show{
+
+    display:flex;
+
+}
+
 
 .back-button{
-display:block;
-text-decoration:none;
-padding:13px;
-margin-top:12px;
-border-radius:14px;
-background:#334155;
-color:white;
-font-weight:bold;
-text-align:center;
-transition:.3s;
+
+    margin-top:10px;
+
+    background:#334155;
+
 }
 
-.back-button:hover{
-background:#475569;
-transform:translateY(-2px);
+
+#loading{
+
+    display:none;
+
+    margin-top:13px;
+
+    text-align:center;
+
+    color:#93c5fd;
+
+    font-size:12px;
+
 }
+
+
+/* =====================================================
+   SUCCESS
+===================================================== */
+
+#success{
+
+    display:none;
+
+    text-align:center;
+
+}
+
+
+.success-icon{
+
+    margin-top:10px;
+
+    font-size:62px;
+
+}
+
+
+.success-title{
+
+    margin-top:8px;
+
+    font-size:24px;
+
+    font-weight:800;
+
+}
+
+
+.order-id{
+
+    margin:
+    14px 0;
+
+    font-size:38px;
+
+    font-weight:800;
+
+    letter-spacing:4px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #60a5fa,
+        #c084fc
+    );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+
+}
+
+
+.success-text{
+
+    color:#cbd5e1;
+
+    font-size:12px;
+
+    line-height:1.7;
+
+}
+
+
+.success-balance{
+
+    margin-top:14px;
+
+    padding:14px;
+
+    border-radius:13px;
+
+    background:
+    rgba(34,197,94,.08);
+
+    border:
+    1px solid
+    rgba(34,197,94,.16);
+
+}
+
+
+.success-balance span{
+
+    display:block;
+
+    color:#94a3b8;
+
+    font-size:10px;
+
+}
+
+
+.success-balance strong{
+
+    display:block;
+
+    margin-top:5px;
+
+    color:#4ade80;
+
+    font-size:18px;
+
+}
+
+
+.home-button{
+
+    margin-top:16px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed
+    );
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
 
 .login-message{
-display:none;
-text-align:center;
-padding:30px 10px;
+
+    display:none;
+
+    text-align:center;
+
+    padding:25px 5px;
+
 }
 
+
 .login-message h2{
-color:#60a5fa;
+
+    color:#60a5fa;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:500px){
+
+    .container{
+
+        padding:13px;
+
+    }
+
+
+    .card{
+
+        padding:19px;
+
+        border-radius:20px;
+
+    }
+
+
+    .title{
+
+        font-size:21px;
+
+    }
+
+
+    .package-name{
+
+        font-size:16px;
+
+    }
+
+
+    .package-price{
+
+        font-size:19px;
+
+    }
+
+
+    .order-id{
+
+        font-size:32px;
+
+    }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
+
 <div class="card">
 
-<div id="loginMessage" class="login-message">
 
-<div class="logo">🔐</div>
+<!-- =====================================================
+     LOGIN REQUIRED
+===================================================== -->
 
-<h2>Login Required</h2>
+<div
+id="loginMessage"
+class="login-message"
+>
+
+<div class="logo">
+🔐
+</div>
+
+<h2>
+Login Required
+</h2>
 
 <p class="success-text">
-Please login to your account before placing an order.
+Please login before placing an order.
 </p>
 
-<button id="loginButton">
+<button
+id="loginButton"
+type="button"
+>
 🔐 Login Now
 </button>
 
 </div>
 
 
+
+<!-- =====================================================
+     ORDER FORM
+===================================================== -->
+
 <div id="formArea">
+
 
 <div class="logo">
 💎
 </div>
 
-<h2 class="title">
+
+<h1 class="title">
 Place Your Order
-</h2>
+</h1>
+
 
 <p class="subtitle">
-Complete your diamond purchase
+Wallet payment only
 </p>
+
 
 <div id="error"></div>
 
+
+
+<!-- PACKAGE -->
 
 <div class="package-box">
 
@@ -411,18 +901,97 @@ Complete your diamond purchase
 SELECTED PACKAGE
 </div>
 
-<div id="packageName"
-class="package-name">
+<div
+id="packageName"
+class="package-name"
+>
 Loading...
 </div>
 
-<div id="packagePrice"
-class="package-price">
+<div
+id="packagePrice"
+class="package-price"
+>
 LKR 0
 </div>
 
 </div>
 
+
+
+<!-- WALLET -->
+
+<div class="wallet-box">
+
+<div class="wallet-title">
+💰 Zyper Wallet
+</div>
+
+
+<div class="wallet-row">
+
+<span>
+Available Balance
+</span>
+
+<strong
+id="walletBalance"
+class="green"
+>
+Loading...
+</strong>
+
+</div>
+
+
+<div class="wallet-row">
+
+<span>
+Order Amount
+</span>
+
+<strong id="orderAmount">
+LKR 0
+</strong>
+
+</div>
+
+
+<div class="wallet-row">
+
+<span>
+Balance After Order
+</span>
+
+<strong id="balanceAfter">
+-
+</strong>
+
+</div>
+
+
+<div
+id="walletStatus"
+class="wallet-status loading"
+>
+Checking wallet balance...
+</div>
+
+</div>
+
+
+
+<a
+href="./recharge-payment.html"
+id="rechargeButton"
+class="recharge-button"
+>
+💳 Recharge Wallet
+</a>
+
+
+
+<!-- EMAIL -->
 
 <div class="email-box">
 
@@ -430,13 +999,18 @@ LKR 0
 📧 LOGIN EMAIL
 </div>
 
-<div id="customerEmail"
-class="email-value">
+<div
+id="customerEmail"
+class="email-value"
+>
 Loading...
 </div>
 
 </div>
 
+
+
+<!-- UID -->
 
 <div class="field">
 
@@ -450,10 +1024,14 @@ id="uid"
 inputmode="numeric"
 maxlength="15"
 placeholder="Enter your Free Fire UID"
-autocomplete="off">
+autocomplete="off"
+>
 
 </div>
 
+
+
+<!-- NAME -->
 
 <div class="field">
 
@@ -466,10 +1044,14 @@ type="text"
 id="playerName"
 maxlength="50"
 placeholder="Enter your Customer Name"
-autocomplete="name">
+autocomplete="name"
+>
 
 </div>
 
+
+
+<!-- PHONE -->
 
 <div class="field">
 
@@ -482,98 +1064,73 @@ type="tel"
 id="phone"
 maxlength="20"
 placeholder="07XXXXXXXX"
-autocomplete="tel">
+autocomplete="tel"
+>
 
 </div>
 
-
-<div class="upload-box">
-
-<input
-type="file"
-id="receipt"
-accept="image/jpeg,image/png">
-
-<label
-for="receipt"
-class="upload-label"
-id="uploadLabel">
-
-<div class="upload-icon">
-📸
-</div>
-
-<div class="upload-text">
-
-<h3 id="uploadTitle">
-Upload Payment Receipt
-</h3>
-
-<p id="uploadText">
-JPG or PNG • Maximum 5 MB
-</p>
-
-</div>
-
-</label>
-
-<img
-id="preview"
-class="preview"
-alt="Payment Receipt Preview">
-
-</div>
 
 
 <button
 id="send"
-type="button">
-
-🚀 Place Order
-
+type="button"
+disabled
+>
+Checking Wallet...
 </button>
 
+
 <p id="loading">
-⏳ Sending Order...
+⏳ Processing Wallet Order...
 </p>
 
 
 <a
 href="topup.html"
-class="back-button">
-
-⬅️ Back to Top Up
-
+class="back-button"
+>
+⬅ Back to Top Up
 </a>
+
 
 </div>
 
 
+
+<!-- =====================================================
+     SUCCESS
+===================================================== -->
+
 <div id="success">
+
 
 <div class="success-icon">
 ✅
 </div>
 
+
 <div class="success-title">
 Order Submitted!
 </div>
 
+
 <p class="success-text">
-
-Your order has been successfully sent
-to Zyper Diamond Store.
-
+Your wallet payment was successful and your order was created.
 </p>
 
-<div id="orderId"
-class="order-id">
+
+<div
+id="orderId"
+class="order-id"
+>
 0000
 </div>
 
+
 <p class="success-text">
 
-⏳ Status: <b>Pending</b>
+⏳ Status:
+<b>Pending</b>
 
 <br><br>
 
@@ -581,228 +1138,311 @@ Please save your Order ID.
 
 </p>
 
-<a
-id="whatsappButton"
-class="whatsapp-button"
-href="#"
-target="_blank"
-rel="noopener">
 
-💬 Open WhatsApp & Send Order
+<div class="success-balance">
 
-</a>
+<span>
+Remaining Wallet Balance
+</span>
+
+<strong id="remainingBalance">
+LKR 0.00
+</strong>
+
+</div>
+
 
 <a
 href="topup.html"
-class="home-button">
-
+class="home-button"
+>
 💎 Place Another Order
-
 </a>
 
+
 </div>
+
 
 </div>
 
 </div>
+
 
 
 <script type="module">
 
+
 /* =====================================================
-FIREBASE
+   FIREBASE
 ===================================================== */
 
-import {
-auth
-} from "./firebase.js";
+import { auth }
+from "./firebase.js";
 
 
 import {
-onAuthStateChanged
-} from
+    onAuthStateChanged
+}
+from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 /* =====================================================
-WORKER
+   SETTINGS
 ===================================================== */
 
 const WORKER_URL =
-"https://zyper-order.ameresh20112011.workers.dev/";
+"https://zyper-order.ameresh20112011.workers.dev";
 
 
 /* =====================================================
-WHATSAPP
-===================================================== */
-
-const WHATSAPP_NUMBER =
-"94751483909";
-
-
-/* =====================================================
-PACKAGES
+   PACKAGE PRICES
 ===================================================== */
 
 const PACKAGES = {
 
-"Weekly":560,
+    "Weekly":560,
+    "Monthly":2720,
+    "Weekly Lite":150,
 
-"Monthly":2720,
+    "VIP Bundle":3280,
+    "SVIP Bundle":4960,
 
-"Weekly Lite":150,
+    "Level 6":130,
+    "Level 10":250,
+    "Level 15":250,
+    "Level 20":250,
+    "Level 25":250,
+    "Level 30":380,
+    "Full Pass":1500,
 
-"VIP Bundle":3280,
+    "E Badge 3":250,
+    "E Badge 7":350,
+    "E Badge 30":1100,
 
-"SVIP Bundle":4960,
-
-"Level 6":130,
-
-"Level 10":250,
-
-"Level 15":250,
-
-"Level 20":250,
-
-"Level 25":250,
-
-"Level 30":380,
-
-"Full Pass":1500,
-
-"E Badge 3":250,
-
-"E Badge 7":350,
-
-"E Badge 30":1100,
-
-"25 Diamonds":150,
-
-"100 Diamonds":380,
-
-"310 Diamonds":1150,
-
-"520 Diamonds":1800,
-
-"1060 Diamonds":3400,
-
-"2180 Diamonds":6500,
-
-"5600 Diamonds":16500,
-
-"11500 Diamonds":35000
+    "25 Diamonds":150,
+    "100 Diamonds":380,
+    "310 Diamonds":1150,
+    "520 Diamonds":1800,
+    "1060 Diamonds":3400,
+    "2180 Diamonds":6500,
+    "5600 Diamonds":16500,
+    "11500 Diamonds":35000
 
 };
 
 
 /* =====================================================
-ELEMENTS
+   ELEMENTS
 ===================================================== */
 
 const errorBox =
-document.getElementById("error");
+document.getElementById(
+    "error"
+);
+
 
 const sendButton =
-document.getElementById("send");
+document.getElementById(
+    "send"
+);
+
 
 const formArea =
-document.getElementById("formArea");
+document.getElementById(
+    "formArea"
+);
+
 
 const loginMessage =
-document.getElementById("loginMessage");
+document.getElementById(
+    "loginMessage"
+);
+
 
 const customerEmail =
-document.getElementById("customerEmail");
+document.getElementById(
+    "customerEmail"
+);
+
+
+const walletBalanceElement =
+document.getElementById(
+    "walletBalance"
+);
+
+
+const orderAmountElement =
+document.getElementById(
+    "orderAmount"
+);
+
+
+const balanceAfterElement =
+document.getElementById(
+    "balanceAfter"
+);
+
+
+const walletStatus =
+document.getElementById(
+    "walletStatus"
+);
+
+
+const rechargeButton =
+document.getElementById(
+    "rechargeButton"
+);
+
+
+let currentUser =
+null;
+
+
+let walletBalance =
+0;
+
+
+let walletReady =
+false;
 
 
 /* =====================================================
-ERROR
+   MONEY
+===================================================== */
+
+function money(value){
+
+    return Number(
+        value || 0
+    ).toLocaleString(
+        "en-LK",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ERROR
 ===================================================== */
 
 function showError(message){
 
-errorBox.textContent =
-message;
+    errorBox.textContent =
+    message;
 
-errorBox.style.display =
-"block";
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+    errorBox.style.display =
+    "block";
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
 
 function hideError(){
 
-errorBox.style.display =
-"none";
+    errorBox.style.display =
+    "none";
 
 }
 
 
 /* =====================================================
-PACKAGE
+   SELECT PACKAGE
 ===================================================== */
 
 function getSelectedPackage(){
 
-const raw =
-localStorage.getItem("package");
+    const raw =
+    localStorage.getItem(
+        "package"
+    );
 
-if(!raw){
 
-return null;
+    if(!raw){
 
-}
+        return null;
 
-const separator =
-" - LKR ";
+    }
 
-const index =
-raw.lastIndexOf(separator);
 
-if(index === -1){
+    const separator =
+    " - LKR ";
 
-return null;
 
-}
+    const index =
+    raw.lastIndexOf(
+        separator
+    );
 
-const name =
-raw.substring(0,index).trim();
 
-const price =
-Number(
-raw.substring(
-index + separator.length
-).trim()
-);
+    if(index === -1){
 
-if(
-!Object.prototype.hasOwnProperty.call(
-PACKAGES,
-name
-)
-){
+        return null;
 
-return null;
+    }
 
-}
 
-if(
-PACKAGES[name] !== price
-){
+    const name =
+    raw
+    .substring(
+        0,
+        index
+    )
+    .trim();
 
-return null;
 
-}
+    const price =
+    Number(
 
-return {
-name:name,
-price:price
-};
+        raw.substring(
+            index +
+            separator.length
+        )
+
+        .trim()
+
+    );
+
+
+    if(
+        !Object.prototype
+        .hasOwnProperty
+        .call(
+            PACKAGES,
+            name
+        )
+    ){
+
+        return null;
+
+    }
+
+
+    if(
+        PACKAGES[name] !==
+        price
+    ){
+
+        return null;
+
+    }
+
+
+    return{
+        name,
+        price
+    };
 
 }
 
@@ -813,617 +1453,756 @@ getSelectedPackage();
 
 if(!selected){
 
-document
-.getElementById("packageName")
-.textContent =
-"No Package Selected";
+    document
+    .getElementById(
+        "packageName"
+    )
+    .textContent =
+    "No Package Selected";
 
-document
-.getElementById("packagePrice")
-.textContent =
-"LKR 0";
 
-sendButton.disabled =
-true;
+    document
+    .getElementById(
+        "packagePrice"
+    )
+    .textContent =
+    "LKR 0";
+
+
+    sendButton.disabled =
+    true;
+
+}
+
+else{
+
+    document
+    .getElementById(
+        "packageName"
+    )
+    .textContent =
+    selected.name;
+
+
+    document
+    .getElementById(
+        "packagePrice"
+    )
+    .textContent =
+    "LKR " +
+    money(
+        selected.price
+    );
+
+
+    orderAmountElement.textContent =
+    "LKR " +
+    money(
+        selected.price
+    );
 
 }
 
 
 /* =====================================================
-AUTH
+   LOAD WALLET
+===================================================== */
+
+async function loadWallet(user){
+
+    if(!selected){
+
+        return;
+
+    }
+
+
+    walletReady =
+    false;
+
+
+    walletStatus.className =
+    "wallet-status loading";
+
+
+    walletStatus.textContent =
+    "Checking wallet balance...";
+
+
+    sendButton.disabled =
+    true;
+
+
+    sendButton.textContent =
+    "Checking Wallet...";
+
+
+    try{
+
+        const token =
+        await user.getIdToken();
+
+
+        const response =
+        await fetch(
+            WORKER_URL,
+            {
+
+                method:
+                "POST",
+
+                headers:{
+
+                    "Content-Type":
+                    "application/json",
+
+                    "Authorization":
+                    `Bearer ${token}`
+
+                },
+
+                body:
+                JSON.stringify({
+
+                    action:
+                    "wallet_balance"
+
+                })
+
+            }
+        );
+
+
+        const result =
+        await response.json();
+
+
+        if(
+            !response.ok ||
+            !result.success
+        ){
+
+            throw new Error(
+                result.message ||
+                "Unable to load wallet."
+            );
+
+        }
+
+
+        walletBalance =
+        Number(
+            result.wallet?.balance ||
+            0
+        );
+
+
+        walletReady =
+        true;
+
+
+        updateWalletUI();
+
+    }
+    catch(error){
+
+        console.error(
+            "Wallet Error:",
+            error
+        );
+
+
+        walletReady =
+        false;
+
+
+        walletBalanceElement.textContent =
+        "Unavailable";
+
+
+        balanceAfterElement.textContent =
+        "-";
+
+
+        walletStatus.className =
+        "wallet-status error";
+
+
+        walletStatus.textContent =
+        "Unable to verify wallet balance.";
+
+
+        sendButton.disabled =
+        true;
+
+
+        sendButton.textContent =
+        "Wallet Unavailable";
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE WALLET UI
+===================================================== */
+
+function updateWalletUI(){
+
+    walletBalanceElement.textContent =
+    "LKR " +
+    money(
+        walletBalance
+    );
+
+
+    const remaining =
+    walletBalance -
+    selected.price;
+
+
+    if(
+        walletBalance >=
+        selected.price
+    ){
+
+        balanceAfterElement.textContent =
+        "LKR " +
+        money(
+            remaining
+        );
+
+
+        balanceAfterElement.className =
+        "green";
+
+
+        walletStatus.className =
+        "wallet-status success";
+
+
+        walletStatus.textContent =
+        "✓ You have enough balance for this order.";
+
+
+        rechargeButton.classList.remove(
+            "show"
+        );
+
+
+        sendButton.disabled =
+        false;
+
+
+        sendButton.textContent =
+        "🚀 Place Wallet Order";
+
+    }
+
+    else{
+
+        const shortage =
+        selected.price -
+        walletBalance;
+
+
+        balanceAfterElement.textContent =
+        "Insufficient";
+
+
+        balanceAfterElement.className =
+        "red";
+
+
+        walletStatus.className =
+        "wallet-status error";
+
+
+        walletStatus.textContent =
+        "Not enough wallet balance. Add LKR "
+        +
+        money(
+            shortage
+        )
+        +
+        " more.";
+
+
+        rechargeButton.classList.add(
+            "show"
+        );
+
+
+        sendButton.disabled =
+        true;
+
+
+        sendButton.textContent =
+        "Not Enough Balance";
+
+    }
+
+}
+
+
+/* =====================================================
+   AUTH
 ===================================================== */
 
 onAuthStateChanged(
+    auth,
+    async function(user){
 
-auth,
+        if(!user){
 
-async function(user){
-
-if(!user){
-
-formArea.style.display =
-"none";
-
-loginMessage.style.display =
-"block";
-
-customerEmail.textContent =
-"Not logged in";
-
-return;
-
-}
+            formArea.style.display =
+            "none";
 
 
-/* LOGGED IN */
-
-formArea.style.display =
-"block";
-
-loginMessage.style.display =
-"none";
+            loginMessage.style.display =
+            "block";
 
 
-customerEmail.textContent =
-user.email ||
-"Email not available";
+            return;
+
+        }
 
 
-if(selected){
+        currentUser =
+        user;
 
-document
-.getElementById("packageName")
-.textContent =
-selected.name;
 
-document
-.getElementById("packagePrice")
-.textContent =
-"LKR " +
-selected.price.toLocaleString("en-US");
+        formArea.style.display =
+        "block";
 
-}
 
-});
+        loginMessage.style.display =
+        "none";
+
+
+        customerEmail.textContent =
+        user.email ||
+        "Email not available";
+
+
+        await loadWallet(
+            user
+        );
+
+    }
+);
 
 
 /* =====================================================
-LOGIN BUTTON
+   LOGIN
 ===================================================== */
 
 document
-.getElementById("loginButton")
+.getElementById(
+    "loginButton"
+)
 .addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-window.location.href =
-"index.html";
+        window.location.href =
+        "index.html";
 
-}
+    }
 );
 
 
 /* =====================================================
-RECEIPT
-===================================================== */
-
-document
-.getElementById("receipt")
-.addEventListener(
-"change",
-function(){
-
-hideError();
-
-const file =
-this.files[0];
-
-if(!file){
-
-return;
-
-}
-
-if(
-file.type !== "image/jpeg" &&
-file.type !== "image/png"
-){
-
-this.value = "";
-
-showError(
-"❌ Only JPG and PNG receipts are allowed."
-);
-
-return;
-
-}
-
-if(
-file.size >
-5 * 1024 * 1024
-){
-
-this.value = "";
-
-showError(
-"❌ Receipt image must be 5 MB or smaller."
-);
-
-return;
-
-}
-
-const preview =
-document.getElementById("preview");
-
-preview.src =
-URL.createObjectURL(file);
-
-preview.style.display =
-"block";
-
-document
-.getElementById("uploadLabel")
-.classList
-.add("active");
-
-document
-.getElementById("uploadTitle")
-.textContent =
-"✅ Receipt Selected";
-
-document
-.getElementById("uploadText")
-.textContent =
-file.name;
-
-}
-);
-
-
-/* =====================================================
-SUBMIT
+   SUBMIT WALLET ORDER
 ===================================================== */
 
 sendButton.addEventListener(
+    "click",
+    async function(){
 
-"click",
-
-async function(){
-
-hideError();
+        hideError();
 
 
-const user =
-auth.currentUser;
+        const user =
+        auth.currentUser;
 
 
-if(!user){
+        if(!user){
 
-formArea.style.display =
-"none";
+            return;
 
-loginMessage.style.display =
-"block";
-
-return;
-
-}
+        }
 
 
-if(!selected){
+        if(!selected){
 
-showError(
-"❌ Please go back and select a package."
+            showError(
+                "❌ Please select a package first."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !walletReady
+        ){
+
+            showError(
+                "❌ Wallet is not ready. Please try again."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            walletBalance <
+            selected.price
+        ){
+
+            showError(
+                "❌ Not enough wallet balance."
+            );
+
+            rechargeButton.classList.add(
+                "show"
+            );
+
+            return;
+
+        }
+
+
+        const uid =
+        document
+        .getElementById(
+            "uid"
+        )
+        .value
+        .trim();
+
+
+        const playerName =
+        document
+        .getElementById(
+            "playerName"
+        )
+        .value
+        .trim();
+
+
+        const phone =
+        document
+        .getElementById(
+            "phone"
+        )
+        .value
+        .trim();
+
+
+        if(
+            !/^[0-9]{6,15}$/
+            .test(uid)
+        ){
+
+            showError(
+                "❌ Please enter a valid Free Fire UID (6-15 digits)."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            playerName.length < 2 ||
+            playerName.length > 50
+        ){
+
+            showError(
+                "❌ Customer Name must be between 2 and 50 characters."
+            );
+
+            return;
+
+        }
+
+
+        const cleanPhone =
+        phone.replace(
+            /[\s\-().]/g,
+            ""
+        );
+
+
+        if(
+            !/^\+?[0-9]{9,15}$/
+            .test(
+                cleanPhone
+            )
+        ){
+
+            showError(
+                "❌ Please enter a valid WhatsApp / Phone number."
+            );
+
+            return;
+
+        }
+
+
+        sendButton.disabled =
+        true;
+
+
+        sendButton.textContent =
+        "⏳ Processing Wallet Order...";
+
+
+        document
+        .getElementById(
+            "loading"
+        )
+        .style.display =
+        "block";
+
+
+        try{
+
+
+            const idToken =
+            await user
+            .getIdToken(
+                true
+            );
+
+
+            /*
+                IMPORTANT:
+
+                Worker must support:
+
+                action: wallet_order
+
+                Worker should:
+                1. verify Firebase token
+                2. get current wallet balance
+                3. check package price server-side
+                4. check balance
+                5. deduct balance
+                6. create order
+                7. create wallet transaction
+                8. send Telegram order
+                9. return orderId + newBalance
+            */
+
+
+            const response =
+            await fetch(
+                WORKER_URL,
+                {
+
+                    method:
+                    "POST",
+
+                    headers:{
+
+                        "Content-Type":
+                        "application/json",
+
+                        "Authorization":
+                        "Bearer " +
+                        idToken
+
+                    },
+
+                    body:
+                    JSON.stringify({
+
+                        action:
+                        "wallet_order",
+
+                        package:
+                        selected.name,
+
+                        gameUID:
+                        uid,
+
+                        playerName:
+                        playerName,
+
+                        phone:
+                        phone
+
+                    })
+
+                }
+            );
+
+
+            let result;
+
+
+            try{
+
+                result =
+                await response.json();
+
+            }
+            catch{
+
+                throw new Error(
+                    "Invalid response from server."
+                );
+
+            }
+
+
+            if(
+                !response.ok ||
+                !result.success
+            ){
+
+                throw new Error(
+                    result.message ||
+                    "Wallet order failed."
+                );
+
+            }
+
+
+            const orderId =
+            String(
+                result.orderId ||
+                ""
+            );
+
+
+            if(!orderId){
+
+                throw new Error(
+                    "Server did not return an Order ID."
+                );
+
+            }
+
+
+            const newBalance =
+            Number(
+                result.walletBalance ??
+                result.newBalance ??
+                (
+                    walletBalance -
+                    selected.price
+                )
+            );
+
+
+            document
+            .getElementById(
+                "remainingBalance"
+            )
+            .textContent =
+            "LKR " +
+            money(
+                newBalance
+            );
+
+
+            formArea.style.display =
+            "none";
+
+
+            document
+            .getElementById(
+                "success"
+            )
+            .style.display =
+            "block";
+
+
+            document
+            .getElementById(
+                "orderId"
+            )
+            .textContent =
+            orderId;
+
+
+            localStorage.removeItem(
+                "package"
+            );
+
+
+            localStorage.removeItem(
+                "packagePrice"
+            );
+
+
+            localStorage.removeItem(
+                "walletEligible"
+            );
+
+
+            localStorage.removeItem(
+                "paymentMethod"
+            );
+
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        }
+        catch(error){
+
+            console.error(
+                "Wallet Order Error:",
+                error
+            );
+
+
+            showError(
+                "❌ "
+                +
+                (
+                    error.message ||
+                    "Something went wrong."
+                )
+            );
+
+
+            /*
+               Reload balance in case another
+               order changed the wallet.
+            */
+
+            await loadWallet(
+                user
+            );
+
+        }
+        finally{
+
+            document
+            .getElementById(
+                "loading"
+            )
+            .style.display =
+            "none";
+
+        }
+
+    }
 );
-
-return;
-
-}
-
-
-const uid =
-document
-.getElementById("uid")
-.value
-.trim();
-
-const playerName =
-document
-.getElementById("playerName")
-.value
-.trim();
-
-const phone =
-document
-.getElementById("phone")
-.value
-.trim();
-
-const receipt =
-document
-.getElementById("receipt")
-.files[0];
-
-
-if(
-!/^[0-9]{6,15}$/.test(uid)
-){
-
-showError(
-"❌ Please enter a valid Free Fire UID (6-15 digits)."
-);
-
-return;
-
-}
-
-
-if(
-playerName.length < 2 ||
-playerName.length > 50
-){
-
-showError(
-"❌ Customer Name must be between 2 and 50 characters."
-);
-
-return;
-
-}
-
-
-const cleanPhone =
-phone.replace(
-/[\s\-().]/g,
-""
-);
-
-
-if(
-!/^\+?[0-9]{9,15}$/.test(cleanPhone)
-){
-
-showError(
-"❌ Please enter a valid WhatsApp / Phone number."
-);
-
-return;
-
-}
-
-
-if(!receipt){
-
-showError(
-"❌ Please upload your payment receipt."
-);
-
-return;
-
-}
-
-
-if(
-receipt.type !== "image/jpeg" &&
-receipt.type !== "image/png"
-){
-
-showError(
-"❌ Receipt must be JPG or PNG."
-);
-
-return;
-
-}
-
-
-if(
-receipt.size >
-5 * 1024 * 1024
-){
-
-showError(
-"❌ Receipt must be 5 MB or smaller."
-);
-
-return;
-
-}
-
-
-/* =====================================================
-LOADING
-===================================================== */
-
-sendButton.disabled =
-true;
-
-sendButton.textContent =
-"⏳ Sending Order...";
-
-document
-.getElementById("loading")
-.style.display =
-"block";
-
-
-try{
-
-
-/* =====================================================
-GET FRESH FIREBASE ID TOKEN
-===================================================== */
-
-const idToken =
-await user.getIdToken(true);
-
-
-if(!idToken){
-
-throw new Error(
-"Unable to get Firebase login token."
-);
-
-}
-
-
-/* =====================================================
-FORM DATA
-===================================================== */
-
-const formData =
-new FormData();
-
-
-formData.append(
-"package",
-selected.name +
-" - LKR " +
-selected.price
-);
-
-formData.append(
-"uid",
-uid
-);
-
-formData.append(
-"playerName",
-playerName
-);
-
-formData.append(
-"phone",
-phone
-);
-
-formData.append(
-"email",
-user.email || ""
-);
-
-formData.append(
-"firebaseUID",
-user.uid
-);
-
-formData.append(
-"receipt",
-receipt,
-receipt.name
-);
-
-
-/* =====================================================
-WORKER REQUEST
-
-IMPORTANT:
-Authorization header is required.
-===================================================== */
-
-const response =
-await fetch(
-
-WORKER_URL,
-
-{
-
-method:"POST",
-
-headers:{
-
-"Authorization":
-"Bearer " + idToken
-
-},
-
-body:formData
-
-}
-
-);
-
-
-/* =====================================================
-RESPONSE
-===================================================== */
-
-let result;
-
-try{
-
-result =
-await response.json();
-
-}catch{
-
-throw new Error(
-"Invalid response from Cloudflare Worker."
-);
-
-}
-
-
-if(
-!response.ok ||
-!result.success
-){
-
-throw new Error(
-result.message ||
-"Order submission failed."
-);
-
-}
-
-
-const orderId =
-String(result.orderId || "");
-
-
-if(!orderId){
-
-throw new Error(
-"Worker did not return a valid Order ID."
-);
-
-}
-
-
-/* =====================================================
-WHATSAPP
-===================================================== */
-
-const whatsappMessage =
-
-`💎 ZYPER DIAMOND STORE
-
-━━━━━━━━━━━━━━━━━━
-
-🧾 ORDER ID: ${orderId}
-
-📦 Package: ${selected.name}
-
-💰 Price: LKR ${selected.price.toLocaleString("en-US")}
-
-🎮 UID: ${uid}
-
-👤 Player: ${playerName}
-
-📧 Email: ${user.email || "Not available"}
-
-📱 Customer Phone: ${phone}
-
-📸 Payment Receipt: Sent to Telegram
-
-⏳ Status: Pending
-
-━━━━━━━━━━━━━━━━━━
-
-Please check and process this order.`;
-
-
-const whatsappURL =
-"https://wa.me/" +
-WHATSAPP_NUMBER +
-"?text=" +
-encodeURIComponent(
-whatsappMessage
-);
-
-
-/* =====================================================
-SUCCESS
-===================================================== */
-
-document
-.getElementById("whatsappButton")
-.href =
-whatsappURL;
-
-
-formArea.style.display =
-"none";
-
-document
-.getElementById("success")
-.style.display =
-"block";
-
-document
-.getElementById("orderId")
-.textContent =
-orderId;
-
-
-localStorage.removeItem(
-"package"
-);
-
-
-window.scrollTo({
-
-top:0,
-
-behavior:"smooth"
-
-});
-
-
-/* OPEN WHATSAPP */
-
-setTimeout(
-
-function(){
-
-window.location.href =
-whatsappURL;
-
-},
-
-700
-
-);
-
-
-}catch(error){
-
-console.error(
-"Order error:",
-error
-);
-
-
-showError(
-"❌ " +
-(
-error.message ||
-"Something went wrong."
-)
-);
-
-
-sendButton.disabled =
-false;
-
-sendButton.textContent =
-"🚀 Place Order";
-
-}finally{
-
-document
-.getElementById("loading")
-.style.display =
-"none";
-
-}
-
-});
 
 </script>
+
 
 </body>
 
