@@ -5,477 +5,896 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
-<title>Zyper Diamond Store - Top Up</title>
+<title>Zyper Diamond Store - Payment</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<!-- Zyper Navigation Bar -->
-<link rel="stylesheet" href="zyper-nav.css">
-
+<link rel="icon" href="1.jpg">
 
 <style>
 
+/* =====================================================
+   GLOBAL
+===================================================== */
+
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 
-/* =========================
-   BODY
-========================= */
+:root{
+
+    --bg:#020617;
+    --card:#0f172a;
+    --border:rgba(255,255,255,.12);
+    --text:#ffffff;
+    --muted:#94a3b8;
+    --blue:#3b82f6;
+    --purple:#8b5cf6;
+    --green:#22c55e;
+    --red:#ef4444;
+
+}
+
 
 body{
 
-margin:0;
+    margin:0;
 
-font-family:'Poppins',sans-serif;
+    min-height:100vh;
 
-background:
-linear-gradient(
-135deg,
-#020617,
-#0f172a,
-#1e1b4b
-);
+    font-family:
+        'Segoe UI',
+        Arial,
+        sans-serif;
 
-color:white;
+    color:white;
 
-min-height:100vh;
+    background:
 
-padding-bottom:100px;
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(37,99,235,.18),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(124,58,237,.18),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #020617,
+            #0f172a,
+            #1e1b4b
+        );
 
 }
 
 
-/* =========================
-   CONTAINER
-========================= */
+/* =====================================================
+   PAGE
+===================================================== */
 
 .container{
 
-padding:15px;
+    width:100%;
 
-max-width:900px;
+    padding:20px;
 
-margin:auto;
+    display:flex;
 
-}
-
-
-/* =========================
-   TITLE
-========================= */
-
-h2{
-
-text-align:center;
-
-font-size:28px;
-
-font-weight:700;
-
-background:
-linear-gradient(
-90deg,
-#60a5fa,
-#c084fc
-);
-
--webkit-background-clip:text;
-
-background-clip:text;
-
-color:transparent;
-
-margin:10px 0 25px;
+    justify-content:center;
 
 }
 
-
-/* =========================
-   SECTION TITLE
-========================= */
-
-h3{
-
-margin-top:25px;
-
-margin-bottom:15px;
-
-color:#cbd5e1;
-
-font-size:18px;
-
-}
-
-
-/* =========================
-   GRID
-========================= */
-
-.grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(
-auto-fit,
-minmax(150px,1fr)
-);
-
-gap:15px;
-
-}
-
-
-/* =========================
-   PACKAGE CARD
-========================= */
 
 .card{
 
-background:#ffffff;
+    width:100%;
 
-color:#0f172a;
+    max-width:480px;
 
-aspect-ratio:1/1;
+    padding:24px;
 
-border-radius:18px;
+    border-radius:25px;
 
-padding:15px;
+    background:
+        rgba(15,23,42,.88);
 
-display:flex;
+    backdrop-filter:
+        blur(18px);
 
-flex-direction:column;
+    -webkit-backdrop-filter:
+        blur(18px);
 
-justify-content:center;
+    border:
+        1px solid
+        rgba(255,255,255,.12);
 
-align-items:center;
+    box-shadow:
+        0 20px 55px
+        rgba(0,0,0,.42);
 
-text-align:center;
-
-cursor:pointer;
-
-position:relative;
-
-overflow:hidden;
-
-border:1px solid #e2e8f0;
-
-transition:
-transform .3s,
-box-shadow .3s,
-border .3s;
-
--webkit-tap-highlight-color:transparent;
-
-user-select:none;
+    animation:
+        show .45s ease;
 
 }
 
 
-.card:hover{
+@keyframes show{
 
-transform:
-translateY(-6px);
+    from{
 
-box-shadow:
-0 12px 30px
-rgba(0,0,0,.25);
+        transform:
+            translateY(25px);
 
-}
+        opacity:0;
 
+    }
 
-.card:active{
+    to{
 
-transform:
-scale(.95);
+        transform:
+            translateY(0);
 
-}
+        opacity:1;
 
-
-/* =========================
-   IMAGES
-========================= */
-
-.card img{
-
-width:100px;
-
-height:100px;
-
-object-fit:contain;
-
-margin-bottom:10px;
-
-}
-
-
-/* MEMBERSHIP */
-
-.card img[src*="Weekly"],
-.card img[src*="Monthly"]{
-
-width:150px;
-
-height:150px;
-
-}
-
-
-/* VIP */
-
-.card img[src*="Vip"],
-.card img[src*="Svip"]{
-
-width:300px;
-
-height:300px;
-
-object-fit:contain;
-
-}
-
-
-/* =========================
-   CARD TEXT
-========================= */
-
-.card h4{
-
-margin:5px 0;
-
-font-size:15px;
-
-font-weight:600;
-
-}
-
-
-.card p{
-
-margin:0;
-
-font-size:13px;
-
-color:#475569;
-
-font-weight:500;
-
-}
-
-
-/* =========================
-   NORMAL BADGE
-========================= */
-
-.badge{
-
-position:absolute;
-
-top:8px;
-
-right:8px;
-
-background:#facc15;
-
-color:#000;
-
-font-size:10px;
-
-padding:5px 8px;
-
-border-radius:8px;
-
-font-weight:bold;
-
-z-index:2;
-
-}
-
-
-/* =========================
-   RIPPLE
-========================= */
-
-.ripple{
-
-position:absolute;
-
-border-radius:50%;
-
-background:
-rgba(0,0,0,.15);
-
-transform:scale(0);
-
-animation:
-ripple .6s linear;
-
-pointer-events:none;
-
-}
-
-
-@keyframes ripple{
-
-to{
-
-transform:scale(4);
-
-opacity:0;
-
-}
+    }
 
 }
 
 
 /* =====================================================
-   WALLET BALANCE
+   HEADER
 ===================================================== */
 
-.wallet-page-balance{
+.logo{
 
-width:100%;
+    text-align:center;
 
-max-width:900px;
-
-margin:
-12px auto 0;
-
-padding:
-0 15px;
-
-display:flex;
-
-justify-content:flex-end;
+    font-size:38px;
 
 }
 
 
-.wallet-page-balance-box{
+.title{
 
-display:inline-flex;
+    margin-top:5px;
 
-align-items:center;
+    text-align:center;
 
-justify-content:center;
+    font-size:25px;
 
-gap:7px;
+    font-weight:800;
 
-height:40px;
+    background:
+        linear-gradient(
+            90deg,
+            #60a5fa,
+            #c084fc
+        );
 
-padding:
-0 13px;
+    -webkit-background-clip:text;
 
-border-radius:999px;
+    background-clip:text;
 
-background:
-linear-gradient(
-135deg,
-#a64fc4,
-#963db5
-);
-
-color:white;
-
-font-size:12px;
-
-font-weight:600;
-
-text-decoration:none;
-
-box-shadow:
-0 4px 14px
-rgba(115,45,145,.28);
+    color:transparent;
 
 }
 
 
-.wallet-page-balance-box svg{
+.subtitle{
 
-width:18px;
+    text-align:center;
 
-height:18px;
+    color:#94a3b8;
 
-flex-shrink:0;
+    margin-top:5px;
+
+    margin-bottom:22px;
+
+    font-size:13px;
 
 }
 
 
 /* =====================================================
-   WALLET PACKAGE STATUS
+   SELECTED PACKAGE
 ===================================================== */
 
-.card.wallet-affordable{
+.order-summary{
 
-border:
-2px solid
-rgba(34,197,94,.65);
+    padding:16px;
 
-box-shadow:
-0 0 18px
-rgba(34,197,94,.14);
+    margin-bottom:18px;
+
+    border-radius:16px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
 }
 
 
-.card.wallet-low{
+.summary-label{
 
-border:
-1px solid
-rgba(239,68,68,.22);
+    color:#94a3b8;
+
+    font-size:11px;
+
+    margin-bottom:6px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+}
+
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+.package-name{
+
+    font-size:14px;
+
+    font-weight:700;
+
+}
+
+
+.package-price{
+
+    color:#60a5fa;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+
+}
+
+
+/* =====================================================
+   SECTION HEADING
+===================================================== */
+
+.choose-title{
+
+    margin:
+        4px 0 12px;
+
+    font-size:14px;
+
+    color:#cbd5e1;
+
+}
+
+
+/* =====================================================
+   PAYMENT METHOD
+===================================================== */
+
+.payment-option{
+
+    position:relative;
+
+    width:100%;
+
+    margin-bottom:13px;
+
+    padding:17px;
+
+    border-radius:17px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    background:
+        rgba(255,255,255,.045);
+
+    cursor:pointer;
+
+    transition:
+        .22s ease;
+
+}
+
+
+.payment-option:hover{
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(96,165,250,.35);
+
+}
+
+
+.payment-option.selected{
+
+    border-color:#60a5fa;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.15),
+            rgba(124,58,237,.12)
+        );
+
+    box-shadow:
+        0 0 0 2px
+        rgba(96,165,250,.06);
+
+}
+
+
+.option-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.option-icon{
+
+    width:43px;
+
+    height:43px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:13px;
+
+    font-size:20px;
+
+}
+
+
+.wallet-icon{
+
+    background:
+        rgba(34,197,94,.12);
+
+}
+
+
+.bank-icon{
+
+    background:
+        rgba(59,130,246,.12);
+
+}
+
+
+.option-info{
+
+    min-width:0;
+
+    flex:1;
+
+}
+
+
+.option-info h3{
+
+    margin:0;
+
+    font-size:15px;
+
+}
+
+
+.option-info p{
+
+    margin:
+        4px 0 0;
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+}
+
+
+.radio{
+
+    width:19px;
+
+    height:19px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    border:
+        2px solid
+        #64748b;
+
+    position:relative;
+
+}
+
+
+.payment-option.selected
+.radio{
+
+    border-color:#60a5fa;
+
+}
+
+
+.payment-option.selected
+.radio::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:9px;
+
+    height:9px;
+
+    top:3px;
+
+    left:3px;
+
+    border-radius:50%;
+
+    background:#60a5fa;
+
+}
+
+
+/* =====================================================
+   WALLET
+===================================================== */
+
+.wallet-details{
+
+    margin-top:15px;
+
+    padding-top:14px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.07);
+
+}
+
+
+.wallet-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:8px;
+
+}
+
+
+.wallet-label{
+
+    color:#94a3b8;
+
+    font-size:12px;
+
+}
+
+
+.wallet-value{
+
+    font-weight:800;
+
+    font-size:14px;
+
+}
+
+
+.available{
+
+    color:#4ade80;
 
 }
 
 
 .wallet-status{
 
-position:absolute;
+    margin-top:11px;
 
-left:8px;
+    padding:
+        10px 12px;
 
-top:8px;
+    border-radius:10px;
 
-z-index:3;
+    font-size:11px;
 
-padding:
-4px 7px;
-
-border-radius:7px;
-
-font-size:8px;
-
-font-weight:700;
-
-letter-spacing:.2px;
-
-pointer-events:none;
+    line-height:1.5;
 
 }
 
 
-.wallet-status.enough{
+.wallet-status.success{
 
-background:#4ade80;
+    color:#86efac;
 
-color:#052e16;
+    background:
+        rgba(34,197,94,.08);
+
+    border:
+        1px solid
+        rgba(34,197,94,.18);
 
 }
 
 
-.wallet-status.low{
+.wallet-status.error{
 
-background:
-rgba(127,29,29,.92);
+    color:#fca5a5;
 
-color:#fecaca;
+    background:
+        rgba(239,68,68,.08);
+
+    border:
+        1px solid
+        rgba(239,68,68,.18);
+
+}
+
+
+.wallet-status.loading{
+
+    color:#bfdbfe;
+
+    background:
+        rgba(59,130,246,.08);
+
+    border:
+        1px solid
+        rgba(59,130,246,.16);
+
+}
+
+
+/* =====================================================
+   BANK DETAILS
+===================================================== */
+
+.bank-details{
+
+    display:none;
+
+    margin-top:15px;
+
+    padding-top:14px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.07);
+
+}
+
+
+.payment-option.selected
+.bank-details{
+
+    display:block;
+
+}
+
+
+.info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:
+        11px 12px;
+
+    margin:
+        8px 0;
+
+    border-radius:10px;
+
+    background:
+        rgba(0,0,0,.22);
+
+}
+
+
+.label{
+
+    color:#94a3b8;
+
+    font-size:12px;
+
+}
+
+
+.value{
+
+    font-weight:700;
+
+    font-size:13px;
+
+    text-align:right;
+
+}
+
+
+/* =====================================================
+   BANK INSTRUCTIONS
+===================================================== */
+
+.bank-instruction{
+
+    display:none;
+
+    margin-top:15px;
+
+    padding:14px;
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+
+}
+
+
+.bank-instruction.show{
+
+    display:block;
+
+}
+
+
+.bank-instruction h3{
+
+    margin:
+        0 0 10px;
+
+    font-size:14px;
+
+}
+
+
+.bank-instruction p{
+
+    margin:
+        7px 0;
+
+    color:#cbd5e1;
+
+    font-size:11px;
+
+    line-height:1.5;
+
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.continue-btn{
+
+    width:100%;
+
+    min-height:50px;
+
+    padding:
+        12px 15px;
+
+    margin-top:18px;
+
+    border:none;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 10px 25px
+        rgba(37,99,235,.25);
+
+    transition:
+        .2s ease;
+
+}
+
+
+.continue-btn:hover{
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.continue-btn:disabled{
+
+    opacity:.5;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+
+.recharge-btn{
+
+    display:none;
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:10px;
+
+    border-radius:13px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #15803d
+        );
+
+}
+
+
+.recharge-btn.show{
+
+    display:block;
+
+}
+
+
+.back{
+
+    width:100%;
+
+    padding:13px;
+
+    margin-top:10px;
+
+    border:none;
+
+    border-radius:13px;
+
+    background:#334155;
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+
+    margin-top:17px;
+
+    text-align:center;
+
+    color:#64748b;
+
+    font-size:10px;
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.page-error{
+
+    display:none;
+
+    padding:13px;
+
+    margin-bottom:15px;
+
+    border-radius:12px;
+
+    color:#fca5a5;
+
+    font-size:12px;
+
+    background:
+        rgba(239,68,68,.08);
+
+    border:
+        1px solid
+        rgba(239,68,68,.16);
+
+}
+
+
+.page-error.show{
+
+    display:block;
 
 }
 
@@ -486,155 +905,94 @@ color:#fecaca;
 
 @media(max-width:500px){
 
-.container{
+    .container{
 
-padding:12px;
+        padding:13px;
 
-}
+    }
 
 
-h2{
+    .card{
 
-font-size:25px;
+        padding:19px;
 
-}
+        border-radius:21px;
 
+    }
 
-h3{
 
-font-size:17px;
+    .logo{
 
-}
+        font-size:33px;
 
+    }
 
-.grid{
 
-grid-template-columns:
-repeat(2,1fr);
+    .title{
 
-gap:12px;
+        font-size:21px;
 
-}
+    }
 
 
-.card{
+    .subtitle{
 
-padding:10px;
+        font-size:11px;
 
-border-radius:15px;
+    }
 
-}
 
+    .order-summary{
 
-.card img{
+        padding:14px;
 
-width:85px;
+    }
 
-height:85px;
 
-}
+    .package-name{
 
+        font-size:12px;
 
-.card img[src*="Weekly"],
-.card img[src*="Monthly"]{
+    }
 
-width:110px;
 
-height:110px;
+    .package-price{
 
-}
+        font-size:15px;
 
+    }
 
-.card img[src*="Vip"],
-.card img[src*="Svip"]{
 
-width:250px;
+    .payment-option{
 
-height:250px;
+        padding:14px;
 
-}
+    }
 
 
-.card h4{
+    .option-icon{
 
-font-size:13px;
+        width:39px;
 
-}
+        height:39px;
 
+        font-size:18px;
 
-.card p{
+    }
 
-font-size:12px;
 
-}
+    .option-info h3{
 
+        font-size:13px;
 
-.badge{
+    }
 
-font-size:9px;
 
-padding:
-4px 6px;
+    .option-info p{
 
-}
+        font-size:10px;
 
-
-.wallet-page-balance{
-
-padding:
-0 12px;
-
-margin-top:8px;
-
-}
-
-
-.wallet-page-balance-box{
-
-height:35px;
-
-padding:
-0 10px;
-
-font-size:11px;
-
-gap:5px;
-
-}
-
-
-.wallet-page-balance-box svg{
-
-width:17px;
-
-height:17px;
-
-}
-
-
-.wallet-status{
-
-font-size:7px;
-
-padding:
-3px 5px;
-
-}
-
-}
-
-
-/* =====================================================
-   SMALL PHONES
-===================================================== */
-
-@media(max-width:350px){
-
-.wallet-page-balance-box{
-
-font-size:10px;
-
-}
+    }
 
 }
 
@@ -646,654 +1004,359 @@ font-size:10px;
 <body>
 
 
+<div class="container">
+
+<div class="card">
+
+
+<!-- HEADER -->
+
+<div class="logo">
+💎
+</div>
+
+
+<div class="title">
+Zyper Diamond Store
+</div>
+
+
+<div class="subtitle">
+Choose your payment method
+</div>
+
+
+
+<!-- ERROR -->
+
+<div
+id="pageError"
+class="page-error">
+</div>
+
+
+
+<!-- SELECTED PACKAGE -->
+
+<div class="order-summary">
+
+<div class="summary-label">
+Selected Package
+</div>
+
+
+<div class="summary-row">
+
+<div
+id="selectedPackage"
+class="package-name">
+
+Loading...
+
+</div>
+
+
+<div
+id="selectedPrice"
+class="package-price">
+
+LKR 0
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="choose-title">
+Select Payment Method
+</div>
+
+
+
 <!-- =====================================================
-     LIVE WALLET BALANCE
+     WALLET PAYMENT
 ===================================================== -->
 
-<div class="wallet-page-balance">
+<div
+id="walletOption"
+class="payment-option"
+data-method="Wallet">
+
+<div class="option-header">
+
+
+<div class="option-icon wallet-icon">
+💰
+</div>
+
+
+<div class="option-info">
+
+<h3>
+Zyper Wallet
+</h3>
+
+<p>
+Pay instantly using your available balance
+</p>
+
+</div>
+
+
+<div class="radio"></div>
+
+
+</div>
+
+
+
+<div class="wallet-details">
+
+
+<div class="wallet-row">
+
+<span class="wallet-label">
+Available Balance
+</span>
+
+<span
+id="walletBalance"
+class="wallet-value available">
+
+Loading...
+
+</span>
+
+</div>
+
+
+<div class="wallet-row">
+
+<span class="wallet-label">
+Order Amount
+</span>
+
+<span
+id="walletOrderAmount"
+class="wallet-value">
+
+LKR 0
+
+</span>
+
+</div>
+
+
+<div class="wallet-row">
+
+<span class="wallet-label">
+Balance After Payment
+</span>
+
+<span
+id="balanceAfter"
+class="wallet-value">
+
+-
+
+</span>
+
+</div>
+
+
+<div
+id="walletStatus"
+class="wallet-status loading">
+
+Checking your wallet balance...
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- RECHARGE -->
 
 <a
 href="wallet.html"
-class="wallet-page-balance-box">
+id="rechargeButton"
+class="recharge-btn">
 
-<svg
-viewBox="0 0 32 32"
-fill="none"
-xmlns="http://www.w3.org/2000/svg">
-
-<path
-d="M6 9.5H24.5C26.4 9.5 28 11.1 28 13V24C28 25.9 26.4 27.5 24.5 27.5H7.5C5.6 27.5 4 25.9 4 24V10.5C4 8.6 5.4 7.1 7.2 6.7L21.5 3.5C22.5 3.3 23.5 4 23.7 5L24.6 9.5"
-stroke="currentColor"
-stroke-width="2"
-stroke-linecap="round"
-stroke-linejoin="round"
-/>
-
-</svg>
-
-
-<span id="topupWalletBalance">
-... LKR
-</span>
+💰 Recharge Wallet
 
 </a>
 
-</div>
-
-
-
-<div class="container">
-
-
-<h2>
-🎮 Game Top Up
-</h2>
-
 
 
 <!-- =====================================================
-     MEMBERSHIP
+     BANK TRANSFER
 ===================================================== -->
 
-<h3>
-Membership
-</h3>
-
-
-<div class="grid">
-
-
-<!-- WEEKLY -->
-
 <div
-class="card"
-onclick="selectPackage(event,this,'Weekly - LKR 560')">
+id="bankOption"
+class="payment-option"
+data-method="Bank Transfer">
 
-<img
-src="topupimages/Weekly.png"
-alt="Weekly">
 
-<h4>
-Weekly
-</h4>
+<div class="option-header">
 
-<p>
-LKR 560
-</p>
 
+<div class="option-icon bank-icon">
+🏦
 </div>
 
 
-
-<!-- MONTHLY -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'Monthly - LKR 2720')">
-
-<img
-src="topupimages/Monthly.png"
-alt="Monthly">
-
-<h4>
-Monthly
-</h4>
-
-<p>
-LKR 2720
-</p>
-
-</div>
-
-
-
-<!-- WEEKLY LITE -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'Weekly Lite - LKR 150')">
-
-<img
-src="topupimages/Weekly-Lite.png"
-alt="Weekly Lite"
-onerror="weeklyLiteFallback(this)">
-
-<h4>
-Weekly Lite
-</h4>
-
-<p>
-LKR 150
-</p>
-
-</div>
-
-
-</div>
-
-
-
-<!-- =====================================================
-     VIP
-===================================================== -->
+<div class="option-info">
 
 <h3>
-VIP Bundles
+Bank Transfer
 </h3>
 
-
-<div class="grid">
-
-
-<!-- VIP -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'VIP Bundle - LKR 3280')">
-
-<img
-src="topupimages/Vip.png"
-alt="VIP">
-
-<h4>
-VIP Bundle
-</h4>
-
 <p>
-LKR 3280
+Transfer payment and upload your receipt
 </p>
 
 </div>
 
 
-
-<!-- SVIP -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'SVIP Bundle - LKR 4960')">
-
-<img
-src="topupimages/Svip.png"
-alt="SVIP">
-
-<h4>
-SVIP Bundle
-</h4>
-
-<p>
-LKR 4960
-</p>
-
-</div>
+<div class="radio"></div>
 
 
 </div>
 
 
 
-<!-- =====================================================
-     LEVEL UP
-===================================================== -->
-
-<h3>
-Level Up Pass
-</h3>
+<div class="bank-details">
 
 
-<div class="grid">
+<div class="info">
 
-
-<!-- LEVEL 6 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'Level 6 - LKR 130')">
-
-<img
-src="topupimages/Levelup.png"
-alt="Level Up">
-
-<h4>
-Level 6
-</h4>
-
-<p>
-LKR 130
-</p>
-
-</div>
-
-
-
-<!-- LEVEL 10 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'Level 10 - LKR 250')">
-
-<img
-src="topupimages/Levelup.png"
-alt="Level Up">
-
-<h4>
-Level 10
-</h4>
-
-<p>
-LKR 250
-</p>
-
-</div>
-
-
-
-<!-- LEVEL 15 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'Level 15 - LKR 250')">
-
-<img
-src="topupimages/Levelup.png"
-alt="Level Up">
-
-<h4>
-Level 15
-</h4>
-
-<p>
-LKR 250
-</p>
-
-</div>
-
-
-
-<!-- LEVEL 20 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'Level 20 - LKR 250')">
-
-<img
-src="topupimages/Levelup.png"
-alt="Level Up">
-
-<h4>
-Level 20
-</h4>
-
-<p>
-LKR 250
-</p>
-
-</div>
-
-
-
-<!-- LEVEL 25 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'Level 25 - LKR 250')">
-
-<img
-src="topupimages/Levelup.png"
-alt="Level Up">
-
-<h4>
-Level 25
-</h4>
-
-<p>
-LKR 250
-</p>
-
-</div>
-
-
-
-<!-- LEVEL 30 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'Level 30 - LKR 380')">
-
-<img
-src="topupimages/Levelup.png"
-alt="Level 30">
-
-<h4>
-Level 30
-</h4>
-
-<p>
-LKR 380
-</p>
-
-</div>
-
-
-
-<!-- FULL PASS -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'Full Pass - LKR 1500')">
-
-<span class="badge">
-FULL PASS
+<span class="label">
+Bank
 </span>
 
-<img
-src="topupimages/Levelup.png"
-alt="Full Pass">
-
-<h4>
-Full Pass
-</h4>
-
-<p>
-LKR 1500
-</p>
-
-</div>
-
-
-</div>
-
-
-
-<!-- =====================================================
-     EVO
-===================================================== -->
-
-<h3>
-EVO Access
-</h3>
-
-
-<div class="grid">
-
-
-<!-- E BADGE 3 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'E Badge 3 - LKR 250')">
-
-<img
-src="topupimages/Evo.png"
-alt="EVO">
-
-<h4>
-E Badge 3
-</h4>
-
-<p>
-LKR 250
-</p>
-
-</div>
-
-
-
-<!-- E BADGE 7 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'E Badge 7 - LKR 350')">
-
-<img
-src="topupimages/Evo.png"
-alt="EVO">
-
-<h4>
-E Badge 7
-</h4>
-
-<p>
-LKR 350
-</p>
-
-</div>
-
-
-
-<!-- E BADGE 30 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'E Badge 30 - LKR 1100')">
-
-<img
-src="topupimages/Evo.png"
-alt="EVO">
-
-<h4>
-E Badge 30
-</h4>
-
-<p>
-LKR 1100
-</p>
-
-</div>
-
-
-</div>
-
-
-
-<!-- =====================================================
-     DIAMONDS
-===================================================== -->
-
-<h3>
-💎 Diamonds
-</h3>
-
-
-<div class="grid">
-
-
-<!-- 25 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'25 Diamonds - LKR 150')">
-
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
-
-<h4>
-25 Diamonds
-</h4>
-
-<p>
-LKR 150
-</p>
-
-</div>
-
-
-
-<!-- 100 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'100 Diamonds - LKR 380')">
-
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
-
-<h4>
-100 Diamonds
-</h4>
-
-<p>
-LKR 380
-</p>
-
-</div>
-
-
-
-<!-- 310 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'310 Diamonds - LKR 1150')">
-
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
-
-<h4>
-310 Diamonds
-</h4>
-
-<p>
-LKR 1150
-</p>
-
-</div>
-
-
-
-<!-- 520 -->
-
-<div
-class="card"
-onclick="selectPackage(event,this,'520 Diamonds - LKR 1800')">
-
-<span class="badge">
-BEST
+<span class="value">
+BOC
 </span>
 
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
+</div>
 
-<h4>
-520 Diamonds
-</h4>
 
-<p>
-LKR 1800
-</p>
+<div class="info">
+
+<span class="label">
+Account
+</span>
+
+<span class="value">
+94946893
+</span>
+
+</div>
+
+
+<div class="info">
+
+<span class="label">
+Name
+</span>
+
+<span class="value">
+Ameresh R
+</span>
+
+</div>
+
+
+</div>
 
 </div>
 
 
 
-<!-- 1060 -->
+<!-- BANK INSTRUCTION -->
 
 <div
-class="card"
-onclick="selectPackage(event,this,'1060 Diamonds - LKR 3400')">
+id="bankInstruction"
+class="bank-instruction">
 
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
+<h3>
+📌 How To Pay
+</h3>
 
-<h4>
-1060 Diamonds
-</h4>
 
 <p>
-LKR 3400
+1️⃣ Transfer the exact order amount to the BOC account above.
+</p>
+
+
+<p>
+2️⃣ Take a screenshot of your successful payment.
+</p>
+
+
+<p>
+3️⃣ Continue to the order page.
+</p>
+
+
+<p>
+4️⃣ Upload your payment receipt and submit your order.
 </p>
 
 </div>
 
 
 
-<!-- 2180 -->
+<!-- CONTINUE -->
 
-<div
-class="card"
-onclick="selectPackage(event,this,'2180 Diamonds - LKR 6500')">
+<button
+id="continueButton"
+class="continue-btn"
+type="button"
+disabled>
 
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
+Select Payment Method
 
-<h4>
-2180 Diamonds
-</h4>
-
-<p>
-LKR 6500
-</p>
-
-</div>
+</button>
 
 
 
-<!-- 5600 -->
+<!-- BACK -->
 
-<div
-class="card"
-onclick="selectPackage(event,this,'5600 Diamonds - LKR 16500')">
+<button
+class="back"
+type="button"
+onclick="history.back()">
 
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
+⬅ Go Back
 
-<h4>
-5600 Diamonds
-</h4>
-
-<p>
-LKR 16500
-</p>
-
-</div>
+</button>
 
 
 
-<!-- 11500 -->
+<div class="footer">
 
-<div
-class="card"
-onclick="selectPackage(event,this,'11500 Diamonds - LKR 35000')">
-
-<img
-src="topupimages/Diamond.png"
-alt="Diamonds">
-
-<h4>
-11500 Diamonds
-</h4>
-
-<p>
-LKR 35000
-</p>
+🔒 Wallet balance is verified securely before your order is processed.
 
 </div>
 
 
 </div>
-
 
 </div>
 
 
 
 <!-- =====================================================
-     NAVIGATION
-===================================================== -->
-
-<div id="zyper-navigation"></div>
-
-
-
-<!-- =====================================================
-     WALLET + FIREBASE
+     FIREBASE + WALLET
 ===================================================== -->
 
 <script type="module">
@@ -1303,598 +1366,803 @@ from "./firebase.js";
 
 
 import {
-onAuthStateChanged
+    onAuthStateChanged
 }
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
 const WORKER_URL =
-"https://zyper-order.ameresh20112011.workers.dev";
-
-
-let currentWalletBalance = 0;
-
+    "https://zyper-order.ameresh20112011.workers.dev";
 
 
 /* =====================================================
-   MONEY FORMAT
+   ELEMENTS
 ===================================================== */
 
-function formatMoney(value){
+const selectedPackageElement =
+    document.getElementById(
+        "selectedPackage"
+    );
 
-return Number(
-value || 0
-).toLocaleString(
-"en-LK",
-{
 
-minimumFractionDigits:2,
+const selectedPriceElement =
+    document.getElementById(
+        "selectedPrice"
+    );
 
-maximumFractionDigits:2
 
-}
-);
+const walletOption =
+    document.getElementById(
+        "walletOption"
+    );
 
-}
+
+const bankOption =
+    document.getElementById(
+        "bankOption"
+    );
+
+
+const walletBalanceElement =
+    document.getElementById(
+        "walletBalance"
+    );
+
+
+const walletOrderAmount =
+    document.getElementById(
+        "walletOrderAmount"
+    );
+
+
+const balanceAfterElement =
+    document.getElementById(
+        "balanceAfter"
+    );
+
+
+const walletStatus =
+    document.getElementById(
+        "walletStatus"
+    );
+
+
+const rechargeButton =
+    document.getElementById(
+        "rechargeButton"
+    );
+
+
+const bankInstruction =
+    document.getElementById(
+        "bankInstruction"
+    );
+
+
+const continueButton =
+    document.getElementById(
+        "continueButton"
+    );
+
+
+const pageError =
+    document.getElementById(
+        "pageError"
+    );
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let currentUser = null;
+
+let walletBalance = 0;
+
+let walletLoaded = false;
+
+let selectedMethod = "";
 
 
 
 /* =====================================================
-   GET PACKAGE PRICE
+   PACKAGE
+===================================================== */
+
+const selectedPackage =
+    localStorage.getItem(
+        "package"
+    ) || "";
+
+
+let packagePrice =
+    Number(
+        localStorage.getItem(
+            "packagePrice"
+        ) || 0
+    );
+
+
+
+/* =====================================================
+   GET PRICE FROM PACKAGE IF REQUIRED
 ===================================================== */
 
 function getPackagePrice(
-packageValue
+    packageValue
 ){
 
-const separator =
-" - LKR ";
+    const separator =
+        " - LKR ";
 
 
-const index =
-String(
-packageValue || ""
-).lastIndexOf(
-separator
-);
+    const index =
+        String(
+            packageValue || ""
+        ).lastIndexOf(
+            separator
+        );
 
 
-if(index === -1){
+    if(index === -1){
 
-return 0;
+        return 0;
 
-}
+    }
 
 
-return Number(
+    return Number(
 
-String(
-packageValue
-)
+        String(
+            packageValue
+        )
 
-.substring(
-index +
-separator.length
-)
+        .substring(
+            index +
+            separator.length
+        )
 
-.trim()
+        .trim()
 
-) || 0;
+    ) || 0;
 
 }
 
 
 
 /* =====================================================
-   GET PACKAGE FROM CARD
+   GET PACKAGE NAME
 ===================================================== */
 
-function getCardPackageValue(
-card
+function getPackageName(
+    packageValue
 ){
 
-const onclickText =
-card.getAttribute(
-"onclick"
-) || "";
+    const separator =
+        " - LKR ";
 
 
-const match =
-onclickText.match(
-/'([^']+ - LKR [0-9]+)'/
-);
+    const index =
+        String(
+            packageValue || ""
+        ).lastIndexOf(
+            separator
+        );
 
 
-return match
-?
-match[1]
-:
-"";
+    if(index === -1){
+
+        return packageValue;
+
+    }
+
+
+    return String(
+        packageValue
+    )
+    .substring(
+        0,
+        index
+    )
+    .trim();
 
 }
 
 
 
 /* =====================================================
-   UPDATE PACKAGE WALLET STATUS
+   MONEY
 ===================================================== */
 
-function updatePackageWalletStatus(){
+function money(
+    value
+){
 
-document
-.querySelectorAll(
-".card"
-)
-.forEach(
-function(card){
-
-const oldStatus =
-card.querySelector(
-".wallet-status"
-);
-
-
-if(oldStatus){
-
-oldStatus.remove();
+    return Number(
+        value || 0
+    ).toLocaleString(
+        "en-LK",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
 
 }
 
 
-card.classList.remove(
-"wallet-affordable",
-"wallet-low"
-);
+
+/* =====================================================
+   SHOW ERROR
+===================================================== */
+
+function showError(
+    message
+){
+
+    pageError.textContent =
+        message;
 
 
-const packageValue =
-getCardPackageValue(
-card
-);
-
-
-if(!packageValue){
-
-return;
+    pageError.classList.add(
+        "show"
+    );
 
 }
 
 
-const price =
-getPackagePrice(
-packageValue
-);
 
+/* =====================================================
+   PACKAGE VALIDATION
+===================================================== */
 
-const status =
-document.createElement(
-"span"
-);
+if(
+    !packagePrice &&
+    selectedPackage
+){
 
+    packagePrice =
+        getPackagePrice(
+            selectedPackage
+        );
 
-status.className =
-"wallet-status";
+}
 
 
 if(
-currentWalletBalance >=
-price
+    !selectedPackage ||
+    packagePrice <= 0
 ){
 
-card.classList.add(
-"wallet-affordable"
-);
+    showError(
+        "No package selected. Please go back to Shop and select a package."
+    );
 
 
-status.classList.add(
-"enough"
-);
-
-
-status.textContent =
-"WALLET ✓";
+    continueButton.disabled =
+        true;
 
 }
 
 else{
 
-card.classList.add(
-"wallet-low"
-);
+    selectedPackageElement.textContent =
+        getPackageName(
+            selectedPackage
+        );
 
 
-status.classList.add(
-"low"
-);
+    selectedPriceElement.textContent =
+        "LKR " +
+        money(
+            packagePrice
+        );
 
 
-status.textContent =
-"LOW BALANCE";
-
-}
-
-
-card.appendChild(
-status
-);
-
-}
-);
+    walletOrderAmount.textContent =
+        "LKR " +
+        money(
+            packagePrice
+        );
 
 }
 
 
 
 /* =====================================================
-   LOAD LIVE WALLET BALANCE
+   CLEAR PAYMENT SELECTION
 ===================================================== */
 
-async function loadWalletBalance(
-user
-){
+function clearSelection(){
 
-const balanceElement =
-document.getElementById(
-"topupWalletBalance"
-);
+    walletOption.classList.remove(
+        "selected"
+    );
 
 
-try{
+    bankOption.classList.remove(
+        "selected"
+    );
 
 
-const token =
-await user.getIdToken();
+    bankInstruction.classList.remove(
+        "show"
+    );
 
 
-const response =
-await fetch(
-WORKER_URL,
-{
-
-method:
-"POST",
+    selectedMethod =
+        "";
 
 
-headers:{
-
-"Content-Type":
-"application/json",
+    continueButton.disabled =
+        true;
 
 
-"Authorization":
-`Bearer ${token}`
-
-},
-
-
-body:
-JSON.stringify(
-{
-
-action:
-"wallet_balance"
-
-}
-)
-
-}
-);
-
-
-const result =
-await response.json();
-
-
-if(
-!response.ok ||
-!result.success
-){
-
-throw new Error(
-result.message ||
-"Unable to load wallet balance."
-);
-
-}
-
-
-currentWalletBalance =
-Number(
-result.wallet?.balance ||
-0
-);
-
-
-if(balanceElement){
-
-balanceElement.textContent =
-
-formatMoney(
-currentWalletBalance
-)
-
-+
-
-" LKR";
-
-}
-
-
-/* SAVE CURRENT BALANCE */
-
-localStorage.setItem(
-"walletBalance",
-String(
-currentWalletBalance
-)
-);
-
-
-updatePackageWalletStatus();
-
-
-}
-
-catch(error){
-
-
-console.error(
-"Wallet Balance Error:",
-error
-);
-
-
-currentWalletBalance =
-0;
-
-
-if(balanceElement){
-
-balanceElement.textContent =
-"0.00 LKR";
-
-}
-
-
-localStorage.setItem(
-"walletBalance",
-"0"
-);
-
-
-updatePackageWalletStatus();
-
-}
+    continueButton.textContent =
+        "Select Payment Method";
 
 }
 
 
 
 /* =====================================================
-   FIREBASE LOGIN CHECK
+   SELECT BANK
+===================================================== */
+
+function selectBank(){
+
+    if(
+        !selectedPackage ||
+        packagePrice <= 0
+    ){
+
+        return;
+
+    }
+
+
+    clearSelection();
+
+
+    selectedMethod =
+        "Bank Transfer";
+
+
+    bankOption.classList.add(
+        "selected"
+    );
+
+
+    bankInstruction.classList.add(
+        "show"
+    );
+
+
+    continueButton.disabled =
+        false;
+
+
+    continueButton.textContent =
+        "Continue with Bank Transfer";
+
+}
+
+
+
+/* =====================================================
+   SELECT WALLET
+===================================================== */
+
+function selectWallet(){
+
+    if(
+        !selectedPackage ||
+        packagePrice <= 0
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        !walletLoaded
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        walletBalance <
+        packagePrice
+    ){
+
+        walletStatus.className =
+            "wallet-status error";
+
+
+        walletStatus.textContent =
+            "Insufficient wallet balance. Recharge your wallet or use Bank Transfer.";
+
+
+        rechargeButton.classList.add(
+            "show"
+        );
+
+
+        return;
+
+    }
+
+
+    clearSelection();
+
+
+    selectedMethod =
+        "Wallet";
+
+
+    walletOption.classList.add(
+        "selected"
+    );
+
+
+    continueButton.disabled =
+        false;
+
+
+    continueButton.textContent =
+        "Continue with Wallet";
+
+}
+
+
+
+/* =====================================================
+   PAYMENT OPTION CLICKS
+===================================================== */
+
+walletOption.addEventListener(
+    "click",
+    selectWallet
+);
+
+
+bankOption.addEventListener(
+    "click",
+    selectBank
+);
+
+
+
+/* =====================================================
+   UPDATE WALLET UI
+===================================================== */
+
+function updateWalletUI(){
+
+    walletBalanceElement.textContent =
+        "LKR " +
+        money(
+            walletBalance
+        );
+
+
+    const remaining =
+        walletBalance -
+        packagePrice;
+
+
+    if(
+        walletBalance >=
+        packagePrice
+    ){
+
+        balanceAfterElement.textContent =
+            "LKR " +
+            money(
+                remaining
+            );
+
+
+        balanceAfterElement.style.color =
+            "#4ade80";
+
+
+        walletStatus.className =
+            "wallet-status success";
+
+
+        walletStatus.textContent =
+            "✓ You have enough balance for this order.";
+
+
+        rechargeButton.classList.remove(
+            "show"
+        );
+
+    }
+
+    else{
+
+        balanceAfterElement.textContent =
+            "Insufficient";
+
+
+        balanceAfterElement.style.color =
+            "#f87171";
+
+
+        const needed =
+            packagePrice -
+            walletBalance;
+
+
+        walletStatus.className =
+            "wallet-status error";
+
+
+        walletStatus.textContent =
+
+            "Insufficient balance. You need LKR "
+
+            +
+
+            money(
+                needed
+            )
+
+            +
+
+            " more.";
+
+
+        rechargeButton.classList.add(
+            "show"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOAD LIVE WALLET
+===================================================== */
+
+async function loadWallet(
+    user
+){
+
+    walletLoaded =
+        false;
+
+
+    walletStatus.className =
+        "wallet-status loading";
+
+
+    walletStatus.textContent =
+        "Checking your wallet balance...";
+
+
+    try{
+
+        const token =
+            await user.getIdToken();
+
+
+        const response =
+            await fetch(
+                WORKER_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    headers:{
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            `Bearer ${token}`
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+                                action:
+                                    "wallet_balance"
+                            }
+                        )
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !result.success
+        ){
+
+            throw new Error(
+                result.message ||
+                "Unable to load wallet."
+            );
+
+        }
+
+
+        walletBalance =
+            Number(
+                result.wallet?.balance ||
+                0
+            );
+
+
+        walletLoaded =
+            true;
+
+
+        localStorage.setItem(
+            "walletBalance",
+            String(
+                walletBalance
+            )
+        );
+
+
+        localStorage.setItem(
+            "walletEligible",
+            walletBalance >= packagePrice
+                ? "true"
+                : "false"
+        );
+
+
+        updateWalletUI();
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Wallet Error:",
+            error
+        );
+
+
+        walletLoaded =
+            false;
+
+
+        walletBalanceElement.textContent =
+            "Unavailable";
+
+
+        balanceAfterElement.textContent =
+            "-";
+
+
+        walletStatus.className =
+            "wallet-status error";
+
+
+        walletStatus.textContent =
+            "Unable to verify your wallet right now. You can still use Bank Transfer.";
+
+
+        rechargeButton.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   AUTH
 ===================================================== */
 
 onAuthStateChanged(
-auth,
-async function(user){
+    auth,
+    async function(user){
 
-if(!user){
+        if(!user){
 
-window.location.href =
-"index.html";
+            window.location.href =
+                "index.html";
 
-return;
+            return;
 
-}
+        }
 
 
-await loadWalletBalance(
-user
-);
+        currentUser =
+            user;
 
-}
+
+        await loadWallet(
+            user
+        );
+
+    }
 );
 
 
 
 /* =====================================================
-   PACKAGE SELECTION
+   CONTINUE
 ===================================================== */
 
-window.selectPackage =
-function(
-event,
-card,
-name
-){
+continueButton.addEventListener(
+    "click",
+    function(){
+
+        if(
+            !selectedMethod
+        ){
+
+            return;
+
+        }
 
 
-const packagePrice =
-getPackagePrice(
-name
+        /*
+            IMPORTANT:
+            This does NOT deduct wallet money.
+
+            Actual wallet deduction must be done
+            securely by your Cloudflare Worker
+            when the order is submitted.
+        */
+
+
+        localStorage.setItem(
+            "paymentMethod",
+            selectedMethod
+        );
+
+
+        localStorage.setItem(
+            "packagePrice",
+            String(
+                packagePrice
+            )
+        );
+
+
+        if(
+            selectedMethod ===
+            "Wallet"
+        ){
+
+            localStorage.setItem(
+                "walletEligible",
+                "true"
+            );
+
+        }
+
+
+        window.location.href =
+            "order.html";
+
+    }
 );
-
-
-const walletEligible =
-
-currentWalletBalance >=
-packagePrice;
-
-
-/* =================================================
-   SAVE PACKAGE
-================================================= */
-
-localStorage.setItem(
-"package",
-name
-);
-
-
-localStorage.setItem(
-"packagePrice",
-String(
-packagePrice
-)
-);
-
-
-localStorage.setItem(
-"walletBalance",
-String(
-currentWalletBalance
-)
-);
-
-
-localStorage.setItem(
-"walletEligible",
-walletEligible
-?
-"true"
-:
-"false"
-);
-
-
-/* =================================================
-   RIPPLE
-================================================= */
-
-const ripple =
-document.createElement(
-"span"
-);
-
-
-ripple.className =
-"ripple";
-
-
-const rect =
-card.getBoundingClientRect();
-
-
-ripple.style.width =
-"120px";
-
-
-ripple.style.height =
-"120px";
-
-
-ripple.style.left =
-
-(
-event.clientX -
-rect.left -
-60
-)
-
-+
-
-"px";
-
-
-ripple.style.top =
-
-(
-event.clientY -
-rect.top -
-60
-)
-
-+
-
-"px";
-
-
-card.appendChild(
-ripple
-);
-
-
-/* =================================================
-   GO PAYMENT
-================================================= */
-
-setTimeout(
-function(){
-
-window.location.href =
-"payment.html";
-
-},
-250
-);
-
-};
-
-
-
-/* =====================================================
-   WEEKLY LITE FALLBACK
-===================================================== */
-
-window.weeklyLiteFallback =
-function(img){
-
-
-if(
-img.dataset.fallback ===
-"1"
-){
-
-return;
-
-}
-
-
-if(
-img.src.includes(
-"Weekly-Lite.png"
-)
-){
-
-img.dataset.fallback =
-"1";
-
-
-img.src =
-"topupimages/Weekly-lite.png";
-
-
-return;
-
-}
-
-
-if(
-img.src.includes(
-"Weekly-lite.png"
-)
-){
-
-img.dataset.fallback =
-"2";
-
-
-img.src =
-"topupimages/weekly-lite.png";
-
-}
-
-};
 
 </script>
-
-
-
-<!-- =====================================================
-     NAVIGATION JS
-===================================================== -->
-
-<script src="zyper-nav.js"></script>
 
 
 </body>
