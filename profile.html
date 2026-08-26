@@ -31,6 +31,15 @@ box-sizing:border-box;
 }
 
 
+html{
+
+min-height:100%;
+
+overflow-x:hidden;
+
+}
+
+
 body{
 
 margin:0;
@@ -53,15 +62,17 @@ circle at top,
 color:white;
 
 padding:
-25px
-20px
-150px;
+15px
+12px
+140px;
 
-display:flex;
+display:block;
 
-justify-content:center;
+overflow-x:hidden;
 
-align-items:flex-start;
+overflow-y:auto;
+
+-webkit-overflow-scrolling:touch;
 
 }
 
@@ -76,9 +87,11 @@ width:100%;
 
 max-width:430px;
 
-margin-top:25px;
+margin:
+20px auto 40px;
 
-padding:30px 22px;
+padding:
+30px 22px 35px;
 
 border-radius:28px;
 
@@ -586,6 +599,19 @@ transform:translateY(-2px);
 
 
 /* =====================================================
+   SAFE SPACE FOR FIXED NAV
+===================================================== */
+
+.nav-safe-space{
+
+width:100%;
+
+height:90px;
+
+}
+
+
+/* =====================================================
    EDIT PANEL
 ===================================================== */
 
@@ -822,42 +848,6 @@ cursor:pointer;
 
 
 /* =====================================================
-   MESSAGE
-===================================================== */
-
-.profile-message{
-
-display:none;
-
-margin-top:12px;
-
-padding:10px;
-
-border-radius:10px;
-
-font-size:12px;
-
-text-align:center;
-
-background:
-rgba(34,197,94,.12);
-
-border:
-1px solid rgba(34,197,94,.25);
-
-color:#86efac;
-
-}
-
-
-.profile-message.show{
-
-display:block;
-
-}
-
-
-/* =====================================================
    MOBILE
 ===================================================== */
 
@@ -866,18 +856,24 @@ display:block;
 body{
 
 padding:
-15px
+10px
 12px
-145px;
+130px;
+
+overflow-y:auto;
+
+-webkit-overflow-scrolling:touch;
 
 }
 
 
 .profile-card{
 
-margin-top:10px;
+margin:
+10px auto 30px;
 
-padding:25px 18px;
+padding:
+25px 18px 30px;
 
 border-radius:24px;
 
@@ -944,6 +940,13 @@ font-size:9px;
 
 }
 
+
+.nav-safe-space{
+
+height:110px;
+
+}
+
 }
 
 
@@ -956,7 +959,7 @@ font-size:9px;
 .profile-card{
 
 padding:
-22px 14px;
+22px 14px 28px;
 
 }
 
@@ -978,6 +981,13 @@ gap:7px;
 .quick-grid{
 
 gap:6px;
+
+}
+
+
+.nav-safe-space{
+
+height:120px;
 
 }
 
@@ -1251,12 +1261,6 @@ onclick="cancelEdit()">
 </div>
 
 
-<div
-id="profileMessage"
-class="profile-message">
-</div>
-
-
 </div>
 
 
@@ -1267,6 +1271,11 @@ onclick="logout()">
 🚪 Logout
 
 </button>
+
+
+<!-- SAFE SPACE SO LOGOUT CAN SCROLL ABOVE NAV -->
+
+<div class="nav-safe-space"></div>
 
 
 </div>
