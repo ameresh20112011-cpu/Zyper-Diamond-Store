@@ -12,9 +12,54 @@ const WORKER_URL =
 
 
 /* =====================================================
+   LOAD POPPINS 500
+   REAL MEDIUM WEIGHT
+===================================================== */
+
+function loadWalletFont() {
+
+    if (
+        document.getElementById(
+            "zyperWalletFont"
+        )
+    ) {
+        return;
+    }
+
+
+    const link =
+        document.createElement(
+            "link"
+        );
+
+
+    link.id =
+        "zyperWalletFont";
+
+
+    link.rel =
+        "stylesheet";
+
+
+    link.href =
+        "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap";
+
+
+    document.head.appendChild(
+        link
+    );
+
+}
+
+
+loadWalletFont();
+
+
+/* =====================================================
    GLOBAL WALLET STYLE
 
-   ONE FILE CONTROLS ALL PAGES
+   SIZE IS KEPT THE SAME.
+   500 = MEDIUM / MID BOLD
 ===================================================== */
 
 const WALLET_STYLE = {
@@ -29,7 +74,7 @@ const WALLET_STYLE = {
 
         font: 11,
 
-        fontWeight: 600,
+        fontWeight: 500,
 
         gap: 5,
 
@@ -50,7 +95,7 @@ const WALLET_STYLE = {
 
         font: 12,
 
-        fontWeight: 600,
+        fontWeight: 500,
 
         gap: 7,
 
@@ -86,7 +131,7 @@ function formatMoney(amount) {
 
 
 /* =====================================================
-   REMOVE OLD PAGE WALLET
+   REMOVE OLD PAGE-SPECIFIC WALLET UI
 ===================================================== */
 
 function removeLegacyWalletUI() {
@@ -107,7 +152,7 @@ function removeLegacyWalletUI() {
 
 
 /* =====================================================
-   REMOVE OLD SHARED WALLET
+   REMOVE OLD SHARED BADGE
 ===================================================== */
 
 function removeOldWalletBadge() {
@@ -201,7 +246,7 @@ function createWalletBadge() {
 
 
 /* =====================================================
-   APPLY SAME STYLE TO EVERY PAGE
+   APPLY SAME WALLET STYLE TO EVERY PAGE
 ===================================================== */
 
 function applyWalletStyle() {
@@ -521,7 +566,8 @@ function applyWalletStyle() {
 
     /* =================================================
        WALLET BALANCE
-       MID-LEVEL BOLD
+
+       POPPINS 500 = REAL MID-LEVEL BOLD
     ================================================= */
 
     balance.style.setProperty(
@@ -545,14 +591,9 @@ function applyWalletStyle() {
     );
 
 
-    /*
-       MID-BOLD FONT
-       Not too thin, not too thick.
-    */
-
     balance.style.setProperty(
         "font-family",
-        '"Segoe UI Semibold", "Segoe UI", Arial, sans-serif',
+        '"Poppins", sans-serif',
         "important"
     );
 
@@ -564,13 +605,9 @@ function applyWalletStyle() {
     );
 
 
-    /*
-       600 = MID LEVEL BOLD
-    */
-
     balance.style.setProperty(
         "font-weight",
-        "600",
+        `${style.fontWeight}`,
         "important"
     );
 
@@ -610,9 +647,7 @@ function applyWalletStyle() {
     );
 
 
-    /*
-       NO EXTRA BOLD EFFECT
-    */
+    /* NO FAKE BOLD */
 
     balance.style.setProperty(
         "text-shadow",
@@ -631,20 +666,6 @@ function applyWalletStyle() {
     balance.style.setProperty(
         "text-decoration",
         "none",
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "-webkit-font-smoothing",
-        "antialiased",
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "-moz-osx-font-smoothing",
-        "grayscale",
         "important"
     );
 
@@ -772,11 +793,6 @@ async function loadWalletBalance(user) {
 
 function startWalletBadge() {
 
-    /*
-       REMOVE OLD PAGE-SPECIFIC WALLET.
-       THIS KEEPS ALL PAGES THE SAME.
-    */
-
     removeLegacyWalletUI();
 
 
@@ -823,7 +839,7 @@ function startWalletBadge() {
 
 
 /* =====================================================
-   SCREEN RESIZE
+   RESIZE
 ===================================================== */
 
 window.addEventListener(
