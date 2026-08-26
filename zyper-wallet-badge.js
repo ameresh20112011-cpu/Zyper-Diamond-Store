@@ -12,34 +12,52 @@ const WORKER_URL =
 
 
 /* =====================================================
-   ONE GLOBAL WALLET STYLE
+   GLOBAL WALLET STYLE
 
-   CHANGE ONLY THESE VALUES.
-   ALL CONNECTED PAGES WILL CHANGE.
+   ONE FILE CONTROLS ALL PAGES
 ===================================================== */
 
 const WALLET_STYLE = {
 
     mobile: {
+
         height: 35,
+
         paddingX: 10,
+
         icon: 17,
+
         font: 11,
-        fontWeight: 500,
+
+        fontWeight: 400,
+
         gap: 5,
+
         top: 8,
+
         right: 10
+
     },
 
+
     desktop: {
+
         height: 40,
+
         paddingX: 13,
+
         icon: 18,
+
         font: 12,
-        fontWeight: 500,
+
+        fontWeight: 400,
+
         gap: 7,
+
         top: 12,
+
         right: 12
+
     }
 
 };
@@ -56,8 +74,11 @@ function formatMoney(amount) {
     ).toLocaleString(
         "en-LK",
         {
+
             minimumFractionDigits: 2,
+
             maximumFractionDigits: 2
+
         }
     );
 
@@ -65,7 +86,7 @@ function formatMoney(amount) {
 
 
 /* =====================================================
-   REMOVE OLD PAGE-SPECIFIC WALLET UI
+   REMOVE OLD PAGE WALLET
 ===================================================== */
 
 function removeLegacyWalletUI() {
@@ -86,7 +107,7 @@ function removeLegacyWalletUI() {
 
 
 /* =====================================================
-   REMOVE OLD SHARED BADGE
+   REMOVE OLD SHARED WALLET
 ===================================================== */
 
 function removeOldWalletBadge() {
@@ -151,7 +172,7 @@ function createWalletBadge() {
             <path
                 d="M6 9.5H24.5C26.4 9.5 28 11.1 28 13V24C28 25.9 26.4 27.5 24.5 27.5H7.5C5.6 27.5 4 25.9 4 24V10.5C4 8.6 5.4 7.1 7.2 6.7L21.5 3.5C22.5 3.3 23.5 4 23.7 5L24.6 9.5"
                 stroke="currentColor"
-                stroke-width="2.5"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
             />
@@ -225,7 +246,7 @@ function applyWalletStyle() {
 
 
     /* =================================================
-       WALLET BADGE
+       BADGE
     ================================================= */
 
     badge.style.setProperty(
@@ -499,8 +520,8 @@ function applyWalletStyle() {
 
 
     /* =================================================
-       PROFESSIONAL BOLD BALANCE TEXT
-       700 = BOLD, BUT NOT TOO THICK
+       BALANCE TEXT
+       THINNER / NORMAL WEIGHT
     ================================================= */
 
     balance.style.setProperty(
@@ -524,9 +545,15 @@ function applyWalletStyle() {
     );
 
 
+    /*
+       IMPORTANT:
+       No Arial Black.
+       Segoe UI gives cleaner normal-weight text.
+    */
+
     balance.style.setProperty(
         "font-family",
-        "Arial, sans-serif",
+        '"Segoe UI", Roboto, Helvetica, Arial, sans-serif',
         "important"
     );
 
@@ -538,9 +565,14 @@ function applyWalletStyle() {
     );
 
 
+    /*
+       400 = NORMAL
+       This is intentionally not bold.
+    */
+
     balance.style.setProperty(
         "font-weight",
-        `${style.fontWeight}`,
+        "400",
         "important"
     );
 
@@ -548,6 +580,18 @@ function applyWalletStyle() {
     balance.style.setProperty(
         "font-style",
         "normal",
+        "important"
+    );
+
+
+    /*
+       Prevent browser from creating
+       synthetic bold text.
+    */
+
+    balance.style.setProperty(
+        "font-synthesis",
+        "none",
         "important"
     );
 
@@ -580,11 +624,41 @@ function applyWalletStyle() {
     );
 
 
-    /* REMOVE OLD EXTRA-BOLD EFFECT */
+    /*
+       REMOVE ALL EXTRA THICKNESS
+    */
 
     balance.style.setProperty(
         "text-shadow",
         "none",
+        "important"
+    );
+
+
+    balance.style.setProperty(
+        "-webkit-text-stroke",
+        "0px transparent",
+        "important"
+    );
+
+
+    balance.style.setProperty(
+        "text-decoration",
+        "none",
+        "important"
+    );
+
+
+    balance.style.setProperty(
+        "-webkit-font-smoothing",
+        "antialiased",
+        "important"
+    );
+
+
+    balance.style.setProperty(
+        "-moz-osx-font-smoothing",
+        "grayscale",
         "important"
     );
 
@@ -642,8 +716,10 @@ async function loadWalletBalance(user) {
                     body:
                         JSON.stringify(
                             {
+
                                 action:
                                     "wallet_balance"
+
                             }
                         )
 
@@ -705,15 +781,14 @@ async function loadWalletBalance(user) {
 
 
 /* =====================================================
-   START
+   START WALLET
 ===================================================== */
 
 function startWalletBadge() {
 
     /*
-       Removes old page-specific wallet displays.
-       This prevents Home / Topup / other pages
-       from having different wallet styles.
+       Remove old page-specific wallet
+       before creating shared wallet.
     */
 
     removeLegacyWalletUI();
@@ -762,7 +837,7 @@ function startWalletBadge() {
 
 
 /* =====================================================
-   RESIZE
+   SCREEN RESIZE
 ===================================================== */
 
 window.addEventListener(
