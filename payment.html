@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Zyper Diamond Store - Payment</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Zyper Diamond Store - Top Up</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -14,26 +18,37 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <!-- Zyper Navigation Bar -->
 <link rel="stylesheet" href="zyper-nav.css">
 
+
 <style>
 
 *{
 box-sizing:border-box;
 }
 
+
+/* =========================
+   BODY
+========================= */
+
 body{
 
 margin:0;
 
-font-family:'Segoe UI',Arial,sans-serif;
+font-family:'Poppins',sans-serif;
 
 background:
-linear-gradient(135deg,#020617,#0f172a,#1e1b4b);
+linear-gradient(
+135deg,
+#020617,
+#0f172a,
+#1e1b4b
+);
 
 color:white;
 
 min-height:100vh;
 
-padding-bottom:90px;
+padding-bottom:100px;
 
 }
 
@@ -44,76 +59,11 @@ padding-bottom:90px;
 
 .container{
 
-padding:20px;
+padding:15px;
 
-display:flex;
+max-width:900px;
 
-justify-content:center;
-
-}
-
-
-/* =========================
-   CARD
-========================= */
-
-.card{
-
-width:100%;
-
-max-width:420px;
-
-background:
-rgba(255,255,255,0.08);
-
-backdrop-filter:blur(15px);
-
--webkit-backdrop-filter:blur(15px);
-
-border:1px solid rgba(255,255,255,0.15);
-
-padding:25px;
-
-border-radius:25px;
-
-box-shadow:
-0 20px 50px rgba(0,0,0,0.4);
-
-animation:show .5s ease;
-
-}
-
-
-@keyframes show{
-
-from{
-
-transform:translateY(30px);
-
-opacity:0;
-
-}
-
-to{
-
-transform:translateY(0);
-
-opacity:1;
-
-}
-
-}
-
-
-/* =========================
-   LOGO
-========================= */
-
-.logo{
-
-text-align:center;
-
-font-size:40px;
+margin:auto;
 
 }
 
@@ -122,16 +72,20 @@ font-size:40px;
    TITLE
 ========================= */
 
-.title{
+h2{
 
 text-align:center;
 
-font-size:26px;
+font-size:28px;
 
-font-weight:800;
+font-weight:700;
 
 background:
-linear-gradient(90deg,#60a5fa,#c084fc);
+linear-gradient(
+90deg,
+#60a5fa,
+#c084fc
+);
 
 -webkit-background-clip:text;
 
@@ -139,339 +93,546 @@ background-clip:text;
 
 color:transparent;
 
-}
-
-
-.subtitle{
-
-text-align:center;
-
-color:#cbd5e1;
-
-margin-bottom:25px;
+margin:10px 0 25px;
 
 }
 
 
 /* =========================
-   SELECTED PACKAGE
+   SECTION TITLE
 ========================= */
 
-.package{
-
-background:
-linear-gradient(
-135deg,
-rgba(37,99,235,.25),
-rgba(139,92,246,.25)
-);
-
-padding:18px;
-
-border-radius:18px;
-
-border:1px solid rgba(255,255,255,.15);
-
-margin-bottom:20px;
-
-text-align:center;
-
-}
-
-
-.package-label{
-
-font-size:12px;
-
-color:#94a3b8;
-
-margin-bottom:5px;
-
-}
-
-
-.package-name{
-
-font-size:20px;
-
-font-weight:bold;
-
-}
-
-
-.package-price{
-
-font-size:25px;
-
-font-weight:800;
-
-margin-top:5px;
-
-color:#60a5fa;
-
-}
-
-
-/* =========================
-   PAYMENT METHOD
-========================= */
-
-.method{
-
-background:
-linear-gradient(
-135deg,
-rgba(37,99,235,.3),
-rgba(139,92,246,.3)
-);
-
-padding:20px;
-
-border-radius:18px;
-
-border:1px solid rgba(255,255,255,.15);
-
-}
-
-
-.method h3{
-
-margin-top:0;
-
-}
-
-
-/* =========================
-   INFO
-========================= */
-
-.info{
-
-display:flex;
-
-justify-content:space-between;
-
-background:rgba(0,0,0,.25);
-
-padding:12px;
-
-border-radius:10px;
-
-margin:10px 0;
-
-gap:10px;
-
-}
-
-
-.label{
-
-color:#cbd5e1;
-
-}
-
-
-.value{
-
-font-weight:bold;
-
-color:#fff;
-
-text-align:right;
-
-word-break:break-word;
-
-}
-
-
-/* =========================
-   INSTRUCTIONS
-========================= */
-
-.instruction{
+h3{
 
 margin-top:25px;
 
-background:rgba(255,255,255,.05);
-
-padding:15px;
-
-border-radius:15px;
-
-line-height:28px;
-
-color:#e2e8f0;
-
-}
-
-
-.instruction h3{
-
-margin-top:0;
-
-}
-
-
-/* =========================
-   BUTTON
-========================= */
-
-button{
-
-width:100%;
-
-padding:15px;
-
-margin-top:20px;
-
-border:none;
-
-border-radius:15px;
-
-font-size:17px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-color:white;
-
-background:
-linear-gradient(
-90deg,
-#2563eb,
-#7c3aed
-);
-
-box-shadow:
-0 10px 25px rgba(37,99,235,.4);
-
-transition:.3s;
-
-}
-
-
-button:hover{
-
-transform:translateY(-3px);
-
-}
-
-
-button:active{
-
-transform:scale(.98);
-
-}
-
-
-/* =========================
-   DISABLED BUTTON
-========================= */
-
-button:disabled{
-
-opacity:.5;
-
-cursor:not-allowed;
-
-transform:none;
-
-box-shadow:none;
-
-}
-
-
-/* =========================
-   BACK BUTTON
-========================= */
-
-.back{
-
-background:#334155;
-
-box-shadow:none;
-
-}
-
-
-/* =========================
-   ERROR
-========================= */
-
-.error{
-
-display:none;
-
-background:rgba(239,68,68,.15);
-
-border:1px solid rgba(239,68,68,.4);
-
-color:#fca5a5;
-
-padding:14px;
-
-border-radius:12px;
-
-text-align:center;
-
 margin-bottom:15px;
 
-font-size:13px;
-
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer{
-
-text-align:center;
-
-margin-top:20px;
-
-color:#94a3b8;
-
-font-size:13px;
-
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:500px){
-
-.card{
-
-padding:20px;
-
-}
-
-.title{
-
-font-size:23px;
-
-}
-
-.package-name{
+color:#cbd5e1;
 
 font-size:18px;
 
 }
 
-.package-price{
 
-font-size:23px;
+/* =========================
+   GRID
+========================= */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(150px,1fr)
+);
+
+gap:15px;
 
 }
 
-.info{
+
+/* =========================
+   PACKAGE CARD
+========================= */
+
+.card{
+
+background:#ffffff;
+
+color:#0f172a;
+
+aspect-ratio:1/1;
+
+border-radius:18px;
+
+padding:15px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+cursor:pointer;
+
+position:relative;
+
+overflow:hidden;
+
+border:1px solid #e2e8f0;
+
+transition:
+transform .3s,
+box-shadow .3s,
+border .3s;
+
+-webkit-tap-highlight-color:transparent;
+
+user-select:none;
+
+}
+
+
+.card:hover{
+
+transform:
+translateY(-6px);
+
+box-shadow:
+0 12px 30px
+rgba(0,0,0,.25);
+
+}
+
+
+.card:active{
+
+transform:
+scale(.95);
+
+}
+
+
+/* =========================
+   IMAGES
+========================= */
+
+.card img{
+
+width:100px;
+
+height:100px;
+
+object-fit:contain;
+
+margin-bottom:10px;
+
+}
+
+
+/* MEMBERSHIP */
+
+.card img[src*="Weekly"],
+.card img[src*="Monthly"]{
+
+width:150px;
+
+height:150px;
+
+}
+
+
+/* VIP */
+
+.card img[src*="Vip"],
+.card img[src*="Svip"]{
+
+width:300px;
+
+height:300px;
+
+object-fit:contain;
+
+}
+
+
+/* =========================
+   CARD TEXT
+========================= */
+
+.card h4{
+
+margin:5px 0;
+
+font-size:15px;
+
+font-weight:600;
+
+}
+
+
+.card p{
+
+margin:0;
 
 font-size:13px;
+
+color:#475569;
+
+font-weight:500;
+
+}
+
+
+/* =========================
+   NORMAL BADGE
+========================= */
+
+.badge{
+
+position:absolute;
+
+top:8px;
+
+right:8px;
+
+background:#facc15;
+
+color:#000;
+
+font-size:10px;
+
+padding:5px 8px;
+
+border-radius:8px;
+
+font-weight:bold;
+
+z-index:2;
+
+}
+
+
+/* =========================
+   RIPPLE
+========================= */
+
+.ripple{
+
+position:absolute;
+
+border-radius:50%;
+
+background:
+rgba(0,0,0,.15);
+
+transform:scale(0);
+
+animation:
+ripple .6s linear;
+
+pointer-events:none;
+
+}
+
+
+@keyframes ripple{
+
+to{
+
+transform:scale(4);
+
+opacity:0;
+
+}
+
+}
+
+
+/* =====================================================
+   WALLET BALANCE
+===================================================== */
+
+.wallet-page-balance{
+
+width:100%;
+
+max-width:900px;
+
+margin:
+12px auto 0;
+
+padding:
+0 15px;
+
+display:flex;
+
+justify-content:flex-end;
+
+}
+
+
+.wallet-page-balance-box{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:7px;
+
+height:40px;
+
+padding:
+0 13px;
+
+border-radius:999px;
+
+background:
+linear-gradient(
+135deg,
+#a64fc4,
+#963db5
+);
+
+color:white;
+
+font-size:12px;
+
+font-weight:600;
+
+text-decoration:none;
+
+box-shadow:
+0 4px 14px
+rgba(115,45,145,.28);
+
+}
+
+
+.wallet-page-balance-box svg{
+
+width:18px;
+
+height:18px;
+
+flex-shrink:0;
+
+}
+
+
+/* =====================================================
+   WALLET PACKAGE STATUS
+===================================================== */
+
+.card.wallet-affordable{
+
+border:
+2px solid
+rgba(34,197,94,.65);
+
+box-shadow:
+0 0 18px
+rgba(34,197,94,.14);
+
+}
+
+
+.card.wallet-low{
+
+border:
+1px solid
+rgba(239,68,68,.22);
+
+}
+
+
+.wallet-status{
+
+position:absolute;
+
+left:8px;
+
+top:8px;
+
+z-index:3;
+
+padding:
+4px 7px;
+
+border-radius:7px;
+
+font-size:8px;
+
+font-weight:700;
+
+letter-spacing:.2px;
+
+pointer-events:none;
+
+}
+
+
+.wallet-status.enough{
+
+background:#4ade80;
+
+color:#052e16;
+
+}
+
+
+.wallet-status.low{
+
+background:
+rgba(127,29,29,.92);
+
+color:#fecaca;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:500px){
+
+.container{
+
+padding:12px;
+
+}
+
+
+h2{
+
+font-size:25px;
+
+}
+
+
+h3{
+
+font-size:17px;
+
+}
+
+
+.grid{
+
+grid-template-columns:
+repeat(2,1fr);
+
+gap:12px;
+
+}
+
+
+.card{
+
+padding:10px;
+
+border-radius:15px;
+
+}
+
+
+.card img{
+
+width:85px;
+
+height:85px;
+
+}
+
+
+.card img[src*="Weekly"],
+.card img[src*="Monthly"]{
+
+width:110px;
+
+height:110px;
+
+}
+
+
+.card img[src*="Vip"],
+.card img[src*="Svip"]{
+
+width:250px;
+
+height:250px;
+
+}
+
+
+.card h4{
+
+font-size:13px;
+
+}
+
+
+.card p{
+
+font-size:12px;
+
+}
+
+
+.badge{
+
+font-size:9px;
+
+padding:
+4px 6px;
+
+}
+
+
+.wallet-page-balance{
+
+padding:
+0 12px;
+
+margin-top:8px;
+
+}
+
+
+.wallet-page-balance-box{
+
+height:35px;
+
+padding:
+0 10px;
+
+font-size:11px;
+
+gap:5px;
+
+}
+
+
+.wallet-page-balance-box svg{
+
+width:17px;
+
+height:17px;
+
+}
+
+
+.wallet-status{
+
+font-size:7px;
+
+padding:
+3px 5px;
+
+}
+
+}
+
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media(max-width:350px){
+
+.wallet-page-balance-box{
+
+font-size:10px;
 
 }
 
@@ -485,116 +646,125 @@ font-size:13px;
 <body>
 
 
+<!-- =====================================================
+     LIVE WALLET BALANCE
+===================================================== -->
+
+<div class="wallet-page-balance">
+
+<a
+href="wallet.html"
+class="wallet-page-balance-box">
+
+<svg
+viewBox="0 0 32 32"
+fill="none"
+xmlns="http://www.w3.org/2000/svg">
+
+<path
+d="M6 9.5H24.5C26.4 9.5 28 11.1 28 13V24C28 25.9 26.4 27.5 24.5 27.5H7.5C5.6 27.5 4 25.9 4 24V10.5C4 8.6 5.4 7.1 7.2 6.7L21.5 3.5C22.5 3.3 23.5 4 23.7 5L24.6 9.5"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+/>
+
+</svg>
+
+
+<span id="topupWalletBalance">
+... LKR
+</span>
+
+</a>
+
+</div>
+
+
+
 <div class="container">
 
 
-<div class="card">
+<h2>
+🎮 Game Top Up
+</h2>
 
 
-<div class="logo">
-💎
-</div>
 
-
-<div class="title">
-
-Zyper Diamond Store
-
-</div>
-
-
-<div class="subtitle">
-
-Secure Payment Gateway
-
-</div>
-
-
-<!-- ERROR -->
-
-<div
-id="error"
-class="error">
-
-Package information is missing.
-
-</div>
-
-
-<!-- SELECTED PACKAGE -->
-
-<div class="package">
-
-<div class="package-label">
-
-SELECTED PACKAGE
-
-</div>
-
-<div
-id="packageName"
-class="package-name">
-
-Loading...
-
-</div>
-
-<div
-id="packagePrice"
-class="package-price">
-
-LKR 0
-
-</div>
-
-</div>
-
-
-<!-- PAYMENT METHOD -->
-
-<div class="method">
-
+<!-- =====================================================
+     MEMBERSHIP
+===================================================== -->
 
 <h3>
-🏦 Bank Transfer
+Membership
 </h3>
 
 
-<div class="info">
-
-<span class="label">
-Bank
-</span>
-
-<span class="value">
-BOC
-</span>
-
-</div>
+<div class="grid">
 
 
-<div class="info">
+<!-- WEEKLY -->
 
-<span class="label">
-Account
-</span>
+<div
+class="card"
+onclick="selectPackage(event,this,'Weekly - LKR 560')">
 
-<span class="value">
-94946893
-</span>
+<img
+src="topupimages/Weekly.png"
+alt="Weekly">
+
+<h4>
+Weekly
+</h4>
+
+<p>
+LKR 560
+</p>
 
 </div>
 
 
-<div class="info">
 
-<span class="label">
-Name
-</span>
+<!-- MONTHLY -->
 
-<span class="value">
-Ameresh R
-</span>
+<div
+class="card"
+onclick="selectPackage(event,this,'Monthly - LKR 2720')">
+
+<img
+src="topupimages/Monthly.png"
+alt="Monthly">
+
+<h4>
+Monthly
+</h4>
+
+<p>
+LKR 2720
+</p>
+
+</div>
+
+
+
+<!-- WEEKLY LITE -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'Weekly Lite - LKR 150')">
+
+<img
+src="topupimages/Weekly-Lite.png"
+alt="Weekly Lite"
+onerror="weeklyLiteFallback(this)">
+
+<h4>
+Weekly Lite
+</h4>
+
+<p>
+LKR 150
+</p>
 
 </div>
 
@@ -602,299 +772,1127 @@ Ameresh R
 </div>
 
 
-<!-- INSTRUCTIONS -->
 
-<div class="instruction">
-
+<!-- =====================================================
+     VIP
+===================================================== -->
 
 <h3>
-📌 How To Pay
+VIP Bundles
 </h3>
 
 
-<p>
-1️⃣ Check your selected package and price
-</p>
+<div class="grid">
 
 
-<p>
-2️⃣ Complete payment using above bank details
-</p>
+<!-- VIP -->
 
+<div
+class="card"
+onclick="selectPackage(event,this,'VIP Bundle - LKR 3280')">
 
-<p>
-3️⃣ Take a clear payment screenshot
-</p>
+<img
+src="topupimages/Vip.png"
+alt="VIP">
 
-
-<p>
-4️⃣ Continue to the order page
-</p>
-
+<h4>
+VIP Bundle
+</h4>
 
 <p>
-5️⃣ Upload your receipt there
+LKR 3280
 </p>
-
 
 </div>
 
 
-<!-- CONTINUE -->
 
-<button
-id="continueButton"
-onclick="continueOrder()">
+<!-- SVIP -->
 
-💎 Continue Order
+<div
+class="card"
+onclick="selectPackage(event,this,'SVIP Bundle - LKR 4960')">
 
-</button>
+<img
+src="topupimages/Svip.png"
+alt="SVIP">
 
+<h4>
+SVIP Bundle
+</h4>
 
-<!-- BACK -->
-
-<button
-class="back"
-onclick="history.back()">
-
-⬅ Go Back
-
-</button>
-
-
-<div class="footer">
-
-🔒 Your payment information is protected
+<p>
+LKR 4960
+</p>
 
 </div>
 
 
 </div>
 
+
+
+<!-- =====================================================
+     LEVEL UP
+===================================================== -->
+
+<h3>
+Level Up Pass
+</h3>
+
+
+<div class="grid">
+
+
+<!-- LEVEL 6 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'Level 6 - LKR 130')">
+
+<img
+src="topupimages/Levelup.png"
+alt="Level Up">
+
+<h4>
+Level 6
+</h4>
+
+<p>
+LKR 130
+</p>
+
 </div>
 
 
-<!-- =========================
-     ZYPER NAVIGATION BAR
-========================= -->
+
+<!-- LEVEL 10 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'Level 10 - LKR 250')">
+
+<img
+src="topupimages/Levelup.png"
+alt="Level Up">
+
+<h4>
+Level 10
+</h4>
+
+<p>
+LKR 250
+</p>
+
+</div>
+
+
+
+<!-- LEVEL 15 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'Level 15 - LKR 250')">
+
+<img
+src="topupimages/Levelup.png"
+alt="Level Up">
+
+<h4>
+Level 15
+</h4>
+
+<p>
+LKR 250
+</p>
+
+</div>
+
+
+
+<!-- LEVEL 20 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'Level 20 - LKR 250')">
+
+<img
+src="topupimages/Levelup.png"
+alt="Level Up">
+
+<h4>
+Level 20
+</h4>
+
+<p>
+LKR 250
+</p>
+
+</div>
+
+
+
+<!-- LEVEL 25 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'Level 25 - LKR 250')">
+
+<img
+src="topupimages/Levelup.png"
+alt="Level Up">
+
+<h4>
+Level 25
+</h4>
+
+<p>
+LKR 250
+</p>
+
+</div>
+
+
+
+<!-- LEVEL 30 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'Level 30 - LKR 380')">
+
+<img
+src="topupimages/Levelup.png"
+alt="Level 30">
+
+<h4>
+Level 30
+</h4>
+
+<p>
+LKR 380
+</p>
+
+</div>
+
+
+
+<!-- FULL PASS -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'Full Pass - LKR 1500')">
+
+<span class="badge">
+FULL PASS
+</span>
+
+<img
+src="topupimages/Levelup.png"
+alt="Full Pass">
+
+<h4>
+Full Pass
+</h4>
+
+<p>
+LKR 1500
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     EVO
+===================================================== -->
+
+<h3>
+EVO Access
+</h3>
+
+
+<div class="grid">
+
+
+<!-- E BADGE 3 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'E Badge 3 - LKR 250')">
+
+<img
+src="topupimages/Evo.png"
+alt="EVO">
+
+<h4>
+E Badge 3
+</h4>
+
+<p>
+LKR 250
+</p>
+
+</div>
+
+
+
+<!-- E BADGE 7 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'E Badge 7 - LKR 350')">
+
+<img
+src="topupimages/Evo.png"
+alt="EVO">
+
+<h4>
+E Badge 7
+</h4>
+
+<p>
+LKR 350
+</p>
+
+</div>
+
+
+
+<!-- E BADGE 30 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'E Badge 30 - LKR 1100')">
+
+<img
+src="topupimages/Evo.png"
+alt="EVO">
+
+<h4>
+E Badge 30
+</h4>
+
+<p>
+LKR 1100
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     DIAMONDS
+===================================================== -->
+
+<h3>
+💎 Diamonds
+</h3>
+
+
+<div class="grid">
+
+
+<!-- 25 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'25 Diamonds - LKR 150')">
+
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
+
+<h4>
+25 Diamonds
+</h4>
+
+<p>
+LKR 150
+</p>
+
+</div>
+
+
+
+<!-- 100 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'100 Diamonds - LKR 380')">
+
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
+
+<h4>
+100 Diamonds
+</h4>
+
+<p>
+LKR 380
+</p>
+
+</div>
+
+
+
+<!-- 310 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'310 Diamonds - LKR 1150')">
+
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
+
+<h4>
+310 Diamonds
+</h4>
+
+<p>
+LKR 1150
+</p>
+
+</div>
+
+
+
+<!-- 520 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'520 Diamonds - LKR 1800')">
+
+<span class="badge">
+BEST
+</span>
+
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
+
+<h4>
+520 Diamonds
+</h4>
+
+<p>
+LKR 1800
+</p>
+
+</div>
+
+
+
+<!-- 1060 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'1060 Diamonds - LKR 3400')">
+
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
+
+<h4>
+1060 Diamonds
+</h4>
+
+<p>
+LKR 3400
+</p>
+
+</div>
+
+
+
+<!-- 2180 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'2180 Diamonds - LKR 6500')">
+
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
+
+<h4>
+2180 Diamonds
+</h4>
+
+<p>
+LKR 6500
+</p>
+
+</div>
+
+
+
+<!-- 5600 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'5600 Diamonds - LKR 16500')">
+
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
+
+<h4>
+5600 Diamonds
+</h4>
+
+<p>
+LKR 16500
+</p>
+
+</div>
+
+
+
+<!-- 11500 -->
+
+<div
+class="card"
+onclick="selectPackage(event,this,'11500 Diamonds - LKR 35000')">
+
+<img
+src="topupimages/Diamond.png"
+alt="Diamonds">
+
+<h4>
+11500 Diamonds
+</h4>
+
+<p>
+LKR 35000
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
 
 <div id="zyper-navigation"></div>
 
 
-<script>
+
+<!-- =====================================================
+     WALLET + FIREBASE
+===================================================== -->
+
+<script type="module">
+
+import { auth }
+from "./firebase.js";
 
 
-/* =========================================
-   FINAL PACKAGE PRICES
-========================================= */
-
-const PACKAGES = {
-
-"Weekly":560,
-
-"Monthly":2720,
-
-"Weekly Lite":150,
-
-"VIP Bundle":3280,
-
-"SVIP Bundle":4960,
-
-"Level 6":130,
-
-"Level 10":250,
-
-"Level 15":250,
-
-"Level 20":250,
-
-"Level 25":250,
-
-"Level 30":380,
-
-"Full Pass":1500,
-
-"E Badge 3":250,
-
-"E Badge 7":350,
-
-"E Badge 30":1100,
-
-"25 Diamonds":150,
-
-"100 Diamonds":380,
-
-"310 Diamonds":1150,
-
-"520 Diamonds":1800,
-
-"1060 Diamonds":3400,
-
-"2180 Diamonds":6500,
-
-"5600 Diamonds":16500,
-
-"11500 Diamonds":35000
-
-};
+import {
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
-/* =========================================
-   READ PACKAGE FROM LOCAL STORAGE
-========================================= */
-
-function getSelectedPackage(){
-
-const raw =
-localStorage.getItem("package");
+const WORKER_URL =
+"https://zyper-order.ameresh20112011.workers.dev";
 
 
-if(!raw){
+let currentWalletBalance = 0;
 
-return null;
+
+
+/* =====================================================
+   MONEY FORMAT
+===================================================== */
+
+function formatMoney(value){
+
+return Number(
+value || 0
+).toLocaleString(
+"en-LK",
+{
+
+minimumFractionDigits:2,
+
+maximumFractionDigits:2
+
+}
+);
 
 }
 
 
-/*
-Expected:
 
-Weekly - LKR 560
-*/
+/* =====================================================
+   GET PACKAGE PRICE
+===================================================== */
+
+function getPackagePrice(
+packageValue
+){
 
 const separator =
 " - LKR ";
 
 
 const index =
-raw.lastIndexOf(separator);
+String(
+packageValue || ""
+).lastIndexOf(
+separator
+);
 
 
 if(index === -1){
 
-return null;
+return 0;
 
 }
 
 
-const name =
-raw.substring(0,index).trim();
+return Number(
 
-
-const price =
-Number(
-raw.substring(
-index + separator.length
-).trim()
-);
-
-
-/* CHECK PACKAGE */
-
-if(
-!Object.prototype.hasOwnProperty.call(
-PACKAGES,
-name
+String(
+packageValue
 )
+
+.substring(
+index +
+separator.length
+)
+
+.trim()
+
+) || 0;
+
+}
+
+
+
+/* =====================================================
+   GET PACKAGE FROM CARD
+===================================================== */
+
+function getCardPackageValue(
+card
 ){
 
-return null;
-
-}
-
-
-/* CHECK PRICE */
-
-if(
-PACKAGES[name] !== price
-){
-
-return null;
-
-}
+const onclickText =
+card.getAttribute(
+"onclick"
+) || "";
 
 
-return {
-
-name:name,
-
-price:price
-
-};
-
-}
-
-
-/* =========================================
-   LOAD PACKAGE
-========================================= */
-
-const selected =
-getSelectedPackage();
-
-
-if(!selected){
-
-document.getElementById("error").style.display=
-"block";
-
-document.getElementById("packageName").textContent=
-"No package selected";
-
-document.getElementById("packagePrice").textContent=
-"LKR 0";
-
-document.getElementById("continueButton").disabled=
-true;
-
-}else{
-
-document.getElementById("packageName").textContent=
-selected.name;
-
-document.getElementById("packagePrice").textContent=
-"LKR " +
-selected.price.toLocaleString("en-US");
-
-}
-
-
-/* =========================================
-   CONTINUE
-========================================= */
-
-function continueOrder(){
-
-if(!selected){
-
-alert(
-"Please select a package first."
+const match =
+onclickText.match(
+/'([^']+ - LKR [0-9]+)'/
 );
 
-window.location.href=
-"topup.html";
+
+return match
+?
+match[1]
+:
+"";
+
+}
+
+
+
+/* =====================================================
+   UPDATE PACKAGE WALLET STATUS
+===================================================== */
+
+function updatePackageWalletStatus(){
+
+document
+.querySelectorAll(
+".card"
+)
+.forEach(
+function(card){
+
+const oldStatus =
+card.querySelector(
+".wallet-status"
+);
+
+
+if(oldStatus){
+
+oldStatus.remove();
+
+}
+
+
+card.classList.remove(
+"wallet-affordable",
+"wallet-low"
+);
+
+
+const packageValue =
+getCardPackageValue(
+card
+);
+
+
+if(!packageValue){
 
 return;
 
 }
 
 
-/*
-Do NOT clear localStorage here.
+const price =
+getPackagePrice(
+packageValue
+);
 
-We clear it only after
-successful order submission.
-*/
 
-window.location.href=
-"order.html";
+const status =
+document.createElement(
+"span"
+);
+
+
+status.className =
+"wallet-status";
+
+
+if(
+currentWalletBalance >=
+price
+){
+
+card.classList.add(
+"wallet-affordable"
+);
+
+
+status.classList.add(
+"enough"
+);
+
+
+status.textContent =
+"WALLET ✓";
 
 }
+
+else{
+
+card.classList.add(
+"wallet-low"
+);
+
+
+status.classList.add(
+"low"
+);
+
+
+status.textContent =
+"LOW BALANCE";
+
+}
+
+
+card.appendChild(
+status
+);
+
+}
+);
+
+}
+
+
+
+/* =====================================================
+   LOAD LIVE WALLET BALANCE
+===================================================== */
+
+async function loadWalletBalance(
+user
+){
+
+const balanceElement =
+document.getElementById(
+"topupWalletBalance"
+);
+
+
+try{
+
+
+const token =
+await user.getIdToken();
+
+
+const response =
+await fetch(
+WORKER_URL,
+{
+
+method:
+"POST",
+
+
+headers:{
+
+"Content-Type":
+"application/json",
+
+
+"Authorization":
+`Bearer ${token}`
+
+},
+
+
+body:
+JSON.stringify(
+{
+
+action:
+"wallet_balance"
+
+}
+)
+
+}
+);
+
+
+const result =
+await response.json();
+
+
+if(
+!response.ok ||
+!result.success
+){
+
+throw new Error(
+result.message ||
+"Unable to load wallet balance."
+);
+
+}
+
+
+currentWalletBalance =
+Number(
+result.wallet?.balance ||
+0
+);
+
+
+if(balanceElement){
+
+balanceElement.textContent =
+
+formatMoney(
+currentWalletBalance
+)
+
++
+
+" LKR";
+
+}
+
+
+/* SAVE CURRENT BALANCE */
+
+localStorage.setItem(
+"walletBalance",
+String(
+currentWalletBalance
+)
+);
+
+
+updatePackageWalletStatus();
+
+
+}
+
+catch(error){
+
+
+console.error(
+"Wallet Balance Error:",
+error
+);
+
+
+currentWalletBalance =
+0;
+
+
+if(balanceElement){
+
+balanceElement.textContent =
+"0.00 LKR";
+
+}
+
+
+localStorage.setItem(
+"walletBalance",
+"0"
+);
+
+
+updatePackageWalletStatus();
+
+}
+
+}
+
+
+
+/* =====================================================
+   FIREBASE LOGIN CHECK
+===================================================== */
+
+onAuthStateChanged(
+auth,
+async function(user){
+
+if(!user){
+
+window.location.href =
+"index.html";
+
+return;
+
+}
+
+
+await loadWalletBalance(
+user
+);
+
+}
+);
+
+
+
+/* =====================================================
+   PACKAGE SELECTION
+===================================================== */
+
+window.selectPackage =
+function(
+event,
+card,
+name
+){
+
+
+const packagePrice =
+getPackagePrice(
+name
+);
+
+
+const walletEligible =
+
+currentWalletBalance >=
+packagePrice;
+
+
+/* =================================================
+   SAVE PACKAGE
+================================================= */
+
+localStorage.setItem(
+"package",
+name
+);
+
+
+localStorage.setItem(
+"packagePrice",
+String(
+packagePrice
+)
+);
+
+
+localStorage.setItem(
+"walletBalance",
+String(
+currentWalletBalance
+)
+);
+
+
+localStorage.setItem(
+"walletEligible",
+walletEligible
+?
+"true"
+:
+"false"
+);
+
+
+/* =================================================
+   RIPPLE
+================================================= */
+
+const ripple =
+document.createElement(
+"span"
+);
+
+
+ripple.className =
+"ripple";
+
+
+const rect =
+card.getBoundingClientRect();
+
+
+ripple.style.width =
+"120px";
+
+
+ripple.style.height =
+"120px";
+
+
+ripple.style.left =
+
+(
+event.clientX -
+rect.left -
+60
+)
+
++
+
+"px";
+
+
+ripple.style.top =
+
+(
+event.clientY -
+rect.top -
+60
+)
+
++
+
+"px";
+
+
+card.appendChild(
+ripple
+);
+
+
+/* =================================================
+   GO PAYMENT
+================================================= */
+
+setTimeout(
+function(){
+
+window.location.href =
+"payment.html";
+
+},
+250
+);
+
+};
+
+
+
+/* =====================================================
+   WEEKLY LITE FALLBACK
+===================================================== */
+
+window.weeklyLiteFallback =
+function(img){
+
+
+if(
+img.dataset.fallback ===
+"1"
+){
+
+return;
+
+}
+
+
+if(
+img.src.includes(
+"Weekly-Lite.png"
+)
+){
+
+img.dataset.fallback =
+"1";
+
+
+img.src =
+"topupimages/Weekly-lite.png";
+
+
+return;
+
+}
+
+
+if(
+img.src.includes(
+"Weekly-lite.png"
+)
+){
+
+img.dataset.fallback =
+"2";
+
+
+img.src =
+"topupimages/weekly-lite.png";
+
+}
+
+};
 
 </script>
 
 
-<!-- Zyper Navigation Script -->
+
+<!-- =====================================================
+     NAVIGATION JS
+===================================================== -->
 
 <script src="zyper-nav.js"></script>
 
