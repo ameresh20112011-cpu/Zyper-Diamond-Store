@@ -13,7 +13,9 @@ const WORKER_URL =
 
 /* =====================================================
    ONE GLOBAL WALLET STYLE
-   CHANGE ONLY THESE VALUES
+
+   CHANGE ONLY THESE VALUES.
+   ALL CONNECTED PAGES WILL CHANGE.
 ===================================================== */
 
 const WALLET_STYLE = {
@@ -23,7 +25,7 @@ const WALLET_STYLE = {
         paddingX: 10,
         icon: 17,
         font: 11,
-        fontWeight: 900,
+        fontWeight: 700,
         gap: 5,
         top: 8,
         right: 10
@@ -34,7 +36,7 @@ const WALLET_STYLE = {
         paddingX: 13,
         icon: 18,
         font: 12,
-        fontWeight: 900,
+        fontWeight: 700,
         gap: 7,
         top: 12,
         right: 12
@@ -69,16 +71,16 @@ function formatMoney(amount) {
 function removeLegacyWalletUI() {
 
     document
-    .querySelectorAll(
-        ".wallet-page-balance, .wallet-page-balance-box"
-    )
-    .forEach(
-        function(element) {
+        .querySelectorAll(
+            ".wallet-page-balance, .wallet-page-balance-box"
+        )
+        .forEach(
+            function(element) {
 
-            element.remove();
+                element.remove();
 
-        }
-    );
+            }
+        );
 
 }
 
@@ -178,7 +180,7 @@ function createWalletBadge() {
 
 
 /* =====================================================
-   APPLY SAME SIZE TO EVERY PAGE
+   APPLY SAME STYLE TO EVERY PAGE
 ===================================================== */
 
 function applyWalletStyle() {
@@ -223,7 +225,7 @@ function applyWalletStyle() {
 
 
     /* =================================================
-       BADGE
+       WALLET BADGE
     ================================================= */
 
     badge.style.setProperty(
@@ -416,7 +418,7 @@ function applyWalletStyle() {
 
 
     /* =================================================
-       ICON
+       WALLET ICON
     ================================================= */
 
     icon.style.setProperty(
@@ -497,7 +499,8 @@ function applyWalletStyle() {
 
 
     /* =================================================
-       MAX BOLD BALANCE TEXT
+       PROFESSIONAL BOLD BALANCE TEXT
+       700 = BOLD, BUT NOT TOO THICK
     ================================================= */
 
     balance.style.setProperty(
@@ -523,7 +526,7 @@ function applyWalletStyle() {
 
     balance.style.setProperty(
         "font-family",
-        '"Arial Black", Arial, sans-serif',
+        "Arial, sans-serif",
         "important"
     );
 
@@ -543,6 +546,13 @@ function applyWalletStyle() {
 
 
     balance.style.setProperty(
+        "font-style",
+        "normal",
+        "important"
+    );
+
+
+    balance.style.setProperty(
         "line-height",
         "1",
         "important"
@@ -551,7 +561,7 @@ function applyWalletStyle() {
 
     balance.style.setProperty(
         "letter-spacing",
-        "-0.1px",
+        "0",
         "important"
     );
 
@@ -570,9 +580,11 @@ function applyWalletStyle() {
     );
 
 
+    /* REMOVE OLD EXTRA-BOLD EFFECT */
+
     balance.style.setProperty(
         "text-shadow",
-        "0.25px 0 currentColor, -0.25px 0 currentColor",
+        "none",
         "important"
     );
 
@@ -625,6 +637,7 @@ async function loadWalletBalance(user) {
                             `Bearer ${token}`
 
                     },
+
 
                     body:
                         JSON.stringify(
@@ -696,6 +709,12 @@ async function loadWalletBalance(user) {
 ===================================================== */
 
 function startWalletBadge() {
+
+    /*
+       Removes old page-specific wallet displays.
+       This prevents Home / Topup / other pages
+       from having different wallet styles.
+    */
 
     removeLegacyWalletUI();
 
