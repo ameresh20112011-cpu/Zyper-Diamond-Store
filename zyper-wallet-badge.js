@@ -12,10 +12,40 @@ const WORKER_URL =
 
 
 /* =====================================================
-   MONEY FORMAT
+   GLOBAL WALLET SIZE
+   CHANGE ONLY THESE VALUES
 ===================================================== */
 
-function formatMoney(amount) {
+const WALLET_SIZE = {
+
+    mobile: {
+        height: 34,
+        paddingX: 10,
+        icon: 18,
+        font: 11,
+        gap: 7,
+        top: 10,
+        right: 10
+    },
+
+    desktop: {
+        height: 38,
+        paddingX: 12,
+        icon: 18,
+        font: 12,
+        gap: 7,
+        top: 12,
+        right: 12
+    }
+
+};
+
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+function formatMoney(amount){
 
     return Number(
         amount || 0
@@ -31,57 +61,55 @@ function formatMoney(amount) {
 
 
 /* =====================================================
-   REMOVE OLD WALLET BADGE
+   REMOVE EVERY OLD WALLET BADGE
 ===================================================== */
 
-function removeOldWalletBadge() {
+function removeOldWalletBadges(){
 
     document
-        .querySelectorAll(
-            "#zyperWalletBadge, .zyper-wallet-badge"
-        )
-        .forEach(
-            function(element) {
+    .querySelectorAll(
+        `
+        #zyperWalletBadge,
+        .zyper-wallet-badge,
+        .wallet-page-balance
+        `
+    )
+    .forEach(
+        function(element){
 
-                element.remove();
+            element.remove();
 
-            }
-        );
+        }
+    );
 
 }
 
 
 /* =====================================================
-   CREATE WALLET BADGE
+   CREATE ONE GLOBAL WALLET BADGE
 ===================================================== */
 
-function createWalletBadge() {
+function createWalletBadge(){
 
-    removeOldWalletBadge();
+    removeOldWalletBadges();
 
 
     const badge =
-        document.createElement(
-            "a"
-        );
+    document.createElement(
+        "a"
+    );
 
 
     badge.id =
-        "zyperWalletBadge";
+    "zyperWalletBadge";
 
 
     badge.className =
-        "zyper-wallet-badge";
+    "zyper-wallet-badge";
 
 
     badge.href =
-        "./wallet.html";
-
-
-    badge.setAttribute(
-        "aria-label",
-        "Open Zyper Wallet"
-    );
+    "./wallet.html";
 
 
     badge.innerHTML = `
@@ -102,7 +130,6 @@ function createWalletBadge() {
             />
 
         </svg>
-
 
         <span id="zyperWalletBalance">
             ... LKR
@@ -125,468 +152,173 @@ function createWalletBadge() {
 
 
 /* =====================================================
-   WALLET STYLE
+   ONE STYLE FOR EVERY PAGE
 ===================================================== */
 
-function applyWalletStyle() {
+function applyWalletStyle(){
 
     const badge =
-        document.getElementById(
-            "zyperWalletBadge"
-        );
+    document.getElementById(
+        "zyperWalletBadge"
+    );
 
 
     const icon =
-        document.getElementById(
-            "zyperWalletBadgeIcon"
-        );
+    document.getElementById(
+        "zyperWalletBadgeIcon"
+    );
 
 
     const balance =
-        document.getElementById(
-            "zyperWalletBalance"
-        );
+    document.getElementById(
+        "zyperWalletBalance"
+    );
 
 
-    if (
+    if(
         !badge ||
         !icon ||
         !balance
-    ) {
-
+    ){
         return;
-
     }
 
 
-    /* =================================================
-       POSITION
-    ================================================= */
+    const isMobile =
+    window.innerWidth <= 500;
 
-    badge.style.setProperty(
-        "position",
-        "fixed",
-        "important"
-    );
 
+    const size =
+    isMobile
+    ? WALLET_SIZE.mobile
+    : WALLET_SIZE.desktop;
 
-    badge.style.setProperty(
-        "top",
-        "10px",
-        "important"
-    );
 
+    /* BADGE */
 
-    badge.style.setProperty(
-        "right",
-        "10px",
-        "important"
-    );
+    badge.style.cssText = `
 
+        position:fixed !important;
 
-    badge.style.setProperty(
-        "left",
-        "auto",
-        "important"
-    );
+        top:${size.top}px !important;
 
+        right:${size.right}px !important;
 
-    badge.style.setProperty(
-        "bottom",
-        "auto",
-        "important"
-    );
+        left:auto !important;
 
+        bottom:auto !important;
 
-    /* =================================================
-       BASIC STYLE
-    ================================================= */
+        width:auto !important;
 
-    badge.style.setProperty(
-        "display",
-        "inline-flex",
-        "important"
-    );
+        min-width:0 !important;
 
+        max-width:none !important;
 
-    badge.style.setProperty(
-        "align-items",
-        "center",
-        "important"
-    );
+        height:${size.height}px !important;
 
+        min-height:${size.height}px !important;
 
-    badge.style.setProperty(
-        "justify-content",
-        "center",
-        "important"
-    );
+        max-height:${size.height}px !important;
 
+        padding:0 ${size.paddingX}px !important;
 
-    badge.style.setProperty(
-        "width",
-        "auto",
-        "important"
-    );
+        margin:0 !important;
 
+        display:inline-flex !important;
 
-    badge.style.setProperty(
-        "min-width",
-        "0",
-        "important"
-    );
+        align-items:center !important;
 
+        justify-content:center !important;
 
-    badge.style.setProperty(
-        "max-width",
-        "none",
-        "important"
-    );
+        gap:${size.gap}px !important;
 
+        box-sizing:border-box !important;
 
-    badge.style.setProperty(
-        "margin",
-        "0",
-        "important"
-    );
+        border-radius:999px !important;
 
+        border:1px solid rgba(255,255,255,.14) !important;
 
-    badge.style.setProperty(
-        "box-sizing",
-        "border-box",
-        "important"
-    );
+        background:
+        linear-gradient(
+            135deg,
+            #a64fc4,
+            #8f37ae
+        ) !important;
 
+        color:#ffffff !important;
 
-    badge.style.setProperty(
-        "white-space",
-        "nowrap",
-        "important"
-    );
+        text-decoration:none !important;
 
+        white-space:nowrap !important;
 
-    badge.style.setProperty(
-        "text-decoration",
-        "none",
-        "important"
-    );
+        font-family:
+        Arial,
+        sans-serif !important;
 
+        box-shadow:
+        0 4px 14px
+        rgba(115,45,145,.28) !important;
 
-    badge.style.setProperty(
-        "color",
-        "#ffffff",
-        "important"
-    );
+        z-index:2147483647 !important;
 
+        -webkit-tap-highlight-color:
+        transparent !important;
 
-    badge.style.setProperty(
-        "background",
-        "linear-gradient(135deg,#a64fc4,#8f37ae)",
-        "important"
-    );
+    `;
 
 
-    badge.style.setProperty(
-        "border",
-        "1px solid rgba(255,255,255,.14)",
-        "important"
-    );
+    /* ICON */
 
+    icon.style.cssText = `
 
-    badge.style.setProperty(
-        "border-radius",
-        "999px",
-        "important"
-    );
+        width:${size.icon}px !important;
 
+        height:${size.icon}px !important;
 
-    badge.style.setProperty(
-        "box-shadow",
-        "0 4px 14px rgba(115,45,145,.28)",
-        "important"
-    );
+        min-width:${size.icon}px !important;
 
+        max-width:${size.icon}px !important;
 
-    badge.style.setProperty(
-        "z-index",
-        "2147483647",
-        "important"
-    );
+        min-height:${size.icon}px !important;
 
+        max-height:${size.icon}px !important;
 
-    badge.style.setProperty(
-        "-webkit-tap-highlight-color",
-        "transparent",
-        "important"
-    );
+        flex:0 0 ${size.icon}px !important;
 
+        display:block !important;
 
-    /* =================================================
-       MOBILE
-       SAME VISUAL SIZE AS TOPUP
-    ================================================= */
+        margin:0 !important;
 
-    if (
-        window.innerWidth <= 500
-    ) {
+        padding:0 !important;
 
-        badge.style.setProperty(
-            "height",
-            "34px",
-            "important"
-        );
+    `;
 
 
-        badge.style.setProperty(
-            "min-height",
-            "34px",
-            "important"
-        );
+    /* BALANCE */
 
+    balance.style.cssText = `
 
-        badge.style.setProperty(
-            "max-height",
-            "34px",
-            "important"
-        );
+        display:block !important;
 
+        margin:0 !important;
 
-        badge.style.setProperty(
-            "padding",
-            "0 10px",
-            "important"
-        );
+        padding:0 !important;
 
+        font-size:${size.font}px !important;
 
-        badge.style.setProperty(
-            "gap",
-            "7px",
-            "important"
-        );
+        font-weight:600 !important;
 
+        line-height:1 !important;
 
-        /* WALLET ICON */
+        color:#ffffff !important;
 
-        icon.style.setProperty(
-            "width",
-            "18px",
-            "important"
-        );
+        white-space:nowrap !important;
 
+        font-family:
+        Arial,
+        sans-serif !important;
 
-        icon.style.setProperty(
-            "height",
-            "18px",
-            "important"
-        );
-
-
-        icon.style.setProperty(
-            "min-width",
-            "18px",
-            "important"
-        );
-
-
-        icon.style.setProperty(
-            "max-width",
-            "18px",
-            "important"
-        );
-
-
-        icon.style.setProperty(
-            "min-height",
-            "18px",
-            "important"
-        );
-
-
-        icon.style.setProperty(
-            "max-height",
-            "18px",
-            "important"
-        );
-
-
-        icon.style.setProperty(
-            "flex",
-            "0 0 18px",
-            "important"
-        );
-
-
-        icon.style.setProperty(
-            "display",
-            "block",
-            "important"
-        );
-
-
-        /* BALANCE TEXT */
-
-        balance.style.setProperty(
-            "font-family",
-            "Arial, sans-serif",
-            "important"
-        );
-
-
-        balance.style.setProperty(
-            "font-size",
-            "11px",
-            "important"
-        );
-
-
-        balance.style.setProperty(
-            "font-weight",
-            "600",
-            "important"
-        );
-
-
-        balance.style.setProperty(
-            "line-height",
-            "1",
-            "important"
-        );
-
-
-        balance.style.setProperty(
-            "margin",
-            "0",
-            "important"
-        );
-
-
-        balance.style.setProperty(
-            "padding",
-            "0",
-            "important"
-        );
-
-    }
-
-
-    /* =================================================
-       TABLET / PC
-    ================================================= */
-
-    else {
-
-        badge.style.setProperty(
-            "height",
-            "38px",
-            "important"
-        );
-
-
-        badge.style.setProperty(
-            "min-height",
-            "38px",
-            "important"
-        );
-
-
-        badge.style.setProperty(
-            "max-height",
-            "38px",
-            "important"
-        );
-
-
-        badge.style.setProperty(
-            "padding",
-            "0 12px",
-            "important"
-        );
-
-
-        badge.style.setProperty(
-            "gap",
-            "7px",
-            "important"
-        );
-
-
-        icon.style.setProperty(
-            "width",
-            "18px",
-            "important"
-        );
-
-
-        icon.style.setProperty(
-            "height",
-            "18px",
-            "important"
-        );
-
-
-        icon.style.setProperty(
-            "min-width",
-            "18px",
-            "important"
-        );
-
-
-        icon.style.setProperty(
-            "max-width",
-            "18px",
-            "important"
-        );
-
-
-        icon.style.setProperty(
-            "flex",
-            "0 0 18px",
-            "important"
-        );
-
-
-        balance.style.setProperty(
-            "font-family",
-            "Arial, sans-serif",
-            "important"
-        );
-
-
-        balance.style.setProperty(
-            "font-size",
-            "12px",
-            "important"
-        );
-
-
-        balance.style.setProperty(
-            "font-weight",
-            "600",
-            "important"
-        );
-
-
-        balance.style.setProperty(
-            "line-height",
-            "1",
-            "important"
-        );
-
-
-        balance.style.setProperty(
-            "margin",
-            "0",
-            "important"
-        );
-
-
-        balance.style.setProperty(
-            "padding",
-            "0",
-            "important"
-        );
-
-    }
+    `;
 
 }
 
@@ -595,68 +327,67 @@ function applyWalletStyle() {
    LOAD LIVE WALLET BALANCE
 ===================================================== */
 
-async function loadWalletBalance(user) {
+async function loadWalletBalance(user){
 
     const balanceElement =
-        document.getElementById(
-            "zyperWalletBalance"
-        );
+    document.getElementById(
+        "zyperWalletBalance"
+    );
 
 
-    if (!balanceElement) {
-
+    if(!balanceElement){
         return;
-
     }
 
 
     balanceElement.textContent =
-        "... LKR";
+    "... LKR";
 
 
-    try {
+    try{
 
         const token =
-            await user.getIdToken();
+        await user.getIdToken();
 
 
         const response =
-            await fetch(
-                WORKER_URL,
-                {
+        await fetch(
+            WORKER_URL,
+            {
 
-                    method: "POST",
+                method:
+                "POST",
 
-                    headers: {
+                headers:{
 
-                        "Content-Type":
-                            "application/json",
+                    "Content-Type":
+                    "application/json",
 
-                        "Authorization":
-                            `Bearer ${token}`
+                    "Authorization":
+                    `Bearer ${token}`
 
-                    },
+                },
 
-                    body:
-                        JSON.stringify(
-                            {
-                                action:
-                                    "wallet_balance"
-                            }
-                        )
+                body:
+                JSON.stringify({
 
-                }
-            );
+                    action:
+                    "wallet_balance"
+
+                })
+
+            }
+        );
 
 
         const result =
-            await response.json();
+        await response.json();
 
 
-        if (
+        if(
             !response.ok ||
             !result.success
-        ) {
+        ){
 
             throw new Error(
                 result.message ||
@@ -666,24 +397,23 @@ async function loadWalletBalance(user) {
         }
 
 
-        const walletBalance =
-            Number(
-                result.wallet?.balance ||
-                0
-            );
+        const amount =
+        Number(
+            result.wallet?.balance ||
+            0
+        );
 
 
         balanceElement.textContent =
-            formatMoney(
-                walletBalance
-            ) +
-            " LKR";
+        formatMoney(amount)
+        +
+        " LKR";
 
 
         applyWalletStyle();
 
     }
-    catch (error) {
+    catch(error){
 
         console.error(
             "Wallet Badge Error:",
@@ -692,7 +422,7 @@ async function loadWalletBalance(user) {
 
 
         balanceElement.textContent =
-            "0.00 LKR";
+        "0.00 LKR";
 
 
         applyWalletStyle();
@@ -703,20 +433,20 @@ async function loadWalletBalance(user) {
 
 
 /* =====================================================
-   START WALLET BADGE
+   START
 ===================================================== */
 
-function startWalletBadge() {
+function startWalletBadge(){
 
     const badge =
-        createWalletBadge();
+    createWalletBadge();
 
 
     onAuthStateChanged(
         auth,
-        async function(user) {
+        async function(user){
 
-            if (!user) {
+            if(!user){
 
                 badge.style.setProperty(
                     "display",
@@ -750,27 +480,23 @@ function startWalletBadge() {
 
 
 /* =====================================================
-   SCREEN RESIZE
+   RESIZE
 ===================================================== */
 
 window.addEventListener(
     "resize",
-    function() {
-
-        applyWalletStyle();
-
-    }
+    applyWalletStyle
 );
 
 
 /* =====================================================
-   PAGE LOAD
+   INIT
 ===================================================== */
 
-if (
+if(
     document.readyState ===
     "loading"
-) {
+){
 
     document.addEventListener(
         "DOMContentLoaded",
@@ -778,7 +504,7 @@ if (
     );
 
 }
-else {
+else{
 
     startWalletBadge();
 
