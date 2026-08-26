@@ -18,6 +18,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <!-- Zyper Navigation Bar -->
 <link rel="stylesheet" href="zyper-nav.css">
 
+
 <style>
 
 *{
@@ -169,7 +170,8 @@ border:1px solid #e2e8f0;
 
 transition:
 transform .3s,
-box-shadow .3s;
+box-shadow .3s,
+border .3s;
 
 -webkit-tap-highlight-color:transparent;
 
@@ -270,7 +272,7 @@ font-weight:500;
 
 
 /* =========================
-   BADGE
+   NORMAL BADGE
 ========================= */
 
 .badge{
@@ -330,6 +332,150 @@ transform:scale(4);
 opacity:0;
 
 }
+
+}
+
+
+/* =====================================================
+   WALLET BALANCE
+===================================================== */
+
+.wallet-page-balance{
+
+width:100%;
+
+max-width:900px;
+
+margin:
+12px auto 0;
+
+padding:
+0 15px;
+
+display:flex;
+
+justify-content:flex-end;
+
+}
+
+
+.wallet-page-balance-box{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:7px;
+
+height:40px;
+
+padding:
+0 13px;
+
+border-radius:999px;
+
+background:
+linear-gradient(
+135deg,
+#a64fc4,
+#963db5
+);
+
+color:white;
+
+font-size:12px;
+
+font-weight:600;
+
+text-decoration:none;
+
+box-shadow:
+0 4px 14px
+rgba(115,45,145,.28);
+
+}
+
+
+.wallet-page-balance-box svg{
+
+width:18px;
+
+height:18px;
+
+flex-shrink:0;
+
+}
+
+
+/* =====================================================
+   WALLET PACKAGE STATUS
+===================================================== */
+
+.card.wallet-affordable{
+
+border:
+2px solid
+rgba(34,197,94,.65);
+
+box-shadow:
+0 0 18px
+rgba(34,197,94,.14);
+
+}
+
+
+.card.wallet-low{
+
+border:
+1px solid
+rgba(239,68,68,.22);
+
+}
+
+
+.wallet-status{
+
+position:absolute;
+
+left:8px;
+
+top:8px;
+
+z-index:3;
+
+padding:
+4px 7px;
+
+border-radius:7px;
+
+font-size:8px;
+
+font-weight:700;
+
+letter-spacing:.2px;
+
+pointer-events:none;
+
+}
+
+
+.wallet-status.enough{
+
+background:#4ade80;
+
+color:#052e16;
+
+}
+
+
+.wallet-status.low{
+
+background:
+rgba(127,29,29,.92);
+
+color:#fecaca;
 
 }
 
@@ -427,7 +573,51 @@ font-size:12px;
 
 font-size:9px;
 
-padding:4px 6px;
+padding:
+4px 6px;
+
+}
+
+
+.wallet-page-balance{
+
+padding:
+0 12px;
+
+margin-top:8px;
+
+}
+
+
+.wallet-page-balance-box{
+
+height:35px;
+
+padding:
+0 10px;
+
+font-size:11px;
+
+gap:5px;
+
+}
+
+
+.wallet-page-balance-box svg{
+
+width:17px;
+
+height:17px;
+
+}
+
+
+.wallet-status{
+
+font-size:7px;
+
+padding:
+3px 5px;
 
 }
 
@@ -440,6 +630,12 @@ padding:4px 6px;
 
 @media(max-width:350px){
 
+.wallet-page-balance-box{
+
+font-size:10px;
+
+}
+
 }
 
 </style>
@@ -450,6 +646,42 @@ padding:4px 6px;
 <body>
 
 
+<!-- =====================================================
+     LIVE WALLET BALANCE
+===================================================== -->
+
+<div class="wallet-page-balance">
+
+<a
+href="wallet.html"
+class="wallet-page-balance-box">
+
+<svg
+viewBox="0 0 32 32"
+fill="none"
+xmlns="http://www.w3.org/2000/svg">
+
+<path
+d="M6 9.5H24.5C26.4 9.5 28 11.1 28 13V24C28 25.9 26.4 27.5 24.5 27.5H7.5C5.6 27.5 4 25.9 4 24V10.5C4 8.6 5.4 7.1 7.2 6.7L21.5 3.5C22.5 3.3 23.5 4 23.7 5L24.6 9.5"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+/>
+
+</svg>
+
+
+<span id="topupWalletBalance">
+... LKR
+</span>
+
+</a>
+
+</div>
+
+
+
 <div class="container">
 
 
@@ -458,13 +690,15 @@ padding:4px 6px;
 </h2>
 
 
-<!-- =========================
+
+<!-- =====================================================
      MEMBERSHIP
-========================= -->
+===================================================== -->
 
 <h3>
 Membership
 </h3>
+
 
 <div class="grid">
 
@@ -490,6 +724,7 @@ LKR 560
 </div>
 
 
+
 <!-- MONTHLY -->
 
 <div
@@ -509,6 +744,7 @@ LKR 2720
 </p>
 
 </div>
+
 
 
 <!-- WEEKLY LITE -->
@@ -532,16 +768,19 @@ LKR 150
 
 </div>
 
+
 </div>
 
 
-<!-- =========================
+
+<!-- =====================================================
      VIP
-========================= -->
+===================================================== -->
 
 <h3>
 VIP Bundles
 </h3>
+
 
 <div class="grid">
 
@@ -567,6 +806,7 @@ LKR 3280
 </div>
 
 
+
 <!-- SVIP -->
 
 <div
@@ -587,19 +827,24 @@ LKR 4960
 
 </div>
 
+
 </div>
 
 
-<!-- =========================
+
+<!-- =====================================================
      LEVEL UP
-========================= -->
+===================================================== -->
 
 <h3>
 Level Up Pass
 </h3>
 
+
 <div class="grid">
 
+
+<!-- LEVEL 6 -->
 
 <div
 class="card"
@@ -620,6 +865,9 @@ LKR 130
 </div>
 
 
+
+<!-- LEVEL 10 -->
+
 <div
 class="card"
 onclick="selectPackage(event,this,'Level 10 - LKR 250')">
@@ -638,6 +886,9 @@ LKR 250
 
 </div>
 
+
+
+<!-- LEVEL 15 -->
 
 <div
 class="card"
@@ -658,6 +909,9 @@ LKR 250
 </div>
 
 
+
+<!-- LEVEL 20 -->
+
 <div
 class="card"
 onclick="selectPackage(event,this,'Level 20 - LKR 250')">
@@ -676,6 +930,9 @@ LKR 250
 
 </div>
 
+
+
+<!-- LEVEL 25 -->
 
 <div
 class="card"
@@ -696,6 +953,9 @@ LKR 250
 </div>
 
 
+
+<!-- LEVEL 30 -->
+
 <div
 class="card"
 onclick="selectPackage(event,this,'Level 30 - LKR 380')">
@@ -714,6 +974,9 @@ LKR 380
 
 </div>
 
+
+
+<!-- FULL PASS -->
 
 <div
 class="card"
@@ -737,19 +1000,24 @@ LKR 1500
 
 </div>
 
+
 </div>
 
 
-<!-- =========================
+
+<!-- =====================================================
      EVO
-========================= -->
+===================================================== -->
 
 <h3>
 EVO Access
 </h3>
 
+
 <div class="grid">
 
+
+<!-- E BADGE 3 -->
 
 <div
 class="card"
@@ -770,6 +1038,9 @@ LKR 250
 </div>
 
 
+
+<!-- E BADGE 7 -->
+
 <div
 class="card"
 onclick="selectPackage(event,this,'E Badge 7 - LKR 350')">
@@ -789,6 +1060,9 @@ LKR 350
 </div>
 
 
+
+<!-- E BADGE 30 -->
+
 <div
 class="card"
 onclick="selectPackage(event,this,'E Badge 30 - LKR 1100')">
@@ -807,19 +1081,24 @@ LKR 1100
 
 </div>
 
+
 </div>
 
 
-<!-- =========================
+
+<!-- =====================================================
      DIAMONDS
-========================= -->
+===================================================== -->
 
 <h3>
 💎 Diamonds
 </h3>
 
+
 <div class="grid">
 
+
+<!-- 25 -->
 
 <div
 class="card"
@@ -840,6 +1119,9 @@ LKR 150
 </div>
 
 
+
+<!-- 100 -->
+
 <div
 class="card"
 onclick="selectPackage(event,this,'100 Diamonds - LKR 380')">
@@ -859,6 +1141,9 @@ LKR 380
 </div>
 
 
+
+<!-- 310 -->
+
 <div
 class="card"
 onclick="selectPackage(event,this,'310 Diamonds - LKR 1150')">
@@ -877,6 +1162,9 @@ LKR 1150
 
 </div>
 
+
+
+<!-- 520 -->
 
 <div
 class="card"
@@ -901,6 +1189,9 @@ LKR 1800
 </div>
 
 
+
+<!-- 1060 -->
+
 <div
 class="card"
 onclick="selectPackage(event,this,'1060 Diamonds - LKR 3400')">
@@ -919,6 +1210,9 @@ LKR 3400
 
 </div>
 
+
+
+<!-- 2180 -->
 
 <div
 class="card"
@@ -939,6 +1233,9 @@ LKR 6500
 </div>
 
 
+
+<!-- 5600 -->
+
 <div
 class="card"
 onclick="selectPackage(event,this,'5600 Diamonds - LKR 16500')">
@@ -958,6 +1255,9 @@ LKR 16500
 </div>
 
 
+
+<!-- 11500 -->
+
 <div
 class="card"
 onclick="selectPackage(event,this,'11500 Diamonds - LKR 35000')">
@@ -976,70 +1276,454 @@ LKR 35000
 
 </div>
 
-</div>
 
 </div>
+
+
+</div>
+
 
 
 <!-- =====================================================
-     ZYPER NAVIGATION BAR
+     NAVIGATION
 ===================================================== -->
 
 <div id="zyper-navigation"></div>
 
 
-<script>
 
-/* =========================================
-   WEEKLY LITE IMAGE FALLBACK
-========================================= */
+<!-- =====================================================
+     WALLET + FIREBASE
+===================================================== -->
 
-function weeklyLiteFallback(img){
+<script type="module">
 
-if(img.dataset.fallback === "1"){
+import { auth }
+from "./firebase.js";
+
+
+import {
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+
+const WORKER_URL =
+"https://zyper-order.ameresh20112011.workers.dev";
+
+
+let currentWalletBalance = 0;
+
+
+
+/* =====================================================
+   MONEY FORMAT
+===================================================== */
+
+function formatMoney(value){
+
+return Number(
+value || 0
+).toLocaleString(
+"en-LK",
+{
+
+minimumFractionDigits:2,
+
+maximumFractionDigits:2
+
+}
+);
+
+}
+
+
+
+/* =====================================================
+   GET PACKAGE PRICE
+===================================================== */
+
+function getPackagePrice(
+packageValue
+){
+
+const separator =
+" - LKR ";
+
+
+const index =
+String(
+packageValue || ""
+).lastIndexOf(
+separator
+);
+
+
+if(index === -1){
+
+return 0;
+
+}
+
+
+return Number(
+
+String(
+packageValue
+)
+
+.substring(
+index +
+separator.length
+)
+
+.trim()
+
+) || 0;
+
+}
+
+
+
+/* =====================================================
+   GET PACKAGE FROM CARD
+===================================================== */
+
+function getCardPackageValue(
+card
+){
+
+const onclickText =
+card.getAttribute(
+"onclick"
+) || "";
+
+
+const match =
+onclickText.match(
+/'([^']+ - LKR [0-9]+)'/
+);
+
+
+return match
+?
+match[1]
+:
+"";
+
+}
+
+
+
+/* =====================================================
+   UPDATE PACKAGE WALLET STATUS
+===================================================== */
+
+function updatePackageWalletStatus(){
+
+document
+.querySelectorAll(
+".card"
+)
+.forEach(
+function(card){
+
+const oldStatus =
+card.querySelector(
+".wallet-status"
+);
+
+
+if(oldStatus){
+
+oldStatus.remove();
+
+}
+
+
+card.classList.remove(
+"wallet-affordable",
+"wallet-low"
+);
+
+
+const packageValue =
+getCardPackageValue(
+card
+);
+
+
+if(!packageValue){
 
 return;
 
 }
+
+
+const price =
+getPackagePrice(
+packageValue
+);
+
+
+const status =
+document.createElement(
+"span"
+);
+
+
+status.className =
+"wallet-status";
 
 
 if(
-img.src.includes("Weekly-Lite.png")
+currentWalletBalance >=
+price
 ){
 
-img.dataset.fallback="1";
+card.classList.add(
+"wallet-affordable"
+);
 
-img.src=
-"topupimages/Weekly-lite.png";
 
-return;
+status.classList.add(
+"enough"
+);
+
+
+status.textContent =
+"WALLET ✓";
 
 }
+
+else{
+
+card.classList.add(
+"wallet-low"
+);
+
+
+status.classList.add(
+"low"
+);
+
+
+status.textContent =
+"LOW BALANCE";
+
+}
+
+
+card.appendChild(
+status
+);
+
+}
+);
+
+}
+
+
+
+/* =====================================================
+   LOAD LIVE WALLET BALANCE
+===================================================== */
+
+async function loadWalletBalance(
+user
+){
+
+const balanceElement =
+document.getElementById(
+"topupWalletBalance"
+);
+
+
+try{
+
+
+const token =
+await user.getIdToken();
+
+
+const response =
+await fetch(
+WORKER_URL,
+{
+
+method:
+"POST",
+
+
+headers:{
+
+"Content-Type":
+"application/json",
+
+
+"Authorization":
+`Bearer ${token}`
+
+},
+
+
+body:
+JSON.stringify(
+{
+
+action:
+"wallet_balance"
+
+}
+)
+
+}
+);
+
+
+const result =
+await response.json();
 
 
 if(
-img.src.includes("Weekly-lite.png")
+!response.ok ||
+!result.success
 ){
 
-img.dataset.fallback="2";
+throw new Error(
+result.message ||
+"Unable to load wallet balance."
+);
 
-img.src=
-"topupimages/weekly-lite.png";
+}
+
+
+currentWalletBalance =
+Number(
+result.wallet?.balance ||
+0
+);
+
+
+if(balanceElement){
+
+balanceElement.textContent =
+
+formatMoney(
+currentWalletBalance
+)
+
++
+
+" LKR";
+
+}
+
+
+/* SAVE CURRENT BALANCE */
+
+localStorage.setItem(
+"walletBalance",
+String(
+currentWalletBalance
+)
+);
+
+
+updatePackageWalletStatus();
+
+
+}
+
+catch(error){
+
+
+console.error(
+"Wallet Balance Error:",
+error
+);
+
+
+currentWalletBalance =
+0;
+
+
+if(balanceElement){
+
+balanceElement.textContent =
+"0.00 LKR";
+
+}
+
+
+localStorage.setItem(
+"walletBalance",
+"0"
+);
+
+
+updatePackageWalletStatus();
+
+}
+
+}
+
+
+
+/* =====================================================
+   FIREBASE LOGIN CHECK
+===================================================== */
+
+onAuthStateChanged(
+auth,
+async function(user){
+
+if(!user){
+
+window.location.href =
+"index.html";
 
 return;
 
 }
 
+
+await loadWalletBalance(
+user
+);
+
 }
+);
 
 
-/* =========================================
+
+/* =====================================================
    PACKAGE SELECTION
-========================================= */
+===================================================== */
 
-function selectPackage(e,card,name){
+window.selectPackage =
+function(
+event,
+card,
+name
+){
 
-/* SAVE PACKAGE */
+
+const packagePrice =
+getPackagePrice(
+name
+);
+
+
+const walletEligible =
+
+currentWalletBalance >=
+packagePrice;
+
+
+/* =================================================
+   SAVE PACKAGE
+================================================= */
 
 localStorage.setItem(
 "package",
@@ -1047,60 +1731,169 @@ name
 );
 
 
-/* RIPPLE */
+localStorage.setItem(
+"packagePrice",
+String(
+packagePrice
+)
+);
 
-let ripple=
-document.createElement("span");
 
-ripple.className=
+localStorage.setItem(
+"walletBalance",
+String(
+currentWalletBalance
+)
+);
+
+
+localStorage.setItem(
+"walletEligible",
+walletEligible
+?
+"true"
+:
+"false"
+);
+
+
+/* =================================================
+   RIPPLE
+================================================= */
+
+const ripple =
+document.createElement(
+"span"
+);
+
+
+ripple.className =
 "ripple";
 
 
-let rect=
+const rect =
 card.getBoundingClientRect();
 
 
-ripple.style.width=
-"120px";
-
-ripple.style.height=
+ripple.style.width =
 "120px";
 
 
-ripple.style.left=
+ripple.style.height =
+"120px";
+
+
+ripple.style.left =
+
 (
-e.clientX-
-rect.left-
+event.clientX -
+rect.left -
 60
-)+"px";
+)
+
++
+
+"px";
 
 
-ripple.style.top=
+ripple.style.top =
+
 (
-e.clientY-
-rect.top-
+event.clientY -
+rect.top -
 60
-)+"px";
+)
+
++
+
+"px";
 
 
-card.appendChild(ripple);
+card.appendChild(
+ripple
+);
 
 
-/* GO PAYMENT */
+/* =================================================
+   GO PAYMENT
+================================================= */
 
-setTimeout(function(){
+setTimeout(
+function(){
 
-window.location.href=
+window.location.href =
 "payment.html";
 
-},250);
+},
+250
+);
+
+};
+
+
+
+/* =====================================================
+   WEEKLY LITE FALLBACK
+===================================================== */
+
+window.weeklyLiteFallback =
+function(img){
+
+
+if(
+img.dataset.fallback ===
+"1"
+){
+
+return;
 
 }
+
+
+if(
+img.src.includes(
+"Weekly-Lite.png"
+)
+){
+
+img.dataset.fallback =
+"1";
+
+
+img.src =
+"topupimages/Weekly-lite.png";
+
+
+return;
+
+}
+
+
+if(
+img.src.includes(
+"Weekly-lite.png"
+)
+){
+
+img.dataset.fallback =
+"2";
+
+
+img.src =
+"topupimages/weekly-lite.png";
+
+}
+
+};
 
 </script>
 
 
-<!-- Zyper Navigation Bar -->
+
+<!-- =====================================================
+     NAVIGATION JS
+===================================================== -->
+
 <script src="zyper-nav.js"></script>
 
 
