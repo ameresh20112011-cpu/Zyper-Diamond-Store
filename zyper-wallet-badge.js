@@ -1,6 +1,6 @@
 /* =====================================================
    ZYPER DIAMOND STORE
-   MINI WALLET BALANCE BADGE
+   MEDIUM WALLET BALANCE BADGE
 ===================================================== */
 
 import { auth } from "./firebase.js";
@@ -39,19 +39,16 @@ function formatMoney(amount) {
 
 
 /* =====================================================
-   CREATE MINI WALLET BADGE
+   CREATE WALLET BADGE
 ===================================================== */
 
 function createWalletBadge() {
-
-    /*
-     * Remove old badge if one already exists
-     */
 
     const oldBadge =
         document.getElementById(
             "zyperWalletBadge"
         );
+
 
     if (oldBadge) {
 
@@ -59,10 +56,6 @@ function createWalletBadge() {
 
     }
 
-
-    /*
-     * Create wallet link
-     */
 
     const badge =
         document.createElement("a");
@@ -83,16 +76,16 @@ function createWalletBadge() {
 
 
     /* =================================================
-       FORCE SMALL SIZE
+       MEDIUM SIZE
     ================================================= */
 
     badge.style.cssText = `
 
         position: fixed !important;
 
-        top: 7px !important;
+        top: 9px !important;
 
-        right: 7px !important;
+        right: 9px !important;
 
         left: auto !important;
 
@@ -106,14 +99,14 @@ function createWalletBadge() {
         max-width: max-content !important;
 
 
-        height: 20px !important;
+        height: 32px !important;
 
-        min-height: 20px !important;
+        min-height: 32px !important;
 
-        max-height: 20px !important;
+        max-height: 32px !important;
 
 
-        padding: 0 6px !important;
+        padding: 0 11px !important;
 
         margin: 0 !important;
 
@@ -127,7 +120,7 @@ function createWalletBadge() {
         justify-content: center !important;
 
 
-        gap: 3px !important;
+        gap: 6px !important;
 
 
         border-radius: 999px !important;
@@ -154,8 +147,8 @@ function createWalletBadge() {
 
         box-shadow:
 
-            0 2px 5px
-            rgba(0,0,0,.20)
+            0 4px 12px
+            rgba(108,45,145,.28)
 
             !important;
 
@@ -173,10 +166,6 @@ function createWalletBadge() {
 
             !important;
 
-
-        font-size: 7px !important;
-
-        font-weight: 700 !important;
 
         line-height: 1 !important;
 
@@ -201,6 +190,14 @@ function createWalletBadge() {
             2147483647 !important;
 
 
+        transition:
+
+            transform .2s ease,
+            box-shadow .2s ease
+
+            !important;
+
+
         -webkit-tap-highlight-color:
             transparent !important;
 
@@ -208,7 +205,7 @@ function createWalletBadge() {
 
 
     /* =================================================
-       BADGE HTML
+       CONTENT
     ================================================= */
 
     badge.innerHTML = `
@@ -237,7 +234,7 @@ function createWalletBadge() {
 
 
     /* =================================================
-       FORCE ICON SIZE
+       ICON SIZE
     ================================================= */
 
     const icon =
@@ -250,35 +247,43 @@ function createWalletBadge() {
 
         icon.style.cssText = `
 
-            display: inline-block !important;
+            display:
+                inline-flex !important;
+
+            align-items:
+                center !important;
+
+            justify-content:
+                center !important;
 
 
-            width: auto !important;
+            width:
+                auto !important;
 
-            min-width: 0 !important;
-
-            max-width: none !important;
-
-
-            height: auto !important;
-
-            min-height: 0 !important;
-
-            max-height: none !important;
+            min-width:
+                0 !important;
 
 
-            padding: 0 !important;
+            height:
+                auto !important;
 
-            margin: 0 !important;
+            min-height:
+                0 !important;
 
 
-            border: none !important;
+            margin:
+                0 !important;
 
-            border-radius: 0 !important;
+            padding:
+                0 !important;
 
 
             background:
                 transparent !important;
+
+
+            border:
+                none !important;
 
 
             box-shadow:
@@ -286,23 +291,15 @@ function createWalletBadge() {
 
 
             font-size:
-                8px !important;
-
-
-            font-weight:
-                normal !important;
+                14px !important;
 
 
             line-height:
                 1 !important;
 
 
-            transform:
+            flex:
                 none !important;
-
-
-            box-sizing:
-                border-box !important;
 
         `;
 
@@ -310,7 +307,7 @@ function createWalletBadge() {
 
 
     /* =================================================
-       FORCE BALANCE SIZE
+       BALANCE TEXT SIZE
     ================================================= */
 
     const balance =
@@ -323,26 +320,26 @@ function createWalletBadge() {
 
         balance.style.cssText = `
 
-            display: inline-block !important;
+            display:
+                inline-block !important;
 
 
-            width: auto !important;
+            width:
+                auto !important;
 
-            min-width: 0 !important;
-
-            max-width: none !important;
-
-
-            height: auto !important;
-
-            min-height: 0 !important;
-
-            max-height: none !important;
+            min-width:
+                0 !important;
 
 
-            padding: 0 !important;
+            height:
+                auto !important;
 
-            margin: 0 !important;
+
+            margin:
+                0 !important;
+
+            padding:
+                0 !important;
 
 
             color:
@@ -370,7 +367,7 @@ function createWalletBadge() {
 
 
             font-size:
-                7px !important;
+                11px !important;
 
 
             font-weight:
@@ -382,19 +379,47 @@ function createWalletBadge() {
 
 
             letter-spacing:
-                0 !important;
+                .1px !important;
 
 
             white-space:
                 nowrap !important;
 
-
-            box-sizing:
-                border-box !important;
-
         `;
 
     }
+
+
+    /* =================================================
+       HOVER
+    ================================================= */
+
+    badge.addEventListener(
+        "mouseenter",
+        function () {
+
+            badge.style.transform =
+                "translateY(-1px)";
+
+            badge.style.boxShadow =
+                "0 6px 16px rgba(108,45,145,.34)";
+
+        }
+    );
+
+
+    badge.addEventListener(
+        "mouseleave",
+        function () {
+
+            badge.style.transform =
+                "none";
+
+            badge.style.boxShadow =
+                "0 4px 12px rgba(108,45,145,.28)";
+
+        }
+    );
 
 
     return badge;
@@ -402,7 +427,7 @@ function createWalletBadge() {
 
 
 /* =====================================================
-   LOAD CUSTOMER WALLET BALANCE
+   LOAD WALLET BALANCE
 ===================================================== */
 
 async function loadWalletBalance(user) {
@@ -426,17 +451,9 @@ async function loadWalletBalance(user) {
 
     try {
 
-        /* =============================================
-           FIREBASE ID TOKEN
-        ============================================= */
-
         const token =
             await user.getIdToken();
 
-
-        /* =============================================
-           GET WALLET FROM WORKER
-        ============================================= */
 
         const response =
             await fetch(
@@ -474,10 +491,6 @@ async function loadWalletBalance(user) {
             await response.json();
 
 
-        /* =============================================
-           CHECK RESPONSE
-        ============================================= */
-
         if (
             !response.ok ||
             !data.success
@@ -493,10 +506,6 @@ async function loadWalletBalance(user) {
 
         }
 
-
-        /* =============================================
-           BALANCE
-        ============================================= */
 
         const walletBalance =
             Number(
@@ -547,10 +556,6 @@ function startWalletBadge() {
         async function(user) {
 
 
-            /* =========================================
-               USER NOT LOGGED IN
-            ========================================= */
-
             if (!user) {
 
                 badge.style.setProperty(
@@ -563,10 +568,6 @@ function startWalletBadge() {
 
             }
 
-
-            /* =========================================
-               USER LOGGED IN
-            ========================================= */
 
             badge.style.setProperty(
                 "display",
