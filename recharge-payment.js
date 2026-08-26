@@ -13,8 +13,16 @@ from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
+/* =====================================================
+   SETTINGS
+===================================================== */
+
 const WORKER_URL =
 "https://zyper-order.ameresh20112011.workers.dev";
+
+
+const WHATSAPP_NUMBER =
+"94751483909";
 
 
 /* =====================================================
@@ -57,6 +65,10 @@ document.getElementById(
 );
 
 
+/* =====================================================
+   CURRENT USER
+===================================================== */
+
 let currentUser =
 null;
 
@@ -81,56 +93,63 @@ function formatMoney(amount){
 
 
 /* =====================================================
-   OPEN PAYMENT DETAILS
+   OPEN / CLOSE PAYMENT DETAILS
 ===================================================== */
 
-redeemMethod.addEventListener(
-    "click",
-    function(){
+if(
+    redeemMethod &&
+    paymentContent
+){
 
-        const opened =
-        paymentContent
-        .classList
-        .contains(
-            "show"
-        );
+    redeemMethod.addEventListener(
+        "click",
+        function(){
 
-
-        if(opened){
-
+            const opened =
             paymentContent
             .classList
-            .remove(
+            .contains(
                 "show"
             );
 
 
-            redeemMethod
-            .classList
-            .remove(
-                "active"
-            );
+            if(opened){
+
+                paymentContent
+                .classList
+                .remove(
+                    "show"
+                );
+
+
+                redeemMethod
+                .classList
+                .remove(
+                    "active"
+                );
+
+            }
+            else{
+
+                paymentContent
+                .classList
+                .add(
+                    "show"
+                );
+
+
+                redeemMethod
+                .classList
+                .add(
+                    "active"
+                );
+
+            }
 
         }
-        else{
+    );
 
-            paymentContent
-            .classList
-            .add(
-                "show"
-            );
-
-
-            redeemMethod
-            .classList
-            .add(
-                "active"
-            );
-
-        }
-
-    }
-);
+}
 
 
 /* =====================================================
@@ -149,7 +168,15 @@ document
             async function(){
 
                 const value =
-                button.dataset.copy;
+                button.dataset.copy ||
+                "";
+
+
+                if(!value){
+
+                    return;
+
+                }
 
 
                 try{
@@ -162,18 +189,18 @@ document
 
 
                     const oldText =
-                    button.textContent;
+                        button.textContent;
 
 
                     button.textContent =
-                    "✓";
+                        "✓";
 
 
                     setTimeout(
                         function(){
 
                             button.textContent =
-                            oldText;
+                                oldText;
 
                         },
                         1200
@@ -188,9 +215,78 @@ document
                     );
 
 
-                    alert(
-                        "Copy failed. Please copy manually."
+                    /* FALLBACK COPY */
+
+                    const textarea =
+                        document.createElement(
+                            "textarea"
+                        );
+
+
+                    textarea.value =
+                        value;
+
+
+                    textarea.style.position =
+                        "fixed";
+
+
+                    textarea.style.opacity =
+                        "0";
+
+
+                    document.body.appendChild(
+                        textarea
                     );
+
+
+                    textarea.focus();
+
+                    textarea.select();
+
+
+                    try{
+
+                        document.execCommand(
+                            "copy"
+                        );
+
+
+                        const oldText =
+                            button.textContent;
+
+
+                        button.textContent =
+                            "✓";
+
+
+                        setTimeout(
+                            function(){
+
+                                button.textContent =
+                                    oldText;
+
+                            },
+                            1200
+                        );
+
+                    }
+                    catch(fallbackError){
+
+                        console.error(
+                            "Fallback copy failed:",
+                            fallbackError
+                        );
+
+
+                        alert(
+                            "Unable to copy. Please copy manually."
+                        );
+
+                    }
+
+
+                    textarea.remove();
 
                 }
 
@@ -202,53 +298,74 @@ document
 
 
 /* =====================================================
-   LOAD WALLET
+   LOAD LIVE WALLET BALANCE
 ===================================================== */
 
 async function loadWallet(user){
 
+    if(!walletBalance){
+
+        return;
+
+    }
+
+
     walletBalance.textContent =
-    "... LKR";
+        "... LKR";
 
 
     try{
 
         const token =
-        await user.getIdToken();
+            await user.getIdToken();
 
 
         const response =
-        await fetch(
-            WORKER_URL,
-            {
+            await fetch(
+                WORKER_URL,
+                {
 
-                method:
-                "POST",
+                    method:
+                        "POST",
 
-                headers:{
+                    headers:{
 
-                    "Content-Type":
-                    "application/json",
+                        "Content-Type":
+                            "application/json",
 
-                    "Authorization":
-                    `Bearer ${token}`
+                        "Authorization":
+                            `Bearer ${token}`
 
-                },
+                    },
 
-                body:
-                JSON.stringify({
+                    body:
+                        JSON.stringify({
 
-                    action:
-                    "wallet_balance"
+                            action:
+                                "wallet_balance"
 
-                })
+                        })
 
-            }
-        );
+                }
+            );
 
 
-        const result =
-        await response.json();
+        let result;
+
+
+        try{
+
+            result =
+                await response.json();
+
+        }
+        catch{
+
+            throw new Error(
+                "Invalid wallet response."
+            );
+
+        }
 
 
         if(
@@ -265,18 +382,21 @@ async function loadWallet(user){
 
 
         const balance =
-        Number(
-            result.wallet?.balance ||
-            0
-        );
+            Number(
+                result.wallet?.balance ||
+                0
+            );
 
 
         walletBalance.textContent =
-        formatMoney(
-            balance
-        )
-        +
-        " LKR";
+
+            formatMoney(
+                balance
+            )
+
+            +
+
+            " LKR";
 
     }
     catch(error){
@@ -288,7 +408,7 @@ async function loadWallet(user){
 
 
         walletBalance.textContent =
-        "0.00 LKR";
+            "0.00 LKR";
 
     }
 
@@ -296,7 +416,7 @@ async function loadWallet(user){
 
 
 /* =====================================================
-   AUTH
+   FIREBASE AUTH
 ===================================================== */
 
 onAuthStateChanged(
@@ -306,7 +426,7 @@ onAuthStateChanged(
         if(!user){
 
             window.location.href =
-            "./index.html";
+                "./index.html";
 
             return;
 
@@ -314,16 +434,24 @@ onAuthStateChanged(
 
 
         currentUser =
-        user;
+            user;
 
 
-        customerEmail.textContent =
-        user.email ||
-        "Not available";
+        if(customerEmail){
+
+            customerEmail.textContent =
+                user.email ||
+                "Not available";
+
+        }
 
 
-        customerUid.textContent =
-        user.uid;
+        if(customerUid){
+
+            customerUid.textContent =
+                user.uid;
+
+        }
 
 
         await loadWallet(
@@ -335,52 +463,50 @@ onAuthStateChanged(
 
 
 /* =====================================================
-   WHATSAPP
+   WHATSAPP RECEIPT
 ===================================================== */
 
-whatsappButton.addEventListener(
-    "click",
-    function(){
+if(whatsappButton){
 
-        if(!currentUser){
+    whatsappButton.addEventListener(
+        "click",
+        function(){
 
-            alert(
-                "Please login first."
-            );
+            if(!currentUser){
 
-            return;
+                alert(
+                    "Please wait for your account to load."
+                );
 
-        }
+                return;
 
-
-        /*
-         IMPORTANT:
-         Put your WhatsApp number below.
-
-         Sri Lanka example:
-         947XXXXXXXX
-
-         Do NOT use:
-         +94
-         spaces
-         dashes
-        */
-
-        const whatsappNumber =
-        "947XXXXXXXX";
+            }
 
 
-        const message =
+            const email =
+                currentUser.email ||
+                "Not available";
 
-`Hello Zyper Diamond Store 👋
 
-I have made a bank transfer to recharge my Zyper Wallet.
+            const uid =
+                currentUser.uid;
+
+
+            const message =
+
+`💎 ZYPER DIAMOND STORE
+
+💰 WALLET RECHARGE REQUEST
+
+Hello Zyper,
+
+I have completed a bank transfer to recharge my Zyper Wallet.
 
 📧 Account Email:
-${currentUser.email || "Not available"}
+${email}
 
 🆔 Firebase UID:
-${currentUser.uid}
+${uid}
 
 🏦 Bank:
 BOC
@@ -391,27 +517,36 @@ BOC
 👤 Account Name:
 Ameresh R
 
-I will attach my payment receipt here.
+📸 I will attach my successful payment receipt to this WhatsApp message.
 
-Please verify my payment and send me the Zyper Redeem Code.
+Please verify my payment and send me my Zyper Wallet Redeem Code.
 
 Thank you. 💎`;
 
 
-        const url =
-        "https://wa.me/"
-        +
-        whatsappNumber
-        +
-        "?text="
-        +
-        encodeURIComponent(
-            message
-        );
+            const whatsappUrl =
+
+                "https://wa.me/"
+
+                +
+
+                WHATSAPP_NUMBER
+
+                +
+
+                "?text="
+
+                +
+
+                encodeURIComponent(
+                    message
+                );
 
 
-        window.location.href =
-        url;
+            window.location.href =
+                whatsappUrl;
 
-    }
-);
+        }
+    );
+
+}
