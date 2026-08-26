@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Zyper Wallet</title>
+
+<link rel="stylesheet"
+href="./wallet.css">
+
+</head>
+
+<body>
+
+
+<div class="wallet-page">
+
+
+    <!-- HEADER -->
+
+    <header class="wallet-header">
+
+        <div class="brand">
+
+            <div class="logo">
+                💎
+            </div>
+
+            <div>
+
+                <h1>
+                    Zyper Wallet
+                </h1>
+
+                <p>
+                    Zyper Diamond Store
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="./home.html"
+            class="home-btn">
+
+            ← Home
+
+        </a>
+
+    </header>
+
+
+
+    <!-- WALLET BALANCE -->
+
+    <section class="balance-card">
+
+
+        <div class="balance-top">
+
+            <span>
+                💰 Available Balance
+            </span>
+
+            <button
+                id="refreshWallet"
+                type="button">
+
+                ↻
+
+            </button>
+
+        </div>
+
+
+        <div class="balance">
+
+            <span>
+                LKR
+            </span>
+
+            <strong id="walletBalance">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="wallet-stats">
+
+
+            <div>
+
+                <small>
+                    Total Added
+                </small>
+
+                <strong id="totalDeposited">
+                    LKR 0
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <small>
+                    Total Spent
+                </small>
+
+                <strong id="totalSpent">
+                    LKR 0
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- REDEEM SECTION -->
+
+    <section class="redeem-card">
+
+
+        <div class="section-title">
+
+            <div class="section-icon">
+                🎟️
+            </div>
+
+            <div>
+
+                <h2>
+                    Redeem Code
+                </h2>
+
+                <p>
+                    Enter your Zyper wallet code
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="redeem-box">
+
+
+            <input
+                type="text"
+                id="redeemCode"
+                placeholder="ZYPER-XXXX-XXXX"
+                maxlength="15"
+                autocomplete="off"
+            >
+
+
+            <button
+                id="redeemButton"
+                type="button">
+
+                Redeem
+
+            </button>
+
+
+        </div>
+
+
+        <div
+            id="redeemMessage"
+            class="redeem-message"
+            style="display:none;">
+        </div>
+
+
+    </section>
+
+
+
+    <!-- TRANSACTIONS -->
+
+    <section class="transactions-card">
+
+
+        <div class="transactions-header">
+
+            <div>
+
+                <h2>
+                    📜 Wallet History
+                </h2>
+
+                <p>
+                    Your recent wallet activity
+                </p>
+
+            </div>
+
+
+            <button
+                id="refreshTransactions"
+                type="button">
+
+                ↻ Refresh
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="transactions"
+            class="transactions">
+
+            <div class="loading">
+                Loading transactions...
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+</div>
+
+
+<script
+type="module"
+src="./wallet.js">
+</script>
+
+
+</body>
+
+</html>
