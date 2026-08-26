@@ -10,17 +10,12 @@
 :root{
 
     --bg:#f5f6f8;
-
     --white:#ffffff;
-
     --text:#24272b;
-
     --muted:#7b8490;
 
     --purple:#a64fc4;
-
     --purple-dark:#8e36ae;
-
     --purple-soft:#f8effc;
 
     --border:#e5e7eb;
@@ -47,11 +42,9 @@ body{
         Arial,
         sans-serif;
 
-    background:
-        var(--bg);
+    background:var(--bg);
 
-    color:
-        var(--text);
+    color:var(--text);
 
 }
 
@@ -66,8 +59,7 @@ body{
 
     min-height:105px;
 
-    padding:
-        18px 6%;
+    padding:18px 6%;
 
     display:flex;
 
@@ -80,11 +72,14 @@ body{
     background:#ffffff;
 
     border-bottom:
-        1px solid
-        #eceff3;
+        1px solid #eceff3;
 
 }
 
+
+/* =====================================================
+   BRAND
+===================================================== */
 
 .recharge-brand{
 
@@ -96,6 +91,10 @@ body{
 
 }
 
+
+/* =====================================================
+   OFFICIAL LOGO
+===================================================== */
 
 .brand-logo{
 
@@ -113,23 +112,33 @@ body{
 
     border-radius:15px;
 
-    font-size:24px;
+    overflow:hidden;
 
-    color:white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #20c8f2,
-            #755cf7
-        );
+    background:#ffffff;
 
     box-shadow:
         0 8px 22px
-        rgba(86,104,240,.25);
+        rgba(86,104,240,.20);
 
 }
 
+
+.brand-logo-image{
+
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+}
+
+
+/* =====================================================
+   BRAND TEXT
+===================================================== */
 
 .brand-text{
 
@@ -178,8 +187,7 @@ body{
 
     height:48px;
 
-    padding:
-        0 16px;
+    padding:0 16px;
 
     display:inline-flex;
 
@@ -188,6 +196,8 @@ body{
     justify-content:center;
 
     gap:8px;
+
+    flex-shrink:0;
 
     border-radius:999px;
 
@@ -239,14 +249,13 @@ body{
 
     margin:auto;
 
-    padding:
-        30px 20px 40px;
+    padding:30px 20px 40px;
 
 }
 
 
 /* =====================================================
-   TITLE
+   PAGE TITLE
 ===================================================== */
 
 .page-heading{
@@ -258,8 +267,7 @@ body{
 
 .mini-title{
 
-    color:
-        var(--purple);
+    color:var(--purple);
 
     font-size:10px;
 
@@ -272,8 +280,7 @@ body{
 
 .page-heading h1{
 
-    margin:
-        5px 0 6px;
+    margin:5px 0 6px;
 
     font-size:31px;
 
@@ -286,8 +293,7 @@ body{
 
     margin:0;
 
-    color:
-        var(--muted);
+    color:var(--muted);
 
     font-size:13px;
 
@@ -297,7 +303,7 @@ body{
 
 
 /* =====================================================
-   METHOD PANEL
+   PAYMENT PANEL
 ===================================================== */
 
 .method-panel{
@@ -308,16 +314,14 @@ body{
 
     background:#ffffff;
 
-    box-shadow:
-        var(--shadow);
+    box-shadow:var(--shadow);
 
 }
 
 
 .method-panel > h2{
 
-    margin:
-        0 0 18px;
+    margin:0 0 18px;
 
     font-size:21px;
 
@@ -325,7 +329,7 @@ body{
 
 
 /* =====================================================
-   REDEEM METHOD BUTTON
+   REDEEM METHOD
 ===================================================== */
 
 .redeem-method{
@@ -334,8 +338,7 @@ body{
 
     min-height:105px;
 
-    padding:
-        18px 20px;
+    padding:18px 20px;
 
     display:flex;
 
@@ -344,8 +347,7 @@ body{
     gap:16px;
 
     border:
-        2px solid
-        #eadcef;
+        2px solid #eadcef;
 
     border-radius:22px;
 
@@ -358,8 +360,7 @@ body{
             #fcf8fe
         );
 
-    color:
-        var(--text);
+    color:var(--text);
 
     text-align:left;
 
@@ -370,22 +371,18 @@ body{
 
 .redeem-method:hover{
 
-    border-color:
-        #c885db;
+    border-color:#c885db;
 
-    transform:
-        translateY(-1px);
+    transform:translateY(-1px);
 
 }
 
 
 .redeem-method.active{
 
-    border-color:
-        var(--purple);
+    border-color:var(--purple);
 
-    background:
-        var(--purple-soft);
+    background:var(--purple-soft);
 
 }
 
@@ -442,8 +439,7 @@ body{
 
     margin-top:5px;
 
-    color:
-        var(--muted);
+    color:var(--muted);
 
     font-size:11px;
 
@@ -454,8 +450,7 @@ body{
 
     font-size:25px;
 
-    color:
-        var(--purple);
+    color:var(--purple);
 
     transition:
         transform .25s ease;
@@ -466,8 +461,7 @@ body{
 .redeem-method.active
 .method-arrow{
 
-    transform:
-        rotate(90deg);
+    transform:rotate(90deg);
 
 }
 
@@ -533,8 +527,7 @@ body{
     border-radius:18px;
 
     border:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
     background:#ffffff;
 
@@ -574,8 +567,7 @@ body{
 
     border-radius:12px;
 
-    background:
-        var(--purple-soft);
+    background:var(--purple-soft);
 
 }
 
@@ -591,11 +583,9 @@ body{
 
 .section-heading p{
 
-    margin:
-        3px 0 0;
+    margin:3px 0 0;
 
-    color:
-        var(--muted);
+    color:var(--muted);
 
     font-size:10px;
 
@@ -612,8 +602,7 @@ body{
 
     min-height:64px;
 
-    padding:
-        10px 12px;
+    padding:10px 12px;
 
     margin-top:9px;
 
@@ -643,8 +632,7 @@ body{
 
 .bank-row span{
 
-    color:
-        var(--muted);
+    color:var(--muted);
 
     font-size:10px;
 
@@ -661,7 +649,7 @@ body{
 
 
 /* =====================================================
-   COPY
+   COPY BUTTON
 ===================================================== */
 
 .copy-btn{
@@ -680,8 +668,7 @@ body{
 
     font-size:16px;
 
-    color:
-        var(--purple);
+    color:var(--purple);
 
     background:#efe4f4;
 
@@ -692,8 +679,7 @@ body{
 
 .copy-btn:hover{
 
-    transform:
-        scale(1.05);
+    transform:scale(1.05);
 
     background:#e6d5ed;
 
@@ -702,8 +688,7 @@ body{
 
 .copy-btn:active{
 
-    transform:
-        scale(.94);
+    transform:scale(.94);
 
 }
 
@@ -720,12 +705,10 @@ body{
 
     gap:12px;
 
-    padding:
-        13px 0;
+    padding:13px 0;
 
     border-bottom:
-        1px solid
-        #f0f1f3;
+        1px solid #f0f1f3;
 
 }
 
@@ -743,8 +726,7 @@ body{
 
     height:30px;
 
-    flex:
-        0 0 30px;
+    flex:0 0 30px;
 
     display:flex;
 
@@ -779,11 +761,9 @@ body{
 
 .step p{
 
-    margin:
-        4px 0 0;
+    margin:4px 0 0;
 
-    color:
-        var(--muted);
+    color:var(--muted);
 
     font-size:11px;
 
@@ -793,7 +773,7 @@ body{
 
 
 /* =====================================================
-   CUSTOMER
+   CUSTOMER INFORMATION
 ===================================================== */
 
 .customer-title{
@@ -806,8 +786,7 @@ body{
 
     gap:8px;
 
-    color:
-        var(--purple-dark);
+    color:var(--purple-dark);
 
     font-size:14px;
 
@@ -818,8 +797,7 @@ body{
 
 .customer-row{
 
-    padding:
-        10px 0;
+    padding:10px 0;
 
     display:flex;
 
@@ -830,8 +808,7 @@ body{
     gap:15px;
 
     border-bottom:
-        1px solid
-        #f0f1f3;
+        1px solid #f0f1f3;
 
 }
 
@@ -845,8 +822,7 @@ body{
 
 .customer-row span{
 
-    color:
-        var(--muted);
+    color:var(--muted);
 
     font-size:10px;
 
@@ -876,8 +852,7 @@ body{
 
     min-height:55px;
 
-    padding:
-        12px 16px;
+    padding:12px 16px;
 
     display:flex;
 
@@ -919,8 +894,7 @@ body{
 
 .whatsapp-btn:hover{
 
-    transform:
-        translateY(-2px);
+    transform:translateY(-2px);
 
 }
 
@@ -933,7 +907,7 @@ body{
 
 
 /* =====================================================
-   NOTE
+   IMPORTANT NOTE
 ===================================================== */
 
 .important-note{
@@ -949,8 +923,7 @@ body{
     background:#fffbeb;
 
     border:
-        1px solid
-        #fde68a;
+        1px solid #fde68a;
 
 }
 
@@ -964,8 +937,7 @@ body{
 
 .important-note p{
 
-    margin:
-        5px 0 0;
+    margin:5px 0 0;
 
     font-size:10px;
 
@@ -975,7 +947,7 @@ body{
 
 
 /* =====================================================
-   BACK
+   BACK BUTTON
 ===================================================== */
 
 .back-wallet{
@@ -994,8 +966,7 @@ body{
 
     border-radius:14px;
 
-    color:
-        var(--text);
+    color:var(--text);
 
     text-decoration:none;
 
@@ -1006,8 +977,7 @@ body{
     background:#ffffff;
 
     border:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
 }
 
@@ -1044,8 +1014,6 @@ body{
 
         border-radius:13px;
 
-        font-size:20px;
-
     }
 
 
@@ -1071,8 +1039,7 @@ body{
 
         height:42px;
 
-        padding:
-            0 12px;
+        padding:0 12px;
 
     }
 
@@ -1119,8 +1086,7 @@ body{
 
         min-height:88px;
 
-        padding:
-            14px;
+        padding:14px;
 
         gap:12px;
 
@@ -1161,7 +1127,7 @@ body{
 
 
 /* =====================================================
-   VERY SMALL PHONE
+   SMALL PHONE
 ===================================================== */
 
 @media(max-width:370px){
@@ -1175,8 +1141,7 @@ body{
 
     .header-wallet{
 
-        padding:
-            0 9px;
+        padding:0 9px;
 
     }
 
