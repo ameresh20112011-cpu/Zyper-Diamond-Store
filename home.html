@@ -1,811 +1,986 @@
-import { auth } from "./firebase.js";
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+>
+
+<title>Zyper Diamond Store | Free Fire Top Up</title>
+
+<link rel="icon" href="1.jpg">
+
+<link rel="stylesheet" href="home.css">
+<link rel="stylesheet" href="zyper-nav.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin
+>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap"
+rel="stylesheet"
+>
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+>
+
+
+<style>
+
+/* ==================================================
+   OFFICIAL ZYPER LOGO
+================================================== */
+
+.brand-icon{
+
+    width:50px !important;
+    height:50px !important;
+
+    min-width:50px !important;
+    min-height:50px !important;
+
+    padding:0 !important;
+    margin:0 !important;
+
+    overflow:hidden !important;
+
+    border-radius:14px !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+    justify-content:center !important;
+
+    background:#ffffff !important;
+
+    box-shadow:
+    0 6px 18px
+    rgba(59,130,246,.20) !important;
+}
+
+
+.brand-icon img{
+
+    width:100% !important;
+    height:100% !important;
+
+    display:block !important;
+
+    object-fit:cover !important;
+
+    border-radius:14px !important;
+}
+
+
+/* MOBILE LOGO */
+
+@media(max-width:500px){
+
+    .brand-icon{
+
+        width:43px !important;
+        height:43px !important;
+
+        min-width:43px !important;
+        min-height:43px !important;
+
+        border-radius:12px !important;
+    }
+
+
+    .brand-icon img{
+
+        border-radius:12px !important;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     BACKGROUND VIDEO
+================================================== -->
+
+<div class="video-background">
+
+    <video
+        id="heroVideo"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+    >
+
+        <source
+            src="assets/freefire-bg.mp4"
+            type="video/mp4"
+        >
+
+    </video>
+
+</div>
+
+
+<div class="video-overlay"></div>
+
+
+
+<!-- ==================================================
+     GAMING EFFECTS
+================================================== -->
+
+<div class="gaming-light light-one"></div>
+<div class="gaming-light light-two"></div>
+<div class="gaming-light light-three"></div>
+
+
+<div class="particles">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header class="top-header">
+
+
+    <div class="brand">
+
+
+        <!-- OFFICIAL COMPANY LOGO -->
+
+        <div class="brand-icon">
+
+            <img
+                src="./1.jpg"
+                alt="Zyper Diamond Store Logo"
+            >
+
+        </div>
+
+
+        <div class="brand-text">
+
+            <div class="brand-name">
+                ZYPER
+            </div>
+
+            <div class="brand-sub">
+                DIAMOND STORE
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="online-status">
+
+        <span></span>
+
+        ONLINE STORE
+
+    </div>
+
+
+</header>
+
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<section class="hero">
+
+
+    <div class="hero-content">
+
+
+        <div class="small-title">
+
+            <i class="fa-solid fa-fire"></i>
+
+            GARENA FREE FIRE TOP UP
+
+        </div>
+
+
+        <h1>
+
+            LEVEL UP
+
+            <br>
+
+            <span>
+                YOUR GAME
+            </span>
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            Fast, secure and reliable Free Fire
+            diamond top-ups from Zyper Diamond Store.
+
+        </p>
+
+
+
+        <div class="hero-buttons">
+
+
+            <button
+                class="primary-button"
+                onclick="goTopup()"
+            >
+
+                <i class="fa-solid fa-gem"></i>
+
+                TOP UP NOW
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+
+
+            <button
+                class="secondary-button"
+                onclick="goHistory()"
+            >
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                MY ORDERS
+
+            </button>
+
+
+        </div>
+
+
+
+        <div class="trust-row">
+
+
+            <div>
+
+                <i class="fa-solid fa-bolt"></i>
+
+                <span>
+                    FAST DELIVERY
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+                    SECURE PAYMENT
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <i class="fa-solid fa-headset"></i>
+
+                <span>
+                    SUPPORT
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FREE FIRE CHARACTER -->
+
+    <div class="hero-character">
+
+        <div class="character-glow"></div>
+
+        <img
+            src="assets/freefire-character.png"
+            alt="Free Fire Character"
+        >
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     SERVICES
+================================================== -->
+
+<section class="services-section">
+
+
+    <div class="section-heading">
+
+
+        <div>
+
+            <span>
+                ZYPER STORE
+            </span>
+
+            <h2>
+                WHAT DO YOU NEED?
+            </h2>
+
+        </div>
+
+
+        <div class="heading-line"></div>
+
+
+    </div>
+
+
+
+    <div class="service-grid">
+
+
+
+        <!-- TOP UP -->
+
+        <div
+            class="service-card featured"
+            onclick="goTopup()"
+        >
+
+
+            <div class="card-image">
+
+
+                <img
+                    src="assets/freefire-hero.jpg"
+                    alt="Free Fire Top Up"
+                >
+
+
+                <div class="card-image-overlay"></div>
+
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-gem"></i>
+
+                </div>
+
+
+                <div class="popular-tag">
+                    POPULAR
+                </div>
+
+
+            </div>
+
+
+
+            <div class="card-content">
+
+
+                <h3>
+                    Diamond Top Up
+                </h3>
+
+
+                <p>
+
+                    Choose your Free Fire diamond package
+                    and complete your order quickly.
+
+                </p>
+
+
+                <div class="card-action">
+
+                    TOP UP NOW
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- WALLET -->
+
+        <div
+            class="service-card"
+            onclick="goWallet()"
+        >
+
+
+            <div
+                class="simple-card-icon"
+                style="
+                background:
+                linear-gradient(
+                135deg,
+                rgba(34,197,94,.22),
+                rgba(16,185,129,.12)
+                );
+                color:#4ade80;
+                "
+            >
+
+                <i class="fa-solid fa-wallet"></i>
+
+            </div>
+
+
+            <div class="card-content">
+
+
+                <h3>
+                    My Wallet
+                </h3>
+
+
+                <p>
+
+                    Check your wallet balance,
+                    redeem Zyper codes and view
+                    your recharge history.
+
+                </p>
+
+
+                <div class="card-action">
+
+                    OPEN WALLET
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- PAYMENT -->
+
+        <div
+            class="service-card"
+            onclick="goPayment()"
+        >
+
+
+            <div class="simple-card-icon payment-icon">
+
+                <i class="fa-solid fa-credit-card"></i>
+
+            </div>
+
+
+            <div class="card-content">
+
+
+                <h3>
+                    Payment Methods
+                </h3>
+
+
+                <p>
+
+                    View available payment methods and
+                    recharge your Zyper Wallet.
+
+                </p>
+
+
+                <div class="card-action">
+
+                    VIEW PAYMENT
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- HISTORY -->
+
+        <div
+            class="service-card"
+            onclick="goHistory()"
+        >
+
+
+            <div class="simple-card-icon history-icon">
+
+                <i class="fa-solid fa-receipt"></i>
+
+            </div>
+
+
+            <div class="card-content">
+
+
+                <h3>
+                    Order History
+                </h3>
+
+
+                <p>
+
+                    Check your previous orders and
+                    view your order information.
+
+                </p>
+
+
+                <div class="card-action">
+
+                    VIEW ORDERS
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- WHATSAPP -->
+
+        <div
+            class="service-card"
+            onclick="goWhatsApp()"
+        >
+
+
+            <div class="simple-card-icon whatsapp-icon">
+
+                <i class="fa-brands fa-whatsapp"></i>
+
+            </div>
+
+
+            <div class="card-content">
+
+
+                <h3>
+                    Customer Support
+                </h3>
+
+
+                <p>
+
+                    Need help? Contact Zyper Diamond Store
+                    directly through WhatsApp.
+
+                </p>
+
+
+                <div class="card-action">
+
+                    CONTACT US
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     FREE FIRE BANNER
+================================================== -->
+
+<section class="ff-banner">
+
+
+    <div class="ff-banner-image">
+
+        <img
+            src="assets/freefire-banner.jpg"
+            alt="Free Fire Banner"
+        >
+
+    </div>
+
+
+    <div class="ff-banner-overlay"></div>
+
+
+    <div class="ff-banner-content">
+
+
+        <div class="banner-label">
+            FREE FIRE
+        </div>
+
+
+        <h2>
+
+            READY FOR
+
+            <br>
+
+            THE <span>BATTLE?</span>
+
+        </h2>
+
+
+        <p>
+
+            Get your diamonds and unlock your
+            next gaming experience.
+
+        </p>
+
+
+        <button onclick="goTopup()">
+
+            GET DIAMONDS
+
+            <i class="fa-solid fa-gem"></i>
+
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     STATS
+================================================== -->
+
+<section class="stats-section">
+
+
+    <div class="stat">
+
+        <i class="fa-solid fa-users"></i>
+
+        <strong>
+            1000+
+        </strong>
+
+        <span>
+            PLAYERS
+        </span>
+
+    </div>
+
+
+
+    <div class="stat">
+
+        <i class="fa-solid fa-gem"></i>
+
+        <strong>
+            DIAMONDS
+        </strong>
+
+        <span>
+            TOP UP SERVICE
+        </span>
+
+    </div>
+
+
+
+    <div class="stat">
+
+        <i class="fa-solid fa-bolt"></i>
+
+        <strong>
+            FAST
+        </strong>
+
+        <span>
+            DELIVERY
+        </span>
+
+    </div>
+
+
+
+    <div class="stat">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        <strong>
+            SECURE
+        </strong>
+
+        <span>
+            PAYMENTS
+        </span>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     BOTTOM NAVIGATION
+================================================== -->
+
+<div id="zyper-navigation"></div>
+
+
+
+<!-- ==================================================
+     FIREBASE AUTH CHECK
+================================================== -->
+
+<script type="module">
 
 import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+    getAuth,
     onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-const WORKER_URL =
-"https://zyper-order.ameresh20112011.workers.dev";
+const firebaseConfig = {
 
+    apiKey:
+    "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
 
-/* =====================================================
-   GLOBAL WALLET DESIGN CONTROL
+    authDomain:
+    "zyper-d-iamond-store.firebaseapp.com",
 
-   CHANGE VALUES HERE ONLY.
-   ALL PAGES WILL USE THE SAME WALLET DESIGN.
-===================================================== */
+    projectId:
+    "zyper-d-iamond-store",
 
-const WALLET_STYLE = {
+    storageBucket:
+    "zyper-d-iamond-store.firebasestorage.app",
 
-    mobile: {
+    messagingSenderId:
+    "892467477866",
 
-        height: 34,
+    appId:
+    "1:892467477866:web:61e9b6ff9435798da23913",
 
-        paddingX: 10,
-
-        icon: 18,
-
-        font: 11,
-
-        fontWeight: 700,
-
-        gap: 7,
-
-        top: 10,
-
-        right: 10
-
-    },
-
-
-    desktop: {
-
-        height: 38,
-
-        paddingX: 12,
-
-        icon: 18,
-
-        font: 12,
-
-        fontWeight: 700,
-
-        gap: 7,
-
-        top: 12,
-
-        right: 12
-
-    }
+    measurementId:
+    "G-RLJFR6F2GC"
 
 };
 
 
-/* =====================================================
-   MONEY FORMAT
-===================================================== */
+try {
 
-function formatMoney(amount) {
-
-    return Number(
-        amount || 0
-    ).toLocaleString(
-        "en-LK",
-        {
-
-            minimumFractionDigits: 2,
-
-            maximumFractionDigits: 2
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   REMOVE OLD GLOBAL BADGE
-===================================================== */
-
-function removeOldWalletBadge() {
-
-    const oldBadge =
-        document.getElementById(
-            "zyperWalletBadge"
+    const app =
+        initializeApp(
+            firebaseConfig
         );
 
 
-    if (oldBadge) {
-
-        oldBadge.remove();
-
-    }
-
-}
-
-
-/* =====================================================
-   CREATE WALLET BADGE
-===================================================== */
-
-function createWalletBadge() {
-
-    removeOldWalletBadge();
-
-
-    const badge =
-        document.createElement(
-            "a"
+    const auth =
+        getAuth(
+            app
         );
-
-
-    badge.id =
-        "zyperWalletBadge";
-
-
-    badge.className =
-        "zyper-wallet-badge";
-
-
-    badge.href =
-        "./wallet.html";
-
-
-    badge.setAttribute(
-        "aria-label",
-        "Open Zyper Wallet"
-    );
-
-
-    badge.innerHTML = `
-
-        <svg
-            id="zyperWalletBadgeIcon"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-
-            <path
-                d="M6 9.5H24.5C26.4 9.5 28 11.1 28 13V24C28 25.9 26.4 27.5 24.5 27.5H7.5C5.6 27.5 4 25.9 4 24V10.5C4 8.6 5.4 7.1 7.2 6.7L21.5 3.5C22.5 3.3 23.5 4 23.7 5L24.6 9.5"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-
-        </svg>
-
-
-        <span id="zyperWalletBalance">
-            ... LKR
-        </span>
-
-    `;
-
-
-    document.body.appendChild(
-        badge
-    );
-
-
-    applyWalletStyle();
-
-
-    return badge;
-
-}
-
-
-/* =====================================================
-   APPLY SAME WALLET DESIGN TO EVERY PAGE
-===================================================== */
-
-function applyWalletStyle() {
-
-    const badge =
-        document.getElementById(
-            "zyperWalletBadge"
-        );
-
-
-    const icon =
-        document.getElementById(
-            "zyperWalletBadgeIcon"
-        );
-
-
-    const balance =
-        document.getElementById(
-            "zyperWalletBalance"
-        );
-
-
-    if (
-        !badge ||
-        !icon ||
-        !balance
-    ) {
-
-        return;
-
-    }
-
-
-    const isMobile =
-        window.innerWidth <= 500;
-
-
-    const style =
-        isMobile
-            ? WALLET_STYLE.mobile
-            : WALLET_STYLE.desktop;
-
-
-    /* =================================================
-       WALLET BADGE
-    ================================================= */
-
-    badge.style.setProperty(
-        "position",
-        "fixed",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "top",
-        `${style.top}px`,
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "right",
-        `${style.right}px`,
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "left",
-        "auto",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "bottom",
-        "auto",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "width",
-        "auto",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "min-width",
-        "0",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "max-width",
-        "none",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "height",
-        `${style.height}px`,
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "min-height",
-        `${style.height}px`,
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "max-height",
-        `${style.height}px`,
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "padding",
-        `0 ${style.paddingX}px`,
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "margin",
-        "0",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "display",
-        "inline-flex",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "align-items",
-        "center",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "justify-content",
-        "center",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "gap",
-        `${style.gap}px`,
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "box-sizing",
-        "border-box",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "border-radius",
-        "999px",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "border",
-        "1px solid rgba(255,255,255,.14)",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "background",
-        "linear-gradient(135deg,#a64fc4,#8f37ae)",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "color",
-        "#ffffff",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "text-decoration",
-        "none",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "white-space",
-        "nowrap",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "font-family",
-        "Arial, sans-serif",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "font-size",
-        `${style.font}px`,
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "font-weight",
-        `${style.fontWeight}`,
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "line-height",
-        "1",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "box-shadow",
-        "0 4px 14px rgba(115,45,145,.28)",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "z-index",
-        "2147483647",
-        "important"
-    );
-
-
-    badge.style.setProperty(
-        "-webkit-tap-highlight-color",
-        "transparent",
-        "important"
-    );
-
-
-    /* =================================================
-       WALLET ICON
-    ================================================= */
-
-    icon.style.setProperty(
-        "width",
-        `${style.icon}px`,
-        "important"
-    );
-
-
-    icon.style.setProperty(
-        "height",
-        `${style.icon}px`,
-        "important"
-    );
-
-
-    icon.style.setProperty(
-        "min-width",
-        `${style.icon}px`,
-        "important"
-    );
-
-
-    icon.style.setProperty(
-        "max-width",
-        `${style.icon}px`,
-        "important"
-    );
-
-
-    icon.style.setProperty(
-        "min-height",
-        `${style.icon}px`,
-        "important"
-    );
-
-
-    icon.style.setProperty(
-        "max-height",
-        `${style.icon}px`,
-        "important"
-    );
-
-
-    icon.style.setProperty(
-        "flex",
-        `0 0 ${style.icon}px`,
-        "important"
-    );
-
-
-    icon.style.setProperty(
-        "display",
-        "block",
-        "important"
-    );
-
-
-    icon.style.setProperty(
-        "margin",
-        "0",
-        "important"
-    );
-
-
-    icon.style.setProperty(
-        "padding",
-        "0",
-        "important"
-    );
-
-
-    icon.style.setProperty(
-        "color",
-        "#ffffff",
-        "important"
-    );
-
-
-    /* =================================================
-       WALLET BALANCE TEXT
-
-       IMPORTANT:
-       FONT WEIGHT IS FORCED HERE.
-       HOME + TOPUP + ALL PAGES = SAME BOLDNESS
-    ================================================= */
-
-    balance.style.setProperty(
-        "display",
-        "block",
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "margin",
-        "0",
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "padding",
-        "0",
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "font-family",
-        "Arial, sans-serif",
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "font-size",
-        `${style.font}px`,
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "font-weight",
-        `${style.fontWeight}`,
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "font-style",
-        "normal",
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "line-height",
-        "1",
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "letter-spacing",
-        "0",
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "color",
-        "#ffffff",
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "white-space",
-        "nowrap",
-        "important"
-    );
-
-}
-
-
-/* =====================================================
-   LOAD LIVE WALLET BALANCE
-===================================================== */
-
-async function loadWalletBalance(user) {
-
-    const balanceElement =
-        document.getElementById(
-            "zyperWalletBalance"
-        );
-
-
-    if (!balanceElement) {
-
-        return;
-
-    }
-
-
-    balanceElement.textContent =
-        "... LKR";
-
-
-    try {
-
-        const token =
-            await user.getIdToken();
-
-
-        const response =
-            await fetch(
-                WORKER_URL,
-                {
-
-                    method:
-                        "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json",
-
-                        "Authorization":
-                            `Bearer ${token}`
-
-                    },
-
-
-                    body:
-                        JSON.stringify(
-                            {
-
-                                action:
-                                    "wallet_balance"
-
-                            }
-                        )
-
-                }
-            );
-
-
-        const result =
-            await response.json();
-
-
-        if (
-            !response.ok ||
-            !result.success
-        ) {
-
-            throw new Error(
-                result.message ||
-                "Unable to load wallet."
-            );
-
-        }
-
-
-        const amount =
-            Number(
-                result.wallet?.balance ||
-                0
-            );
-
-
-        balanceElement.textContent =
-            formatMoney(
-                amount
-            ) +
-            " LKR";
-
-
-        applyWalletStyle();
-
-    }
-    catch (error) {
-
-        console.error(
-            "Wallet Badge Error:",
-            error
-        );
-
-
-        balanceElement.textContent =
-            "0.00 LKR";
-
-
-        applyWalletStyle();
-
-    }
-
-}
-
-
-/* =====================================================
-   START WALLET
-===================================================== */
-
-function startWalletBadge() {
-
-    const badge =
-        createWalletBadge();
 
 
     onAuthStateChanged(
         auth,
-        async function(user) {
+        function(user) {
 
             if (!user) {
 
-                badge.style.setProperty(
-                    "display",
-                    "none",
-                    "important"
-                );
-
-
-                return;
+                window.location.href =
+                    "index.html";
 
             }
-
-
-            badge.style.setProperty(
-                "display",
-                "inline-flex",
-                "important"
-            );
-
-
-            applyWalletStyle();
-
-
-            await loadWalletBalance(
-                user
-            );
 
         }
     );
 
 }
+catch(error) {
 
-
-/* =====================================================
-   RESIZE
-===================================================== */
-
-window.addEventListener(
-    "resize",
-    function() {
-
-        applyWalletStyle();
-
-    }
-);
-
-
-/* =====================================================
-   START
-===================================================== */
-
-if (
-    document.readyState ===
-    "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        startWalletBadge
+    console.error(
+        "Firebase Error:",
+        error
     );
 
 }
-else {
 
-    startWalletBadge();
+</script>
+
+
+
+<!-- ==================================================
+     PAGE FUNCTIONS
+================================================== -->
+
+<script>
+
+function goTopup() {
+
+    window.location.href =
+        "topup.html";
 
 }
+
+
+function goWallet() {
+
+    window.location.href =
+        "wallet.html";
+
+}
+
+
+function goPayment() {
+
+    window.location.href =
+        "payment.html";
+
+}
+
+
+function goHistory() {
+
+    window.location.href =
+        "history.html";
+
+}
+
+
+function goWhatsApp() {
+
+    window.location.href =
+        "whatsapp.html";
+
+}
+
+</script>
+
+
+
+<!-- ==================================================
+     SMALL LIVE WALLET BADGE
+     CODE IS INSIDE zyper-wallet-badge.js
+================================================== -->
+
+<script
+    type="module"
+    src="./zyper-wallet-badge.js?v=50000"
+>
+</script>
+
+
+
+<!-- ==================================================
+     NAVIGATION
+================================================== -->
+
+<script
+    src="./zyper-nav.js?v=2005"
+>
+</script>
+
+
+
+<!-- ==================================================
+     HOME JS
+================================================== -->
+
+<script
+    src="./home.js?v=2005"
+>
+</script>
+
+
+</body>
+
+</html>
