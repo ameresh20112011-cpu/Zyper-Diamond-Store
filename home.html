@@ -360,7 +360,7 @@ TOP UP NOW
 
 <div
 class="service-card"
-onclick="window.location.href='wallet.html'">
+onclick="goWallet()">
 
 
 <div
@@ -696,7 +696,7 @@ PAYMENTS
 
 
 <!-- ==================================================
-     NAVIGATION
+     NAVIGATION PLACEHOLDER
 ================================================== -->
 
 <div id="zyper-navigation"></div>
@@ -710,15 +710,15 @@ PAYMENTS
 <script type="module">
 
 import {
-initializeApp
+    initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
 import {
-getAuth,
-onAuthStateChanged
+    getAuth,
+    onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -726,60 +726,61 @@ from
 
 const firebaseConfig = {
 
-apiKey:
-"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
+    apiKey:
+    "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
 
-authDomain:
-"zyper-d-iamond-store.firebaseapp.com",
+    authDomain:
+    "zyper-d-iamond-store.firebaseapp.com",
 
-projectId:
-"zyper-d-iamond-store",
+    projectId:
+    "zyper-d-iamond-store",
 
-storageBucket:
-"zyper-d-iamond-store.firebasestorage.app",
+    storageBucket:
+    "zyper-d-iamond-store.firebasestorage.app",
 
-messagingSenderId:
-"892467477866",
+    messagingSenderId:
+    "892467477866",
 
-appId:
-"1:892467477866:web:61e9b6ff9435798da23913",
+    appId:
+    "1:892467477866:web:61e9b6ff9435798da23913",
 
-measurementId:
-"G-RLJFR6F2GC"
+    measurementId:
+    "G-RLJFR6F2GC"
 
 };
 
 
 try {
 
-const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
+    const app =
+        initializeApp(firebaseConfig);
 
 
-onAuthStateChanged(
-auth,
-(user) => {
+    const auth =
+        getAuth(app);
 
-if (!user) {
 
-window.location.href =
-"index.html";
+    onAuthStateChanged(
+        auth,
+        (user) => {
+
+            if (!user) {
+
+                window.location.href =
+                    "index.html";
+
+            }
+
+        }
+    );
 
 }
+catch (error) {
 
-});
-
-}
-
-catch(error) {
-
-console.error(
-"Firebase Error:",
-error
-);
+    console.error(
+        "Firebase Error:",
+        error
+    );
 
 }
 
@@ -788,12 +789,63 @@ error
 
 
 <!-- ==================================================
-     LIVE WALLET BALANCE
+     PAGE FUNCTIONS
+================================================== -->
+
+<script>
+
+function goTopup() {
+
+    window.location.href =
+        "topup.html";
+
+}
+
+
+function goWallet() {
+
+    window.location.href =
+        "wallet.html";
+
+}
+
+
+function goPayment() {
+
+    window.location.href =
+        "payment.html";
+
+}
+
+
+function goHistory() {
+
+    window.location.href =
+        "history.html";
+
+}
+
+
+function goWhatsApp() {
+
+    window.location.href =
+        "whatsapp.html";
+
+}
+
+</script>
+
+
+
+<!-- ==================================================
+     NEW LIVE WALLET BALANCE
+     IMPORTANT:
+     OLD zyper-wallet-badge.js IS NOT USED
 ================================================== -->
 
 <script
 type="module"
-src="./zyper-wallet-badge.js">
+src="./wallet-balance-badge.js?v=1">
 </script>
 
 
@@ -802,15 +854,19 @@ src="./zyper-wallet-badge.js">
      NAVIGATION
 ================================================== -->
 
-<script src="zyper-nav.js"></script>
+<script
+src="./zyper-nav.js">
+</script>
 
 
 
 <!-- ==================================================
-     HOME FUNCTIONS
+     HOME JAVASCRIPT
 ================================================== -->
 
-<script src="home.js"></script>
+<script
+src="./home.js">
+</script>
 
 
 </body>
