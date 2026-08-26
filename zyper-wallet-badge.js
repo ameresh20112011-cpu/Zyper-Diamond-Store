@@ -39,9 +39,9 @@ function createWalletBadge() {
 
             z-index: 999998;
 
-            height: 36px;
+            height: 30px;
 
-            min-width: 112px;
+            min-width: 80px;
 
             padding: 0 12px;
 
