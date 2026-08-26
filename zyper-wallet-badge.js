@@ -269,7 +269,7 @@ function applyResponsiveSize() {
 
         badge.style.setProperty(
             "min-width",
-            "150px",
+            "120px",
             "important"
         );
 
