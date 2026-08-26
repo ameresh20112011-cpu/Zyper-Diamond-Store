@@ -1,6 +1,6 @@
 /* =====================================================
    ZYPER DIAMOND STORE
-   SMALL LIVE WALLET BALANCE BADGE
+   MINI WALLET BALANCE BADGE
 ===================================================== */
 
 import { auth } from "./firebase.js";
@@ -20,60 +20,238 @@ const WORKER_URL =
 
 
 /* =====================================================
-   CREATE WALLET BADGE
+   MONEY FORMAT
+===================================================== */
+
+function formatMoney(amount) {
+
+    const value =
+        Number(amount || 0);
+
+    return value.toLocaleString(
+        "en-LK",
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    );
+}
+
+
+/* =====================================================
+   CREATE MINI WALLET BADGE
 ===================================================== */
 
 function createWalletBadge() {
 
     /*
-     * Prevent duplicate wallet badges
+     * Remove old badge if one already exists
      */
 
-    const existing =
+    const oldBadge =
         document.getElementById(
             "zyperWalletBadge"
         );
 
-    if (existing) {
-        return;
+    if (oldBadge) {
+
+        oldBadge.remove();
+
     }
 
 
+    /*
+     * Create wallet link
+     */
+
+    const badge =
+        document.createElement("a");
+
+
+    badge.id =
+        "zyperWalletBadge";
+
+
+    badge.href =
+        "./wallet.html";
+
+
+    badge.setAttribute(
+        "aria-label",
+        "Open Wallet"
+    );
+
+
     /* =================================================
-       CREATE CSS
+       FORCE SMALL SIZE
     ================================================= */
 
-    const style =
-        document.createElement(
-            "style"
+    badge.style.cssText = `
+
+        position: fixed !important;
+
+        top: 7px !important;
+
+        right: 7px !important;
+
+        left: auto !important;
+
+        bottom: auto !important;
+
+
+        width: auto !important;
+
+        min-width: 0 !important;
+
+        max-width: max-content !important;
+
+
+        height: 20px !important;
+
+        min-height: 20px !important;
+
+        max-height: 20px !important;
+
+
+        padding: 0 6px !important;
+
+        margin: 0 !important;
+
+
+        display: inline-flex !important;
+
+        flex-direction: row !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+
+        gap: 3px !important;
+
+
+        border-radius: 999px !important;
+
+
+        border:
+
+            1px solid
+            rgba(255,255,255,.18)
+
+            !important;
+
+
+        background:
+
+            linear-gradient(
+                135deg,
+                #a855c7,
+                #8434a8
+            )
+
+            !important;
+
+
+        box-shadow:
+
+            0 2px 5px
+            rgba(0,0,0,.20)
+
+            !important;
+
+
+        color: white !important;
+
+
+        text-decoration: none !important;
+
+
+        font-family:
+
+            Arial,
+            sans-serif
+
+            !important;
+
+
+        font-size: 7px !important;
+
+        font-weight: 700 !important;
+
+        line-height: 1 !important;
+
+
+        box-sizing:
+            border-box !important;
+
+
+        overflow:
+            hidden !important;
+
+
+        white-space:
+            nowrap !important;
+
+
+        cursor:
+            pointer !important;
+
+
+        z-index:
+            2147483647 !important;
+
+
+        -webkit-tap-highlight-color:
+            transparent !important;
+
+    `;
+
+
+    /* =================================================
+       BADGE HTML
+    ================================================= */
+
+    badge.innerHTML = `
+
+        <span
+            id="zyperWalletMiniIcon">
+
+            👛
+
+        </span>
+
+
+        <span
+            id="zyperWalletBalance">
+
+            ... LKR
+
+        </span>
+
+    `;
+
+
+    document.body.appendChild(
+        badge
+    );
+
+
+    /* =================================================
+       FORCE ICON SIZE
+    ================================================= */
+
+    const icon =
+        document.getElementById(
+            "zyperWalletMiniIcon"
         );
 
 
-    style.id =
-        "zyperWalletBadgeStyles";
+    if (icon) {
 
+        icon.style.cssText = `
 
-    style.textContent = `
+            display: inline-block !important;
 
-        /* =============================================
-           WALLET BADGE
-        ============================================= */
-
-        #zyperWalletBadge {
-
-            position: fixed !important;
-
-            top: 7px !important;
-
-            right: 7px !important;
-
-            left: auto !important;
-            bottom: auto !important;
-
-            z-index: 999999 !important;
-
-
-            /* IMPORTANT - SMALL SIZE */
 
             width: auto !important;
 
@@ -81,183 +259,26 @@ function createWalletBadge() {
 
             max-width: none !important;
 
-            height: 26px !important;
 
-            min-height: 26px !important;
+            height: auto !important;
 
-            max-height: 26px !important;
+            min-height: 0 !important;
 
+            max-height: none !important;
 
-            padding:
-                0 8px !important;
 
-            margin:
-                0 !important;
+            padding: 0 !important;
 
+            margin: 0 !important;
 
-            display:
-                inline-flex !important;
 
-            align-items:
-                center !important;
+            border: none !important;
 
-            justify-content:
-                center !important;
-
-            flex-direction:
-                row !important;
-
-            gap:
-                4px !important;
-
-
-            border-radius:
-                999px !important;
-
-
-            text-decoration:
-                none !important;
-
-
-            color:
-                #ffffff !important;
-
-
-            background:
-
-                linear-gradient(
-                    135deg,
-                    #a855c7,
-                    #8b3aad
-                ) !important;
-
-
-            border:
-
-                1px solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .16
-                ) !important;
-
-
-            box-shadow:
-
-                0 3px 8px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    .22
-                ) !important;
-
-
-            font-family:
-
-                Arial,
-                sans-serif !important;
-
-
-            line-height:
-                1 !important;
-
-
-            overflow:
-                hidden !important;
-
-
-            cursor:
-                pointer !important;
-
-
-            -webkit-tap-highlight-color:
-                transparent;
-
-        }
-
-
-
-        /* =============================================
-           HOVER
-        ============================================= */
-
-        #zyperWalletBadge:hover {
-
-            transform:
-                translateY(-1px);
-
-            box-shadow:
-
-                0 4px 10px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    .28
-                ) !important;
-
-        }
-
-
-
-        /* =============================================
-           CLICK
-        ============================================= */
-
-        #zyperWalletBadge:active {
-
-            transform:
-                scale(.96);
-
-        }
-
-
-
-        /* =============================================
-           WALLET ICON
-        ============================================= */
-
-        #zyperWalletBadge
-        .zyper-wallet-badge-icon {
-
-            width:
-                auto !important;
-
-            min-width:
-                0 !important;
-
-            height:
-                auto !important;
-
-            min-height:
-                0 !important;
-
-
-            margin:
-                0 !important;
-
-            padding:
-                0 !important;
-
-
-            display:
-                inline-flex !important;
-
-            align-items:
-                center !important;
-
-            justify-content:
-                center !important;
+            border-radius: 0 !important;
 
 
             background:
                 transparent !important;
-
-
-            border:
-                none !important;
 
 
             box-shadow:
@@ -265,97 +286,63 @@ function createWalletBadge() {
 
 
             font-size:
-                11px !important;
+                8px !important;
+
+
+            font-weight:
+                normal !important;
 
 
             line-height:
                 1 !important;
 
 
-            flex:
+            transform:
                 none !important;
 
-        }
+
+            box-sizing:
+                border-box !important;
+
+        `;
+
+    }
 
 
+    /* =================================================
+       FORCE BALANCE SIZE
+    ================================================= */
 
-        /* =============================================
-           INFO CONTAINER
-        ============================================= */
-
-        #zyperWalletBadge
-        .zyper-wallet-badge-info {
-
-            width:
-                auto !important;
-
-            min-width:
-                0 !important;
-
-            height:
-                auto !important;
+    const balance =
+        document.getElementById(
+            "zyperWalletBalance"
+        );
 
 
-            margin:
-                0 !important;
+    if (balance) {
 
-            padding:
-                0 !important;
+        balance.style.cssText = `
 
-
-            display:
-                inline-flex !important;
-
-            align-items:
-                center !important;
-
-            justify-content:
-                center !important;
+            display: inline-block !important;
 
 
-            flex:
-                none !important;
+            width: auto !important;
 
-        }
+            min-width: 0 !important;
 
-
-
-        /* =============================================
-           HIDE WALLET TITLE
-        ============================================= */
-
-        #zyperWalletBadge
-        .zyper-wallet-badge-title {
-
-            display:
-                none !important;
-
-        }
+            max-width: none !important;
 
 
+            height: auto !important;
 
-        /* =============================================
-           BALANCE TEXT
-        ============================================= */
+            min-height: 0 !important;
 
-        #zyperWalletBalance {
-
-            width:
-                auto !important;
-
-            min-width:
-                0 !important;
+            max-height: none !important;
 
 
-            margin:
-                0 !important;
+            padding: 0 !important;
 
-            padding:
-                0 !important;
-
-
-            display:
-                inline !important;
+            margin: 0 !important;
 
 
             color:
@@ -370,14 +357,20 @@ function createWalletBadge() {
                 none !important;
 
 
+            box-shadow:
+                none !important;
+
+
             font-family:
 
                 Arial,
-                sans-serif !important;
+                sans-serif
+
+                !important;
 
 
             font-size:
-                9px !important;
+                7px !important;
 
 
             font-weight:
@@ -396,219 +389,23 @@ function createWalletBadge() {
                 nowrap !important;
 
 
-            flex:
-                none !important;
+            box-sizing:
+                border-box !important;
 
-        }
+        `;
 
+    }
 
 
-        /* =============================================
-           MOBILE
-        ============================================= */
-
-        @media (
-            max-width: 500px
-        ) {
-
-            #zyperWalletBadge {
-
-                top:
-                    6px !important;
-
-                right:
-                    6px !important;
-
-
-                height:
-                    24px !important;
-
-                min-height:
-                    24px !important;
-
-                max-height:
-                    24px !important;
-
-
-                padding:
-                    0 7px !important;
-
-
-                gap:
-                    3px !important;
-
-            }
-
-
-            #zyperWalletBadge
-            .zyper-wallet-badge-icon {
-
-                font-size:
-                    10px !important;
-
-            }
-
-
-            #zyperWalletBalance {
-
-                font-size:
-                    8px !important;
-
-            }
-
-        }
-
-
-
-        /* =============================================
-           VERY SMALL PHONE
-        ============================================= */
-
-        @media (
-            max-width: 350px
-        ) {
-
-            #zyperWalletBadge {
-
-                height:
-                    22px !important;
-
-                min-height:
-                    22px !important;
-
-                max-height:
-                    22px !important;
-
-
-                padding:
-                    0 6px !important;
-
-            }
-
-
-            #zyperWalletBadge
-            .zyper-wallet-badge-icon {
-
-                font-size:
-                    9px !important;
-
-            }
-
-
-            #zyperWalletBalance {
-
-                font-size:
-                    7.5px !important;
-
-            }
-
-        }
-
-    `;
-
-
-    document.head.appendChild(
-        style
-    );
-
-
-    /* =================================================
-       CREATE WALLET BUTTON
-    ================================================= */
-
-    const badge =
-        document.createElement(
-            "a"
-        );
-
-
-    badge.id =
-        "zyperWalletBadge";
-
-
-    badge.className =
-        "zyper-wallet-badge";
-
-
-    badge.href =
-        "./wallet.html";
-
-
-    badge.setAttribute(
-        "aria-label",
-        "Open Wallet"
-    );
-
-
-    badge.innerHTML = `
-
-        <span
-            class="zyper-wallet-badge-icon">
-            👛
-        </span>
-
-        <span
-            class="zyper-wallet-badge-info">
-
-            <span
-                id="zyperWalletBalance"
-                class="zyper-wallet-badge-balance">
-
-                0.00 LKR
-
-            </span>
-
-        </span>
-
-    `;
-
-
-    document.body.appendChild(
-        badge
-    );
-
+    return badge;
 }
 
 
-
 /* =====================================================
-   FORMAT MONEY
+   LOAD CUSTOMER WALLET BALANCE
 ===================================================== */
 
-function formatMoney(
-    amount
-) {
-
-    const value =
-        Number(
-            amount || 0
-        );
-
-
-    return value.toLocaleString(
-        "en-LK",
-        {
-
-            minimumFractionDigits:
-                2,
-
-            maximumFractionDigits:
-                2
-
-        }
-    );
-
-}
-
-
-
-/* =====================================================
-   LOAD WALLET BALANCE
-===================================================== */
-
-async function loadWalletBalance(
-    user
-) {
+async function loadWalletBalance(user) {
 
     const balanceElement =
         document.getElementById(
@@ -617,13 +414,11 @@ async function loadWalletBalance(
 
 
     if (!balanceElement) {
+
         return;
+
     }
 
-
-    /*
-     * Loading
-     */
 
     balanceElement.textContent =
         "... LKR";
@@ -632,7 +427,7 @@ async function loadWalletBalance(
     try {
 
         /* =============================================
-           FIREBASE TOKEN
+           FIREBASE ID TOKEN
         ============================================= */
 
         const token =
@@ -640,7 +435,7 @@ async function loadWalletBalance(
 
 
         /* =============================================
-           REQUEST WALLET
+           GET WALLET FROM WORKER
         ============================================= */
 
         const response =
@@ -675,13 +470,13 @@ async function loadWalletBalance(
             );
 
 
-        /* =============================================
-           RESPONSE
-        ============================================= */
-
         const data =
             await response.json();
 
+
+        /* =============================================
+           CHECK RESPONSE
+        ============================================= */
 
         if (
             !response.ok ||
@@ -689,32 +484,31 @@ async function loadWalletBalance(
         ) {
 
             throw new Error(
+
                 data.message ||
-                "Unable to load wallet."
+
+                "Unable to load wallet balance."
+
             );
 
         }
 
 
         /* =============================================
-           GET BALANCE
+           BALANCE
         ============================================= */
 
-        const balance =
+        const walletBalance =
             Number(
                 data.wallet?.balance ||
                 0
             );
 
 
-        /* =============================================
-           SHOW BALANCE
-        ============================================= */
-
         balanceElement.textContent =
 
             formatMoney(
-                balance
+                walletBalance
             )
 
             +
@@ -725,7 +519,7 @@ async function loadWalletBalance(
     } catch (error) {
 
         console.error(
-            "Zyper Wallet Badge Error:",
+            "Wallet balance error:",
             error
         );
 
@@ -738,64 +532,47 @@ async function loadWalletBalance(
 }
 
 
-
 /* =====================================================
-   CREATE BADGE
+   START WALLET BADGE
 ===================================================== */
 
 function startWalletBadge() {
 
-    createWalletBadge();
+    const badge =
+        createWalletBadge();
 
-
-    /* =================================================
-       FIREBASE AUTH
-    ================================================= */
 
     onAuthStateChanged(
         auth,
-        async function (
-            user
-        ) {
-
-            const badge =
-                document.getElementById(
-                    "zyperWalletBadge"
-                );
-
-
-            if (!badge) {
-                return;
-            }
+        async function(user) {
 
 
             /* =========================================
-               NOT LOGGED IN
+               USER NOT LOGGED IN
             ========================================= */
 
             if (!user) {
 
-                badge.style
-                    .setProperty(
-                        "display",
-                        "none",
-                        "important"
-                    );
+                badge.style.setProperty(
+                    "display",
+                    "none",
+                    "important"
+                );
 
                 return;
+
             }
 
 
             /* =========================================
-               LOGGED IN
+               USER LOGGED IN
             ========================================= */
 
-            badge.style
-                .setProperty(
-                    "display",
-                    "inline-flex",
-                    "important"
-                );
+            badge.style.setProperty(
+                "display",
+                "inline-flex",
+                "important"
+            );
 
 
             await loadWalletBalance(
@@ -808,9 +585,8 @@ function startWalletBadge() {
 }
 
 
-
 /* =====================================================
-   START AFTER HTML LOADS
+   START
 ===================================================== */
 
 if (
