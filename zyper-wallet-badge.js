@@ -1,8 +1,10 @@
-import { auth } from "./firebase.js";
+import { auth }
+from "./firebase.js";
 
 import {
     onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
 const WORKER_URL =
@@ -10,53 +12,32 @@ const WORKER_URL =
 
 
 /* =====================================================
-   GLOBAL WALLET DESIGN CONTROL
-
-   CHANGE SIZE HERE ONLY.
-   ALL PAGES USING THIS FILE WILL CHANGE.
+   ONE GLOBAL WALLET STYLE
+   CHANGE ONLY THESE VALUES
 ===================================================== */
 
 const WALLET_STYLE = {
 
     mobile: {
-
-        height: 34,
-
+        height: 35,
         paddingX: 10,
-
-        icon: 18,
-
+        icon: 17,
         font: 11,
-
         fontWeight: 900,
-
-        gap: 7,
-
-        top: 10,
-
+        gap: 5,
+        top: 8,
         right: 10
-
     },
 
-
     desktop: {
-
-        height: 38,
-
-        paddingX: 12,
-
+        height: 40,
+        paddingX: 13,
         icon: 18,
-
         font: 12,
-
         fontWeight: 900,
-
         gap: 7,
-
         top: 12,
-
         right: 12
-
     }
 
 };
@@ -82,7 +63,28 @@ function formatMoney(amount) {
 
 
 /* =====================================================
-   REMOVE OLD WALLET BADGE
+   REMOVE OLD PAGE-SPECIFIC WALLET UI
+===================================================== */
+
+function removeLegacyWalletUI() {
+
+    document
+    .querySelectorAll(
+        ".wallet-page-balance, .wallet-page-balance-box"
+    )
+    .forEach(
+        function(element) {
+
+            element.remove();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   REMOVE OLD SHARED BADGE
 ===================================================== */
 
 function removeOldWalletBadge() {
@@ -176,7 +178,7 @@ function createWalletBadge() {
 
 
 /* =====================================================
-   APPLY SAME DESIGN ON EVERY PAGE
+   APPLY SAME SIZE TO EVERY PAGE
 ===================================================== */
 
 function applyWalletStyle() {
@@ -221,7 +223,7 @@ function applyWalletStyle() {
 
 
     /* =================================================
-       WALLET BADGE
+       BADGE
     ================================================= */
 
     badge.style.setProperty(
@@ -359,7 +361,7 @@ function applyWalletStyle() {
 
     badge.style.setProperty(
         "border",
-        "1px solid rgba(255,255,255,.18)",
+        "1px solid rgba(255,255,255,.14)",
         "important"
     );
 
@@ -414,7 +416,7 @@ function applyWalletStyle() {
 
 
     /* =================================================
-       WALLET ICON
+       ICON
     ================================================= */
 
     icon.style.setProperty(
@@ -495,7 +497,7 @@ function applyWalletStyle() {
 
 
     /* =================================================
-       MAXIMUM BOLD WALLET BALANCE TEXT
+       MAX BOLD BALANCE TEXT
     ================================================= */
 
     balance.style.setProperty(
@@ -519,25 +521,9 @@ function applyWalletStyle() {
     );
 
 
-    /*
-       Arial Black makes the balance noticeably
-       thicker than normal Arial.
-    */
-
     balance.style.setProperty(
         "font-family",
-        '"Arial Black", "Arial Bold", Arial, sans-serif',
-        "important"
-    );
-
-
-    /*
-       900 is the maximum standard CSS font weight.
-    */
-
-    balance.style.setProperty(
-        "font-weight",
-        "900",
+        '"Arial Black", Arial, sans-serif',
         "important"
     );
 
@@ -550,8 +536,8 @@ function applyWalletStyle() {
 
 
     balance.style.setProperty(
-        "font-style",
-        "normal",
+        "font-weight",
+        `${style.fontWeight}`,
         "important"
     );
 
@@ -584,33 +570,9 @@ function applyWalletStyle() {
     );
 
 
-    /*
-       EXTRA THICK EFFECT
-       Makes small mobile text visibly bolder.
-    */
-
     balance.style.setProperty(
         "text-shadow",
         "0.25px 0 currentColor, -0.25px 0 currentColor",
-        "important"
-    );
-
-
-    /*
-       Helps supported browsers render the
-       strongest available font weight.
-    */
-
-    balance.style.setProperty(
-        "font-synthesis",
-        "weight",
-        "important"
-    );
-
-
-    balance.style.setProperty(
-        "-webkit-font-smoothing",
-        "auto",
         "important"
     );
 
@@ -663,7 +625,6 @@ async function loadWalletBalance(user) {
                             `Bearer ${token}`
 
                     },
-
 
                     body:
                         JSON.stringify(
@@ -731,10 +692,13 @@ async function loadWalletBalance(user) {
 
 
 /* =====================================================
-   START WALLET
+   START
 ===================================================== */
 
 function startWalletBadge() {
+
+    removeLegacyWalletUI();
+
 
     const badge =
         createWalletBadge();
