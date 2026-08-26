@@ -29,7 +29,7 @@ const WALLET_STYLE = {
 
         font: 11,
 
-        fontWeight: 400,
+        fontWeight: 600,
 
         gap: 5,
 
@@ -50,7 +50,7 @@ const WALLET_STYLE = {
 
         font: 12,
 
-        fontWeight: 400,
+        fontWeight: 600,
 
         gap: 7,
 
@@ -520,8 +520,8 @@ function applyWalletStyle() {
 
 
     /* =================================================
-       BALANCE TEXT
-       THINNER / NORMAL WEIGHT
+       WALLET BALANCE
+       MID-LEVEL BOLD
     ================================================= */
 
     balance.style.setProperty(
@@ -546,14 +546,13 @@ function applyWalletStyle() {
 
 
     /*
-       IMPORTANT:
-       No Arial Black.
-       Segoe UI gives cleaner normal-weight text.
+       MID-BOLD FONT
+       Not too thin, not too thick.
     */
 
     balance.style.setProperty(
         "font-family",
-        '"Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+        '"Segoe UI Semibold", "Segoe UI", Arial, sans-serif',
         "important"
     );
 
@@ -566,13 +565,12 @@ function applyWalletStyle() {
 
 
     /*
-       400 = NORMAL
-       This is intentionally not bold.
+       600 = MID LEVEL BOLD
     */
 
     balance.style.setProperty(
         "font-weight",
-        "400",
+        "600",
         "important"
     );
 
@@ -580,18 +578,6 @@ function applyWalletStyle() {
     balance.style.setProperty(
         "font-style",
         "normal",
-        "important"
-    );
-
-
-    /*
-       Prevent browser from creating
-       synthetic bold text.
-    */
-
-    balance.style.setProperty(
-        "font-synthesis",
-        "none",
         "important"
     );
 
@@ -625,7 +611,7 @@ function applyWalletStyle() {
 
 
     /*
-       REMOVE ALL EXTRA THICKNESS
+       NO EXTRA BOLD EFFECT
     */
 
     balance.style.setProperty(
@@ -787,8 +773,8 @@ async function loadWalletBalance(user) {
 function startWalletBadge() {
 
     /*
-       Remove old page-specific wallet
-       before creating shared wallet.
+       REMOVE OLD PAGE-SPECIFIC WALLET.
+       THIS KEEPS ALL PAGES THE SAME.
     */
 
     removeLegacyWalletUI();
