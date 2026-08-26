@@ -6,24 +6,25 @@
 <meta charset="UTF-8">
 
 <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
+name="viewport"
+content="width=device-width, initial-scale=1.0"
 >
 
 <title>Zyper Wallet</title>
 
-<link rel="icon" href="./1.jpg">
-
-<!-- WALLET DESIGN -->
 <link
-    rel="stylesheet"
-    href="./wallet.css"
+rel="icon"
+href="./1.jpg"
 >
 
-<!-- BOTTOM NAVIGATION DESIGN -->
 <link
-    rel="stylesheet"
-    href="./zyper-nav.css"
+rel="stylesheet"
+href="./wallet.css"
+>
+
+<link
+rel="stylesheet"
+href="./zyper-nav.css"
 >
 
 </head>
@@ -35,9 +36,9 @@
 <div class="wallet-page">
 
 
-    <!-- =================================================
+    <!-- =====================================================
          HEADER
-    ================================================== -->
+    ====================================================== -->
 
     <header class="wallet-header">
 
@@ -68,10 +69,9 @@
 
         <a
             href="./home.html"
-            class="home-btn">
-
+            class="home-btn"
+        >
             ← Home
-
         </a>
 
 
@@ -79,15 +79,14 @@
 
 
 
-    <!-- =================================================
+    <!-- =====================================================
          WALLET BALANCE
-    ================================================== -->
+    ====================================================== -->
 
     <section class="balance-card">
 
 
         <div class="balance-top">
-
 
             <span>
                 💰 Available Balance
@@ -97,12 +96,9 @@
             <button
                 id="refreshWallet"
                 type="button"
-                aria-label="Refresh wallet">
-
+            >
                 ↻
-
             </button>
-
 
         </div>
 
@@ -110,16 +106,13 @@
 
         <div class="balance">
 
-
             <span>
                 LKR
             </span>
 
-
             <strong id="walletBalance">
                 0
             </strong>
-
 
         </div>
 
@@ -127,8 +120,6 @@
 
         <div class="wallet-stats">
 
-
-            <!-- TOTAL ADDED -->
 
             <div>
 
@@ -142,8 +133,6 @@
 
             </div>
 
-
-            <!-- TOTAL SPENT -->
 
             <div>
 
@@ -165,9 +154,24 @@
 
 
 
-    <!-- =================================================
+    <!-- =====================================================
+         RECHARGE WALLET BUTTON
+    ====================================================== -->
+
+    <a
+        href="./recharge-payment.html"
+        class="wallet-recharge-button"
+    >
+
+        💳 Recharge Wallet
+
+    </a>
+
+
+
+    <!-- =====================================================
          REDEEM CODE
-    ================================================== -->
+    ====================================================== -->
 
     <section class="redeem-card">
 
@@ -206,16 +210,14 @@
                 placeholder="ZYPER-XXXX-XXXX"
                 maxlength="15"
                 autocomplete="off"
-                spellcheck="false"
             >
 
 
             <button
                 id="redeemButton"
-                type="button">
-
+                type="button"
+            >
                 Redeem
-
             </button>
 
 
@@ -226,7 +228,8 @@
         <div
             id="redeemMessage"
             class="redeem-message"
-            style="display:none;">
+            style="display:none;"
+        >
         </div>
 
 
@@ -234,9 +237,9 @@
 
 
 
-    <!-- =================================================
+    <!-- =====================================================
          WALLET HISTORY
-    ================================================== -->
+    ====================================================== -->
 
     <section class="transactions-card">
 
@@ -251,7 +254,7 @@
                 </h2>
 
                 <p>
-                    Recharge and wallet payment history
+                    Your recent wallet activity
                 </p>
 
             </div>
@@ -259,10 +262,9 @@
 
             <button
                 id="refreshTransactions"
-                type="button">
-
+                type="button"
+            >
                 ↻ Refresh
-
             </button>
 
 
@@ -272,15 +274,12 @@
 
         <div
             id="transactions"
-            class="transactions">
-
+            class="transactions"
+        >
 
             <div class="loading">
-
                 Loading transactions...
-
             </div>
-
 
         </div>
 
@@ -294,17 +293,14 @@
 
 <!-- =====================================================
      BOTTOM NAVIGATION
-
-     zyper-nav.js automatically loads:
-     zyper-nav.html
-
-     Wallet becomes ACTIVE on wallet.html
 ===================================================== -->
 
-<script
-    src="./zyper-nav.js?v=1001">
-</script>
+<div id="zyper-navigation"></div>
 
+
+<script
+src="./zyper-nav.js?v=1000"
+></script>
 
 
 <!-- =====================================================
@@ -312,9 +308,9 @@
 ===================================================== -->
 
 <script
-    type="module"
-    src="./wallet.js?v=1001">
-</script>
+type="module"
+src="./wallet.js?v=1000"
+></script>
 
 
 </body>
