@@ -39,6 +39,8 @@ body{
 
     color:white;
 
+    padding-bottom:150px;
+
     background:
     radial-gradient(
         circle at 10% 10%,
@@ -105,6 +107,40 @@ body{
     text-align:center;
 
     font-size:42px;
+
+}
+
+
+.store-logo{
+
+    width:70px;
+    height:70px;
+
+    margin:0 auto 10px;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    background:#ffffff;
+
+    border:2px solid rgba(96,165,250,.45);
+
+    box-shadow:
+    0 8px 25px rgba(37,99,235,.28),
+    0 0 20px rgba(168,85,247,.18);
+
+}
+
+
+.store-logo img{
+
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
 
 }
 
@@ -777,6 +813,91 @@ button,
 
 
 /* =====================================================
+   USER HELPERS
+===================================================== */
+
+.wallet-title{
+    justify-content:space-between;
+}
+
+.wallet-title-main{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.wallet-refresh-button{
+    width:auto !important;
+    min-height:32px !important;
+    padding:6px 10px !important;
+    border-radius:9px !important;
+    margin:0 !important;
+    font-size:10px !important;
+    font-weight:600 !important;
+    background:rgba(59,130,246,.14) !important;
+    border:1px solid rgba(96,165,250,.20) !important;
+    box-shadow:none !important;
+}
+
+.uid-input-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.uid-input-row input{
+    flex:1;
+    min-width:0;
+}
+
+.paste-uid-btn{
+    width:auto !important;
+    min-width:76px !important;
+    min-height:48px !important;
+    margin:0 !important;
+    padding:0 12px !important;
+    border-radius:11px !important;
+    background:#334155 !important;
+    box-shadow:none !important;
+    font-size:11px !important;
+}
+
+.check-row{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    margin-top:11px;
+    padding:11px 12px;
+    border-radius:11px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.07);
+    color:#cbd5e1;
+    font-size:11px;
+    line-height:1.5;
+    text-align:left;
+}
+
+.check-row input{
+    width:17px !important;
+    height:17px !important;
+    min-width:17px;
+    margin:0;
+    accent-color:#3b82f6;
+}
+
+.uid-warning{
+    margin-top:8px;
+    color:#facc15;
+    font-size:10px;
+    line-height:1.5;
+}
+
+.nav-safe-space{
+    width:100%;
+    height:95px;
+}
+
+/* =====================================================
    MOBILE
 ===================================================== */
 
@@ -823,6 +944,15 @@ button,
 
         font-size:32px;
 
+    }
+
+    .paste-uid-btn{
+        min-width:70px !important;
+        padding:0 10px !important;
+    }
+
+    .nav-safe-space{
+        height:110px;
     }
 
 }
@@ -880,8 +1010,8 @@ type="button"
 <div id="formArea">
 
 
-<div class="logo">
-💎
+<div class="store-logo">
+<img src="./1.jpg" alt="Zyper Diamond Store Logo">
 </div>
 
 
@@ -930,7 +1060,19 @@ LKR 0
 <div class="wallet-box">
 
 <div class="wallet-title">
+
+<div class="wallet-title-main">
 💰 Zyper Wallet
+</div>
+
+<button
+type="button"
+id="refreshWalletButton"
+class="wallet-refresh-button"
+>
+↻ Refresh
+</button>
+
 </div>
 
 
@@ -1024,14 +1166,40 @@ Loading...
 🎮 Free Fire UID
 </label>
 
+<div class="uid-input-row">
+
 <input
 type="text"
 id="uid"
 inputmode="numeric"
-maxlength="15"
+maxlength="20"
 placeholder="Enter your Free Fire UID"
 autocomplete="off"
 >
+
+<button
+type="button"
+id="pasteUidButton"
+class="paste-uid-btn"
+>
+📋 Paste
+</button>
+
+</div>
+
+<div class="uid-warning">
+⚠️ Check your Free Fire UID carefully. Orders sent to the wrong UID cannot be refunded.
+</div>
+
+<label class="check-row">
+<input
+type="checkbox"
+id="confirmUid"
+>
+<span>
+I checked and confirm that this Free Fire UID is correct.
+</span>
+</label>
 
 </div>
 
@@ -1076,6 +1244,17 @@ autocomplete="tel"
 </div>
 
 
+<label class="check-row">
+<input
+type="checkbox"
+id="rememberDetails"
+checked
+>
+<span>
+Remember my Customer Name and Phone on this device.
+</span>
+</label>
+
 
 <button
 id="send"
@@ -1097,6 +1276,8 @@ class="back-button"
 >
 ⬅ Back to Top Up
 </a>
+
+<div class="nav-safe-space"></div>
 
 
 </div>
@@ -1164,6 +1345,8 @@ class="home-button"
 >
 💎 Place Another Order
 </a>
+
+<div class="nav-safe-space"></div>
 
 
 </div>
@@ -1302,6 +1485,48 @@ document.getElementById(
 );
 
 
+const refreshWalletButton =
+document.getElementById(
+    "refreshWalletButton"
+);
+
+
+const pasteUidButton =
+document.getElementById(
+    "pasteUidButton"
+);
+
+
+const uidInput =
+document.getElementById(
+    "uid"
+);
+
+
+const playerNameInput =
+document.getElementById(
+    "playerName"
+);
+
+
+const phoneInput =
+document.getElementById(
+    "phone"
+);
+
+
+const confirmUidInput =
+document.getElementById(
+    "confirmUid"
+);
+
+
+const rememberDetailsInput =
+document.getElementById(
+    "rememberDetails"
+);
+
+
 let currentUser =
 null;
 
@@ -1311,6 +1536,10 @@ let walletBalance =
 
 
 let walletReady =
+false;
+
+
+let isSubmitting =
 false;
 
 
@@ -1753,6 +1982,199 @@ function updateWalletUI(){
 
 
 /* =====================================================
+   REMEMBER CUSTOMER DETAILS
+===================================================== */
+
+function loadRememberedDetails(){
+
+    const savedName =
+    localStorage.getItem(
+        "zyperOrderCustomerName"
+    );
+
+
+    const savedPhone =
+    localStorage.getItem(
+        "zyperOrderCustomerPhone"
+    );
+
+
+    if(savedName){
+
+        playerNameInput.value =
+        savedName;
+
+    }
+
+
+    if(savedPhone){
+
+        phoneInput.value =
+        savedPhone;
+
+    }
+
+}
+
+
+function saveRememberedDetails(
+    name,
+    phone
+){
+
+    if(
+        rememberDetailsInput.checked
+    ){
+
+        localStorage.setItem(
+            "zyperOrderCustomerName",
+            name
+        );
+
+
+        localStorage.setItem(
+            "zyperOrderCustomerPhone",
+            phone
+        );
+
+    }
+    else{
+
+        localStorage.removeItem(
+            "zyperOrderCustomerName"
+        );
+
+
+        localStorage.removeItem(
+            "zyperOrderCustomerPhone"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   PASTE UID
+===================================================== */
+
+pasteUidButton.addEventListener(
+    "click",
+    async function(){
+
+        try{
+
+            if(
+                !navigator.clipboard ||
+                !navigator.clipboard.readText
+            ){
+
+                throw new Error(
+                    "Clipboard is not available."
+                );
+
+            }
+
+
+            const text =
+            await navigator.clipboard.readText();
+
+
+            const digits =
+            String(text || "")
+            .replace(/\D/g, "")
+            .slice(0,20);
+
+
+            if(!digits){
+
+                showError(
+                    "❌ No Free Fire UID found in your clipboard."
+                );
+
+                return;
+
+            }
+
+
+            uidInput.value =
+            digits;
+
+
+            confirmUidInput.checked =
+            false;
+
+
+            hideError();
+
+        }
+        catch(error){
+
+            showError(
+                "❌ Unable to paste UID. Please paste it manually."
+            );
+
+        }
+
+    }
+);
+
+
+uidInput.addEventListener(
+    "input",
+    function(){
+
+        uidInput.value =
+        uidInput.value
+        .replace(/\D/g, "")
+        .slice(0,20);
+
+
+        confirmUidInput.checked =
+        false;
+
+    }
+);
+
+
+/* =====================================================
+   REFRESH WALLET
+===================================================== */
+
+refreshWalletButton.addEventListener(
+    "click",
+    async function(){
+
+        if(!currentUser){
+            return;
+        }
+
+
+        refreshWalletButton.disabled =
+        true;
+
+
+        refreshWalletButton.textContent =
+        "Refreshing...";
+
+
+        await loadWallet(
+            currentUser
+        );
+
+
+        refreshWalletButton.disabled =
+        false;
+
+
+        refreshWalletButton.textContent =
+        "↻ Refresh";
+
+    }
+);
+
+
+/* =====================================================
    AUTH
 ===================================================== */
 
@@ -1792,6 +2214,9 @@ onAuthStateChanged(
         "Email not available";
 
 
+        loadRememberedDetails();
+
+
         await loadWallet(
             user
         );
@@ -1826,6 +2251,13 @@ document
 sendButton.addEventListener(
     "click",
     async function(){
+
+        if(isSubmitting){
+
+            return;
+
+        }
+
 
         hideError();
 
@@ -1911,12 +2343,25 @@ sendButton.addEventListener(
 
 
         if(
-            !/^[0-9]{6,15}$/
+            !/^[0-9]{6,20}$/
             .test(uid)
         ){
 
             showError(
-                "❌ Please enter a valid Free Fire UID (6-15 digits)."
+                "❌ Please enter a valid Free Fire UID (6-20 digits)."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !confirmUidInput.checked
+        ){
+
+            showError(
+                "❌ Please confirm that you checked your Free Fire UID."
             );
 
             return;
@@ -1959,6 +2404,41 @@ sendButton.addEventListener(
             return;
 
         }
+
+
+        const balanceAfterOrder =
+        walletBalance -
+        selected.price;
+
+
+        const confirmed =
+        window.confirm(
+            "CONFIRM ZYPER ORDER\n\n" +
+            "Package: " + selected.name + "\n" +
+            "Price: LKR " + money(selected.price) + "\n" +
+            "Free Fire UID: " + uid + "\n" +
+            "Customer: " + playerName + "\n" +
+            "Phone: " + cleanPhone + "\n" +
+            "Balance After: LKR " + money(balanceAfterOrder) + "\n\n" +
+            "Please confirm these details are correct."
+        );
+
+
+        if(!confirmed){
+
+            return;
+
+        }
+
+
+        saveRememberedDetails(
+            playerName,
+            cleanPhone
+        );
+
+
+        isSubmitting =
+        true;
 
 
         sendButton.disabled =
@@ -2195,6 +2675,10 @@ sendButton.addEventListener(
         }
         finally{
 
+            isSubmitting =
+            false;
+
+
             document
             .getElementById(
                 "loading"
@@ -2216,6 +2700,12 @@ sendButton.addEventListener(
 ===================================================== -->
 
 <div id="zyper-navigation"></div>
+
+<!-- SHARED LIVE WALLET BADGE -->
+<script
+type="module"
+src="./zyper-wallet-badge.js?v=120000"
+></script>
 
 <script
 src="./zyper-nav.js?v=1003"
