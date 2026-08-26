@@ -7,170 +7,629 @@
 
 <meta
 name="viewport"
-content="width=device-width, initial-scale=1.0">
+content="width=device-width, initial-scale=1.0"
+>
 
-<title>My Orders - Zyper Diamond Store</title>
+<title>History - Zyper Diamond Store</title>
 
-<link rel="stylesheet" href="zyper-nav.css">
+<link rel="icon" href="./1.jpg">
+
+<link
+rel="stylesheet"
+href="./zyper-nav.css"
+>
 
 <style>
 
+/* =====================================================
+   GLOBAL
+===================================================== */
+
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
+
+
+:root{
+
+    --bg1:#020617;
+    --bg2:#0f172a;
+    --bg3:#312e81;
+
+    --card:#1e293b;
+
+    --blue:#60a5fa;
+    --purple:#c084fc;
+
+    --green:#22c55e;
+    --red:#ef4444;
+    --yellow:#facc15;
+
+    --text:#f8fafc;
+    --muted:#94a3b8;
+
+}
+
 
 body{
 
-margin:0;
+    margin:0;
 
-font-family:Arial,sans-serif;
+    min-height:100vh;
 
-background:
-linear-gradient(
-135deg,
-#020617,
-#0f172a,
-#312e81
-);
+    padding-bottom:100px;
 
-color:white;
+    font-family:
+        Arial,
+        sans-serif;
 
-min-height:100vh;
+    color:white;
 
-padding-bottom:100px;
+    background:
+        linear-gradient(
+            135deg,
+            var(--bg1),
+            var(--bg2),
+            var(--bg3)
+        );
+
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.history-page{
+
+    width:100%;
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:20px;
 
 }
 
-h2{
 
-text-align:center;
+/* =====================================================
+   TITLE
+===================================================== */
 
-color:#60a5fa;
+.page-title{
 
-margin-top:20px;
+    margin:
+        12px 0 8px;
 
-margin-bottom:25px;
+    text-align:center;
+
+    color:#60a5fa;
+
+    font-size:27px;
 
 }
+
+
+.page-subtitle{
+
+    margin:
+        0 0 22px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:12px;
+
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+.history-tabs{
+
+    width:100%;
+
+    max-width:520px;
+
+    margin:
+        0 auto 22px;
+
+    padding:5px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:5px;
+
+    border-radius:16px;
+
+    background:
+        rgba(15,23,42,.85);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+}
+
+
+.history-tab{
+
+    min-height:46px;
+
+    padding:
+        8px 10px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:transparent;
+
+    color:#94a3b8;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+.history-tab.active{
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 7px 20px
+        rgba(37,99,235,.25);
+
+}
+
+
+/* =====================================================
+   TAB CONTENT
+===================================================== */
+
+.history-section{
+
+    display:none;
+
+}
+
+
+.history-section.active{
+
+    display:block;
+
+}
+
+
+/* =====================================================
+   SECTION HEADER
+===================================================== */
+
+.section-header{
+
+    margin-bottom:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+}
+
+
+.section-header h2{
+
+    margin:0;
+
+    color:#e2e8f0;
+
+    font-size:18px;
+
+}
+
+
+.refresh-btn{
+
+    padding:
+        8px 12px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    border-radius:9px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color:white;
+
+    font-size:11px;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================================
+   ORDER CARD
+===================================================== */
 
 .order-card{
 
-background:
-rgba(30,41,59,.95);
+    margin-bottom:15px;
 
-margin:20px;
+    padding:19px;
 
-padding:20px;
+    border-radius:17px;
 
-border-radius:15px;
+    background:
+        rgba(30,41,59,.95);
 
-box-shadow:
-0 0 15px rgba(0,0,0,0.3);
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
-border:
-1px solid rgba(255,255,255,.08);
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.20);
 
 }
+
 
 .order-card h3{
 
-margin-top:0;
+    margin:
+        0 0 15px;
 
-color:#c084fc;
+    color:#c084fc;
+
+    font-size:17px;
+
+}
+
+
+.order-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
 
 }
 
-.order-card p{
 
-line-height:1.6;
+.order-info{
 
-color:#e2e8f0;
+    padding:10px;
+
+    border-radius:10px;
+
+    background:
+        rgba(2,6,23,.28);
 
 }
+
+
+.order-info.full{
+
+    grid-column:
+        1 / -1;
+
+}
+
+
+.order-info span{
+
+    display:block;
+
+    margin-bottom:4px;
+
+    color:#94a3b8;
+
+    font-size:9px;
+
+    text-transform:uppercase;
+
+}
+
+
+.order-info strong{
+
+    display:block;
+
+    color:#f8fafc;
+
+    font-size:12px;
+
+    word-break:break-word;
+
+}
+
+
+/* =====================================================
+   ORDER STATUS
+===================================================== */
 
 .status{
 
-font-weight:bold;
+    display:inline-block;
 
-font-size:18px;
-
-display:inline-block;
-
-margin-left:5px;
+    font-weight:700;
 
 }
+
 
 .pending{
 
-color:#facc15;
+    color:#facc15;
 
 }
+
 
 .success{
 
-color:#22c55e;
+    color:#22c55e;
 
 }
+
 
 .rejected{
 
-color:#ef4444;
+    color:#ef4444;
 
 }
+
+
+/* =====================================================
+   TRACK BUTTON
+===================================================== */
 
 .track-btn{
 
-width:100%;
+    width:100%;
 
-margin-top:15px;
+    min-height:45px;
 
-display:block;
+    margin-top:14px;
 
-padding:13px;
+    padding:10px;
 
-border:none;
+    border:none;
 
-border-radius:10px;
+    border-radius:11px;
 
-background:#2563eb;
+    color:white;
 
-color:white;
+    font-size:13px;
 
-font-size:16px;
+    font-weight:700;
 
-font-weight:bold;
+    cursor:pointer;
 
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-.track-btn:hover{
-
-transform:translateY(-2px);
-
-opacity:.9;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
 
 }
+
 
 .track-btn:active{
 
-transform:scale(.97);
+    transform:
+        scale(.98);
 
 }
 
+
+/* =====================================================
+   WALLET TRANSACTION
+===================================================== */
+
+.wallet-transaction{
+
+    margin-bottom:12px;
+
+    padding:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    border-radius:15px;
+
+    background:
+        rgba(30,41,59,.95);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    box-shadow:
+        0 7px 20px
+        rgba(0,0,0,.18);
+
+}
+
+
+.transaction-left{
+
+    min-width:0;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+}
+
+
+.transaction-icon{
+
+    width:43px;
+
+    height:43px;
+
+    flex:0 0 43px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:12px;
+
+    font-size:19px;
+
+    background:
+        rgba(255,255,255,.06);
+
+}
+
+
+.transaction-details{
+
+    min-width:0;
+
+}
+
+
+.transaction-title{
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+
+.transaction-meta{
+
+    margin-top:4px;
+
+    color:#94a3b8;
+
+    font-size:10px;
+
+    line-height:1.5;
+
+    word-break:break-word;
+
+}
+
+
+.transaction-right{
+
+    flex-shrink:0;
+
+    text-align:right;
+
+}
+
+
+.transaction-amount{
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+
+.transaction-amount.deposit{
+
+    color:#4ade80;
+
+}
+
+
+.transaction-amount.spend{
+
+    color:#f87171;
+
+}
+
+
+.transaction-amount.refund{
+
+    color:#60a5fa;
+
+}
+
+
+.balance-after{
+
+    margin-top:4px;
+
+    color:#94a3b8;
+
+    font-size:9px;
+
+}
+
+
+/* =====================================================
+   EMPTY / LOADING / ERROR
+===================================================== */
+
 .empty{
 
-text-align:center;
+    margin-top:30px;
 
-margin-top:50px;
+    padding:30px 18px;
 
-font-size:18px;
+    text-align:center;
 
-color:#cbd5e1;
+    color:#cbd5e1;
 
-padding:20px;
+    font-size:14px;
+
+    line-height:1.7;
+
+    border-radius:15px;
+
+    background:
+        rgba(15,23,42,.55);
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
 
 }
 
@@ -181,19 +640,114 @@ padding:20px;
 
 @media(max-width:500px){
 
-.order-card{
+    .history-page{
 
-margin:15px;
+        padding:
+            14px;
 
-padding:17px;
+    }
 
-}
 
-h2{
+    .page-title{
 
-font-size:22px;
+        margin-top:15px;
 
-}
+        font-size:22px;
+
+    }
+
+
+    .page-subtitle{
+
+        font-size:10px;
+
+    }
+
+
+    .history-tabs{
+
+        margin-bottom:17px;
+
+    }
+
+
+    .history-tab{
+
+        min-height:43px;
+
+        font-size:11px;
+
+    }
+
+
+    .section-header h2{
+
+        font-size:16px;
+
+    }
+
+
+    .order-card{
+
+        padding:15px;
+
+    }
+
+
+    .order-grid{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .order-info.full{
+
+        grid-column:auto;
+
+    }
+
+
+    .wallet-transaction{
+
+        padding:13px;
+
+    }
+
+
+    .transaction-icon{
+
+        width:38px;
+
+        height:38px;
+
+        flex-basis:38px;
+
+        font-size:17px;
+
+    }
+
+
+    .transaction-title{
+
+        font-size:11px;
+
+    }
+
+
+    .transaction-meta{
+
+        font-size:9px;
+
+    }
+
+
+    .transaction-amount{
+
+        font-size:11px;
+
+    }
 
 }
 
@@ -205,693 +759,1450 @@ font-size:22px;
 <body>
 
 
-<h2>
-📜 My Order History
-</h2>
+<div class="history-page">
 
 
-<div id="orders">
+    <!-- =================================================
+         PAGE TITLE
+    ================================================== -->
 
-<p class="empty">
-⏳ Loading orders...
-</p>
+    <h1 class="page-title">
+        📜 My History
+    </h1>
+
+
+    <p class="page-subtitle">
+        View your orders and wallet activity
+    </p>
+
+
+
+    <!-- =================================================
+         TABS
+    ================================================== -->
+
+    <div class="history-tabs">
+
+
+        <button
+            type="button"
+            class="history-tab active"
+            id="orderTab"
+        >
+            📦 Orders
+        </button>
+
+
+        <button
+            type="button"
+            class="history-tab"
+            id="walletTab"
+        >
+            💰 Wallet
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         ORDER HISTORY
+    ================================================== -->
+
+    <section
+        class="history-section active"
+        id="orderSection"
+    >
+
+
+        <div class="section-header">
+
+            <h2>
+                📦 Order History
+            </h2>
+
+            <button
+                type="button"
+                class="refresh-btn"
+                id="refreshOrders"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+
+        <div id="orders">
+
+            <div class="empty">
+                ⏳ Loading orders...
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         WALLET HISTORY
+    ================================================== -->
+
+    <section
+        class="history-section"
+        id="walletSection"
+    >
+
+
+        <div class="section-header">
+
+            <h2>
+                💰 Wallet History
+            </h2>
+
+            <button
+                type="button"
+                class="refresh-btn"
+                id="refreshWallet"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+
+        <div id="walletTransactions">
+
+            <div class="empty">
+                ⏳ Loading wallet history...
+            </div>
+
+        </div>
+
+
+    </section>
+
 
 </div>
 
 
+
 <!-- =====================================================
-     ZYPER NAVIGATION
+     BOTTOM NAVIGATION
 ===================================================== -->
 
 <div id="zyper-navigation"></div>
 
 
+
+<!-- =====================================================
+     HISTORY LOGIC
+===================================================== -->
+
 <script type="module">
 
 
-/* =========================================
-FIREBASE
-========================================= */
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 import {
-auth,
-db
+    auth,
+    db
 }
 from "./firebase.js";
 
 
 import {
-onAuthStateChanged
+    onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 import {
-collection,
-query,
-where,
-getDocs
+    collection,
+    query,
+    where,
+    getDocs
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* =========================================
-ELEMENTS
-========================================= */
+/* =====================================================
+   WORKER
+===================================================== */
+
+const WORKER_URL =
+"https://zyper-order.ameresh20112011.workers.dev";
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const orderTab =
+document.getElementById(
+    "orderTab"
+);
+
+
+const walletTab =
+document.getElementById(
+    "walletTab"
+);
+
+
+const orderSection =
+document.getElementById(
+    "orderSection"
+);
+
+
+const walletSection =
+document.getElementById(
+    "walletSection"
+);
+
 
 const ordersDiv =
-document.getElementById("orders");
-
-
-/* =========================================
-AUTH CHECK
-========================================= */
-
-onAuthStateChanged(
-
-auth,
-
-async function(user){
-
-
-/* =========================================
-NOT LOGGED IN
-========================================= */
-
-if(!user){
-
-ordersDiv.innerHTML = `
-
-<p class="empty">
-
-❌ Please Login First
-
-</p>
-
-<button
-class="track-btn"
-id="loginButton"
-style="max-width:300px;margin:20px auto;background:#7c3aed;">
-
-🔐 Login Now
-
-</button>
-
-`;
-
-
-const loginButton =
 document.getElementById(
-"loginButton"
+    "orders"
 );
 
 
-if(loginButton){
-
-loginButton.onclick =
-function(){
-
-window.location.href =
-"index.html";
-
-};
-
-}
-
-return;
-
-}
-
-
-/* =========================================
-LOGGED IN
-========================================= */
-
-try{
-
-
-ordersDiv.innerHTML = `
-
-<p class="empty">
-
-⏳ Loading your orders...
-
-</p>
-
-`;
-
-
-/* =========================================
-FIRESTORE ORDERS
-========================================= */
-
-const ordersRef =
-collection(
-db,
-"orders"
+const walletTransactionsDiv =
+document.getElementById(
+    "walletTransactions"
 );
 
 
-/* =========================================
-ONLY CURRENT USER ORDERS
-========================================= */
-
-const q =
-query(
-
-ordersRef,
-
-where(
-"userId",
-"==",
-user.uid
-)
-
+const refreshOrders =
+document.getElementById(
+    "refreshOrders"
 );
 
 
-/* =========================================
-GET ORDERS
-========================================= */
-
-const snapshot =
-await getDocs(q);
-
-
-/* =========================================
-NO ORDERS
-========================================= */
-
-if(snapshot.empty){
-
-ordersDiv.innerHTML = `
-
-<p class="empty">
-
-📦 No Orders Found
-
-<br><br>
-
-You haven't placed any orders yet.
-
-</p>
-
-`;
-
-return;
-
-}
-
-
-/* =========================================
-CLEAR LOADING
-========================================= */
-
-ordersDiv.innerHTML = "";
-
-
-/* =========================================
-DISPLAY ORDERS
-========================================= */
-
-snapshot.forEach(
-
-function(orderSnapshot){
-
-const data =
-orderSnapshot.data();
-
-
-/* =========================================
-ORDER ID
-========================================= */
-
-const orderId =
-data.orderId ||
-orderSnapshot.id;
-
-
-/* =========================================
-FREE FIRE UID
-========================================= */
-
-const gameUID =
-data.gameUID ||
-data.uid ||
-"-";
-
-
-/* =========================================
-PACKAGE
-========================================= */
-
-const packageName =
-data.package ||
-data.productName ||
-data.product ||
-"-";
-
-
-/* =========================================
-PRICE
-========================================= */
-
-const price =
-data.price ??
-data.productPrice ??
-data.total ??
-0;
-
-
-/* =========================================
-STATUS
-========================================= */
-
-const rawStatus =
-String(
-data.status ||
-"Pending"
-)
-.trim();
-
-
-const normalizedStatus =
-rawStatus.toLowerCase();
-
-
-let statusClass =
-"pending";
-
-let statusText =
-"⏳ Pending";
-
-
-/* =========================================
-APPROVED = SUCCESS
-========================================= */
-
-if(
-
-normalizedStatus ===
-"approved"
-
-){
-
-statusClass =
-"success";
-
-statusText =
-"✅ Success";
-
-}
-
-
-/* =========================================
-SUCCESS
-========================================= */
-
-else if(
-
-normalizedStatus ===
-"success"
-
-){
-
-statusClass =
-"success";
-
-statusText =
-"✅ Success";
-
-}
-
-
-/* =========================================
-REJECTED
-========================================= */
-
-else if(
-
-normalizedStatus ===
-"rejected"
-
-){
-
-statusClass =
-"rejected";
-
-statusText =
-"❌ Rejected";
-
-}
-
-
-/* =========================================
-PENDING
-========================================= */
-
-else if(
-
-normalizedStatus ===
-"pending"
-
-){
-
-statusClass =
-"pending";
-
-statusText =
-"⏳ Pending";
-
-}
-
-
-/* =========================================
-OTHER STATUS
-========================================= */
-
-else{
-
-statusClass =
-"pending";
-
-statusText =
-"⏳ " +
-escapeHTML(rawStatus);
-
-}
-
-
-/* =========================================
-DATE
-========================================= */
-
-let orderDate =
-"";
-
-
-if(data.createdAt){
-
-try{
-
-
-/*
-FIRESTORE TIMESTAMP
-*/
-
-if(
-
-typeof data.createdAt.toDate ===
-"function"
-
-){
-
-orderDate =
-data.createdAt
-.toDate()
-.toLocaleString();
-
-}
-
-
-/*
-FIRESTORE REST TIMESTAMP
-*/
-
-else if(
-
-data.createdAt.seconds
-
-){
-
-orderDate =
-new Date(
-
-Number(
-data.createdAt.seconds
-) * 1000
-
-)
-.toLocaleString();
-
-}
-
-
-/*
-NORMAL DATE
-*/
-
-else{
-
-const convertedDate =
-new Date(
-data.createdAt
+const refreshWallet =
+document.getElementById(
+    "refreshWallet"
 );
 
 
-if(
-!isNaN(
-convertedDate.getTime()
-)
-){
+let currentUser =
+null;
 
-orderDate =
-convertedDate
-.toLocaleString();
 
-}
+/* =====================================================
+   MONEY
+===================================================== */
 
-}
+function money(value){
 
-}catch(error){
-
-console.error(
-"Date error:",
-error
-);
-
-orderDate = "";
-
-}
+    return Number(
+        value || 0
+    ).toLocaleString(
+        "en-LK",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
 
 }
 
 
-/* =========================================
-CREATE ORDER CARD
-========================================= */
-
-ordersDiv.innerHTML += `
-
-<div class="order-card">
-
-
-<h3>
-💎 Diamond Order
-</h3>
-
-
-<p>
-
-<b>Order ID:</b>
-
-<br>
-
-${escapeHTML(orderId)}
-
-</p>
-
-
-<p>
-
-<b>Game UID:</b>
-
-<br>
-
-${escapeHTML(gameUID)}
-
-</p>
-
-
-<p>
-
-<b>Package:</b>
-
-<br>
-
-${escapeHTML(packageName)}
-
-</p>
-
-
-<p>
-
-<b>Price:</b>
-
-<br>
-
-LKR ${Number(price).toLocaleString("en-US")}
-
-</p>
-
-
-<p>
-
-<b>Status:</b>
-
-<span
-class="status ${statusClass}">
-
-${statusText}
-
-</span>
-
-</p>
-
-
-${
-orderDate
-?
-`
-
-<p>
-
-<b>Order Date:</b>
-
-<br>
-
-${escapeHTML(orderDate)}
-
-</p>
-
-`
-:
-""
-}
-
-
-<button
-class="track-btn"
-data-order-id="${escapeHTML(orderId)}">
-
-🔎 Track Order
-
-</button>
-
-
-</div>
-
-`;
-
-});
-
-
-/* =========================================
-TRACK BUTTONS
-========================================= */
-
-document
-.querySelectorAll(".track-btn")
-.forEach(
-
-function(button){
-
-button.addEventListener(
-
-"click",
-
-function(){
-
-const id =
-button.dataset.orderId;
-
-
-window.location.href =
-"track.html?id=" +
-encodeURIComponent(id);
-
-}
-
-);
-
-});
-
-
-}catch(error){
-
-
-console.error(
-"History error:",
-error
-);
-
-
-ordersDiv.innerHTML = `
-
-<p class="empty">
-
-❌ Unable to load orders.
-
-<br><br>
-
-${escapeHTML(
-error.message
-)}
-
-</p>
-
-`;
-
-}
-
-});
-
-
-/* =========================================
-SECURITY DISPLAY HELPER
-========================================= */
+/* =====================================================
+   SECURITY
+===================================================== */
 
 function escapeHTML(value){
 
-return String(value)
+    return String(
+        value ?? ""
+    )
 
-.replace(
-/&/g,
-"&amp;"
-)
+    .replace(
+        /&/g,
+        "&amp;"
+    )
 
-.replace(
-/</g,
-"&lt;"
-)
+    .replace(
+        /</g,
+        "&lt;"
+    )
 
-.replace(
-/>/g,
-"&gt;"
-)
+    .replace(
+        />/g,
+        "&gt;"
+    )
 
-.replace(
-/"/g,
-"&quot;"
-)
+    .replace(
+        /"/g,
+        "&quot;"
+    )
 
-.replace(
-/'/g,
-"&#039;"
-);
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
+
+
+/* =====================================================
+   DATE FORMAT
+===================================================== */
+
+function formatDate(value){
+
+    if(!value){
+
+        return "";
+
+    }
+
+
+    try{
+
+
+        if(
+            typeof value.toDate ===
+            "function"
+        ){
+
+            return value
+                .toDate()
+                .toLocaleString();
+
+        }
+
+
+        if(
+            value.seconds
+        ){
+
+            return new Date(
+                Number(
+                    value.seconds
+                ) * 1000
+            ).toLocaleString();
+
+        }
+
+
+        const date =
+        new Date(
+            value
+        );
+
+
+        if(
+            !Number.isNaN(
+                date.getTime()
+            )
+        ){
+
+            return date
+                .toLocaleString();
+
+        }
+
+
+    }
+    catch(error){
+
+        console.error(
+            "Date error:",
+            error
+        );
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+function showOrders(){
+
+    orderTab
+        .classList
+        .add(
+            "active"
+        );
+
+
+    walletTab
+        .classList
+        .remove(
+            "active"
+        );
+
+
+    orderSection
+        .classList
+        .add(
+            "active"
+        );
+
+
+    walletSection
+        .classList
+        .remove(
+            "active"
+        );
+
+}
+
+
+function showWallet(){
+
+    walletTab
+        .classList
+        .add(
+            "active"
+        );
+
+
+    orderTab
+        .classList
+        .remove(
+            "active"
+        );
+
+
+    walletSection
+        .classList
+        .add(
+            "active"
+        );
+
+
+    orderSection
+        .classList
+        .remove(
+            "active"
+        );
+
+}
+
+
+orderTab.addEventListener(
+    "click",
+    showOrders
+);
+
+
+walletTab.addEventListener(
+    "click",
+    showWallet
+);
+
+
+/* =====================================================
+   LOAD ORDERS
+===================================================== */
+
+async function loadOrders(user){
+
+
+    ordersDiv.innerHTML = `
+
+        <div class="empty">
+            ⏳ Loading your orders...
+        </div>
+
+    `;
+
+
+    try{
+
+
+        const ordersRef =
+        collection(
+            db,
+            "orders"
+        );
+
+
+        const ordersQuery =
+        query(
+            ordersRef,
+
+            where(
+                "userId",
+                "==",
+                user.uid
+            )
+        );
+
+
+        const snapshot =
+        await getDocs(
+            ordersQuery
+        );
+
+
+        if(
+            snapshot.empty
+        ){
+
+            ordersDiv.innerHTML = `
+
+                <div class="empty">
+
+                    📦 No Orders Found
+
+                    <br><br>
+
+                    You haven't placed any orders yet.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        const orderList = [];
+
+
+        snapshot.forEach(
+            function(orderSnapshot){
+
+                orderList.push({
+
+                    id:
+                    orderSnapshot.id,
+
+                    data:
+                    orderSnapshot.data()
+
+                });
+
+            }
+        );
+
+
+        /*
+           NEWEST FIRST
+        */
+
+        orderList.sort(
+            function(a,b){
+
+                const dateA =
+                getSortableDate(
+                    a.data.createdAt
+                );
+
+
+                const dateB =
+                getSortableDate(
+                    b.data.createdAt
+                );
+
+
+                return (
+                    dateB -
+                    dateA
+                );
+
+            }
+        );
+
+
+        ordersDiv.innerHTML =
+        "";
+
+
+        orderList.forEach(
+            function(item){
+
+
+                const data =
+                item.data;
+
+
+                const orderId =
+                data.orderId ||
+                item.id;
+
+
+                const gameUID =
+                data.gameUID ||
+                data.uid ||
+                "-";
+
+
+                const packageName =
+                data.package ||
+                data.productName ||
+                data.product ||
+                "-";
+
+
+                const price =
+                data.price ??
+                data.productPrice ??
+                data.total ??
+                0;
+
+
+                const rawStatus =
+                String(
+                    data.status ||
+                    "Pending"
+                ).trim();
+
+
+                const normalizedStatus =
+                rawStatus.toLowerCase();
+
+
+                let statusClass =
+                "pending";
+
+
+                let statusText =
+                "⏳ Pending";
+
+
+                if(
+                    normalizedStatus ===
+                    "approved" ||
+                    normalizedStatus ===
+                    "success"
+                ){
+
+                    statusClass =
+                    "success";
+
+
+                    statusText =
+                    "✅ Success";
+
+                }
+
+                else if(
+                    normalizedStatus ===
+                    "rejected"
+                ){
+
+                    statusClass =
+                    "rejected";
+
+
+                    statusText =
+                    "❌ Rejected";
+
+                }
+
+
+                const orderDate =
+                formatDate(
+                    data.createdAt
+                );
+
+
+                const card =
+                document.createElement(
+                    "div"
+                );
+
+
+                card.className =
+                "order-card";
+
+
+                card.innerHTML = `
+
+                    <h3>
+                        💎 Diamond Order
+                    </h3>
+
+
+                    <div class="order-grid">
+
+
+                        <div class="order-info">
+
+                            <span>
+                                ORDER ID
+                            </span>
+
+                            <strong>
+                                ${escapeHTML(orderId)}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="order-info">
+
+                            <span>
+                                GAME UID
+                            </span>
+
+                            <strong>
+                                ${escapeHTML(gameUID)}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="order-info">
+
+                            <span>
+                                PACKAGE
+                            </span>
+
+                            <strong>
+                                ${escapeHTML(packageName)}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="order-info">
+
+                            <span>
+                                PRICE
+                            </span>
+
+                            <strong>
+                                LKR ${money(price)}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="order-info">
+
+                            <span>
+                                STATUS
+                            </span>
+
+                            <strong
+                                class="status ${statusClass}"
+                            >
+                                ${statusText}
+                            </strong>
+
+                        </div>
+
+
+                        ${
+                            orderDate
+                            ?
+                            `
+
+                            <div class="order-info">
+
+                                <span>
+                                    DATE
+                                </span>
+
+                                <strong>
+                                    ${escapeHTML(orderDate)}
+                                </strong>
+
+                            </div>
+
+                            `
+                            :
+                            ""
+                        }
+
+
+                    </div>
+
+
+                    <button
+                        class="track-btn"
+                        data-order-id="${escapeHTML(orderId)}"
+                    >
+                        🔎 Track Order
+                    </button>
+
+                `;
+
+
+                ordersDiv.appendChild(
+                    card
+                );
+
+            }
+        );
+
+
+        document
+            .querySelectorAll(
+                ".track-btn[data-order-id]"
+            )
+            .forEach(
+                function(button){
+
+                    button.addEventListener(
+                        "click",
+                        function(){
+
+                            const id =
+                            button
+                                .dataset
+                                .orderId;
+
+
+                            window.location.href =
+                                "track.html?id=" +
+                                encodeURIComponent(
+                                    id
+                                );
+
+                        }
+                    );
+
+                }
+            );
+
+
+    }
+    catch(error){
+
+
+        console.error(
+            "Order History Error:",
+            error
+        );
+
+
+        ordersDiv.innerHTML = `
+
+            <div class="empty">
+
+                ❌ Unable to load orders.
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   SORTABLE FIRESTORE DATE
+===================================================== */
+
+function getSortableDate(value){
+
+    try{
+
+
+        if(!value){
+
+            return 0;
+
+        }
+
+
+        if(
+            typeof value.toDate ===
+            "function"
+        ){
+
+            return value
+                .toDate()
+                .getTime();
+
+        }
+
+
+        if(
+            value.seconds
+        ){
+
+            return Number(
+                value.seconds
+            ) * 1000;
+
+        }
+
+
+        const date =
+        new Date(
+            value
+        );
+
+
+        return Number.isNaN(
+            date.getTime()
+        )
+        ?
+        0
+        :
+        date.getTime();
+
+
+    }
+    catch{
+
+        return 0;
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD WALLET HISTORY
+===================================================== */
+
+async function loadWalletHistory(user){
+
+
+    walletTransactionsDiv.innerHTML = `
+
+        <div class="empty">
+            ⏳ Loading wallet history...
+        </div>
+
+    `;
+
+
+    try{
+
+
+        const token =
+        await user.getIdToken();
+
+
+        const response =
+        await fetch(
+            WORKER_URL,
+            {
+
+                method:
+                "POST",
+
+                headers:{
+
+                    "Content-Type":
+                    "application/json",
+
+                    "Authorization":
+                    `Bearer ${token}`
+
+                },
+
+                body:
+                JSON.stringify({
+
+                    action:
+                    "wallet_transactions"
+
+                })
+
+            }
+        );
+
+
+        const result =
+        await response.json();
+
+
+        if(
+            !response.ok ||
+            !result.success
+        ){
+
+            throw new Error(
+                result.message ||
+                "Unable to load wallet history."
+            );
+
+        }
+
+
+        const transactions =
+        Array.isArray(
+            result.transactions
+        )
+        ?
+        result.transactions
+        :
+        [];
+
+
+        if(
+            transactions.length ===
+            0
+        ){
+
+            walletTransactionsDiv.innerHTML = `
+
+                <div class="empty">
+
+                    💰 No Wallet History Found
+
+                    <br><br>
+
+                    Your wallet activity will appear here.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        walletTransactionsDiv.innerHTML =
+        "";
+
+
+        transactions.forEach(
+            function(transaction){
+
+
+                const type =
+                String(
+                    transaction.type ||
+                    ""
+                ).toUpperCase();
+
+
+                const amount =
+                Number(
+                    transaction.amount ||
+                    0
+                );
+
+
+                const balanceAfter =
+                Number(
+                    transaction.balanceAfter ??
+                    0
+                );
+
+
+                const date =
+                formatDate(
+                    transaction.createdAt
+                );
+
+
+                let icon =
+                "💰";
+
+
+                let title =
+                "Wallet Transaction";
+
+
+                let amountClass =
+                "deposit";
+
+
+                let sign =
+                "+";
+
+
+                if(
+                    type ===
+                    "DEPOSIT"
+                ){
+
+                    icon =
+                    "➕";
+
+
+                    title =
+                    "Wallet Recharge";
+
+
+                    amountClass =
+                    "deposit";
+
+
+                    sign =
+                    "+";
+
+                }
+
+                else if(
+                    type ===
+                    "SPEND"
+                ){
+
+                    icon =
+                    "🛒";
+
+
+                    title =
+                    "Order Payment";
+
+
+                    amountClass =
+                    "spend";
+
+
+                    sign =
+                    "-";
+
+                }
+
+                else if(
+                    type ===
+                    "REFUND"
+                ){
+
+                    icon =
+                    "↩️";
+
+
+                    title =
+                    "Wallet Refund";
+
+
+                    amountClass =
+                    "refund";
+
+
+                    sign =
+                    "+";
+
+                }
+
+
+                let meta =
+                "";
+
+
+                if(
+                    transaction.redeemCode
+                ){
+
+                    meta +=
+                    `Code: ${
+                        escapeHTML(
+                            transaction.redeemCode
+                        )
+                    }`;
+
+                }
+
+
+                if(
+                    transaction.orderId
+                ){
+
+                    if(meta){
+
+                        meta +=
+                        "<br>";
+
+                    }
+
+
+                    meta +=
+                    `Order ID: ${
+                        escapeHTML(
+                            transaction.orderId
+                        )
+                    }`;
+
+                }
+
+
+                if(
+                    transaction.package
+                ){
+
+                    if(meta){
+
+                        meta +=
+                        "<br>";
+
+                    }
+
+
+                    meta +=
+                    `Package: ${
+                        escapeHTML(
+                            transaction.package
+                        )
+                    }`;
+
+                }
+
+
+                if(date){
+
+                    if(meta){
+
+                        meta +=
+                        "<br>";
+
+                    }
+
+
+                    meta +=
+                    escapeHTML(
+                        date
+                    );
+
+                }
+
+
+                const row =
+                document.createElement(
+                    "div"
+                );
+
+
+                row.className =
+                "wallet-transaction";
+
+
+                row.innerHTML = `
+
+                    <div class="transaction-left">
+
+
+                        <div class="transaction-icon">
+                            ${icon}
+                        </div>
+
+
+                        <div class="transaction-details">
+
+                            <div class="transaction-title">
+                                ${title}
+                            </div>
+
+                            <div class="transaction-meta">
+                                ${
+                                    meta ||
+                                    "-"
+                                }
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="transaction-right">
+
+
+                        <div
+                            class="transaction-amount ${amountClass}"
+                        >
+                            ${sign}LKR ${money(amount)}
+                        </div>
+
+
+                        <div class="balance-after">
+
+                            Balance:
+                            LKR ${money(balanceAfter)}
+
+                        </div>
+
+
+                    </div>
+
+                `;
+
+
+                walletTransactionsDiv
+                    .appendChild(
+                        row
+                    );
+
+            }
+        );
+
+
+    }
+    catch(error){
+
+
+        console.error(
+            "Wallet History Error:",
+            error
+        );
+
+
+        walletTransactionsDiv.innerHTML = `
+
+            <div class="empty">
+
+                ❌ Unable to load wallet history.
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   REFRESH
+===================================================== */
+
+refreshOrders.addEventListener(
+    "click",
+    function(){
+
+        if(currentUser){
+
+            loadOrders(
+                currentUser
+            );
+
+        }
+
+    }
+);
+
+
+refreshWallet.addEventListener(
+    "click",
+    function(){
+
+        if(currentUser){
+
+            loadWalletHistory(
+                currentUser
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+onAuthStateChanged(
+    auth,
+    async function(user){
+
+
+        if(!user){
+
+
+            ordersDiv.innerHTML = `
+
+                <div class="empty">
+
+                    ❌ Please Login First
+
+                </div>
+
+            `;
+
+
+            walletTransactionsDiv.innerHTML = `
+
+                <div class="empty">
+
+                    ❌ Please Login First
+
+                </div>
+
+            `;
+
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                    "./index.html";
+
+                },
+                900
+            );
+
+
+            return;
+
+        }
+
+
+        currentUser =
+        user;
+
+
+        await Promise.all([
+
+            loadOrders(
+                user
+            ),
+
+            loadWalletHistory(
+                user
+            )
+
+        ]);
+
+    }
+);
 
 </script>
 
 
+
 <!-- =====================================================
-     ZYPER NAVIGATION SCRIPT
+     SHARED LIVE WALLET BADGE
 ===================================================== -->
 
-<script src="zyper-nav.js"></script>
+<script
+type="module"
+src="./zyper-wallet-badge.js?v=120000">
+</script>
+
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<script
+src="./zyper-nav.js">
+</script>
 
 
 </body>
