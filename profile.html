@@ -11,6 +11,8 @@ content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Diamond Store - Profile</title>
 
+<link rel="icon" href="./1.jpg">
+
 <link rel="stylesheet" href="ep.css">
 
 <link rel="stylesheet" href="media.css">
@@ -218,7 +220,7 @@ rgba(34,197,94,.9);
 
 
 /* =====================================================
-   BADGE
+   CUSTOMER BADGE
 ===================================================== */
 
 .company-badge{
@@ -293,7 +295,7 @@ color:#94a3b8;
 
 
 /* =====================================================
-   INFO
+   INFO GRID
 ===================================================== */
 
 .info-box{
@@ -321,6 +323,8 @@ rgba(255,255,255,.05);
 
 border:
 1px solid rgba(255,255,255,.08);
+
+min-width:0;
 
 }
 
@@ -351,17 +355,167 @@ letter-spacing:.6px;
 
 font-size:12px;
 
-font-weight:bold;
+font-weight:600;
 
 color:#e2e8f0;
 
-margin-top:3px;
+margin-top:4px;
+
+word-break:break-word;
 
 }
 
 
 /* =====================================================
-   BUTTON
+   QUICK ACTIONS
+===================================================== */
+
+.quick-title{
+
+text-align:left;
+
+margin:
+5px 0 10px;
+
+font-size:12px;
+
+font-weight:700;
+
+color:#94a3b8;
+
+text-transform:uppercase;
+
+letter-spacing:.8px;
+
+}
+
+
+.quick-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:8px;
+
+margin-bottom:18px;
+
+}
+
+
+.quick-action{
+
+min-width:0;
+
+padding:
+13px 5px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+rgba(255,255,255,.055);
+
+border:
+1px solid rgba(255,255,255,.09);
+
+color:white;
+
+cursor:pointer;
+
+transition:.2s;
+
+-webkit-tap-highlight-color:transparent;
+
+}
+
+
+.quick-action:active{
+
+transform:scale(.95);
+
+}
+
+
+.quick-action-icon{
+
+display:block;
+
+font-size:21px;
+
+margin-bottom:6px;
+
+}
+
+
+.quick-action-text{
+
+display:block;
+
+font-size:10px;
+
+font-weight:700;
+
+color:#e2e8f0;
+
+}
+
+
+/* RECHARGE */
+
+.quick-action.recharge{
+
+background:
+linear-gradient(
+135deg,
+rgba(34,197,94,.16),
+rgba(16,185,129,.08)
+);
+
+border-color:
+rgba(34,197,94,.20);
+
+}
+
+
+/* HISTORY */
+
+.quick-action.history{
+
+background:
+linear-gradient(
+135deg,
+rgba(59,130,246,.16),
+rgba(79,70,229,.08)
+);
+
+border-color:
+rgba(96,165,250,.20);
+
+}
+
+
+/* HELP */
+
+.quick-action.help{
+
+background:
+linear-gradient(
+135deg,
+rgba(37,211,102,.14),
+rgba(18,140,126,.07)
+);
+
+border-color:
+rgba(37,211,102,.20);
+
+}
+
+
+/* =====================================================
+   PROFILE BUTTON
 ===================================================== */
 
 .profile-button{
@@ -516,7 +670,7 @@ color:#cbd5e1;
 
 
 /* =====================================================
-   NAME
+   NAME INPUT
 ===================================================== */
 
 .name-input{
@@ -554,7 +708,7 @@ rgba(96,165,250,.15);
 
 
 /* =====================================================
-   FILE
+   FILE INPUT
 ===================================================== */
 
 .file-input{
@@ -612,7 +766,7 @@ border:
 
 
 /* =====================================================
-   ACTIONS
+   EDIT ACTIONS
 ===================================================== */
 
 .edit-actions{
@@ -767,6 +921,35 @@ padding:12px 6px;
 
 }
 
+
+.info-value{
+
+font-size:11px;
+
+}
+
+
+.quick-action{
+
+padding:
+12px 4px;
+
+}
+
+
+.quick-action-icon{
+
+font-size:19px;
+
+}
+
+
+.quick-action-text{
+
+font-size:9px;
+
+}
+
 }
 
 
@@ -794,6 +977,13 @@ font-size:21px;
 .info-box{
 
 gap:7px;
+
+}
+
+
+.quick-grid{
+
+gap:6px;
 
 }
 
@@ -853,6 +1043,7 @@ Your Zyper Diamond Store account
 </p>
 
 
+
 <!-- =====================================================
      ACCOUNT INFO
 ===================================================== -->
@@ -860,10 +1051,12 @@ Your Zyper Diamond Store account
 <div class="info-box">
 
 
+<!-- ACCOUNT STATUS -->
+
 <div class="info-item">
 
 <div class="info-icon">
-👤
+✅
 </div>
 
 <div class="info-title">
@@ -880,6 +1073,9 @@ Active
 
 </div>
 
+
+
+<!-- STORE -->
 
 <div class="info-item">
 
@@ -900,7 +1096,127 @@ Zyper Store
 </div>
 
 
+
+<!-- EMAIL -->
+
+<div class="info-item">
+
+<div class="info-icon">
+📧
 </div>
+
+<div class="info-title">
+Email
+</div>
+
+<div
+id="userEmail"
+class="info-value">
+
+Loading...
+
+</div>
+
+</div>
+
+
+
+<!-- MEMBER SINCE -->
+
+<div class="info-item">
+
+<div class="info-icon">
+📅
+</div>
+
+<div class="info-title">
+Member Since
+</div>
+
+<div
+id="memberSince"
+class="info-value">
+
+Loading...
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     QUICK ACTIONS
+===================================================== -->
+
+<div class="quick-title">
+
+Quick Actions
+
+</div>
+
+
+<div class="quick-grid">
+
+
+<button
+type="button"
+class="quick-action recharge"
+onclick="goRecharge()"
+>
+
+<span class="quick-action-icon">
+💳
+</span>
+
+<span class="quick-action-text">
+Recharge
+</span>
+
+</button>
+
+
+
+<button
+type="button"
+class="quick-action history"
+onclick="goHistory()"
+>
+
+<span class="quick-action-icon">
+📜
+</span>
+
+<span class="quick-action-text">
+History
+</span>
+
+</button>
+
+
+
+<button
+type="button"
+class="quick-action help"
+onclick="goHelp()"
+>
+
+<span class="quick-action-icon">
+💬
+</span>
+
+<span class="quick-action-text">
+Help
+</span>
+
+</button>
+
+
+</div>
+
 
 
 <!-- =====================================================
@@ -914,6 +1230,7 @@ onclick="editProfile()">
 ✏️ Edit Profile
 
 </button>
+
 
 
 <!-- =====================================================
@@ -1007,6 +1324,7 @@ class="profile-message">
 </div>
 
 
+
 <!-- =====================================================
      LOGOUT
 ===================================================== -->
@@ -1023,6 +1341,7 @@ onclick="logout()">
 </div>
 
 
+
 <!-- =====================================================
      ZYPER NAVIGATION
 ===================================================== -->
@@ -1030,27 +1349,21 @@ onclick="logout()">
 <div id="zyper-navigation"></div>
 
 
+
 <!-- =====================================================
-     FIREBASE
+     FIREBASE + PROFILE
 ===================================================== -->
 
 <script type="module">
 
 
 import {
-
-initializeApp
-
+auth
 }
-
-from
-
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+from "./firebase.js";
 
 
 import {
-
-getAuth,
 
 onAuthStateChanged,
 
@@ -1061,48 +1374,6 @@ signOut
 from
 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-
-/* =====================================================
-   FIREBASE CONFIG
-===================================================== */
-
-const firebaseConfig = {
-
-apiKey:
-"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
-
-authDomain:
-"zyper-d-iamond-store.firebaseapp.com",
-
-projectId:
-"zyper-d-iamond-store",
-
-storageBucket:
-"zyper-d-iamond-store.firebasestorage.app",
-
-messagingSenderId:
-"892467477866",
-
-appId:
-"1:892467477866:web:61e9b6ff9435798da23913",
-
-measurementId:
-"G-RLJFR6F2GC"
-
-};
-
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
-const app =
-initializeApp(firebaseConfig);
-
-
-const auth =
-getAuth(app);
 
 
 let currentUser =
@@ -1121,7 +1392,7 @@ onAuthStateChanged(
 
 auth,
 
-(user) => {
+function(user){
 
 
 if(!user){
@@ -1140,6 +1411,68 @@ user;
 
 const uid =
 user.uid;
+
+
+/* =====================================================
+   EMAIL
+===================================================== */
+
+document
+.getElementById(
+"userEmail"
+)
+.textContent =
+user.email ||
+"Not available";
+
+
+/* =====================================================
+   MEMBER SINCE
+===================================================== */
+
+let createdDate =
+"Not available";
+
+
+if(
+user.metadata &&
+user.metadata.creationTime
+){
+
+try{
+
+createdDate =
+new Date(
+user.metadata.creationTime
+)
+.toLocaleDateString(
+"en-LK",
+{
+year:"numeric",
+month:"short",
+day:"numeric"
+}
+);
+
+}
+catch(error){
+
+console.error(
+"Creation date error:",
+error
+);
+
+}
+
+}
+
+
+document
+.getElementById(
+"memberSince"
+)
+.textContent =
+createdDate;
 
 
 /* =====================================================
@@ -1190,29 +1523,68 @@ savedImage
 ===================================================== */
 
 document
-.getElementById("username")
+.getElementById(
+"username"
+)
 .innerText =
 savedName;
 
 
 document
-.getElementById("profileImage")
+.getElementById(
+"profileImage"
+)
 .src =
 savedImage;
 
 
 document
-.getElementById("nameInput")
+.getElementById(
+"nameInput"
+)
 .value =
 savedName;
 
 
 document
-.getElementById("imagePreview")
+.getElementById(
+"imagePreview"
+)
 .src =
 savedImage;
 
 });
+
+
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
+
+window.goRecharge =
+function(){
+
+window.location.href =
+"recharge-payment.html";
+
+};
+
+
+window.goHistory =
+function(){
+
+window.location.href =
+"history.html";
+
+};
+
+
+window.goHelp =
+function(){
+
+window.location.href =
+"whatsapp.html";
+
+};
 
 
 /* =====================================================
@@ -1263,26 +1635,37 @@ DEFAULT_IMAGE;
 
 
 document
-.getElementById("nameInput")
+.getElementById(
+"nameInput"
+)
 .value =
 savedName;
 
 
 document
-.getElementById("imagePreview")
+.getElementById(
+"imagePreview"
+)
 .src =
 savedImage;
 
 
 document
-.getElementById("imageInput")
+.getElementById(
+"imageInput"
+)
 .value =
 "";
 
 
 document
-.getElementById("editPanel")
-.classList.add("show");
+.getElementById(
+"editPanel"
+)
+.classList
+.add(
+"show"
+);
 
 };
 
@@ -1292,7 +1675,9 @@ document
 ===================================================== */
 
 document
-.getElementById("imageInput")
+.getElementById(
+"imageInput"
+)
 .addEventListener(
 
 "change",
@@ -1330,7 +1715,9 @@ return;
 
 
 if(
-!file.type.startsWith("image/")
+!file.type.startsWith(
+"image/"
+)
 ){
 
 alert(
@@ -1353,14 +1740,18 @@ reader.onload =
 function(){
 
 document
-.getElementById("imagePreview")
+.getElementById(
+"imagePreview"
+)
 .src =
 reader.result;
 
 };
 
 
-reader.readAsDataURL(file);
+reader.readAsDataURL(
+file
+);
 
 });
 
@@ -1385,7 +1776,9 @@ currentUser.uid;
 
 let name =
 document
-.getElementById("nameInput")
+.getElementById(
+"nameInput"
+)
 .value
 .trim();
 
@@ -1398,17 +1791,21 @@ name =
 }
 
 
-if(name.length > 40){
+if(
+name.length >
+40
+){
 
 name =
-name.substring(0,40);
+name.substring(
+0,
+40
+);
 
 }
 
 
-/* =====================================================
-   SAVE NAME
-===================================================== */
+/* SAVE NAME */
 
 localStorage.setItem(
 uid + "_name",
@@ -1416,13 +1813,13 @@ name
 );
 
 
-/* =====================================================
-   SAVE IMAGE
-===================================================== */
+/* SAVE IMAGE */
 
 const file =
 document
-.getElementById("imageInput")
+.getElementById(
+"imageInput"
+)
 .files[0];
 
 
@@ -1439,21 +1836,38 @@ const imageData =
 reader.result;
 
 
+try{
+
 localStorage.setItem(
 uid + "_img",
 imageData
 );
-
 
 finishProfileSave(
 name,
 imageData
 );
 
+}
+catch(error){
+
+console.error(
+"Profile image save error:",
+error
+);
+
+alert(
+"Image is too large to save. Please choose a smaller image."
+);
+
+}
+
 };
 
 
-reader.readAsDataURL(file);
+reader.readAsDataURL(
+file
+);
 
 }
 
@@ -1489,8 +1903,7 @@ existingImage
 
 
 /* =====================================================
-   SAVE FINISHED
-   SAVE → CLOSE EDIT PANEL
+   FINISH SAVE
 ===================================================== */
 
 function finishProfileSave(
@@ -1499,69 +1912,54 @@ image
 ){
 
 
-/* UPDATE PROFILE IMAGE */
-
 document
-.getElementById("profileImage")
+.getElementById(
+"profileImage"
+)
 .src =
 image;
 
 
-/* UPDATE NAME */
-
 document
-.getElementById("username")
+.getElementById(
+"username"
+)
 .innerText =
 name;
 
 
-/* UPDATE PREVIEW */
-
 document
-.getElementById("imagePreview")
+.getElementById(
+"imagePreview"
+)
 .src =
 image;
 
 
-/* CLEAR FILE */
-
 document
-.getElementById("imageInput")
+.getElementById(
+"imageInput"
+)
 .value =
 "";
 
 
-/* =====================================================
-   IMPORTANT:
-   CLOSE EDIT PANEL AFTER SAVE
-===================================================== */
-
 document
-.getElementById("editPanel")
-.classList.remove("show");
+.getElementById(
+"editPanel"
+)
+.classList
+.remove(
+"show"
+);
 
 
-/* =====================================================
-   SHOW SUCCESS MESSAGE
-===================================================== */
-
-const message =
-document
-.getElementById("profileMessage");
-
-
-message.innerText =
-"";
-
-
-/*
-Message is inside edit panel,
-so create temporary message
-outside the panel.
-*/
+/* SUCCESS NOTICE */
 
 const savedNotice =
-document.createElement("div");
+document.createElement(
+"div"
+);
 
 
 savedNotice.style.position =
@@ -1598,7 +1996,10 @@ savedNotice.style.fontSize =
 "13px";
 
 savedNotice.style.fontWeight =
-"bold";
+"600";
+
+savedNotice.style.whiteSpace =
+"nowrap";
 
 savedNotice.style.boxShadow =
 "0 10px 30px rgba(0,0,0,.4)";
@@ -1611,8 +2012,6 @@ document.body.appendChild(
 savedNotice
 );
 
-
-/* REMOVE NOTICE */
 
 setTimeout(
 
@@ -1654,12 +2053,19 @@ window.cancelEdit =
 function(){
 
 document
-.getElementById("editPanel")
-.classList.remove("show");
+.getElementById(
+"editPanel"
+)
+.classList
+.remove(
+"show"
+);
 
 
 document
-.getElementById("imageInput")
+.getElementById(
+"imageInput"
+)
 .value =
 "";
 
@@ -1700,13 +2106,17 @@ DEFAULT_IMAGE;
 
 
 document
-.getElementById("nameInput")
+.getElementById(
+"nameInput"
+)
 .value =
 savedName;
 
 
 document
-.getElementById("imagePreview")
+.getElementById(
+"imagePreview"
+)
 .src =
 savedImage;
 
@@ -1722,7 +2132,9 @@ savedImage;
 window.logout =
 function(){
 
-signOut(auth)
+signOut(
+auth
+)
 
 .then(
 
@@ -1757,11 +2169,25 @@ alert(
 </script>
 
 
+
+<!-- =====================================================
+     SHARED LIVE WALLET BADGE
+===================================================== -->
+
+<script
+type="module"
+src="./zyper-wallet-badge.js?v=120000">
+</script>
+
+
+
 <!-- =====================================================
      ZYPER NAVIGATION SCRIPT
 ===================================================== -->
 
-<script src="zyper-nav.js"></script>
+<script
+src="./zyper-nav.js">
+</script>
 
 
 </body>
