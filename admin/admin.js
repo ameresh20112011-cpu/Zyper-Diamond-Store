@@ -142,10 +142,8 @@ if (loginForm) {
             if (!email || !password) {
 
                 if (msg) {
-
                     msg.textContent =
                         "Enter email and password.";
-
                 }
 
                 return;
@@ -155,7 +153,6 @@ if (loginForm) {
             if (button) {
 
                 button.disabled = true;
-
                 button.textContent =
                     "LOGIN...";
 
@@ -599,9 +596,7 @@ function formatDate(timestamp) {
             2,
             "0"
         );
-
-
-    const day =
+        const day =
         String(
             date.getDate()
         ).padStart(
@@ -611,30 +606,39 @@ function formatDate(timestamp) {
 
 
     return (
-        `${hour}:${minute} , ${year}/${month}/${day}`
+        `${year}-${month}-${day} ${hour}:${minute}`
     );
 }
 
 
 /* =====================================================
-   SORT TIME
+   NORMALIZE STATUS
 ===================================================== */
 
-function getTime(timestamp) {
+function normalizeStatus(value) {
 
-    const date =
-        convertToDate(
-            timestamp
-        );
-
-
-    if (!date) {
-        return 0;
-    }
-
-
-    return date.getTime();
+    return String(
+        value || ""
+    )
+        .trim()
+        .toLowerCase();
 }
+
+
+/* =====================================================
+   NORMALIZE WALLET STATE
+===================================================== */
+
+function normalizeWalletState(value) {
+
+    return String(
+        value || ""
+    )
+        .trim()
+        .toLowerCase();
+}
+
+
 /* =====================================================
    LOAD ORDERS
 ===================================================== */
@@ -655,9 +659,11 @@ async function loadOrders() {
     table.innerHTML = `
 
         <tr>
+
             <td colspan="16">
                 Loading orders...
             </td>
+
         </tr>
 
     `;
@@ -678,15 +684,15 @@ async function loadOrders() {
 
 
         snapshot.forEach(
-            function (item) {
+            function (documentSnapshot) {
 
                 allOrders.push({
 
                     id:
-                        item.id,
+                        documentSnapshot.id,
 
                     data:
-                        item.data()
+                        documentSnapshot.data()
 
                 });
 
@@ -694,21 +700,40 @@ async function loadOrders() {
         );
 
 
+        /* -----------------------------------------
+           NEWEST FIRST
+        ----------------------------------------- */
+
         allOrders.sort(
             function (a, b) {
 
-                return (
-
-                    getTime(
-                        b.data.createdAt
-                    )
-
-                    -
-
-                    getTime(
+                const dateA =
+                    convertToDate(
                         a.data.createdAt
-                    )
+                    );
 
+
+                const dateB =
+                    convertToDate(
+                        b.data.createdAt
+                    );
+
+
+                const timeA =
+                    dateA
+                        ? dateA.getTime()
+                        : 0;
+
+
+                const timeB =
+                    dateB
+                        ? dateB.getTime()
+                        : 0;
+
+
+                return (
+                    timeB -
+                    timeA
                 );
 
             }
@@ -729,14 +754,19 @@ async function loadOrders() {
         table.innerHTML = `
 
             <tr>
+
                 <td colspan="16">
+
                     ❌ Failed to load orders
+
                 </td>
+
             </tr>
 
         `;
 
     }
+
 }
 
 
@@ -763,9 +793,7 @@ function filterOrders() {
 
     if (!selectedDate) {
 
-        renderOrders(
-            []
-        );
+        renderOrders([]);
 
         return;
     }
@@ -776,15 +804,11 @@ function filterOrders() {
             function (item) {
 
                 return (
-
                     getDateString(
                         item.data.createdAt
                     )
-
                     ===
-
                     selectedDate
-
                 );
 
             }
@@ -794,6 +818,7 @@ function filterOrders() {
     renderOrders(
         filtered
     );
+
 }
 
 
@@ -808,70 +833,76 @@ function buildOrderAction(
 ) {
 
     const status =
-        String(
-            order.status || ""
-        )
-            .trim()
-            .toLowerCase();
+        normalizeStatus(
+            order.status
+        );
 
 
     const walletState =
-        String(
-            order.walletState || ""
-        )
-            .trim()
-            .toLowerCase();
+        normalizeWalletState(
+            order.walletState
+        );
 
 
     const heldAmount =
         Number(
-            order.heldAmount ||
-            amount ||
+            order.heldAmount ??
+            amount ??
             0
         );
 
 
     /* =================================================
-       SUCCESS
+       SUCCESS AFTER MONEY RELEASED
+
+       Supplier later confirmed Success, but admin
+       already returned the customer's wallet money.
+
+       Never show this as normal completed.
+    ================================================= */
+
+    const lateSuccess =
+
+        order.lateSuccessAfterRelease ===
+            true
+
+        ||
+
+        (
+            status ===
+                "success"
+            &&
+            walletState ===
+                "released"
+        );
+
+
+    if (lateSuccess) {
+
+        return `
+
+            <span
+                class="
+                    order-action-state
+                    review-required
+                "
+            >
+                ⚠ REVIEW
+            </span>
+
+        `;
+
+    }
+
+
+    /* =================================================
+       NORMAL SUCCESS
     ================================================= */
 
     if (
         status ===
         "success"
     ) {
-
-        /*
-           IMPORTANT:
-
-           If supplier success arrives AFTER the admin
-           already released the customer's money,
-           we DO NOT deduct the wallet again.
-
-           Admin only sees REVIEW.
-        */
-
-        if (
-            order.lateSuccessAfterRelease ===
-            true
-        ) {
-
-            return `
-
-                <span
-                    class="
-                        order-action-state
-                        review-required
-                    "
-                >
-
-                    ⚠ REVIEW
-
-                </span>
-
-            `;
-
-        }
-
 
         return `
 
@@ -881,9 +912,7 @@ function buildOrderAction(
                     order-completed
                 "
             >
-
                 ✓ COMPLETED
-
             </span>
 
         `;
@@ -908,9 +937,7 @@ function buildOrderAction(
                     money-released
                 "
             >
-
                 ✓ MONEY RELEASED
-
             </span>
 
         `;
@@ -924,14 +951,16 @@ function buildOrderAction(
 
     if (
         walletState ===
-        "held"
+            "held"
         &&
         (
             status ===
-            "failed"
+                "failed"
+
             ||
+
             status ===
-            "pending review"
+                "pending review"
         )
     ) {
 
@@ -943,9 +972,7 @@ function buildOrderAction(
                 data-order-id="${escapeHTML(orderId)}"
                 data-amount="${heldAmount}"
             >
-
                 🔓 RELEASE MONEY
-
             </button>
 
         `;
@@ -970,19 +997,13 @@ function buildOrderAction(
                     money-held
                 "
             >
-
                 🔒 MONEY HELD
-
             </span>
 
         `;
 
     }
 
-
-    /* =================================================
-       NO ADMIN ACTION
-    ================================================= */
 
     return `
 
@@ -992,12 +1013,11 @@ function buildOrderAction(
                 no-action
             "
         >
-
             —
-
         </span>
 
     `;
+
 }
 
 
@@ -1005,7 +1025,9 @@ function buildOrderAction(
    RENDER ORDERS
 ===================================================== */
 
-function renderOrders(orders) {
+function renderOrders(
+    orders
+) {
 
     const table =
         document.getElementById(
@@ -1042,7 +1064,9 @@ function renderOrders(orders) {
             <tr>
 
                 <td colspan="16">
+
                     No orders found
+
                 </td>
 
             </tr>
@@ -1059,23 +1083,24 @@ function renderOrders(orders) {
 
 
         return;
+
     }
 
 
     /* =================================================
-       EACH ORDER
+       LOOP ORDERS
     ================================================= */
 
     orders.forEach(
         function (item) {
 
             const order =
-                item.data;
+                item.data || {};
 
 
-            /* -----------------------------------------
+            /* =============================================
                ORDER ID
-            ----------------------------------------- */
+            ============================================= */
 
             const orderId =
 
@@ -1085,12 +1110,14 @@ function renderOrders(orders) {
                 ||
                 order.orderNumber
                 ||
-                item.id;
+                item.id
+                ||
+                "-";
 
 
-            /* -----------------------------------------
-               CUSTOMER
-            ----------------------------------------- */
+            /* =============================================
+               CUSTOMER NAME
+            ============================================= */
 
             const customer =
 
@@ -1101,9 +1128,9 @@ function renderOrders(orders) {
                 "-";
 
 
-            /* -----------------------------------------
+            /* =============================================
                FIREBASE UID
-            ----------------------------------------- */
+            ============================================= */
 
             const firebaseUID =
 
@@ -1114,9 +1141,9 @@ function renderOrders(orders) {
                 "-";
 
 
-            /* -----------------------------------------
-               GAME UID
-            ----------------------------------------- */
+            /* =============================================
+               FREE FIRE UID
+            ============================================= */
 
             const gameUID =
 
@@ -1129,43 +1156,132 @@ function renderOrders(orders) {
                 "-";
 
 
-            /* -----------------------------------------
+            /* =============================================
                STATUS
-            ----------------------------------------- */
+            ============================================= */
 
             const status =
                 String(
                     order.status ||
                     "Processing"
-                )
-                    .trim();
+                );
 
 
             const statusLower =
-                status.toLowerCase();
+                normalizeStatus(
+                    status
+                );
 
 
-            /* -----------------------------------------
-               VERIFIED FF NAME
+            /* =============================================
+               WALLET STATE
+            ============================================= */
 
-               This must come from the provider result.
-               Customer contact name is NOT used here.
-            ----------------------------------------- */
+            const walletState =
+                String(
+                    order.walletState ||
+                    ""
+                );
 
-            const verifiedFFName =
 
-                order.verifiedFFName
+            const walletLower =
+                normalizeWalletState(
+                    walletState
+                );
+
+
+            /* =============================================
+               VERIFIED FREE FIRE NAME
+
+               Do NOT use the customer-entered name unless
+               the provider marked it as verified.
+            ============================================= */
+
+            const providerVerified =
+
+                order.playerVerified ===
+                    true
+
                 ||
-                order.verifiedPlayerName
-                ||
-                order.ffName
-                ||
+
+                String(
+                    order.playerNameSource ||
+                    ""
+                )
+                    .trim()
+                    .toLowerCase()
+                    ===
+                    "provider";
+
+
+            let verifiedFFName =
                 "-";
 
 
-            /* -----------------------------------------
+            if (
+                order.verifiedFFName
+            ) {
+
+                verifiedFFName =
+                    order.verifiedFFName;
+
+            }
+
+            else if (
+                order.verifiedPlayerName
+            ) {
+
+                verifiedFFName =
+                    order.verifiedPlayerName;
+
+            }
+
+            else if (
+                order.providerPlayerName
+            ) {
+
+                verifiedFFName =
+                    order.providerPlayerName;
+
+            }
+
+            else if (
+                providerVerified
+                &&
+                order.playerName
+            ) {
+
+                verifiedFFName =
+                    order.playerName;
+
+            }
+
+            else if (
+                order.ffName
+            ) {
+
+                verifiedFFName =
+                    order.ffName;
+
+            }
+
+            else if (
+                statusLower ===
+                    "processing"
+                ||
+                statusLower ===
+                    "pending"
+            ) {
+
+                verifiedFFName =
+                    "Processing...";
+
+            }
+
+
+            /* =============================================
                PRODUCT
-            ----------------------------------------- */
+            ============================================= */
 
             const product =
 
@@ -1180,63 +1296,155 @@ function renderOrders(orders) {
                 "-";
 
 
-            /* -----------------------------------------
+            /* =============================================
                QUANTITY
-            ----------------------------------------- */
+            ============================================= */
 
-            const quantity =
-                Math.max(
-                    1,
-                    Number(
-                        order.quantity
-                        ||
-                        order.qty
-                        ||
-                        1
-                    )
+            let quantity =
+                Number(
+                    order.quantity ??
+                    order.qty ??
+                    1
                 );
 
 
-            /* -----------------------------------------
-               UNIT PRICE
-            ----------------------------------------- */
+            if (
+                !Number.isFinite(
+                    quantity
+                )
+                ||
+                quantity < 1
+            ) {
 
-            const unitPrice =
+                quantity = 1;
+
+            }
+
+
+            quantity =
+                Math.floor(
+                    quantity
+                );
+
+
+            /* =============================================
+               TOTAL
+            ============================================= */
+
+            let totalAmount =
+                Number(
+                    order.total ??
+                    order.amount ??
+                    0
+                );
+
+
+            if (
+                !Number.isFinite(
+                    totalAmount
+                )
+            ) {
+
+                totalAmount = 0;
+
+            }
+
+
+            /* =============================================
+               UNIT PRICE
+            ============================================= */
+
+            let unitPrice =
                 Number(
 
                     order.unitPrice
                     ??
                     order.productPrice
                     ??
-                    order.price
-                    ??
                     0
 
                 );
 
 
-            /* -----------------------------------------
-               TOTAL
-            ----------------------------------------- */
+            if (
+                !Number.isFinite(
+                    unitPrice
+                )
+            ) {
 
-            const amount =
-                Number(
+                unitPrice = 0;
 
-                    order.total
-                    ??
-                    order.amount
-                    ??
-                    (
-                        unitPrice *
-                        quantity
+            }
+
+
+            /*
+             * Older orders may have only total + quantity.
+             * Derive unit price from them.
+             */
+
+            if (
+                unitPrice <= 0
+                &&
+                totalAmount > 0
+                &&
+                quantity > 0
+            ) {
+
+                unitPrice =
+                    totalAmount /
+                    quantity;
+
+            }
+
+
+            /*
+             * Older single-quantity orders may have
+             * price only.
+             */
+
+            if (
+                unitPrice <= 0
+            ) {
+
+                const oldPrice =
+                    Number(
+                        order.price ??
+                        0
+                    );
+
+
+                if (
+                    Number.isFinite(
+                        oldPrice
                     )
+                ) {
 
-                );
+                    unitPrice =
+                        oldPrice;
+
+                }
+
+            }
 
 
-            /* -----------------------------------------
+            /*
+             * If total was not stored, calculate it.
+             */
+
+            if (
+                totalAmount <= 0
+            ) {
+
+                totalAmount =
+                    unitPrice *
+                    quantity;
+
+            }
+
+
+            /* =============================================
                PAYMENT
-            ----------------------------------------- */
+            ============================================= */
 
             const payment =
 
@@ -1247,23 +1455,39 @@ function renderOrders(orders) {
                 "Wallet";
 
 
-            /* -----------------------------------------
-               ORDERED TIME
-            ----------------------------------------- */
+            /* =============================================
+               ORDER DATE
+            ============================================= */
+
+            const orderedValue =
+
+                order.orderedAt
+                ||
+                order.createdAt
+                ||
+                null;
+
 
             const orderedDate =
-                formatDate(
-                    order.createdAt
-                );
+
+                orderedValue
+
+                    ? formatDate(
+                        orderedValue
+                    )
+
+                    : "-";
 
 
-            /* -----------------------------------------
-               COMPLETED TIME
-            ----------------------------------------- */
+            /* =============================================
+               COMPLETED DATE
+            ============================================= */
 
             const completedValue =
 
                 order.completedAt
+                ||
+                order.providerSuccessAt
                 ||
                 order.completedTime
                 ||
@@ -1274,39 +1498,23 @@ function renderOrders(orders) {
 
             const completedDate =
 
-                completedValue
+                (
+                    statusLower ===
+                        "success"
+                    &&
+                    completedValue
+                )
 
-                    ?
-
-                    formatDate(
+                    ? formatDate(
                         completedValue
                     )
 
-                    :
-
-                    "-";
+                    : "-";
 
 
-            /* -----------------------------------------
-               WALLET STATE
-            ----------------------------------------- */
-
-            const walletState =
-                String(
-                    order.walletState ||
-                    "-"
-                )
-                    .trim();
-
-
-            const walletLower =
-                walletState
-                    .toLowerCase();
-
-
-            /* -----------------------------------------
+            /* =============================================
                PROVIDER STATUS
-            ----------------------------------------- */
+            ============================================= */
 
             const providerStatus =
                 String(
@@ -1317,228 +1525,39 @@ function renderOrders(orders) {
 
                     (
                         statusLower ===
-                        "success"
-
-                            ?
-
                             "success"
 
-                            :
+                            ? "success"
 
-                            "-"
+                            : "-"
                     )
 
-                )
-                    .trim();
+                );
 
 
-            const providerLower =
-                providerStatus
-                    .toLowerCase();
+            const providerOrderId =
 
-
-            /* =================================================
-               STATUS COLOR
-            ================================================= */
-
-            let statusClass =
-                "state-neutral";
-
-
-            if (
-                statusLower ===
-                "processing"
-            ) {
-
-                statusClass =
-                    "state-processing";
-
-            }
-            else if (
-                statusLower ===
-                "pending review"
-            ) {
-
-                statusClass =
-                    "state-review";
-
-            }
-            else if (
-                statusLower ===
-                "failed"
-            ) {
-
-                statusClass =
-                    "state-failed";
-
-            }
-            else if (
-                statusLower ===
-                "success"
-            ) {
-
-                statusClass =
-                    "state-success";
-
-            }
-
-
-            /* =================================================
-               WALLET STATE COLOR
-            ================================================= */
-
-            let walletClass =
-                "state-neutral";
-
-
-            let walletText =
-                walletState ||
-                "-";
-
-
-            if (
-                walletLower ===
-                "held"
-            ) {
-
-                walletClass =
-                    "state-processing";
-
-                walletText =
-                    "🔒 HELD";
-
-            }
-            else if (
-                walletLower ===
-                "deducted"
-            ) {
-
-                walletClass =
-                    "state-success";
-
-                walletText =
-                    "✓ DEDUCTED";
-
-            }
-            else if (
-                walletLower ===
-                "released"
-            ) {
-
-                walletClass =
-                    "state-success";
-
-                walletText =
-                    "↩ RELEASED";
-
-            }
-
-
-            /* =================================================
-               PROVIDER STATUS COLOR
-            ================================================= */
-
-            let providerClass =
-                "state-neutral";
-
-
-            if (
-                [
-                    "processing",
-                    "registered",
-                    "sent"
-                ]
-                    .includes(
-                        providerLower
-                    )
-            ) {
-
-                providerClass =
-                    "state-processing";
-
-            }
-            else if (
-                providerLower.includes(
-                    "review"
-                )
+                order.providerOrderId
                 ||
-                providerLower ===
-                "unknown"
-                ||
-                providerLower ===
-                "unsupported"
-            ) {
-
-                providerClass =
-                    "state-review";
-
-            }
-            else if (
-                [
-                    "failed",
-                    "failure"
-                ]
-                    .includes(
-                        providerLower
-                    )
-            ) {
-
-                providerClass =
-                    "state-failed";
-
-            }
-            else if (
-                [
-                    "success",
-                    "completed"
-                ]
-                    .includes(
-                        providerLower
-                    )
-            ) {
-
-                providerClass =
-                    "state-success";
-
-            }
+                "";
 
 
-            /* =================================================
+            /* =============================================
                DASHBOARD COUNTERS
-            ================================================= */
+            ============================================= */
 
             total++;
 
 
-            /*
-               Revenue is counted ONLY when the
-               automatic order has actually succeeded.
-
-               Held money is NOT completed revenue.
-            */
-
             if (
                 statusLower ===
-                "success"
-            ) {
-
-                revenue +=
-                    amount;
-
-                success++;
-
-            }
-
-
-            if (
-                statusLower ===
-                "pending"
+                    "pending"
                 ||
                 statusLower ===
-                "processing"
+                    "processing"
                 ||
                 statusLower ===
-                "pending review"
+                    "pending review"
             ) {
 
                 pending++;
@@ -1546,21 +1565,260 @@ function renderOrders(orders) {
             }
 
 
-            /* =================================================
+            if (
+                statusLower ===
+                "success"
+            ) {
+
+                success++;
+
+
+                /*
+                 * Revenue = ONLY wallet money that was
+                 * really deducted.
+                 *
+                 * A late Success after money release
+                 * MUST NOT be counted.
+                 */
+
+                if (
+                    walletLower ===
+                    "deducted"
+                ) {
+
+                    revenue +=
+                        totalAmount;
+
+                }
+
+            }
+
+
+            /* =============================================
+               ORDER STATUS STYLE
+            ============================================= */
+
+            let statusClass =
+                "state-neutral";
+
+
+            if (
+                statusLower ===
+                "success"
+            ) {
+
+                statusClass =
+                    "state-success";
+
+            }
+
+            else if (
+                statusLower ===
+                    "failed"
+                ||
+                statusLower ===
+                    "rejected"
+            ) {
+
+                statusClass =
+                    "state-failed";
+
+            }
+
+            else if (
+                statusLower ===
+                "pending review"
+            ) {
+
+                statusClass =
+                    "state-review";
+
+            }
+
+            else if (
+                statusLower ===
+                    "processing"
+                ||
+                statusLower ===
+                    "pending"
+            ) {
+
+                statusClass =
+                    "state-processing";
+
+            }
+            /* =============================================
+               WALLET BADGE
+            ============================================= */
+
+            let walletHTML = `
+
+                <span
+                    class="
+                        admin-state-badge
+                        state-neutral
+                    "
+                >
+                    —
+                </span>
+
+            `;
+
+
+            if (
+                walletLower ===
+                "held"
+            ) {
+
+                walletHTML = `
+
+                    <span
+                        class="
+                            admin-state-badge
+                            state-processing
+                        "
+                    >
+                        🔒 HELD
+                    </span>
+
+                `;
+
+            }
+
+            else if (
+                walletLower ===
+                "deducted"
+            ) {
+
+                walletHTML = `
+
+                    <span
+                        class="
+                            admin-state-badge
+                            state-success
+                        "
+                    >
+                        ✓ DEDUCTED
+                    </span>
+
+                `;
+
+            }
+
+            else if (
+                walletLower ===
+                "released"
+            ) {
+
+                walletHTML = `
+
+                    <span
+                        class="
+                            admin-state-badge
+                            state-review
+                        "
+                    >
+                        ↩ RELEASED
+                    </span>
+
+                `;
+
+            }
+
+
+            /* =============================================
+               PROVIDER STATUS STYLE
+            ============================================= */
+
+            const providerLower =
+                providerStatus
+                    .trim()
+                    .toLowerCase();
+
+
+            let providerClass =
+                "state-neutral";
+
+
+            if (
+                providerLower ===
+                "success"
+            ) {
+
+                providerClass =
+                    "state-success";
+
+            }
+
+            else if (
+                providerLower ===
+                "failed"
+            ) {
+
+                providerClass =
+                    "state-failed";
+
+            }
+
+            else if (
+                providerLower ===
+                    "pending_review"
+                ||
+                providerLower ===
+                    "send_unknown"
+                ||
+                providerLower ===
+                    "unsupported"
+            ) {
+
+                providerClass =
+                    "state-review";
+
+            }
+
+            else if (
+                providerLower ===
+                    "processing"
+                ||
+                providerLower ===
+                    "waiting"
+            ) {
+
+                providerClass =
+                    "state-processing";
+
+            }
+
+
+            let providerText =
+                providerStatus;
+
+
+            if (
+                providerOrderId
+            ) {
+
+                providerText +=
+                    ` #${providerOrderId}`;
+
+            }
+
+
+            /* =============================================
                ACTION
-            ================================================= */
+            ============================================= */
 
             const actionHTML =
                 buildOrderAction(
                     order,
                     orderId,
-                    amount
+                    totalAmount
                 );
 
 
-            /* =================================================
-               CREATE TABLE ROW
-            ================================================= */
+            /* =============================================
+               TABLE ROW
+            ============================================= */
 
             const row =
                 document.createElement(
@@ -1580,54 +1838,42 @@ function renderOrders(orders) {
 
 
                 <td>
-                    ${escapeHTML(customer)}
+
+                    ${escapeHTML(
+                        customer
+                    )}
+
                 </td>
 
 
                 <td>
-                    ${escapeHTML(firebaseUID)}
+
+                    ${escapeHTML(
+                        firebaseUID
+                    )}
+
                 </td>
 
 
                 <td>
-                    ${escapeHTML(gameUID)}
+
+                    ${escapeHTML(
+                        gameUID
+                    )}
+
                 </td>
 
 
                 <td>
 
                     <span
-                        class="${
-                            verifiedFFName !== "-"
-                                ?
-                                "ff-name-verified"
-                                :
-                                ""
-                        }"
+                        class="
+                            ff-name-verified
+                        "
                     >
-
                         ${escapeHTML(
                             verifiedFFName
                         )}
-
-                    </span>
-
-                </td>
-
-
-                <td>
-                    ${escapeHTML(product)}
-                </td>
-
-
-                <td>
-
-                    <span class="qty-badge">
-
-                        ×${escapeHTML(
-                            quantity
-                        )}
-
                     </span>
 
                 </td>
@@ -1635,7 +1881,29 @@ function renderOrders(orders) {
 
                 <td>
 
-                    Rs.
+                    ${escapeHTML(
+                        product
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="
+                            qty-badge
+                        "
+                    >
+                        x${quantity}
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    LKR
                     ${unitPrice.toLocaleString(
                         "en-LK"
                     )}
@@ -1647,8 +1915,8 @@ function renderOrders(orders) {
 
                     <strong>
 
-                        Rs.
-                        ${amount.toLocaleString(
+                        LKR
+                        ${totalAmount.toLocaleString(
                             "en-LK"
                         )}
 
@@ -1658,21 +1926,29 @@ function renderOrders(orders) {
 
 
                 <td>
-                    ${escapeHTML(payment)}
+
+                    ${escapeHTML(
+                        payment
+                    )}
+
                 </td>
 
 
                 <td>
+
                     ${escapeHTML(
                         orderedDate
                     )}
+
                 </td>
 
 
                 <td>
+
                     ${escapeHTML(
                         completedDate
                     )}
+
                 </td>
 
 
@@ -1684,11 +1960,9 @@ function renderOrders(orders) {
                             ${statusClass}
                         "
                     >
-
                         ${escapeHTML(
                             status
                         )}
-
                     </span>
 
                 </td>
@@ -1696,18 +1970,7 @@ function renderOrders(orders) {
 
                 <td>
 
-                    <span
-                        class="
-                            admin-state-badge
-                            ${walletClass}
-                        "
-                    >
-
-                        ${escapeHTML(
-                            walletText
-                        )}
-
-                    </span>
+                    ${walletHTML}
 
                 </td>
 
@@ -1720,11 +1983,9 @@ function renderOrders(orders) {
                             ${providerClass}
                         "
                     >
-
                         ${escapeHTML(
-                            providerStatus
+                            providerText
                         )}
-
                     </span>
 
                 </td>
@@ -1748,7 +2009,7 @@ function renderOrders(orders) {
 
 
     /* =================================================
-       UPDATE CARDS
+       UPDATE DASHBOARD CARDS
     ================================================= */
 
     updateCards(
@@ -1775,11 +2036,7 @@ function renderOrders(orders) {
                     async function () {
 
                         const orderId =
-                            String(
-                                button.dataset.orderId ||
-                                ""
-                            )
-                                .trim();
+                            button.dataset.orderId;
 
 
                         const amount =
@@ -1789,18 +2046,96 @@ function renderOrders(orders) {
                             );
 
 
-                        await releaseMoney(
-                            orderId,
-                            amount,
-                            button
-                        );
+                        if (!orderId) {
+
+                            alert(
+                                "Order ID not found."
+                            );
+
+                            return;
+                        }
+
+
+                        const confirmRelease =
+                            confirm(
+
+                                `Release LKR ${amount.toLocaleString(
+                                    "en-LK"
+                                )} back to the customer's wallet?\n\nOrder ID: ${orderId}`
+
+                            );
+
+
+                        if (
+                            !confirmRelease
+                        ) {
+
+                            return;
+                        }
+
+
+                        button.disabled =
+                            true;
+
+
+                        const oldText =
+                            button.textContent;
+
+
+                        button.textContent =
+                            "RELEASING...";
+
+
+                        try {
+
+                            await releaseOrderMoney(
+                                orderId
+                            );
+
+
+                            alert(
+                                "✅ Money released successfully."
+                            );
+
+
+                            await loadOrders();
+
+                        }
+                        catch (error) {
+
+                            console.error(
+                                "Release money error:",
+                                error
+                            );
+
+
+                            alert(
+                                "❌ " +
+                                (
+                                    error.message ||
+                                    "Failed to release money."
+                                )
+                            );
+
+
+                            button.disabled =
+                                false;
+
+
+                            button.textContent =
+                                oldText;
+
+                        }
 
                     }
                 );
 
             }
         );
+
 }
+
+
 /* =====================================================
    UPDATE DASHBOARD CARDS
 ===================================================== */
@@ -1849,10 +2184,9 @@ function updateCards(
         revenueElement.textContent =
             Number(
                 revenue
-            )
-                .toLocaleString(
-                    "en-LK"
-                );
+            ).toLocaleString(
+                "en-LK"
+            );
 
     }
 
@@ -1871,257 +2205,12 @@ function updateCards(
             success;
 
     }
+
 }
 
 
 /* =====================================================
-   RELEASE MONEY
-===================================================== */
-
-async function releaseMoney(
-    orderId,
-    amount,
-    button
-) {
-
-    const user =
-        auth.currentUser;
-
-
-    if (!user) {
-
-        alert(
-            "Admin login required."
-        );
-
-        return;
-    }
-
-
-    const admin =
-        await checkAdmin(
-            user
-        );
-
-
-    if (!admin) {
-
-        alert(
-            "Access denied."
-        );
-
-        return;
-    }
-
-
-    if (!orderId) {
-
-        alert(
-            "Order ID missing."
-        );
-
-        return;
-    }
-
-
-    const formattedAmount =
-        Number(
-            amount || 0
-        )
-            .toLocaleString(
-                "en-LK"
-            );
-
-
-    /* =================================================
-       CONFIRM RELEASE
-    ================================================= */
-
-    const confirmed =
-        confirm(
-
-            `Release LKR ${formattedAmount} back to this customer's wallet?`
-
-        );
-
-
-    if (!confirmed) {
-        return;
-    }
-
-
-    /* =================================================
-       ASK ADMIN SECRET
-    ================================================= */
-
-    const secret =
-        prompt(
-            "Enter Admin Secret Key to release this money:"
-        );
-
-
-    if (
-        !secret ||
-        !secret.trim()
-    ) {
-
-        alert(
-            "Release cancelled."
-        );
-
-        return;
-    }
-
-
-    const originalText =
-        button.textContent;
-
-
-    button.disabled =
-        true;
-
-
-    button.textContent =
-        "⏳ RELEASING...";
-
-
-    try {
-
-        const token =
-            await user.getIdToken(
-                true
-            );
-
-
-        const response =
-            await fetch(
-                WORKER_URL,
-                {
-
-                    method:
-                        "POST",
-
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json",
-
-                        "Authorization":
-                            "Bearer " +
-                            token,
-
-                        "X-Admin-Key":
-                            secret.trim()
-
-                    },
-
-
-                    body:
-                        JSON.stringify({
-
-                            action:
-                                "release_order_hold",
-
-                            orderId:
-                                orderId
-
-                        })
-
-                }
-            );
-
-
-        let data;
-
-
-        try {
-
-            data =
-                await response.json();
-
-        }
-        catch (error) {
-
-            throw new Error(
-                "Invalid response from Worker."
-            );
-
-        }
-
-
-        if (
-            !response.ok
-            ||
-            !data
-            ||
-            !data.success
-        ) {
-
-            throw new Error(
-
-                data?.message
-                ||
-                `Server error (${response.status})`
-
-            );
-
-        }
-
-
-        if (
-            data.alreadyReleased
-        ) {
-
-            alert(
-                "✓ Money was already released."
-            );
-
-        }
-        else {
-
-            alert(
-
-                `✓ LKR ${formattedAmount} released back to the customer's wallet.`
-
-            );
-
-        }
-
-
-        await loadOrders();
-
-    }
-    catch (error) {
-
-        console.error(
-            "Release money error:",
-            error
-        );
-
-
-        alert(
-
-            error.message
-            ||
-            "Failed to release money."
-
-        );
-
-
-        button.disabled =
-            false;
-
-
-        button.textContent =
-            originalText;
-
-    }
-}
-
-
-/* =====================================================
-   DATE SEARCH
+   DATE SEARCH BUTTON
 ===================================================== */
 
 const dateSearch =
@@ -2143,7 +2232,8 @@ if (dateSearch) {
 
 
             if (
-                !input ||
+                !input
+                ||
                 !input.value
             ) {
 
@@ -2163,6 +2253,7 @@ if (dateSearch) {
 
         }
     );
+
 }
 
 
@@ -2190,6 +2281,7 @@ if (orderDate) {
 
         }
     );
+
 }
 
 
@@ -2213,15 +2305,15 @@ if (todayButton) {
                 getTodayString();
 
 
-            const input =
+            const dateInput =
                 document.getElementById(
                     "orderDate"
                 );
 
 
-            if (input) {
+            if (dateInput) {
 
-                input.value =
+                dateInput.value =
                     today;
 
             }
@@ -2235,27 +2327,28 @@ if (todayButton) {
 
         }
     );
+
 }
 
 
 /* =====================================================
-   ORDER SEARCH
+   TEXT SEARCH
 ===================================================== */
 
-const search =
+const searchInput =
     document.getElementById(
         "search"
     );
 
 
-if (search) {
+if (searchInput) {
 
-    search.addEventListener(
+    searchInput.addEventListener(
         "input",
         function () {
 
             const text =
-                search.value
+                searchInput.value
                     .trim()
                     .toLowerCase();
 
@@ -2265,15 +2358,11 @@ if (search) {
                     function (item) {
 
                         return (
-
                             getDateString(
                                 item.data.createdAt
                             )
-
                             ===
-
                             selectedDate
-
                         );
 
                     }
@@ -2287,23 +2376,49 @@ if (search) {
                         function (item) {
 
                             const order =
-                                item.data;
+                                item.data || {};
 
 
-                            const orderId =
+                            const verifiedFFName =
 
-                                order.orderId
+                                order.verifiedFFName
                                 ||
-                                order.orderID
+                                order.verifiedPlayerName
                                 ||
-                                order.orderNumber
+                                order.providerPlayerName
                                 ||
-                                item.id;
+                                (
+                                    (
+                                        order.playerVerified ===
+                                        true
+                                        ||
+                                        String(
+                                            order.playerNameSource ||
+                                            ""
+                                        )
+                                            .trim()
+                                            .toLowerCase()
+                                            ===
+                                            "provider"
+                                    )
+
+                                        ? order.playerName
+
+                                        : ""
+                                )
+                                ||
+                                order.ffName
+                                ||
+                                "";
 
 
                             const values = [
 
-                                orderId,
+                                order.orderId,
+
+                                order.orderID,
+
+                                order.orderNumber,
 
                                 order.customerName,
 
@@ -2318,6 +2433,8 @@ if (search) {
                                 order.gameUid,
 
                                 order.gameId,
+
+                                verifiedFFName,
 
                                 order.productName,
 
@@ -2339,17 +2456,7 @@ if (search) {
 
                                 order.providerOrderId,
 
-                                order.playerName,
-
-                                order.verifiedFFName,
-
-                                order.verifiedPlayerName,
-
-                                order.ffName,
-
-                                order.quantity,
-
-                                order.qty
+                                order.quantity
 
                             ];
 
@@ -2357,21 +2464,25 @@ if (search) {
                             return values.some(
                                 function (value) {
 
-                                    return (
+                                    if (
+                                        value ===
+                                        undefined
+                                        ||
+                                        value ===
+                                        null
+                                    ) {
 
-                                        value !== undefined
-                                        &&
-                                        value !== null
-                                        &&
-                                        String(
-                                            value
-                                        )
-                                            .toLowerCase()
-                                            .includes(
-                                                text
-                                            )
+                                        return false;
+                                    }
 
-                                    );
+
+                                    return String(
+                                        value
+                                    )
+                                        .toLowerCase()
+                                        .includes(
+                                            text
+                                        );
 
                                 }
                             );
@@ -2388,31 +2499,40 @@ if (search) {
 
         }
     );
+
 }
 
 
 /* =====================================================
-   REFRESH
+   REFRESH BUTTON
 ===================================================== */
 
-const refresh =
+const refreshButton =
+    document.getElementById(
+        "refreshButton"
+    )
+    ||
     document.getElementById(
         "refresh"
     );
 
 
-if (refresh) {
+if (refreshButton) {
 
-    refresh.addEventListener(
+    refreshButton.addEventListener(
         "click",
         async function () {
 
-            refresh.disabled =
+            const oldText =
+                refreshButton.textContent;
+
+
+            refreshButton.disabled =
                 true;
 
 
-            refresh.textContent =
-                "Loading...";
+            refreshButton.textContent =
+                "REFRESHING...";
 
 
             try {
@@ -2420,19 +2540,28 @@ if (refresh) {
                 await loadOrders();
 
             }
+            catch (error) {
+
+                console.error(
+                    "Refresh error:",
+                    error
+                );
+
+            }
             finally {
 
-                refresh.disabled =
+                refreshButton.disabled =
                     false;
 
 
-                refresh.textContent =
-                    "↻ Refresh";
+                refreshButton.textContent =
+                    oldText;
 
             }
 
         }
     );
+
 }
 
 
@@ -2440,15 +2569,19 @@ if (refresh) {
    LOGOUT
 ===================================================== */
 
-const logout =
+const logoutButton =
     document.getElementById(
         "logout"
+    )
+    ||
+    document.getElementById(
+        "logoutButton"
     );
 
 
-if (logout) {
+if (logoutButton) {
 
-    logout.addEventListener(
+    logoutButton.addEventListener(
         "click",
         async function () {
 
@@ -2458,108 +2591,363 @@ if (logout) {
                     auth
                 );
 
-            }
-            finally {
 
                 window.location.href =
                     "./admin-login.html";
 
             }
+            catch (error) {
+
+                console.error(
+                    "Logout error:",
+                    error
+                );
+
+
+                alert(
+                    "Logout failed."
+                );
+
+            }
 
         }
     );
+
 }
+/* =====================================================
+   GET ADMIN SECRET
+===================================================== */
+
+function getAdminSecret() {
+
+    /*
+     * IMPORTANT:
+     * Never hard-code ADMIN_SECRET inside admin.js.
+     *
+     * This asks the admin for it only when a protected
+     * Worker action is required.
+     */
+
+    let secret =
+        sessionStorage.getItem(
+            "zyper_admin_secret"
+        );
+
+
+    if (secret) {
+        return secret;
+    }
+
+
+    secret =
+        prompt(
+            "Enter Admin Security Key:"
+        );
+
+
+    if (!secret) {
+        return "";
+    }
+
+
+    secret =
+        secret.trim();
+
+
+    if (!secret) {
+        return "";
+    }
+
+
+    sessionStorage.setItem(
+        "zyper_admin_secret",
+        secret
+    );
+
+
+    return secret;
+}
+
+
+/* =====================================================
+   CLEAR ADMIN SECRET
+===================================================== */
+
+function clearAdminSecret() {
+
+    sessionStorage.removeItem(
+        "zyper_admin_secret"
+    );
+
+}
+
+
+/* =====================================================
+   WORKER REQUEST
+===================================================== */
+
+async function workerRequest(
+    body,
+    requireAdminSecret = false
+) {
+
+    const user =
+        auth.currentUser;
+
+
+    if (!user) {
+
+        throw new Error(
+            "Admin login is required."
+        );
+
+    }
+
+
+    const token =
+        await user.getIdToken(
+            true
+        );
+
+
+    const headers = {
+
+        "Content-Type":
+            "application/json",
+
+        "Authorization":
+            `Bearer ${token}`
+
+    };
+
+
+    /* -----------------------------------------
+       PROTECTED ADMIN ACTION
+    ----------------------------------------- */
+
+    if (
+        requireAdminSecret
+    ) {
+
+        const adminSecret =
+            getAdminSecret();
+
+
+        if (!adminSecret) {
+
+            throw new Error(
+                "Admin Security Key is required."
+            );
+
+        }
+
+
+        headers["X-Admin-Key"] =
+            adminSecret;
+
+    }
+
+
+    let response;
+
+
+    try {
+
+        response =
+            await fetch(
+                WORKER_URL,
+                {
+                    method:
+                        "POST",
+
+                    headers:
+                        headers,
+
+                    body:
+                        JSON.stringify(
+                            body
+                        )
+                }
+            );
+
+    }
+    catch (error) {
+
+        throw new Error(
+            "Could not connect to Zyper server."
+        );
+
+    }
+
+
+    let result = {};
+
+
+    try {
+
+        result =
+            await response.json();
+
+    }
+    catch (error) {
+
+        result = {};
+
+    }
+
+
+    /* -----------------------------------------
+       INVALID ADMIN SECRET
+    ----------------------------------------- */
+
+    if (
+        response.status === 401
+        ||
+        response.status === 403
+    ) {
+
+        if (
+            requireAdminSecret
+        ) {
+
+            clearAdminSecret();
+
+        }
+
+
+        throw new Error(
+            result.message
+            ||
+            result.error
+            ||
+            "Unauthorized request."
+        );
+
+    }
+
+
+    if (
+        !response.ok
+        ||
+        result.success === false
+    ) {
+
+        throw new Error(
+            result.message
+            ||
+            result.error
+            ||
+            `Server error (${response.status})`
+        );
+
+    }
+
+
+    return result;
+}
+
+
+/* =====================================================
+   RELEASE ORDER MONEY
+===================================================== */
+
+async function releaseOrderMoney(
+    orderId
+) {
+
+    if (!orderId) {
+
+        throw new Error(
+            "Order ID is required."
+        );
+
+    }
+
+
+    return await workerRequest(
+        {
+
+            action:
+                "release_order_hold",
+
+            orderId:
+                orderId
+
+        },
+        true
+    );
+
+}
+
+
+/* =====================================================
+   CREATE REDEEM CODE ELEMENTS
+===================================================== */
+
+const createRedeemButton =
+
+    document.getElementById(
+        "createRedeem"
+    )
+
+    ||
+
+    document.getElementById(
+        "createRedeemButton"
+    );
+
+
+const redeemAmountInput =
+
+    document.getElementById(
+        "redeemAmount"
+    );
+
+
+const redeemResult =
+
+    document.getElementById(
+        "redeemResult"
+    );
+
+
 /* =====================================================
    CREATE REDEEM CODE
 ===================================================== */
 
-const createRedeem =
-    document.getElementById(
-        "createRedeem"
-    );
+if (
+    createRedeemButton
+) {
 
-
-if (createRedeem) {
-
-    createRedeem.addEventListener(
+    createRedeemButton.addEventListener(
         "click",
         async function () {
 
-            const secretInput =
-                document.getElementById(
-                    "adminSecret"
-                );
-
-
-            const amountInput =
-                document.getElementById(
-                    "redeemAmount"
-                );
-
-
-            const resultBox =
-                document.getElementById(
-                    "redeemResult"
-                );
-
-
-            const codeBox =
-                document.getElementById(
-                    "redeemCode"
-                );
-
-
-            const valueBox =
-                document.getElementById(
-                    "redeemValue"
-                );
-
-
-            const statusBox =
-                document.getElementById(
-                    "redeemStatus"
-                );
-
+            /* -----------------------------------------
+               GET AMOUNT
+            ----------------------------------------- */
 
             if (
-                !secretInput ||
-                !amountInput
+                !redeemAmountInput
             ) {
+
+                alert(
+                    "Redeem amount input not found."
+                );
+
                 return;
             }
-
-
-            const secret =
-                secretInput.value
-                    .trim();
 
 
             const amount =
                 Number(
-                    amountInput.value
+                    redeemAmountInput.value
                 );
 
 
-            /* =================================================
-               CHECK SECRET
-            ================================================= */
-
-            if (!secret) {
-
-                alert(
-                    "Please enter your Admin Secret Key."
-                );
-
-
-                secretInput.focus();
-
-                return;
-            }
-
-
-            /* =================================================
-               CHECK AMOUNT
-            ================================================= */
+            /* -----------------------------------------
+               VALIDATE AMOUNT
+            ----------------------------------------- */
 
             if (
                 !Number.isFinite(
@@ -2567,254 +2955,305 @@ if (createRedeem) {
                 )
                 ||
                 amount <= 0
-                ||
-                amount > 1000000
             ) {
 
                 alert(
-                    "Enter a valid amount between LKR 1 and LKR 1,000,000."
+                    "Enter a valid redeem amount."
                 );
 
-
-                amountInput.focus();
+                redeemAmountInput.focus();
 
                 return;
             }
 
 
-            createRedeem.disabled =
-                true;
+            if (
+                !Number.isInteger(
+                    amount
+                )
+            ) {
 
+                alert(
+                    "Redeem amount must be a whole number."
+                );
 
-            createRedeem.textContent =
-                "⏳ Creating...";
+                redeemAmountInput.focus();
 
-
-            if (resultBox) {
-
-                resultBox.style.display =
-                    "none";
-
+                return;
             }
 
 
-            if (statusBox) {
+            const confirmed =
+                confirm(
 
-                statusBox.textContent =
-                    "🔐 Creating secure redeem code...";
+                    `Create a redeem code for LKR ${amount.toLocaleString(
+                        "en-LK"
+                    )}?`
+
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            /* -----------------------------------------
+               BUTTON LOADING
+            ----------------------------------------- */
+
+            const oldText =
+                createRedeemButton.textContent;
+
+
+            createRedeemButton.disabled =
+                true;
+
+
+            createRedeemButton.textContent =
+                "CREATING...";
+
+
+            if (
+                redeemResult
+            ) {
+
+                redeemResult.innerHTML = `
+
+                    <div
+                        class="
+                            redeem-result-message
+                        "
+                    >
+                        Creating redeem code...
+                    </div>
+
+                `;
 
             }
 
 
             try {
 
-                /* =================================================
-                   CALL WORKER
-                ================================================= */
+                /* -----------------------------------------
+                   CREATE CODE THROUGH WORKER
+                ----------------------------------------- */
 
-                const response =
-                    await fetch(
-                        WORKER_URL,
+                const result =
+                    await workerRequest(
                         {
 
-                            method:
-                                "POST",
+                            action:
+                                "create_redeem_code",
 
+                            amount:
+                                amount
 
-                            headers: {
-
-                                "Content-Type":
-                                    "application/json",
-
-                                "X-Admin-Key":
-                                    secret
-
-                            },
-
-
-                            body:
-                                JSON.stringify({
-
-                                    action:
-                                        "create_redeem_code",
-
-                                    amount:
-                                        amount
-
-                                })
-
-                        }
+                        },
+                        true
                     );
 
 
-                let data;
+                /* -----------------------------------------
+                   GET GENERATED CODE
+                ----------------------------------------- */
 
+                const code =
 
-                try {
-
-                    data =
-                        await response.json();
-
-                }
-                catch (error) {
-
-                    throw new Error(
-                        "Invalid response from server."
-                    );
-
-                }
-
-
-                /* =================================================
-                   WORKER ERROR
-                ================================================= */
-
-                if (
-                    !response.ok
+                    result.code
                     ||
-                    !data
+                    result.redeemCode
                     ||
-                    !data.success
-                ) {
-
-                    throw new Error(
-
-                        data?.message
-                        ||
-                        `Server error (${response.status})`
-
-                    );
-
-                }
-
-
-                /* =================================================
-                   CHECK CODE
-                ================================================= */
-
-                if (!data.code) {
-
-                    throw new Error(
-                        "Server did not return a redeem code."
-                    );
-
-                }
-
-
-                /* =================================================
-                   SHOW RESULT
-                ================================================= */
-
-                if (
-                    typeof window.showRedeemResult ===
-                    "function"
-                ) {
-
-                    window.showRedeemResult(
-                        data.code,
-                        data.amount
-                    );
-
-                }
-                else {
-
-                    if (codeBox) {
-
-                        codeBox.textContent =
-                            data.code;
-
-                    }
-
-
-                    if (valueBox) {
-
-                        valueBox.textContent =
-                            "LKR " +
-                            Number(
-                                data.amount
-                            )
-                                .toLocaleString(
-                                    "en-LK"
-                                );
-
-                    }
-
-
-                    if (resultBox) {
-
-                        resultBox.style.display =
-                            "block";
-
-                    }
-
-                }
-
-
-                if (statusBox) {
-
-                    statusBox.textContent =
-                        "✅ Redeem code created successfully.";
-
-                }
-
-
-                /* =================================================
-                   SECURITY
-
-                   Remove secret from the page after use.
-                ================================================= */
-
-                secretInput.value =
+                    result.data?.code
+                    ||
                     "";
 
 
-                amountInput.value =
+                if (!code) {
+
+                    throw new Error(
+                        "Server did not return the redeem code."
+                    );
+
+                }
+
+
+                const returnedAmount =
+                    Number(
+
+                        result.amount
+                        ??
+                        result.data?.amount
+                        ??
+                        amount
+
+                    );
+
+
+                /* -----------------------------------------
+                   SHOW RESULT
+                ----------------------------------------- */
+
+                if (
+                    redeemResult
+                ) {
+
+                    redeemResult.innerHTML = `
+
+                        <div
+                            class="
+                                redeem-created-card
+                            "
+                        >
+
+                            <div
+                                class="
+                                    redeem-created-title
+                                "
+                            >
+                                ✅ Redeem Code Created
+                            </div>
+
+
+                            <div
+                                class="
+                                    redeem-created-amount
+                                "
+                            >
+                                LKR
+                                ${returnedAmount.toLocaleString(
+                                    "en-LK"
+                                )}
+                            </div>
+
+
+                            <div
+                                class="
+                                    redeem-code-box
+                                "
+                            >
+
+                                <span
+                                    id="
+                                        generatedRedeemCode
+                                    "
+                                >
+                                    ${escapeHTML(
+                                        code
+                                    )}
+                                </span>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="
+                                    copy-redeem-code-btn
+                                "
+                                id="
+                                    copyRedeemCode
+                                "
+                            >
+                                📋 COPY CODE
+                            </button>
+
+                        </div>
+
+                    `;
+
+
+                    /* -----------------------------------------
+                       COPY BUTTON
+                    ----------------------------------------- */
+
+                    const copyButton =
+                        document.getElementById(
+                            "copyRedeemCode"
+                        );
+
+
+                    if (
+                        copyButton
+                    ) {
+
+                        copyButton.addEventListener(
+                            "click",
+                            async function () {
+
+                                await copyRedeemCode(
+                                    code,
+                                    copyButton
+                                );
+
+                            }
+                        );
+
+                    }
+
+                }
+
+
+                redeemAmountInput.value =
                     "";
 
             }
             catch (error) {
 
                 console.error(
-                    "Redeem creation error:",
+                    "Create redeem code error:",
                     error
                 );
 
 
-                if (statusBox) {
+                if (
+                    redeemResult
+                ) {
 
-                    statusBox.textContent =
-                        "❌ " +
-                        (
-                            error.message
-                            ||
-                            "Failed to create code."
-                        );
+                    redeemResult.innerHTML = `
+
+                        <div
+                            class="
+                                redeem-result-error
+                            "
+                        >
+                            ❌
+                            ${escapeHTML(
+                                error.message ||
+                                "Failed to create redeem code."
+                            )}
+                        </div>
+
+                    `;
 
                 }
+                else {
 
+                    alert(
+                        "❌ " +
+                        (
+                            error.message ||
+                            "Failed to create redeem code."
+                        )
+                    );
 
-                alert(
-
-                    error.message
-                    ||
-                    "Failed to create redeem code."
-
-                );
+                }
 
             }
             finally {
 
-                createRedeem.disabled =
+                createRedeemButton.disabled =
                     false;
 
 
-                createRedeem.textContent =
-                    "💎 Create Code";
+                createRedeemButton.textContent =
+                    oldText;
 
             }
 
         }
     );
+
 }
 
 
@@ -2822,147 +3261,177 @@ if (createRedeem) {
    COPY REDEEM CODE
 ===================================================== */
 
-const copyRedeem =
-    document.getElementById(
-        "copyRedeem"
-    );
+async function copyRedeemCode(
+    code,
+    button = null
+) {
+
+    if (!code) {
+        return;
+    }
 
 
-if (copyRedeem) {
+    const oldText =
+        button
+            ? button.textContent
+            : "";
 
-    copyRedeem.addEventListener(
-        "click",
-        async function () {
 
-            const codeBox =
-                document.getElementById(
-                    "redeemCode"
+    try {
+
+        /* -----------------------------------------
+           MODERN CLIPBOARD
+        ----------------------------------------- */
+
+        if (
+            navigator.clipboard
+            &&
+            window.isSecureContext
+        ) {
+
+            await navigator.clipboard.writeText(
+                code
+            );
+
+        }
+        else {
+
+            /* -----------------------------------------
+               FALLBACK COPY
+            ----------------------------------------- */
+
+            const textarea =
+                document.createElement(
+                    "textarea"
                 );
 
 
-            if (!codeBox) {
-                return;
-            }
+            textarea.value =
+                code;
 
 
-            const code =
-                codeBox.textContent
-                    .trim();
+            textarea.style.position =
+                "fixed";
 
 
-            if (!code) {
-
-                alert(
-                    "No redeem code available."
-                );
-
-                return;
-            }
+            textarea.style.left =
+                "-9999px";
 
 
-            try {
-
-                /* =================================================
-                   MODERN CLIPBOARD
-                ================================================= */
-
-                await navigator.clipboard
-                    .writeText(
-                        code
-                    );
+            textarea.style.top =
+                "-9999px";
 
 
-                copyRedeem.textContent =
-                    "✅ Copied!";
+            document.body.appendChild(
+                textarea
+            );
 
 
-                setTimeout(
-                    function () {
+            textarea.focus();
 
-                        copyRedeem.textContent =
-                            "📋 Copy Code";
-
-                    },
-                    1500
-                );
-
-            }
-            catch (error) {
-
-                console.error(
-                    "Clipboard error:",
-                    error
-                );
+            textarea.select();
 
 
-                /* =================================================
-                   FALLBACK COPY METHOD
-                ================================================= */
-
-                const textarea =
-                    document.createElement(
-                        "textarea"
-                    );
+            document.execCommand(
+                "copy"
+            );
 
 
-                textarea.value =
-                    code;
+            textarea.remove();
+
+        }
 
 
-                textarea.style.position =
-                    "fixed";
+        if (
+            button
+        ) {
+
+            button.textContent =
+                "✅ COPIED";
 
 
-                textarea.style.opacity =
-                    "0";
+            setTimeout(
+                function () {
+
+                    button.textContent =
+                        oldText;
+
+                },
+                1800
+            );
+
+        }
+
+    }
+    catch (error) {
+
+        console.error(
+            "Copy redeem code error:",
+            error
+        );
 
 
-                document.body.appendChild(
-                    textarea
-                );
+        if (
+            button
+        ) {
+
+            button.textContent =
+                "❌ COPY FAILED";
 
 
-                textarea.focus();
-                textarea.select();
+            setTimeout(
+                function () {
+
+                    button.textContent =
+                        oldText;
+
+                },
+                1800
+            );
+
+        }
+        else {
+
+            alert(
+                "Could not copy redeem code."
+            );
+
+        }
+
+    }
+
+}
 
 
-                try {
+/* =====================================================
+   ENTER KEY - CREATE REDEEM
+===================================================== */
 
-                    document.execCommand(
-                        "copy"
-                    );
+if (
+    redeemAmountInput
+    &&
+    createRedeemButton
+) {
 
+    redeemAmountInput.addEventListener(
+        "keydown",
+        function (event) {
 
-                    copyRedeem.textContent =
-                        "✅ Copied!";
+            if (
+                event.key ===
+                "Enter"
+            ) {
 
-
-                    setTimeout(
-                        function () {
-
-                            copyRedeem.textContent =
-                                "📋 Copy Code";
-
-                        },
-                        1500
-                    );
-
-                }
-                catch (copyError) {
-
-                    alert(
-                        "Copy failed. Please copy the code manually."
-                    );
-
-                }
+                event.preventDefault();
 
 
-                textarea.remove();
+                createRedeemButton.click();
 
             }
 
         }
     );
+
 }
 
 
@@ -2970,39 +3439,41 @@ if (copyRedeem) {
    ESCAPE HTML
 ===================================================== */
 
-function escapeHTML(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
+function escapeHTML(
+    value
+) {
 
     return String(
-        value
+        value ?? ""
     )
-        .replaceAll(
-            "&",
+        .replace(
+            /&/g,
             "&amp;"
         )
-        .replaceAll(
-            "<",
+        .replace(
+            /</g,
             "&lt;"
         )
-        .replaceAll(
-            ">",
+        .replace(
+            />/g,
             "&gt;"
         )
-        .replaceAll(
-            '"',
+        .replace(
+            /"/g,
             "&quot;"
         )
-        .replaceAll(
-            "'",
+        .replace(
+            /'/g,
             "&#039;"
         );
+
 }
+
+
+/* =====================================================
+   ADMIN.JS READY
+===================================================== */
+
+console.log(
+    "Zyper Admin Dashboard loaded."
+);
