@@ -20,6 +20,15 @@ href="./admin.css">
 <style>
 
 /* =====================================================
+   PAGE EXTRA STYLES
+===================================================== */
+
+*{
+box-sizing:border-box;
+}
+
+
+/* =====================================================
    REDEEM ADMIN
 ===================================================== */
 
@@ -106,13 +115,16 @@ white-space:nowrap;
 }
 
 
+/* =====================================================
+   REDEEM FORM
+===================================================== */
+
 .redeem-form{
 
 display:grid;
 
 grid-template-columns:
-1.3fr
-.7fr
+1fr
 auto;
 
 gap:12px;
@@ -125,8 +137,6 @@ align-items:center;
 .redeem-input{
 
 width:100%;
-
-box-sizing:border-box;
 
 padding:15px 17px;
 
@@ -217,6 +227,10 @@ transform:none;
 }
 
 
+/* =====================================================
+   REDEEM RESULT
+===================================================== */
+
 .redeem-status{
 
 margin-top:15px;
@@ -252,38 +266,53 @@ rgba(16,185,129,.28);
 }
 
 
-.redeem-result-top{
+.redeem-result-message{
 
-display:flex;
-
-justify-content:
-space-between;
-
-align-items:center;
-
-gap:15px;
-
-margin-bottom:15px;
-
-}
-
-
-.redeem-result-title{
-
-color:#4ade80;
-
-font-weight:700;
+color:#cbd5e1;
 
 font-size:14px;
 
 }
 
 
-.redeem-generated-time{
+.redeem-result-error{
 
-color:#64748b;
+color:#fca5a5;
 
-font-size:12px;
+font-weight:700;
+
+}
+
+
+.redeem-created-card{
+
+width:100%;
+
+}
+
+
+.redeem-created-title{
+
+color:#4ade80;
+
+font-weight:800;
+
+font-size:15px;
+
+margin-bottom:12px;
+
+}
+
+
+.redeem-created-amount{
+
+color:#c4b5fd;
+
+font-size:18px;
+
+font-weight:800;
+
+margin-bottom:14px;
 
 }
 
@@ -299,7 +328,7 @@ gap:10px;
 }
 
 
-.redeem-code{
+.redeem-code-box span{
 
 flex:1;
 
@@ -324,10 +353,12 @@ letter-spacing:3px;
 
 user-select:all;
 
+word-break:break-all;
+
 }
 
 
-.copy-redeem-btn{
+.copy-redeem-code-btn{
 
 min-height:57px;
 
@@ -345,71 +376,21 @@ color:white;
 
 font-weight:700;
 
+white-space:nowrap;
+
 }
 
 
-.copy-redeem-btn:hover{
+.copy-redeem-code-btn:hover{
 
 background:#475569;
 
 }
 
 
-.redeem-details{
-
-display:grid;
-
-grid-template-columns:
-repeat(2,1fr);
-
-gap:12px;
-
-margin-top:15px;
-
-}
-
-
-.redeem-detail{
-
-padding:14px;
-
-border-radius:12px;
-
-background:
-rgba(15,23,42,.7);
-
-border:
-1px solid
-rgba(148,163,184,.1);
-
-}
-
-
-.redeem-detail-label{
-
-display:block;
-
-color:#64748b;
-
-font-size:11px;
-
-margin-bottom:5px;
-
-text-transform:uppercase;
-
-}
-
-
-.redeem-detail-value{
-
-color:white;
-
-font-size:16px;
-
-font-weight:700;
-
-}
-
+/* =====================================================
+   CUSTOMER NOTE
+===================================================== */
 
 .customer-note{
 
@@ -432,7 +413,7 @@ line-height:1.5;
 
 
 /* =====================================================
-   NEW WALLET HOLD ACTIONS
+   WALLET HOLD ACTIONS
 ===================================================== */
 
 .release-money-btn{
@@ -491,6 +472,10 @@ transform:none;
 
 }
 
+
+/* =====================================================
+   ACTION STATES
+===================================================== */
 
 .order-action-state{
 
@@ -579,24 +564,210 @@ rgba(148,163,184,.14);
 }
 
 
+/* =====================================================
+   ORDER TABLE
+===================================================== */
 
-/* AUTOMATIC ORDER TABLE */
-.table-container{overflow-x:auto;}
-.table-container table{min-width:1550px;}
-.admin-state-badge{display:inline-block;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:800;white-space:nowrap;}
-.state-processing{color:#fde68a;background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.25);}
-.state-review{color:#fda4af;background:rgba(244,63,94,.10);border:1px solid rgba(244,63,94,.25);}
-.state-failed{color:#fca5a5;background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.25);}
-.state-success{color:#86efac;background:rgba(34,197,94,.10);border:1px solid rgba(34,197,94,.25);}
-.state-neutral{color:#cbd5e1;background:rgba(148,163,184,.08);border:1px solid rgba(148,163,184,.14);}
-.ff-name-verified{color:#86efac;font-weight:800;}
-.qty-badge{display:inline-block;min-width:38px;padding:6px 9px;border-radius:9px;text-align:center;font-weight:800;color:#c4b5fd;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.22);}
+.table-container{
+
+overflow-x:auto;
+
+-webkit-overflow-scrolling:touch;
+
+}
+
+
+.table-container table{
+
+min-width:1850px;
+
+}
+
+
+.table-container th{
+
+white-space:nowrap;
+
+}
+
+
+.table-container td{
+
+vertical-align:middle;
+
+}
+
+
+/* =====================================================
+   STATUS BADGES
+===================================================== */
+
+.admin-state-badge{
+
+display:inline-block;
+
+padding:7px 10px;
+
+border-radius:999px;
+
+font-size:11px;
+
+font-weight:800;
+
+white-space:nowrap;
+
+}
+
+
+.state-processing{
+
+color:#fde68a;
+
+background:
+rgba(245,158,11,.10);
+
+border:
+1px solid
+rgba(245,158,11,.25);
+
+}
+
+
+.state-review{
+
+color:#fda4af;
+
+background:
+rgba(244,63,94,.10);
+
+border:
+1px solid
+rgba(244,63,94,.25);
+
+}
+
+
+.state-failed{
+
+color:#fca5a5;
+
+background:
+rgba(239,68,68,.10);
+
+border:
+1px solid
+rgba(239,68,68,.25);
+
+}
+
+
+.state-success{
+
+color:#86efac;
+
+background:
+rgba(34,197,94,.10);
+
+border:
+1px solid
+rgba(34,197,94,.25);
+
+}
+
+
+.state-neutral{
+
+color:#cbd5e1;
+
+background:
+rgba(148,163,184,.08);
+
+border:
+1px solid
+rgba(148,163,184,.14);
+
+}
+
+
+/* =====================================================
+   VERIFIED FF NAME
+===================================================== */
+
+.ff-name-verified{
+
+color:#86efac;
+
+font-weight:800;
+
+}
+
+
+/* =====================================================
+   QUANTITY
+===================================================== */
+
+.qty-badge{
+
+display:inline-block;
+
+min-width:38px;
+
+padding:6px 9px;
+
+border-radius:9px;
+
+text-align:center;
+
+font-weight:800;
+
+color:#c4b5fd;
+
+background:
+rgba(124,58,237,.12);
+
+border:
+1px solid
+rgba(124,58,237,.22);
+
+}
+
+
+/* =====================================================
+   DATE AREA EXTRA
+===================================================== */
+
+.date-search{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+}
+
+
+.date-search input{
+
+min-height:42px;
+
+}
+
 
 /* =====================================================
    MOBILE
 ===================================================== */
 
 @media(max-width:850px){
+
+.redeem-admin{
+
+padding:20px;
+
+}
+
 
 .redeem-form{
 
@@ -621,27 +792,42 @@ flex-direction:column;
 }
 
 
-.redeem-code{
+.redeem-code-box span{
 
 width:100%;
-
-box-sizing:border-box;
 
 font-size:20px;
 
 }
 
 
-.copy-redeem-btn{
+.copy-redeem-code-btn{
 
 width:100%;
 
 }
 
 
-.redeem-details{
+.date-search{
 
-grid-template-columns:1fr;
+align-items:stretch;
+
+flex-direction:column;
+
+}
+
+
+.date-search input,
+.date-search button{
+
+width:100%;
+
+}
+
+
+.search-box input{
+
+width:100%;
 
 }
 
@@ -698,6 +884,7 @@ Logout
 </aside>
 
 
+
 <!-- =====================================================
      MAIN
 ===================================================== -->
@@ -705,7 +892,9 @@ Logout
 <main class="main">
 
 
-<!-- TOP BAR -->
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
 
 <div class="topbar">
 
@@ -715,6 +904,7 @@ Logout
 <h1>
 Orders Dashboard
 </h1>
+
 
 <p class="subtitle">
 Zyper Diamond Store
@@ -738,7 +928,7 @@ type="button">
 
 
 <!-- =====================================================
-     REDEEM CODE
+     WALLET REDEEM CENTER
 ===================================================== -->
 
 <section class="redeem-admin">
@@ -753,6 +943,7 @@ type="button">
 💰 Wallet Redeem Center
 </h2>
 
+
 <p>
 Generate a secure wallet balance code for a customer.
 </p>
@@ -761,9 +952,7 @@ Generate a secure wallet balance code for a customer.
 
 
 <div class="redeem-badge">
-
 🔐 ADMIN ONLY
-
 </div>
 
 
@@ -775,21 +964,14 @@ Generate a secure wallet balance code for a customer.
 
 
 <input
-type="password"
-id="adminSecret"
-class="redeem-input"
-placeholder="Enter Admin Secret Key"
-autocomplete="off">
-
-
-<input
 type="number"
 id="redeemAmount"
 class="redeem-input"
 placeholder="Amount (LKR)"
 min="1"
 max="1000000"
-step="1">
+step="1"
+inputmode="numeric">
 
 
 <button
@@ -810,6 +992,8 @@ type="button">
 id="redeemStatus"
 class="redeem-status">
 
+Enter the received amount and create a customer wallet code.
+
 </div>
 
 
@@ -819,87 +1003,6 @@ id="redeemResult"
 class="redeem-result"
 style="display:none;">
 
-
-<div class="redeem-result-top">
-
-
-<div class="redeem-result-title">
-
-✅ Redeem Code Created
-
-</div>
-
-
-<div
-id="redeemGeneratedTime"
-class="redeem-generated-time">
-
-</div>
-
-
-</div>
-
-
-
-<div class="redeem-code-box">
-
-
-<div
-id="redeemCode"
-class="redeem-code">
-
-</div>
-
-
-<button
-id="copyRedeem"
-class="copy-redeem-btn"
-type="button">
-
-📋 Copy Code
-
-</button>
-
-
-</div>
-
-
-
-<div class="redeem-details">
-
-
-<div class="redeem-detail">
-
-<span class="redeem-detail-label">
-Wallet Value
-</span>
-
-<span
-id="redeemValue"
-class="redeem-detail-value">
-
-LKR 0
-
-</span>
-
-</div>
-
-
-<div class="redeem-detail">
-
-<span class="redeem-detail-label">
-Status
-</span>
-
-<span class="redeem-detail-value">
-
-AVAILABLE
-
-</span>
-
-</div>
-
-
 </div>
 
 
@@ -907,11 +1010,7 @@ AVAILABLE
 <div class="customer-note">
 
 💡 <strong>Customer:</strong>
-Send this redeem code to the customer.
-The customer can redeem it while logged into their own account.
-
-</div>
-
+After you verify the customer's payment, create the redeem code and send the code to the customer. The customer can redeem it while logged into their own Zyper account.
 
 </div>
 
@@ -928,9 +1027,7 @@ The customer can redeem it while logged into their own account.
 
 
 <div class="date-title">
-
 📅 Order Date
-
 </div>
 
 
@@ -964,7 +1061,7 @@ Today
 
 
 <!-- =====================================================
-     CARDS
+     DASHBOARD CARDS
 ===================================================== -->
 
 <div class="cards">
@@ -981,6 +1078,7 @@ Orders
 </h2>
 
 </div>
+
 
 
 <div class="card">
@@ -1001,6 +1099,7 @@ Rs.
 </div>
 
 
+
 <div class="card">
 
 <h3>
@@ -1012,6 +1111,7 @@ Pending
 </h2>
 
 </div>
+
 
 
 <div class="card">
@@ -1041,7 +1141,7 @@ Success
 <input
 id="search"
 type="text"
-placeholder="Search Order ID, UID, customer, product...">
+placeholder="Search Order ID, UID, FF name, customer, product...">
 
 
 </div>
@@ -1059,16 +1159,88 @@ placeholder="Search Order ID, UID, customer, product...">
 
 
 <thead>
+
 <tr>
-<th>Order ID</th><th>Customer</th><th>Firebase UID</th><th>Game UID</th>
-<th>Verified FF Name</th><th>Product</th><th>Qty</th><th>Unit Price</th>
-<th>Total</th><th>Payment</th><th>Ordered</th><th>Completed</th>
-<th>Status</th><th>Wallet</th><th>Provider</th><th>Action</th>
+
+<th>
+Order ID
+</th>
+
+<th>
+Customer
+</th>
+
+<th>
+Firebase UID
+</th>
+
+<th>
+Game UID
+</th>
+
+<th>
+Verified FF Name
+</th>
+
+<th>
+Product
+</th>
+
+<th>
+Qty
+</th>
+
+<th>
+Unit Price
+</th>
+
+<th>
+Total
+</th>
+
+<th>
+Payment
+</th>
+
+<th>
+Ordered
+</th>
+
+<th>
+Completed
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Wallet
+</th>
+
+<th>
+Provider
+</th>
+
+<th>
+Action
+</th>
+
 </tr>
+
 </thead>
 
 
+
 <tbody id="orders">
+
+<tr>
+
+<td colspan="16">
+Loading orders...
+</td>
+
+</tr>
 
 </tbody>
 
@@ -1086,166 +1258,13 @@ placeholder="Search Order ID, UID, customer, product...">
 
 
 
+<!-- =====================================================
+     ADMIN JAVASCRIPT
+===================================================== -->
+
 <script
 type="module"
-src="./admin.js">
-</script>
-
-
-
-<script>
-
-document.addEventListener(
-"DOMContentLoaded",
-function(){
-
-const createButton =
-document.getElementById(
-"createRedeem"
-);
-
-const copyButton =
-document.getElementById(
-"copyRedeem"
-);
-
-const amountInput =
-document.getElementById(
-"redeemAmount"
-);
-
-const resultBox =
-document.getElementById(
-"redeemResult"
-);
-
-const codeBox =
-document.getElementById(
-"redeemCode"
-);
-
-const valueBox =
-document.getElementById(
-"redeemValue"
-);
-
-const statusBox =
-document.getElementById(
-"redeemStatus"
-);
-
-const timeBox =
-document.getElementById(
-"redeemGeneratedTime"
-);
-
-
-if(!createButton){
-return;
-}
-
-
-createButton.addEventListener(
-"click",
-function(){
-
-resultBox.style.display =
-"none";
-
-statusBox.textContent =
-"🔐 Preparing secure redeem code...";
-
-}
-);
-
-
-amountInput.addEventListener(
-"keydown",
-function(event){
-
-if(event.key === "Enter"){
-
-createButton.click();
-
-}
-
-}
-);
-
-
-copyButton.addEventListener(
-"click",
-async function(){
-
-const code =
-codeBox.textContent.trim();
-
-if(!code){
-return;
-}
-
-try{
-
-await navigator.clipboard.writeText(
-code
-);
-
-copyButton.textContent =
-"✅ Copied!";
-
-setTimeout(
-function(){
-
-copyButton.textContent =
-"📋 Copy Code";
-
-},
-1800
-);
-
-}
-catch(error){
-
-alert(
-"Copy failed. Please select the code manually."
-);
-
-}
-
-}
-);
-
-
-window.showRedeemResult =
-function(code,amount){
-
-codeBox.textContent =
-code;
-
-valueBox.textContent =
-"LKR " +
-Number(amount)
-.toLocaleString(
-"en-LK"
-);
-
-timeBox.textContent =
-new Date()
-.toLocaleString(
-"en-LK"
-);
-
-resultBox.style.display =
-"block";
-
-statusBox.textContent =
-"✅ Redeem code created successfully.";
-
-};
-
-}
-);
-
+src="./admin.js?v=20260828">
 </script>
 
 
