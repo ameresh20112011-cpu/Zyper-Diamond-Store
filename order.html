@@ -147,8 +147,7 @@ body{
 
 .title{
 
-    margin:
-    6px 0 0;
+    margin:6px 0 0;
 
     text-align:center;
 
@@ -174,8 +173,7 @@ body{
 
 .subtitle{
 
-    margin:
-    5px 0 20px;
+    margin:5px 0 20px;
 
     text-align:center;
 
@@ -281,6 +279,8 @@ body{
 
     align-items:center;
 
+    justify-content:space-between;
+
     gap:9px;
 
     margin-bottom:12px;
@@ -288,6 +288,45 @@ body{
     font-size:14px;
 
     font-weight:700;
+
+}
+
+
+.wallet-title-main{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+}
+
+
+.wallet-refresh-button{
+
+    width:auto !important;
+
+    min-height:32px !important;
+
+    padding:6px 10px !important;
+
+    border-radius:9px !important;
+
+    margin:0 !important;
+
+    font-size:10px !important;
+
+    font-weight:600 !important;
+
+    background:
+    rgba(59,130,246,.14) !important;
+
+    border:
+    1px solid
+    rgba(96,165,250,.20) !important;
+
+    box-shadow:none !important;
 
 }
 
@@ -349,7 +388,7 @@ body{
 
 
 /* =====================================================
-   STATUS
+   WALLET STATUS
 ===================================================== */
 
 .wallet-status{
@@ -483,8 +522,7 @@ body{
 
     height:48px;
 
-    padding:
-    0 14px;
+    padding:0 14px;
 
     border-radius:11px;
 
@@ -517,6 +555,221 @@ body{
     box-shadow:
     0 0 0 3px
     rgba(96,165,250,.08);
+
+}
+
+
+/* =====================================================
+   QUANTITY SELECTOR
+===================================================== */
+
+.quantity-selector{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+.qty-btn{
+
+    width:52px !important;
+
+    min-width:52px !important;
+
+    min-height:48px !important;
+
+    padding:0 !important;
+
+    margin:0 !important;
+
+    border-radius:11px !important;
+
+    background:
+    linear-gradient(
+        135deg,
+        #334155,
+        #1e293b
+    ) !important;
+
+    border:
+    1px solid
+    rgba(255,255,255,.10) !important;
+
+    color:white;
+
+    font-size:22px !important;
+
+    font-weight:800 !important;
+
+    box-shadow:none !important;
+
+}
+
+
+.qty-btn:hover{
+
+    border-color:
+    rgba(96,165,250,.45) !important;
+
+}
+
+
+.qty-btn:disabled{
+
+    opacity:.35;
+
+    cursor:not-allowed;
+
+}
+
+
+.qty-value{
+
+    flex:1;
+
+    height:48px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:#1e293b;
+
+    border:
+    1px solid
+    rgba(255,255,255,.10);
+
+    color:white;
+
+    font-size:19px;
+
+    font-weight:800;
+
+}
+
+
+.qty-note{
+
+    margin-top:6px;
+
+    color:#94a3b8;
+
+    font-size:10px;
+
+}
+
+
+/* =====================================================
+   UID
+===================================================== */
+
+.uid-input-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+
+.uid-input-row input{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+.paste-uid-btn{
+
+    width:auto !important;
+
+    min-width:76px !important;
+
+    min-height:48px !important;
+
+    margin:0 !important;
+
+    padding:0 12px !important;
+
+    border-radius:11px !important;
+
+    background:#334155 !important;
+
+    box-shadow:none !important;
+
+    font-size:11px !important;
+
+}
+
+
+.uid-warning{
+
+    margin-top:8px;
+
+    color:#facc15;
+
+    font-size:10px;
+
+    line-height:1.5;
+
+}
+
+
+.check-row{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:9px;
+
+    margin-top:11px;
+
+    padding:11px 12px;
+
+    border-radius:11px;
+
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid
+    rgba(255,255,255,.07);
+
+    color:#cbd5e1;
+
+    font-size:11px;
+
+    line-height:1.5;
+
+    text-align:left;
+
+}
+
+
+.check-row input{
+
+    width:17px !important;
+
+    height:17px !important;
+
+    min-width:17px;
+
+    margin:0;
+
+    accent-color:#3b82f6;
 
 }
 
@@ -698,8 +951,7 @@ button,
 
 .order-id{
 
-    margin:
-    14px 0;
+    margin:14px 0;
 
     font-size:38px;
 
@@ -812,90 +1064,14 @@ button,
 }
 
 
-/* =====================================================
-   USER HELPERS
-===================================================== */
-
-.wallet-title{
-    justify-content:space-between;
-}
-
-.wallet-title-main{
-    display:flex;
-    align-items:center;
-    gap:9px;
-}
-
-.wallet-refresh-button{
-    width:auto !important;
-    min-height:32px !important;
-    padding:6px 10px !important;
-    border-radius:9px !important;
-    margin:0 !important;
-    font-size:10px !important;
-    font-weight:600 !important;
-    background:rgba(59,130,246,.14) !important;
-    border:1px solid rgba(96,165,250,.20) !important;
-    box-shadow:none !important;
-}
-
-.uid-input-row{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.uid-input-row input{
-    flex:1;
-    min-width:0;
-}
-
-.paste-uid-btn{
-    width:auto !important;
-    min-width:76px !important;
-    min-height:48px !important;
-    margin:0 !important;
-    padding:0 12px !important;
-    border-radius:11px !important;
-    background:#334155 !important;
-    box-shadow:none !important;
-    font-size:11px !important;
-}
-
-.check-row{
-    display:flex;
-    align-items:flex-start;
-    gap:9px;
-    margin-top:11px;
-    padding:11px 12px;
-    border-radius:11px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.07);
-    color:#cbd5e1;
-    font-size:11px;
-    line-height:1.5;
-    text-align:left;
-}
-
-.check-row input{
-    width:17px !important;
-    height:17px !important;
-    min-width:17px;
-    margin:0;
-    accent-color:#3b82f6;
-}
-
-.uid-warning{
-    margin-top:8px;
-    color:#facc15;
-    font-size:10px;
-    line-height:1.5;
-}
-
 .nav-safe-space{
+
     width:100%;
+
     height:95px;
+
 }
+
 
 /* =====================================================
    MOBILE
@@ -946,13 +1122,29 @@ button,
 
     }
 
+
     .paste-uid-btn{
+
         min-width:70px !important;
+
         padding:0 10px !important;
+
     }
 
+
+    .qty-btn{
+
+        width:48px !important;
+
+        min-width:48px !important;
+
+    }
+
+
     .nav-safe-space{
+
         height:110px;
+
     }
 
 }
@@ -1002,7 +1194,6 @@ type="button"
 </div>
 
 
-
 <!-- =====================================================
      ORDER FORM
 ===================================================== -->
@@ -1011,7 +1202,10 @@ type="button"
 
 
 <div class="store-logo">
-<img src="./1.jpg" alt="Zyper Diamond Store Logo">
+<img
+src="./1.jpg"
+alt="Zyper Diamond Store Logo"
+>
 </div>
 
 
@@ -1026,7 +1220,6 @@ Wallet payment only
 
 
 <div id="error"></div>
-
 
 
 <!-- PACKAGE -->
@@ -1052,7 +1245,6 @@ LKR 0
 </div>
 
 </div>
-
 
 
 <!-- WALLET -->
@@ -1108,7 +1300,7 @@ LKR 0
 <div class="wallet-row">
 
 <span>
-Balance After Order
+Available After Hold
 </span>
 
 <strong id="balanceAfter">
@@ -1128,7 +1320,6 @@ Checking wallet balance...
 </div>
 
 
-
 <a
 href="./recharge-payment.html"
 id="rechargeButton"
@@ -1136,7 +1327,6 @@ class="recharge-button"
 >
 💳 Recharge Wallet
 </a>
-
 
 
 <!-- EMAIL -->
@@ -1156,6 +1346,47 @@ Loading...
 
 </div>
 
+
+<!-- QUANTITY -->
+
+<div class="field">
+
+<label>
+🔢 Quantity
+</label>
+
+<div class="quantity-selector">
+
+<button
+type="button"
+id="qtyMinus"
+class="qty-btn"
+>
+−
+</button>
+
+<div
+id="quantityValue"
+class="qty-value"
+>
+1
+</div>
+
+<button
+type="button"
+id="qtyPlus"
+class="qty-btn"
+>
++
+</button>
+
+</div>
+
+<div class="qty-note">
+Minimum 1 • Maximum 5 per order
+</div>
+
+</div>
 
 
 <!-- UID -->
@@ -1192,17 +1423,19 @@ class="paste-uid-btn"
 </div>
 
 <label class="check-row">
+
 <input
 type="checkbox"
 id="confirmUid"
 >
+
 <span>
 I checked and confirm that this Free Fire UID is correct.
 </span>
+
 </label>
 
 </div>
-
 
 
 <!-- NAME -->
@@ -1222,7 +1455,6 @@ autocomplete="name"
 >
 
 </div>
-
 
 
 <!-- PHONE -->
@@ -1245,14 +1477,17 @@ autocomplete="tel"
 
 
 <label class="check-row">
+
 <input
 type="checkbox"
 id="rememberDetails"
 checked
 >
+
 <span>
 Remember my Customer Name and Phone on this device.
 </span>
+
 </label>
 
 
@@ -1277,32 +1512,37 @@ class="back-button"
 ⬅ Back to Top Up
 </a>
 
+
 <div class="nav-safe-space"></div>
 
 
 </div>
-
-
-
 <!-- =====================================================
-     SUCCESS
+     ORDER RECEIVED / PROCESSING
 ===================================================== -->
 
 <div id="success">
 
 
 <div class="success-icon">
-✅
+⏳
 </div>
 
 
 <div class="success-title">
-Order Submitted!
+Order Received!
 </div>
 
 
 <p class="success-text">
-Your wallet payment was successful and your order was created.
+
+Your order was received successfully.
+
+<br>
+
+The order amount is temporarily held from your
+available wallet balance while your order is being processed.
+
 </p>
 
 
@@ -1317,7 +1557,7 @@ class="order-id"
 <p class="success-text">
 
 ⏳ Status:
-<b>Pending</b>
+<b>Processing</b>
 
 <br><br>
 
@@ -1329,7 +1569,7 @@ Please save your Order ID.
 <div class="success-balance">
 
 <span>
-Remaining Wallet Balance
+Available Balance After Hold
 </span>
 
 <strong id="remainingBalance">
@@ -1346,6 +1586,7 @@ class="home-button"
 💎 Place Another Order
 </a>
 
+
 <div class="nav-safe-space"></div>
 
 
@@ -1355,7 +1596,6 @@ class="home-button"
 </div>
 
 </div>
-
 
 
 <script type="module">
@@ -1386,6 +1626,7 @@ const WORKER_URL =
 
 /* =====================================================
    PACKAGE PRICES
+   DO NOT CHANGE
 ===================================================== */
 
 const PACKAGES = {
@@ -1527,6 +1768,32 @@ document.getElementById(
 );
 
 
+/* =====================================================
+   QUANTITY ELEMENTS
+===================================================== */
+
+const quantityValue =
+document.getElementById(
+    "quantityValue"
+);
+
+
+const qtyMinus =
+document.getElementById(
+    "qtyMinus"
+);
+
+
+const qtyPlus =
+document.getElementById(
+    "qtyPlus"
+);
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
 let currentUser =
 null;
 
@@ -1543,8 +1810,26 @@ let isSubmitting =
 false;
 
 
+/*
+    Quantity starts at 1.
+
+    Maximum quantity = 5.
+
+    IMPORTANT:
+
+    Quantity 5 DOES NOT mean
+    five separate Zyper orders.
+
+    It is ONE Zyper order
+    containing quantity 5.
+*/
+
+let quantity =
+1;
+
+
 /* =====================================================
-   MONEY
+   MONEY FORMAT
 ===================================================== */
 
 function money(value){
@@ -1682,6 +1967,10 @@ function getSelectedPackage(){
 }
 
 
+/* =====================================================
+   CURRENT PACKAGE
+===================================================== */
+
 const selected =
 getSelectedPackage();
 
@@ -1701,6 +1990,10 @@ if(!selected){
         "packagePrice"
     )
     .textContent =
+    "LKR 0";
+
+
+    orderAmountElement.textContent =
     "LKR 0";
 
 
@@ -1729,14 +2022,161 @@ else{
         selected.price
     );
 
+}
 
-    orderAmountElement.textContent =
-    "LKR " +
-    money(
-        selected.price
+
+/* =====================================================
+   ORDER TOTAL
+===================================================== */
+
+function getOrderTotal(){
+
+    if(!selected){
+
+        return 0;
+
+    }
+
+
+    /*
+        Example:
+
+        Monthly = 2720
+        Quantity = 5
+
+        Total =
+        2720 × 5
+        = 13600
+    */
+
+    return (
+        selected.price *
+        quantity
     );
 
 }
+
+
+/* =====================================================
+   QUANTITY
+===================================================== */
+
+function updateQuantity(){
+
+    /*
+        Hard limit in the website.
+
+        Minimum = 1
+        Maximum = 5
+    */
+
+    if(quantity < 1){
+
+        quantity =
+        1;
+
+    }
+
+
+    if(quantity > 5){
+
+        quantity =
+        5;
+
+    }
+
+
+    quantityValue.textContent =
+    quantity;
+
+
+    qtyMinus.disabled =
+    (
+        quantity <= 1 ||
+        isSubmitting
+    );
+
+
+    qtyPlus.disabled =
+    (
+        quantity >= 5 ||
+        isSubmitting
+    );
+
+
+    /*
+        Recalculate:
+
+        Order Amount
+        Available After Hold
+        Wallet status
+    */
+
+    updateWalletUI();
+
+}
+
+
+/* =====================================================
+   QUANTITY MINUS
+===================================================== */
+
+qtyMinus.addEventListener(
+    "click",
+    function(){
+
+        if(isSubmitting){
+
+            return;
+
+        }
+
+
+        if(quantity <= 1){
+
+            return;
+
+        }
+
+
+        quantity--;
+
+
+        updateQuantity();
+
+    }
+);
+
+
+/* =====================================================
+   QUANTITY PLUS
+===================================================== */
+
+qtyPlus.addEventListener(
+    "click",
+    function(){
+
+        if(isSubmitting){
+
+            return;
+
+        }
+
+
+        if(quantity >= 5){
+
+            return;
+
+        }
+
+
+        quantity++;
+
+
+        updateQuantity();
+
+    }
+);
 
 
 /* =====================================================
@@ -1773,6 +2213,7 @@ async function loadWallet(user){
 
 
     try{
+
 
         const token =
         await user.getIdToken();
@@ -1839,7 +2280,9 @@ async function loadWallet(user){
         updateWalletUI();
 
     }
+
     catch(error){
+
 
         console.error(
             "Wallet Error:",
@@ -1853,6 +2296,13 @@ async function loadWallet(user){
 
         walletBalanceElement.textContent =
         "Unavailable";
+
+
+        orderAmountElement.textContent =
+        "LKR " +
+        money(
+            getOrderTotal()
+        );
 
 
         balanceAfterElement.textContent =
@@ -1885,6 +2335,21 @@ async function loadWallet(user){
 
 function updateWalletUI(){
 
+    if(!selected){
+
+        return;
+
+    }
+
+
+    const totalAmount =
+    getOrderTotal();
+
+
+    /*
+        Display customer's current wallet.
+    */
+
     walletBalanceElement.textContent =
     "LKR " +
     money(
@@ -1892,14 +2357,42 @@ function updateWalletUI(){
     );
 
 
+    /*
+        THIS is where quantity changes
+        the total amount.
+
+        Qty 1:
+        2720 × 1 = 2720
+
+        Qty 5:
+        2720 × 5 = 13600
+    */
+
+    orderAmountElement.textContent =
+    "LKR " +
+    money(
+        totalAmount
+    );
+
+
+    if(!walletReady){
+
+        balanceAfterElement.textContent =
+        "-";
+
+        return;
+
+    }
+
+
     const remaining =
     walletBalance -
-    selected.price;
+    totalAmount;
 
 
     if(
         walletBalance >=
-        selected.price
+        totalAmount
     ){
 
         balanceAfterElement.textContent =
@@ -1918,7 +2411,13 @@ function updateWalletUI(){
 
 
         walletStatus.textContent =
-        "✓ You have enough balance for this order.";
+        "✓ Enough balance. LKR "
+        +
+        money(
+            totalAmount
+        )
+        +
+        " will be held while this order is processing.";
 
 
         rechargeButton.classList.remove(
@@ -1937,8 +2436,9 @@ function updateWalletUI(){
 
     else{
 
+
         const shortage =
-        selected.price -
+        totalAmount -
         walletBalance;
 
 
@@ -1979,8 +2479,6 @@ function updateWalletUI(){
     }
 
 }
-
-
 /* =====================================================
    REMEMBER CUSTOMER DETAILS
 ===================================================== */
@@ -2038,6 +2536,7 @@ function saveRememberedDetails(
         );
 
     }
+
     else{
 
         localStorage.removeItem(
@@ -2081,9 +2580,17 @@ pasteUidButton.addEventListener(
 
 
             const digits =
-            String(text || "")
-            .replace(/\D/g, "")
-            .slice(0,20);
+            String(
+                text || ""
+            )
+            .replace(
+                /\D/g,
+                ""
+            )
+            .slice(
+                0,
+                20
+            );
 
 
             if(!digits){
@@ -2101,6 +2608,11 @@ pasteUidButton.addEventListener(
             digits;
 
 
+            /*
+                Every time UID changes,
+                customer must confirm it again.
+            */
+
             confirmUidInput.checked =
             false;
 
@@ -2108,7 +2620,14 @@ pasteUidButton.addEventListener(
             hideError();
 
         }
+
         catch(error){
+
+            console.error(
+                "Paste UID Error:",
+                error
+            );
+
 
             showError(
                 "❌ Unable to paste UID. Please paste it manually."
@@ -2120,15 +2639,38 @@ pasteUidButton.addEventListener(
 );
 
 
+/* =====================================================
+   UID INPUT CLEANER
+===================================================== */
+
 uidInput.addEventListener(
     "input",
     function(){
 
+        /*
+            Only digits.
+
+            Maximum:
+            20 digits.
+        */
+
         uidInput.value =
         uidInput.value
-        .replace(/\D/g, "")
-        .slice(0,20);
+        .replace(
+            /\D/g,
+            ""
+        )
+        .slice(
+            0,
+            20
+        );
 
+
+        /*
+            UID was changed.
+
+            Require confirmation again.
+        */
 
         confirmUidInput.checked =
         false;
@@ -2146,7 +2688,16 @@ refreshWalletButton.addEventListener(
     async function(){
 
         if(!currentUser){
+
             return;
+
+        }
+
+
+        if(isSubmitting){
+
+            return;
+
         }
 
 
@@ -2175,7 +2726,7 @@ refreshWalletButton.addEventListener(
 
 
 /* =====================================================
-   AUTH
+   FIREBASE AUTH
 ===================================================== */
 
 onAuthStateChanged(
@@ -2183,6 +2734,10 @@ onAuthStateChanged(
     async function(user){
 
         if(!user){
+
+            currentUser =
+            null;
+
 
             formArea.style.display =
             "none";
@@ -2214,8 +2769,28 @@ onAuthStateChanged(
         "Email not available";
 
 
+        /*
+            Load locally remembered
+            Customer Name + Phone.
+        */
+
         loadRememberedDetails();
 
+
+        /*
+            Start quantity at 1.
+        */
+
+        quantity =
+        1;
+
+
+        updateQuantity();
+
+
+        /*
+            Get live wallet balance.
+        */
 
         await loadWallet(
             user
@@ -2226,7 +2801,7 @@ onAuthStateChanged(
 
 
 /* =====================================================
-   LOGIN
+   LOGIN BUTTON
 ===================================================== */
 
 document
@@ -2252,6 +2827,15 @@ sendButton.addEventListener(
     "click",
     async function(){
 
+        /*
+            ---------------------------------------------
+            DUPLICATE SUBMIT PROTECTION
+            ---------------------------------------------
+
+            If customer double-clicks the button,
+            do not run another request.
+        */
+
         if(isSubmitting){
 
             return;
@@ -2268,10 +2852,18 @@ sendButton.addEventListener(
 
         if(!user){
 
+            showError(
+                "❌ Please login before placing an order."
+            );
+
             return;
 
         }
 
+
+        /* =================================================
+           PACKAGE CHECK
+        ================================================= */
 
         if(!selected){
 
@@ -2284,12 +2876,14 @@ sendButton.addEventListener(
         }
 
 
-        if(
-            !walletReady
-        ){
+        /* =================================================
+           WALLET CHECK
+        ================================================= */
+
+        if(!walletReady){
 
             showError(
-                "❌ Wallet is not ready. Please try again."
+                "❌ Wallet is not ready. Please refresh and try again."
             );
 
             return;
@@ -2297,54 +2891,116 @@ sendButton.addEventListener(
         }
 
 
+        /* =================================================
+           QUANTITY CHECK
+        ================================================= */
+
+        /*
+            Customer can choose:
+
+            1
+            2
+            3
+            4
+            5
+
+            Maximum = 5.
+        */
+
         if(
-            walletBalance <
-            selected.price
+            !Number.isInteger(
+                quantity
+            ) ||
+            quantity < 1 ||
+            quantity > 5
         ){
 
             showError(
-                "❌ Not enough wallet balance."
+                "❌ Quantity must be between 1 and 5."
             );
+
+            return;
+
+        }
+
+
+        /*
+            IMPORTANT:
+
+            This is the TOTAL Zyper price.
+
+            Example:
+
+            Monthly:
+            Unit = LKR 2720
+
+            Quantity = 5
+
+            Total:
+            2720 × 5
+            = LKR 13600
+        */
+
+        const totalAmount =
+        selected.price *
+        quantity;
+
+
+        if(
+            walletBalance <
+            totalAmount
+        ){
+
+            const shortage =
+            totalAmount -
+            walletBalance;
+
+
+            showError(
+                "❌ Not enough wallet balance. Add LKR "
+                +
+                money(
+                    shortage
+                )
+                +
+                " more."
+            );
+
 
             rechargeButton.classList.add(
                 "show"
             );
 
+
             return;
 
         }
 
 
+        /* =================================================
+           UID
+        ================================================= */
+
         const uid =
-        document
-        .getElementById(
-            "uid"
-        )
+        uidInput
         .value
         .trim();
 
 
-        const playerName =
-        document
-        .getElementById(
-            "playerName"
-        )
-        .value
-        .trim();
+        /*
+            Free Fire UID:
 
+            minimum = 6
+            maximum = 20
 
-        const phone =
-        document
-        .getElementById(
-            "phone"
-        )
-        .value
-        .trim();
-
+            digits only
+        */
 
         if(
             !/^[0-9]{6,20}$/
-            .test(uid)
+            .test(
+                uid
+            )
         ){
 
             showError(
@@ -2355,6 +3011,10 @@ sendButton.addEventListener(
 
         }
 
+
+        /*
+            Customer must manually confirm UID.
+        */
 
         if(
             !confirmUidInput.checked
@@ -2369,6 +3029,28 @@ sendButton.addEventListener(
         }
 
 
+        /* =================================================
+           CUSTOMER NAME
+        ================================================= */
+
+        const playerName =
+        playerNameInput
+        .value
+        .trim();
+
+
+        /*
+            IMPORTANT:
+
+            This is CUSTOMER NAME only.
+
+            This is NOT the final
+            verified Free Fire player name.
+
+            The final FF Name will come from
+            the provider's final success response.
+        */
+
         if(
             playerName.length < 2 ||
             playerName.length > 50
@@ -2381,6 +3063,16 @@ sendButton.addEventListener(
             return;
 
         }
+
+
+        /* =================================================
+           PHONE
+        ================================================= */
+
+        const phone =
+        phoneInput
+        .value
+        .trim();
 
 
         const cleanPhone =
@@ -2406,21 +3098,105 @@ sendButton.addEventListener(
         }
 
 
-        const balanceAfterOrder =
-        walletBalance -
-        selected.price;
+        /* =================================================
+           BALANCE AFTER HOLD
+        ================================================= */
 
+        const balanceAfterHold =
+        walletBalance -
+        totalAmount;
+
+
+        /* =================================================
+           FINAL CONFIRMATION
+        ================================================= */
+
+        /*
+            Customer sees quantity + total
+            before the order is submitted.
+        */
 
         const confirmed =
         window.confirm(
-            "CONFIRM ZYPER ORDER\n\n" +
-            "Package: " + selected.name + "\n" +
-            "Price: LKR " + money(selected.price) + "\n" +
-            "Free Fire UID: " + uid + "\n" +
-            "Customer: " + playerName + "\n" +
-            "Phone: " + cleanPhone + "\n" +
-            "Balance After: LKR " + money(balanceAfterOrder) + "\n\n" +
-            "Please confirm these details are correct."
+
+            "CONFIRM ZYPER ORDER\n\n"
+
+            +
+
+            "Package: "
+            +
+            selected.name
+            +
+            "\n"
+
+            +
+
+            "Quantity: "
+            +
+            quantity
+            +
+            "\n"
+
+            +
+
+            "Unit Price: LKR "
+            +
+            money(
+                selected.price
+            )
+            +
+            "\n"
+
+            +
+
+            "Total: LKR "
+            +
+            money(
+                totalAmount
+            )
+            +
+            "\n"
+
+            +
+
+            "Free Fire UID: "
+            +
+            uid
+            +
+            "\n"
+
+            +
+
+            "Customer: "
+            +
+            playerName
+            +
+            "\n"
+
+            +
+
+            "Phone: "
+            +
+            cleanPhone
+            +
+            "\n"
+
+            +
+
+            "Available After Hold: LKR "
+            +
+            money(
+                balanceAfterHold
+            )
+
+            +
+
+            "\n\n"
+
+            +
+
+            "⚠️ Please confirm the UID and order details are correct."
+
         );
 
 
@@ -2431,17 +3207,44 @@ sendButton.addEventListener(
         }
 
 
+        /* =================================================
+           SAVE CUSTOMER DETAILS
+        ================================================= */
+
         saveRememberedDetails(
             playerName,
             cleanPhone
         );
 
 
+        /* =================================================
+           LOCK ORDER FORM
+        ================================================= */
+
+        /*
+            From this point onward,
+            customer cannot click Place Order twice.
+
+            This helps prevent duplicate orders.
+        */
+
         isSubmitting =
         true;
 
 
         sendButton.disabled =
+        true;
+
+
+        qtyMinus.disabled =
+        true;
+
+
+        qtyPlus.disabled =
+        true;
+
+
+        refreshWalletButton.disabled =
         true;
 
 
@@ -2457,33 +3260,76 @@ sendButton.addEventListener(
         "block";
 
 
+        /*
+            PART 4 continues from here.
+
+            It will:
+
+            1. Get Firebase token
+
+            2. Send ONE wallet_order request
+
+            3. Send quantity in that ONE request
+
+            4. Worker creates ONE Zyper Order ID
+
+            5. Wallet amount is HELD
+
+            6. Provider receives ONE request
+
+            Example quantity 5:
+
+            /order "monthly" UID 5
+
+            NOT five separate commands.
+        */
+
         try{
 
+            /* =================================================
+               FIREBASE TOKEN
+            ================================================= */
 
             const idToken =
-            await user
-            .getIdToken(
+            await user.getIdToken(
                 true
             );
 
 
+            /* =================================================
+               SEND ONE ZYPER ORDER
+            ================================================= */
+
             /*
                 IMPORTANT:
 
-                Worker must support:
+                Only ONE fetch() happens here.
 
-                action: wallet_order
+                Example:
 
-                Worker should:
-                1. verify Firebase token
-                2. get current wallet balance
-                3. check package price server-side
-                4. check balance
-                5. deduct balance
-                6. create order
-                7. create wallet transaction
-                8. send Telegram order
-                9. return orderId + newBalance
+                Package:
+                Monthly
+
+                Quantity:
+                5
+
+                We send:
+
+                {
+                    package: "Monthly",
+                    quantity: 5
+                }
+
+                ONE Zyper Order ID is created.
+
+                Provider Worker receives quantity 5.
+
+                Provider sends ONE command:
+
+                /order "monthly" UID 5
+
+                It DOES NOT send 5 separate
+                supplier commands.
             */
 
 
@@ -2518,17 +3364,37 @@ sendButton.addEventListener(
                         gameUID:
                         uid,
 
+                        /*
+                            Customer contact name.
+
+                            Provider verified FF Name
+                            will replace/be stored separately
+                            after final provider success.
+                        */
+
                         playerName:
                         playerName,
 
                         phone:
-                        phone
+                        cleanPhone,
+
+                        /*
+                            ONE ORDER
+                            with selected quantity.
+                        */
+
+                        quantity:
+                        quantity
 
                     })
 
                 }
             );
 
+
+            /* =================================================
+               READ SERVER RESPONSE
+            ================================================= */
 
             let result;
 
@@ -2539,7 +3405,8 @@ sendButton.addEventListener(
                 await response.json();
 
             }
-            catch{
+
+            catch(error){
 
                 throw new Error(
                     "Invalid response from server."
@@ -2547,6 +3414,10 @@ sendButton.addEventListener(
 
             }
 
+
+            /* =================================================
+               SERVER ERROR
+            ================================================= */
 
             if(
                 !response.ok ||
@@ -2560,6 +3431,10 @@ sendButton.addEventListener(
 
             }
 
+
+            /* =================================================
+               ORDER ID
+            ================================================= */
 
             const orderId =
             String(
@@ -2577,14 +3452,37 @@ sendButton.addEventListener(
             }
 
 
-            const newBalance =
+            /* =================================================
+               AVAILABLE BALANCE AFTER HOLD
+            ================================================= */
+
+            /*
+                New HOLD system:
+
+                Customer balance isn't treated as
+                a final successful purchase yet.
+
+                Amount is reserved/held while
+                provider processes the order.
+
+                Prefer availableBalance returned
+                by Worker.
+
+                Fallback to our calculated amount
+                only for display.
+            */
+
+            const displayedBalance =
             Number(
+
+                result.availableBalance ??
+
                 result.walletBalance ??
+
                 result.newBalance ??
-                (
-                    walletBalance -
-                    selected.price
-                )
+
+                balanceAfterHold
+
             );
 
 
@@ -2595,8 +3493,30 @@ sendButton.addEventListener(
             .textContent =
             "LKR " +
             money(
-                newBalance
+                displayedBalance
             );
+
+
+            /* =================================================
+               SHOW PROCESSING SCREEN
+            ================================================= */
+
+            /*
+                IMPORTANT:
+
+                This screen does NOT mean that
+                the Free Fire top-up is complete.
+
+                It only means:
+
+                ✓ Zyper accepted order
+                ✓ Order ID created
+                ✓ Wallet amount held
+                ✓ Processing started
+
+                Final Success is received later
+                from provider.
+            */
 
 
             formArea.style.display =
@@ -2619,6 +3539,16 @@ sendButton.addEventListener(
             orderId;
 
 
+            /* =================================================
+               CLEAR SELECTED PACKAGE
+            ================================================= */
+
+            /*
+                Prevent accidental package reuse
+                if customer refreshes the page.
+            */
+
+
             localStorage.removeItem(
                 "package"
             );
@@ -2639,13 +3569,24 @@ sendButton.addEventListener(
             );
 
 
+            /* =================================================
+               SCROLL TO ORDER ID
+            ================================================= */
+
             window.scrollTo({
+
                 top:0,
-                behavior:"smooth"
+
+                behavior:
+                "smooth"
+
             });
 
+
         }
+
         catch(error){
+
 
             console.error(
                 "Wallet Order Error:",
@@ -2664,16 +3605,45 @@ sendButton.addEventListener(
 
 
             /*
-               Reload balance in case another
-               order changed the wallet.
+                IMPORTANT SAFETY:
+
+                DO NOT automatically submit
+                wallet_order again here.
+
+                Why?
+
+                If Zyper Worker received the
+                first request but the browser
+                lost the response, automatically
+                sending another request could
+                create another order.
+
+                We only reload wallet state.
             */
 
-            await loadWallet(
-                user
-            );
+
+            try{
+
+                await loadWallet(
+                    user
+                );
+
+            }
+
+            catch(walletError){
+
+                console.error(
+                    "Wallet reload error:",
+                    walletError
+                );
+
+            }
+
 
         }
+
         finally{
+
 
             isSubmitting =
             false;
@@ -2686,13 +3656,56 @@ sendButton.addEventListener(
             .style.display =
             "none";
 
+
+            refreshWalletButton.disabled =
+            false;
+
+
+            /*
+                If success screen is NOT showing,
+                restore quantity buttons and
+                Place Order button according
+                to current wallet balance.
+            */
+
+
+            const successVisible =
+            document
+            .getElementById(
+                "success"
+            )
+            .style.display ===
+            "block";
+
+
+            if(!successVisible){
+
+                updateQuantity();
+
+            }
+
         }
 
     }
 );
 
-</script>
 
+/* =====================================================
+   INITIAL QUANTITY
+===================================================== */
+
+/*
+    Start every new order at quantity 1.
+*/
+
+quantity =
+1;
+
+
+updateQuantity();
+
+
+</script>
 
 
 <!-- =====================================================
@@ -2701,11 +3714,14 @@ sendButton.addEventListener(
 
 <div id="zyper-navigation"></div>
 
+
 <!-- SHARED LIVE WALLET BADGE -->
+
 <script
 type="module"
 src="./zyper-wallet-badge.js?v=120000"
 ></script>
+
 
 <script
 src="./zyper-nav.js?v=1003"
