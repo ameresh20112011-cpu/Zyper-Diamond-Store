@@ -579,6 +579,19 @@ rgba(148,163,184,.14);
 }
 
 
+
+/* AUTOMATIC ORDER TABLE */
+.table-container{overflow-x:auto;}
+.table-container table{min-width:1550px;}
+.admin-state-badge{display:inline-block;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:800;white-space:nowrap;}
+.state-processing{color:#fde68a;background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.25);}
+.state-review{color:#fda4af;background:rgba(244,63,94,.10);border:1px solid rgba(244,63,94,.25);}
+.state-failed{color:#fca5a5;background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.25);}
+.state-success{color:#86efac;background:rgba(34,197,94,.10);border:1px solid rgba(34,197,94,.25);}
+.state-neutral{color:#cbd5e1;background:rgba(148,163,184,.08);border:1px solid rgba(148,163,184,.14);}
+.ff-name-verified{color:#86efac;font-weight:800;}
+.qty-badge{display:inline-block;min-width:38px;padding:6px 9px;border-radius:9px;text-align:center;font-weight:800;color:#c4b5fd;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.22);}
+
 /* =====================================================
    MOBILE
 ===================================================== */
@@ -1046,55 +1059,12 @@ placeholder="Search Order ID, UID, customer, product...">
 
 
 <thead>
-
 <tr>
-
-<th>
-Order ID
-</th>
-
-<th>
-Customer
-</th>
-
-<th>
-Firebase UID
-</th>
-
-<th>
-Game UID
-</th>
-
-<th>
-Product
-</th>
-
-<th>
-Price
-</th>
-
-<th>
-Payment
-</th>
-
-<th>
-Date Time
-</th>
-
-<th>
-Total
-</th>
-
-<th>
-Status
-</th>
-
-<th>
-Action
-</th>
-
+<th>Order ID</th><th>Customer</th><th>Firebase UID</th><th>Game UID</th>
+<th>Verified FF Name</th><th>Product</th><th>Qty</th><th>Unit Price</th>
+<th>Total</th><th>Payment</th><th>Ordered</th><th>Completed</th>
+<th>Status</th><th>Wallet</th><th>Provider</th><th>Action</th>
 </tr>
-
 </thead>
 
 
