@@ -142,8 +142,10 @@ if (loginForm) {
             if (!email || !password) {
 
                 if (msg) {
+
                     msg.textContent =
                         "Enter email and password.";
+
                 }
 
                 return;
@@ -153,6 +155,7 @@ if (loginForm) {
             if (button) {
 
                 button.disabled = true;
+
                 button.textContent =
                     "LOGIN...";
 
@@ -632,8 +635,6 @@ function getTime(timestamp) {
 
     return date.getTime();
 }
-
-
 /* =====================================================
    LOAD ORDERS
 ===================================================== */
@@ -654,7 +655,7 @@ async function loadOrders() {
     table.innerHTML = `
 
         <tr>
-            <td colspan="11">
+            <td colspan="16">
                 Loading orders...
             </td>
         </tr>
@@ -697,13 +698,17 @@ async function loadOrders() {
             function (a, b) {
 
                 return (
+
                     getTime(
                         b.data.createdAt
                     )
+
                     -
+
                     getTime(
                         a.data.createdAt
                     )
+
                 );
 
             }
@@ -724,7 +729,7 @@ async function loadOrders() {
         table.innerHTML = `
 
             <tr>
-                <td colspan="11">
+                <td colspan="16">
                     ❌ Failed to load orders
                 </td>
             </tr>
@@ -771,11 +776,15 @@ function filterOrders() {
             function (item) {
 
                 return (
+
                     getDateString(
                         item.data.createdAt
                     )
+
                     ===
+
                     selectedDate
+
                 );
 
             }
@@ -831,6 +840,16 @@ function buildOrderAction(
         "success"
     ) {
 
+        /*
+           IMPORTANT:
+
+           If supplier success arrives AFTER the admin
+           already released the customer's money,
+           we DO NOT deduct the wallet again.
+
+           Admin only sees REVIEW.
+        */
+
         if (
             order.lateSuccessAfterRelease ===
             true
@@ -839,10 +858,11 @@ function buildOrderAction(
             return `
 
                 <span
-                class="
-                    order-action-state
-                    review-required
-                ">
+                    class="
+                        order-action-state
+                        review-required
+                    "
+                >
 
                     ⚠ REVIEW
 
@@ -856,10 +876,11 @@ function buildOrderAction(
         return `
 
             <span
-            class="
-                order-action-state
-                order-completed
-            ">
+                class="
+                    order-action-state
+                    order-completed
+                "
+            >
 
                 ✓ COMPLETED
 
@@ -871,7 +892,7 @@ function buildOrderAction(
 
 
     /* =================================================
-       RELEASED
+       MONEY ALREADY RELEASED
     ================================================= */
 
     if (
@@ -882,10 +903,11 @@ function buildOrderAction(
         return `
 
             <span
-            class="
-                order-action-state
-                money-released
-            ">
+                class="
+                    order-action-state
+                    money-released
+                "
+            >
 
                 ✓ MONEY RELEASED
 
@@ -897,7 +919,7 @@ function buildOrderAction(
 
 
     /* =================================================
-       FAILED / PENDING REVIEW + HELD
+       FAILED / PENDING REVIEW + MONEY HELD
     ================================================= */
 
     if (
@@ -932,7 +954,7 @@ function buildOrderAction(
 
 
     /* =================================================
-       PROCESSING + HELD
+       PROCESSING + MONEY HELD
     ================================================= */
 
     if (
@@ -943,10 +965,11 @@ function buildOrderAction(
         return `
 
             <span
-            class="
-                order-action-state
-                money-held
-            ">
+                class="
+                    order-action-state
+                    money-held
+                "
+            >
 
                 🔒 MONEY HELD
 
@@ -957,13 +980,18 @@ function buildOrderAction(
     }
 
 
+    /* =================================================
+       NO ADMIN ACTION
+    ================================================= */
+
     return `
 
         <span
-        class="
-            order-action-state
-            no-action
-        ">
+            class="
+                order-action-state
+                no-action
+            "
+        >
 
             —
 
@@ -1000,6 +1028,10 @@ function renderOrders(orders) {
         "";
 
 
+    /* =================================================
+       NO ORDERS
+    ================================================= */
+
     if (
         orders.length ===
         0
@@ -1009,7 +1041,7 @@ function renderOrders(orders) {
 
             <tr>
 
-                <td colspan="11">
+                <td colspan="16">
                     No orders found
                 </td>
 
@@ -1030,12 +1062,20 @@ function renderOrders(orders) {
     }
 
 
+    /* =================================================
+       EACH ORDER
+    ================================================= */
+
     orders.forEach(
         function (item) {
 
             const order =
                 item.data;
 
+
+            /* -----------------------------------------
+               ORDER ID
+            ----------------------------------------- */
 
             const orderId =
 
@@ -1048,6 +1088,10 @@ function renderOrders(orders) {
                 item.id;
 
 
+            /* -----------------------------------------
+               CUSTOMER
+            ----------------------------------------- */
+
             const customer =
 
                 order.customerName
@@ -1057,6 +1101,10 @@ function renderOrders(orders) {
                 "-";
 
 
+            /* -----------------------------------------
+               FIREBASE UID
+            ----------------------------------------- */
+
             const firebaseUID =
 
                 order.userId
@@ -1065,6 +1113,10 @@ function renderOrders(orders) {
                 ||
                 "-";
 
+
+            /* -----------------------------------------
+               GAME UID
+            ----------------------------------------- */
 
             const gameUID =
 
@@ -1076,6 +1128,44 @@ function renderOrders(orders) {
                 ||
                 "-";
 
+
+            /* -----------------------------------------
+               STATUS
+            ----------------------------------------- */
+
+            const status =
+                String(
+                    order.status ||
+                    "Processing"
+                )
+                    .trim();
+
+
+            const statusLower =
+                status.toLowerCase();
+
+
+            /* -----------------------------------------
+               VERIFIED FF NAME
+
+               This must come from the provider result.
+               Customer contact name is NOT used here.
+            ----------------------------------------- */
+
+            const verifiedFFName =
+
+                order.verifiedFFName
+                ||
+                order.verifiedPlayerName
+                ||
+                order.ffName
+                ||
+                "-";
+
+
+            /* -----------------------------------------
+               PRODUCT
+            ----------------------------------------- */
 
             const product =
 
@@ -1090,17 +1180,63 @@ function renderOrders(orders) {
                 "-";
 
 
-            const price =
+            /* -----------------------------------------
+               QUANTITY
+            ----------------------------------------- */
+
+            const quantity =
+                Math.max(
+                    1,
+                    Number(
+                        order.quantity
+                        ||
+                        order.qty
+                        ||
+                        1
+                    )
+                );
+
+
+            /* -----------------------------------------
+               UNIT PRICE
+            ----------------------------------------- */
+
+            const unitPrice =
                 Number(
 
+                    order.unitPrice
+                    ??
                     order.productPrice
-                    ||
+                    ??
                     order.price
-                    ||
+                    ??
                     0
 
                 );
 
+
+            /* -----------------------------------------
+               TOTAL
+            ----------------------------------------- */
+
+            const amount =
+                Number(
+
+                    order.total
+                    ??
+                    order.amount
+                    ??
+                    (
+                        unitPrice *
+                        quantity
+                    )
+
+                );
+
+
+            /* -----------------------------------------
+               PAYMENT
+            ----------------------------------------- */
 
             const payment =
 
@@ -1108,45 +1244,290 @@ function renderOrders(orders) {
                 ||
                 order.payment
                 ||
-                "-";
+                "Wallet";
 
 
-            const amount =
-                Number(
+            /* -----------------------------------------
+               ORDERED TIME
+            ----------------------------------------- */
 
-                    order.total
-                    ||
-                    order.amount
-                    ||
-                    price
-                    ||
-                    0
-
-                );
-
-
-            const date =
+            const orderedDate =
                 formatDate(
                     order.createdAt
                 );
 
 
-            const status =
-                order.status ||
-                "Pending";
+            /* -----------------------------------------
+               COMPLETED TIME
+            ----------------------------------------- */
+
+            const completedValue =
+
+                order.completedAt
+                ||
+                order.completedTime
+                ||
+                order.successAt
+                ||
+                null;
 
 
-            const statusLower =
+            const completedDate =
+
+                completedValue
+
+                    ?
+
+                    formatDate(
+                        completedValue
+                    )
+
+                    :
+
+                    "-";
+
+
+            /* -----------------------------------------
+               WALLET STATE
+            ----------------------------------------- */
+
+            const walletState =
                 String(
-                    status
-                ).toLowerCase();
+                    order.walletState ||
+                    "-"
+                )
+                    .trim();
 
+
+            const walletLower =
+                walletState
+                    .toLowerCase();
+
+
+            /* -----------------------------------------
+               PROVIDER STATUS
+            ----------------------------------------- */
+
+            const providerStatus =
+                String(
+
+                    order.providerStatus
+
+                    ||
+
+                    (
+                        statusLower ===
+                        "success"
+
+                            ?
+
+                            "success"
+
+                            :
+
+                            "-"
+                    )
+
+                )
+                    .trim();
+
+
+            const providerLower =
+                providerStatus
+                    .toLowerCase();
+
+
+            /* =================================================
+               STATUS COLOR
+            ================================================= */
+
+            let statusClass =
+                "state-neutral";
+
+
+            if (
+                statusLower ===
+                "processing"
+            ) {
+
+                statusClass =
+                    "state-processing";
+
+            }
+            else if (
+                statusLower ===
+                "pending review"
+            ) {
+
+                statusClass =
+                    "state-review";
+
+            }
+            else if (
+                statusLower ===
+                "failed"
+            ) {
+
+                statusClass =
+                    "state-failed";
+
+            }
+            else if (
+                statusLower ===
+                "success"
+            ) {
+
+                statusClass =
+                    "state-success";
+
+            }
+
+
+            /* =================================================
+               WALLET STATE COLOR
+            ================================================= */
+
+            let walletClass =
+                "state-neutral";
+
+
+            let walletText =
+                walletState ||
+                "-";
+
+
+            if (
+                walletLower ===
+                "held"
+            ) {
+
+                walletClass =
+                    "state-processing";
+
+                walletText =
+                    "🔒 HELD";
+
+            }
+            else if (
+                walletLower ===
+                "deducted"
+            ) {
+
+                walletClass =
+                    "state-success";
+
+                walletText =
+                    "✓ DEDUCTED";
+
+            }
+            else if (
+                walletLower ===
+                "released"
+            ) {
+
+                walletClass =
+                    "state-success";
+
+                walletText =
+                    "↩ RELEASED";
+
+            }
+
+
+            /* =================================================
+               PROVIDER STATUS COLOR
+            ================================================= */
+
+            let providerClass =
+                "state-neutral";
+
+
+            if (
+                [
+                    "processing",
+                    "registered",
+                    "sent"
+                ]
+                    .includes(
+                        providerLower
+                    )
+            ) {
+
+                providerClass =
+                    "state-processing";
+
+            }
+            else if (
+                providerLower.includes(
+                    "review"
+                )
+                ||
+                providerLower ===
+                "unknown"
+                ||
+                providerLower ===
+                "unsupported"
+            ) {
+
+                providerClass =
+                    "state-review";
+
+            }
+            else if (
+                [
+                    "failed",
+                    "failure"
+                ]
+                    .includes(
+                        providerLower
+                    )
+            ) {
+
+                providerClass =
+                    "state-failed";
+
+            }
+            else if (
+                [
+                    "success",
+                    "completed"
+                ]
+                    .includes(
+                        providerLower
+                    )
+            ) {
+
+                providerClass =
+                    "state-success";
+
+            }
+
+
+            /* =================================================
+               DASHBOARD COUNTERS
+            ================================================= */
 
             total++;
 
 
-            revenue +=
-                amount;
+            /*
+               Revenue is counted ONLY when the
+               automatic order has actually succeeded.
+
+               Held money is NOT completed revenue.
+            */
+
+            if (
+                statusLower ===
+                "success"
+            ) {
+
+                revenue +=
+                    amount;
+
+                success++;
+
+            }
 
 
             if (
@@ -1165,15 +1546,9 @@ function renderOrders(orders) {
             }
 
 
-            if (
-                statusLower ===
-                "success"
-            ) {
-
-                success++;
-
-            }
-
+            /* =================================================
+               ACTION
+            ================================================= */
 
             const actionHTML =
                 buildOrderAction(
@@ -1182,6 +1557,10 @@ function renderOrders(orders) {
                     amount
                 );
 
+
+            /* =================================================
+               CREATE TABLE ROW
+            ================================================= */
 
             const row =
                 document.createElement(
@@ -1192,9 +1571,11 @@ function renderOrders(orders) {
             row.innerHTML = `
 
                 <td>
+
                     <strong>
                         ${escapeHTML(orderId)}
                     </strong>
+
                 </td>
 
 
@@ -1214,12 +1595,65 @@ function renderOrders(orders) {
 
 
                 <td>
+
+                    <span
+                        class="${
+                            verifiedFFName !== "-"
+                                ?
+                                "ff-name-verified"
+                                :
+                                ""
+                        }"
+                    >
+
+                        ${escapeHTML(
+                            verifiedFFName
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
                     ${escapeHTML(product)}
                 </td>
 
 
                 <td>
-                    Rs. ${price.toLocaleString("en-LK")}
+
+                    <span class="qty-badge">
+
+                        ×${escapeHTML(
+                            quantity
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    Rs.
+                    ${unitPrice.toLocaleString(
+                        "en-LK"
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    <strong>
+
+                        Rs.
+                        ${amount.toLocaleString(
+                            "en-LK"
+                        )}
+
+                    </strong>
+
                 </td>
 
 
@@ -1229,24 +1663,77 @@ function renderOrders(orders) {
 
 
                 <td>
-                    ${escapeHTML(date)}
+                    ${escapeHTML(
+                        orderedDate
+                    )}
                 </td>
 
 
                 <td>
-                    Rs. ${amount.toLocaleString("en-LK")}
-                </td>
-
-
-                <td
-                    class="${escapeHTML(status)}"
-                >
-                    ${escapeHTML(status)}
+                    ${escapeHTML(
+                        completedDate
+                    )}
                 </td>
 
 
                 <td>
+
+                    <span
+                        class="
+                            admin-state-badge
+                            ${statusClass}
+                        "
+                    >
+
+                        ${escapeHTML(
+                            status
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="
+                            admin-state-badge
+                            ${walletClass}
+                        "
+                    >
+
+                        ${escapeHTML(
+                            walletText
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="
+                            admin-state-badge
+                            ${providerClass}
+                        "
+                    >
+
+                        ${escapeHTML(
+                            providerStatus
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
                     ${actionHTML}
+
                 </td>
 
             `;
@@ -1259,6 +1746,10 @@ function renderOrders(orders) {
         }
     );
 
+
+    /* =================================================
+       UPDATE CARDS
+    ================================================= */
 
     updateCards(
         total,
@@ -1287,7 +1778,8 @@ function renderOrders(orders) {
                             String(
                                 button.dataset.orderId ||
                                 ""
-                            ).trim();
+                            )
+                                .trim();
 
 
                         const amount =
@@ -1309,8 +1801,6 @@ function renderOrders(orders) {
             }
         );
 }
-
-
 /* =====================================================
    UPDATE DASHBOARD CARDS
 ===================================================== */
@@ -1359,9 +1849,10 @@ function updateCards(
         revenueElement.textContent =
             Number(
                 revenue
-            ).toLocaleString(
-                "en-LK"
-            );
+            )
+                .toLocaleString(
+                    "en-LK"
+                );
 
     }
 
@@ -1436,9 +1927,10 @@ async function releaseMoney(
     const formattedAmount =
         Number(
             amount || 0
-        ).toLocaleString(
-            "en-LK"
-        );
+        )
+            .toLocaleString(
+                "en-LK"
+            );
 
 
     /* =================================================
@@ -1847,7 +2339,17 @@ if (search) {
 
                                 order.providerOrderId,
 
-                                order.playerName
+                                order.playerName,
+
+                                order.verifiedFFName,
+
+                                order.verifiedPlayerName,
+
+                                order.ffName,
+
+                                order.quantity,
+
+                                order.qty
 
                             ];
 
@@ -1967,8 +2469,6 @@ if (logout) {
         }
     );
 }
-
-
 /* =====================================================
    CREATE REDEEM CODE
 ===================================================== */
@@ -2040,6 +2540,10 @@ if (createRedeem) {
                 );
 
 
+            /* =================================================
+               CHECK SECRET
+            ================================================= */
+
             if (!secret) {
 
                 alert(
@@ -2052,6 +2556,10 @@ if (createRedeem) {
                 return;
             }
 
+
+            /* =================================================
+               CHECK AMOUNT
+            ================================================= */
 
             if (
                 !Number.isFinite(
@@ -2099,6 +2607,10 @@ if (createRedeem) {
 
 
             try {
+
+                /* =================================================
+                   CALL WORKER
+                ================================================= */
 
                 const response =
                     await fetch(
@@ -2153,6 +2665,10 @@ if (createRedeem) {
                 }
 
 
+                /* =================================================
+                   WORKER ERROR
+                ================================================= */
+
                 if (
                     !response.ok
                     ||
@@ -2172,6 +2688,10 @@ if (createRedeem) {
                 }
 
 
+                /* =================================================
+                   CHECK CODE
+                ================================================= */
+
                 if (!data.code) {
 
                     throw new Error(
@@ -2180,6 +2700,10 @@ if (createRedeem) {
 
                 }
 
+
+                /* =================================================
+                   SHOW RESULT
+                ================================================= */
 
                 if (
                     typeof window.showRedeemResult ===
@@ -2208,9 +2732,10 @@ if (createRedeem) {
                             "LKR " +
                             Number(
                                 data.amount
-                            ).toLocaleString(
-                                "en-LK"
-                            );
+                            )
+                                .toLocaleString(
+                                    "en-LK"
+                                );
 
                     }
 
@@ -2233,9 +2758,11 @@ if (createRedeem) {
                 }
 
 
-                /* SECURITY:
-                   clear admin secret after use
-                */
+                /* =================================================
+                   SECURITY
+
+                   Remove secret from the page after use.
+                ================================================= */
 
                 secretInput.value =
                     "";
@@ -2335,6 +2862,10 @@ if (copyRedeem) {
 
             try {
 
+                /* =================================================
+                   MODERN CLIPBOARD
+                ================================================= */
+
                 await navigator.clipboard
                     .writeText(
                         code
@@ -2363,6 +2894,10 @@ if (copyRedeem) {
                     error
                 );
 
+
+                /* =================================================
+                   FALLBACK COPY METHOD
+                ================================================= */
 
                 const textarea =
                     document.createElement(
