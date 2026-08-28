@@ -3,13 +3,19 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>Zyper Admin Login</title>
+    <title>Zyper Admin Login</title>
 
-<link rel="stylesheet" href="./admin.css">
+    <link
+        rel="stylesheet"
+        href="./admin.css?v=20260828-2"
+    >
 
 </head>
 
@@ -23,19 +29,25 @@
         💎
     </div>
 
+
     <h1>
         Zyper Diamond Store
     </h1>
+
 
     <h3>
         Admin Login
     </h3>
 
 
-    <form id="loginForm">
+    <form
+        id="loginForm"
+        autocomplete="on"
+    >
 
         <input
             id="email"
+            name="email"
             type="email"
             placeholder="Email"
             autocomplete="email"
@@ -45,6 +57,7 @@
 
         <input
             id="password"
+            name="password"
             type="password"
             placeholder="Password"
             autocomplete="current-password"
@@ -67,9 +80,15 @@
 </div>
 
 
+<!--
+    ADMIN JAVASCRIPT
+    Version query forces browser/GitHub Pages
+    to load the newest admin.js
+-->
+
 <script
     type="module"
-    src="./admin.js">
+    src="./admin.js?v=20260828-2">
 </script>
 
 
