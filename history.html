@@ -405,6 +405,30 @@ body{
 
 }
 
+.processing{
+    color:#60a5fa;
+}
+
+.review{
+    color:#facc15;
+}
+
+.failed{
+    color:#ef4444;
+}
+
+.wallet-held{
+    color:#facc15 !important;
+}
+
+.wallet-deducted{
+    color:#22c55e !important;
+}
+
+.wallet-released{
+    color:#60a5fa !important;
+}
+
 
 /* =====================================================
    TRACK BUTTON
@@ -1353,42 +1377,71 @@ async function loadOrders(user){
                 "-";
 
 
-                const price =
-                data.price ??
-                data.productPrice ??
-                data.total ??
-                0;
+                const quantity =
+                Math.max(
+                    1,
+                    Number(
+                        data.quantity ||
+                        1
+                    )
+                );
+
+
+                const unitPrice =
+                Number(
+                    data.unitPrice ??
+                    data.productPrice ??
+                    (
+                        data.total != null
+                        ?
+                        Number(data.total) / quantity
+                        :
+                        data.price ??
+                        0
+                    )
+                );
+
+
+                const total =
+                Number(
+                    data.total ??
+                    data.price ??
+                    (unitPrice * quantity)
+                );
 
 
                 const rawStatus =
                 String(
                     data.status ||
-                    "Pending"
+                    "Processing"
                 ).trim();
 
 
                 const normalizedStatus =
-                rawStatus.toLowerCase();
+                rawStatus
+                .toLowerCase()
+                .replace(/[_-]+/g," ")
+                .replace(/\s+/g," ")
+                .trim();
 
 
                 let statusClass =
-                "pending";
+                "processing";
 
 
                 let statusText =
-                "⏳ Pending";
+                "⏳ Processing";
 
 
                 if(
                     normalizedStatus ===
-                    "approved" ||
+                    "success" ||
                     normalizedStatus ===
-                    "success"
+                    "approved"
                 ){
 
                     statusClass =
                     "success";
-
 
                     statusText =
                     "✅ Success";
@@ -1397,15 +1450,123 @@ async function loadOrders(user){
 
                 else if(
                     normalizedStatus ===
+                    "pending review"
+                ){
+
+                    statusClass =
+                    "review";
+
+                    statusText =
+                    "⚠️ Pending Review";
+
+                }
+
+                else if(
+                    normalizedStatus ===
+                    "failed" ||
+                    normalizedStatus ===
                     "rejected"
                 ){
 
                     statusClass =
-                    "rejected";
-
+                    "failed";
 
                     statusText =
-                    "❌ Rejected";
+                    normalizedStatus === "rejected"
+                    ? "❌ Rejected"
+                    : "❌ Failed";
+
+                }
+
+                else if(
+                    normalizedStatus ===
+                    "pending"
+                ){
+
+                    statusClass =
+                    "review";
+
+                    statusText =
+                    "⏳ Pending";
+
+                }
+
+
+                const verifiedPlayerName =
+                (
+                    data.playerVerified === true ||
+                    String(data.playerNameSource || "")
+                    .toLowerCase() === "provider"
+                )
+                ?
+                (
+                    data.playerName ||
+                    data.verifiedPlayerName ||
+                    data.providerPlayerName ||
+                    "-"
+                )
+                :
+                (
+                    normalizedStatus === "success"
+                    ?
+                    (
+                        data.verifiedPlayerName ||
+                        data.providerPlayerName ||
+                        "Verified name unavailable"
+                    )
+                    :
+                    "Processing..."
+                );
+
+
+                const walletState =
+                String(
+                    data.walletState ||
+                    ""
+                ).toLowerCase();
+
+
+                let walletText =
+                "-";
+
+
+                let walletClass =
+                "";
+
+
+                if(walletState === "held"){
+
+                    walletText =
+                    `🔒 LKR ${money(total)} Held`;
+
+                    walletClass =
+                    "wallet-held";
+
+                }
+
+                else if(walletState === "deducted"){
+
+                    const used =
+                    Number(
+                        data.walletAmountUsed ??
+                        total
+                    );
+
+                    walletText =
+                    `💳 LKR ${money(used)} Deducted`;
+
+                    walletClass =
+                    "wallet-deducted";
+
+                }
+
+                else if(walletState === "released"){
+
+                    walletText =
+                    `↩️ LKR ${money(total)} Released`;
+
+                    walletClass =
+                    "wallet-released";
 
                 }
 
@@ -1413,6 +1574,13 @@ async function loadOrders(user){
                 const orderDate =
                 formatDate(
                     data.createdAt
+                );
+
+
+                const completedDate =
+                formatDate(
+                    data.completedAt ||
+                    data.providerSuccessAt
                 );
 
 
@@ -1429,105 +1597,87 @@ async function loadOrders(user){
                 card.innerHTML = `
 
                     <h3>
-                        💎 Diamond Order
+                        💎 Zyper Order
                     </h3>
-
 
                     <div class="order-grid">
 
-
                         <div class="order-info">
-
-                            <span>
-                                ORDER ID
-                            </span>
-
-                            <strong>
-                                ${escapeHTML(orderId)}
-                            </strong>
-
+                            <span>ORDER ID</span>
+                            <strong>${escapeHTML(orderId)}</strong>
                         </div>
 
-
                         <div class="order-info">
-
-                            <span>
-                                GAME UID
-                            </span>
-
-                            <strong>
-                                ${escapeHTML(gameUID)}
-                            </strong>
-
-                        </div>
-
-
-                        <div class="order-info">
-
-                            <span>
-                                PACKAGE
-                            </span>
-
-                            <strong>
-                                ${escapeHTML(packageName)}
-                            </strong>
-
-                        </div>
-
-
-                        <div class="order-info">
-
-                            <span>
-                                PRICE
-                            </span>
-
-                            <strong>
-                                LKR ${money(price)}
-                            </strong>
-
-                        </div>
-
-
-                        <div class="order-info">
-
-                            <span>
-                                STATUS
-                            </span>
-
-                            <strong
-                                class="status ${statusClass}"
-                            >
+                            <span>STATUS</span>
+                            <strong class="status ${statusClass}">
                                 ${statusText}
                             </strong>
-
                         </div>
 
+                        <div class="order-info">
+                            <span>GAME UID</span>
+                            <strong>${escapeHTML(gameUID)}</strong>
+                        </div>
+
+                        <div class="order-info">
+                            <span>VERIFIED FF NAME</span>
+                            <strong>${escapeHTML(verifiedPlayerName)}</strong>
+                        </div>
+
+                        <div class="order-info">
+                            <span>PACKAGE</span>
+                            <strong>${escapeHTML(packageName)}</strong>
+                        </div>
+
+                        <div class="order-info">
+                            <span>QUANTITY</span>
+                            <strong>×${escapeHTML(quantity)}</strong>
+                        </div>
+
+                        <div class="order-info">
+                            <span>UNIT PRICE</span>
+                            <strong>LKR ${money(unitPrice)}</strong>
+                        </div>
+
+                        <div class="order-info">
+                            <span>TOTAL</span>
+                            <strong>LKR ${money(total)}</strong>
+                        </div>
+
+                        <div class="order-info full">
+                            <span>WALLET</span>
+                            <strong class="${walletClass}">
+                                ${walletText}
+                            </strong>
+                        </div>
 
                         ${
                             orderDate
                             ?
                             `
-
                             <div class="order-info">
-
-                                <span>
-                                    DATE
-                                </span>
-
-                                <strong>
-                                    ${escapeHTML(orderDate)}
-                                </strong>
-
+                                <span>ORDERED</span>
+                                <strong>${escapeHTML(orderDate)}</strong>
                             </div>
-
                             `
                             :
                             ""
                         }
 
+                        ${
+                            completedDate && normalizedStatus === "success"
+                            ?
+                            `
+                            <div class="order-info">
+                                <span>COMPLETED</span>
+                                <strong>${escapeHTML(completedDate)}</strong>
+                            </div>
+                            `
+                            :
+                            ""
+                        }
 
                     </div>
-
 
                     <button
                         class="track-btn"
@@ -1824,72 +1974,53 @@ async function loadWalletHistory(user){
 
 
                 let sign =
-                "+";
+                "";
 
 
-                if(
-                    type ===
-                    "DEPOSIT"
-                ){
+                if(type === "DEPOSIT"){
 
-                    icon =
-                    "➕";
-
-
-                    title =
-                    "Wallet Recharge";
-
-
-                    amountClass =
-                    "deposit";
-
-
-                    sign =
-                    "+";
+                    icon = "➕";
+                    title = "Wallet Recharge";
+                    amountClass = "deposit";
+                    sign = "+";
 
                 }
 
                 else if(
-                    type ===
-                    "SPEND"
+                    type === "HOLD" ||
+                    type === "ORDER_HOLD"
                 ){
 
-                    icon =
-                    "🛒";
-
-
-                    title =
-                    "Order Payment";
-
-
-                    amountClass =
-                    "spend";
-
-
-                    sign =
-                    "-";
+                    icon = "🔒";
+                    title = "Order Amount Held";
+                    amountClass = "refund";
+                    sign = "";
 
                 }
 
                 else if(
-                    type ===
-                    "REFUND"
+                    type === "HOLD_FINALIZED" ||
+                    type === "FINALIZE_HOLD" ||
+                    type === "SPEND"
                 ){
 
-                    icon =
-                    "↩️";
+                    icon = "💳";
+                    title = "Order Payment";
+                    amountClass = "spend";
+                    sign = "-";
 
+                }
 
-                    title =
-                    "Wallet Refund";
+                else if(
+                    type === "HOLD_RELEASED" ||
+                    type === "RELEASE_HOLD" ||
+                    type === "REFUND"
+                ){
 
-
-                    amountClass =
-                    "refund";
-
-
-                    sign =
-                    "+";
+                    icon = "↩️";
+                    title = "Money Released";
+                    amountClass = "refund";
+                    sign = "+";
 
                 }
 
@@ -1952,6 +2083,20 @@ async function loadWalletHistory(user){
                             transaction.package
                         )
                     }`;
+
+                }
+
+
+                if(
+                    transaction.quantity
+                ){
+
+                    if(meta){
+                        meta += "<br>";
+                    }
+
+                    meta +=
+                    `Quantity: ×${escapeHTML(transaction.quantity)}`;
 
                 }
 
