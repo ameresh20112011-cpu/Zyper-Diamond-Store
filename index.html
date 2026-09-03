@@ -290,6 +290,71 @@ href="1.jpg"
 
 }
 
+
+/* ==================================================
+   GOOGLE SIGN IN - ADDED ONLY
+================================================== */
+
+.google-divider{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:20px 0 16px;
+    color:rgba(255,255,255,.55);
+    font-size:12px;
+    font-weight:600;
+}
+
+.google-divider::before,
+.google-divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:rgba(255,255,255,.12);
+}
+
+.google-login-button{
+    width:100%;
+    min-height:52px;
+    border:0;
+    border-radius:14px;
+    background:#ffffff;
+    color:#1f2937;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:11px;
+    box-shadow:0 8px 22px rgba(0,0,0,.12);
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+}
+
+.google-login-button:active{
+    transform:scale(.985);
+}
+
+.google-login-button:disabled{
+    opacity:.72;
+    cursor:not-allowed;
+}
+
+.google-login-button svg{
+    width:20px;
+    height:20px;
+    flex:0 0 20px;
+}
+
+@media(max-width:500px){
+    .google-login-button{
+        min-height:52px;
+        font-size:14px;
+    }
+}
+
 </style>
 
 </head>
@@ -609,6 +674,30 @@ aria-live="polite"
 
 </form>
 
+<!-- ==================================================
+     CONTINUE WITH GOOGLE - ADDED ONLY
+================================================== -->
+
+<div class="google-divider">
+    <span>OR</span>
+</div>
+
+<button
+    type="button"
+    id="googleLoginButton"
+    class="google-login-button"
+>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="#4285F4" d="M21.35 12.2c0-.64-.06-1.25-.17-1.84H12v3.48h5.25a4.48 4.48 0 0 1-1.95 2.94v2.26h3.16c1.85-1.7 2.89-4.22 2.89-6.84z"/>
+        <path fill="#34A853" d="M12 21.72c2.64 0 4.86-.87 6.48-2.37l-3.16-2.26c-.88.59-2 .94-3.32.94-2.55 0-4.71-1.72-5.48-4.03H3.25v2.34A9.79 9.79 0 0 0 12 21.72z"/>
+        <path fill="#FBBC05" d="M6.52 14a5.87 5.87 0 0 1 0-3.76V7.9H3.25a9.79 9.79 0 0 0 0 8.44L6.52 14z"/>
+        <path fill="#EA4335" d="M12 6.2c1.44 0 2.73.49 3.75 1.46l2.81-2.81A9.43 9.43 0 0 0 12 2.5 9.79 9.79 0 0 0 3.25 7.9l3.27 2.34C7.29 7.93 9.45 6.2 12 6.2z"/>
+    </svg>
+
+    <span id="googleLoginText">
+        Continue with Google
+    </span>
+</button>
 
 
 <!-- ==================================================
@@ -674,7 +763,11 @@ import {
 
     browserSessionPersistence,
 
-    onAuthStateChanged
+    onAuthStateChanged,
+
+    GoogleAuthProvider,
+
+    signInWithPopup
 
 }
 from
@@ -749,6 +842,18 @@ const loginLoading =
 const loginStatus =
     document.getElementById(
         "loginStatus"
+    );
+
+
+const googleLoginButton =
+    document.getElementById(
+        "googleLoginButton"
+    );
+
+
+const googleLoginText =
+    document.getElementById(
+        "googleLoginText"
     );
 
 
@@ -995,6 +1100,172 @@ onAuthStateChanged(
 
 );
 
+
+
+
+
+/* ==================================================
+   GOOGLE SIGN IN
+   PC + ANDROID + IPHONE SAFARI
+================================================== */
+
+const googleProvider =
+    new GoogleAuthProvider();
+
+
+googleProvider.setCustomParameters({
+    prompt:"select_account"
+});
+
+
+if(googleLoginButton){
+
+    googleLoginButton.addEventListener(
+
+        "click",
+
+        async function(){
+
+            if(loginInProgress){
+                return;
+            }
+
+            clearStatus();
+
+            loginInProgress =
+                true;
+
+            googleLoginButton.disabled =
+                true;
+
+            if(googleLoginText){
+                googleLoginText.textContent =
+                    "Connecting...";
+            }
+
+            try{
+
+                if(rememberInput.checked){
+
+                    await setPersistence(
+                        auth,
+                        browserLocalPersistence
+                    );
+
+                }
+                else{
+
+                    await setPersistence(
+                        auth,
+                        browserSessionPersistence
+                    );
+
+                }
+
+                const result =
+                    await signInWithPopup(
+                        auth,
+                        googleProvider
+                    );
+
+                if(!result.user){
+
+                    throw new Error(
+                        "Google login session was not created."
+                    );
+
+                }
+
+                await result.user.getIdToken(
+                    true
+                );
+
+                showStatus(
+                    "Google login successful ✓",
+                    "success"
+                );
+
+                setTimeout(
+                    function(){
+                        window.location.replace(
+                            "./home.html"
+                        );
+                    },
+                    250
+                );
+
+            }
+            catch(error){
+
+                console.error(
+                    "GOOGLE LOGIN ERROR:",
+                    error
+                );
+
+                loginInProgress =
+                    false;
+
+                googleLoginButton.disabled =
+                    false;
+
+                if(googleLoginText){
+                    googleLoginText.textContent =
+                        "Continue with Google";
+                }
+
+                let message =
+                    "Google login failed. Please try again.";
+
+                if(
+                    error.code ===
+                    "auth/popup-closed-by-user"
+                    ||
+                    error.code ===
+                    "auth/cancelled-popup-request"
+                ){
+                    message =
+                        "Google sign in was cancelled.";
+                }
+                else if(
+                    error.code ===
+                    "auth/popup-blocked"
+                ){
+                    message =
+                        "Google sign in popup was blocked. Please allow popups and try again.";
+                }
+                else if(
+                    error.code ===
+                    "auth/account-exists-with-different-credential"
+                ){
+                    message =
+                        "This email already has another login method. Please sign in with your existing email and password.";
+                }
+                else if(
+                    error.code ===
+                    "auth/unauthorized-domain"
+                ){
+                    message =
+                        "This website domain is not authorized for Google login.";
+                }
+                else if(
+                    error.code ===
+                    "auth/network-request-failed"
+                ){
+                    message =
+                        "Network error. Check your internet connection.";
+                }
+
+                showStatus(
+                    message
+                );
+
+            }
+
+        }
+
+    );
+
+}
 
 
 /* ==================================================
