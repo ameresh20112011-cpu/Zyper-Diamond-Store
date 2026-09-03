@@ -10,6 +10,8 @@ content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Diamond Store - Top Up</title>
 
+<link rel="icon" href="./1.jpg">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
@@ -1163,6 +1165,8 @@ const WORKER_URL =
 "https://zyper-order.ameresh20112011.workers.dev";
 
 
+let currentUser = null;
+
 let currentWalletBalance = 0;
 
 
@@ -1271,6 +1275,39 @@ match[1]
 ===================================================== */
 
 function updatePackageWalletStatus(){
+
+/*
+   Guest users can browse packages.
+   Do not show LOW BALANCE / READY status until logged in.
+*/
+if(!currentUser){
+
+document
+.querySelectorAll(
+".card"
+)
+.forEach(
+function(card){
+
+const oldStatus =
+card.querySelector(
+".wallet-status"
+);
+
+if(oldStatus){
+oldStatus.remove();
+}
+
+card.classList.remove(
+"wallet-affordable",
+"wallet-low"
+);
+
+}
+);
+
+return;
+}
 
 document
 .querySelectorAll(
@@ -1504,11 +1541,26 @@ onAuthStateChanged(
 auth,
 async function(user){
 
+currentUser =
+user || null;
+
 if(!user){
 
-window.location.href =
-"index.html";
+currentWalletBalance =
+0;
 
+localStorage.setItem(
+"walletBalance",
+"0"
+);
+
+updatePackageWalletStatus();
+
+/*
+   PUBLIC BROWSING:
+   Guest stays on Top Up page.
+   Login is required only when selecting a package.
+*/
 return;
 
 }
@@ -1641,6 +1693,27 @@ ripple
 
 
 /* =================================================
+   GUEST -> LOGIN
+================================================= */
+
+if(!currentUser){
+
+setTimeout(
+function(){
+
+window.location.href =
+"./index.html?login=1";
+
+},
+250
+);
+
+return;
+
+}
+
+
+/* =================================================
    GO PAYMENT
 ================================================= */
 
@@ -1717,12 +1790,12 @@ img.src =
 
 
 <!-- =====================================================
-     SHARED LIVE WALLET BADGE
+     SAME SHARED TOP BAR AS HOME
+     (also loads LOGIN / LIVE WALLET control)
 ===================================================== -->
 
 <script
-type="module"
-src="./zyper-wallet-badge.js?v=50000">
+src="./zyper-topbar.js?v=6002">
 </script>
 
 
@@ -1730,7 +1803,9 @@ src="./zyper-wallet-badge.js?v=50000">
      NAVIGATION JS
 ===================================================== -->
 
-<script src="zyper-nav.js"></script>
+<script
+src="./zyper-nav.js?v=6002">
+</script>
 
 
 </body>
