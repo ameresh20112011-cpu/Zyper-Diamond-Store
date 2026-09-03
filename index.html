@@ -7,62 +7,45 @@
 
 <meta
 name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 >
 
 <title>Zyper Diamond Store - Login</title>
 
-<link rel="stylesheet" href="index.css">
-<link rel="stylesheet" href="media.css">
-<link rel="icon" href="1.jpg">
+<link
+rel="stylesheet"
+href="index.css"
+>
 
+<link
+rel="stylesheet"
+href="media.css"
+>
 
-<!-- ==================================================
-     PUBLIC WEBSITE ENTRY
-
-     Normal:
-     index.html
-     -> home.html
-
-     Login:
-     index.html?login=1
-     -> stay on login page
-================================================== -->
-
-<script>
-
-(function(){
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
-    const loginMode =
-        params.get("login");
-
-
-    if(loginMode !== "1"){
-
-        window.location.replace(
-            "./home.html"
-        );
-
-    }
-
-})();
-
-</script>
+<link
+rel="icon"
+href="1.jpg"
+>
 
 
 <style>
 
+/* ==================================================
+   LOGIN HEADER
+================================================== */
+
 .login-header{
+
     text-align:center;
+
     margin-bottom:28px;
+
 }
 
+
+/* ==================================================
+   LOGO
+================================================== */
 
 .company-logo{
 
@@ -89,17 +72,19 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     align-items:center !important;
     justify-content:center !important;
 
-    background:#fff;
+    background:#ffffff;
 
     box-shadow:
         0 8px 25px
         rgba(0,0,0,.20);
+
 }
 
 
 .company-logo img{
 
     width:100% !important;
+
     height:100% !important;
 
     display:block !important;
@@ -110,6 +95,10 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
 }
 
+
+/* ==================================================
+   BRAND
+================================================== */
 
 .brand-name{
 
@@ -134,6 +123,10 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 }
 
 
+/* ==================================================
+   PASSWORD
+================================================== */
+
 .password-group{
 
     position:relative;
@@ -144,29 +137,44 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 .password-group input{
 
     padding-right:
-        55px !important;
+        58px !important;
 
 }
 
+
+/* ==================================================
+   PASSWORD EYE
+================================================== */
 
 .password-toggle{
 
     position:absolute;
 
-    right:8px;
+    right:7px;
 
     top:50%;
 
     transform:
         translateY(-50%);
 
-    width:40px;
-    height:40px;
+    width:44px;
+
+    height:44px;
+
+    padding:0;
+
+    margin:0;
 
     border:0;
 
+    outline:0;
+
+    border-radius:50%;
+
     background:
         transparent;
+
+    color:inherit;
 
     cursor:pointer;
 
@@ -175,7 +183,25 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     align-items:center;
     justify-content:center;
 
-    z-index:20;
+    z-index:999;
+
+    touch-action:manipulation;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+    user-select:none;
+
+    -webkit-user-select:none;
+
+}
+
+
+.password-toggle:active{
+
+    transform:
+        translateY(-50%)
+        scale(.90);
 
 }
 
@@ -183,10 +209,17 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 .password-toggle svg{
 
     width:21px;
+
     height:21px;
+
+    pointer-events:none;
 
 }
 
+
+/* ==================================================
+   STATUS
+================================================== */
 
 .login-status{
 
@@ -196,12 +229,20 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
     margin-top:15px;
 
-    font-size:14px;
+    padding:10px;
+
+    border-radius:10px;
+
+    font-size:13px;
 
     font-weight:600;
 
 }
 
+
+/* ==================================================
+   MOBILE
+================================================== */
 
 @media(max-width:500px){
 
@@ -225,6 +266,28 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
     }
 
+
+    /*
+       iPhone Safari input zoom prevention
+    */
+
+    input{
+
+        font-size:16px !important;
+
+    }
+
+
+    .password-toggle{
+
+        width:46px;
+
+        height:46px;
+
+        right:4px;
+
+    }
+
 }
 
 </style>
@@ -240,6 +303,10 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
 <div class="login-card">
 
+
+<!-- ==================================================
+     HEADER
+================================================== -->
 
 <div class="login-header">
 
@@ -272,12 +339,18 @@ Welcome back! Sign in to continue
 
 
 
+<!-- ==================================================
+     LOGIN FORM
+================================================== -->
+
 <form
 id="loginForm"
 class="login-form"
 novalidate
 >
 
+
+<!-- EMAIL -->
 
 <div class="form-group">
 
@@ -291,6 +364,7 @@ id="email"
 name="email"
 required
 autocomplete="email"
+inputmode="email"
 placeholder=" "
 >
 
@@ -309,10 +383,16 @@ Email Address
 
 
 
+<!-- ==================================================
+     PASSWORD
+================================================== -->
+
 <div class="form-group">
 
 
-<div class="input-group neu-input password-group">
+<div
+class="input-group neu-input password-group"
+>
 
 
 <input
@@ -338,8 +418,11 @@ type="button"
 id="passwordToggle"
 class="password-toggle"
 aria-label="Show password"
+aria-pressed="false"
 >
 
+
+<!-- EYE OPEN -->
 
 <svg
 id="eyeOpen"
@@ -347,6 +430,8 @@ viewBox="0 0 24 24"
 fill="none"
 stroke="currentColor"
 stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
 >
 
 <path
@@ -363,28 +448,41 @@ r="3"
 
 
 
+<!-- EYE CLOSED -->
+
 <svg
 id="eyeClosed"
 viewBox="0 0 24 24"
 fill="none"
 stroke="currentColor"
 stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
 style="display:none;"
 >
 
 <path
-d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8"
+d="M17.94 17.94A10.07 10.07 0 0 1 12 20"
 />
 
 <path
-d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8"
+d="M9.9 4.24A9.12 9.12 0 0 1 12 4"
 />
 
-<line
-x1="1"
-y1="1"
-x2="23"
-y2="23"
+<path
+d="M3 3l18 18"
+/>
+
+<path
+d="M6.71 6.71C3.93 8.5 2 12 2 12s4 8 10 8c1.52 0 2.9-.38 4.12-.98"
+/>
+
+<path
+d="M14.12 14.12A3 3 0 0 1 9.88 9.88"
+/>
+
+<path
+d="M17.29 17.29C20.07 15.5 22 12 22 12s-4-8-10-8c-.72 0-1.41.09-2.06.24"
 />
 
 </svg>
@@ -400,6 +498,10 @@ y2="23"
 
 
 
+<!-- ==================================================
+     OPTIONS
+================================================== -->
+
 <div class="form-options">
 
 
@@ -410,6 +512,7 @@ y2="23"
 type="checkbox"
 id="remember"
 name="remember"
+checked
 >
 
 
@@ -450,7 +553,7 @@ Remember me
 
 
 <a
-href="forgot-password.html"
+href="./forgot-password.html"
 class="forgot-link"
 >
 
@@ -462,6 +565,10 @@ Forgot password?
 </div>
 
 
+
+<!-- ==================================================
+     LOGIN BUTTON
+================================================== -->
 
 <button
 type="submit"
@@ -494,6 +601,8 @@ Signing in...
 <div
 id="loginStatus"
 class="login-status"
+role="status"
+aria-live="polite"
 >
 </div>
 
@@ -502,6 +611,10 @@ class="login-status"
 
 
 
+<!-- ==================================================
+     REGISTER
+================================================== -->
+
 <div class="signup-link">
 
 
@@ -509,7 +622,7 @@ class="login-status"
 
 Don't have an account?
 
-<a href="register.html">
+<a href="./register.html">
 
 Create Account
 
@@ -528,61 +641,50 @@ Create Account
 
 
 
+<!-- ==================================================
+     FIREBASE LOGIN
+================================================== -->
+
 <script type="module">
 
 
+/*
+   IMPORTANT:
+
+   Do NOT initialize another Firebase app here.
+
+   Every page now uses the SAME firebase.js
+   and SAME Firebase Auth instance.
+*/
+
 import {
-    initializeApp
+    auth
 }
 from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+"./firebase.js";
 
 
 import {
-    getAuth,
-    signInWithEmailAndPassword
+
+    signInWithEmailAndPassword,
+
+    setPersistence,
+
+    browserLocalPersistence,
+
+    browserSessionPersistence,
+
+    onAuthStateChanged
+
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 
-const firebaseConfig = {
-
-    apiKey:
-    "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
-
-    authDomain:
-    "zyper-d-iamond-store.firebaseapp.com",
-
-    projectId:
-    "zyper-d-iamond-store",
-
-    storageBucket:
-    "zyper-d-iamond-store.firebasestorage.app",
-
-    messagingSenderId:
-    "892467477866",
-
-    appId:
-    "1:892467477866:web:61e9b6ff9435798da23913"
-
-};
-
-
-
-const app =
-    initializeApp(
-        firebaseConfig
-    );
-
-
-const auth =
-    getAuth(
-        app
-    );
-
-
+/* ==================================================
+   ELEMENTS
+================================================== */
 
 const loginForm =
     document.getElementById(
@@ -590,13 +692,13 @@ const loginForm =
     );
 
 
-const email =
+const emailInput =
     document.getElementById(
         "email"
     );
 
 
-const password =
+const passwordInput =
     document.getElementById(
         "password"
     );
@@ -617,6 +719,12 @@ const eyeOpen =
 const eyeClosed =
     document.getElementById(
         "eyeClosed"
+    );
+
+
+const rememberInput =
+    document.getElementById(
+        "remember"
     );
 
 
@@ -645,59 +753,246 @@ const loginStatus =
 
 
 
+let loginInProgress =
+    false;
+
+
+
 /* ==================================================
-   SHOW / HIDE PASSWORD
+   STATUS
 ================================================== */
 
+function showStatus(
+    message,
+    type = "error"
+){
+
+    loginStatus.style.display =
+        "block";
+
+
+    loginStatus.textContent =
+        message;
+
+
+    if(
+        type ===
+        "success"
+    ){
+
+        loginStatus.style.color =
+            "#4ade80";
+
+
+        loginStatus.style.background =
+            "rgba(34,197,94,.10)";
+
+    }
+    else{
+
+        loginStatus.style.color =
+            "#fca5a5";
+
+
+        loginStatus.style.background =
+            "rgba(239,68,68,.10)";
+
+    }
+
+}
+
+
+
+function clearStatus(){
+
+    loginStatus.style.display =
+        "none";
+
+
+    loginStatus.textContent =
+        "";
+
+}
+
+
+
+/* ==================================================
+   LOGIN BUTTON STATE
+================================================== */
+
+function setLoading(
+    loading
+){
+
+    loginButton.disabled =
+        loading;
+
+
+    loginText.style.display =
+        loading
+        ?
+        "none"
+        :
+        "inline";
+
+
+    loginLoading.style.display =
+        loading
+        ?
+        "inline"
+        :
+        "none";
+
+}
+
+
+
+/* ==================================================
+   PASSWORD SHOW / HIDE
+================================================== */
+
+function togglePassword(){
+
+    const currentlyHidden =
+
+        passwordInput.type ===
+        "password";
+
+
+    if(
+        currentlyHidden
+    ){
+
+        passwordInput.type =
+            "text";
+
+
+        eyeOpen.style.display =
+            "none";
+
+
+        eyeClosed.style.display =
+            "block";
+
+
+        passwordToggle.setAttribute(
+            "aria-label",
+            "Hide password"
+        );
+
+
+        passwordToggle.setAttribute(
+            "aria-pressed",
+            "true"
+        );
+
+    }
+    else{
+
+        passwordInput.type =
+            "password";
+
+
+        eyeOpen.style.display =
+            "block";
+
+
+        eyeClosed.style.display =
+            "none";
+
+
+        passwordToggle.setAttribute(
+            "aria-label",
+            "Show password"
+        );
+
+
+        passwordToggle.setAttribute(
+            "aria-pressed",
+            "false"
+        );
+
+    }
+
+}
+
+
+
+/*
+   Prevent phone tap from moving
+   input focus before toggling.
+*/
+
 passwordToggle.addEventListener(
+
+    "pointerdown",
+
+    function(event){
+
+        event.preventDefault();
+
+    }
+
+);
+
+
+passwordToggle.addEventListener(
+
     "click",
-    function(){
+
+    function(event){
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+        togglePassword();
+
+        passwordInput.focus({
+            preventScroll:true
+        });
+
+    }
+
+);
+
+
+
+/* ==================================================
+   IF ALREADY LOGGED IN
+================================================== */
+
+const unsubscribe =
+
+onAuthStateChanged(
+
+    auth,
+
+    function(user){
+
+
+        /*
+           When user manually submits Login,
+           submit handler controls redirect.
+
+           Otherwise if a logged-in customer
+           opens index.html, send them Home.
+        */
 
         if(
-            password.type ===
-            "password"
+            user
+            &&
+            !loginInProgress
         ){
 
-            password.type =
-                "text";
-
-
-            eyeOpen.style.display =
-                "none";
-
-
-            eyeClosed.style.display =
-                "block";
-
-
-            passwordToggle.setAttribute(
-                "aria-label",
-                "Hide password"
-            );
-
-        }
-        else{
-
-            password.type =
-                "password";
-
-
-            eyeOpen.style.display =
-                "block";
-
-
-            eyeClosed.style.display =
-                "none";
-
-
-            passwordToggle.setAttribute(
-                "aria-label",
-                "Show password"
+            window.location.replace(
+                "./home.html"
             );
 
         }
 
     }
+
 );
 
 
@@ -707,90 +1002,174 @@ passwordToggle.addEventListener(
 ================================================== */
 
 loginForm.addEventListener(
+
     "submit",
-    async function(e){
 
-        e.preventDefault();
-
-
-        const emailValue =
-            email.value.trim();
+    async function(event){
 
 
-        const passwordValue =
-            password.value;
+        event.preventDefault();
 
 
-        if(!emailValue){
+        clearStatus();
 
-            alert(
+
+        const email =
+            emailInput.value
+                .trim();
+
+
+        const password =
+            passwordInput.value;
+
+
+
+        /* EMAIL */
+
+        if(!email){
+
+            showStatus(
                 "Please enter your email."
             );
 
 
-            email.focus();
+            emailInput.focus();
 
             return;
 
         }
 
 
-        if(!passwordValue){
 
-            alert(
+        /* PASSWORD */
+
+        if(!password){
+
+            showStatus(
                 "Please enter your password."
             );
 
 
-            password.focus();
+            passwordInput.focus();
 
             return;
 
         }
+
+
+
+        loginInProgress =
+            true;
+
+
+        setLoading(
+            true
+        );
 
 
         try{
 
 
-            loginButton.disabled =
-                true;
+            /* ==================================================
+               REMEMBER ME
+
+               Checked:
+               Keep logged in after browser closes.
+
+               Not checked:
+               Keep logged in during this browser session.
+            ================================================== */
+
+            if(
+                rememberInput.checked
+            ){
+
+                await setPersistence(
+                    auth,
+                    browserLocalPersistence
+                );
+
+            }
+            else{
+
+                await setPersistence(
+                    auth,
+                    browserSessionPersistence
+                );
+
+            }
 
 
-            loginText.style.display =
-                "none";
+
+            /* ==================================================
+               FIREBASE LOGIN
+            ================================================== */
+
+            const result =
+
+                await signInWithEmailAndPassword(
+
+                    auth,
+
+                    email,
+
+                    password
+
+                );
 
 
-            loginLoading.style.display =
-                "inline";
+
+            if(
+                !result.user
+            ){
+
+                throw new Error(
+                    "Login session was not created."
+                );
+
+            }
 
 
-            await signInWithEmailAndPassword(
-                auth,
-                emailValue,
-                passwordValue
+
+            /*
+               Force token creation before
+               opening Home.
+
+               This helps Wallet / Worker
+               recognize logged-in user
+               immediately.
+            */
+
+            await result.user.getIdToken(
+                true
             );
 
 
-            loginStatus.style.display =
-                "block";
+
+            showStatus(
+                "Login successful ✓",
+                "success"
+            );
 
 
-            loginStatus.style.color =
-                "#00c853";
 
-
-            loginStatus.textContent =
-                "Login successful ✓";
-
+            /*
+               Use replace so Back button
+               does not return to Login.
+            */
 
             setTimeout(
+
                 function(){
 
-                    window.location.href =
-                        "./home.html";
+                    window.location.replace(
+                        "./home.html"
+                    );
 
                 },
-                600
+
+                350
+
             );
 
 
@@ -804,28 +1183,30 @@ loginForm.addEventListener(
             );
 
 
-            loginButton.disabled =
+            loginInProgress =
                 false;
 
 
-            loginText.style.display =
-                "inline";
+            setLoading(
+                false
+            );
 
 
-            loginLoading.style.display =
-                "none";
+            let message =
+                "Unable to login. Please try again.";
+
 
 
             if(
                 error.code ===
-                "auth/invalid-credential" ||
+                "auth/invalid-credential"
+                ||
                 error.code ===
                 "auth/wrong-password"
             ){
 
-                alert(
-                    "Incorrect email or password."
-                );
+                message =
+                    "Incorrect email or password.";
 
             }
 
@@ -835,11 +1216,106 @@ loginForm.addEventListener(
                 "auth/user-not-found"
             ){
 
-                alert(
-                    "No account found with this email."
-                );
+                message =
+                    "No account found with this email.";
 
             }
 
 
-           
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ){
+
+                message =
+                    "Please enter a valid email address.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/too-many-requests"
+            ){
+
+                message =
+                    "Too many login attempts. Please try again later.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/network-request-failed"
+            ){
+
+                message =
+                    "Network error. Check your internet connection.";
+
+            }
+
+
+            showStatus(
+                message
+            );
+
+        }
+
+    }
+
+);
+
+
+
+/* ==================================================
+   INPUT CHANGE
+================================================== */
+
+emailInput.addEventListener(
+
+    "input",
+
+    clearStatus
+
+);
+
+
+passwordInput.addEventListener(
+
+    "input",
+
+    clearStatus
+
+);
+
+
+
+/* ==================================================
+   CLEANUP
+================================================== */
+
+window.addEventListener(
+
+    "pagehide",
+
+    function(){
+
+        if(
+            typeof unsubscribe ===
+            "function"
+        ){
+
+            unsubscribe();
+
+        }
+
+    }
+
+);
+
+</script>
+
+
+</body>
+
+</html>
