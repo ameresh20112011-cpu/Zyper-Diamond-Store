@@ -1,441 +1,388 @@
-/* =====================================================
-   ZYPER NAVIGATION SYSTEM
+/* =========================================================
+   ZYPER BOTTOM NAVIGATION
+   RESPONSIVE + TOUCH FRIENDLY
+========================================================= */
 
-   Pages:
-   Home
-   Shop
-   Wallet
-   History
-   Profile
+(function(){
+
+  "use strict";
+
+
+  const NAV_ID =
+  "zyper-navigation";
+
+
+  const items = [
+
+    {
+
+      label:
+      "Home",
+
+      href:
+      "./home.html",
+
+      pages:[
+        "home.html",
+        ""
+      ],
+
+      icon:`
+
+        <path
+          d="M3 10.5 12 3l9 7.5">
+        </path>
+
+        <path
+          d="M5 9.5V21h14V9.5">
+        </path>
+
+        <path
+          d="M9 21v-7h6v7">
+        </path>
+
+      `
+
+    },
+
+
+    {
+
+      label:
+      "Shop",
+
+      href:
+      "./topup.html",
+
+      pages:[
+        "topup.html"
+      ],
+
+      icon:`
+
+        <path
+          d="M6 2l1 4h10l1-4">
+        </path>
+
+        <path
+          d="M4 6h16l-1 15H5L4 6z">
+        </path>
+
+        <path
+          d="M9 10v1">
+        </path>
+
+        <path
+          d="M15 10v1">
+        </path>
+
+      `
+
+    },
+
+
+    {
+
+      label:
+      "Payment",
+
+      href:
+      "./payment.html",
+
+      pages:[
+        "payment.html",
+        "recharge-payment.html",
+        "order.html"
+      ],
+
+      icon:`
+
+        <rect
+          x="3"
+          y="5"
+          width="18"
+          height="14"
+          rx="2">
+        </rect>
+
+        <path
+          d="M3 10h18">
+        </path>
+
+        <path
+          d="M7 15h3">
+        </path>
+
+      `
+
+    },
+
+
+    {
+
+      label:
+      "History",
+
+      href:
+      "./history.html",
+
+      pages:[
+        "history.html",
+        "track.html"
+      ],
+
+      icon:`
+
+        <path
+          d="M3 12a9 9 0 1 0 3-6.7">
+        </path>
+
+        <path
+          d="M3 4v5h5">
+        </path>
+
+        <path
+          d="M12 7v5l3 2">
+        </path>
+
+      `
+
+    },
+
+
+    {
+
+      label:
+      "Profile",
+
+      href:
+      "./profile.html",
+
+      pages:[
+        "profile.html",
+        "wallet.html"
+      ],
+
+      icon:`
+
+        <circle
+          cx="12"
+          cy="8"
+          r="4">
+        </circle>
+
+        <path
+          d="M4 21a8 8 0 0 1 16 0">
+        </path>
+
+      `
+
+    }
+
+  ];
+
+
+/* =====================================================
+   CURRENT PAGE
 ===================================================== */
 
-(function () {
+function currentPage(){
 
-    "use strict";
+  let page =
 
+  window.location
+  .pathname
+  .split("/")
+  .pop()
+  .toLowerCase();
 
-    /* =================================================
-       FIND CURRENT PAGE
-    ================================================= */
 
-    function getCurrentPage() {
+  if(
+    !page
+  ){
 
-        let file =
-            window.location.pathname
-                .split("/")
-                .pop()
-                .toLowerCase();
+    page =
+    "";
 
+  }
 
-        /*
-         * Website root
-         */
 
-        if (!file) {
+  return page;
 
-            return "home";
+}
 
-        }
 
+/* =====================================================
+   SVG
+===================================================== */
 
-        /*
-         * Login / index
-         */
+function iconSvg(
+  content
+){
 
-        if (file === "index.html") {
+  return `
 
-            return "home";
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
 
-        }
+      ${content}
 
+    </svg>
 
-        /*
-         * Home
-         */
+  `;
 
-        if (file === "home.html") {
+}
 
-            return "home";
 
-        }
+/* =====================================================
+   BUILD
+===================================================== */
 
+function build(){
 
-        /*
-         * Shop
-         */
+  const host =
+  document.getElementById(
+    NAV_ID
+  );
 
-        if (file === "topup.html") {
 
-            return "topup";
+  if(
+    !host
+  ){
 
-        }
+    return;
 
+  }
 
-        /*
-         * Payment / Order
-         *
-         * Keep Shop active while customer
-         * is completing an order.
-         */
 
-        if (
-            file === "payment.html" ||
-            file === "order.html"
-        ) {
+  const page =
+  currentPage();
 
-            return "topup";
 
-        }
+  const shell =
+  document.createElement(
+    "nav"
+  );
 
 
-        /*
-         * Wallet
-         */
+  shell.className =
+  "zyper-nav-shell";
 
-        if (file === "wallet.html") {
 
-            return "wallet";
+  shell.setAttribute(
+    "aria-label",
+    "Zyper navigation"
+  );
 
-        }
 
+  items.forEach(
+    function(item){
 
-        /*
-         * History
-         */
+      const link =
+      document.createElement(
+        "a"
+      );
 
-        if (
-            file === "history.html" ||
-            file === "track.html"
-        ) {
 
-            return "history";
+      link.className =
+      "zyper-nav-item";
 
-        }
 
+      link.href =
+      item.href;
 
-        /*
-         * Profile
-         */
 
-        if (file === "profile.html") {
+      const active =
+      item.pages.includes(
+        page
+      );
 
-            return "profile";
 
-        }
+      if(
+        active
+      ){
 
-
-        return "";
-
-    }
-
-
-
-    /* =================================================
-       SET ACTIVE BUTTON
-    ================================================= */
-
-    function setActiveNavigation() {
-
-        const currentPage =
-            getCurrentPage();
-
-
-        const items =
-            document.querySelectorAll(
-                ".zyper-nav-item"
-            );
-
-
-        items.forEach(
-            function (item) {
-
-                item.classList.remove(
-                    "active"
-                );
-
-
-                const page =
-                    item.getAttribute(
-                        "data-page"
-                    );
-
-
-                if (
-                    page === currentPage
-                ) {
-
-                    item.classList.add(
-                        "active"
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-
-    /* =================================================
-       CREATE FALLBACK NAVIGATION
-
-       This is used only if zyper-nav.html
-       cannot be loaded.
-    ================================================= */
-
-    function createFallbackNavigation() {
-
-        const nav =
-            document.createElement(
-                "nav"
-            );
-
-
-        nav.id =
-            "zyperNavigation";
-
-
-        nav.className =
-            "zyper-nav";
-
-
-        nav.innerHTML = `
-
-            <a
-                href="./home.html"
-                class="zyper-nav-item"
-                data-page="home"
-            >
-
-                <span class="zyper-icon">
-                    🏠
-                </span>
-
-                <span class="zyper-label">
-                    Home
-                </span>
-
-            </a>
-
-
-            <a
-                href="./topup.html"
-                class="zyper-nav-item"
-                data-page="topup"
-            >
-
-                <span class="zyper-icon">
-                    💎
-                </span>
-
-                <span class="zyper-label">
-                    Shop
-                </span>
-
-            </a>
-
-
-            <a
-                href="./wallet.html"
-                class="zyper-nav-item"
-                data-page="wallet"
-            >
-
-                <span class="zyper-icon">
-                    💰
-                </span>
-
-                <span class="zyper-label">
-                    Wallet
-                </span>
-
-            </a>
-
-
-            <a
-                href="./history.html"
-                class="zyper-nav-item"
-                data-page="history"
-            >
-
-                <span class="zyper-icon">
-                    📜
-                </span>
-
-                <span class="zyper-label">
-                    History
-                </span>
-
-            </a>
-
-
-            <a
-                href="./profile.html"
-                class="zyper-nav-item"
-                data-page="profile"
-            >
-
-                <span class="zyper-icon">
-                    👤
-                </span>
-
-                <span class="zyper-label">
-                    Profile
-                </span>
-
-            </a>
-
-        `;
-
-
-        document.body.appendChild(
-            nav
+        link.classList.add(
+          "active"
         );
 
 
-        setActiveNavigation();
-
-    }
-
-
-
-    /* =================================================
-       LOAD NAVIGATION HTML
-    ================================================= */
-
-    function loadNavigation() {
-
-        const oldNav =
-            document.getElementById(
-                "zyperNavigation"
-            );
-
-
-        /*
-         * Navigation already exists
-         */
-
-        if (oldNav) {
-
-            setActiveNavigation();
-
-            return;
-
-        }
-
-
-        fetch("./zyper-nav.html", {
-
-            cache: "no-cache"
-
-        })
-
-        .then(
-            function (response) {
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        "Navigation file not found"
-                    );
-
-                }
-
-
-                return response.text();
-
-            }
-        )
-
-        .then(
-            function (html) {
-
-                const wrapper =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                wrapper.innerHTML =
-                    html;
-
-
-                const navigation =
-                    wrapper.querySelector(
-                        ".zyper-nav"
-                    );
-
-
-                if (!navigation) {
-
-                    throw new Error(
-                        "Navigation HTML missing"
-                    );
-
-                }
-
-
-                /*
-                 * Make sure it has an ID
-                 */
-
-                navigation.id =
-                    "zyperNavigation";
-
-
-                document.body.appendChild(
-                    navigation
-                );
-
-
-                setActiveNavigation();
-
-            }
-        )
-
-        .catch(
-            function (error) {
-
-                console.error(
-                    "Zyper Navigation Error:",
-                    error
-                );
-
-
-                /*
-                 * If zyper-nav.html fails,
-                 * still show navigation.
-                 */
-
-                createFallbackNavigation();
-
-            }
+        link.setAttribute(
+          "aria-current",
+          "page"
         );
 
+      }
+
+
+      link.innerHTML = `
+
+        <span
+          class="zyper-nav-icon"
+        >
+
+          ${iconSvg(
+            item.icon
+          )}
+
+        </span>
+
+
+        <span
+          class="zyper-nav-label"
+        >
+
+          ${item.label}
+
+        </span>
+
+      `;
+
+
+      shell.appendChild(
+        link
+      );
+
     }
+  );
 
 
+  host.replaceChildren(
+    shell
+  );
 
-    /* =================================================
-       START
-    ================================================= */
+}
 
-    if (
-        document.readyState ===
-        "loading"
-    ) {
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            loadNavigation
-        );
+/* =====================================================
+   START
+===================================================== */
 
-    } else {
+if(
+  document.readyState ===
+  "loading"
+){
 
-        loadNavigation();
-
+  document.addEventListener(
+    "DOMContentLoaded",
+    build,
+    {
+      once:true
     }
+  );
 
+}
+else{
+
+  build();
+
+}
 
 })();
