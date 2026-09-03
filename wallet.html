@@ -19,12 +19,12 @@ href="./1.jpg"
 
 <link
 rel="stylesheet"
-href="./wallet.css"
+href="./wallet.css?v=3000"
 >
 
 <link
 rel="stylesheet"
-href="./zyper-nav.css"
+href="./zyper-nav.css?v=3000"
 >
 
 </head>
@@ -36,20 +36,13 @@ href="./zyper-nav.css"
 <div class="wallet-page">
 
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
-
     <header class="wallet-header">
 
-
         <div class="brand">
-
 
             <div class="logo">
                 💎
             </div>
-
 
             <div>
 
@@ -63,7 +56,6 @@ href="./zyper-nav.css"
 
             </div>
 
-
         </div>
 
 
@@ -74,17 +66,11 @@ href="./zyper-nav.css"
             ← Home
         </a>
 
-
     </header>
 
 
 
-    <!-- =====================================================
-         WALLET BALANCE
-    ====================================================== -->
-
     <section class="balance-card">
-
 
         <div class="balance-top">
 
@@ -92,16 +78,15 @@ href="./zyper-nav.css"
                 💰 Available Balance
             </span>
 
-
             <button
                 id="refreshWallet"
                 type="button"
+                aria-label="Refresh wallet"
             >
                 ↻
             </button>
 
         </div>
-
 
 
         <div class="balance">
@@ -117,9 +102,7 @@ href="./zyper-nav.css"
         </div>
 
 
-
         <div class="wallet-stats">
-
 
             <div>
 
@@ -146,43 +129,28 @@ href="./zyper-nav.css"
 
             </div>
 
-
         </div>
-
 
     </section>
 
 
 
-    <!-- =====================================================
-         RECHARGE WALLET BUTTON
-    ====================================================== -->
-
     <a
         href="./recharge-payment.html"
         class="wallet-recharge-button"
     >
-
         💳 Recharge Wallet
-
     </a>
 
 
 
-    <!-- =====================================================
-         REDEEM CODE
-    ====================================================== -->
-
     <section class="redeem-card">
 
-
         <div class="section-title">
-
 
             <div class="section-icon">
                 🎟️
             </div>
-
 
             <div>
 
@@ -196,13 +164,10 @@ href="./zyper-nav.css"
 
             </div>
 
-
         </div>
 
 
-
         <div class="redeem-box">
-
 
             <input
                 type="text"
@@ -212,7 +177,6 @@ href="./zyper-nav.css"
                 autocomplete="off"
             >
 
-
             <button
                 id="redeemButton"
                 type="button"
@@ -220,9 +184,7 @@ href="./zyper-nav.css"
                 Redeem
             </button>
 
-
         </div>
-
 
 
         <div
@@ -232,20 +194,13 @@ href="./zyper-nav.css"
         >
         </div>
 
-
     </section>
 
 
 
-    <!-- =====================================================
-         WALLET HISTORY
-    ====================================================== -->
-
     <section class="transactions-card">
 
-
         <div class="transactions-header">
-
 
             <div>
 
@@ -267,9 +222,7 @@ href="./zyper-nav.css"
                 ↻ Refresh
             </button>
 
-
         </div>
-
 
 
         <div
@@ -283,7 +236,6 @@ href="./zyper-nav.css"
 
         </div>
 
-
     </section>
 
 
@@ -291,25 +243,17 @@ href="./zyper-nav.css"
 
 
 
-<!-- =====================================================
-     BOTTOM NAVIGATION
-===================================================== -->
-
 <div id="zyper-navigation"></div>
 
 
 <script
-src="./zyper-nav.js?v=1000"
+src="./zyper-nav.js?v=3000"
 ></script>
 
 
-<!-- =====================================================
-     WALLET JAVASCRIPT
-===================================================== -->
-
 <script
 type="module"
-src="./wallet.js?v=1000"
+src="./wallet.js?v=3000"
 ></script>
 
 
