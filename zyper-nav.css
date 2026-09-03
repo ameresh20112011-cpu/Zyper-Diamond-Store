@@ -1,265 +1,328 @@
 /* =========================================================
-   ZYPER BOTTOM NAVIGATION
-   RESPONSIVE: PC + ANDROID + IPHONE + TABLET
+   ZYPER DIAMOND STORE
+   ORIGINAL OLD 6 BUTTON NAVIGATION
+
+   PC + PHONE + IPHONE + ANDROID
 ========================================================= */
+
 
 :root{
 
-  --zyper-nav-height:
-  74px;
+    --zyper-nav-height:
+        88px;
 
 }
 
+
+/* =====================================================
+   NAV HOLDER
+===================================================== */
 
 #zyper-navigation{
 
-  position:
-  fixed !important;
+    position:
+        fixed !important;
 
-  left:
-  0 !important;
+    left:
+        0 !important;
 
-  right:
-  0 !important;
+    right:
+        0 !important;
 
-  bottom:
-  0 !important;
+    bottom:
+        0 !important;
 
-  width:
-  100% !important;
 
-  min-height:
-  calc(
-    var(--zyper-nav-height)
-    +
-    env(
-      safe-area-inset-bottom,
-      0px
-    )
-  ) !important;
+    width:
+        100% !important;
 
-  padding:
-  8px
-  max(
-    12px,
-    env(
-      safe-area-inset-right,
-      0px
-    )
-  )
-  max(
-    8px,
-    env(
-      safe-area-inset-bottom,
-      0px
-    )
-  )
-  max(
-    12px,
-    env(
-      safe-area-inset-left,
-      0px
-    )
-  )
-  !important;
 
-  margin:
-  0 !important;
+    padding:
 
-  display:
-  flex !important;
+        8px
 
-  align-items:
-  flex-end !important;
+        max(
+            10px,
+            env(
+                safe-area-inset-right,
+                0px
+            )
+        )
 
-  justify-content:
-  center !important;
+        max(
+            10px,
+            env(
+                safe-area-inset-bottom,
+                0px
+            )
+        )
 
-  pointer-events:
-  none !important;
+        max(
+            10px,
+            env(
+                safe-area-inset-left,
+                0px
+            )
+        )
 
-  z-index:
-  2147482500 !important;
+        !important;
 
-  box-sizing:
-  border-box !important;
+
+    display:
+        flex !important;
+
+
+    align-items:
+        center !important;
+
+
+    justify-content:
+        center !important;
+
+
+    pointer-events:
+        none !important;
+
+
+    z-index:
+        2147482000 !important;
 
 }
 
 
 /* =====================================================
-   NAV SHELL
+   MAIN BAR
 ===================================================== */
 
-#zyper-navigation
-.zyper-nav-shell{
+.zyper-old-nav{
 
-  width:
-  min(
-    720px,
-    100%
-  ) !important;
+    width:
+        min(
+            680px,
+            calc(
+                100vw -
+                20px
+            )
+        );
 
-  min-width:
-  0 !important;
 
-  display:
-  grid !important;
+    min-height:
+        72px;
 
-  grid-template-columns:
-  repeat(
-    5,
-    minmax(0,1fr)
-  ) !important;
 
-  align-items:
-  center !important;
+    display:
+        grid;
 
-  gap:
-  3px !important;
 
-  padding:
-  6px !important;
+    grid-template-columns:
+        repeat(
+            6,
+            minmax(
+                0,
+                1fr
+            )
+        );
 
-  border-radius:
-  22px !important;
 
-  background:
-  rgba(
-    8,
-    15,
-    31,
-    .96
-  ) !important;
+    align-items:
+        stretch;
 
-  border:
-  1px solid
-  rgba(
-    255,
-    255,
-    255,
-    .10
-  ) !important;
 
-  box-shadow:
-  0 -5px 30px
-  rgba(
-    0,
-    0,
-    0,
-    .32
-  ) !important;
+    gap:
+        4px;
 
-  backdrop-filter:
-  blur(
-    18px
-  ) !important;
 
-  -webkit-backdrop-filter:
-  blur(
-    18px
-  ) !important;
+    padding:
+        6px;
 
-  pointer-events:
-  auto !important;
 
-  overflow:
-  hidden !important;
+    border-radius:
+        28px;
+
+
+    background:
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(
+                9,
+                16,
+                39,
+                .97
+            ),
+
+            rgba(
+                24,
+                27,
+                72,
+                .96
+            )
+
+        );
+
+
+    border:
+
+        1px solid
+        rgba(
+            148,
+            163,
+            255,
+            .25
+        );
+
+
+    box-shadow:
+
+        0
+        0
+        0
+        1px
+        rgba(
+            255,
+            255,
+            255,
+            .04
+        ),
+
+        0
+        -4px
+        35px
+        rgba(
+            0,
+            0,
+            0,
+            .45
+        ),
+
+        0
+        8px
+        35px
+        rgba(
+            59,
+            130,
+            246,
+            .10
+        );
+
+
+    backdrop-filter:
+        blur(
+            22px
+        );
+
+
+    -webkit-backdrop-filter:
+        blur(
+            22px
+        );
+
+
+    pointer-events:
+        auto;
+
+
+    overflow:
+        hidden;
 
 }
 
 
 /* =====================================================
-   NAV ITEM
+   EACH BUTTON
 ===================================================== */
 
-#zyper-navigation
-.zyper-nav-item{
+.zyper-old-nav-item{
 
-  min-width:
-  0 !important;
-
-  min-height:
-  48px !important;
-
-  padding:
-  5px 3px !important;
-
-  display:
-  flex !important;
-
-  flex-direction:
-  column !important;
-
-  align-items:
-  center !important;
-
-  justify-content:
-  center !important;
-
-  gap:
-  3px !important;
-
-  border-radius:
-  16px !important;
-
-  color:
-  #94a3b8 !important;
-
-  text-decoration:
-  none !important;
-
-  font-family:
-  "Poppins",
-  Arial,
-  sans-serif
-  !important;
-
-  font-size:
-  10px !important;
-
-  font-weight:
-  600 !important;
-
-  line-height:
-  1 !important;
-
-  white-space:
-  nowrap !important;
-
-  overflow:
-  hidden !important;
-
-  pointer-events:
-  auto !important;
-
-  cursor:
-  pointer !important;
-
-  touch-action:
-  manipulation !important;
-
-  -webkit-tap-highlight-color:
-  transparent !important;
-
-  transition:
-  background .18s ease,
-  color .18s ease,
-  transform .18s ease
-  !important;
-
-}
+    min-width:
+        0;
 
 
-/* =====================================================
-   TAP
-===================================================== */
+    min-height:
+        60px;
 
-#zyper-navigation
-.zyper-nav-item:active{
 
-  transform:
-  scale(.95) !important;
+    display:
+        flex;
+
+
+    flex-direction:
+        column;
+
+
+    align-items:
+        center;
+
+
+    justify-content:
+        center;
+
+
+    gap:
+        4px;
+
+
+    padding:
+        6px 2px;
+
+
+    border-radius:
+        21px;
+
+
+    color:
+        #a6adc4;
+
+
+    text-decoration:
+        none;
+
+
+    font-family:
+        "Poppins",
+        Arial,
+        sans-serif;
+
+
+    cursor:
+        pointer;
+
+
+    user-select:
+        none;
+
+
+    -webkit-user-select:
+        none;
+
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+
+    touch-action:
+        manipulation;
+
+
+    transition:
+
+        transform
+        .18s
+        ease,
+
+        background
+        .22s
+        ease,
+
+        color
+        .22s
+        ease,
+
+        box-shadow
+        .22s
+        ease;
 
 }
 
@@ -268,95 +331,209 @@
    ICON
 ===================================================== */
 
-#zyper-navigation
-.zyper-nav-icon{
+.zyper-old-nav-icon{
 
-  width:
-  20px !important;
-
-  height:
-  20px !important;
-
-  display:
-  flex !important;
-
-  align-items:
-  center !important;
-
-  justify-content:
-  center !important;
-
-  flex:
-  0 0 auto !important;
-
-}
+    height:
+        28px;
 
 
-#zyper-navigation
-.zyper-nav-icon svg{
-
-  width:
-  20px !important;
-
-  height:
-  20px !important;
-
-  display:
-  block !important;
-
-}
+    display:
+        flex;
 
 
-/* =====================================================
-   LABEL
-===================================================== */
+    align-items:
+        center;
 
-#zyper-navigation
-.zyper-nav-label{
 
-  display:
-  block !important;
+    justify-content:
+        center;
 
-  width:
-  100% !important;
 
-  overflow:
-  hidden !important;
+    font-size:
+        25px;
 
-  text-overflow:
-  ellipsis !important;
 
-  text-align:
-  center !important;
+    line-height:
+        1;
+
+
+    filter:
+
+        drop-shadow(
+            0
+            3px
+            7px
+            rgba(
+                0,
+                0,
+                0,
+                .25
+            )
+        );
 
 }
 
 
 /* =====================================================
-   ACTIVE
+   TEXT
 ===================================================== */
 
-#zyper-navigation
-.zyper-nav-item.active{
+.zyper-old-nav-text{
 
-  color:
-  #ffffff !important;
+    display:
+        block;
 
-  background:
-  linear-gradient(
-    135deg,
-    rgba(37,99,235,.95),
-    rgba(124,58,237,.95)
-  ) !important;
 
-  box-shadow:
-  0 7px 20px
-  rgba(
-    79,
-    70,
-    229,
-    .28
-  ) !important;
+    max-width:
+        100%;
+
+
+    font-size:
+        10px;
+
+
+    line-height:
+        1;
+
+
+    font-weight:
+        600;
+
+
+    white-space:
+        nowrap;
+
+
+    overflow:
+        hidden;
+
+
+    text-overflow:
+        ellipsis;
+
+
+    text-align:
+        center;
+
+}
+
+
+/* =====================================================
+   ACTIVE BUTTON
+===================================================== */
+
+.zyper-old-nav-item.active{
+
+    color:
+        #ffffff;
+
+
+    background:
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(
+                33,
+                64,
+                145,
+                .85
+            ),
+
+            rgba(
+                69,
+                55,
+                142,
+                .80
+            )
+
+        );
+
+
+    box-shadow:
+
+        inset
+        0
+        0
+        0
+        1px
+        rgba(
+            255,
+            255,
+            255,
+            .04
+        ),
+
+        0
+        0
+        24px
+        rgba(
+            74,
+            111,
+            255,
+            .32
+        );
+
+}
+
+
+/* ACTIVE ICON GLOW */
+
+.zyper-old-nav-item.active
+.zyper-old-nav-icon{
+
+    filter:
+
+        drop-shadow(
+            0
+            0
+            10px
+            rgba(
+                96,
+                165,
+                250,
+                .95
+            )
+        );
+
+}
+
+
+/* ACTIVE TEXT */
+
+.zyper-old-nav-item.active
+.zyper-old-nav-text{
+
+    color:
+        #ffffff;
+
+
+    text-shadow:
+
+        0
+        0
+        10px
+        rgba(
+            96,
+            165,
+            250,
+            .85
+        );
+
+}
+
+
+/* =====================================================
+   TOUCH
+===================================================== */
+
+.zyper-old-nav-item:active{
+
+    transform:
+        scale(
+            .93
+        );
 
 }
 
@@ -367,100 +544,224 @@
 
 body{
 
-  padding-bottom:
-  calc(
-    var(--zyper-nav-height)
-    +
-    env(
-      safe-area-inset-bottom,
-      0px
-    )
-    +
-    16px
-  ) !important;
+    padding-bottom:
+
+        calc(
+
+            var(
+                --zyper-nav-height
+            )
+
+            +
+
+            env(
+                safe-area-inset-bottom,
+                0px
+            )
+
+            +
+
+            18px
+
+        )
+
+        !important;
 
 }
 
 
 /* =====================================================
-   PHONE / TABLET
+   TABLET
 ===================================================== */
 
-@media(max-width:768px){
+@media(
+    max-width:
+    768px
+){
 
-  :root{
+    :root{
 
-    --zyper-nav-height:
-    70px;
+        --zyper-nav-height:
+            82px;
 
-  }
-
-
-  #zyper-navigation{
-
-    padding-left:
-    max(
-      6px,
-      env(
-        safe-area-inset-left,
-        0px
-      )
-    ) !important;
-
-    padding-right:
-    max(
-      6px,
-      env(
-        safe-area-inset-right,
-        0px
-      )
-    ) !important;
-
-    padding-top:
-    5px !important;
-
-  }
+    }
 
 
-  #zyper-navigation
-  .zyper-nav-shell{
+    #zyper-navigation{
 
-    border-radius:
-    18px !important;
-
-    padding:
-    5px !important;
-
-  }
+        padding-left:
+            6px !important;
 
 
-  #zyper-navigation
-  .zyper-nav-item{
+        padding-right:
+            6px !important;
 
-    min-height:
-    46px !important;
-
-    border-radius:
-    14px !important;
-
-    font-size:
-    9px !important;
-
-  }
+    }
 
 
-  #zyper-navigation
-  .zyper-nav-icon,
-  #zyper-navigation
-  .zyper-nav-icon svg{
+    .zyper-old-nav{
 
-    width:
-    19px !important;
+        width:
+            calc(
+                100vw -
+                12px
+            );
 
-    height:
-    19px !important;
 
-  }
+        min-height:
+            70px;
+
+
+        border-radius:
+            25px;
+
+
+        gap:
+            2px;
+
+
+        padding:
+            5px;
+
+    }
+
+
+    .zyper-old-nav-item{
+
+        min-height:
+            58px;
+
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .zyper-old-nav-icon{
+
+        font-size:
+            23px;
+
+    }
+
+
+    .zyper-old-nav-text{
+
+        font-size:
+            9px;
+
+    }
+
+}
+
+
+/* =====================================================
+   NORMAL PHONE
+===================================================== */
+
+@media(
+    max-width:
+    480px
+){
+
+    :root{
+
+        --zyper-nav-height:
+            79px;
+
+    }
+
+
+    #zyper-navigation{
+
+        padding:
+
+            5px
+
+            5px
+
+            max(
+                6px,
+                env(
+                    safe-area-inset-bottom,
+                    0px
+                )
+            )
+
+            5px
+
+            !important;
+
+    }
+
+
+    .zyper-old-nav{
+
+        width:
+            calc(
+                100vw -
+                10px
+            );
+
+
+        min-height:
+            67px;
+
+
+        padding:
+            4px;
+
+
+        gap:
+            1px;
+
+
+        border-radius:
+            24px;
+
+    }
+
+
+    .zyper-old-nav-item{
+
+        min-height:
+            57px;
+
+
+        padding:
+            5px
+            1px;
+
+
+        border-radius:
+            17px;
+
+
+        gap:
+            4px;
+
+    }
+
+
+    .zyper-old-nav-icon{
+
+        height:
+            25px;
+
+
+        font-size:
+            22px;
+
+    }
+
+
+    .zyper-old-nav-text{
+
+        font-size:
+            8.5px;
+
+    }
 
 }
 
@@ -469,43 +770,33 @@ body{
    SMALL PHONE
 ===================================================== */
 
-@media(max-width:360px){
+@media(
+    max-width:
+    360px
+){
 
-  :root{
+    .zyper-old-nav-icon{
 
-    --zyper-nav-height:
-    66px;
+        font-size:
+            20px;
 
-  }
-
-
-  #zyper-navigation
-  .zyper-nav-item{
-
-    min-height:
-    43px !important;
-
-    font-size:
-    8px !important;
-
-    gap:
-    2px !important;
-
-  }
+    }
 
 
-  #zyper-navigation
-  .zyper-nav-icon,
-  #zyper-navigation
-  .zyper-nav-icon svg{
+    .zyper-old-nav-text{
 
-    width:
-    18px !important;
+        font-size:
+            7.5px;
 
-    height:
-    18px !important;
+    }
 
-  }
+
+    .zyper-old-nav-item{
+
+        min-height:
+            54px;
+
+    }
 
 }
 
@@ -515,65 +806,76 @@ body{
 ===================================================== */
 
 @media(
-  max-height:520px
+    max-height:
+    520px
 )
 and
 (
-  orientation:landscape
+    orientation:
+    landscape
 ){
 
-  :root{
+    :root{
 
-    --zyper-nav-height:
-    58px;
+        --zyper-nav-height:
+            62px;
 
-  }
-
-
-  #zyper-navigation{
-
-    padding-top:
-    3px !important;
-
-    padding-bottom:
-    max(
-      3px,
-      env(
-        safe-area-inset-bottom,
-        0px
-      )
-    ) !important;
-
-  }
+    }
 
 
-  #zyper-navigation
-  .zyper-nav-shell{
+    .zyper-old-nav{
 
-    padding:
-    3px !important;
-
-    border-radius:
-    15px !important;
-
-  }
+        min-height:
+            52px;
 
 
-  #zyper-navigation
-  .zyper-nav-item{
+        border-radius:
+            19px;
 
-    min-height:
-    38px !important;
 
-    flex-direction:
-    row !important;
+        padding:
+            3px;
 
-    gap:
-    4px !important;
+    }
 
-    font-size:
-    9px !important;
 
-  }
+    .zyper-old-nav-item{
+
+        min-height:
+            44px;
+
+
+        flex-direction:
+            row;
+
+
+        gap:
+            4px;
+
+
+        border-radius:
+            14px;
+
+    }
+
+
+    .zyper-old-nav-icon{
+
+        height:
+            auto;
+
+
+        font-size:
+            19px;
+
+    }
+
+
+    .zyper-old-nav-text{
+
+        font-size:
+            8px;
+
+    }
 
 }
