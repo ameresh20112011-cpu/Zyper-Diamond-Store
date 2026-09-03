@@ -16,7 +16,7 @@ content="width=device-width, initial-scale=1.0"
 
 <link
 rel="stylesheet"
-href="./zyper-nav.css"
+href="./zyper-nav.css?v=10001"
 >
 
 <style>
@@ -2266,14 +2266,45 @@ onAuthStateChanged(
     async function(user){
 
 
+        currentUser =
+        user || null;
+
+
         if(!user){
+
+
+            /*
+               PUBLIC PAGE MODE
+
+               Guest can stay on History page.
+               Only private order / wallet data
+               requires login.
+            */
 
 
             ordersDiv.innerHTML = `
 
                 <div class="empty">
 
-                    ❌ Please Login First
+                    🔐 Login to view your order history.
+
+                    <br><br>
+
+                    <a
+                        href="./index.html"
+                        style="
+                            display:inline-block;
+                            padding:10px 18px;
+                            border-radius:10px;
+                            color:white;
+                            text-decoration:none;
+                            font-size:12px;
+                            font-weight:700;
+                            background:linear-gradient(135deg,#2563eb,#7c3aed);
+                        "
+                    >
+                        LOGIN
+                    </a>
 
                 </div>
 
@@ -2284,31 +2315,34 @@ onAuthStateChanged(
 
                 <div class="empty">
 
-                    ❌ Please Login First
+                    🔐 Login to view your wallet history.
+
+                    <br><br>
+
+                    <a
+                        href="./index.html"
+                        style="
+                            display:inline-block;
+                            padding:10px 18px;
+                            border-radius:10px;
+                            color:white;
+                            text-decoration:none;
+                            font-size:12px;
+                            font-weight:700;
+                            background:linear-gradient(135deg,#2563eb,#7c3aed);
+                        "
+                    >
+                        LOGIN
+                    </a>
 
                 </div>
 
             `;
 
 
-            setTimeout(
-                function(){
-
-                    window.location.href =
-                    "./index.html";
-
-                },
-                900
-            );
-
-
             return;
 
         }
-
-
-        currentUser =
-        user;
 
 
         await Promise.all([
@@ -2331,22 +2365,23 @@ onAuthStateChanged(
 
 
 <!-- =====================================================
-     SHARED LIVE WALLET BADGE
+     SHARED TOP BAR
+     Guest  -> LOGIN
+     Logged -> LIVE WALLET BALANCE
 ===================================================== -->
 
 <script
-type="module"
-src="./zyper-wallet-badge.js?v=120000">
+src="./zyper-topbar.js?v=10001">
 </script>
 
 
 
 <!-- =====================================================
-     NAVIGATION
+     OLD 6-BUTTON NAVIGATION
 ===================================================== -->
 
 <script
-src="./zyper-nav.js">
+src="./zyper-nav.js?v=10001">
 </script>
 
 
