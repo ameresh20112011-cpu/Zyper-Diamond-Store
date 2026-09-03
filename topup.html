@@ -5,8 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>Zyper Diamond Store - Top Up</title>
 
@@ -18,7 +17,8 @@ content="width=device-width, initial-scale=1.0">
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <!-- Zyper Navigation Bar -->
-<link rel="stylesheet" href="zyper-nav.css">
+<link rel="stylesheet" href="zyper-nav.css?v=7000">
+<link rel="stylesheet" href="zyper-responsive.css?v=7000">
 
 
 <style>
@@ -526,6 +526,53 @@ padding:
    SMALL PHONES
 ===================================================== */
 
+
+
+/* =====================================================
+   EXTRA PHONE / TABLET SUPPORT
+===================================================== */
+@media(max-width:768px){
+
+    .grid{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    }
+
+    .card{
+        width:100% !important;
+        min-width:0 !important;
+        aspect-ratio:auto !important;
+        min-height:170px !important;
+        touch-action:manipulation !important;
+    }
+
+    .card img{
+        max-width:85% !important;
+        object-fit:contain !important;
+    }
+}
+
+@media(max-width:380px){
+
+    .grid{
+        gap:9px !important;
+    }
+
+    .card{
+        min-height:155px !important;
+        padding:8px !important;
+    }
+
+    .card img{
+        width:75px !important;
+        height:75px !important;
+    }
+
+    .card img[src*="Weekly"],
+    .card img[src*="Monthly"]{
+        width:95px !important;
+        height:95px !important;
+    }
+}
 
 </style>
 
@@ -1795,7 +1842,7 @@ img.src =
 ===================================================== -->
 
 <script
-src="./zyper-topbar.js?v=6002">
+src="./zyper-topbar.js?v=7000">
 </script>
 
 
@@ -1804,7 +1851,7 @@ src="./zyper-topbar.js?v=6002">
 ===================================================== -->
 
 <script
-src="./zyper-nav.js?v=6002">
+src="./zyper-nav.js?v=7000">
 </script>
 
 
