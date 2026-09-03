@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>Zyper Diamond Store - Register</title>
 
@@ -118,7 +118,68 @@ content="width=device-width, initial-scale=1.0">
 
     margin-top:15px;
 
+    padding:10px;
+
+    border-radius:10px;
+
+    font-size:13px;
+
     font-weight:600;
+}
+
+/* ==================================================
+   EMAIL VERIFICATION PANEL
+   Uses the same card/design. Hidden until account created.
+================================================== */
+
+.verify-panel{
+    display:none;
+    text-align:center;
+    margin-top:4px;
+}
+
+.verify-icon{
+    width:64px;
+    height:64px;
+    margin:0 auto 14px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+    background:rgba(59,130,246,.12);
+}
+
+.verify-panel h3{
+    margin:0 0 8px;
+    font-size:20px;
+}
+
+.verify-panel p{
+    margin:0 0 16px;
+    line-height:1.6;
+    opacity:.76;
+    font-size:13px;
+}
+
+.verify-email{
+    display:block;
+    margin:10px 0 18px;
+    font-weight:700;
+    word-break:break-word;
+}
+
+.verify-help{
+    margin-top:14px !important;
+    font-size:12px !important;
+    opacity:.62 !important;
+}
+
+.verify-login-link{
+    display:inline-block;
+    margin-top:8px;
+    text-decoration:none;
+    font-weight:700;
 }
 
 @media(max-width:500px){
@@ -130,6 +191,10 @@ content="width=device-width, initial-scale=1.0">
 
     .brand-name{
         font-size:21px;
+    }
+
+    input{
+        font-size:16px !important;
     }
 
 }
@@ -166,7 +231,6 @@ Create your account
 </p>
 
 </div>
-
 
 
 <form
@@ -335,11 +399,65 @@ Creating Account...
 
 <div
 id="status"
-class="status">
+class="status"
+role="status"
+aria-live="polite">
 </div>
 
 
 </form>
+
+
+<!-- ==================================================
+     VERIFICATION PANEL
+================================================== -->
+
+<div
+id="verifyPanel"
+class="verify-panel">
+
+<div class="verify-icon">
+✉️
+</div>
+
+<h3>
+Verify your email
+</h3>
+
+<p>
+We sent a verification email to:
+</p>
+
+<strong
+id="verifyEmail"
+class="verify-email">
+</strong>
+
+<p>
+Open Gmail and tap the verification link.
+After verification, return here and sign in.
+</p>
+
+<a
+href="https://mail.google.com/"
+target="_blank"
+rel="noopener"
+class="neu-button login-btn"
+style="display:flex;align-items:center;justify-content:center;text-decoration:none;">
+Open Gmail
+</a>
+
+<a
+href="./index.html"
+class="verify-login-link">
+I verified my email → Sign In
+</a>
+
+<p class="verify-help">
+Your Zyper account cannot be used with Email/Password until the email is verified.
+</p>
+
+</div>
 
 
 <div class="signup-link">
@@ -362,66 +480,36 @@ Login
 </div>
 
 
-
 <script type="module">
 
+/* ==================================================
+   SAME FIREBASE INSTANCE AS ALL OTHER CUSTOMER PAGES
+================================================== */
+
 import {
-initializeApp
+    auth,
+    db
 }
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+from "./firebase.js";
 
 
 import {
-getAuth,
-createUserWithEmailAndPassword,
-updateProfile
+    createUserWithEmailAndPassword,
+    updateProfile,
+    sendEmailVerification,
+    signOut
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 import {
-getFirestore,
-doc,
-setDoc,
-serverTimestamp
+    doc,
+    setDoc,
+    serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-const firebaseConfig = {
-
-apiKey:
-"AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
-
-authDomain:
-"zyper-d-iamond-store.firebaseapp.com",
-
-projectId:
-"zyper-d-iamond-store",
-
-storageBucket:
-"zyper-d-iamond-store.firebasestorage.app",
-
-messagingSenderId:
-"892467477866",
-
-appId:
-"1:892467477866:web:61e9b6ff9435798da23913"
-
-};
-
-
-const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
-
-const db =
-getFirestore(app);
 
 
 const form =
@@ -460,255 +548,388 @@ document.getElementById("registerLoading");
 const status =
 document.getElementById("status");
 
+const verifyPanel =
+document.getElementById("verifyPanel");
 
-/* SHOW PASSWORD */
+const verifyEmail =
+document.getElementById("verifyEmail");
 
-toggle.addEventListener("click", () => {
 
-    if(password.type === "password"){
+/* ==================================================
+   STATUS
+================================================== */
 
-        password.type = "text";
+function showStatus(message,type="error"){
 
-        eyeOpen.style.display = "none";
+    status.style.display =
+        "block";
 
-        eyeClosed.style.display = "block";
+    status.textContent =
+        message;
 
-    }else{
-
-        password.type = "password";
-
-        eyeOpen.style.display = "block";
-
-        eyeClosed.style.display = "none";
-
-    }
-
-});
-
-
-/* REGISTER */
-
-form.addEventListener("submit", async (e) => {
-
-    e.preventDefault();
-
-
-    const usernameValue =
-        username.value.trim();
-
-    const phoneValue =
-        phone.value.trim();
-
-    const emailValue =
-        email.value.trim();
-
-    const passwordValue =
-        password.value;
-
-
-    if(usernameValue.length < 3){
-
-        alert(
-            "Username must contain at least 3 characters."
-        );
-
-        return;
-
-    }
-
-
-    if(!phoneValue){
-
-        alert(
-            "Please enter your phone number."
-        );
-
-        return;
-
-    }
-
-
-    if(!emailValue){
-
-        alert(
-            "Please enter your email."
-        );
-
-        return;
-
-    }
-
-
-    if(passwordValue.length < 6){
-
-        alert(
-            "Password must be at least 6 characters."
-        );
-
-        return;
-
-    }
-
-
-    try{
-
-        button.disabled = true;
-
-        registerText.style.display = "none";
-
-        registerLoading.style.display = "inline";
-
-
-        /* CREATE AUTH ACCOUNT */
-
-        const result =
-            await createUserWithEmailAndPassword(
-                auth,
-                emailValue,
-                passwordValue
-            );
-
-
-        const user =
-            result.user;
-
-
-        /* SAVE USERNAME */
-
-        await updateProfile(
-            user,
-            {
-                displayName:
-                usernameValue
-            }
-        );
-
-
-        /* SAVE USER PROFILE */
-
-        await setDoc(
-            doc(
-                db,
-                "users",
-                user.uid
-            ),
-            {
-
-                uid:
-                user.uid,
-
-                username:
-                usernameValue,
-
-                phone:
-                phoneValue,
-
-                email:
-                emailValue,
-
-                role:
-                "customer",
-
-                createdAt:
-                serverTimestamp()
-
-            }
-        );
-
-
-        status.style.display =
-            "block";
+    if(type === "success"){
 
         status.style.color =
-            "#00c853";
+            "#4ade80";
 
-        status.textContent =
-            "Account created successfully ✓";
+        status.style.background =
+            "rgba(34,197,94,.10)";
 
+    }
+    else{
 
-        setTimeout(() => {
+        status.style.color =
+            "#fca5a5";
 
-            window.location.href =
-                "home.html";
+        status.style.background =
+            "rgba(239,68,68,.10)";
 
-        },1200);
+    }
 
-
-    }catch(error){
-
-        console.error(
-            "REGISTRATION ERROR:",
-            error
-        );
+}
 
 
-        button.disabled = false;
+function clearStatus(){
 
-        registerText.style.display =
-            "inline";
+    status.style.display =
+        "none";
 
-        registerLoading.style.display =
-            "none";
+    status.textContent =
+        "";
+
+}
 
 
-        if(
-            error.code ===
-            "auth/email-already-in-use"
-        ){
+function setLoading(loading){
 
-            alert(
-                "This email is already registered."
-            );
+    button.disabled =
+        loading;
+
+    registerText.style.display =
+        loading ? "none" : "inline";
+
+    registerLoading.style.display =
+        loading ? "inline" : "none";
+
+}
+
+
+/* ==================================================
+   SHOW PASSWORD
+================================================== */
+
+toggle.addEventListener(
+    "click",
+    function(){
+
+        if(password.type === "password"){
+
+            password.type =
+                "text";
+
+            eyeOpen.style.display =
+                "none";
+
+            eyeClosed.style.display =
+                "block";
+
+        }
+        else{
+
+            password.type =
+                "password";
+
+            eyeOpen.style.display =
+                "block";
+
+            eyeClosed.style.display =
+                "none";
 
         }
 
-        else if(
-            error.code ===
-            "auth/invalid-email"
-        ){
+    }
+);
 
-            alert(
-                "Invalid email address."
+
+/* ==================================================
+   REGISTER
+================================================== */
+
+form.addEventListener(
+    "submit",
+    async function(e){
+
+        e.preventDefault();
+
+        clearStatus();
+
+
+        const usernameValue =
+            username.value.trim();
+
+        const phoneValue =
+            phone.value.trim();
+
+        const emailValue =
+            email.value.trim();
+
+        const passwordValue =
+            password.value;
+
+
+        if(usernameValue.length < 3){
+
+            showStatus(
+                "Username must contain at least 3 characters."
             );
+
+            username.focus();
+
+            return;
 
         }
 
-        else if(
-            error.code ===
-            "auth/weak-password"
-        ){
 
-            alert(
+        if(!phoneValue){
+
+            showStatus(
+                "Please enter your phone number."
+            );
+
+            phone.focus();
+
+            return;
+
+        }
+
+
+        if(!emailValue){
+
+            showStatus(
+                "Please enter your email."
+            );
+
+            email.focus();
+
+            return;
+
+        }
+
+
+        if(passwordValue.length < 6){
+
+            showStatus(
                 "Password must be at least 6 characters."
             );
 
-        }
+            password.focus();
 
-        else if(
-            error.code ===
-            "permission-denied" ||
-            error.code ===
-            "firestore/permission-denied"
-        ){
-
-            alert(
-                "Firestore permission denied. Check your Firestore Rules."
-            );
+            return;
 
         }
 
-        else{
 
-            alert(
-                "Registration failed:\n\n" +
-                error.message
+        try{
+
+            setLoading(true);
+
+
+            /* CREATE FIREBASE AUTH ACCOUNT */
+
+            const result =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    emailValue,
+                    passwordValue
+                );
+
+
+            const user =
+                result.user;
+
+
+            /* SAVE DISPLAY NAME */
+
+            await updateProfile(
+                user,
+                {
+                    displayName:
+                        usernameValue
+                }
             );
+
+
+            /*
+               Save the customer document immediately,
+               but mark it as not yet email verified.
+            */
+
+            await setDoc(
+                doc(
+                    db,
+                    "users",
+                    user.uid
+                ),
+                {
+                    uid:
+                        user.uid,
+
+                    username:
+                        usernameValue,
+
+                    name:
+                        usernameValue,
+
+                    phone:
+                        phoneValue,
+
+                    email:
+                        emailValue,
+
+                    provider:
+                        "password",
+
+                    role:
+                        "customer",
+
+                    emailVerified:
+                        false,
+
+                    createdAt:
+                        serverTimestamp()
+                }
+            );
+
+
+            /* ==================================================
+               SEND FIREBASE EMAIL VERIFICATION
+            ================================================== */
+
+            await sendEmailVerification(
+                user,
+                {
+                    url: new URL(
+                        "./index.html",
+                        window.location.href
+                    ).href
+                }
+            );
+
+
+            /*
+               Important security step:
+               do not leave an unverified Email/Password
+               account signed in.
+            */
+
+            await signOut(auth);
+
+
+            verifyEmail.textContent =
+                emailValue;
+
+            form.style.display =
+                "none";
+
+            verifyPanel.style.display =
+                "block";
+
+            setLoading(false);
+
+
+        }
+        catch(error){
+
+            console.error(
+                "REGISTRATION ERROR:",
+                error
+            );
+
+            setLoading(false);
+
+
+            if(
+                error.code ===
+                "auth/email-already-in-use"
+            ){
+
+                showStatus(
+                    "This email is already registered. If you have not verified it yet, go to Login and sign in to receive another verification email."
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ){
+
+                showStatus(
+                    "Invalid email address."
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "auth/weak-password"
+            ){
+
+                showStatus(
+                    "Password must be at least 6 characters."
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "permission-denied"
+                ||
+                error.code ===
+                "firestore/permission-denied"
+            ){
+
+                showStatus(
+                    "Firestore permission denied. Check your Firestore Rules."
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "auth/too-many-requests"
+            ){
+
+                showStatus(
+                    "Too many attempts. Please try again later."
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "auth/network-request-failed"
+            ){
+
+                showStatus(
+                    "Network error. Check your internet connection."
+                );
+
+            }
+
+            else{
+
+                showStatus(
+                    error.message ||
+                    "Registration failed. Please try again."
+                );
+
+            }
 
         }
 
     }
-
-});
+);
 
 </script>
 
