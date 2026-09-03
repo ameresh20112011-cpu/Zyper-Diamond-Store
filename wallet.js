@@ -1,8 +1,32 @@
-import { auth } from "./firebase.js";
+/* =========================================================
+   ZYPER DIAMOND STORE
+   WALLET JS
+
+   GUEST:
+   - Full wallet page visible
+   - All options visible
+   - NO automatic redirect
+   - Click wallet actions -> Login to use wallet
+
+   LOGGED USER:
+   - Real wallet balance
+   - Recharge
+   - Redeem
+   - Transactions
+========================================================= */
+
+
+import {
+    auth
+}
+from "./firebase.js?v=10000";
+
 
 import {
     onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 
 
 /* =====================================================
@@ -13,7 +37,9 @@ const WORKER_URL =
     "https://zyper-order.ameresh20112011.workers.dev";
 
 
-let currentUser = null;
+let currentUser =
+    null;
+
 
 
 /* =====================================================
@@ -74,20 +100,729 @@ const refreshTransactions =
     );
 
 
+const rechargeButton =
+    document.getElementById(
+        "rechargeWalletButton"
+    )
+    ||
+    document.querySelector(
+        ".wallet-recharge-button"
+    );
+
+
+
+/* =====================================================
+   GUEST LOGIN UI STYLE
+===================================================== */
+
+function addGuestStyle() {
+
+    if (
+        document.getElementById(
+            "zyperWalletGuestStyle"
+        )
+    ) {
+        return;
+    }
+
+
+    const style =
+        document.createElement(
+            "style"
+        );
+
+
+    style.id =
+        "zyperWalletGuestStyle";
+
+
+    style.textContent = `
+
+/* =========================================
+   LOGIN REQUIRED MESSAGE
+========================================= */
+
+.zyper-wallet-login-box{
+
+    width:100%;
+
+    margin:0 0 18px;
+
+    padding:17px;
+
+    border-radius:16px;
+
+    text-align:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(37,99,235,.14),
+        rgba(124,58,237,.14)
+    );
+
+    border:
+    1px solid
+    rgba(96,165,250,.25);
+
+    box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.18);
+
+}
+
+
+.zyper-wallet-login-box
+.login-icon{
+
+    font-size:24px;
+
+    margin-bottom:7px;
+
+}
+
+
+.zyper-wallet-login-box
+.login-title{
+
+    color:#ffffff;
+
+    font-size:15px;
+
+    font-weight:700;
+
+}
+
+
+.zyper-wallet-login-box
+.login-text{
+
+    margin-top:5px;
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+}
+
+
+.zyper-wallet-login-box
+.login-button{
+
+    min-width:120px;
+
+    margin-top:12px;
+
+    padding:10px 18px;
+
+    display:inline-block;
+
+    border-radius:10px;
+
+    color:#ffffff;
+
+    text-decoration:none;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+}
+
+
+/* =========================================
+   POPUP
+========================================= */
+
+#zyperWalletLoginModal{
+
+    position:fixed;
+
+    inset:0;
+
+    padding:20px;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+    rgba(2,6,23,.72);
+
+    backdrop-filter:
+    blur(8px);
+
+    -webkit-backdrop-filter:
+    blur(8px);
+
+    z-index:2147483640;
+
+}
+
+
+#zyperWalletLoginModal.show{
+
+    display:flex;
+
+}
+
+
+.zyper-wallet-modal-card{
+
+    width:100%;
+
+    max-width:360px;
+
+    padding:25px 20px;
+
+    text-align:center;
+
+    border-radius:22px;
+
+    color:#ffffff;
+
+    background:
+    linear-gradient(
+        145deg,
+        #111827,
+        #1e1b4b
+    );
+
+    border:
+    1px solid
+    rgba(255,255,255,.12);
+
+    box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.45);
+
+}
+
+
+.zyper-wallet-modal-icon{
+
+    width:55px;
+
+    height:55px;
+
+    margin:0 auto 14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:17px;
+
+    font-size:26px;
+
+    background:
+    rgba(124,58,237,.18);
+
+}
+
+
+.zyper-wallet-modal-card h3{
+
+    margin:0;
+
+    font-size:20px;
+
+}
+
+
+.zyper-wallet-modal-card p{
+
+    margin:
+    9px 0 18px;
+
+    color:#94a3b8;
+
+    font-size:12px;
+
+    line-height:1.6;
+
+}
+
+
+.zyper-wallet-modal-login{
+
+    width:100%;
+
+    min-height:45px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:12px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+}
+
+
+.zyper-wallet-modal-cancel{
+
+    width:100%;
+
+    min-height:42px;
+
+    margin-top:9px;
+
+    border:
+    1px solid
+    rgba(255,255,255,.10);
+
+    border-radius:11px;
+
+    color:#cbd5e1;
+
+    background:
+    rgba(255,255,255,.05);
+
+    cursor:pointer;
+
+}
+
+    `;
+
+
+    document.head.appendChild(
+        style
+    );
+
+}
+
+
+
+/* =====================================================
+   CREATE LOGIN MODAL
+===================================================== */
+
+function createLoginModal() {
+
+    if (
+        document.getElementById(
+            "zyperWalletLoginModal"
+        )
+    ) {
+        return;
+    }
+
+
+    const modal =
+        document.createElement(
+            "div"
+        );
+
+
+    modal.id =
+        "zyperWalletLoginModal";
+
+
+    modal.innerHTML = `
+
+<div class="zyper-wallet-modal-card">
+
+    <div class="zyper-wallet-modal-icon">
+        🔐
+    </div>
+
+    <h3>
+        Login Required
+    </h3>
+
+    <p>
+        Please login to use your
+        Zyper Wallet.
+    </p>
+
+    <a
+    href="./index.html"
+    class="zyper-wallet-modal-login"
+    >
+        LOGIN
+    </a>
+
+    <button
+    type="button"
+    class="zyper-wallet-modal-cancel"
+    id="zyperWalletModalCancel"
+    >
+        Continue Browsing
+    </button>
+
+</div>
+
+    `;
+
+
+    document.body.appendChild(
+        modal
+    );
+
+
+    const cancel =
+        document.getElementById(
+            "zyperWalletModalCancel"
+        );
+
+
+    if (cancel) {
+
+        cancel.addEventListener(
+            "click",
+            hideLoginPopup
+        );
+
+    }
+
+
+    modal.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === modal
+            ) {
+
+                hideLoginPopup();
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   SHOW LOGIN POPUP
+===================================================== */
+
+function showLoginPopup() {
+
+    createLoginModal();
+
+
+    const modal =
+        document.getElementById(
+            "zyperWalletLoginModal"
+        );
+
+
+    if (modal) {
+
+        modal.classList.add(
+            "show"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   HIDE LOGIN POPUP
+===================================================== */
+
+function hideLoginPopup() {
+
+    const modal =
+        document.getElementById(
+            "zyperWalletLoginModal"
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CREATE GUEST NOTICE
+===================================================== */
+
+function showGuestNotice() {
+
+    const walletPage =
+        document.querySelector(
+            ".wallet-page"
+        );
+
+
+    if (!walletPage) {
+        return;
+    }
+
+
+    if (
+        document.getElementById(
+            "zyperWalletGuestNotice"
+        )
+    ) {
+        return;
+    }
+
+
+    const notice =
+        document.createElement(
+            "div"
+        );
+
+
+    notice.id =
+        "zyperWalletGuestNotice";
+
+
+    notice.className =
+        "zyper-wallet-login-box";
+
+
+    notice.innerHTML = `
+
+<div class="login-icon">
+    🔐
+</div>
+
+<div class="login-title">
+    Login to use Zyper Wallet
+</div>
+
+<div class="login-text">
+    You can view all wallet options.
+    Login is required to use them.
+</div>
+
+<a
+href="./index.html"
+class="login-button"
+>
+    LOGIN
+</a>
+
+    `;
+
+
+    /*
+       Keep whole wallet page visible.
+       Just place login notice near the top.
+    */
+
+    const firstSection =
+        walletPage.querySelector(
+            ".balance-card"
+        );
+
+
+    if (firstSection) {
+
+        walletPage.insertBefore(
+            notice,
+            firstSection
+        );
+
+    }
+    else {
+
+        walletPage.prepend(
+            notice
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   REMOVE GUEST NOTICE AFTER LOGIN
+===================================================== */
+
+function removeGuestNotice() {
+
+    const notice =
+        document.getElementById(
+            "zyperWalletGuestNotice"
+        );
+
+
+    if (notice) {
+
+        notice.remove();
+
+    }
+
+
+    hideLoginPopup();
+
+}
+
+
+
+/* =====================================================
+   SHOW GUEST WALLET STATE
+===================================================== */
+
+function showGuestWallet() {
+
+    /*
+       IMPORTANT:
+       DO NOT hide wallet page.
+       DO NOT redirect.
+    */
+
+    currentUser =
+        null;
+
+
+    if (walletBalance) {
+
+        walletBalance.textContent =
+            "--";
+
+    }
+
+
+    if (totalDeposited) {
+
+        totalDeposited.textContent =
+            "LKR --";
+
+    }
+
+
+    if (totalSpent) {
+
+        totalSpent.textContent =
+            "LKR --";
+
+    }
+
+
+    if (transactionsBox) {
+
+        transactionsBox.innerHTML = `
+
+<div class="empty">
+
+    🔐 Login to view your
+    wallet history.
+
+</div>
+
+        `;
+
+    }
+
+
+    if (redeemMessage) {
+
+        redeemMessage.style.display =
+            "none";
+
+    }
+
+
+    /*
+       Do NOT disable buttons.
+       User can see/click them.
+       Clicking will show Login popup.
+    */
+
+    if (redeemInput) {
+
+        redeemInput.disabled =
+            false;
+
+    }
+
+
+    if (redeemButton) {
+
+        redeemButton.disabled =
+            false;
+
+        redeemButton.textContent =
+            "Redeem";
+
+    }
+
+
+    if (refreshWallet) {
+
+        refreshWallet.disabled =
+            false;
+
+    }
+
+
+    if (refreshTransactions) {
+
+        refreshTransactions.disabled =
+            false;
+
+    }
+
+
+    showGuestNotice();
+
+}
+
+
+
 /* =====================================================
    AUTH
 ===================================================== */
 
 onAuthStateChanged(
+
     auth,
+
     async function(user) {
+
 
         if (!user) {
 
-            window.location.href =
-                "./index.html";
+            showGuestWallet();
 
             return;
+
         }
 
 
@@ -95,12 +830,37 @@ onAuthStateChanged(
             user;
 
 
-        await loadWallet();
+        removeGuestNotice();
 
-        await loadTransactions();
+
+        if (redeemInput) {
+
+            redeemInput.disabled =
+                false;
+
+        }
+
+
+        if (redeemButton) {
+
+            redeemButton.disabled =
+                false;
+
+        }
+
+
+        await Promise.all([
+
+            loadWallet(),
+
+            loadTransactions()
+
+        ]);
 
     }
+
 );
+
 
 
 /* =====================================================
@@ -110,6 +870,8 @@ onAuthStateChanged(
 async function getToken() {
 
     if (!currentUser) {
+
+        showLoginPopup();
 
         throw new Error(
             "Login required."
@@ -124,8 +886,9 @@ async function getToken() {
 }
 
 
+
 /* =====================================================
-   API
+   WORKER REQUEST
 ===================================================== */
 
 async function workerRequest(
@@ -138,25 +901,34 @@ async function workerRequest(
 
     const response =
         await fetch(
+
             WORKER_URL,
+
             {
+
                 method:
                     "POST",
+
 
                 headers: {
 
                     "Content-Type":
                         "application/json",
 
+
                     "Authorization":
                         `Bearer ${token}`
 
                 },
 
+
                 body:
-                    JSON.stringify(body)
+                    JSON.stringify(
+                        body
+                    )
 
             }
+
         );
 
 
@@ -196,11 +968,21 @@ async function workerRequest(
 }
 
 
+
 /* =====================================================
    LOAD WALLET
 ===================================================== */
 
 async function loadWallet() {
+
+    if (!currentUser) {
+
+        showLoginPopup();
+
+        return;
+
+    }
+
 
     if (walletBalance) {
 
@@ -212,6 +994,7 @@ async function loadWallet() {
 
     try {
 
+
         const result =
             await workerRequest({
 
@@ -222,37 +1005,63 @@ async function loadWallet() {
 
 
         const wallet =
-            result.wallet;
+            result.wallet || {};
 
 
-        walletBalance.textContent =
-            Number(
-                wallet.balance || 0
-            ).toLocaleString(
-                "en-LK"
-            );
+        const availableBalance =
+
+            wallet.availableBalance
+
+            ??
+
+            wallet.balance
+
+            ??
+
+            0;
 
 
-        totalDeposited.textContent =
-            "LKR " +
-            Number(
-                wallet.totalDeposited || 0
-            ).toLocaleString(
-                "en-LK"
-            );
+        if (walletBalance) {
+
+            walletBalance.textContent =
+                Number(
+                    availableBalance
+                ).toLocaleString(
+                    "en-LK"
+                );
+
+        }
 
 
-        totalSpent.textContent =
-            "LKR " +
-            Number(
-                wallet.totalSpent || 0
-            ).toLocaleString(
-                "en-LK"
-            );
+        if (totalDeposited) {
+
+            totalDeposited.textContent =
+                "LKR " +
+                Number(
+                    wallet.totalDeposited || 0
+                ).toLocaleString(
+                    "en-LK"
+                );
+
+        }
+
+
+        if (totalSpent) {
+
+            totalSpent.textContent =
+                "LKR " +
+                Number(
+                    wallet.totalSpent || 0
+                ).toLocaleString(
+                    "en-LK"
+                );
+
+        }
 
 
     }
     catch(error) {
+
 
         console.error(
             "Wallet error:",
@@ -260,8 +1069,17 @@ async function loadWallet() {
         );
 
 
-        walletBalance.textContent =
-            "0";
+        if (!currentUser) {
+            return;
+        }
+
+
+        if (walletBalance) {
+
+            walletBalance.textContent =
+                "--";
+
+        }
 
 
         showMessage(
@@ -274,24 +1092,57 @@ async function loadWallet() {
 }
 
 
+
 /* =====================================================
-   REDEEM
+   REDEEM BUTTON
 ===================================================== */
 
 if (redeemButton) {
 
     redeemButton.addEventListener(
+
         "click",
-        redeemCode
+
+        function() {
+
+
+            if (!currentUser) {
+
+                showLoginPopup();
+
+                return;
+
+            }
+
+
+            redeemCode();
+
+        }
+
     );
 
 }
 
 
+
+/* =====================================================
+   REDEEM CODE
+===================================================== */
+
 async function redeemCode() {
 
+    if (!currentUser) {
+
+        showLoginPopup();
+
+        return;
+
+    }
+
+
     const code =
-        redeemInput.value
+        redeemInput
+            .value
             .trim()
             .toUpperCase();
 
@@ -310,7 +1161,7 @@ async function redeemCode() {
 
     if (
         !/^ZYPER-[A-Z0-9]{4}-[A-Z0-9]{4}$/
-            .test(code)
+        .test(code)
     ) {
 
         showMessage(
@@ -336,6 +1187,7 @@ async function redeemCode() {
 
     try {
 
+
         const result =
             await workerRequest({
 
@@ -349,12 +1201,15 @@ async function redeemCode() {
 
 
         showMessage(
+
             `✅ LKR ${Number(
                 result.amount
             ).toLocaleString(
                 "en-LK"
             )} added to your wallet successfully.`,
+
             "success"
+
         );
 
 
@@ -362,13 +1217,18 @@ async function redeemCode() {
             "";
 
 
-        await loadWallet();
+        await Promise.all([
 
-        await loadTransactions();
+            loadWallet(),
+
+            loadTransactions()
+
+        ]);
 
 
     }
     catch(error) {
+
 
         console.error(
             "Redeem error:",
@@ -381,9 +1241,9 @@ async function redeemCode() {
             "error"
         );
 
-
     }
     finally {
+
 
         redeemButton.disabled =
             false;
@@ -397,6 +1257,7 @@ async function redeemCode() {
 }
 
 
+
 /* =====================================================
    ENTER KEY
 ===================================================== */
@@ -404,23 +1265,42 @@ async function redeemCode() {
 if (redeemInput) {
 
     redeemInput.addEventListener(
+
         "keydown",
+
         function(event) {
 
+
             if (
-                event.key === "Enter"
+                event.key !==
+                "Enter"
             ) {
 
-                event.preventDefault();
-
-                redeemCode();
+                return;
 
             }
 
+
+            event.preventDefault();
+
+
+            if (!currentUser) {
+
+                showLoginPopup();
+
+                return;
+
+            }
+
+
+            redeemCode();
+
         }
+
     );
 
 }
+
 
 
 /* =====================================================
@@ -430,11 +1310,16 @@ if (redeemInput) {
 if (redeemInput) {
 
     redeemInput.addEventListener(
+
         "input",
+
         function() {
 
+
             redeemInput.value =
-                redeemInput.value
+
+                redeemInput
+                    .value
                     .toUpperCase()
                     .replace(
                         /[^A-Z0-9-]/g,
@@ -442,32 +1327,84 @@ if (redeemInput) {
                     );
 
         }
+
     );
 
 }
 
 
+
 /* =====================================================
-   TRANSACTIONS
+   RECHARGE WALLET
+===================================================== */
+
+if (rechargeButton) {
+
+    rechargeButton.addEventListener(
+
+        "click",
+
+        function(event) {
+
+
+            if (!currentUser) {
+
+                event.preventDefault();
+
+                showLoginPopup();
+
+            }
+
+        }
+
+    );
+
+}
+
+
+
+/* =====================================================
+   LOAD TRANSACTIONS
 ===================================================== */
 
 async function loadTransactions() {
 
     if (!transactionsBox) {
+
         return;
+
+    }
+
+
+    if (!currentUser) {
+
+        transactionsBox.innerHTML = `
+
+<div class="empty">
+
+    🔐 Login to view your
+    wallet history.
+
+</div>
+
+        `;
+
+        return;
+
     }
 
 
     transactionsBox.innerHTML = `
 
-        <div class="loading">
-            Loading transactions...
-        </div>
+<div class="loading">
+    Loading transactions...
+</div>
 
     `;
 
 
     try {
+
 
         const result =
             await workerRequest({
@@ -491,6 +1428,7 @@ async function loadTransactions() {
     }
     catch(error) {
 
+
         console.error(
             "Transactions error:",
             error
@@ -499,15 +1437,18 @@ async function loadTransactions() {
 
         transactionsBox.innerHTML = `
 
-            <div class="empty">
-                Unable to load wallet history.
-            </div>
+<div class="empty">
+
+    Unable to load wallet history.
+
+</div>
 
         `;
 
     }
 
 }
+
 
 
 /* =====================================================
@@ -523,16 +1464,17 @@ function renderTransactions(
 
 
     if (
-        transactions.length === 0
+        transactions.length ===
+        0
     ) {
 
         transactionsBox.innerHTML = `
 
-            <div class="empty">
+<div class="empty">
 
-                No wallet transactions yet.
+    No wallet transactions yet.
 
-            </div>
+</div>
 
         `;
 
@@ -542,6 +1484,7 @@ function renderTransactions(
 
 
     transactions.forEach(
+
         function(transaction) {
 
 
@@ -560,7 +1503,8 @@ function renderTransactions(
 
 
             const isDeposit =
-                type === "DEPOSIT";
+                type ===
+                "DEPOSIT";
 
 
             const item =
@@ -586,74 +1530,75 @@ function renderTransactions(
 
             item.innerHTML = `
 
-                <div class="transaction-left">
+<div class="transaction-left">
 
-                    <div class="transaction-icon">
+    <div class="transaction-icon">
 
-                        ${
-                            isDeposit
-                            ? "💰"
-                            : "🛒"
-                        }
+        ${
+            isDeposit
+            ? "💰"
+            : "🛒"
+        }
 
-                    </div>
-
-
-                    <div>
-
-                        <div class="transaction-title">
-
-                            ${
-                                isDeposit
-                                ? "Wallet Top Up"
-                                : "Wallet Payment"
-                            }
-
-                        </div>
+    </div>
 
 
-                        <div class="transaction-date">
+    <div>
 
-                            ${escapeHTML(date)}
+        <div class="transaction-title">
 
-                        </div>
+            ${
+                isDeposit
+                ? "Wallet Top Up"
+                : "Wallet Payment"
+            }
 
-
-                        ${
-                            code
-                            ?
-
-                            `<div class="transaction-code">
-                                ${escapeHTML(code)}
-                            </div>`
-
-                            :
-
-                            ""
-                        }
-
-                    </div>
-
-                </div>
+        </div>
 
 
-                <div
-                    class="transaction-amount ${
-                        isDeposit
-                        ? "deposit"
-                        : "spend"
-                    }">
+        <div class="transaction-date">
 
-                    ${
-                        isDeposit
-                        ? "+"
-                        : "-"
-                    }
+            ${escapeHTML(date)}
 
-                    LKR
-                    ${amount.toLocaleString("en-LK")}
+        </div>
 
-                </div>
+
+        ${
+            code
+            ?
+
+            `<div class="transaction-code">
+                ${escapeHTML(code)}
+            </div>`
+
+            :
+
+            ""
+        }
+
+    </div>
+
+</div>
+
+
+<div
+class="transaction-amount ${
+    isDeposit
+    ? "deposit"
+    : "spend"
+}"
+>
+
+    ${
+        isDeposit
+        ? "+"
+        : "-"
+    }
+
+    LKR
+    ${amount.toLocaleString("en-LK")}
+
+</div>
 
             `;
 
@@ -663,13 +1608,15 @@ function renderTransactions(
             );
 
         }
+
     );
 
 }
 
 
+
 /* =====================================================
-   DATE
+   FORMAT DATE
 ===================================================== */
 
 function formatDate(value) {
@@ -681,8 +1628,36 @@ function formatDate(value) {
     }
 
 
-    const date =
-        new Date(value);
+    let date;
+
+
+    /*
+       Firestore timestamp support
+    */
+
+    if (
+        typeof value ===
+        "object"
+        &&
+        value.seconds
+    ) {
+
+        date =
+            new Date(
+                Number(
+                    value.seconds
+                ) * 1000
+            );
+
+    }
+    else {
+
+        date =
+            new Date(
+                value
+            );
+
+    }
 
 
     if (
@@ -697,7 +1672,9 @@ function formatDate(value) {
 
 
     return date.toLocaleString(
+
         "en-LK",
+
         {
 
             year:
@@ -716,9 +1693,11 @@ function formatDate(value) {
                 "2-digit"
 
         }
+
     );
 
 }
+
 
 
 /* =====================================================
@@ -729,6 +1708,11 @@ function showMessage(
     text,
     type
 ) {
+
+    if (!redeemMessage) {
+        return;
+    }
+
 
     redeemMessage.textContent =
         text;
@@ -745,7 +1729,17 @@ function showMessage(
 }
 
 
+
+/* =====================================================
+   HIDE MESSAGE
+===================================================== */
+
 function hideMessage() {
+
+    if (!redeemMessage) {
+        return;
+    }
+
 
     redeemMessage.style.display =
         "none";
@@ -753,52 +1747,97 @@ function hideMessage() {
 }
 
 
+
 /* =====================================================
-   REFRESH
+   REFRESH WALLET
 ===================================================== */
 
 if (refreshWallet) {
 
     refreshWallet.addEventListener(
+
         "click",
+
         async function() {
+
+
+            if (!currentUser) {
+
+                showLoginPopup();
+
+                return;
+
+            }
+
 
             refreshWallet.disabled =
                 true;
 
 
-            await loadWallet();
+            try {
 
+                await loadWallet();
 
-            refreshWallet.disabled =
-                false;
+            }
+            finally {
+
+                refreshWallet.disabled =
+                    false;
+
+            }
 
         }
+
     );
 
 }
 
+
+
+/* =====================================================
+   REFRESH TRANSACTIONS
+===================================================== */
 
 if (refreshTransactions) {
 
     refreshTransactions.addEventListener(
+
         "click",
+
         async function() {
+
+
+            if (!currentUser) {
+
+                showLoginPopup();
+
+                return;
+
+            }
+
 
             refreshTransactions.disabled =
                 true;
 
 
-            await loadTransactions();
+            try {
 
+                await loadTransactions();
 
-            refreshTransactions.disabled =
-                false;
+            }
+            finally {
+
+                refreshTransactions.disabled =
+                    false;
+
+            }
 
         }
+
     );
 
 }
+
 
 
 /* =====================================================
@@ -817,31 +1856,43 @@ function escapeHTML(value) {
     }
 
 
-    return String(value)
+    return String(
+        value
+    )
 
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
 
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
+    .replace(
+        /</g,
+        "&lt;"
+    )
 
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
+    .replace(
+        />/g,
+        "&gt;"
+    )
 
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
 
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
+
+
+
+/* =====================================================
+   START GUEST UI SUPPORT
+===================================================== */
+
+addGuestStyle();
+
+createLoginModal();
