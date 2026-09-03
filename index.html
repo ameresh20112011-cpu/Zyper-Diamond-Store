@@ -12,21 +12,9 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 
 <title>Zyper Diamond Store - Login</title>
 
-<link
-rel="stylesheet"
-href="index.css"
->
-
-<link
-rel="stylesheet"
-href="media.css"
->
-
-<link
-rel="icon"
-href="1.jpg"
->
-
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="media.css">
+<link rel="icon" href="1.jpg">
 
 <style>
 
@@ -35,11 +23,8 @@ href="1.jpg"
 ================================================== */
 
 .login-header{
-
     text-align:center;
-
     margin-bottom:28px;
-
 }
 
 
@@ -48,7 +33,6 @@ href="1.jpg"
 ================================================== */
 
 .company-logo{
-
     width:76px !important;
     height:76px !important;
 
@@ -58,33 +42,26 @@ href="1.jpg"
     max-width:76px !important;
     max-height:76px !important;
 
-    margin:
-        0 auto 15px !important;
-
+    margin:0 auto 15px !important;
     padding:0 !important;
 
     border-radius:50% !important;
-
     overflow:hidden !important;
 
     display:flex !important;
-
     align-items:center !important;
     justify-content:center !important;
 
     background:#ffffff;
 
     box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.20);
-
+    0 8px 25px
+    rgba(0,0,0,.20);
 }
 
 
 .company-logo img{
-
     width:100% !important;
-
     height:100% !important;
 
     display:block !important;
@@ -92,7 +69,6 @@ href="1.jpg"
     object-fit:cover !important;
 
     border-radius:50% !important;
-
 }
 
 
@@ -101,25 +77,16 @@ href="1.jpg"
 ================================================== */
 
 .brand-name{
-
     margin:0;
-
     font-size:24px;
-
     font-weight:800;
-
 }
 
 
 .brand-subtitle{
-
-    margin:
-        7px 0 0;
-
+    margin:7px 0 0;
     font-size:13px;
-
     opacity:.7;
-
 }
 
 
@@ -128,17 +95,12 @@ href="1.jpg"
 ================================================== */
 
 .password-group{
-
     position:relative;
-
 }
 
 
 .password-group input{
-
-    padding-right:
-        58px !important;
-
+    padding-right:58px !important;
 }
 
 
@@ -147,39 +109,31 @@ href="1.jpg"
 ================================================== */
 
 .password-toggle{
-
     position:absolute;
 
     right:7px;
-
     top:50%;
 
     transform:
-        translateY(-50%);
+    translateY(-50%);
 
     width:44px;
-
     height:44px;
 
     padding:0;
-
     margin:0;
 
     border:0;
-
     outline:0;
 
     border-radius:50%;
 
-    background:
-        transparent;
-
+    background:transparent;
     color:inherit;
 
     cursor:pointer;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
@@ -188,32 +142,24 @@ href="1.jpg"
     touch-action:manipulation;
 
     -webkit-tap-highlight-color:
-        transparent;
+    transparent;
 
     user-select:none;
-
     -webkit-user-select:none;
-
 }
 
 
 .password-toggle:active{
-
     transform:
-        translateY(-50%)
-        scale(.90);
-
+    translateY(-50%)
+    scale(.90);
 }
 
 
 .password-toggle svg{
-
     width:21px;
-
     height:21px;
-
     pointer-events:none;
-
 }
 
 
@@ -222,7 +168,6 @@ href="1.jpg"
 ================================================== */
 
 .login-status{
-
     display:none;
 
     text-align:center;
@@ -234,9 +179,116 @@ href="1.jpg"
     border-radius:10px;
 
     font-size:13px;
-
     font-weight:600;
+}
 
+
+/* ==================================================
+   GOOGLE DIVIDER
+================================================== */
+
+.google-divider{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:
+    8px 0 16px;
+
+    color:
+    rgba(255,255,255,.55);
+
+    font-size:12px;
+    font-weight:600;
+}
+
+
+.google-divider::before,
+.google-divider::after{
+    content:"";
+
+    flex:1;
+
+    height:1px;
+
+    background:
+    rgba(255,255,255,.12);
+}
+
+
+/* ==================================================
+   GOOGLE BUTTON
+================================================== */
+
+.google-login-button{
+    width:100%;
+
+    min-height:52px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:#ffffff;
+
+    color:#1f2937;
+
+    font-family:inherit;
+
+    font-size:14px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:11px;
+
+    box-shadow:
+    0 8px 22px
+    rgba(0,0,0,.12);
+
+    touch-action:manipulation;
+
+    -webkit-tap-highlight-color:
+    transparent;
+}
+
+
+.google-login-button:active{
+    transform:
+    scale(.985);
+}
+
+
+.google-login-button:disabled{
+    opacity:.72;
+    cursor:not-allowed;
+}
+
+
+.google-login-button svg{
+    width:20px;
+    height:20px;
+
+    flex:
+    0 0 20px;
+}
+
+
+/*
+   Bigger space between
+   Google and Create Account
+*/
+
+.signup-link{
+    margin-top:
+    30px !important;
 }
 
 
@@ -247,7 +299,6 @@ href="1.jpg"
 @media(max-width:500px){
 
     .company-logo{
-
         width:68px !important;
         height:68px !important;
 
@@ -256,103 +307,38 @@ href="1.jpg"
 
         max-width:68px !important;
         max-height:68px !important;
-
     }
 
 
     .brand-name{
-
         font-size:21px;
-
     }
 
 
     /*
-       iPhone Safari input zoom prevention
+       Prevent iPhone Safari
+       automatic input zoom
     */
 
     input{
-
-        font-size:16px !important;
-
+        font-size:
+        16px !important;
     }
 
 
     .password-toggle{
-
         width:46px;
-
         height:46px;
 
         right:4px;
-
     }
 
-}
 
-
-/* ==================================================
-   GOOGLE SIGN IN - ADDED ONLY
-================================================== */
-
-.google-divider{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin:20px 0 16px;
-    color:rgba(255,255,255,.55);
-    font-size:12px;
-    font-weight:600;
-}
-
-.google-divider::before,
-.google-divider::after{
-    content:"";
-    flex:1;
-    height:1px;
-    background:rgba(255,255,255,.12);
-}
-
-.google-login-button{
-    width:100%;
-    min-height:52px;
-    border:0;
-    border-radius:14px;
-    background:#ffffff;
-    color:#1f2937;
-    font-family:inherit;
-    font-size:14px;
-    font-weight:700;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:11px;
-    box-shadow:0 8px 22px rgba(0,0,0,.12);
-    touch-action:manipulation;
-    -webkit-tap-highlight-color:transparent;
-}
-
-.google-login-button:active{
-    transform:scale(.985);
-}
-
-.google-login-button:disabled{
-    opacity:.72;
-    cursor:not-allowed;
-}
-
-.google-login-button svg{
-    width:20px;
-    height:20px;
-    flex:0 0 20px;
-}
-
-@media(max-width:500px){
     .google-login-button{
         min-height:52px;
         font-size:14px;
     }
+
 }
 
 </style>
@@ -365,7 +351,6 @@ href="1.jpg"
 
 <div class="login-container">
 
-
 <div class="login-card">
 
 
@@ -374,7 +359,6 @@ href="1.jpg"
 ================================================== -->
 
 <div class="login-header">
-
 
 <div class="company-logo">
 
@@ -387,18 +371,13 @@ alt="Zyper Diamond Store"
 
 
 <h2 class="brand-name">
-
 Zyper Diamond Store
-
 </h2>
 
 
 <p class="brand-subtitle">
-
 Welcome back! Sign in to continue
-
 </p>
-
 
 </div>
 
@@ -419,9 +398,7 @@ novalidate
 
 <div class="form-group">
 
-
 <div class="input-group neu-input">
-
 
 <input
 type="email"
@@ -433,32 +410,23 @@ inputmode="email"
 placeholder=" "
 >
 
-
 <label for="email">
-
 Email Address
-
 </label>
 
+</div>
 
 </div>
 
 
-</div>
 
-
-
-<!-- ==================================================
-     PASSWORD
-================================================== -->
+<!-- PASSWORD -->
 
 <div class="form-group">
-
 
 <div
 class="input-group neu-input password-group"
 >
-
 
 <input
 type="password"
@@ -469,13 +437,9 @@ autocomplete="current-password"
 placeholder=" "
 >
 
-
 <label for="password">
-
 Password
-
 </label>
-
 
 
 <button
@@ -510,7 +474,6 @@ r="3"
 />
 
 </svg>
-
 
 
 <!-- EYE CLOSED -->
@@ -552,12 +515,9 @@ d="M17.29 17.29C20.07 15.5 22 12 22 12s-4-8-10-8c-.72 0-1.41.09-2.06.24"
 
 </svg>
 
-
 </button>
 
-
 </div>
-
 
 </div>
 
@@ -571,7 +531,6 @@ d="M17.29 17.29C20.07 15.5 22 12 22 12s-4-8-10-8c-.72 0-1.41.09-2.06.24"
 
 
 <div class="remember-wrapper">
-
 
 <input
 type="checkbox"
@@ -589,7 +548,6 @@ class="checkbox-label"
 
 <div class="neu-checkbox">
 
-
 <svg
 viewBox="0 0 24 24"
 fill="none"
@@ -603,15 +561,12 @@ points="20 6 9 17 4 12"
 
 </svg>
 
-
 </div>
 
 
 Remember me
 
-
 </label>
-
 
 </div>
 
@@ -632,7 +587,7 @@ Forgot password?
 
 
 <!-- ==================================================
-     LOGIN BUTTON
+     SIGN IN
 ================================================== -->
 
 <button
@@ -641,23 +596,16 @@ class="neu-button login-btn"
 id="loginButton"
 >
 
-
 <span id="loginText">
-
 Sign In
-
 </span>
-
 
 <span
 id="loginLoading"
 style="display:none;"
 >
-
 Signing in...
-
 </span>
-
 
 </button>
 
@@ -674,80 +622,109 @@ aria-live="polite"
 
 </form>
 
+
+
 <!-- ==================================================
-     CONTINUE WITH GOOGLE - ADDED ONLY
+     OR
 ================================================== -->
 
 <div class="google-divider">
-    <span>OR</span>
+
+<span>
+OR
+</span>
+
 </div>
 
-<button
-    type="button"
-    id="googleLoginButton"
-    class="google-login-button"
->
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path fill="#4285F4" d="M21.35 12.2c0-.64-.06-1.25-.17-1.84H12v3.48h5.25a4.48 4.48 0 0 1-1.95 2.94v2.26h3.16c1.85-1.7 2.89-4.22 2.89-6.84z"/>
-        <path fill="#34A853" d="M12 21.72c2.64 0 4.86-.87 6.48-2.37l-3.16-2.26c-.88.59-2 .94-3.32.94-2.55 0-4.71-1.72-5.48-4.03H3.25v2.34A9.79 9.79 0 0 0 12 21.72z"/>
-        <path fill="#FBBC05" d="M6.52 14a5.87 5.87 0 0 1 0-3.76V7.9H3.25a9.79 9.79 0 0 0 0 8.44L6.52 14z"/>
-        <path fill="#EA4335" d="M12 6.2c1.44 0 2.73.49 3.75 1.46l2.81-2.81A9.43 9.43 0 0 0 12 2.5 9.79 9.79 0 0 0 3.25 7.9l3.27 2.34C7.29 7.93 9.45 6.2 12 6.2z"/>
-    </svg>
-
-    <span id="googleLoginText">
-        Continue with Google
-    </span>
-</button>
 
 
 <!-- ==================================================
-     REGISTER
+     CONTINUE WITH GOOGLE
+================================================== -->
+
+<button
+type="button"
+id="googleLoginButton"
+class="google-login-button"
+>
+
+
+<svg
+viewBox="0 0 24 24"
+aria-hidden="true"
+>
+
+<path
+fill="#4285F4"
+d="M21.35 12.2c0-.64-.06-1.25-.17-1.84H12v3.48h5.25a4.48 4.48 0 0 1-1.95 2.94v2.26h3.16c1.85-1.7 2.89-4.22 2.89-6.84z"
+/>
+
+<path
+fill="#34A853"
+d="M12 21.72c2.64 0 4.86-.87 6.48-2.37l-3.16-2.26c-.88.59-2 .94-3.32.94-2.55 0-4.71-1.72-5.48-4.03H3.25v2.34A9.79 9.79 0 0 0 12 21.72z"
+/>
+
+<path
+fill="#FBBC05"
+d="M6.52 14a5.87 5.87 0 0 1 0-3.76V7.9H3.25a9.79 9.79 0 0 0 0 8.44L6.52 14z"
+/>
+
+<path
+fill="#EA4335"
+d="M12 6.2c1.44 0 2.73.49 3.75 1.46l2.81-2.81A9.43 9.43 0 0 0 12 2.5 9.79 9.79 0 0 0 3.25 7.9l3.27 2.34C7.29 7.93 9.45 6.2 12 6.2z"
+/>
+
+</svg>
+
+
+<span id="googleLoginText">
+Continue with Google
+</span>
+
+
+</button>
+
+
+
+<!-- ==================================================
+     CREATE ACCOUNT
 ================================================== -->
 
 <div class="signup-link">
-
 
 <p>
 
 Don't have an account?
 
 <a href="./register.html">
-
 Create Account
-
 </a>
 
 </p>
 
-
 </div>
 
 
 </div>
-
 
 </div>
 
 
 
 <!-- ==================================================
-     FIREBASE LOGIN
+     FIREBASE
 ================================================== -->
 
 <script type="module">
 
 
-/*
-   IMPORTANT:
-
-   Do NOT initialize another Firebase app here.
-
-   Every page now uses the SAME firebase.js
-   and SAME Firebase Auth instance.
-*/
+/* ==================================================
+   SHARED FIREBASE
+================================================== */
 
 import {
-    auth
+    auth,
+    db
 }
 from
 "./firebase.js";
@@ -767,11 +744,155 @@ import {
 
     GoogleAuthProvider,
 
-    signInWithPopup
+    signInWithPopup,
+
+    signOut,
+
+    sendEmailVerification
 
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+import {
+
+    doc,
+
+    getDoc,
+
+    setDoc,
+
+    serverTimestamp
+
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+/* ==================================================
+   GOOGLE USER -> FIRESTORE
+================================================== */
+
+async function saveGoogleUserToFirestore(
+    user
+){
+
+    if(!user){
+
+        throw new Error(
+            "Google user is missing."
+        );
+
+    }
+
+
+    const userRef =
+        doc(
+            db,
+            "users",
+            user.uid
+        );
+
+
+    const userSnapshot =
+        await getDoc(
+            userRef
+        );
+
+
+    /*
+       FIRST GOOGLE LOGIN
+    */
+
+    if(
+        !userSnapshot.exists()
+    ){
+
+        await setDoc(
+            userRef,
+            {
+
+                uid:
+                    user.uid,
+
+                email:
+                    user.email || "",
+
+                name:
+                    user.displayName || "",
+
+                username:
+                    user.displayName || "",
+
+                photoURL:
+                    user.photoURL || "",
+
+                provider:
+                    "google",
+
+                role:
+                    "customer",
+
+                emailVerified:
+                    true,
+
+                createdAt:
+                    serverTimestamp(),
+
+                lastLoginAt:
+                    serverTimestamp()
+
+            }
+        );
+
+    }
+
+    else{
+
+        /*
+           EXISTING USER
+           DO NOT CHANGE ROLE
+        */
+
+        await setDoc(
+            userRef,
+            {
+
+                uid:
+                    user.uid,
+
+                email:
+                    user.email || "",
+
+                name:
+                    user.displayName || "",
+
+                username:
+                    user.displayName || "",
+
+                photoURL:
+                    user.photoURL || "",
+
+                provider:
+                    "google",
+
+                emailVerified:
+                    true,
+
+                lastLoginAt:
+                    serverTimestamp()
+
+            },
+            {
+                merge:true
+            }
+        );
+
+    }
+
+}
 
 
 
@@ -780,86 +901,85 @@ from
 ================================================== */
 
 const loginForm =
-    document.getElementById(
-        "loginForm"
-    );
+document.getElementById(
+    "loginForm"
+);
 
 
 const emailInput =
-    document.getElementById(
-        "email"
-    );
+document.getElementById(
+    "email"
+);
 
 
 const passwordInput =
-    document.getElementById(
-        "password"
-    );
+document.getElementById(
+    "password"
+);
 
 
 const passwordToggle =
-    document.getElementById(
-        "passwordToggle"
-    );
+document.getElementById(
+    "passwordToggle"
+);
 
 
 const eyeOpen =
-    document.getElementById(
-        "eyeOpen"
-    );
+document.getElementById(
+    "eyeOpen"
+);
 
 
 const eyeClosed =
-    document.getElementById(
-        "eyeClosed"
-    );
+document.getElementById(
+    "eyeClosed"
+);
 
 
 const rememberInput =
-    document.getElementById(
-        "remember"
-    );
+document.getElementById(
+    "remember"
+);
 
 
 const loginButton =
-    document.getElementById(
-        "loginButton"
-    );
+document.getElementById(
+    "loginButton"
+);
 
 
 const loginText =
-    document.getElementById(
-        "loginText"
-    );
+document.getElementById(
+    "loginText"
+);
 
 
 const loginLoading =
-    document.getElementById(
-        "loginLoading"
-    );
+document.getElementById(
+    "loginLoading"
+);
 
 
 const loginStatus =
-    document.getElementById(
-        "loginStatus"
-    );
+document.getElementById(
+    "loginStatus"
+);
 
 
 const googleLoginButton =
-    document.getElementById(
-        "googleLoginButton"
-    );
+document.getElementById(
+    "googleLoginButton"
+);
 
 
 const googleLoginText =
-    document.getElementById(
-        "googleLoginText"
-    );
-
+document.getElementById(
+    "googleLoginText"
+);
 
 
 let loginInProgress =
-    false;
+false;
 
 
 
@@ -873,11 +993,11 @@ function showStatus(
 ){
 
     loginStatus.style.display =
-        "block";
+    "block";
 
 
     loginStatus.textContent =
-        message;
+    message;
 
 
     if(
@@ -886,21 +1006,22 @@ function showStatus(
     ){
 
         loginStatus.style.color =
-            "#4ade80";
+        "#4ade80";
 
 
         loginStatus.style.background =
-            "rgba(34,197,94,.10)";
+        "rgba(34,197,94,.10)";
 
     }
+
     else{
 
         loginStatus.style.color =
-            "#fca5a5";
+        "#fca5a5";
 
 
         loginStatus.style.background =
-            "rgba(239,68,68,.10)";
+        "rgba(239,68,68,.10)";
 
     }
 
@@ -911,18 +1032,18 @@ function showStatus(
 function clearStatus(){
 
     loginStatus.style.display =
-        "none";
+    "none";
 
 
     loginStatus.textContent =
-        "";
+    "";
 
 }
 
 
 
 /* ==================================================
-   LOGIN BUTTON STATE
+   SIGN IN BUTTON LOADING
 ================================================== */
 
 function setLoading(
@@ -930,23 +1051,23 @@ function setLoading(
 ){
 
     loginButton.disabled =
-        loading;
+    loading;
 
 
     loginText.style.display =
-        loading
-        ?
-        "none"
-        :
-        "inline";
+    loading
+    ?
+    "none"
+    :
+    "inline";
 
 
     loginLoading.style.display =
-        loading
-        ?
-        "inline"
-        :
-        "none";
+    loading
+    ?
+    "inline"
+    :
+    "none";
 
 }
 
@@ -958,26 +1079,23 @@ function setLoading(
 
 function togglePassword(){
 
-    const currentlyHidden =
-
+    const hidden =
         passwordInput.type ===
         "password";
 
 
-    if(
-        currentlyHidden
-    ){
+    if(hidden){
 
         passwordInput.type =
-            "text";
+        "text";
 
 
         eyeOpen.style.display =
-            "none";
+        "none";
 
 
         eyeClosed.style.display =
-            "block";
+        "block";
 
 
         passwordToggle.setAttribute(
@@ -992,18 +1110,19 @@ function togglePassword(){
         );
 
     }
+
     else{
 
         passwordInput.type =
-            "password";
+        "password";
 
 
         eyeOpen.style.display =
-            "block";
+        "block";
 
 
         eyeClosed.style.display =
-            "none";
+        "none";
 
 
         passwordToggle.setAttribute(
@@ -1023,11 +1142,6 @@ function togglePassword(){
 
 
 
-/*
-   Prevent phone tap from moving
-   input focus before toggling.
-*/
-
 passwordToggle.addEventListener(
 
     "pointerdown",
@@ -1041,6 +1155,7 @@ passwordToggle.addEventListener(
 );
 
 
+
 passwordToggle.addEventListener(
 
     "click",
@@ -1051,7 +1166,9 @@ passwordToggle.addEventListener(
 
         event.stopPropagation();
 
+
         togglePassword();
+
 
         passwordInput.focus({
             preventScroll:true
@@ -1064,37 +1181,73 @@ passwordToggle.addEventListener(
 
 
 /* ==================================================
-   IF ALREADY LOGGED IN
+   ALREADY LOGGED IN
 ================================================== */
 
 const unsubscribe =
-
 onAuthStateChanged(
 
     auth,
 
-    function(user){
+    async function(user){
+
+
+        if(
+            !user
+            ||
+            loginInProgress
+        ){
+
+            return;
+
+        }
+
+
+        const passwordUser =
+
+            user
+            .providerData
+            .some(
+                function(provider){
+
+                    return (
+                        provider.providerId ===
+                        "password"
+                    );
+
+                }
+            );
 
 
         /*
-           When user manually submits Login,
-           submit handler controls redirect.
-
-           Otherwise if a logged-in customer
-           opens index.html, send them Home.
+           Email + Password user
+           must verify email first.
         */
 
         if(
-            user
+            passwordUser
             &&
-            !loginInProgress
+            !user.emailVerified
         ){
 
-            window.location.replace(
-                "./home.html"
+            await signOut(
+                auth
             );
 
+
+            showStatus(
+                "Please verify your email first, then sign in."
+            );
+
+
+            return;
+
         }
+
+
+        window.location.replace(
+            "./home.html"
+        );
 
     }
 
@@ -1102,50 +1255,71 @@ onAuthStateChanged(
 
 
 
-
-
 /* ==================================================
-   GOOGLE SIGN IN
-   PC + ANDROID + IPHONE SAFARI
+   GOOGLE PROVIDER
 ================================================== */
 
 const googleProvider =
-    new GoogleAuthProvider();
+new GoogleAuthProvider();
 
 
-googleProvider.setCustomParameters({
-    prompt:"select_account"
+googleProvider
+.setCustomParameters({
+
+    prompt:
+    "select_account"
+
 });
 
 
+
+/* ==================================================
+   GOOGLE LOGIN
+================================================== */
+
 if(googleLoginButton){
 
-    googleLoginButton.addEventListener(
+    googleLoginButton
+    .addEventListener(
 
         "click",
 
         async function(){
 
+
             if(loginInProgress){
+
                 return;
+
             }
+
 
             clearStatus();
 
+
             loginInProgress =
-                true;
+            true;
+
 
             googleLoginButton.disabled =
-                true;
+            true;
 
-            if(googleLoginText){
-                googleLoginText.textContent =
-                    "Connecting...";
-            }
+
+            googleLoginText.textContent =
+            "Connecting...";
+
 
             try{
 
-                if(rememberInput.checked){
+
+                /*
+                   SAME REMEMBER SETTING
+                   FOR GOOGLE LOGIN
+                */
+
+                if(
+                    rememberInput.checked
+                ){
 
                     await setPersistence(
                         auth,
@@ -1153,6 +1327,7 @@ if(googleLoginButton){
                     );
 
                 }
+
                 else{
 
                     await setPersistence(
@@ -1162,11 +1337,18 @@ if(googleLoginButton){
 
                 }
 
+
+
+                /*
+                   GOOGLE SIGN IN
+                */
+
                 const result =
-                    await signInWithPopup(
-                        auth,
-                        googleProvider
-                    );
+                await signInWithPopup(
+                    auth,
+                    googleProvider
+                );
+
 
                 if(!result.user){
 
@@ -1176,45 +1358,75 @@ if(googleLoginButton){
 
                 }
 
-                await result.user.getIdToken(
+
+
+                /*
+                   SAVE GOOGLE USER
+                   IN FIRESTORE users/{uid}
+                */
+
+                await saveGoogleUserToFirestore(
+                    result.user
+                );
+
+
+
+                /*
+                   CREATE FRESH FIREBASE TOKEN
+                */
+
+                await result.user
+                .getIdToken(
                     true
                 );
+
+
 
                 showStatus(
                     "Google login successful ✓",
                     "success"
                 );
 
+
                 setTimeout(
                     function(){
+
                         window.location.replace(
                             "./home.html"
                         );
+
                     },
                     250
                 );
 
+
             }
+
             catch(error){
+
 
                 console.error(
                     "GOOGLE LOGIN ERROR:",
                     error
                 );
 
+
                 loginInProgress =
-                    false;
+                false;
+
 
                 googleLoginButton.disabled =
-                    false;
+                false;
 
-                if(googleLoginText){
-                    googleLoginText.textContent =
-                        "Continue with Google";
-                }
+
+                googleLoginText.textContent =
+                "Continue with Google";
+
 
                 let message =
-                    "Google login failed. Please try again.";
+                "Google login failed. Please try again.";
+
+
 
                 if(
                     error.code ===
@@ -1223,37 +1435,56 @@ if(googleLoginButton){
                     error.code ===
                     "auth/cancelled-popup-request"
                 ){
+
                     message =
-                        "Google sign in was cancelled.";
+                    "Google sign in was cancelled.";
+
                 }
+
+
                 else if(
                     error.code ===
                     "auth/popup-blocked"
                 ){
+
                     message =
-                        "Google sign in popup was blocked. Please allow popups and try again.";
+                    "Google sign in popup was blocked. Please allow popups and try again.";
+
                 }
+
+
                 else if(
                     error.code ===
                     "auth/account-exists-with-different-credential"
                 ){
+
                     message =
-                        "This email already has another login method. Please sign in with your existing email and password.";
+                    "This email already has another login method. Please use your existing login method.";
+
                 }
+
+
                 else if(
                     error.code ===
                     "auth/unauthorized-domain"
                 ){
+
                     message =
-                        "This website domain is not authorized for Google login.";
+                    "This website domain is not authorized for Google login.";
+
                 }
+
+
                 else if(
                     error.code ===
                     "auth/network-request-failed"
                 ){
+
                     message =
-                        "Network error. Check your internet connection.";
+                    "Network error. Check your internet connection.";
+
                 }
+
 
                 showStatus(
                     message
@@ -1268,8 +1499,9 @@ if(googleLoginButton){
 }
 
 
+
 /* ==================================================
-   LOGIN
+   EMAIL + PASSWORD LOGIN
 ================================================== */
 
 loginForm.addEventListener(
@@ -1286,12 +1518,14 @@ loginForm.addEventListener(
 
 
         const email =
-            emailInput.value
-                .trim();
+        emailInput
+        .value
+        .trim();
 
 
         const password =
-            passwordInput.value;
+        passwordInput
+        .value;
 
 
 
@@ -1328,9 +1562,8 @@ loginForm.addEventListener(
         }
 
 
-
         loginInProgress =
-            true;
+        true;
 
 
         setLoading(
@@ -1343,12 +1576,6 @@ loginForm.addEventListener(
 
             /* ==================================================
                REMEMBER ME
-
-               Checked:
-               Keep logged in after browser closes.
-
-               Not checked:
-               Keep logged in during this browser session.
             ================================================== */
 
             if(
@@ -1361,6 +1588,7 @@ loginForm.addEventListener(
                 );
 
             }
+
             else{
 
                 await setPersistence(
@@ -1377,22 +1605,18 @@ loginForm.addEventListener(
             ================================================== */
 
             const result =
+            await signInWithEmailAndPassword(
 
-                await signInWithEmailAndPassword(
+                auth,
 
-                    auth,
+                email,
 
-                    email,
+                password
 
-                    password
-
-                );
-
+            );
 
 
-            if(
-                !result.user
-            ){
+            if(!result.user){
 
                 throw new Error(
                     "Login session was not created."
@@ -1402,16 +1626,139 @@ loginForm.addEventListener(
 
 
 
-            /*
-               Force token creation before
-               opening Home.
+            /* ==================================================
+               CHECK LOGIN PROVIDER
+            ================================================== */
 
-               This helps Wallet / Worker
-               recognize logged-in user
-               immediately.
-            */
+            const passwordUser =
 
-            await result.user.getIdToken(
+            result.user
+            .providerData
+            .some(
+
+                function(provider){
+
+                    return (
+                        provider.providerId ===
+                        "password"
+                    );
+
+                }
+
+            );
+
+
+
+            /* ==================================================
+               EMAIL NOT VERIFIED
+            ================================================== */
+
+            if(
+                passwordUser
+                &&
+                !result.user.emailVerified
+            ){
+
+                /*
+                   Send verification again
+                   when customer tries login.
+                */
+
+                try{
+
+                    await sendEmailVerification(
+
+                        result.user,
+
+                        {
+                            url:
+                            new URL(
+                                "./index.html",
+                                window.location.href
+                            ).href
+                        }
+
+                    );
+
+                }
+
+                catch(
+                    verificationError
+                ){
+
+                    console.warn(
+                        "Verification email resend failed:",
+                        verificationError
+                    );
+
+                }
+
+
+
+                await signOut(
+                    auth
+                );
+
+
+                loginInProgress =
+                false;
+
+
+                setLoading(
+                    false
+                );
+
+
+                showStatus(
+                    "Your email is not verified. We sent a verification email. Open Gmail, verify it, then sign in again."
+                );
+
+
+                return;
+
+            }
+
+
+
+            /* ==================================================
+               UPDATE FIRESTORE
+            ================================================== */
+
+            await setDoc(
+
+                doc(
+                    db,
+                    "users",
+                    result.user.uid
+                ),
+
+                {
+
+                    email:
+                        result.user.email || email,
+
+                    emailVerified:
+                        true,
+
+                    lastLoginAt:
+                        serverTimestamp()
+
+                },
+
+                {
+                    merge:true
+                }
+
+            );
+
+
+
+            /* ==================================================
+               REFRESH TOKEN
+            ================================================== */
+
+            await result.user
+            .getIdToken(
                 true
             );
 
@@ -1424,10 +1771,9 @@ loginForm.addEventListener(
 
 
 
-            /*
-               Use replace so Back button
-               does not return to Login.
-            */
+            /* ==================================================
+               HOME
+            ================================================== */
 
             setTimeout(
 
@@ -1445,6 +1791,7 @@ loginForm.addEventListener(
 
 
         }
+
         catch(error){
 
 
@@ -1455,7 +1802,7 @@ loginForm.addEventListener(
 
 
             loginInProgress =
-                false;
+            false;
 
 
             setLoading(
@@ -1464,7 +1811,7 @@ loginForm.addEventListener(
 
 
             let message =
-                "Unable to login. Please try again.";
+            "Unable to login. Please try again.";
 
 
 
@@ -1477,7 +1824,7 @@ loginForm.addEventListener(
             ){
 
                 message =
-                    "Incorrect email or password.";
+                "Incorrect email or password.";
 
             }
 
@@ -1488,7 +1835,7 @@ loginForm.addEventListener(
             ){
 
                 message =
-                    "No account found with this email.";
+                "No account found with this email.";
 
             }
 
@@ -1499,7 +1846,7 @@ loginForm.addEventListener(
             ){
 
                 message =
-                    "Please enter a valid email address.";
+                "Please enter a valid email address.";
 
             }
 
@@ -1510,7 +1857,7 @@ loginForm.addEventListener(
             ){
 
                 message =
-                    "Too many login attempts. Please try again later.";
+                "Too many login attempts. Please try again later.";
 
             }
 
@@ -1521,7 +1868,7 @@ loginForm.addEventListener(
             ){
 
                 message =
-                    "Network error. Check your internet connection.";
+                "Network error. Check your internet connection.";
 
             }
 
@@ -1539,24 +1886,18 @@ loginForm.addEventListener(
 
 
 /* ==================================================
-   INPUT CHANGE
+   CLEAR ERROR WHEN TYPING
 ================================================== */
 
 emailInput.addEventListener(
-
     "input",
-
     clearStatus
-
 );
 
 
 passwordInput.addEventListener(
-
     "input",
-
     clearStatus
-
 );
 
 
