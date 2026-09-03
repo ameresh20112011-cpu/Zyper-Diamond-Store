@@ -1,1684 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Zyper Diamond Store - Register</title>
-
 <link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="media.css">
-
 <link rel="icon" href="1.jpg">
-
 <style>
-
-.login-header{
-    text-align:center;
-    margin-bottom:28px;
-}
-
-.company-logo{
-    width:76px !important;
-    height:76px !important;
-    min-width:76px !important;
-    min-height:76px !important;
-    max-width:76px !important;
-    max-height:76px !important;
-
-    margin:0 auto 15px !important;
-    padding:0 !important;
-
-    border-radius:50% !important;
-    overflow:hidden !important;
-
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-
-    background:#fff;
-
-    box-shadow:
-    0 8px 25px rgba(0,0,0,.20);
-}
-
-.company-logo img{
-    width:100% !important;
-    height:100% !important;
-
-    display:block !important;
-    object-fit:cover !important;
-
-    border-radius:50% !important;
-}
-
-.brand-name{
-    margin:0;
-    font-size:24px;
-    font-weight:800;
-}
-
-.brand-subtitle{
-    margin:7px 0 0;
-    opacity:.7;
-}
-
-.password-group{
-    position:relative;
-}
-
-.password-group input{
-    padding-right:55px !important;
-}
-
-.password-toggle{
-    position:absolute;
-    right:8px;
-    top:50%;
-    transform:translateY(-50%);
-
-    width:40px;
-    height:40px;
-
-    border:0;
-    background:transparent;
-    cursor:pointer;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    z-index:20;
-}
-
-.password-toggle svg{
-    width:21px;
-    height:21px;
-}
-
-.status{
-    display:none;
-    text-align:center;
-
-    margin-top:15px;
-    padding:10px;
-
-    border-radius:10px;
-
-    font-size:13px;
-    font-weight:600;
-}
-
-
-/* EMAIL + OTP BUTTON */
-
-.email-row{
-    display:flex;
-    gap:8px;
-    align-items:stretch;
-}
-
-.email-row .input-group{
-    flex:1;
-}
-
-.send-otp-btn{
-    min-width:95px;
-    padding:0 12px;
-
-    border:0;
-    border-radius:12px;
-
-    background:#fff;
-    color:#111827;
-
-    font-size:12px;
-    font-weight:700;
-
-    cursor:pointer;
-
-    box-shadow:
-    0 5px 15px rgba(0,0,0,.15);
-}
-
-.send-otp-btn:disabled{
-    opacity:.55;
-    cursor:not-allowed;
-}
-
-
-/* OTP */
-
-.otp-area{
-    display:none;
-
-    margin-top:15px;
-    padding:16px 12px;
-
-    border-radius:15px;
-
-    background:
-    rgba(255,255,255,.04);
-
-    border:
-    1px solid rgba(255,255,255,.08);
-}
-
-.otp-title{
-    text-align:center;
-    font-size:13px;
-    margin-bottom:12px;
-    opacity:.8;
-}
-
-.otp-boxes{
-    display:flex;
-    justify-content:center;
-    gap:7px;
-    margin-bottom:13px;
-}
-
-.otp-box{
-    width:42px;
-    height:48px;
-
-    text-align:center;
-
-    font-size:21px !important;
-    font-weight:800;
-
-    border:2px solid rgba(255,255,255,.35);
-    outline:none;
-
-    border-radius:10px;
-
-    background:#ffffff;
-
-    color:#000000;
-
-    box-shadow:
-    0 4px 12px rgba(0,0,0,.18);
-
-    caret-color:#000000;
-}
-
-.otp-box:focus{
-    border-color:#60a5fa;
-
-    box-shadow:
-    0 0 0 3px rgba(96,165,250,.22);
-}
-.verify-otp-btn{
-    width:100%;
-    min-height:44px;
-
-    border:0;
-    border-radius:12px;
-
-    background:#fff;
-    color:#111827;
-
-    cursor:pointer;
-    font-weight:800;
-}
-
-.verify-otp-btn:disabled{
-    opacity:.55;
-}
-
-.verified-message{
-    display:none;
-
-    text-align:center;
-    margin-top:10px;
-
-    color:#22c55e;
-
-    font-size:13px;
-    font-weight:800;
-}
-
-#registerButton:disabled{
-    opacity:.55;
-    cursor:not-allowed;
-}
-
-
-@media(max-width:500px){
-
-    .company-logo{
-        width:68px !important;
-        height:68px !important;
-
-        min-width:68px !important;
-        min-height:68px !important;
-
-        max-width:68px !important;
-        max-height:68px !important;
-    }
-
-    .brand-name{
-        font-size:21px;
-    }
-
-    input{
-        font-size:16px !important;
-    }
-
-    .email-row{
-        gap:6px;
-    }
-
-    .send-otp-btn{
-        min-width:86px;
-        font-size:11px;
-    }
-
-    .otp-box{
-        width:38px;
-        height:46px;
-    }
-
-}
-
-
-/* FORCE OTP BOX STYLE */
-
-input.otp-box,
-.otp-boxes input.otp-box{
-    width:42px !important;
-    height:48px !important;
-
-    background:#ffffff !important;
-    background-color:#ffffff !important;
-
-    color:#000000 !important;
-    -webkit-text-fill-color:#000000 !important;
-
-    border:2px solid #94a3b8 !important;
-    outline:none !important;
-
-    border-radius:10px !important;
-
-    text-align:center !important;
-
-    font-size:21px !important;
-    font-weight:800 !important;
-
-    caret-color:#000000 !important;
-
-    box-shadow:
-        0 4px 12px rgba(0,0,0,.20) !important;
-
-    opacity:1 !important;
-}
-
-input.otp-box:focus,
-.otp-boxes input.otp-box:focus{
-    background:#ffffff !important;
-    color:#000000 !important;
-    -webkit-text-fill-color:#000000 !important;
-
-    border-color:#3b82f6 !important;
-
-    box-shadow:
-        0 0 0 3px rgba(59,130,246,.25),
-        0 4px 12px rgba(0,0,0,.20) !important;
-}
-
-input.otp-box:disabled{
-    background:#ffffff !important;
-    color:#000000 !important;
-    -webkit-text-fill-color:#000000 !important;
-
-    opacity:1 !important;
-}
-
-/* iPhone Safari autofill fix */
-input.otp-box:-webkit-autofill{
-    -webkit-box-shadow:
-        0 0 0 1000px #ffffff inset !important;
-
-    -webkit-text-fill-color:#000000 !important;
-}
-
-    
+.login-header{text-align:center;margin-bottom:28px}
+.company-logo{width:76px!important;height:76px!important;min-width:76px!important;min-height:76px!important;max-width:76px!important;max-height:76px!important;margin:0 auto 15px!important;padding:0!important;border-radius:50%!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#fff;box-shadow:0 8px 25px rgba(0,0,0,.20)}
+.company-logo img{width:100%!important;height:100%!important;display:block!important;object-fit:cover!important;border-radius:50%!important}
+.brand-name{margin:0;font-size:24px;font-weight:800}
+.brand-subtitle{margin:7px 0 0;opacity:.7}
+.icon-input{position:relative}
+.icon-input .field-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);z-index:15;font-size:17px;pointer-events:none;opacity:.8}
+.icon-input input{padding-left:48px!important}
+.icon-input label{left:48px!important}
+.password-group{position:relative}
+.password-group input{padding-right:55px!important}
+.password-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:40px;height:40px;border:0;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:20}
+.password-toggle svg{width:21px;height:21px}
+.phone-row{display:flex;gap:8px;align-items:stretch}
+.country-select-wrap{position:relative;min-width:112px}
+.country-select{width:100%;height:100%;min-height:54px;border:0;outline:0;border-radius:14px;padding:0 10px;font-family:inherit;font-size:14px;font-weight:650;background:rgba(255,255,255,.09);color:inherit;box-shadow:inset 2px 2px 7px rgba(0,0,0,.12)}
+.country-select option{color:#111827;background:#fff}
+.phone-input-wrap{flex:1;min-width:0}
+.email-row{display:flex;gap:8px;align-items:stretch}
+.email-row .input-group{flex:1;min-width:0}
+.send-otp-btn{min-width:95px;border:0;border-radius:12px;padding:0 12px;cursor:pointer;font-weight:700;font-size:12px;background:#fff;color:#111827;box-shadow:0 5px 15px rgba(0,0,0,.15)}
+.send-otp-btn:disabled{opacity:.55;cursor:not-allowed}
+.otp-area{display:none;margin-top:15px;padding:16px 12px;border-radius:15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.otp-title{text-align:center;font-size:13px;margin-bottom:12px;opacity:.8}
+.otp-boxes{display:flex;justify-content:center;gap:7px;margin-bottom:13px}
+input.otp-box,.otp-boxes input.otp-box{width:42px!important;height:48px!important;background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important;border:2px solid #94a3b8!important;outline:none!important;border-radius:10px!important;text-align:center!important;font-size:21px!important;font-weight:800!important;caret-color:#000!important;box-shadow:0 4px 12px rgba(0,0,0,.20)!important;opacity:1!important;padding:0!important}
+input.otp-box:focus,.otp-boxes input.otp-box:focus{border-color:#3b82f6!important;box-shadow:0 0 0 3px rgba(59,130,246,.25),0 4px 12px rgba(0,0,0,.20)!important}
+input.otp-box:disabled{background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important;opacity:1!important}
+.verify-otp-btn{width:100%;min-height:44px;border:0;border-radius:12px;cursor:pointer;font-weight:800;background:#fff;color:#111827}
+.verified-message{display:none;text-align:center;color:#22c55e;font-size:13px;font-weight:800;margin-top:10px}
+.status{display:none;text-align:center;margin-top:15px;padding:10px;border-radius:10px;font-weight:600;font-size:13px}
+#registerButton:disabled{opacity:.55;cursor:not-allowed}
+.google-divider{display:flex!important;align-items:center!important;gap:12px!important;margin:12px 0!important;color:rgba(255,255,255,.55);font-size:12px;font-weight:600}
+.google-divider::before,.google-divider::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.12)}
+.google-login-button{width:100%;min-height:52px;border:0;border-radius:14px;background:#fff;color:#1f2937;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:11px;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.google-login-button:disabled{opacity:.7;cursor:not-allowed}
+.google-login-button svg{width:20px;height:20px;flex:0 0 20px}
+.signup-link{margin-top:30px!important}
+@media(max-width:500px){.company-logo{width:68px!important;height:68px!important;min-width:68px!important;min-height:68px!important;max-width:68px!important;max-height:68px!important}.brand-name{font-size:21px}input,select{font-size:16px!important}.phone-row{gap:6px}.country-select-wrap{min-width:108px}.email-row{gap:6px}.send-otp-btn{min-width:86px;font-size:11px}input.otp-box,.otp-boxes input.otp-box{width:38px!important;height:46px!important}}
 </style>
-
 </head>
-
-
 <body>
+<div class="login-container"><div class="login-card">
+<div class="login-header"><div class="company-logo"><img src="1.jpg" alt="Zyper Diamond Store"></div><h2 class="brand-name">Zyper Diamond Store</h2><p class="brand-subtitle">Create your account</p></div>
 
-<div class="login-container">
+<form id="registerForm" class="login-form" novalidate>
+<div class="form-group"><div class="input-group neu-input icon-input"><span class="field-icon">👤</span><input type="text" id="username" required placeholder=" " maxlength="20" autocomplete="username"><label for="username">Username</label></div></div>
 
-<div class="login-card">
+<div class="form-group"><div class="phone-row">
+<div class="country-select-wrap"><select id="countryCode" class="country-select" aria-label="Country code">
+<option value="+94" selected>🇱🇰 +94</option><option value="+91">🇮🇳 +91</option><option value="+971">🇦🇪 +971</option><option value="+966">🇸🇦 +966</option><option value="+974">🇶🇦 +974</option><option value="+965">🇰🇼 +965</option><option value="+968">🇴🇲 +968</option><option value="+973">🇧🇭 +973</option><option value="+60">🇲🇾 +60</option><option value="+65">🇸🇬 +65</option><option value="+44">🇬🇧 +44</option><option value="+1">🇺🇸 +1</option><option value="+61">🇦🇺 +61</option><option value="+64">🇳🇿 +64</option><option value="+49">🇩🇪 +49</option><option value="+33">🇫🇷 +33</option><option value="+39">🇮🇹 +39</option><option value="+34">🇪🇸 +34</option><option value="+81">🇯🇵 +81</option><option value="+82">🇰🇷 +82</option><option value="+86">🇨🇳 +86</option><option value="+92">🇵🇰 +92</option><option value="+880">🇧🇩 +880</option><option value="+977">🇳🇵 +977</option><option value="+960">🇲🇻 +960</option>
+</select></div>
+<div class="input-group neu-input icon-input phone-input-wrap"><span class="field-icon">📱</span><input type="tel" id="phone" required placeholder=" " maxlength="15" autocomplete="tel-national" inputmode="tel"><label for="phone">Phone Number</label></div>
+</div></div>
 
+<div class="form-group"><div class="email-row"><div class="input-group neu-input icon-input"><span class="field-icon">✉️</span><input type="email" id="email" required placeholder=" " autocomplete="email"><label for="email">Email Address</label></div><button type="button" id="sendOtpButton" class="send-otp-btn">Send OTP</button></div></div>
 
-<div class="login-header">
+<div id="otpArea" class="otp-area"><div class="otp-title">Enter the 6-digit code sent to your email</div><div class="otp-boxes">
+<input class="otp-box" maxlength="1" inputmode="numeric" autocomplete="one-time-code"><input class="otp-box" maxlength="1" inputmode="numeric"><input class="otp-box" maxlength="1" inputmode="numeric"><input class="otp-box" maxlength="1" inputmode="numeric"><input class="otp-box" maxlength="1" inputmode="numeric"><input class="otp-box" maxlength="1" inputmode="numeric">
+</div><button type="button" id="verifyOtpButton" class="verify-otp-btn">Verify OTP</button><div id="verifiedMessage" class="verified-message">✓ Email verified successfully</div></div>
 
-<div class="company-logo">
+<div class="form-group"><div class="input-group neu-input password-group icon-input"><span class="field-icon">🔒</span><input type="password" id="password" required placeholder=" " minlength="6" autocomplete="new-password"><label for="password">Password</label><button type="button" class="password-toggle" data-target="password" aria-label="Show password"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8"/><line x1="1" y1="1" x2="23" y2="23"/></svg></button></div></div>
 
-<img
-src="1.jpg"
-alt="Zyper Diamond Store">
+<div class="form-group"><div class="input-group neu-input password-group icon-input"><span class="field-icon">🔐</span><input type="password" id="confirmPassword" required placeholder=" " minlength="6" autocomplete="new-password"><label for="confirmPassword">Re-enter Password</label><button type="button" class="password-toggle" data-target="confirmPassword" aria-label="Show password"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8"/><line x1="1" y1="1" x2="23" y2="23"/></svg></button></div></div>
 
-</div>
-
-<h2 class="brand-name">
-Zyper Diamond Store
-</h2>
-
-<p class="brand-subtitle">
-Create your account
-</p>
-
-</div>
-
-
-<form
-id="registerForm"
-class="login-form"
-novalidate>
-
-
-<!-- USERNAME -->
-
-<div class="form-group">
-
-<div class="input-group neu-input">
-
-<input
-type="text"
-id="username"
-required
-placeholder=" "
-maxlength="20"
-autocomplete="username">
-
-<label for="username">
-Username
-</label>
-
-</div>
-
-</div>
-
-
-<!-- PHONE -->
-
-<div class="form-group">
-
-<div class="input-group neu-input">
-
-<input
-type="tel"
-id="phone"
-required
-placeholder=" "
-maxlength="15"
-autocomplete="tel">
-
-<label for="phone">
-Phone Number
-</label>
-
-</div>
-
-</div>
-
-
-<!-- EMAIL -->
-
-<div class="form-group">
-
-<div class="email-row">
-
-<div class="input-group neu-input">
-
-<input
-type="email"
-id="email"
-required
-placeholder=" "
-autocomplete="email">
-
-<label for="email">
-Email Address
-</label>
-
-</div>
-
-
-<button
-type="button"
-id="sendOtpButton"
-class="send-otp-btn">
-
-Send OTP
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- OTP -->
-
-<div
-id="otpArea"
-class="otp-area">
-
-<div class="otp-title">
-Enter the 6-digit code sent to your email
-</div>
-
-<div class="otp-boxes">
-
-<input class="otp-box" maxlength="1" inputmode="numeric" autocomplete="one-time-code">
-<input class="otp-box" maxlength="1" inputmode="numeric">
-<input class="otp-box" maxlength="1" inputmode="numeric">
-<input class="otp-box" maxlength="1" inputmode="numeric">
-<input class="otp-box" maxlength="1" inputmode="numeric">
-<input class="otp-box" maxlength="1" inputmode="numeric">
-
-</div>
-
-<button
-type="button"
-id="verifyOtpButton"
-class="verify-otp-btn">
-
-Verify OTP
-
-</button>
-
-<div
-id="verifiedMessage"
-class="verified-message">
-
-✓ Email verified successfully
-
-</div>
-
-</div>
-
-
-<!-- PASSWORD -->
-
-<div class="form-group">
-
-<div class="input-group neu-input password-group">
-
-<input
-type="password"
-id="password"
-required
-placeholder=" "
-minlength="6"
-autocomplete="new-password">
-
-<label for="password">
-Password
-</label>
-
-<button
-type="button"
-id="passwordToggle"
-class="password-toggle"
-aria-label="Show password">
-
-<svg
-id="eyeOpen"
-viewBox="0 0 24 24"
-fill="none"
-stroke="currentColor"
-stroke-width="2">
-
-<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-<circle cx="12" cy="12" r="3"/>
-
-</svg>
-
-<svg
-id="eyeClosed"
-viewBox="0 0 24 24"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-style="display:none;">
-
-<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8"/>
-<path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8"/>
-<line x1="1" y1="1" x2="23" y2="23"/>
-
-</svg>
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- REGISTER -->
-
-<button
-type="submit"
-class="neu-button login-btn"
-id="registerButton"
-disabled>
-
-<span id="registerText">
-Create Account
-</span>
-
-<span
-id="registerLoading"
-style="display:none;">
-
-Creating Account...
-
-</span>
-
-</button>
-
-
-<div
-id="status"
-class="status">
-</div>
-
-
+<button type="submit" class="neu-button login-btn" id="registerButton" disabled><span id="registerText">Create Account</span><span id="registerLoading" style="display:none;">Creating Account...</span></button>
+<div id="status" class="status"></div>
 </form>
 
+<div class="google-divider"><span>OR</span></div>
 
-<div class="signup-link">
+<button type="button" id="googleLoginButton" class="google-login-button">
+<svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.35 12.2c0-.64-.06-1.25-.17-1.84H12v3.48h5.25a4.48 4.48 0 0 1-1.95 2.94v2.26h3.16c1.85-1.7 2.89-4.22 2.89-6.84z"/><path fill="#34A853" d="M12 21.72c2.64 0 4.86-.87 6.48-2.37l-3.16-2.26c-.88.59-2 .94-3.32.94-2.55 0-4.71-1.72-5.48-4.03H3.25v2.34A9.79 9.79 0 0 0 12 21.72z"/><path fill="#FBBC05" d="M6.52 14a5.87 5.87 0 0 1 0-3.76V7.9H3.25a9.79 9.79 0 0 0 0 8.44L6.52 14z"/><path fill="#EA4335" d="M12 6.2c1.44 0 2.73.49 3.75 1.46l2.81-2.81A9.43 9.43 0 0 0 12 2.5 9.79 9.79 0 0 0 3.25 7.9l3.27 2.34C7.29 7.93 9.45 6.2 12 6.2z"/></svg>
+<span id="googleLoginText">Continue with Google</span></button>
 
-<p>
-
-Already have an account?
-
-<a href="./index.html">
-Login
-</a>
-
-</p>
-
-</div>
-
-
-</div>
-
-</div>
-
-
+<div class="signup-link"><p>Already have an account? <a href="./index.html">Login</a></p></div>
+</div></div>
 
 <script type="module">
+import { auth, db } from "./firebase.js";
+import { signInWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-import {
-    auth,
-    db
+const OTP_WORKER="https://zyper-email-otp.ameresh20112011.workers.dev/";
+
+const form=document.getElementById("registerForm");
+const username=document.getElementById("username");
+const countryCode=document.getElementById("countryCode");
+const phone=document.getElementById("phone");
+const email=document.getElementById("email");
+const password=document.getElementById("password");
+const confirmPassword=document.getElementById("confirmPassword");
+const sendOtpButton=document.getElementById("sendOtpButton");
+const otpArea=document.getElementById("otpArea");
+const otpBoxes=Array.from(document.querySelectorAll(".otp-box"));
+const verifyOtpButton=document.getElementById("verifyOtpButton");
+const verifiedMessage=document.getElementById("verifiedMessage");
+const registerButton=document.getElementById("registerButton");
+const registerText=document.getElementById("registerText");
+const registerLoading=document.getElementById("registerLoading");
+const status=document.getElementById("status");
+const googleLoginButton=document.getElementById("googleLoginButton");
+const googleLoginText=document.getElementById("googleLoginText");
+
+let otpVerified=false, verifiedEmail="", verificationToken="", resendTimer=null;
+
+function showStatus(message,success=false){
+  status.style.display="block";
+  status.textContent=message;
+  status.style.color=success?"#22c55e":"#f87171";
+  status.style.background=success?"rgba(34,197,94,.08)":"rgba(239,68,68,.08)";
 }
-from "./firebase.js";
-
-
-import {
-    signInWithEmailAndPassword,
-    updateProfile
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-
-import {
-    doc,
-    setDoc,
-    serverTimestamp
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-const OTP_WORKER =
-"https://zyper-email-otp.ameresh20112011.workers.dev/";
-
-
-const form =
-document.getElementById(
-    "registerForm"
-);
-
-const username =
-document.getElementById(
-    "username"
-);
-
-const phone =
-document.getElementById(
-    "phone"
-);
-
-const email =
-document.getElementById(
-    "email"
-);
-
-const password =
-document.getElementById(
-    "password"
-);
-
-
-const toggle =
-document.getElementById(
-    "passwordToggle"
-);
-
-const eyeOpen =
-document.getElementById(
-    "eyeOpen"
-);
-
-const eyeClosed =
-document.getElementById(
-    "eyeClosed"
-);
-
-
-const sendOtpButton =
-document.getElementById(
-    "sendOtpButton"
-);
-
-const otpArea =
-document.getElementById(
-    "otpArea"
-);
-
-const otpBoxes =
-Array.from(
-    document.querySelectorAll(
-        ".otp-box"
-    )
-);
-
-const verifyOtpButton =
-document.getElementById(
-    "verifyOtpButton"
-);
-
-const verifiedMessage =
-document.getElementById(
-    "verifiedMessage"
-);
-
-
-const registerButton =
-document.getElementById(
-    "registerButton"
-);
-
-const registerText =
-document.getElementById(
-    "registerText"
-);
-
-const registerLoading =
-document.getElementById(
-    "registerLoading"
-);
-
-const status =
-document.getElementById(
-    "status"
-);
-
-
-let otpVerified =
-false;
-
-let verifiedEmail =
-"";
-
-let verificationToken =
-"";
-
-let resendTimer =
-null;
-
-
-/* STATUS */
-
-function showStatus(
-    message,
-    success = false
-){
-
-    status.style.display =
-    "block";
-
-    status.textContent =
-    message;
-
-
-    if(success){
-
-        status.style.color =
-        "#22c55e";
-
-        status.style.background =
-        "rgba(34,197,94,.08)";
-
-    }
-
-    else{
-
-        status.style.color =
-        "#f87171";
-
-        status.style.background =
-        "rgba(239,68,68,.08)";
-
-    }
-
-}
-
-
-function clearStatus(){
-
-    status.style.display =
-    "none";
-
-    status.textContent =
-    "";
-
-}
-
-
-/* PASSWORD */
-
-toggle.addEventListener(
-    "click",
-    function(){
-
-        if(
-            password.type ===
-            "password"
-        ){
-
-            password.type =
-            "text";
-
-            eyeOpen.style.display =
-            "none";
-
-            eyeClosed.style.display =
-            "block";
-
-        }
-
-        else{
-
-            password.type =
-            "password";
-
-            eyeOpen.style.display =
-            "block";
-
-            eyeClosed.style.display =
-            "none";
-
-        }
-
-    }
-);
-
-
-/* EMAIL CHANGE INVALIDATES OTP */
-
-email.addEventListener(
-    "input",
-    function(){
-
-        const value =
-        email.value
-        .trim()
-        .toLowerCase();
-
-
-        if(
-            otpVerified &&
-            value !== verifiedEmail
-        ){
-
-            otpVerified =
-            false;
-
-            verifiedEmail =
-            "";
-
-            verificationToken =
-            "";
-
-            registerButton.disabled =
-            true;
-
-            verifiedMessage.style.display =
-            "none";
-
-
-            otpBoxes.forEach(
-                function(box){
-
-                    box.disabled =
-                    false;
-
-                    box.value =
-                    "";
-
-                }
-            );
-
-
-            verifyOtpButton.disabled =
-            false;
-
-            verifyOtpButton.textContent =
-            "Verify OTP";
-
-        }
-
-    }
-);
-
-
-/* OTP INPUT */
-
-otpBoxes.forEach(
-    function(box, index){
-
-        box.addEventListener(
-            "input",
-            function(){
-
-                box.value =
-                box.value
-                .replace(/\D/g, "")
-                .slice(0,1);
-
-
-                if(
-                    box.value &&
-                    index <
-                    otpBoxes.length - 1
-                ){
-
-                    otpBoxes[
-                        index + 1
-                    ].focus();
-
-                }
-
-            }
-        );
-
-
-        box.addEventListener(
-            "keydown",
-            function(event){
-
-                if(
-                    event.key ===
-                    "Backspace" &&
-                    !box.value &&
-                    index > 0
-                ){
-
-                    otpBoxes[
-                        index - 1
-                    ].focus();
-
-                }
-
-            }
-        );
-
-
-        box.addEventListener(
-            "paste",
-            function(event){
-
-                const text =
-                (
-                    event.clipboardData ||
-                    window.clipboardData
-                )
-                .getData("text")
-                .replace(/\D/g, "")
-                .slice(0,6);
-
-
-                if(!text){
-
-                    return;
-
-                }
-
-
-                event.preventDefault();
-
-
-                text
-                .split("")
-                .forEach(
-                    function(number, i){
-
-                        if(
-                            otpBoxes[i]
-                        ){
-
-                            otpBoxes[i].value =
-                            number;
-
-                        }
-
-                    }
-                );
-
-            }
-        );
-
-    }
-);
-
-
-/* RESEND TIMER */
+function clearStatus(){status.style.display="none";status.textContent="";}
+
+document.querySelectorAll(".password-toggle").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const target=document.getElementById(btn.dataset.target);
+    const open=btn.querySelector(".eye-open"), closed=btn.querySelector(".eye-closed");
+    const hidden=target.type==="password";
+    target.type=hidden?"text":"password";
+    open.style.display=hidden?"none":"block";
+    closed.style.display=hidden?"block":"none";
+  });
+});
+
+email.addEventListener("input",()=>{
+  const value=email.value.trim().toLowerCase();
+  if(otpVerified && value!==verifiedEmail){
+    otpVerified=false; verifiedEmail=""; verificationToken="";
+    registerButton.disabled=true; verifiedMessage.style.display="none"; email.readOnly=false;
+    otpBoxes.forEach(box=>{box.disabled=false;box.value="";});
+    verifyOtpButton.disabled=false; verifyOtpButton.textContent="Verify OTP";
+  }
+});
+
+otpBoxes.forEach((box,index)=>{
+  box.addEventListener("input",()=>{
+    box.value=box.value.replace(/\D/g,"").slice(0,1);
+    if(box.value && index<otpBoxes.length-1) otpBoxes[index+1].focus();
+  });
+  box.addEventListener("keydown",e=>{
+    if(e.key==="Backspace" && !box.value && index>0) otpBoxes[index-1].focus();
+  });
+  box.addEventListener("paste",e=>{
+    const text=(e.clipboardData||window.clipboardData).getData("text").replace(/\D/g,"").slice(0,6);
+    if(!text)return;
+    e.preventDefault();
+    text.split("").forEach((n,i)=>{if(otpBoxes[i])otpBoxes[i].value=n;});
+  });
+});
 
 function startResendTimer(){
-
-    let seconds =
-    60;
-
-
-    sendOtpButton.disabled =
-    true;
-
-
-    sendOtpButton.textContent =
-    "60s";
-
-
-    if(resendTimer){
-
-        clearInterval(
-            resendTimer
-        );
-
+  let seconds=60;
+  sendOtpButton.disabled=true;
+  sendOtpButton.textContent="60s";
+  if(resendTimer)clearInterval(resendTimer);
+  resendTimer=setInterval(()=>{
+    seconds--;
+    if(seconds<=0){
+      clearInterval(resendTimer);resendTimer=null;
+      sendOtpButton.disabled=false;sendOtpButton.textContent="Resend OTP";return;
     }
-
-
-    resendTimer =
-    setInterval(
-        function(){
-
-            seconds--;
-
-
-            if(
-                seconds <= 0
-            ){
-
-                clearInterval(
-                    resendTimer
-                );
-
-                resendTimer =
-                null;
-
-
-                sendOtpButton.disabled =
-                false;
-
-
-                sendOtpButton.textContent =
-                "Resend OTP";
-
-
-                return;
-
-            }
-
-
-            sendOtpButton.textContent =
-            seconds + "s";
-
-        },
-        1000
-    );
-
+    sendOtpButton.textContent=seconds+"s";
+  },1000);
 }
 
+sendOtpButton.addEventListener("click",async()=>{
+  clearStatus();
+  const emailValue=email.value.trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)){showStatus("Please enter a valid email address.");return;}
+  sendOtpButton.disabled=true;sendOtpButton.textContent="Sending...";
+  try{
+    const response=await fetch(OTP_WORKER,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"send_otp",email:emailValue})});
+    const data=await response.json();
+    if(!response.ok||!data.success)throw new Error(data.message||"Unable to send OTP.");
+    otpVerified=false;verifiedEmail="";verificationToken="";
+    otpArea.style.display="block";verifiedMessage.style.display="none";registerButton.disabled=true;
+    otpBoxes.forEach(box=>{box.disabled=false;box.value="";});
+    verifyOtpButton.disabled=false;verifyOtpButton.textContent="Verify OTP";
+    otpBoxes[0].focus();
+    showStatus("Verification code sent. Check your Gmail.",true);
+    startResendTimer();
+  }catch(error){
+    sendOtpButton.disabled=false;sendOtpButton.textContent="Send OTP";
+    showStatus(error.message||"Unable to send OTP.");
+  }
+});
 
-/* SEND OTP */
+verifyOtpButton.addEventListener("click",async()=>{
+  clearStatus();
+  const emailValue=email.value.trim().toLowerCase();
+  const otp=otpBoxes.map(box=>box.value).join("");
+  if(otp.length!==6){showStatus("Enter the complete 6-digit OTP.");return;}
+  verifyOtpButton.disabled=true;verifyOtpButton.textContent="Verifying...";
+  try{
+    const response=await fetch(OTP_WORKER,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"verify_otp",email:emailValue,otp})});
+    const data=await response.json();
+    if(!response.ok||!data.success||!data.verified||!data.verificationToken)throw new Error(data.message||"OTP verification failed.");
+    otpVerified=true;verifiedEmail=emailValue;verificationToken=data.verificationToken;
+    verifiedMessage.style.display="block";verifyOtpButton.textContent="Verified ✓";
+    otpBoxes.forEach(box=>box.disabled=true);
+    email.readOnly=true;registerButton.disabled=false;
+    showStatus("Email verified successfully ✓",true);
+  }catch(error){
+    verifyOtpButton.disabled=false;verifyOtpButton.textContent="Verify OTP";
+    showStatus(error.message||"OTP verification failed.");
+  }
+});
 
-sendOtpButton.addEventListener(
-    "click",
-    async function(){
+form.addEventListener("submit",async e=>{
+  e.preventDefault();clearStatus();
+  const usernameValue=username.value.trim();
+  const countryValue=countryCode.value;
+  const localPhone=phone.value.trim().replace(/\s+/g,"");
+  const fullPhone=countryValue+localPhone.replace(/^0+/,"");
+  const emailValue=email.value.trim().toLowerCase();
+  const passwordValue=password.value;
+  const confirmValue=confirmPassword.value;
 
-        clearStatus();
+  if(usernameValue.length<3){showStatus("Username must contain at least 3 characters.");return;}
+  if(!localPhone){showStatus("Please enter your phone number.");return;}
+  if(!otpVerified||!verificationToken||emailValue!==verifiedEmail){showStatus("Please verify your email OTP first.");return;}
+  if(passwordValue.length<6){showStatus("Password must be at least 6 characters.");return;}
+  if(passwordValue!==confirmValue){showStatus("Passwords do not match.");confirmPassword.focus();return;}
 
+  try{
+    registerButton.disabled=true;registerText.style.display="none";registerLoading.style.display="inline";
+    const response=await fetch(OTP_WORKER,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"complete_registration",username:usernameValue,phone:fullPhone,email:emailValue,password:passwordValue,verificationToken})});
+    const data=await response.json();
+    if(!response.ok||!data.success)throw new Error(data.message||"Unable to create account.");
 
-        const emailValue =
-        email.value
-        .trim()
-        .toLowerCase();
+    const loginResult=await signInWithEmailAndPassword(auth,emailValue,passwordValue);
+    const user=loginResult.user;
+    await updateProfile(user,{displayName:usernameValue});
+    await setDoc(doc(db,"users",user.uid),{
+      uid:user.uid,username:usernameValue,phone:fullPhone,countryCode:countryValue,email:emailValue,
+      role:"customer",provider:"password",otpVerified:true,otpVerifiedAt:serverTimestamp(),createdAt:serverTimestamp()
+    });
+    showStatus("Account created successfully ✓",true);
+    setTimeout(()=>window.location.replace("./home.html"),900);
+  }catch(error){
+    console.error("REGISTRATION ERROR:",error);
+    registerButton.disabled=false;registerText.style.display="inline";registerLoading.style.display="none";
+    showStatus(error.message||"Registration failed.");
+  }
+});
 
+const googleProvider=new GoogleAuthProvider();
+googleProvider.setCustomParameters({prompt:"select_account"});
 
-        if(
-            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
-            .test(
-                emailValue
-            )
-        ){
+googleLoginButton.addEventListener("click",async()=>{
+  clearStatus();
+  googleLoginButton.disabled=true;googleLoginText.textContent="Connecting...";
+  try{
+    const result=await signInWithPopup(auth,googleProvider);
+    const user=result.user;
+    if(!user)throw new Error("Google account was not created.");
 
-            showStatus(
-                "Please enter a valid email address."
-            );
+    const userRef=doc(db,"users",user.uid);
+    const snapshot=await getDoc(userRef);
 
-            return;
-
-        }
-
-
-        sendOtpButton.disabled =
-        true;
-
-        sendOtpButton.textContent =
-        "Sending...";
-
-
-        try{
-
-            const response =
-            await fetch(
-                OTP_WORKER,
-                {
-
-                    method:
-                        "POST",
-
-                    headers:{
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            action:
-                                "send_otp",
-
-                            email:
-                                emailValue
-
-                        })
-
-                }
-            );
-
-
-            const data =
-            await response.json();
-
-
-            if(
-                !response.ok ||
-                !data.success
-            ){
-
-                throw new Error(
-                    data.message ||
-                    "Unable to send OTP."
-                );
-
-            }
-
-
-            otpVerified =
-            false;
-
-            verifiedEmail =
-            "";
-
-            verificationToken =
-            "";
-
-
-            otpArea.style.display =
-            "block";
-
-
-            verifiedMessage.style.display =
-            "none";
-
-
-            registerButton.disabled =
-            true;
-
-
-            otpBoxes.forEach(
-                function(box){
-
-                    box.disabled =
-                    false;
-
-                    box.value =
-                    "";
-
-                }
-            );
-
-
-            verifyOtpButton.disabled =
-            false;
-
-            verifyOtpButton.textContent =
-            "Verify OTP";
-
-
-            otpBoxes[0].focus();
-
-
-            showStatus(
-                "Verification code sent. Check your Gmail.",
-                true
-            );
-
-
-            startResendTimer();
-
-        }
-
-        catch(error){
-
-            console.error(
-                error
-            );
-
-
-            sendOtpButton.disabled =
-            false;
-
-            sendOtpButton.textContent =
-            "Send OTP";
-
-
-            showStatus(
-                error.message ||
-                "Unable to send OTP."
-            );
-
-        }
-
+    if(!snapshot.exists()){
+      await setDoc(userRef,{
+        uid:user.uid,email:user.email||"",username:user.displayName||"",name:user.displayName||"",
+        photoURL:user.photoURL||"",phone:"",countryCode:"",provider:"google",role:"customer",
+        createdAt:serverTimestamp(),lastLoginAt:serverTimestamp()
+      });
+    }else{
+      await setDoc(userRef,{
+        uid:user.uid,email:user.email||"",username:user.displayName||"",name:user.displayName||"",
+        photoURL:user.photoURL||"",provider:"google",lastLoginAt:serverTimestamp()
+      },{merge:true});
     }
-);
 
-
-/* VERIFY OTP */
-
-verifyOtpButton.addEventListener(
-    "click",
-    async function(){
-
-        clearStatus();
-
-
-        const emailValue =
-        email.value
-        .trim()
-        .toLowerCase();
-
-
-        const otp =
-        otpBoxes
-        .map(
-            box => box.value
-        )
-        .join("");
-
-
-        if(
-            otp.length !== 6
-        ){
-
-            showStatus(
-                "Enter the complete 6-digit OTP."
-            );
-
-            return;
-
-        }
-
-
-        verifyOtpButton.disabled =
-        true;
-
-        verifyOtpButton.textContent =
-        "Verifying...";
-
-
-        try{
-
-            const response =
-            await fetch(
-                OTP_WORKER,
-                {
-
-                    method:
-                        "POST",
-
-                    headers:{
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            action:
-                                "verify_otp",
-
-                            email:
-                                emailValue,
-
-                            otp:
-                                otp
-
-                        })
-
-                }
-            );
-
-
-            const data =
-            await response.json();
-
-
-            if(
-                !response.ok ||
-                !data.success ||
-                !data.verified ||
-                !data.verificationToken
-            ){
-
-                throw new Error(
-                    data.message ||
-                    "OTP verification failed."
-                );
-
-            }
-
-
-            otpVerified =
-            true;
-
-            verifiedEmail =
-            emailValue;
-
-            verificationToken =
-            data.verificationToken;
-
-
-            verifiedMessage.style.display =
-            "block";
-
-
-            verifyOtpButton.textContent =
-            "Verified ✓";
-
-
-            otpBoxes.forEach(
-                function(box){
-
-                    box.disabled =
-                    true;
-
-                }
-            );
-
-
-            email.readOnly =
-            true;
-
-
-            registerButton.disabled =
-            false;
-
-
-            showStatus(
-                "Email verified successfully ✓",
-                true
-            );
-
-        }
-
-        catch(error){
-
-            console.error(
-                error
-            );
-
-
-            verifyOtpButton.disabled =
-            false;
-
-            verifyOtpButton.textContent =
-            "Verify OTP";
-
-
-            showStatus(
-                error.message ||
-                "OTP verification failed."
-            );
-
-        }
-
-    }
-);
-
-
-/* REGISTER */
-
-form.addEventListener(
-    "submit",
-    async function(event){
-
-        event.preventDefault();
-
-
-        clearStatus();
-
-
-        const usernameValue =
-        username.value.trim();
-
-
-        const phoneValue =
-        phone.value.trim();
-
-
-        const emailValue =
-        email.value
-        .trim()
-        .toLowerCase();
-
-
-        const passwordValue =
-        password.value;
-
-
-        if(
-            usernameValue.length < 3
-        ){
-
-            showStatus(
-                "Username must contain at least 3 characters."
-            );
-
-            return;
-
-        }
-
-
-        if(!phoneValue){
-
-            showStatus(
-                "Please enter your phone number."
-            );
-
-            return;
-
-        }
-
-
-        if(
-            !otpVerified ||
-            !verificationToken ||
-            emailValue !== verifiedEmail
-        ){
-
-            showStatus(
-                "Please verify your email OTP first."
-            );
-
-            return;
-
-        }
-
-
-        if(
-            passwordValue.length < 6
-        ){
-
-            showStatus(
-                "Password must be at least 6 characters."
-            );
-
-            return;
-
-        }
-
-
-        try{
-
-            registerButton.disabled =
-            true;
-
-
-            registerText.style.display =
-            "none";
-
-
-            registerLoading.style.display =
-            "inline";
-
-
-            /*
-               WORKER CONSUMES TOKEN
-               AND CREATES FIREBASE ACCOUNT
-            */
-
-            const response =
-            await fetch(
-                OTP_WORKER,
-                {
-
-                    method:
-                        "POST",
-
-                    headers:{
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            action:
-                                "complete_registration",
-
-                            username:
-                                usernameValue,
-
-                            phone:
-                                phoneValue,
-
-                            email:
-                                emailValue,
-
-                            password:
-                                passwordValue,
-
-                            verificationToken:
-                                verificationToken
-
-                        })
-
-                }
-            );
-
-
-            const data =
-            await response.json();
-
-
-            if(
-                !response.ok ||
-                !data.success
-            ){
-
-                throw new Error(
-                    data.message ||
-                    "Unable to create account."
-                );
-
-            }
-
-
-            /*
-               WORKER CREATED ACCOUNT.
-               NOW SIGN INTO FIREBASE CLIENT.
-            */
-
-            const loginResult =
-            await signInWithEmailAndPassword(
-                auth,
-                emailValue,
-                passwordValue
-            );
-
-
-            const user =
-            loginResult.user;
-
-
-            /*
-               NORMAL PROFILE NAME
-            */
-
-            await updateProfile(
-                user,
-                {
-                    displayName:
-                        usernameValue
-                }
-            );
-
-
-            /*
-               FIRESTORE USER PROFILE
-
-               otpVerified here is only informational.
-               Security does NOT trust this field anymore.
-               Real verification lives in Worker KV.
-            */
-
-            await setDoc(
-                doc(
-                    db,
-                    "users",
-                    user.uid
-                ),
-                {
-
-                    uid:
-                        user.uid,
-
-                    username:
-                        usernameValue,
-
-                    phone:
-                        phoneValue,
-
-                    email:
-                        emailValue,
-
-                    role:
-                        "customer",
-
-                    provider:
-                        "password",
-
-                    otpVerified:
-                        true,
-
-                    otpVerifiedAt:
-                        serverTimestamp(),
-
-                    createdAt:
-                        serverTimestamp()
-
-                }
-            );
-
-
-            showStatus(
-                "Account created successfully ✓",
-                true
-            );
-
-
-            setTimeout(
-                function(){
-
-                    window.location.replace(
-                        "./home.html"
-                    );
-
-                },
-                900
-            );
-
-        }
-
-        catch(error){
-
-            console.error(
-                "REGISTRATION ERROR:",
-                error
-            );
-
-
-            registerButton.disabled =
-            false;
-
-
-            registerText.style.display =
-            "inline";
-
-
-            registerLoading.style.display =
-            "none";
-
-
-            showStatus(
-                error.message ||
-                "Registration failed."
-            );
-
-        }
-
-    }
-);
-
+    await user.getIdToken(true);
+    window.location.replace("./home.html");
+  }catch(error){
+    console.error("GOOGLE ERROR:",error);
+    googleLoginButton.disabled=false;googleLoginText.textContent="Continue with Google";
+    let message="Google sign in failed. Please try again.";
+    if(error.code==="auth/popup-closed-by-user")message="Google sign in was cancelled.";
+    else if(error.code==="auth/popup-blocked")message="Please allow the Google popup and try again.";
+    else if(error.code==="auth/unauthorized-domain")message="This website domain is not authorized for Google login.";
+    showStatus(message);
+  }
+});
 </script>
-
 </body>
-
 </html>
