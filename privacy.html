@@ -60,6 +60,82 @@ body{
     padding:30px 18px 60px;
 }
 
+
+/* =========================
+   LANGUAGE BAR
+========================= */
+
+.language-bar{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-bottom:20px;
+}
+
+.language-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:
+    rgba(15,23,42,.92);
+
+    border:
+    1px solid
+    rgba(148,163,184,.25);
+
+    border-radius:14px;
+
+    padding:8px 12px;
+
+    box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.25);
+}
+
+.language-icon{
+
+    font-size:18px;
+}
+
+.language-select{
+
+    border:none;
+
+    outline:none;
+
+    background:#0f172a;
+
+    color:#ffffff;
+
+    padding:8px 12px;
+
+    border-radius:9px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.language-select option{
+
+    background:#0f172a;
+
+    color:#ffffff;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
 .header{
 
     text-align:center;
@@ -101,6 +177,11 @@ h1{
 
     font-size:14px;
 }
+
+
+/* =========================
+   PRIVACY CARD
+========================= */
 
 .card{
 
@@ -219,19 +300,44 @@ a:hover{
     text-decoration:none;
 }
 
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:600px){
 
     .container{
+
         padding:
-        20px 12px 45px;
+        18px 12px 45px;
     }
 
     .card{
+
         padding:20px;
     }
 
     h1{
+
         font-size:25px;
+    }
+
+    .language-bar{
+
+        justify-content:center;
+    }
+
+    .language-box{
+
+        width:100%;
+
+        justify-content:center;
+    }
+
+    .language-select{
+
+        flex:1;
     }
 
 }
@@ -247,6 +353,46 @@ a:hover{
 <div class="container">
 
 
+<!-- =========================
+     LANGUAGE SELECTOR
+========================= -->
+
+<div class="language-bar">
+
+<div class="language-box">
+
+<span class="language-icon">
+🌐
+</span>
+
+<select
+id="languageSelect"
+class="language-select"
+>
+
+<option value="en">
+English
+</option>
+
+<option value="ta">
+தமிழ்
+</option>
+
+<option value="si">
+සිංහල
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <div class="header">
 
 <img
@@ -255,7 +401,7 @@ alt="Zyper Diamond Store"
 class="logo"
 >
 
-<h1>
+<h1 id="pageTitle">
 Privacy Policy
 </h1>
 
@@ -269,229 +415,230 @@ Zyper Diamond Store
 <div class="card">
 
 
-<h2>
+<h2 data-key="section1Title">
 1. Introduction
 </h2>
 
-<p>
+<p data-key="section1Text1">
 Zyper Diamond Store respects your privacy and is committed to protecting the personal information you provide when using our website and services.
 </p>
 
-<p>
+<p data-key="section1Text2">
 This Privacy Policy explains what information we collect, how we use it, and how we protect it.
 </p>
 
 
-<h2>
+<h2 data-key="section2Title">
 2. Information We Collect
 </h2>
 
-<p>
+<p data-key="section2Text">
 When you create an account or use Zyper Diamond Store, we may collect information such as:
 </p>
 
 <ul>
 
-<li>
+<li data-key="info1">
 Name or username
 </li>
 
-<li>
+<li data-key="info2">
 Email address
 </li>
 
-<li>
+<li data-key="info3">
 Phone number
 </li>
 
-<li>
+<li data-key="info4">
 Firebase account identification information
 </li>
 
-<li>
+<li data-key="info5">
 Free Fire player UID and player name
 </li>
 
-<li>
+<li data-key="info6">
 Order and transaction information
 </li>
 
-<li>
+<li data-key="info7">
 Wallet balance and wallet transaction records
 </li>
 
-<li>
+<li data-key="info8">
 Payment receipt information when submitted by the customer
 </li>
 
 </ul>
 
 
-<h2>
+<h2 data-key="section3Title">
 3. Google Sign-In
 </h2>
 
-<p>
+<p data-key="section3Text1">
 Zyper Diamond Store may allow users to sign in using Google Authentication.
 </p>
 
-<p>
+<p data-key="section3Text2">
 When you choose Google Sign-In, we may receive basic account information provided by Google, such as your name, email address, profile picture, and Google account identifier.
 </p>
 
-<p>
+<p data-key="section3Text3">
 We use this information only for account creation, authentication, and providing Zyper Diamond Store services.
 </p>
 
 
-<h2>
+<h2 data-key="section4Title">
 4. Email Verification and Password Reset
 </h2>
 
-<p>
+<p data-key="section4Text1">
 We may use your email address to send verification codes and password reset codes.
 </p>
 
-<p>
+<p data-key="section4Text2">
 These codes are used only for account security and identity verification.
 </p>
 
 
-<h2>
+<h2 data-key="section5Title">
 5. How We Use Your Information
 </h2>
 
-<p>
+<p data-key="section5Text">
 We may use your information to:
 </p>
 
 <ul>
 
-<li>
+<li data-key="use1">
 Create and manage your customer account
 </li>
 
-<li>
+<li data-key="use2">
 Authenticate your login
 </li>
 
-<li>
+<li data-key="use3">
 Process Free Fire top-up orders
 </li>
 
-<li>
+<li data-key="use4">
 Manage customer wallet balances
 </li>
 
-<li>
+<li data-key="use5">
 Verify payments
 </li>
 
-<li>
+<li data-key="use6">
 Provide customer support
 </li>
 
-<li>
+<li data-key="use7">
 Prevent fraud or unauthorized activity
 </li>
 
-<li>
+<li data-key="use8">
 Improve website security and reliability
 </li>
 
 </ul>
 
 
-<h2>
+<h2 data-key="section6Title">
 6. Payment Information
 </h2>
 
-<p>
+<p data-key="section6Text1">
 Zyper Diamond Store may request payment receipts for verification purposes.
 </p>
 
-<p>
+<p data-key="section6Text2">
 We do not request or store your online banking password, PIN, OTP, debit card PIN, or other banking login credentials.
 </p>
 
 
-<h2>
+<h2 data-key="section7Title">
 7. Data Storage
 </h2>
 
-<p>
+<p data-key="section7Text1">
 Some customer information may be stored using third-party services such as Firebase and Cloudflare.
 </p>
 
-<p>
+<p data-key="section7Text2">
 These services are used to operate authentication, order processing, wallet functions, and other website features.
 </p>
 
 
-<h2>
+<h2 data-key="section8Title">
 8. Data Sharing
 </h2>
 
-<p>
+<p data-key="section8Text1">
 We do not sell customer personal information.
 </p>
 
-<p>
+<p data-key="section8Text2">
 Information may only be shared with service providers when necessary to operate the website, process authentication, deliver services, or comply with applicable legal requirements.
 </p>
 
 
-<h2>
+<h2 data-key="section9Title">
 9. Account Security
 </h2>
 
-<p>
+<p data-key="section9Text">
 Customers are responsible for keeping their passwords, verification codes, and account information private.
 </p>
 
-<div class="highlight">
-
+<div
+class="highlight"
+data-key="securityWarning"
+>
 Never share your Zyper Diamond Store password or verification code with another person.
-
 </div>
 
 
-<h2>
+<h2 data-key="section10Title">
 10. Cookies and Local Storage
 </h2>
 
-<p>
+<p data-key="section10Text">
 Zyper Diamond Store may use browser storage, cookies, or similar technologies to keep users signed in, remember preferences, store selected products, and improve website functionality.
 </p>
 
 
-<h2>
+<h2 data-key="section11Title">
 11. Children's Privacy
 </h2>
 
-<p>
+<p data-key="section11Text">
 Users should only use Zyper Diamond Store in accordance with applicable local laws and the terms of the gaming services they use.
 </p>
 
 
-<h2>
+<h2 data-key="section12Title">
 12. Changes to This Privacy Policy
 </h2>
 
-<p>
+<p data-key="section12Text1">
 We may update this Privacy Policy when our services, website features, or legal requirements change.
 </p>
 
-<p>
+<p data-key="section12Text2">
 The latest version will always be available on this page.
 </p>
 
 
-<h2>
+<h2 data-key="section13Title">
 13. Contact Us
 </h2>
 
-<p>
+<p data-key="section13Text">
 If you have questions about this Privacy Policy or your Zyper Diamond Store account, you may contact our support team through the official website.
 </p>
 
@@ -499,6 +646,7 @@ If you have questions about this Privacy Policy or your Zyper Diamond Store acco
 <a
 href="./home.html"
 class="home-btn"
+data-key="homeButton"
 >
 Go to Home
 </a>
@@ -509,14 +657,711 @@ Go to Home
 
 <div class="footer">
 
-© 2026 Zyper Diamond Store<br>
+<span data-key="copyright">
+© 2026 Zyper Diamond Store
+</span>
 
+<br>
+
+<span data-key="rights">
 All rights reserved.
+</span>
 
 </div>
 
 
 </div>
+
+
+<script>
+
+/* =========================================
+   LANGUAGE TRANSLATIONS
+========================================= */
+
+const translations = {
+
+
+/* =========================
+   ENGLISH
+========================= */
+
+en:{
+
+pageTitle:
+"Privacy Policy",
+
+section1Title:
+"1. Introduction",
+
+section1Text1:
+"Zyper Diamond Store respects your privacy and is committed to protecting the personal information you provide when using our website and services.",
+
+section1Text2:
+"This Privacy Policy explains what information we collect, how we use it, and how we protect it.",
+
+
+section2Title:
+"2. Information We Collect",
+
+section2Text:
+"When you create an account or use Zyper Diamond Store, we may collect information such as:",
+
+info1:
+"Name or username",
+
+info2:
+"Email address",
+
+info3:
+"Phone number",
+
+info4:
+"Firebase account identification information",
+
+info5:
+"Free Fire player UID and player name",
+
+info6:
+"Order and transaction information",
+
+info7:
+"Wallet balance and wallet transaction records",
+
+info8:
+"Payment receipt information when submitted by the customer",
+
+
+section3Title:
+"3. Google Sign-In",
+
+section3Text1:
+"Zyper Diamond Store may allow users to sign in using Google Authentication.",
+
+section3Text2:
+"When you choose Google Sign-In, we may receive basic account information provided by Google, such as your name, email address, profile picture, and Google account identifier.",
+
+section3Text3:
+"We use this information only for account creation, authentication, and providing Zyper Diamond Store services.",
+
+
+section4Title:
+"4. Email Verification and Password Reset",
+
+section4Text1:
+"We may use your email address to send verification codes and password reset codes.",
+
+section4Text2:
+"These codes are used only for account security and identity verification.",
+
+
+section5Title:
+"5. How We Use Your Information",
+
+section5Text:
+"We may use your information to:",
+
+use1:
+"Create and manage your customer account",
+
+use2:
+"Authenticate your login",
+
+use3:
+"Process Free Fire top-up orders",
+
+use4:
+"Manage customer wallet balances",
+
+use5:
+"Verify payments",
+
+use6:
+"Provide customer support",
+
+use7:
+"Prevent fraud or unauthorized activity",
+
+use8:
+"Improve website security and reliability",
+
+
+section6Title:
+"6. Payment Information",
+
+section6Text1:
+"Zyper Diamond Store may request payment receipts for verification purposes.",
+
+section6Text2:
+"We do not request or store your online banking password, PIN, OTP, debit card PIN, or other banking login credentials.",
+
+
+section7Title:
+"7. Data Storage",
+
+section7Text1:
+"Some customer information may be stored using third-party services such as Firebase and Cloudflare.",
+
+section7Text2:
+"These services are used to operate authentication, order processing, wallet functions, and other website features.",
+
+
+section8Title:
+"8. Data Sharing",
+
+section8Text1:
+"We do not sell customer personal information.",
+
+section8Text2:
+"Information may only be shared with service providers when necessary to operate the website, process authentication, deliver services, or comply with applicable legal requirements.",
+
+
+section9Title:
+"9. Account Security",
+
+section9Text:
+"Customers are responsible for keeping their passwords, verification codes, and account information private.",
+
+securityWarning:
+"Never share your Zyper Diamond Store password or verification code with another person.",
+
+
+section10Title:
+"10. Cookies and Local Storage",
+
+section10Text:
+"Zyper Diamond Store may use browser storage, cookies, or similar technologies to keep users signed in, remember preferences, store selected products, and improve website functionality.",
+
+
+section11Title:
+"11. Children's Privacy",
+
+section11Text:
+"Users should only use Zyper Diamond Store in accordance with applicable local laws and the terms of the gaming services they use.",
+
+
+section12Title:
+"12. Changes to This Privacy Policy",
+
+section12Text1:
+"We may update this Privacy Policy when our services, website features, or legal requirements change.",
+
+section12Text2:
+"The latest version will always be available on this page.",
+
+
+section13Title:
+"13. Contact Us",
+
+section13Text:
+"If you have questions about this Privacy Policy or your Zyper Diamond Store account, you may contact our support team through the official website.",
+
+homeButton:
+"Go to Home",
+
+copyright:
+"© 2026 Zyper Diamond Store",
+
+rights:
+"All rights reserved."
+
+},
+
+
+
+/* =========================
+   TAMIL
+========================= */
+
+ta:{
+
+pageTitle:
+"தனியுரிமைக் கொள்கை",
+
+section1Title:
+"1. அறிமுகம்",
+
+section1Text1:
+"Zyper Diamond Store உங்கள் தனியுரிமையை மதிக்கிறது. எங்கள் இணையதளம் மற்றும் சேவைகளை பயன்படுத்தும் போது நீங்கள் வழங்கும் தனிப்பட்ட தகவல்களை பாதுகாப்பதில் நாங்கள் உறுதியாக உள்ளோம்.",
+
+section1Text2:
+"நாங்கள் எந்த தகவல்களை சேகரிக்கிறோம், அவற்றை எவ்வாறு பயன்படுத்துகிறோம் மற்றும் பாதுகாக்கிறோம் என்பதை இந்த தனியுரிமைக் கொள்கை விளக்குகிறது.",
+
+
+section2Title:
+"2. நாங்கள் சேகரிக்கும் தகவல்கள்",
+
+section2Text:
+"நீங்கள் Zyper Diamond Store கணக்கை உருவாக்கும் போது அல்லது எங்கள் சேவையை பயன்படுத்தும் போது பின்வரும் தகவல்களை சேகரிக்கலாம்:",
+
+info1:
+"பெயர் அல்லது பயனர் பெயர்",
+
+info2:
+"மின்னஞ்சல் முகவரி",
+
+info3:
+"தொலைபேசி எண்",
+
+info4:
+"Firebase கணக்கு அடையாள தகவல்கள்",
+
+info5:
+"Free Fire Player UID மற்றும் Player Name",
+
+info6:
+"Order மற்றும் transaction தகவல்கள்",
+
+info7:
+"Wallet balance மற்றும் wallet transaction பதிவுகள்",
+
+info8:
+"வாடிக்கையாளர் சமர்ப்பிக்கும் payment receipt தகவல்கள்",
+
+
+section3Title:
+"3. Google உள்நுழைவு",
+
+section3Text1:
+"Zyper Diamond Store Google Authentication மூலம் உள்நுழைய அனுமதிக்கலாம்.",
+
+section3Text2:
+"Google Sign-In பயன்படுத்தும் போது உங்கள் பெயர், மின்னஞ்சல் முகவரி, profile picture மற்றும் Google account identifier போன்ற அடிப்படை தகவல்கள் எங்களுக்கு கிடைக்கலாம்.",
+
+section3Text3:
+"இந்த தகவல்கள் account creation, authentication மற்றும் Zyper Diamond Store சேவைகளை வழங்குவதற்காக மட்டுமே பயன்படுத்தப்படும்.",
+
+
+section4Title:
+"4. Email Verification மற்றும் Password Reset",
+
+section4Text1:
+"Verification code மற்றும் password reset code அனுப்ப உங்கள் email address பயன்படுத்தப்படலாம்.",
+
+section4Text2:
+"இந்த codes account security மற்றும் identity verification பயன்பாட்டிற்காக மட்டுமே பயன்படுத்தப்படும்.",
+
+
+section5Title:
+"5. உங்கள் தகவல்களை எவ்வாறு பயன்படுத்துகிறோம்",
+
+section5Text:
+"உங்கள் தகவல்களை பின்வரும் தேவைகளுக்காக பயன்படுத்தலாம்:",
+
+use1:
+"Customer account உருவாக்க மற்றும் நிர்வகிக்க",
+
+use2:
+"Login authentication செய்ய",
+
+use3:
+"Free Fire top-up orders process செய்ய",
+
+use4:
+"Customer wallet balance நிர்வகிக்க",
+
+use5:
+"Payments verify செய்ய",
+
+use6:
+"Customer support வழங்க",
+
+use7:
+"Fraud மற்றும் unauthorized activity தடுக்க",
+
+use8:
+"Website security மற்றும் reliability மேம்படுத்த",
+
+
+section6Title:
+"6. Payment தகவல்கள்",
+
+section6Text1:
+"Payment verification செய்ய Zyper Diamond Store payment receipt கேட்கலாம்.",
+
+section6Text2:
+"உங்கள் online banking password, PIN, OTP, debit card PIN அல்லது banking login credentials எங்களால் கேட்கப்படவோ சேமிக்கப்படவோாது.",
+
+
+section7Title:
+"7. தகவல் சேமிப்பு",
+
+section7Text1:
+"சில customer தகவல்கள் Firebase மற்றும் Cloudflare போன்ற third-party services மூலம் சேமிக்கப்படலாம்.",
+
+section7Text2:
+"Authentication, order processing, wallet functions மற்றும் website features இயக்க இந்த services பயன்படுத்தப்படுகின்றன.",
+
+
+section8Title:
+"8. தகவல் பகிர்வு",
+
+section8Text1:
+"வாடிக்கையாளர்களின் தனிப்பட்ட தகவல்களை நாங்கள் விற்பனை செய்யமாட்டோம்.",
+
+section8Text2:
+"Website operation, authentication, service delivery அல்லது சட்டபூர்வ தேவைகளுக்காக அவசியமான போது மட்டுமே service providers உடன் தகவல்கள் பகிரப்படலாம்.",
+
+
+section9Title:
+"9. கணக்கு பாதுகாப்பு",
+
+section9Text:
+"Customers தங்களுடைய password, verification code மற்றும் account information-ஐ பாதுகாப்பாக வைத்திருக்க வேண்டும்.",
+
+securityWarning:
+"உங்கள் Zyper Diamond Store password அல்லது verification code-ஐ வேறு யாருடனும் பகிர வேண்டாம்.",
+
+
+section10Title:
+"10. Cookies மற்றும் Local Storage",
+
+section10Text:
+"Login நிலையை வைத்திருக்க, preferences நினைவில் கொள்ள, selected products சேமிக்க மற்றும் website functionality மேம்படுத்த browser storage, cookies அல்லது இதற்கு ஒத்த technologies பயன்படுத்தப்படலாம்.",
+
+
+section11Title:
+"11. குழந்தைகளின் தனியுரிமை",
+
+section11Text:
+"Zyper Diamond Store சேவைகளை பயன்படுத்தும் போது உள்ளூர் சட்டங்கள் மற்றும் பயன்படுத்தப்படும் gaming services-ன் விதிமுறைகளை பயனர்கள் பின்பற்ற வேண்டும்.",
+
+
+section12Title:
+"12. Privacy Policy மாற்றங்கள்",
+
+section12Text1:
+"எங்கள் services, website features அல்லது சட்ட தேவைகள் மாறும் போது இந்த Privacy Policy update செய்யப்படலாம்.",
+
+section12Text2:
+"சமீபத்திய version எப்போதும் இந்த page-ல் கிடைக்கும்.",
+
+
+section13Title:
+"13. எங்களை தொடர்பு கொள்ள",
+
+section13Text:
+"இந்த Privacy Policy அல்லது உங்கள் Zyper Diamond Store account குறித்து கேள்விகள் இருந்தால் official website மூலம் support team-ஐ தொடர்பு கொள்ளலாம்.",
+
+homeButton:
+"முகப்பு பக்கத்திற்கு செல்ல",
+
+copyright:
+"© 2026 Zyper Diamond Store",
+
+rights:
+"அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை."
+
+},
+
+
+
+/* =========================
+   SINHALA
+========================= */
+
+si:{
+
+pageTitle:
+"රහස්‍යතා ප්‍රතිපත්තිය",
+
+section1Title:
+"1. හැඳින්වීම",
+
+section1Text1:
+"Zyper Diamond Store ඔබගේ පෞද්ගලිකත්වයට ගරු කරන අතර අපගේ වෙබ් අඩවිය සහ සේවාවන් භාවිතා කරන විට ඔබ ලබාදෙන පුද්ගලික තොරතුරු ආරක්ෂා කිරීමට කැපවී සිටී.",
+
+section1Text2:
+"අප එකතු කරන තොරතුරු, ඒවා භාවිතා කරන ආකාරය සහ ආරක්ෂා කරන ආකාරය මෙම රහස්‍යතා ප්‍රතිපත්තියෙන් පැහැදිලි කරයි.",
+
+
+section2Title:
+"2. අප එකතු කරන තොරතුරු",
+
+section2Text:
+"ඔබ Zyper Diamond Store ගිණුමක් සාදන විට හෝ සේවාව භාවිතා කරන විට පහත තොරතුරු එකතු කළ හැක:",
+
+info1:
+"නම හෝ පරිශීලක නාමය",
+
+info2:
+"විද්‍යුත් තැපැල් ලිපිනය",
+
+info3:
+"දුරකථන අංකය",
+
+info4:
+"Firebase ගිණුම් හඳුනාගැනීමේ තොරතුරු",
+
+info5:
+"Free Fire Player UID සහ Player Name",
+
+info6:
+"Order සහ transaction තොරතුරු",
+
+info7:
+"Wallet balance සහ wallet transaction වාර්තා",
+
+info8:
+"පාරිභෝගිකයා ලබාදෙන payment receipt තොරතුරු",
+
+
+section3Title:
+"3. Google Sign-In",
+
+section3Text1:
+"Zyper Diamond Store මඟින් Google Authentication භාවිතයෙන් පිවිසීමට ඉඩ ලබාදිය හැක.",
+
+section3Text2:
+"Google Sign-In භාවිතා කරන විට ඔබගේ නම, email address, profile picture සහ Google account identifier වැනි මූලික තොරතුරු අපට ලැබිය හැක.",
+
+section3Text3:
+"මෙම තොරතුරු ගිණුම් නිර්මාණය, authentication සහ Zyper Diamond Store සේවාව ලබාදීම සඳහා පමණක් භාවිතා කරනු ලැබේ.",
+
+
+section4Title:
+"4. Email Verification සහ Password Reset",
+
+section4Text1:
+"Verification code සහ password reset code යැවීමට ඔබගේ email address භාවිතා කළ හැක.",
+
+section4Text2:
+"මෙම codes භාවිතා කරන්නේ account security සහ identity verification සඳහා පමණි.",
+
+
+section5Title:
+"5. ඔබගේ තොරතුරු භාවිතා කරන ආකාරය",
+
+section5Text:
+"ඔබගේ තොරතුරු පහත අරමුණු සඳහා භාවිතා කළ හැක:",
+
+use1:
+"Customer account නිර්මාණය සහ කළමනාකරණය",
+
+use2:
+"Login authentication",
+
+use3:
+"Free Fire top-up orders process කිරීම",
+
+use4:
+"Customer wallet balances කළමනාකරණය",
+
+use5:
+"Payments verify කිරීම",
+
+use6:
+"Customer support ලබාදීම",
+
+use7:
+"Fraud සහ unauthorized activity වැළැක්වීම",
+
+use8:
+"Website security සහ reliability වැඩිදියුණු කිරීම",
+
+
+section6Title:
+"6. Payment තොරතුරු",
+
+section6Text1:
+"Payment verification සඳහා Zyper Diamond Store payment receipt ඉල්ලා සිටිය හැක.",
+
+section6Text2:
+"ඔබගේ online banking password, PIN, OTP, debit card PIN හෝ වෙනත් banking login credentials අප ඉල්ලා නොසිටින අතර ගබඩා නොකරයි.",
+
+
+section7Title:
+"7. දත්ත ගබඩා කිරීම",
+
+section7Text1:
+"සමහර customer තොරතුරු Firebase සහ Cloudflare වැනි third-party services මඟින් ගබඩා කළ හැක.",
+
+section7Text2:
+"Authentication, order processing, wallet functions සහ වෙනත් website features සඳහා මෙම services භාවිතා කරනු ලැබේ.",
+
+
+section8Title:
+"8. තොරතුරු බෙදාගැනීම",
+
+section8Text1:
+"අප customer personal information විකුණන්නේ නැත.",
+
+section8Text2:
+"Website operation, authentication, service delivery හෝ නීතිමය අවශ්‍යතා සඳහා අවශ්‍ය වූ විට පමණක් service providers සමඟ තොරතුරු බෙදාගත හැක.",
+
+
+section9Title:
+"9. ගිණුම් ආරක්ෂාව",
+
+section9Text:
+"Customers තම password, verification code සහ account information රහසිගතව හා ආරක්ෂිතව තබාගත යුතුය.",
+
+securityWarning:
+"ඔබගේ Zyper Diamond Store password හෝ verification code වෙනත් පුද්ගලයෙකු සමඟ බෙදා නොගන්න.",
+
+
+section10Title:
+"10. Cookies සහ Local Storage",
+
+section10Text:
+"Users signed in තබාගැනීම, preferences මතක තබාගැනීම, selected products ගබඩා කිරීම සහ website functionality වැඩිදියුණු කිරීම සඳහා browser storage, cookies හෝ සමාන technologies භාවිතා කළ හැක.",
+
+
+section11Title:
+"11. ළමුන්ගේ පෞද්ගලිකත්වය",
+
+section11Text:
+"Zyper Diamond Store භාවිතා කරන විට අදාළ දේශීය නීති සහ gaming services වල නියමයන් පිළිපැදිය යුතුය.",
+
+
+section12Title:
+"12. මෙම Privacy Policy වෙනස් කිරීම",
+
+section12Text1:
+"අපගේ services, website features හෝ නීතිමය අවශ්‍යතා වෙනස් වන විට මෙම Privacy Policy update කළ හැක.",
+
+section12Text2:
+"නවතම version එක සෑම විටම මෙම page එකේ ලබාගත හැක.",
+
+
+section13Title:
+"13. අප අමතන්න",
+
+section13Text:
+"මෙම Privacy Policy හෝ ඔබගේ Zyper Diamond Store account පිළිබඳ ප්‍රශ්න තිබේ නම් official website හරහා support team එක අමතන්න.",
+
+homeButton:
+"මුල් පිටුවට යන්න",
+
+copyright:
+"© 2026 Zyper Diamond Store",
+
+rights:
+"සියලු හිමිකම් ඇවිරිණි."
+
+}
+
+};
+
+
+
+/* =========================================
+   APPLY LANGUAGE
+========================================= */
+
+const languageSelect =
+    document.getElementById(
+        "languageSelect"
+    );
+
+
+function applyLanguage(
+    language
+){
+
+    const selected =
+        translations[
+            language
+        ] ||
+        translations.en;
+
+
+    document.documentElement.lang =
+        language;
+
+
+    document.getElementById(
+        "pageTitle"
+    ).textContent =
+        selected.pageTitle;
+
+
+    document
+    .querySelectorAll(
+        "[data-key]"
+    )
+    .forEach(
+        element => {
+
+            const key =
+                element.getAttribute(
+                    "data-key"
+                );
+
+
+            if(
+                selected[key]
+            ){
+
+                element.textContent =
+                    selected[key];
+
+            }
+
+        }
+    );
+
+
+    localStorage.setItem(
+        "zyperLanguage",
+        language
+    );
+
+}
+
+
+
+/* =========================================
+   LOAD SAVED LANGUAGE
+========================================= */
+
+const savedLanguage =
+    localStorage.getItem(
+        "zyperLanguage"
+    );
+
+
+if(
+    savedLanguage &&
+    translations[
+        savedLanguage
+    ]
+){
+
+    languageSelect.value =
+        savedLanguage;
+
+    applyLanguage(
+        savedLanguage
+    );
+
+}
+else{
+
+    applyLanguage(
+        "en"
+    );
+
+}
+
+
+
+/* =========================================
+   LANGUAGE CHANGE
+========================================= */
+
+languageSelect.addEventListener(
+    "change",
+    () => {
+
+        applyLanguage(
+            languageSelect.value
+        );
+
+    }
+);
+
+</script>
 
 
 </body>
