@@ -7,161 +7,222 @@
 
 <meta
 name="viewport"
-content="width=device-width, initial-scale=1.0"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 >
 
-<title>Zyper Diamond Store</title>
+<title>Zyper Diamond Store - Login</title>
 
-<link
-rel="icon"
-href="./1.jpg"
->
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="media.css">
+<link rel="icon" href="1.jpg">
+
+
+<!-- ==================================================
+     PUBLIC WEBSITE ENTRY
+
+     Normal:
+     index.html
+     -> home.html
+
+     Login:
+     index.html?login=1
+     -> stay on login page
+================================================== -->
+
+<script>
+
+(function(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const loginMode =
+        params.get("login");
+
+
+    if(loginMode !== "1"){
+
+        window.location.replace(
+            "./home.html"
+        );
+
+    }
+
+})();
+
+</script>
+
 
 <style>
 
-*{
-    box-sizing:border-box;
-}
-
-html,
-body{
-    margin:0;
-    width:100%;
-    height:100%;
-}
-
-body{
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-    color:white;
-
-    background:
-
-    radial-gradient(
-        circle at 15% 15%,
-        rgba(37,99,235,.20),
-        transparent 35%
-    ),
-
-    radial-gradient(
-        circle at 85% 20%,
-        rgba(124,58,237,.20),
-        transparent 35%
-    ),
-
-    linear-gradient(
-        145deg,
-        #020617,
-        #0f172a,
-        #111827
-    );
-
-}
-
-
-.loading-box{
-
+.login-header{
     text-align:center;
-
-    padding:30px;
-
+    margin-bottom:28px;
 }
 
 
-.logo{
+.company-logo{
 
-    width:72px;
-    height:72px;
+    width:76px !important;
+    height:76px !important;
+
+    min-width:76px !important;
+    min-height:76px !important;
+
+    max-width:76px !important;
+    max-height:76px !important;
 
     margin:
-    0 auto 18px;
+        0 auto 15px !important;
 
-    display:flex;
+    padding:0 !important;
 
-    align-items:center;
+    border-radius:50% !important;
 
-    justify-content:center;
+    overflow:hidden !important;
 
-    border-radius:20px;
+    display:flex !important;
 
-    font-size:38px;
+    align-items:center !important;
+    justify-content:center !important;
 
-    background:
-
-    linear-gradient(
-        135deg,
-        rgba(37,99,235,.35),
-        rgba(124,58,237,.35)
-    );
-
-    border:
-    1px solid
-    rgba(129,140,248,.30);
+    background:#fff;
 
     box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.20);
+}
 
-    0 0 35px
-    rgba(79,70,229,.20);
+
+.company-logo img{
+
+    width:100% !important;
+    height:100% !important;
+
+    display:block !important;
+
+    object-fit:cover !important;
+
+    border-radius:50% !important;
 
 }
 
 
-h1{
-
-    margin:0 0 8px;
-
-    font-size:22px;
-
-}
-
-
-p{
+.brand-name{
 
     margin:0;
 
-    color:#94a3b8;
+    font-size:24px;
+
+    font-weight:800;
+
+}
+
+
+.brand-subtitle{
+
+    margin:
+        7px 0 0;
 
     font-size:13px;
 
-}
-
-
-.loader{
-
-    width:38px;
-    height:38px;
-
-    margin:
-    24px auto 0;
-
-    border-radius:50%;
-
-    border:
-    3px solid
-    rgba(255,255,255,.12);
-
-    border-top-color:
-    #60a5fa;
-
-    animation:
-    spin .8s linear infinite;
+    opacity:.7;
 
 }
 
 
-@keyframes spin{
+.password-group{
 
-    to{
-        transform:
-        rotate(360deg);
+    position:relative;
+
+}
+
+
+.password-group input{
+
+    padding-right:
+        55px !important;
+
+}
+
+
+.password-toggle{
+
+    position:absolute;
+
+    right:8px;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    width:40px;
+    height:40px;
+
+    border:0;
+
+    background:
+        transparent;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:20;
+
+}
+
+
+.password-toggle svg{
+
+    width:21px;
+    height:21px;
+
+}
+
+
+.login-status{
+
+    display:none;
+
+    text-align:center;
+
+    margin-top:15px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+
+@media(max-width:500px){
+
+    .company-logo{
+
+        width:68px !important;
+        height:68px !important;
+
+        min-width:68px !important;
+        min-height:68px !important;
+
+        max-width:68px !important;
+        max-height:68px !important;
+
+    }
+
+
+    .brand-name{
+
+        font-size:21px;
+
     }
 
 }
@@ -174,45 +235,611 @@ p{
 <body>
 
 
-<div class="loading-box">
-
-    <div class="logo">
-        💎
-    </div>
+<div class="login-container">
 
 
-    <h1>
-        Zyper Diamond Store
-    </h1>
+<div class="login-card">
 
 
-    <p>
-        Opening store...
-    </p>
+<div class="login-header">
 
 
-    <div class="loader"></div>
+<div class="company-logo">
+
+<img
+src="1.jpg"
+alt="Zyper Diamond Store"
+>
+
+</div>
+
+
+<h2 class="brand-name">
+
+Zyper Diamond Store
+
+</h2>
+
+
+<p class="brand-subtitle">
+
+Welcome back! Sign in to continue
+
+</p>
+
 
 </div>
 
 
 
-<script>
+<form
+id="loginForm"
+class="login-form"
+novalidate
+>
 
-setTimeout(
+
+<div class="form-group">
+
+
+<div class="input-group neu-input">
+
+
+<input
+type="email"
+id="email"
+name="email"
+required
+autocomplete="email"
+placeholder=" "
+>
+
+
+<label for="email">
+
+Email Address
+
+</label>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="form-group">
+
+
+<div class="input-group neu-input password-group">
+
+
+<input
+type="password"
+id="password"
+name="password"
+required
+autocomplete="current-password"
+placeholder=" "
+>
+
+
+<label for="password">
+
+Password
+
+</label>
+
+
+
+<button
+type="button"
+id="passwordToggle"
+class="password-toggle"
+aria-label="Show password"
+>
+
+
+<svg
+id="eyeOpen"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+>
+
+<path
+d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+/>
+
+<circle
+cx="12"
+cy="12"
+r="3"
+/>
+
+</svg>
+
+
+
+<svg
+id="eyeClosed"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+style="display:none;"
+>
+
+<path
+d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8"
+/>
+
+<path
+d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8"
+/>
+
+<line
+x1="1"
+y1="1"
+x2="23"
+y2="23"
+/>
+
+</svg>
+
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="form-options">
+
+
+<div class="remember-wrapper">
+
+
+<input
+type="checkbox"
+id="remember"
+name="remember"
+>
+
+
+<label
+for="remember"
+class="checkbox-label"
+>
+
+
+<div class="neu-checkbox">
+
+
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="3"
+>
+
+<polyline
+points="20 6 9 17 4 12"
+/>
+
+</svg>
+
+
+</div>
+
+
+Remember me
+
+
+</label>
+
+
+</div>
+
+
+
+<a
+href="forgot-password.html"
+class="forgot-link"
+>
+
+Forgot password?
+
+</a>
+
+
+</div>
+
+
+
+<button
+type="submit"
+class="neu-button login-btn"
+id="loginButton"
+>
+
+
+<span id="loginText">
+
+Sign In
+
+</span>
+
+
+<span
+id="loginLoading"
+style="display:none;"
+>
+
+Signing in...
+
+</span>
+
+
+</button>
+
+
+
+<div
+id="loginStatus"
+class="login-status"
+>
+</div>
+
+
+</form>
+
+
+
+<div class="signup-link">
+
+
+<p>
+
+Don't have an account?
+
+<a href="register.html">
+
+Create Account
+
+</a>
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script type="module">
+
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+    getAuth,
+    signInWithEmailAndPassword
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
+
+    authDomain:
+    "zyper-d-iamond-store.firebaseapp.com",
+
+    projectId:
+    "zyper-d-iamond-store",
+
+    storageBucket:
+    "zyper-d-iamond-store.firebasestorage.app",
+
+    messagingSenderId:
+    "892467477866",
+
+    appId:
+    "1:892467477866:web:61e9b6ff9435798da23913"
+
+};
+
+
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+    getAuth(
+        app
+    );
+
+
+
+const loginForm =
+    document.getElementById(
+        "loginForm"
+    );
+
+
+const email =
+    document.getElementById(
+        "email"
+    );
+
+
+const password =
+    document.getElementById(
+        "password"
+    );
+
+
+const passwordToggle =
+    document.getElementById(
+        "passwordToggle"
+    );
+
+
+const eyeOpen =
+    document.getElementById(
+        "eyeOpen"
+    );
+
+
+const eyeClosed =
+    document.getElementById(
+        "eyeClosed"
+    );
+
+
+const loginButton =
+    document.getElementById(
+        "loginButton"
+    );
+
+
+const loginText =
+    document.getElementById(
+        "loginText"
+    );
+
+
+const loginLoading =
+    document.getElementById(
+        "loginLoading"
+    );
+
+
+const loginStatus =
+    document.getElementById(
+        "loginStatus"
+    );
+
+
+
+/* ==================================================
+   SHOW / HIDE PASSWORD
+================================================== */
+
+passwordToggle.addEventListener(
+    "click",
     function(){
 
-        window.location.replace(
-            "./home.html"
-        );
+        if(
+            password.type ===
+            "password"
+        ){
 
-    },
-    350
+            password.type =
+                "text";
+
+
+            eyeOpen.style.display =
+                "none";
+
+
+            eyeClosed.style.display =
+                "block";
+
+
+            passwordToggle.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        }
+        else{
+
+            password.type =
+                "password";
+
+
+            eyeOpen.style.display =
+                "block";
+
+
+            eyeClosed.style.display =
+                "none";
+
+
+            passwordToggle.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
+        }
+
+    }
 );
 
-</script>
 
 
-</body>
+/* ==================================================
+   LOGIN
+================================================== */
 
-</html>
+loginForm.addEventListener(
+    "submit",
+    async function(e){
+
+        e.preventDefault();
+
+
+        const emailValue =
+            email.value.trim();
+
+
+        const passwordValue =
+            password.value;
+
+
+        if(!emailValue){
+
+            alert(
+                "Please enter your email."
+            );
+
+
+            email.focus();
+
+            return;
+
+        }
+
+
+        if(!passwordValue){
+
+            alert(
+                "Please enter your password."
+            );
+
+
+            password.focus();
+
+            return;
+
+        }
+
+
+        try{
+
+
+            loginButton.disabled =
+                true;
+
+
+            loginText.style.display =
+                "none";
+
+
+            loginLoading.style.display =
+                "inline";
+
+
+            await signInWithEmailAndPassword(
+                auth,
+                emailValue,
+                passwordValue
+            );
+
+
+            loginStatus.style.display =
+                "block";
+
+
+            loginStatus.style.color =
+                "#00c853";
+
+
+            loginStatus.textContent =
+                "Login successful ✓";
+
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                        "./home.html";
+
+                },
+                600
+            );
+
+
+        }
+        catch(error){
+
+
+            console.error(
+                "LOGIN ERROR:",
+                error
+            );
+
+
+            loginButton.disabled =
+                false;
+
+
+            loginText.style.display =
+                "inline";
+
+
+            loginLoading.style.display =
+                "none";
+
+
+            if(
+                error.code ===
+                "auth/invalid-credential" ||
+                error.code ===
+                "auth/wrong-password"
+            ){
+
+                alert(
+                    "Incorrect email or password."
+                );
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/user-not-found"
+            ){
+
+                alert(
+                    "No account found with this email."
+                );
+
+            }
+
+
+           
