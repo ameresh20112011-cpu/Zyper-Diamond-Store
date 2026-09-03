@@ -168,7 +168,8 @@ async function workerRequest(
         result =
             await response.json();
 
-    } catch {
+    }
+    catch {
 
         throw new Error(
             "Invalid server response."
@@ -250,7 +251,8 @@ async function loadWallet() {
             );
 
 
-    } catch(error) {
+    }
+    catch(error) {
 
         console.error(
             "Wallet error:",
@@ -305,10 +307,6 @@ async function redeemCode() {
 
     }
 
-
-    /*
-     * New Zyper code format
-     */
 
     if (
         !/^ZYPER-[A-Z0-9]{4}-[A-Z0-9]{4}$/
@@ -369,7 +367,8 @@ async function redeemCode() {
         await loadTransactions();
 
 
-    } catch(error) {
+    }
+    catch(error) {
 
         console.error(
             "Redeem error:",
@@ -383,7 +382,8 @@ async function redeemCode() {
         );
 
 
-    } finally {
+    }
+    finally {
 
         redeemButton.disabled =
             false;
@@ -488,7 +488,8 @@ async function loadTransactions() {
         );
 
 
-    } catch(error) {
+    }
+    catch(error) {
 
         console.error(
             "Transactions error:",
