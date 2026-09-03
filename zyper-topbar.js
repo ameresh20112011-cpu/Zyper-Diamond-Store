@@ -1,977 +1,529 @@
 /* =========================================================
-   ZYPER DIAMOND STORE
-   SHARED RESPONSIVE TOP BAR
-   PC + ANDROID + IPHONE + TABLET + LANDSCAPE
+   ZYPER SHARED TOP HEADER
+
+   SAME ON ALL CUSTOMER PAGES
 ========================================================= */
 
 (function(){
 
-  "use strict";
-
-  const TOPBAR_ID =
-  "zyperSharedTopbar";
-
-  const STYLE_ID =
-  "zyperSharedTopbarStyle";
-
-  const WALLET_SCRIPT_ID =
-  "zyperSharedWalletScript";
-
-  const WALLET_SCRIPT =
-  "./zyper-wallet-badge.js?v=7000";
+"use strict";
 
 
-  /* =====================================================
-     VIEWPORT
-  ===================================================== */
-
-  function ensureViewport(){
-
-    let viewport =
-    document.querySelector(
-      'meta[name="viewport"]'
-    );
-
-    const content =
-    "width=device-width, initial-scale=1.0, viewport-fit=cover";
-
-    if(!viewport){
-
-      viewport =
-      document.createElement(
-        "meta"
-      );
-
-      viewport.name =
-      "viewport";
-
-      document.head.prepend(
-        viewport
-      );
-    }
-
-    viewport.setAttribute(
-      "content",
-      content
-    );
-  }
+const TOPBAR_ID =
+"zyperSharedTopbar";
 
 
-  /* =====================================================
-     FONT
-  ===================================================== */
+/* =====================================================
+   STYLE
+===================================================== */
 
-  function loadFont(){
+function addStyle(){
 
-    if(
-      document.getElementById(
-        "zyperSharedTopbarFont"
-      )
-    ){
-      return;
-    }
+if(
+document.getElementById(
+"zyperTopbarStyle"
+)
+){
 
-    const link =
-    document.createElement(
-      "link"
-    );
+return;
 
-    link.id =
-    "zyperSharedTopbarFont";
-
-    link.rel =
-    "stylesheet";
-
-    link.href =
-    "https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap";
-
-    document.head.appendChild(
-      link
-    );
-  }
+}
 
 
-  /* =====================================================
-     STYLE
-  ===================================================== */
+const style =
+document.createElement(
+"style"
+);
 
-  function createStyle(){
 
-    if(
-      document.getElementById(
-        STYLE_ID
-      )
-    ){
-      return;
-    }
+style.id =
+"zyperTopbarStyle";
 
-    const style =
-    document.createElement(
-      "style"
-    );
 
-    style.id =
-    STYLE_ID;
-
-    style.textContent = `
+style.textContent = `
 
 :root{
-  --zyper-topbar-height:72px;
-}
 
-#${TOPBAR_ID}{
-
-  position:fixed !important;
-
-  top:0 !important;
-  left:0 !important;
-  right:0 !important;
-
-  width:100% !important;
-
-  height:
-  calc(
-    var(--zyper-topbar-height)
-    +
-    env(safe-area-inset-top, 0px)
-  ) !important;
-
-  padding:
-  env(safe-area-inset-top, 0px)
-  max(16px, env(safe-area-inset-right, 0px))
-  0
-  max(16px, env(safe-area-inset-left, 0px))
-  !important;
-
-  margin:0 !important;
-
-  display:flex !important;
-
-  align-items:center !important;
-
-  justify-content:
-  space-between !important;
-
-  gap:10px !important;
-
-  box-sizing:
-  border-box !important;
-
-  background:
-  linear-gradient(
-    180deg,
-    rgba(2,6,23,.98),
-    rgba(15,23,42,.95)
-  ) !important;
-
-  border-bottom:
-  1px solid
-  rgba(255,255,255,.08)
-  !important;
-
-  box-shadow:
-  0 10px 35px
-  rgba(0,0,0,.32)
-  !important;
-
-  backdrop-filter:
-  blur(18px) !important;
-
-  -webkit-backdrop-filter:
-  blur(18px) !important;
-
-  z-index:
-  2147483000 !important;
-
-  isolation:isolate !important;
-
-  pointer-events:auto !important;
-
-  -webkit-tap-highlight-color:
-  transparent !important;
+--zyper-header-height:
+72px;
 
 }
 
 
-/* GLOW LINE */
+#zyperSharedTopbar{
 
-#${TOPBAR_ID}::after{
+position:
+fixed;
 
-  content:"";
+top:
+0;
 
-  position:absolute !important;
+left:
+0;
 
-  left:10% !important;
-  right:10% !important;
-  bottom:0 !important;
-
-  height:1px !important;
-
-  background:
-  linear-gradient(
-    90deg,
-    transparent,
-    rgba(59,130,246,.65),
-    rgba(124,58,237,.65),
-    transparent
-  ) !important;
-
-  pointer-events:none !important;
-
-}
+right:
+0;
 
 
-/* =====================================================
-   BRAND
-===================================================== */
+height:
 
-#${TOPBAR_ID}
-.zyper-topbar-brand{
-
-  min-width:0 !important;
-
-  display:flex !important;
-
-  align-items:center !important;
-
-  gap:10px !important;
-
-  flex:
-  1 1 auto !important;
-
-  overflow:hidden !important;
-
-  color:#fff !important;
-
-  text-decoration:none !important;
-
-  pointer-events:auto !important;
-
-  touch-action:
-  manipulation !important;
-
-  -webkit-tap-highlight-color:
-  transparent !important;
-
-}
+calc(
+var(
+--zyper-header-height
+)
++
+env(
+safe-area-inset-top,
+0px
+)
+);
 
 
-/* =====================================================
-   LOGO
-===================================================== */
+padding:
 
-#${TOPBAR_ID}
-.zyper-topbar-logo{
+env(
+safe-area-inset-top,
+0px
+)
 
-  width:46px !important;
+max(
+18px,
+env(
+safe-area-inset-right,
+0px
+)
+)
 
-  height:46px !important;
+0
 
-  min-width:46px !important;
-
-  min-height:46px !important;
-
-  flex:
-  0 0 46px !important;
-
-  border-radius:
-  13px !important;
-
-  overflow:hidden !important;
-
-  display:flex !important;
-
-  align-items:center !important;
-
-  justify-content:center !important;
-
-  background:
-  #ffffff !important;
-
-  box-shadow:
-  0 6px 18px
-  rgba(59,130,246,.22)
-  !important;
-
-}
+max(
+18px,
+env(
+safe-area-inset-left,
+0px
+)
+);
 
 
-#${TOPBAR_ID}
-.zyper-topbar-logo img{
-
-  display:block !important;
-
-  width:100% !important;
-
-  height:100% !important;
-
-  object-fit:cover !important;
-
-  border:0 !important;
-
-}
+display:
+flex;
 
 
-/* =====================================================
-   BRAND TEXT
-===================================================== */
+align-items:
+center;
 
-#${TOPBAR_ID}
-.zyper-topbar-text{
 
-  min-width:0 !important;
+justify-content:
+space-between;
 
-  display:flex !important;
 
-  flex-direction:
-  column !important;
+gap:
+10px;
 
-  justify-content:
-  center !important;
 
-  overflow:hidden !important;
+background:
+
+linear-gradient(
+180deg,
+rgba(1,9,31,.98),
+rgba(3,14,43,.96)
+);
+
+
+border-bottom:
+
+1px solid
+rgba(
+80,
+125,
+255,
+.22
+);
+
+
+box-shadow:
+
+0
+8px
+30px
+rgba(
+0,
+0,
+0,
+.35
+);
+
+
+backdrop-filter:
+blur(18px);
+
+
+-webkit-backdrop-filter:
+blur(18px);
+
+
+z-index:
+2147483000;
 
 }
 
 
-#${TOPBAR_ID}
-.zyper-topbar-name{
+/* BRAND */
 
-  max-width:100% !important;
+.zyper-top-brand{
 
-  overflow:hidden !important;
+display:
+flex;
 
-  text-overflow:
-  ellipsis !important;
+align-items:
+center;
 
-  font-family:
-  "Orbitron",
-  "Poppins",
-  Arial,
-  sans-serif
-  !important;
+gap:
+12px;
 
-  font-size:
-  19px !important;
+min-width:
+0;
 
-  font-weight:
-  800 !important;
-
-  line-height:
-  1.05 !important;
-
-  letter-spacing:
-  .8px !important;
-
-  color:#ffffff !important;
-
-  white-space:
-  nowrap !important;
+text-decoration:
+none;
 
 }
 
 
-#${TOPBAR_ID}
-.zyper-topbar-sub{
+/* LOGO */
 
-  max-width:100% !important;
+.zyper-top-logo{
 
-  margin-top:
-  4px !important;
+width:
+48px;
 
-  overflow:hidden !important;
+height:
+48px;
 
-  text-overflow:
-  ellipsis !important;
+min-width:
+48px;
 
-  font-family:
-  "Poppins",
-  Arial,
-  sans-serif
-  !important;
+border-radius:
+14px;
 
-  font-size:
-  9px !important;
+overflow:
+hidden;
 
-  font-weight:
-  600 !important;
-
-  line-height:
-  1 !important;
-
-  letter-spacing:
-  1.8px !important;
-
-  color:
-  #94a3b8 !important;
-
-  white-space:
-  nowrap !important;
+background:
+#ffffff;
 
 }
 
 
-/* =====================================================
-   RIGHT LOGIN / WALLET AREA
-===================================================== */
+.zyper-top-logo img{
 
-#${TOPBAR_ID}
+width:
+100%;
+
+height:
+100%;
+
+object-fit:
+cover;
+
+display:
+block;
+
+}
+
+
+/* NAME */
+
+.zyper-top-name{
+
+color:
+#ffffff;
+
+font-family:
+"Poppins",
+Arial,
+sans-serif;
+
+font-size:
+20px;
+
+font-weight:
+800;
+
+letter-spacing:
+1px;
+
+white-space:
+nowrap;
+
+}
+
+
+/* RIGHT */
+
 #zyperTopbarAction{
 
-  min-width:0 !important;
+display:
+flex;
 
-  display:flex !important;
+align-items:
+center;
 
-  align-items:center !important;
+justify-content:
+flex-end;
 
-  justify-content:
-  flex-end !important;
-
-  flex:
-  0 1 auto !important;
-
-  pointer-events:
-  auto !important;
-
-  position:relative !important;
-
-  z-index:3 !important;
+min-width:
+0;
 
 }
 
 
-/* =====================================================
-   REMOVE OLD HOME HEADER
-===================================================== */
-
-body > .top-header,
-body > header.top-header{
-
-  display:none !important;
-
-}
-
-
-/* =====================================================
-   PAGE SPACE
-===================================================== */
-
-html{
-
-  scroll-padding-top:
-  calc(
-    var(--zyper-topbar-height)
-    +
-    env(safe-area-inset-top, 0px)
-    +
-    8px
-  ) !important;
-
-}
-
+/* BODY SPACE */
 
 body{
 
-  padding-top:
-  calc(
-    var(--zyper-topbar-height)
-    +
-    env(safe-area-inset-top, 0px)
-    +
-    10px
-  ) !important;
+padding-top:
+
+calc(
+var(
+--zyper-header-height
+)
++
+env(
+safe-area-inset-top,
+0px
+)
++
+10px
+)
+
+!important;
 
 }
 
 
-/* =====================================================
-   TABLET / PHONE
-===================================================== */
-
-@media(max-width:768px){
-
-  :root{
-
-    --zyper-topbar-height:
-    64px;
-
-  }
-
-
-  #${TOPBAR_ID}{
-
-    padding-left:
-    max(
-      11px,
-      env(safe-area-inset-left, 0px)
-    ) !important;
-
-    padding-right:
-    max(
-      10px,
-      env(safe-area-inset-right, 0px)
-    ) !important;
-
-    gap:
-    8px !important;
-
-  }
-
-
-  #${TOPBAR_ID}
-  .zyper-topbar-brand{
-
-    gap:
-    8px !important;
-
-  }
-
-
-  #${TOPBAR_ID}
-  .zyper-topbar-logo{
-
-    width:
-    42px !important;
-
-    height:
-    42px !important;
-
-    min-width:
-    42px !important;
-
-    min-height:
-    42px !important;
-
-    flex-basis:
-    42px !important;
-
-    border-radius:
-    11px !important;
-
-  }
-
-
-  #${TOPBAR_ID}
-  .zyper-topbar-name{
-
-    font-size:
-    15px !important;
-
-    letter-spacing:
-    .4px !important;
-
-  }
-
-
-  #${TOPBAR_ID}
-  .zyper-topbar-sub{
-
-    margin-top:
-    3px !important;
-
-    font-size:
-    7px !important;
-
-    letter-spacing:
-    1.2px !important;
-
-  }
-
-}
-
-
-/* =====================================================
-   SMALL PHONE
-===================================================== */
+/* MOBILE */
 
 @media(max-width:480px){
 
-  :root{
+:root{
 
-    --zyper-topbar-height:
-    62px;
-
-  }
-
-
-  #${TOPBAR_ID}{
-
-    padding-left:
-    max(
-      9px,
-      env(safe-area-inset-left, 0px)
-    ) !important;
-
-    padding-right:
-    max(
-      8px,
-      env(safe-area-inset-right, 0px)
-    ) !important;
-
-    gap:
-    6px !important;
-
-  }
-
-
-  #${TOPBAR_ID}
-  .zyper-topbar-logo{
-
-    width:
-    38px !important;
-
-    height:
-    38px !important;
-
-    min-width:
-    38px !important;
-
-    min-height:
-    38px !important;
-
-    flex-basis:
-    38px !important;
-
-    border-radius:
-    10px !important;
-
-  }
-
-
-  #${TOPBAR_ID}
-  .zyper-topbar-name{
-
-    font-size:
-    13px !important;
-
-  }
-
-
-  #${TOPBAR_ID}
-  .zyper-topbar-sub{
-
-    font-size:
-    6.5px !important;
-
-    letter-spacing:
-    .9px !important;
-
-  }
+--zyper-header-height:
+64px;
 
 }
 
 
-/* =====================================================
-   VERY SMALL PHONE
-===================================================== */
+#zyperSharedTopbar{
+
+padding-left:
+12px;
+
+padding-right:
+12px;
+
+}
+
+
+.zyper-top-logo{
+
+width:
+43px;
+
+height:
+43px;
+
+min-width:
+43px;
+
+border-radius:
+13px;
+
+}
+
+
+.zyper-top-name{
+
+font-size:
+18px;
+
+}
+
+}
+
 
 @media(max-width:360px){
 
-  :root{
+.zyper-top-name{
 
-    --zyper-topbar-height:
-    60px;
+font-size:
+16px;
 
-  }
+}
 
+}
 
-  #${TOPBAR_ID}
-  .zyper-topbar-logo{
-
-    width:
-    36px !important;
-
-    height:
-    36px !important;
-
-    min-width:
-    36px !important;
-
-    min-height:
-    36px !important;
-
-    flex-basis:
-    36px !important;
-
-  }
+`;
 
 
-  #${TOPBAR_ID}
-  .zyper-topbar-name{
-
-    font-size:
-    12px !important;
-
-  }
-
-
-  #${TOPBAR_ID}
-  .zyper-topbar-sub{
-
-    display:
-    none !important;
-
-  }
+document.head.appendChild(
+style
+);
 
 }
 
 
 /* =====================================================
-   PHONE LANDSCAPE
+   HEADER
 ===================================================== */
 
-@media(
-  max-height:520px
+function createHeader(){
+
+if(
+document.getElementById(
+TOPBAR_ID
 )
-and
-(
-  orientation:landscape
 ){
 
-  :root{
-
-    --zyper-topbar-height:
-    56px;
-
-  }
-
-
-  #${TOPBAR_ID}
-  .zyper-topbar-logo{
-
-    width:
-    36px !important;
-
-    height:
-    36px !important;
-
-    min-width:
-    36px !important;
-
-    min-height:
-    36px !important;
-
-    flex-basis:
-    36px !important;
-
-  }
-
-
-  #${TOPBAR_ID}
-  .zyper-topbar-sub{
-
-    display:
-    none !important;
-
-  }
+return;
 
 }
 
-    `;
 
+const header =
+document.createElement(
+"header"
+);
 
-    document.head.appendChild(
-      style
-    );
 
-  }
+header.id =
+TOPBAR_ID;
 
 
-  /* =====================================================
-     CREATE TOP BAR
-  ===================================================== */
+header.innerHTML = `
 
-  function createTopbar(){
+<a
+href="./home.html"
+class="zyper-top-brand"
+>
 
-    let header =
-    document.getElementById(
-      TOPBAR_ID
-    );
+<span
+class="zyper-top-logo"
+>
 
+<img
+src="./1.jpg"
+alt="Zyper"
+>
 
-    if(header){
+</span>
 
-      return header;
 
-    }
+<span
+class="zyper-top-name"
+>
+ZYPER
+</span>
 
+</a>
 
-    header =
-    document.createElement(
-      "header"
-    );
 
+<div
+id="zyperTopbarAction"
+>
+</div>
 
-    header.id =
-    TOPBAR_ID;
+`;
 
 
-    header.innerHTML = `
+document.body.prepend(
+header
+);
 
-      <a
-        href="./home.html"
-        class="zyper-topbar-brand"
-        aria-label="Zyper Diamond Store Home"
-      >
+}
 
-        <span
-          class="zyper-topbar-logo"
-        >
 
-          <img
-            src="./1.jpg"
-            alt="Zyper Diamond Store"
-          >
+/* =====================================================
+   LOAD WALLET BADGE
+===================================================== */
 
-        </span>
+function loadWalletBadge(){
 
+const existing =
 
-        <span
-          class="zyper-topbar-text"
-        >
+Array.from(
+document.scripts
+)
+.find(
+script =>
+script.src &&
+script.src.includes(
+"zyper-wallet-badge.js"
+)
+);
 
-          <span
-            class="zyper-topbar-name"
-          >
-            ZYPER
-          </span>
 
+if(existing){
 
-          <span
-            class="zyper-topbar-sub"
-          >
-            DIAMOND STORE
-          </span>
+return;
 
-        </span>
+}
 
-      </a>
 
+const script =
+document.createElement(
+"script"
+);
 
-      <div
-        id="zyperTopbarAction"
-        aria-live="polite"
-      >
-      </div>
 
-    `;
+script.type =
+"module";
 
 
-    document.body.prepend(
-      header
-    );
+script.src =
+"./zyper-wallet-badge.js?v=8001";
 
 
-    return header;
+document.body.appendChild(
+script
+);
 
-  }
+}
 
 
-  /* =====================================================
-     LOAD WALLET / LOGIN BADGE
-  ===================================================== */
+/* =====================================================
+   START
+===================================================== */
 
-  function loadWallet(){
+function start(){
 
-    const existing =
-    Array.from(
-      document.scripts
-    )
-    .find(
-      function(script){
+addStyle();
 
-        return (
-          script.src
-          &&
-          script.src.includes(
-            "zyper-wallet-badge.js"
-          )
-        );
+createHeader();
 
-      }
-    );
+loadWalletBadge();
 
+}
 
-    if(existing){
 
-      return;
+if(
+document.readyState ===
+"loading"
+){
 
-    }
+document.addEventListener(
+"DOMContentLoaded",
+start,
+{
+once:true
+}
+);
 
+}
+else{
 
-    if(
-      document.getElementById(
-        WALLET_SCRIPT_ID
-      )
-    ){
+start();
 
-      return;
-
-    }
-
-
-    const script =
-    document.createElement(
-      "script"
-    );
-
-
-    script.id =
-    WALLET_SCRIPT_ID;
-
-
-    script.type =
-    "module";
-
-
-    script.src =
-    WALLET_SCRIPT;
-
-
-    document.body.appendChild(
-      script
-    );
-
-  }
-
-
-  /* =====================================================
-     START
-  ===================================================== */
-
-  function start(){
-
-    ensureViewport();
-
-    loadFont();
-
-    createStyle();
-
-    createTopbar();
-
-    loadWallet();
-
-  }
-
-
-  if(
-    document.readyState ===
-    "loading"
-  ){
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      start,
-      {
-        once:true
-      }
-    );
-
-  }
-  else{
-
-    start();
-
-  }
+}
 
 })();
