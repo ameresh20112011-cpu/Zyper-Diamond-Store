@@ -17,7 +17,7 @@ content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="media.css">
 
-<link rel="stylesheet" href="zyper-nav.css">
+<link rel="stylesheet" href="./zyper-nav.css?v=10001">
 
 
 <style>
@@ -993,6 +993,134 @@ height:120px;
 
 }
 
+
+
+/* =====================================================
+   GUEST PROFILE
+===================================================== */
+
+.zyper-profile-login-box{
+    width:100%;
+    margin:0 0 18px;
+    padding:16px;
+    border-radius:16px;
+    text-align:center;
+    background:linear-gradient(
+        135deg,
+        rgba(37,99,235,.14),
+        rgba(124,58,237,.14)
+    );
+    border:1px solid rgba(96,165,250,.25);
+}
+
+.zyper-profile-login-box .guest-title{
+    color:#fff;
+    font-size:14px;
+    font-weight:700;
+}
+
+.zyper-profile-login-box .guest-text{
+    margin-top:5px;
+    color:#94a3b8;
+    font-size:11px;
+    line-height:1.5;
+}
+
+.zyper-profile-login-box .guest-login{
+    display:inline-block;
+    min-width:120px;
+    margin-top:11px;
+    padding:10px 18px;
+    border-radius:10px;
+    color:#fff;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:700;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+}
+
+#zyperProfileLoginModal{
+    position:fixed;
+    inset:0;
+    padding:20px;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(2,6,23,.74);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    z-index:2147483640;
+}
+
+#zyperProfileLoginModal.show{
+    display:flex;
+}
+
+.zyper-profile-modal-card{
+    width:100%;
+    max-width:350px;
+    padding:24px 20px;
+    text-align:center;
+    border-radius:22px;
+    background:linear-gradient(145deg,#111827,#1e1b4b);
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+.zyper-profile-modal-icon{
+    width:54px;
+    height:54px;
+    margin:0 auto 13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:17px;
+    font-size:25px;
+    background:rgba(124,58,237,.18);
+}
+
+.zyper-profile-modal-card h3{
+    margin:0;
+    color:#fff;
+    font-size:19px;
+}
+
+.zyper-profile-modal-card p{
+    margin:9px 0 17px;
+    color:#94a3b8;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.zyper-profile-modal-login{
+    width:100%;
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    color:#fff;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+}
+
+.zyper-profile-modal-cancel{
+    width:100%;
+    min-height:41px;
+    margin-top:9px;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:11px;
+    color:#cbd5e1;
+    background:rgba(255,255,255,.05);
+    cursor:pointer;
+}
+
+.guest-private{
+    color:#94a3b8 !important;
+}
+
 </style>
 
 </head>
@@ -1287,185 +1415,583 @@ onclick="logout()">
 <script type="module">
 
 import {
-auth
+    auth
 }
-from "./firebase.js";
+from "./firebase.js?v=10000";
 
 
 import {
+    onAuthStateChanged,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-onAuthStateChanged,
 
-signOut
+let currentUser = null;
+
+const DEFAULT_IMAGE = "1.jpg";
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const username =
+    document.getElementById("username");
+
+const profileImage =
+    document.getElementById("profileImage");
+
+const userEmail =
+    document.getElementById("userEmail");
+
+const memberSince =
+    document.getElementById("memberSince");
+
+const accountStatus =
+    document.getElementById("accountStatus");
+
+const editPanel =
+    document.getElementById("editPanel");
+
+const nameInput =
+    document.getElementById("nameInput");
+
+const imageInput =
+    document.getElementById("imageInput");
+
+const imagePreview =
+    document.getElementById("imagePreview");
+
+const logoutButton =
+    document.querySelector(".logout-button");
+
+
+/* =====================================================
+   LOGIN MODAL
+===================================================== */
+
+function createLoginModal(){
+
+    if(
+        document.getElementById(
+            "zyperProfileLoginModal"
+        )
+    ){
+        return;
+    }
+
+
+    const modal =
+        document.createElement("div");
+
+
+    modal.id =
+        "zyperProfileLoginModal";
+
+
+    modal.innerHTML = `
+
+<div class="zyper-profile-modal-card">
+
+    <div class="zyper-profile-modal-icon">
+        🔐
+    </div>
+
+    <h3>
+        Login Required
+    </h3>
+
+    <p>
+        Please login to use your
+        Zyper Profile.
+    </p>
+
+    <a
+    href="./index.html"
+    class="zyper-profile-modal-login"
+    >
+        LOGIN
+    </a>
+
+    <button
+    type="button"
+    class="zyper-profile-modal-cancel"
+    id="zyperProfileModalCancel"
+    >
+        Continue Browsing
+    </button>
+
+</div>
+
+    `;
+
+
+    document.body.appendChild(
+        modal
+    );
+
+
+    document
+    .getElementById(
+        "zyperProfileModalCancel"
+    )
+    .addEventListener(
+        "click",
+        hideLoginPopup
+    );
+
+
+    modal.addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target === modal
+            ){
+                hideLoginPopup();
+            }
+
+        }
+    );
 
 }
 
-from
 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+function showLoginPopup(){
+
+    createLoginModal();
+
+    const modal =
+        document.getElementById(
+            "zyperProfileLoginModal"
+        );
+
+    if(modal){
+        modal.classList.add("show");
+    }
+
+}
 
 
-let currentUser =
-null;
+function hideLoginPopup(){
+
+    const modal =
+        document.getElementById(
+            "zyperProfileLoginModal"
+        );
+
+    if(modal){
+        modal.classList.remove("show");
+    }
+
+}
 
 
-const DEFAULT_IMAGE =
-"1.jpg";
+/* =====================================================
+   GUEST NOTICE
+===================================================== */
 
+function showGuestNotice(){
+
+    const card =
+        document.querySelector(
+            ".profile-card"
+        );
+
+    if(
+        !card ||
+        document.getElementById(
+            "zyperProfileGuestNotice"
+        )
+    ){
+        return;
+    }
+
+
+    const notice =
+        document.createElement("div");
+
+
+    notice.id =
+        "zyperProfileGuestNotice";
+
+
+    notice.className =
+        "zyper-profile-login-box";
+
+
+    notice.innerHTML = `
+
+<div class="guest-title">
+    🔐 Login to use your Profile
+</div>
+
+<div class="guest-text">
+    You can view this page and all options.
+    Login is required to view or change
+    your personal profile information.
+</div>
+
+<a
+href="./index.html"
+class="guest-login"
+>
+    LOGIN
+</a>
+
+    `;
+
+
+    const badge =
+        card.querySelector(
+            ".company-badge"
+        );
+
+
+    if(
+        badge &&
+        badge.nextSibling
+    ){
+
+        card.insertBefore(
+            notice,
+            badge.nextSibling
+        );
+
+    }
+    else{
+
+        card.prepend(
+            notice
+        );
+
+    }
+
+}
+
+
+function removeGuestNotice(){
+
+    const notice =
+        document.getElementById(
+            "zyperProfileGuestNotice"
+        );
+
+
+    if(notice){
+        notice.remove();
+    }
+
+
+    hideLoginPopup();
+
+}
+
+
+/* =====================================================
+   GUEST PROFILE STATE
+===================================================== */
+
+function showGuestProfile(){
+
+    currentUser =
+        null;
+
+
+    if(username){
+        username.textContent =
+            "Guest";
+    }
+
+
+    if(profileImage){
+        profileImage.src =
+            DEFAULT_IMAGE;
+    }
+
+
+    if(accountStatus){
+
+        accountStatus.textContent =
+            "Login Required";
+
+        accountStatus.classList.add(
+            "guest-private"
+        );
+
+    }
+
+
+    if(userEmail){
+
+        userEmail.textContent =
+            "Login to view";
+
+        userEmail.classList.add(
+            "guest-private"
+        );
+
+    }
+
+
+    if(memberSince){
+
+        memberSince.textContent =
+            "Login to view";
+
+        memberSince.classList.add(
+            "guest-private"
+        );
+
+    }
+
+
+    if(nameInput){
+        nameInput.value = "";
+    }
+
+
+    if(imagePreview){
+        imagePreview.src =
+            DEFAULT_IMAGE;
+    }
+
+
+    if(editPanel){
+        editPanel.classList.remove(
+            "show"
+        );
+    }
+
+
+    if(logoutButton){
+
+        logoutButton.innerHTML =
+            "🔐 Login";
+
+    }
+
+
+    showGuestNotice();
+
+}
+
+
+/* =====================================================
+   LOGGED-IN PROFILE
+===================================================== */
+
+function showUserProfile(user){
+
+    currentUser =
+        user;
+
+
+    removeGuestNotice();
+
+
+    if(accountStatus){
+
+        accountStatus.textContent =
+            "Active";
+
+        accountStatus.classList.remove(
+            "guest-private"
+        );
+
+    }
+
+
+    if(userEmail){
+
+        userEmail.textContent =
+            user.email ||
+            "Not available";
+
+        userEmail.classList.remove(
+            "guest-private"
+        );
+
+    }
+
+
+    let createdDate =
+        "Not available";
+
+
+    if(
+        user.metadata &&
+        user.metadata.creationTime
+    ){
+
+        try{
+
+            createdDate =
+                new Date(
+                    user.metadata.creationTime
+                )
+                .toLocaleDateString(
+                    "en-LK",
+                    {
+                        year:"numeric",
+                        month:"short",
+                        day:"numeric"
+                    }
+                );
+
+        }
+        catch(error){
+
+            console.error(
+                "Creation date error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    if(memberSince){
+
+        memberSince.textContent =
+            createdDate;
+
+        memberSince.classList.remove(
+            "guest-private"
+        );
+
+    }
+
+
+    const uid =
+        user.uid;
+
+
+    let savedName =
+        localStorage.getItem(
+            uid + "_name"
+        );
+
+
+    if(!savedName){
+
+        savedName =
+            user.displayName ||
+            "Zyper Customer";
+
+    }
+
+
+    let savedImage =
+        localStorage.getItem(
+            uid + "_img"
+        );
+
+
+    if(!savedImage){
+
+        savedImage =
+            DEFAULT_IMAGE;
+
+    }
+
+
+    try{
+
+        localStorage.setItem(
+            uid + "_img",
+            savedImage
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Profile image cache error:",
+            error
+        );
+
+    }
+
+
+    if(username){
+        username.innerText =
+            savedName;
+    }
+
+
+    if(profileImage){
+        profileImage.src =
+            savedImage;
+    }
+
+
+    if(nameInput){
+        nameInput.value =
+            savedName;
+    }
+
+
+    if(imagePreview){
+        imagePreview.src =
+            savedImage;
+    }
+
+
+    if(logoutButton){
+
+        logoutButton.innerHTML =
+            "🚪 Logout";
+
+    }
+
+}
+
+
+/* =====================================================
+   AUTH
+===================================================== */
 
 onAuthStateChanged(
+    auth,
+    function(user){
 
-auth,
+        if(!user){
 
-function(user){
+            showGuestProfile();
 
+            return;
 
-if(!user){
-
-window.location.href =
-"index.html";
-
-return;
-
-}
+        }
 
 
-currentUser =
-user;
+        showUserProfile(
+            user
+        );
 
-
-const uid =
-user.uid;
-
-
-document
-.getElementById(
-"userEmail"
-)
-.textContent =
-user.email ||
-"Not available";
-
-
-let createdDate =
-"Not available";
-
-
-if(
-user.metadata &&
-user.metadata.creationTime
-){
-
-try{
-
-createdDate =
-new Date(
-user.metadata.creationTime
-)
-.toLocaleDateString(
-"en-LK",
-{
-year:"numeric",
-month:"short",
-day:"numeric"
-}
-);
-
-}
-catch(error){
-
-console.error(
-"Creation date error:",
-error
-);
-
-}
-
-}
-
-
-document
-.getElementById(
-"memberSince"
-)
-.textContent =
-createdDate;
-
-
-let savedName =
-localStorage.getItem(
-uid + "_name"
+    }
 );
 
 
-if(!savedName){
-
-savedName =
-user.displayName ||
-"Zyper Customer";
-
-}
-
-
-let savedImage =
-localStorage.getItem(
-uid + "_img"
-);
-
-
-if(!savedImage){
-
-savedImage =
-DEFAULT_IMAGE;
-
-}
-
-
-localStorage.setItem(
-uid + "_img",
-savedImage
-);
-
-
-document
-.getElementById(
-"username"
-)
-.innerText =
-savedName;
-
-
-document
-.getElementById(
-"profileImage"
-)
-.src =
-savedImage;
-
-
-document
-.getElementById(
-"nameInput"
-)
-.value =
-savedName;
-
-
-document
-.getElementById(
-"imagePreview"
-)
-.src =
-savedImage;
-
-});
-
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
 
 window.goRecharge =
 function(){
 
-window.location.href =
-"recharge-payment.html";
+    if(!currentUser){
+
+        showLoginPopup();
+
+        return;
+    }
+
+
+    window.location.href =
+        "./recharge-payment.html";
 
 };
 
@@ -1473,8 +1999,14 @@ window.location.href =
 window.goHistory =
 function(){
 
-window.location.href =
-"history.html";
+    /*
+       History page is public.
+       Guest can open it and the page itself
+       shows Login to view private history.
+    */
+
+    window.location.href =
+        "./history.html";
 
 };
 
@@ -1482,572 +2014,605 @@ window.location.href =
 window.goHelp =
 function(){
 
-window.location.href =
-"whatsapp.html";
+    window.location.href =
+        "./whatsapp.html";
 
 };
 
+
+/* =====================================================
+   EDIT PROFILE
+===================================================== */
 
 window.editProfile =
 function(){
 
-if(!currentUser){
+    if(!currentUser){
 
-return;
+        showLoginPopup();
 
-}
-
-
-const uid =
-currentUser.uid;
+        return;
+    }
 
 
-let savedName =
-localStorage.getItem(
-uid + "_name"
-);
+    const uid =
+        currentUser.uid;
 
 
-if(!savedName){
-
-savedName =
-currentUser.displayName ||
-"Zyper Customer";
-
-}
+    let savedName =
+        localStorage.getItem(
+            uid + "_name"
+        );
 
 
-let savedImage =
-localStorage.getItem(
-uid + "_img"
-);
+    if(!savedName){
+
+        savedName =
+            currentUser.displayName ||
+            "Zyper Customer";
+
+    }
 
 
-if(!savedImage){
-
-savedImage =
-DEFAULT_IMAGE;
-
-}
+    let savedImage =
+        localStorage.getItem(
+            uid + "_img"
+        );
 
 
-document
-.getElementById(
-"nameInput"
-)
-.value =
-savedName;
+    if(!savedImage){
+
+        savedImage =
+            DEFAULT_IMAGE;
+
+    }
 
 
-document
-.getElementById(
-"imagePreview"
-)
-.src =
-savedImage;
+    if(nameInput){
+
+        nameInput.value =
+            savedName;
+
+    }
 
 
-document
-.getElementById(
-"imageInput"
-)
-.value =
-"";
+    if(imagePreview){
+
+        imagePreview.src =
+            savedImage;
+
+    }
 
 
-document
-.getElementById(
-"editPanel"
-)
-.classList
-.add(
-"show"
-);
+    if(imageInput){
 
-};
+        imageInput.value =
+            "";
+
+    }
 
 
-document
-.getElementById(
-"imageInput"
-)
-.addEventListener(
+    if(editPanel){
 
-"change",
+        editPanel.classList.add(
+            "show"
+        );
 
-function(event){
-
-const file =
-event.target.files[0];
-
-
-if(!file){
-
-return;
-
-}
-
-
-if(
-file.size >
-2 * 1024 * 1024
-){
-
-alert(
-"Please select an image smaller than 2MB."
-);
-
-event.target.value =
-"";
-
-return;
-
-}
-
-
-if(
-!file.type.startsWith(
-"image/"
-)
-){
-
-alert(
-"Please select a valid image."
-);
-
-event.target.value =
-"";
-
-return;
-
-}
-
-
-const reader =
-new FileReader();
-
-
-reader.onload =
-function(){
-
-document
-.getElementById(
-"imagePreview"
-)
-.src =
-reader.result;
+    }
 
 };
 
 
-reader.readAsDataURL(
-file
-);
+/* =====================================================
+   IMAGE PREVIEW
+===================================================== */
 
-});
+if(imageInput){
 
+    imageInput.addEventListener(
+
+        "change",
+
+        function(event){
+
+
+            if(!currentUser){
+
+                event.target.value =
+                    "";
+
+                showLoginPopup();
+
+                return;
+
+            }
+
+
+            const file =
+                event.target.files[0];
+
+
+            if(!file){
+                return;
+            }
+
+
+            if(
+                file.size >
+                2 * 1024 * 1024
+            ){
+
+                alert(
+                    "Please select an image smaller than 2MB."
+                );
+
+                event.target.value =
+                    "";
+
+                return;
+
+            }
+
+
+            if(
+                !file.type.startsWith(
+                    "image/"
+                )
+            ){
+
+                alert(
+                    "Please select a valid image."
+                );
+
+                event.target.value =
+                    "";
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+            function(){
+
+                if(imagePreview){
+
+                    imagePreview.src =
+                        reader.result;
+
+                }
+
+            };
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =====================================================
+   SAVE PROFILE
+===================================================== */
 
 window.saveProfile =
 function(){
 
-if(!currentUser){
+    if(!currentUser){
 
-return;
+        showLoginPopup();
 
-}
+        return;
 
-
-const uid =
-currentUser.uid;
+    }
 
 
-let name =
-document
-.getElementById(
-"nameInput"
-)
-.value
-.trim();
+    const uid =
+        currentUser.uid;
 
 
-if(!name){
-
-name =
-"Zyper Customer";
-
-}
+    let name =
+        nameInput
+        ? nameInput.value.trim()
+        : "";
 
 
-if(
-name.length >
-40
-){
+    if(!name){
 
-name =
-name.substring(
-0,
-40
-);
+        name =
+            "Zyper Customer";
 
-}
+    }
 
 
-localStorage.setItem(
-uid + "_name",
-name
-);
+    if(
+        name.length >
+        40
+    ){
+
+        name =
+            name.substring(
+                0,
+                40
+            );
+
+    }
 
 
-const file =
-document
-.getElementById(
-"imageInput"
-)
-.files[0];
+    localStorage.setItem(
+        uid + "_name",
+        name
+    );
 
 
-if(file){
-
-const reader =
-new FileReader();
-
-
-reader.onload =
-function(){
-
-const imageData =
-reader.result;
+    const file =
+        imageInput
+        ? imageInput.files[0]
+        : null;
 
 
-try{
+    if(file){
 
-localStorage.setItem(
-uid + "_img",
-imageData
-);
+        const reader =
+            new FileReader();
 
-finishProfileSave(
-name,
-imageData
-);
 
-}
-catch(error){
+        reader.onload =
+        function(){
 
-console.error(
-"Profile image save error:",
-error
-);
+            const imageData =
+                reader.result;
 
-alert(
-"Image is too large to save. Please choose a smaller image."
-);
 
-}
+            try{
+
+                localStorage.setItem(
+                    uid + "_img",
+                    imageData
+                );
+
+
+                finishProfileSave(
+                    name,
+                    imageData
+                );
+
+            }
+            catch(error){
+
+                console.error(
+                    "Profile image save error:",
+                    error
+                );
+
+
+                alert(
+                    "Image is too large to save. Please choose a smaller image."
+                );
+
+            }
+
+        };
+
+
+        reader.readAsDataURL(
+            file
+        );
+
+    }
+    else{
+
+        let existingImage =
+            localStorage.getItem(
+                uid + "_img"
+            );
+
+
+        if(!existingImage){
+
+            existingImage =
+                DEFAULT_IMAGE;
+
+
+            localStorage.setItem(
+                uid + "_img",
+                DEFAULT_IMAGE
+            );
+
+        }
+
+
+        finishProfileSave(
+            name,
+            existingImage
+        );
+
+    }
 
 };
 
 
-reader.readAsDataURL(
-file
-);
-
-}
-
-else{
-
-let existingImage =
-localStorage.getItem(
-uid + "_img"
-);
-
-
-if(!existingImage){
-
-existingImage =
-DEFAULT_IMAGE;
-
-localStorage.setItem(
-uid + "_img",
-DEFAULT_IMAGE
-);
-
-}
-
-
-finishProfileSave(
-name,
-existingImage
-);
-
-}
-
-};
-
+/* =====================================================
+   FINISH SAVE
+===================================================== */
 
 function finishProfileSave(
-name,
-image
+    name,
+    image
 ){
 
+    if(profileImage){
 
-document
-.getElementById(
-"profileImage"
-)
-.src =
-image;
+        profileImage.src =
+            image;
 
-
-document
-.getElementById(
-"username"
-)
-.innerText =
-name;
+    }
 
 
-document
-.getElementById(
-"imagePreview"
-)
-.src =
-image;
+    if(username){
+
+        username.innerText =
+            name;
+
+    }
 
 
-document
-.getElementById(
-"imageInput"
-)
-.value =
-"";
+    if(imagePreview){
+
+        imagePreview.src =
+            image;
+
+    }
 
 
-document
-.getElementById(
-"editPanel"
-)
-.classList
-.remove(
-"show"
-);
+    if(imageInput){
+
+        imageInput.value =
+            "";
+
+    }
 
 
-const savedNotice =
-document.createElement(
-"div"
-);
+    if(editPanel){
+
+        editPanel.classList.remove(
+            "show"
+        );
+
+    }
 
 
-savedNotice.style.position =
-"fixed";
-
-savedNotice.style.left =
-"50%";
-
-savedNotice.style.bottom =
-"105px";
-
-savedNotice.style.transform =
-"translateX(-50%)";
-
-savedNotice.style.zIndex =
-"10001";
-
-savedNotice.style.padding =
-"12px 20px";
-
-savedNotice.style.borderRadius =
-"14px";
-
-savedNotice.style.background =
-"rgba(22,163,74,.95)";
-
-savedNotice.style.border =
-"1px solid rgba(134,239,172,.5)";
-
-savedNotice.style.color =
-"white";
-
-savedNotice.style.fontSize =
-"13px";
-
-savedNotice.style.fontWeight =
-"600";
-
-savedNotice.style.whiteSpace =
-"nowrap";
-
-savedNotice.style.boxShadow =
-"0 10px 30px rgba(0,0,0,.4)";
-
-savedNotice.innerText =
-"✅ Profile saved successfully";
+    const savedNotice =
+        document.createElement(
+            "div"
+        );
 
 
-document.body.appendChild(
-savedNotice
-);
+    savedNotice.style.position =
+        "fixed";
+
+    savedNotice.style.left =
+        "50%";
+
+    savedNotice.style.bottom =
+        "105px";
+
+    savedNotice.style.transform =
+        "translateX(-50%)";
+
+    savedNotice.style.zIndex =
+        "10001";
+
+    savedNotice.style.padding =
+        "12px 20px";
+
+    savedNotice.style.borderRadius =
+        "14px";
+
+    savedNotice.style.background =
+        "rgba(22,163,74,.95)";
+
+    savedNotice.style.border =
+        "1px solid rgba(134,239,172,.5)";
+
+    savedNotice.style.color =
+        "white";
+
+    savedNotice.style.fontSize =
+        "13px";
+
+    savedNotice.style.fontWeight =
+        "600";
+
+    savedNotice.style.whiteSpace =
+        "nowrap";
+
+    savedNotice.style.boxShadow =
+        "0 10px 30px rgba(0,0,0,.4)";
+
+    savedNotice.innerText =
+        "✅ Profile saved successfully";
 
 
-setTimeout(
-
-function(){
-
-savedNotice.style.opacity =
-"0";
-
-savedNotice.style.transition =
-"opacity .3s";
+    document.body.appendChild(
+        savedNotice
+    );
 
 
-setTimeout(
+    setTimeout(
+        function(){
 
-function(){
+            savedNotice.style.opacity =
+                "0";
 
-savedNotice.remove();
+            savedNotice.style.transition =
+                "opacity .3s";
 
-},
 
-300
+            setTimeout(
+                function(){
 
-);
+                    savedNotice.remove();
 
-},
+                },
+                300
+            );
 
-2000
-
-);
+        },
+        2000
+    );
 
 }
 
+
+/* =====================================================
+   CANCEL EDIT
+===================================================== */
 
 window.cancelEdit =
 function(){
 
-document
-.getElementById(
-"editPanel"
-)
-.classList
-.remove(
-"show"
-);
+    if(editPanel){
+
+        editPanel.classList.remove(
+            "show"
+        );
+
+    }
 
 
-document
-.getElementById(
-"imageInput"
-)
-.value =
-"";
+    if(imageInput){
+
+        imageInput.value =
+            "";
+
+    }
 
 
-if(currentUser){
-
-const uid =
-currentUser.uid;
-
-
-let savedName =
-localStorage.getItem(
-uid + "_name"
-);
+    if(!currentUser){
+        return;
+    }
 
 
-let savedImage =
-localStorage.getItem(
-uid + "_img"
-);
+    const uid =
+        currentUser.uid;
 
 
-if(!savedName){
-
-savedName =
-currentUser.displayName ||
-"Zyper Customer";
-
-}
+    let savedName =
+        localStorage.getItem(
+            uid + "_name"
+        );
 
 
-if(!savedImage){
-
-savedImage =
-DEFAULT_IMAGE;
-
-}
+    let savedImage =
+        localStorage.getItem(
+            uid + "_img"
+        );
 
 
-document
-.getElementById(
-"nameInput"
-)
-.value =
-savedName;
+    if(!savedName){
+
+        savedName =
+            currentUser.displayName ||
+            "Zyper Customer";
+
+    }
 
 
-document
-.getElementById(
-"imagePreview"
-)
-.src =
-savedImage;
+    if(!savedImage){
 
-}
+        savedImage =
+            DEFAULT_IMAGE;
+
+    }
+
+
+    if(nameInput){
+
+        nameInput.value =
+            savedName;
+
+    }
+
+
+    if(imagePreview){
+
+        imagePreview.src =
+            savedImage;
+
+    }
 
 };
 
+
+/* =====================================================
+   LOGOUT / LOGIN BUTTON
+===================================================== */
 
 window.logout =
-function(){
+async function(){
 
-signOut(
-auth
-)
+    if(!currentUser){
 
-.then(
+        showLoginPopup();
 
-function(){
+        return;
 
-window.location.href =
-"index.html";
+    }
 
-}
 
-)
+    try{
 
-.catch(
+        await signOut(
+            auth
+        );
 
-function(error){
 
-console.error(
-"Logout error:",
-error
-);
+        window.location.href =
+            "./home.html";
 
-alert(
-"Logout failed. Please try again."
-);
+    }
+    catch(error){
 
-}
+        console.error(
+            "Logout error:",
+            error
+        );
 
-);
+
+        alert(
+            "Logout failed. Please try again."
+        );
+
+    }
 
 };
 
-</script>
 
+/* =====================================================
+   START
+===================================================== */
+
+createLoginModal();
+
+</script>
 
 <script
-type="module"
-src="./zyper-wallet-badge.js?v=120000">
+src="./zyper-topbar.js?v=10001">
 </script>
-
 
 <script
-src="./zyper-nav.js">
+src="./zyper-nav.js?v=10001">
 </script>
-
 
 </body>
 
