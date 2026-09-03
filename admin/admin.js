@@ -695,9 +695,6 @@ async function loadOrders() {
             );
 
 
-        allOrders = [];
-
-
         snapshot.forEach(
             function (item) {
 
@@ -1001,14 +998,53 @@ function buildOrderAction(
 
         return `
 
-            <button
-                type="button"
-                class="release-money-btn"
-                data-order-id="${escapeHTML(orderId)}"
-                data-amount="${heldAmount}"
+            <div
+                class="manual-order-actions"
+                style="
+                    display:flex;
+                    flex-direction:column;
+                    gap:7px;
+                    min-width:190px;
+                "
             >
-                🔓 RELEASE MONEY
-            </button>
+
+                <input
+                    type="text"
+                    class="manual-ff-name-input"
+                    data-order-id="${escapeHTML(orderId)}"
+                    placeholder="Paste FF Name"
+                    maxlength="100"
+                    autocomplete="off"
+                    style="
+                        width:100%;
+                        padding:8px 10px;
+                        border-radius:8px;
+                        border:1px solid rgba(255,255,255,.18);
+                        background:rgba(255,255,255,.08);
+                        color:inherit;
+                        outline:none;
+                    "
+                >
+
+                <button
+                    type="button"
+                    class="manual-done-btn"
+                    data-order-id="${escapeHTML(orderId)}"
+                    data-amount="${heldAmount}"
+                >
+                    ✅ DONE
+                </button>
+
+                <button
+                    type="button"
+                    class="release-money-btn"
+                    data-order-id="${escapeHTML(orderId)}"
+                    data-amount="${heldAmount}"
+                >
+                    🔓 RELEASE MONEY
+                </button>
+
+            </div>
 
         `;
     }
@@ -1359,8 +1395,7 @@ function renderOrders(orders) {
                     rawStatus
                 );
 
-
-            /* -----------------------------------------
+                        /* -----------------------------------------
                WALLET
             ----------------------------------------- */
 
@@ -1847,6 +1882,66 @@ function renderOrders(orders) {
                 );
             }
         );
+
+
+    /* =================================================
+       MANUAL DONE BUTTON EVENTS
+    ================================================= */
+
+    table
+        .querySelectorAll(
+            ".manual-done-btn"
+        )
+        .forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    async function () {
+
+                        const orderId =
+                            String(
+                                button.dataset.orderId ||
+                                ""
+                            )
+                                .trim();
+
+
+                        const wrapper =
+                            button.closest(
+                                ".manual-order-actions"
+                            );
+
+
+                        const input =
+                            wrapper
+                                ?
+                                wrapper.querySelector(
+                                    ".manual-ff-name-input"
+                                )
+                                :
+                                null;
+
+
+                        const ffName =
+                            input
+                                ?
+                                String(
+                                    input.value || ""
+                                ).trim()
+                                :
+                                "";
+
+
+                        await finalizeFailedOrder(
+                            orderId,
+                            ffName,
+                            button
+                        );
+                    }
+                );
+            }
+        );
 }
 
 
@@ -1998,7 +2093,6 @@ async function workerRequest(
             true
         );
 
-
     const headers = {
 
         "Content-Type":
@@ -2081,6 +2175,179 @@ async function workerRequest(
 
 
     return data;
+}
+
+
+/* =====================================================
+   MANUAL COMPLETE FAILED / REVIEW ORDER
+===================================================== */
+
+async function finalizeFailedOrder(
+    orderId,
+    ffName,
+    button
+) {
+
+    if (!orderId) {
+
+        alert(
+            "Order ID missing."
+        );
+
+        return;
+    }
+
+
+    const playerName =
+        String(
+            ffName || ""
+        )
+            .trim()
+            .slice(
+                0,
+                100
+            );
+
+
+    if (!playerName) {
+
+        alert(
+            "Please paste the verified FF Name first."
+        );
+
+        const wrapper =
+            button
+                ?
+                button.closest(
+                    ".manual-order-actions"
+                )
+                :
+                null;
+
+
+        const input =
+            wrapper
+                ?
+                wrapper.querySelector(
+                    ".manual-ff-name-input"
+                )
+                :
+                null;
+
+
+        if (input) {
+            input.focus();
+        }
+
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+
+            `Mark order ${orderId} as SUCCESS and deduct the held wallet money?\n\nFF Name: ${playerName}`
+
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    const originalText =
+        button
+            ?
+            button.textContent
+            :
+            "";
+
+
+    if (button) {
+
+        button.disabled =
+            true;
+
+        button.textContent =
+            "⏳ COMPLETING...";
+    }
+
+
+    try {
+
+        const data =
+            await workerRequest(
+                {
+
+                    action:
+                        "finalize_order_hold",
+
+                    orderId:
+                        orderId,
+
+                    playerName:
+                        playerName
+
+                },
+                true
+            );
+
+
+        if (
+            data.lateSuccessAfterRelease
+        ) {
+
+            alert(
+                "⚠ Order marked Success, but the wallet money had already been released, so it was NOT deducted again."
+            );
+        }
+        else if (
+            data.message ===
+            "Order already finalized."
+        ) {
+
+            alert(
+                "✓ This order was already completed."
+            );
+        }
+        else {
+
+            alert(
+                `✅ Order ${orderId} completed successfully.\nFF Name: ${playerName}\nHeld wallet money deducted.`
+            );
+        }
+
+
+        await loadOrders();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Manual complete order error:",
+            error
+        );
+
+
+        alert(
+
+            error.message
+            ||
+            "Failed to complete order."
+
+        );
+
+
+        if (button) {
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                originalText;
+        }
+    }
 }
 
 
@@ -2526,6 +2793,7 @@ if (refresh) {
 
 /* =====================================================
    LOGOUT
+
 ===================================================== */
 
 const logout =
@@ -3079,3 +3347,5 @@ function escapeHTML(value) {
 console.log(
     "Zyper Admin Dashboard ready."
 );
+
+        allOrders = [];
