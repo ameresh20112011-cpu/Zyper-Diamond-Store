@@ -148,6 +148,8 @@ body{
 
     box-shadow:
     0 10px 35px rgba(0,0,0,.30);
+
+    padding-right:170px !important;
 }
 
 
@@ -171,121 +173,6 @@ body{
 }
 
 
-/* TOP RIGHT LOGIN / WALLET */
-
-.top-account-area{
-    display:flex;
-    align-items:center;
-    justify-content:flex-end;
-
-    min-width:130px;
-    min-height:40px;
-}
-
-
-.top-login-button,
-.top-wallet-button{
-    height:40px;
-
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-
-    gap:8px;
-
-    padding:0 14px;
-
-    border-radius:20px;
-
-    text-decoration:none;
-
-    font-family:'Poppins',sans-serif;
-    font-size:13px;
-    font-weight:700;
-
-    white-space:nowrap;
-
-    cursor:pointer;
-
-    transition:
-    transform .18s ease,
-    box-shadow .18s ease;
-}
-
-
-.top-login-button{
-    color:#ffffff;
-
-    background:
-    linear-gradient(
-        135deg,
-        #2563eb,
-        #7c3aed
-    );
-
-    border:
-    1px solid rgba(255,255,255,.16);
-
-    box-shadow:
-    0 7px 22px rgba(79,70,229,.28);
-}
-
-
-.top-wallet-button{
-    color:#ffffff;
-
-    background:
-    linear-gradient(
-        135deg,
-        #16a34a,
-        #059669
-    );
-
-    border:
-    1px solid rgba(255,255,255,.16);
-
-    box-shadow:
-    0 7px 22px rgba(16,185,129,.25);
-}
-
-
-.top-login-button:hover,
-.top-wallet-button:hover{
-    transform:translateY(-1px);
-}
-
-
-.top-wallet-balance{
-    font-weight:800;
-}
-
-
-.top-account-loading{
-    min-height:40px;
-
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-
-    gap:8px;
-
-    padding:0 13px;
-
-    border-radius:20px;
-
-    color:#cbd5e1;
-
-    background:
-    rgba(255,255,255,.07);
-
-    border:
-    1px solid rgba(255,255,255,.10);
-
-    font-size:12px;
-    font-weight:600;
-}
-
-
 @media(max-width:600px){
 
     body{
@@ -295,34 +182,9 @@ body{
 
     .top-header{
         min-height:64px;
+        padding-right:125px !important;
     }
 
-    .top-account-area{
-        min-width:auto;
-    }
-
-    .top-login-button,
-    .top-wallet-button{
-        height:36px;
-
-        padding:0 11px;
-
-        border-radius:18px;
-
-        font-size:11px;
-
-        gap:6px;
-    }
-
-    .top-wallet-button .wallet-word{
-        display:none;
-    }
-
-    .top-account-loading{
-        min-height:36px;
-        padding:0 10px;
-        font-size:11px;
-    }
 }
 
 </style>
@@ -398,8 +260,6 @@ body{
     <div class="brand">
 
 
-        <!-- OFFICIAL COMPANY LOGO -->
-
         <div class="brand-icon">
 
             <img
@@ -424,21 +284,6 @@ body{
 
 
     </div>
-
-
-    <div
-        id="topAccountArea"
-        class="top-account-area"
-        aria-live="polite"
-    >
-
-        <div class="top-account-loading">
-            <i class="fa-solid fa-circle-notch fa-spin"></i>
-            CHECKING
-        </div>
-
-    </div>
-
 
 </header>
 
@@ -561,8 +406,6 @@ body{
     </div>
 
 
-
-    <!-- FREE FIRE CHARACTER -->
 
     <div class="hero-character">
 
@@ -1034,318 +877,6 @@ body{
 
 
 <!-- ==================================================
-     PUBLIC HOME + LOGIN / LIVE WALLET
-================================================== -->
-
-<script type="module">
-
-import {
-    initializeApp,
-    getApps,
-    getApp
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-
-import {
-    getAuth,
-    onAuthStateChanged
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-
-const firebaseConfig = {
-
-    apiKey:
-    "AIzaSyCd_2LplLOl4TOGjbWQqndwHNGzPh2PEHM",
-
-    authDomain:
-    "zyper-d-iamond-store.firebaseapp.com",
-
-    projectId:
-    "zyper-d-iamond-store",
-
-    storageBucket:
-    "zyper-d-iamond-store.firebasestorage.app",
-
-    messagingSenderId:
-    "892467477866",
-
-    appId:
-    "1:892467477866:web:61e9b6ff9435798da23913",
-
-    measurementId:
-    "G-RLJFR6F2GC"
-};
-
-
-const WORKER_URL =
-    "https://zyper-order.ameresh20112011.workers.dev";
-
-
-const app =
-    getApps().length
-    ?
-    getApp()
-    :
-    initializeApp(
-        firebaseConfig
-    );
-
-
-const auth =
-    getAuth(
-        app
-    );
-
-
-const topAccountArea =
-    document.getElementById(
-        "topAccountArea"
-    );
-
-
-window.zyperCurrentUser =
-    null;
-
-
-function showLoginButton(){
-
-    if(!topAccountArea){
-        return;
-    }
-
-
-    topAccountArea.innerHTML = `
-
-        <a
-            class="top-login-button"
-            href="./index.html"
-            aria-label="Login to Zyper"
-        >
-
-            <i class="fa-solid fa-right-to-bracket"></i>
-
-            LOGIN
-
-        </a>
-
-    `;
-}
-
-
-function showWalletButton(
-    balanceText
-){
-
-    if(!topAccountArea){
-        return;
-    }
-
-
-    topAccountArea.innerHTML = `
-
-        <a
-            class="top-wallet-button"
-            href="./wallet.html"
-            aria-label="Open Zyper Wallet"
-        >
-
-            <i class="fa-solid fa-wallet"></i>
-
-            <span class="wallet-word">
-                WALLET
-            </span>
-
-            <span class="top-wallet-balance">
-                ${balanceText}
-            </span>
-
-        </a>
-
-    `;
-}
-
-
-function formatMoney(value){
-
-    const number =
-        Number(
-            value || 0
-        );
-
-
-    if(
-        !Number.isFinite(
-            number
-        )
-    ){
-        return "LKR 0";
-    }
-
-
-    return (
-        "LKR " +
-        number.toLocaleString(
-            "en-LK",
-            {
-                maximumFractionDigits:2
-            }
-        )
-    );
-}
-
-
-async function loadTopWallet(
-    user
-){
-
-    showWalletButton(
-        "..."
-    );
-
-
-    try{
-
-        const token =
-            await user.getIdToken();
-
-
-        const response =
-            await fetch(
-                WORKER_URL,
-                {
-                    method:
-                        "POST",
-
-                    headers:{
-                        "Content-Type":
-                            "application/json",
-
-                        "Authorization":
-                            "Bearer " +
-                            token
-                    },
-
-                    body:
-                        JSON.stringify({
-                            action:
-                                "wallet_balance"
-                        })
-                }
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if(
-            !response.ok
-            ||
-            !data
-            ||
-            data.success === false
-        ){
-
-            throw new Error(
-                data?.message ||
-                "Wallet unavailable."
-            );
-        }
-
-
-        const wallet =
-            data.wallet ||
-            {};
-
-
-        const balance =
-            wallet.availableBalance ??
-            wallet.balance ??
-            0;
-
-
-        showWalletButton(
-            formatMoney(
-                balance
-            )
-        );
-
-    }
-    catch(error){
-
-        console.error(
-            "Top wallet error:",
-            error
-        );
-
-
-        showWalletButton(
-            "WALLET"
-        );
-    }
-}
-
-
-onAuthStateChanged(
-    auth,
-    async function(user){
-
-        window.zyperCurrentUser =
-            user || null;
-
-
-        if(!user){
-
-            /*
-             HOME IS PUBLIC.
-             Do not redirect guest to login.
-            */
-
-            showLoginButton();
-
-            return;
-        }
-
-
-        await loadTopWallet(
-            user
-        );
-    }
-);
-
-
-/*
- Guest protected-page helper:
- Wallet / History require login.
-*/
-
-window.zyperOpenProtected =
-    function(page){
-
-        if(
-            window.zyperCurrentUser
-        ){
-
-            window.location.href =
-                page;
-
-            return;
-        }
-
-
-        window.location.href =
-            "./index.html";
-    };
-
-</script>
-
-
-
-<!-- ==================================================
      PAGE FUNCTIONS
 ================================================== -->
 
@@ -1361,21 +892,8 @@ function goTopup() {
 
 function goWallet() {
 
-    if(
-        typeof window.zyperOpenProtected ===
-        "function"
-    ){
-
-        window.zyperOpenProtected(
-            "wallet.html"
-        );
-
-        return;
-    }
-
-
     window.location.href =
-        "index.html";
+        "wallet.html";
 
 }
 
@@ -1390,21 +908,8 @@ function goPayment() {
 
 function goHistory() {
 
-    if(
-        typeof window.zyperOpenProtected ===
-        "function"
-    ){
-
-        window.zyperOpenProtected(
-            "history.html"
-        );
-
-        return;
-    }
-
-
     window.location.href =
-        "index.html";
+        "history.html";
 
 }
 
@@ -1421,11 +926,23 @@ function goWhatsApp() {
 
 
 <!-- ==================================================
+     SHARED WALLET / LOGIN CONTROL
+================================================== -->
+
+<script
+type="module"
+src="./zyper-wallet-badge.js?v=4000"
+>
+</script>
+
+
+
+<!-- ==================================================
      NAVIGATION
 ================================================== -->
 
 <script
-    src="./zyper-nav.js?v=2005"
+src="./zyper-nav.js?v=2005"
 >
 </script>
 
@@ -1436,7 +953,7 @@ function goWhatsApp() {
 ================================================== -->
 
 <script
-    src="./home.js?v=2005"
+src="./home.js?v=2005"
 >
 </script>
 
