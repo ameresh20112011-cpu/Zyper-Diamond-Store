@@ -19,18 +19,13 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 <style>
 
 /* ==================================================
-   LOGIN HEADER
+   HEADER
 ================================================== */
 
 .login-header{
     text-align:center;
     margin-bottom:28px;
 }
-
-
-/* ==================================================
-   LOGO
-================================================== */
 
 .company-logo{
     width:76px !important;
@@ -52,36 +47,27 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     align-items:center !important;
     justify-content:center !important;
 
-    background:#ffffff;
+    background:#fff;
 
     box-shadow:
-    0 8px 25px
-    rgba(0,0,0,.20);
+    0 8px 25px rgba(0,0,0,.20);
 }
-
 
 .company-logo img{
     width:100% !important;
     height:100% !important;
 
     display:block !important;
-
     object-fit:cover !important;
 
     border-radius:50% !important;
 }
-
-
-/* ==================================================
-   BRAND
-================================================== */
 
 .brand-name{
     margin:0;
     font-size:24px;
     font-weight:800;
 }
-
 
 .brand-subtitle{
     margin:7px 0 0;
@@ -98,24 +84,18 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     position:relative;
 }
 
-
 .password-group input{
     padding-right:58px !important;
 }
 
-
-/* ==================================================
-   PASSWORD EYE
-================================================== */
-
 .password-toggle{
+
     position:absolute;
 
     right:7px;
     top:50%;
 
-    transform:
-    translateY(-50%);
+    transform:translateY(-50%);
 
     width:44px;
     height:44px;
@@ -141,20 +121,15 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 
     touch-action:manipulation;
 
-    -webkit-tap-highlight-color:
-    transparent;
+    -webkit-tap-highlight-color:transparent;
 
     user-select:none;
     -webkit-user-select:none;
 }
 
-
 .password-toggle:active{
-    transform:
-    translateY(-50%)
-    scale(.90);
+    transform:translateY(-50%) scale(.90);
 }
-
 
 .password-toggle svg{
     width:21px;
@@ -168,6 +143,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 ================================================== */
 
 .login-status{
+
     display:none;
 
     text-align:center;
@@ -188,33 +164,31 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 ================================================== */
 
 .google-divider{
+
     display:flex;
 
     align-items:center;
 
     gap:12px;
 
-    margin:
-    8px 0 16px;
+    margin:8px 0 16px;
 
-    color:
-    rgba(255,255,255,.55);
+    color:rgba(255,255,255,.55);
 
     font-size:12px;
     font-weight:600;
 }
 
-
 .google-divider::before,
 .google-divider::after{
+
     content:"";
 
     flex:1;
 
     height:1px;
 
-    background:
-    rgba(255,255,255,.12);
+    background:rgba(255,255,255,.12);
 }
 
 
@@ -223,6 +197,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 ================================================== */
 
 .google-login-button{
+
     width:100%;
 
     min-height:52px;
@@ -250,45 +225,33 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     gap:11px;
 
     box-shadow:
-    0 8px 22px
-    rgba(0,0,0,.12);
+    0 8px 22px rgba(0,0,0,.12);
 
     touch-action:manipulation;
 
-    -webkit-tap-highlight-color:
-    transparent;
+    -webkit-tap-highlight-color:transparent;
 }
-
 
 .google-login-button:active{
-    transform:
-    scale(.985);
+    transform:scale(.985);
 }
-
 
 .google-login-button:disabled{
     opacity:.72;
     cursor:not-allowed;
 }
 
-
 .google-login-button svg{
     width:20px;
     height:20px;
-
-    flex:
-    0 0 20px;
+    flex:0 0 20px;
 }
 
 
-/*
-   Bigger space between
-   Google and Create Account
-*/
+/* MORE GAP GOOGLE -> CREATE ACCOUNT */
 
 .signup-link{
-    margin-top:
-    30px !important;
+    margin-top:30px !important;
 }
 
 
@@ -299,6 +262,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 @media(max-width:500px){
 
     .company-logo{
+
         width:68px !important;
         height:68px !important;
 
@@ -309,30 +273,19 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         max-height:68px !important;
     }
 
-
     .brand-name{
         font-size:21px;
     }
 
-
-    /*
-       Prevent iPhone Safari
-       automatic input zoom
-    */
-
     input{
-        font-size:
-        16px !important;
+        font-size:16px !important;
     }
-
 
     .password-toggle{
         width:46px;
         height:46px;
-
         right:4px;
     }
-
 
     .google-login-button{
         min-height:52px;
@@ -354,9 +307,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 <div class="login-card">
 
 
-<!-- ==================================================
-     HEADER
-================================================== -->
+<!-- HEADER -->
 
 <div class="login-header">
 
@@ -383,9 +334,7 @@ Welcome back! Sign in to continue
 
 
 
-<!-- ==================================================
-     LOGIN FORM
-================================================== -->
+<!-- LOGIN FORM -->
 
 <form
 id="loginForm"
@@ -424,9 +373,7 @@ Email Address
 
 <div class="form-group">
 
-<div
-class="input-group neu-input password-group"
->
+<div class="input-group neu-input password-group">
 
 <input
 type="password"
@@ -451,8 +398,6 @@ aria-pressed="false"
 >
 
 
-<!-- EYE OPEN -->
-
 <svg
 id="eyeOpen"
 viewBox="0 0 24 24"
@@ -475,8 +420,6 @@ r="3"
 
 </svg>
 
-
-<!-- EYE CLOSED -->
 
 <svg
 id="eyeClosed"
@@ -523,9 +466,7 @@ d="M17.29 17.29C20.07 15.5 22 12 22 12s-4-8-10-8c-.72 0-1.41.09-2.06.24"
 
 
 
-<!-- ==================================================
-     OPTIONS
-================================================== -->
+<!-- OPTIONS -->
 
 <div class="form-options">
 
@@ -586,9 +527,7 @@ Forgot password?
 
 
 
-<!-- ==================================================
-     SIGN IN
-================================================== -->
+<!-- SIGN IN -->
 
 <button
 type="submit"
@@ -604,7 +543,9 @@ Sign In
 id="loginLoading"
 style="display:none;"
 >
+
 Signing in...
+
 </span>
 
 </button>
@@ -624,9 +565,7 @@ aria-live="polite"
 
 
 
-<!-- ==================================================
-     OR
-================================================== -->
+<!-- OR -->
 
 <div class="google-divider">
 
@@ -638,9 +577,7 @@ OR
 
 
 
-<!-- ==================================================
-     CONTINUE WITH GOOGLE
-================================================== -->
+<!-- GOOGLE LOGIN -->
 
 <button
 type="button"
@@ -686,9 +623,7 @@ Continue with Google
 
 
 
-<!-- ==================================================
-     CREATE ACCOUNT
-================================================== -->
+<!-- CREATE ACCOUNT -->
 
 <div class="signup-link">
 
@@ -711,23 +646,18 @@ Create Account
 
 
 
-<!-- ==================================================
-     FIREBASE
-================================================== -->
-
 <script type="module">
 
 
 /* ==================================================
-   SHARED FIREBASE
+   FIREBASE
 ================================================== */
 
 import {
     auth,
     db
 }
-from
-"./firebase.js";
+from "./firebase.js";
 
 
 import {
@@ -746,9 +676,7 @@ import {
 
     signInWithPopup,
 
-    signOut,
-
-    sendEmailVerification
+    signOut
 
 }
 from
@@ -772,210 +700,47 @@ from
 
 
 /* ==================================================
-   GOOGLE USER -> FIRESTORE
-================================================== */
-
-async function saveGoogleUserToFirestore(
-    user
-){
-
-    if(!user){
-
-        throw new Error(
-            "Google user is missing."
-        );
-
-    }
-
-
-    const userRef =
-        doc(
-            db,
-            "users",
-            user.uid
-        );
-
-
-    const userSnapshot =
-        await getDoc(
-            userRef
-        );
-
-
-    /*
-       FIRST GOOGLE LOGIN
-    */
-
-    if(
-        !userSnapshot.exists()
-    ){
-
-        await setDoc(
-            userRef,
-            {
-
-                uid:
-                    user.uid,
-
-                email:
-                    user.email || "",
-
-                name:
-                    user.displayName || "",
-
-                username:
-                    user.displayName || "",
-
-                photoURL:
-                    user.photoURL || "",
-
-                provider:
-                    "google",
-
-                role:
-                    "customer",
-
-                emailVerified:
-                    true,
-
-                createdAt:
-                    serverTimestamp(),
-
-                lastLoginAt:
-                    serverTimestamp()
-
-            }
-        );
-
-    }
-
-    else{
-
-        /*
-           EXISTING USER
-           DO NOT CHANGE ROLE
-        */
-
-        await setDoc(
-            userRef,
-            {
-
-                uid:
-                    user.uid,
-
-                email:
-                    user.email || "",
-
-                name:
-                    user.displayName || "",
-
-                username:
-                    user.displayName || "",
-
-                photoURL:
-                    user.photoURL || "",
-
-                provider:
-                    "google",
-
-                emailVerified:
-                    true,
-
-                lastLoginAt:
-                    serverTimestamp()
-
-            },
-            {
-                merge:true
-            }
-        );
-
-    }
-
-}
-
-
-
-/* ==================================================
    ELEMENTS
 ================================================== */
 
 const loginForm =
-document.getElementById(
-    "loginForm"
-);
-
+document.getElementById("loginForm");
 
 const emailInput =
-document.getElementById(
-    "email"
-);
-
+document.getElementById("email");
 
 const passwordInput =
-document.getElementById(
-    "password"
-);
-
+document.getElementById("password");
 
 const passwordToggle =
-document.getElementById(
-    "passwordToggle"
-);
-
+document.getElementById("passwordToggle");
 
 const eyeOpen =
-document.getElementById(
-    "eyeOpen"
-);
-
+document.getElementById("eyeOpen");
 
 const eyeClosed =
-document.getElementById(
-    "eyeClosed"
-);
-
+document.getElementById("eyeClosed");
 
 const rememberInput =
-document.getElementById(
-    "remember"
-);
-
+document.getElementById("remember");
 
 const loginButton =
-document.getElementById(
-    "loginButton"
-);
-
+document.getElementById("loginButton");
 
 const loginText =
-document.getElementById(
-    "loginText"
-);
-
+document.getElementById("loginText");
 
 const loginLoading =
-document.getElementById(
-    "loginLoading"
-);
-
+document.getElementById("loginLoading");
 
 const loginStatus =
-document.getElementById(
-    "loginStatus"
-);
-
+document.getElementById("loginStatus");
 
 const googleLoginButton =
-document.getElementById(
-    "googleLoginButton"
-);
-
+document.getElementById("googleLoginButton");
 
 const googleLoginText =
-document.getElementById(
-    "googleLoginText"
-);
+document.getElementById("googleLoginText");
 
 
 let loginInProgress =
@@ -1000,10 +765,7 @@ function showStatus(
     message;
 
 
-    if(
-        type ===
-        "success"
-    ){
+    if(type === "success"){
 
         loginStatus.style.color =
         "#4ade80";
@@ -1034,7 +796,6 @@ function clearStatus(){
     loginStatus.style.display =
     "none";
 
-
     loginStatus.textContent =
     "";
 
@@ -1043,7 +804,7 @@ function clearStatus(){
 
 
 /* ==================================================
-   SIGN IN BUTTON LOADING
+   LOADING
 ================================================== */
 
 function setLoading(
@@ -1080,8 +841,7 @@ function setLoading(
 function togglePassword(){
 
     const hidden =
-        passwordInput.type ===
-        "password";
+    passwordInput.type === "password";
 
 
     if(hidden){
@@ -1143,23 +903,18 @@ function togglePassword(){
 
 
 passwordToggle.addEventListener(
-
     "pointerdown",
-
     function(event){
 
         event.preventDefault();
 
     }
-
 );
 
 
 
 passwordToggle.addEventListener(
-
     "click",
-
     function(event){
 
         event.preventDefault();
@@ -1175,8 +930,181 @@ passwordToggle.addEventListener(
         });
 
     }
-
 );
+
+
+
+/* ==================================================
+   CHECK PASSWORD ACCOUNT OTP STATUS
+================================================== */
+
+async function checkOtpVerified(
+    user
+){
+
+    try{
+
+        const userRef =
+        doc(
+            db,
+            "users",
+            user.uid
+        );
+
+
+        const userSnap =
+        await getDoc(
+            userRef
+        );
+
+
+        if(!userSnap.exists()){
+
+            return false;
+
+        }
+
+
+        const userData =
+        userSnap.data();
+
+
+        return (
+            userData.otpVerified === true
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            "OTP STATUS CHECK ERROR:",
+            error
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+
+/* ==================================================
+   SAVE GOOGLE USER
+================================================== */
+
+async function saveGoogleUserToFirestore(
+    user
+){
+
+    if(!user){
+
+        throw new Error(
+            "Google user is missing."
+        );
+
+    }
+
+
+    const userRef =
+    doc(
+        db,
+        "users",
+        user.uid
+    );
+
+
+    const userSnapshot =
+    await getDoc(
+        userRef
+    );
+
+
+    /* FIRST LOGIN */
+
+    if(!userSnapshot.exists()){
+
+        await setDoc(
+            userRef,
+            {
+
+                uid:
+                user.uid,
+
+                email:
+                user.email || "",
+
+                name:
+                user.displayName || "",
+
+                username:
+                user.displayName || "",
+
+                photoURL:
+                user.photoURL || "",
+
+                provider:
+                "google",
+
+                role:
+                "customer",
+
+                otpVerified:
+                true,
+
+                createdAt:
+                serverTimestamp(),
+
+                lastLoginAt:
+                serverTimestamp()
+
+            }
+        );
+
+    }
+
+    else{
+
+        /*
+           DO NOT OVERWRITE ROLE
+        */
+
+        await setDoc(
+            userRef,
+            {
+
+                uid:
+                user.uid,
+
+                email:
+                user.email || "",
+
+                name:
+                user.displayName || "",
+
+                username:
+                user.displayName || "",
+
+                photoURL:
+                user.photoURL || "",
+
+                provider:
+                "google",
+
+                lastLoginAt:
+                serverTimestamp()
+
+            },
+            {
+                merge:true
+            }
+        );
+
+    }
+
+}
 
 
 
@@ -1193,8 +1121,7 @@ onAuthStateChanged(
 
 
         if(
-            !user
-            ||
+            !user ||
             loginInProgress
         ){
 
@@ -1203,47 +1130,59 @@ onAuthStateChanged(
         }
 
 
+        /*
+           CHECK PROVIDER
+        */
+
         const passwordUser =
+        user.providerData.some(
+            function(provider){
 
-            user
-            .providerData
-            .some(
-                function(provider){
+                return (
+                    provider.providerId ===
+                    "password"
+                );
 
-                    return (
-                        provider.providerId ===
-                        "password"
-                    );
-
-                }
-            );
+            }
+        );
 
 
         /*
-           Email + Password user
-           must verify email first.
+           PASSWORD USER MUST HAVE
+           otpVerified:true
         */
 
-        if(
-            passwordUser
-            &&
-            !user.emailVerified
-        ){
+        if(passwordUser){
 
-            await signOut(
-                auth
+            const verified =
+            await checkOtpVerified(
+                user
             );
 
 
-            showStatus(
-                "Please verify your email first, then sign in."
-            );
+            if(!verified){
+
+                await signOut(
+                    auth
+                );
 
 
-            return;
+                showStatus(
+                    "Please verify your email OTP first."
+                );
+
+
+                return;
+
+            }
 
         }
 
+
+        /*
+           VERIFIED / GOOGLE USER
+           GO HOME
+        */
 
         window.location.replace(
             "./home.html"
@@ -1263,8 +1202,7 @@ const googleProvider =
 new GoogleAuthProvider();
 
 
-googleProvider
-.setCustomParameters({
+googleProvider.setCustomParameters({
 
     prompt:
     "select_account"
@@ -1277,226 +1215,207 @@ googleProvider
    GOOGLE LOGIN
 ================================================== */
 
-if(googleLoginButton){
+googleLoginButton.addEventListener(
 
-    googleLoginButton
-    .addEventListener(
+    "click",
 
-        "click",
+    async function(){
 
-        async function(){
 
+        if(loginInProgress){
 
-            if(loginInProgress){
-
-                return;
-
-            }
-
-
-            clearStatus();
-
-
-            loginInProgress =
-            true;
-
-
-            googleLoginButton.disabled =
-            true;
-
-
-            googleLoginText.textContent =
-            "Connecting...";
-
-
-            try{
-
-
-                /*
-                   SAME REMEMBER SETTING
-                   FOR GOOGLE LOGIN
-                */
-
-                if(
-                    rememberInput.checked
-                ){
-
-                    await setPersistence(
-                        auth,
-                        browserLocalPersistence
-                    );
-
-                }
-
-                else{
-
-                    await setPersistence(
-                        auth,
-                        browserSessionPersistence
-                    );
-
-                }
-
-
-
-                /*
-                   GOOGLE SIGN IN
-                */
-
-                const result =
-                await signInWithPopup(
-                    auth,
-                    googleProvider
-                );
-
-
-                if(!result.user){
-
-                    throw new Error(
-                        "Google login session was not created."
-                    );
-
-                }
-
-
-
-                /*
-                   SAVE GOOGLE USER
-                   IN FIRESTORE users/{uid}
-                */
-
-                await saveGoogleUserToFirestore(
-                    result.user
-                );
-
-
-
-                /*
-                   CREATE FRESH FIREBASE TOKEN
-                */
-
-                await result.user
-                .getIdToken(
-                    true
-                );
-
-
-
-                showStatus(
-                    "Google login successful ✓",
-                    "success"
-                );
-
-
-                setTimeout(
-                    function(){
-
-                        window.location.replace(
-                            "./home.html"
-                        );
-
-                    },
-                    250
-                );
-
-
-            }
-
-            catch(error){
-
-
-                console.error(
-                    "GOOGLE LOGIN ERROR:",
-                    error
-                );
-
-
-                loginInProgress =
-                false;
-
-
-                googleLoginButton.disabled =
-                false;
-
-
-                googleLoginText.textContent =
-                "Continue with Google";
-
-
-                let message =
-                "Google login failed. Please try again.";
-
-
-
-                if(
-                    error.code ===
-                    "auth/popup-closed-by-user"
-                    ||
-                    error.code ===
-                    "auth/cancelled-popup-request"
-                ){
-
-                    message =
-                    "Google sign in was cancelled.";
-
-                }
-
-
-                else if(
-                    error.code ===
-                    "auth/popup-blocked"
-                ){
-
-                    message =
-                    "Google sign in popup was blocked. Please allow popups and try again.";
-
-                }
-
-
-                else if(
-                    error.code ===
-                    "auth/account-exists-with-different-credential"
-                ){
-
-                    message =
-                    "This email already has another login method. Please use your existing login method.";
-
-                }
-
-
-                else if(
-                    error.code ===
-                    "auth/unauthorized-domain"
-                ){
-
-                    message =
-                    "This website domain is not authorized for Google login.";
-
-                }
-
-
-                else if(
-                    error.code ===
-                    "auth/network-request-failed"
-                ){
-
-                    message =
-                    "Network error. Check your internet connection.";
-
-                }
-
-
-                showStatus(
-                    message
-                );
-
-            }
+            return;
 
         }
 
-    );
 
-}
+        clearStatus();
+
+
+        loginInProgress =
+        true;
+
+
+        googleLoginButton.disabled =
+        true;
+
+
+        googleLoginText.textContent =
+        "Connecting...";
+
+
+        try{
+
+
+            /* PERSISTENCE */
+
+            if(rememberInput.checked){
+
+                await setPersistence(
+                    auth,
+                    browserLocalPersistence
+                );
+
+            }
+
+            else{
+
+                await setPersistence(
+                    auth,
+                    browserSessionPersistence
+                );
+
+            }
+
+
+
+            /* GOOGLE LOGIN */
+
+            const result =
+            await signInWithPopup(
+                auth,
+                googleProvider
+            );
+
+
+            if(!result.user){
+
+                throw new Error(
+                    "Google login session was not created."
+                );
+
+            }
+
+
+
+            /* SAVE FIRESTORE USER */
+
+            await saveGoogleUserToFirestore(
+                result.user
+            );
+
+
+
+            /* REFRESH TOKEN */
+
+            await result.user.getIdToken(
+                true
+            );
+
+
+
+            showStatus(
+                "Google login successful ✓",
+                "success"
+            );
+
+
+            setTimeout(
+                function(){
+
+                    window.location.replace(
+                        "./home.html"
+                    );
+
+                },
+                250
+            );
+
+
+        }
+
+        catch(error){
+
+
+            console.error(
+                "GOOGLE LOGIN ERROR:",
+                error
+            );
+
+
+            loginInProgress =
+            false;
+
+
+            googleLoginButton.disabled =
+            false;
+
+
+            googleLoginText.textContent =
+            "Continue with Google";
+
+
+            let message =
+            "Google login failed. Please try again.";
+
+
+
+            if(
+                error.code ===
+                "auth/popup-closed-by-user" ||
+                error.code ===
+                "auth/cancelled-popup-request"
+            ){
+
+                message =
+                "Google sign in was cancelled.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/popup-blocked"
+            ){
+
+                message =
+                "Google sign in popup was blocked. Please allow popups and try again.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/account-exists-with-different-credential"
+            ){
+
+                message =
+                "This email already has another login method. Please use your existing login method.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/unauthorized-domain"
+            ){
+
+                message =
+                "This website domain is not authorized for Google login.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/network-request-failed"
+            ){
+
+                message =
+                "Network error. Check your internet connection.";
+
+            }
+
+
+            showStatus(
+                message
+            );
+
+        }
+
+    }
+
+);
 
 
 
@@ -1518,14 +1437,11 @@ loginForm.addEventListener(
 
 
         const email =
-        emailInput
-        .value
-        .trim();
+        emailInput.value.trim();
 
 
         const password =
-        passwordInput
-        .value;
+        passwordInput.value;
 
 
 
@@ -1562,6 +1478,7 @@ loginForm.addEventListener(
         }
 
 
+
         loginInProgress =
         true;
 
@@ -1574,13 +1491,9 @@ loginForm.addEventListener(
         try{
 
 
-            /* ==================================================
-               REMEMBER ME
-            ================================================== */
+            /* PERSISTENCE */
 
-            if(
-                rememberInput.checked
-            ){
+            if(rememberInput.checked){
 
                 await setPersistence(
                     auth,
@@ -1600,19 +1513,13 @@ loginForm.addEventListener(
 
 
 
-            /* ==================================================
-               FIREBASE LOGIN
-            ================================================== */
+            /* FIREBASE LOGIN */
 
             const result =
             await signInWithEmailAndPassword(
-
                 auth,
-
                 email,
-
                 password
-
             );
 
 
@@ -1627,73 +1534,16 @@ loginForm.addEventListener(
 
 
             /* ==================================================
-               CHECK LOGIN PROVIDER
+               CHECK OTP VERIFIED IN FIRESTORE
             ================================================== */
 
-            const passwordUser =
-
-            result.user
-            .providerData
-            .some(
-
-                function(provider){
-
-                    return (
-                        provider.providerId ===
-                        "password"
-                    );
-
-                }
-
+            const verified =
+            await checkOtpVerified(
+                result.user
             );
 
 
-
-            /* ==================================================
-               EMAIL NOT VERIFIED
-            ================================================== */
-
-            if(
-                passwordUser
-                &&
-                !result.user.emailVerified
-            ){
-
-                /*
-                   Send verification again
-                   when customer tries login.
-                */
-
-                try{
-
-                    await sendEmailVerification(
-
-                        result.user,
-
-                        {
-                            url:
-                            new URL(
-                                "./index.html",
-                                window.location.href
-                            ).href
-                        }
-
-                    );
-
-                }
-
-                catch(
-                    verificationError
-                ){
-
-                    console.warn(
-                        "Verification email resend failed:",
-                        verificationError
-                    );
-
-                }
-
-
+            if(!verified){
 
                 await signOut(
                     auth
@@ -1710,7 +1560,7 @@ loginForm.addEventListener(
 
 
                 showStatus(
-                    "Your email is not verified. We sent a verification email. Open Gmail, verify it, then sign in again."
+                    "This account has not completed email OTP verification."
                 );
 
 
@@ -1721,44 +1571,34 @@ loginForm.addEventListener(
 
 
             /* ==================================================
-               UPDATE FIRESTORE
+               UPDATE LAST LOGIN
             ================================================== */
 
             await setDoc(
-
                 doc(
                     db,
                     "users",
                     result.user.uid
                 ),
-
                 {
 
                     email:
-                        result.user.email || email,
-
-                    emailVerified:
-                        true,
+                    result.user.email || email,
 
                     lastLoginAt:
-                        serverTimestamp()
+                    serverTimestamp()
 
                 },
-
                 {
                     merge:true
                 }
-
             );
 
 
 
-            /* ==================================================
-               REFRESH TOKEN
-            ================================================== */
+            /* REFRESH TOKEN */
 
-            await result.user
-            .getIdToken(
+            await result.user.getIdToken(
                 true
             );
 
@@ -1771,12 +1611,7 @@ loginForm.addEventListener(
 
 
 
-            /* ==================================================
-               HOME
-            ================================================== */
-
             setTimeout(
-
                 function(){
 
                     window.location.replace(
@@ -1784,9 +1619,7 @@ loginForm.addEventListener(
                     );
 
                 },
-
                 350
-
             );
 
 
@@ -1817,8 +1650,7 @@ loginForm.addEventListener(
 
             if(
                 error.code ===
-                "auth/invalid-credential"
-                ||
+                "auth/invalid-credential" ||
                 error.code ===
                 "auth/wrong-password"
             ){
@@ -1886,7 +1718,7 @@ loginForm.addEventListener(
 
 
 /* ==================================================
-   CLEAR ERROR WHEN TYPING
+   CLEAR STATUS
 ================================================== */
 
 emailInput.addEventListener(
