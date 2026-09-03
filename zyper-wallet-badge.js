@@ -1,15 +1,21 @@
 /* =========================================================
-   ZYPER DIAMOND STORE
-   SHARED LOGIN / LIVE WALLET BADGE
-   RESPONSIVE: PC + ANDROID + IPHONE + TABLET
+   ZYPER LOGIN / LIVE WALLET BADGE
+
+   GUEST:
+   LOGIN
+
+   LOGGED IN:
+   LIVE WALLET BALANCE
 ========================================================= */
 
-import { auth }
+import {
+    auth
+}
 from "./firebase.js";
 
 
 import {
-  onAuthStateChanged
+    onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -23,14 +29,6 @@ const BADGE_ID =
 "zyperWalletBadge";
 
 
-const STYLE_ID =
-"zyperWalletBadgeStyle";
-
-
-const TOPBAR_SLOT_ID =
-"zyperTopbarAction";
-
-
 let badge =
 null;
 
@@ -39,1003 +37,533 @@ null;
    STYLE
 ===================================================== */
 
-function ensureStyle(){
+function addStyle(){
 
-  if(
-    document.getElementById(
-      STYLE_ID
-    )
-  ){
+    if(
+        document.getElementById(
+            "zyperWalletBadgeStyle"
+        )
+    ){
 
-    return;
+        return;
 
-  }
-
-
-  const style =
-  document.createElement(
-    "style"
-  );
+    }
 
 
-  style.id =
-  STYLE_ID;
+    const style =
+        document.createElement(
+            "style"
+        );
 
 
-  style.textContent = `
+    style.id =
+        "zyperWalletBadgeStyle";
 
-#${BADGE_ID}{
 
-  position:
-  relative !important;
+    style.textContent = `
 
-  inset:
-  auto !important;
+#zyperWalletBadge{
 
-  display:
-  inline-flex !important;
+    height:42px;
 
-  align-items:
-  center !important;
+    min-width:110px;
 
-  justify-content:
-  center !important;
+    max-width:180px;
 
-  min-width:
-  0 !important;
+    padding:0 15px;
 
-  max-width:
-  100% !important;
+    display:inline-flex;
 
-  height:
-  40px !important;
+    align-items:center;
 
-  gap:
-  7px !important;
+    justify-content:center;
 
-  padding:
-  0 14px !important;
+    gap:8px;
 
-  border-radius:
-  999px !important;
+    border-radius:24px;
 
-  border:
-  1px solid
-  rgba(255,255,255,.14)
-  !important;
+    color:#ffffff;
 
-  color:
-  #ffffff !important;
+    text-decoration:none;
 
-  text-decoration:
-  none !important;
+    font-family:
+    "Poppins",
+    Arial,
+    sans-serif;
 
-  font-family:
-  "Poppins",
-  Arial,
-  sans-serif
-  !important;
+    font-size:13px;
 
-  font-size:
-  12px !important;
+    font-weight:700;
 
-  font-weight:
-  800 !important;
+    white-space:nowrap;
 
-  line-height:
-  1 !important;
+    background:
 
-  white-space:
-  nowrap !important;
+    linear-gradient(
+        135deg,
+        #2876ff,
+        #7c3aed
+    );
 
-  background:
-  linear-gradient(
-    135deg,
-    #2563eb,
-    #7c3aed
-  ) !important;
+    border:
 
-  box-shadow:
-  0 8px 24px
-  rgba(79,70,229,.28)
-  !important;
+    1px solid
+    rgba(
+        255,
+        255,
+        255,
+        .15
+    );
 
-  cursor:
-  pointer !important;
+    box-shadow:
 
-  pointer-events:
-  auto !important;
+    0 8px 22px
+    rgba(
+        79,
+        70,
+        229,
+        .25
+    );
 
-  touch-action:
-  manipulation !important;
+    cursor:pointer;
 
-  -webkit-tap-highlight-color:
-  transparent !important;
+    pointer-events:auto;
 
-  -webkit-user-select:
-  none !important;
+    touch-action:manipulation;
 
-  user-select:
-  none !important;
-
-  z-index:
-  2 !important;
+    -webkit-tap-highlight-color:
+    transparent;
 
 }
 
 
-#${BADGE_ID}:active{
+#zyperWalletBadge:active{
 
-  transform:
-  scale(.97) !important;
-
-}
-
-
-#${BADGE_ID}
-.zyper-badge-icon{
-
-  width:
-  18px !important;
-
-  height:
-  18px !important;
-
-  min-width:
-  18px !important;
-
-  display:
-  inline-flex !important;
-
-  align-items:
-  center !important;
-
-  justify-content:
-  center !important;
-
-  flex:
-  0 0 auto !important;
+    transform:
+    scale(.96);
 
 }
 
 
-#${BADGE_ID}
-.zyper-badge-icon svg{
+.zyper-wallet-badge-icon{
 
-  width:
-  18px !important;
-
-  height:
-  18px !important;
-
-  display:
-  block !important;
+    font-size:18px;
 
 }
 
 
-#${BADGE_ID}
-.zyper-badge-text{
+.zyper-wallet-badge-text{
 
-  display:
-  block !important;
+    overflow:hidden;
 
-  min-width:
-  0 !important;
-
-  max-width:
-  150px !important;
-
-  overflow:
-  hidden !important;
-
-  text-overflow:
-  ellipsis !important;
-
-  color:
-  #ffffff !important;
+    text-overflow:ellipsis;
 
 }
 
-
-#${BADGE_ID}
-.zyper-badge-loading{
-
-  opacity:
-  .88 !important;
-
-}
-
-
-#${BADGE_ID}
-.zyper-badge-login{
-
-  background:
-  linear-gradient(
-    135deg,
-    #2563eb,
-    #7c3aed
-  ) !important;
-
-}
-
-
-#${BADGE_ID}
-.zyper-badge-wallet{
-
-  background:
-  linear-gradient(
-    135deg,
-    #2563eb,
-    #7c3aed
-  ) !important;
-
-}
-
-
-/* FALLBACK WHEN NO TOPBAR */
-
-body > #${BADGE_ID}{
-
-  position:
-  fixed !important;
-
-  top:
-  calc(
-    12px
-    +
-    env(
-      safe-area-inset-top,
-      0px
-    )
-  ) !important;
-
-  right:
-  calc(
-    12px
-    +
-    env(
-      safe-area-inset-right,
-      0px
-    )
-  ) !important;
-
-  z-index:
-  2147483600 !important;
-
-}
-
-
-/* =====================================================
-   PHONE / TABLET
-===================================================== */
-
-@media(max-width:768px){
-
-  #${BADGE_ID}{
-
-    height:
-    36px !important;
-
-    padding:
-    0 11px !important;
-
-    gap:
-    6px !important;
-
-    font-size:
-    11px !important;
-
-  }
-
-
-  #${BADGE_ID}
-  .zyper-badge-icon{
-
-    width:
-    16px !important;
-
-    height:
-    16px !important;
-
-    min-width:
-    16px !important;
-
-  }
-
-
-  #${BADGE_ID}
-  .zyper-badge-icon svg{
-
-    width:
-    16px !important;
-
-    height:
-    16px !important;
-
-  }
-
-
-  #${BADGE_ID}
-  .zyper-badge-text{
-
-    max-width:
-    116px !important;
-
-  }
-
-}
-
-
-/* =====================================================
-   SMALL PHONE
-===================================================== */
 
 @media(max-width:480px){
 
-  #${BADGE_ID}{
+    #zyperWalletBadge{
 
-    height:
-    34px !important;
+        height:38px;
 
-    padding:
-    0 9px !important;
+        min-width:100px;
 
-    gap:
-    5px !important;
+        max-width:145px;
 
-    font-size:
-    10px !important;
+        padding:0 12px;
 
-  }
+        font-size:12px;
+
+        border-radius:21px;
+
+    }
 
 
-  #${BADGE_ID}
-  .zyper-badge-text{
+    .zyper-wallet-badge-icon{
 
-    max-width:
-    100px !important;
+        font-size:16px;
 
-  }
+    }
 
 }
 
-
-/* =====================================================
-   VERY SMALL PHONE
-===================================================== */
 
 @media(max-width:360px){
 
-  #${BADGE_ID}{
+    #zyperWalletBadge{
 
-    padding:
-    0 8px !important;
+        min-width:88px;
 
-    font-size:
-    9px !important;
+        max-width:125px;
 
-  }
+        padding:0 9px;
 
-
-  #${BADGE_ID}
-  .zyper-badge-text{
-
-    max-width:
-    82px !important;
-
-  }
-
-}
-
-
-/* =====================================================
-   PHONE LANDSCAPE
-===================================================== */
-
-@media(
-  max-height:520px
-)
-and
-(
-  orientation:landscape
-){
-
-  #${BADGE_ID}{
-
-    height:
-    32px !important;
-
-    font-size:
-    10px !important;
-
-  }
-
-}
-
-  `;
-
-
-  document.head.appendChild(
-    style
-  );
-
-}
-
-
-/* =====================================================
-   LOGIN ICON
-===================================================== */
-
-function loginIcon(){
-
-  return `
-
-  <span
-    class="zyper-badge-icon"
-  >
-
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-    >
-
-      <path
-        d="M10 17l5-5-5-5"
-      >
-      </path>
-
-      <path
-        d="M15 12H3"
-      >
-      </path>
-
-      <path
-        d="M21 19V5a2 2 0 0 0-2-2h-6"
-      >
-      </path>
-
-    </svg>
-
-  </span>
-
-  `;
-
-}
-
-
-/* =====================================================
-   WALLET ICON
-===================================================== */
-
-function walletIcon(){
-
-  return `
-
-  <span
-    class="zyper-badge-icon"
-  >
-
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-    >
-
-      <path
-        d="M20 7V5a2 2 0 0 0-2-2H5a3 3 0 0 0 0 6h15v10a2 2 0 0 1-2 2H5a3 3 0 0 1-3-3V6"
-      >
-      </path>
-
-      <path
-        d="M16 13h4"
-      >
-      </path>
-
-    </svg>
-
-  </span>
-
-  `;
-
-}
-
-
-/* =====================================================
-   MONEY FORMAT
-===================================================== */
-
-function formatMoney(
-  amount
-){
-
-  const value =
-  Number(
-    amount || 0
-  );
-
-
-  if(
-    !Number.isFinite(
-      value
-    )
-  ){
-
-    return
-    "0.00 LKR";
-
-  }
-
-
-  return (
-    value.toLocaleString(
-      "en-LK",
-      {
-        minimumFractionDigits:
-        2,
-
-        maximumFractionDigits:
-        2
-      }
-    )
-    +
-    " LKR"
-  );
-
-}
-
-
-/* =====================================================
-   REMOVE OLD BUTTONS
-===================================================== */
-
-function removeLegacy(){
-
-  [
-    ".top-login-button",
-    ".top-wallet-button",
-    ".top-account-loading"
-  ]
-
-  .forEach(
-    function(selector){
-
-      document
-      .querySelectorAll(
-        selector
-      )
-      .forEach(
-        function(element){
-
-          if(
-            element.id !==
-            BADGE_ID
-          ){
-
-            element.remove();
-
-          }
-
-        }
-      );
+        font-size:10px;
 
     }
-  );
 
 }
 
-
-/* =====================================================
-   FIND TOPBAR TARGET
-===================================================== */
-
-function findTarget(){
-
-  return (
-    document.getElementById(
-      TOPBAR_SLOT_ID
-    )
-    ||
-    document.body
-  );
-
-}
+    `;
 
 
-/* =====================================================
-   ATTACH BADGE
-===================================================== */
-
-function attachBadge(){
-
-  if(
-    !badge
-  ){
-
-    return;
-
-  }
-
-
-  const target =
-  findTarget();
-
-
-  if(
-    badge.parentElement !==
-    target
-  ){
-
-    target.appendChild(
-      badge
+    document.head.appendChild(
+        style
     );
 
-  }
+}
+
+
+/* =====================================================
+   TARGET
+===================================================== */
+
+function getTarget(){
+
+    return (
+        document.getElementById(
+            "zyperTopbarAction"
+        )
+        ||
+        document.body
+    );
 
 }
 
 
 /* =====================================================
-   CREATE BADGE
+   CREATE
 ===================================================== */
 
 function createBadge(){
 
-  const existing =
-  document.getElementById(
-    BADGE_ID
-  );
+    const existing =
+        document.getElementById(
+            BADGE_ID
+        );
 
 
-  if(existing){
+    if(existing){
+
+        badge =
+            existing;
+
+        return;
+
+    }
+
 
     badge =
-    existing;
-
-    attachBadge();
-
-    return badge;
-
-  }
+        document.createElement(
+            "a"
+        );
 
 
-  badge =
-  document.createElement(
-    "a"
-  );
+    badge.id =
+        BADGE_ID;
 
 
-  badge.id =
-  BADGE_ID;
-
-
-  badge.href =
-  "./index.html?login=1";
-
-
-  badge.setAttribute(
-    "aria-label",
-    "Zyper account"
-  );
-
-
-  badge.className =
-  "zyper-badge-loading";
-
-
-  badge.innerHTML = `
-
-    ${loginIcon()}
-
-    <span
-      class="zyper-badge-text"
-    >
-      CHECKING
-    </span>
-
-  `;
-
-
-  attachBadge();
-
-
-  return badge;
+    getTarget()
+    .appendChild(
+        badge
+    );
 
 }
 
 
 /* =====================================================
-   SHOW LOGIN
+   LOGIN
 ===================================================== */
 
 function showLogin(){
 
-  createBadge();
+    createBadge();
 
 
-  badge.href =
-  "./index.html?login=1";
+    badge.href =
+        "./index.html";
 
 
-  badge.className =
-  "zyper-badge-login";
+    badge.innerHTML = `
 
+        <span
+            class="zyper-wallet-badge-icon"
+        >
+            ⇥
+        </span>
 
-  badge.setAttribute(
-    "aria-label",
-    "Login to Zyper"
-  );
+        <span
+            class="zyper-wallet-badge-text"
+        >
+            LOGIN
+        </span>
 
-
-  badge.innerHTML = `
-
-    ${loginIcon()}
-
-    <span
-      class="zyper-badge-text"
-    >
-      LOGIN
-    </span>
-
-  `;
+    `;
 
 }
 
 
 /* =====================================================
-   SHOW WALLET
+   WALLET
 ===================================================== */
 
 function showWallet(
-  text
+    balance
 ){
 
-  createBadge();
+    createBadge();
 
 
-  badge.href =
-  "./wallet.html";
+    badge.href =
+        "./wallet.html";
 
 
-  badge.className =
-  "zyper-badge-wallet";
+    badge.innerHTML = `
 
+        <span
+            class="zyper-wallet-badge-icon"
+        >
+            💰
+        </span>
 
-  badge.setAttribute(
-    "aria-label",
-    "Open Zyper Wallet"
-  );
+        <span
+            class="zyper-wallet-badge-text"
+        >
+            ${balance}
+        </span>
 
-
-  badge.innerHTML = `
-
-    ${walletIcon()}
-
-    <span
-      class="zyper-badge-text"
-    >
-      ${text}
-    </span>
-
-  `;
+    `;
 
 }
 
 
 /* =====================================================
-   LOAD LIVE WALLET
+   MONEY
+===================================================== */
+
+function money(
+    value
+){
+
+    const number =
+        Number(
+            value || 0
+        );
+
+
+    return (
+
+        number.toLocaleString(
+            "en-LK",
+            {
+                minimumFractionDigits:
+                    2,
+
+                maximumFractionDigits:
+                    2
+            }
+        )
+
+        +
+
+        " LKR"
+
+    );
+
+}
+
+
+/* =====================================================
+   LOAD WALLET
 ===================================================== */
 
 async function loadWallet(
-  user
+    user
 ){
 
-  showWallet(
-    "..."
-  );
-
-
-  try{
-
-    const token =
-    await user.getIdToken();
-
-
-    const response =
-    await fetch(
-      WORKER_URL,
-      {
-
-        method:
-        "POST",
-
-
-        headers:{
-
-          "Content-Type":
-          "application/json",
-
-
-          "Authorization":
-          `Bearer ${token}`
-
-        },
-
-
-        body:
-        JSON.stringify({
-          action:
-          "wallet_balance"
-        })
-
-      }
+    showWallet(
+        "..."
     );
 
 
-    const result =
-    await response.json();
+    try{
 
 
-    if(
-      !response.ok
-      ||
-      !result
-      ||
-      result.success ===
-      false
-    ){
+        const token =
+            await user.getIdToken(
+                true
+            );
 
-      throw new Error(
-        result?.message
-        ||
-        "Wallet unavailable."
-      );
+
+        const response =
+            await fetch(
+
+                WORKER_URL,
+
+                {
+
+                    method:
+                        "POST",
+
+
+                    headers:{
+
+                        "Content-Type":
+                            "application/json",
+
+
+                        "Authorization":
+                            `Bearer ${token}`
+
+                    },
+
+
+                    body:
+                        JSON.stringify({
+                            action:
+                                "wallet_balance"
+                        })
+
+                }
+
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if(
+            !response.ok
+            ||
+            !result
+            ||
+            result.success === false
+        ){
+
+            throw new Error(
+                result?.message ||
+                "Wallet unavailable"
+            );
+
+        }
+
+
+        const balance =
+
+            result.wallet
+                ?.availableBalance
+
+            ??
+
+            result.wallet
+                ?.balance
+
+            ??
+
+            0;
+
+
+        showWallet(
+            money(
+                balance
+            )
+        );
+
 
     }
+    catch(error){
 
 
-    const amount =
-
-    result.wallet
-    ?.availableBalance
-
-    ??
-
-    result.wallet
-    ?.balance
-
-    ??
-
-    0;
+        console.error(
+            "Wallet badge:",
+            error
+        );
 
 
-    showWallet(
-      formatMoney(
-        amount
-      )
-    );
+        showWallet(
+            "WALLET"
+        );
 
-  }
-  catch(error){
-
-    console.error(
-      "Zyper wallet badge:",
-      error
-    );
-
-
-    showWallet(
-      "WALLET"
-    );
-
-  }
+    }
 
 }
 
 
 /* =====================================================
-   OBSERVE TOP BAR
-===================================================== */
-
-function observeTopbar(){
-
-  const observer =
-  new MutationObserver(
-    function(){
-
-      if(
-        document.getElementById(
-          TOPBAR_SLOT_ID
-        )
-      ){
-
-        attachBadge();
-
-      }
-
-    }
-  );
-
-
-  observer.observe(
-    document.documentElement,
-    {
-
-      childList:
-      true,
-
-      subtree:
-      true
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   START
+   AUTH
 ===================================================== */
 
 function start(){
 
-  ensureStyle();
+    addStyle();
 
-  removeLegacy();
-
-  createBadge();
-
-  observeTopbar();
+    createBadge();
 
 
-  onAuthStateChanged(
-    auth,
-    async function(user){
+    onAuthStateChanged(
 
-      if(!user){
+        auth,
 
-        showLogin();
-
-        return;
-
-      }
+        async function(user){
 
 
-      await loadWallet(
-        user
-      );
+            window.zyperCurrentUser =
+                user || null;
 
-    }
-  );
+
+            window.dispatchEvent(
+
+                new CustomEvent(
+                    "zyper-auth-change",
+                    {
+                        detail:{
+                            user:
+                                user || null
+                        }
+                    }
+                )
+
+            );
+
+
+            if(!user){
+
+                showLogin();
+
+                return;
+
+            }
+
+
+            await loadWallet(
+                user
+            );
+
+        }
+
+    );
 
 }
 
 
 if(
-  document.readyState ===
-  "loading"
+    document.readyState ===
+    "loading"
 ){
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    start,
-    {
-      once:true
-    }
-  );
+    document.addEventListener(
+        "DOMContentLoaded",
+        start,
+        {
+            once:true
+        }
+    );
 
 }
 else{
 
-  start();
+    start();
 
 }
