@@ -285,6 +285,68 @@ content="width=device-width, initial-scale=1.0">
 
 }
 
+
+/* FORCE OTP BOX STYLE */
+
+input.otp-box,
+.otp-boxes input.otp-box{
+    width:42px !important;
+    height:48px !important;
+
+    background:#ffffff !important;
+    background-color:#ffffff !important;
+
+    color:#000000 !important;
+    -webkit-text-fill-color:#000000 !important;
+
+    border:2px solid #94a3b8 !important;
+    outline:none !important;
+
+    border-radius:10px !important;
+
+    text-align:center !important;
+
+    font-size:21px !important;
+    font-weight:800 !important;
+
+    caret-color:#000000 !important;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.20) !important;
+
+    opacity:1 !important;
+}
+
+input.otp-box:focus,
+.otp-boxes input.otp-box:focus{
+    background:#ffffff !important;
+    color:#000000 !important;
+    -webkit-text-fill-color:#000000 !important;
+
+    border-color:#3b82f6 !important;
+
+    box-shadow:
+        0 0 0 3px rgba(59,130,246,.25),
+        0 4px 12px rgba(0,0,0,.20) !important;
+}
+
+input.otp-box:disabled{
+    background:#ffffff !important;
+    color:#000000 !important;
+    -webkit-text-fill-color:#000000 !important;
+
+    opacity:1 !important;
+}
+
+/* iPhone Safari autofill fix */
+input.otp-box:-webkit-autofill{
+    -webkit-box-shadow:
+        0 0 0 1000px #ffffff inset !important;
+
+    -webkit-text-fill-color:#000000 !important;
+}
+
+    
 </style>
 
 </head>
