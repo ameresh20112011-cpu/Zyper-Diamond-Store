@@ -7,775 +7,29 @@
 
 <meta
 name="viewport"
-content="width=device-width, initial-scale=1.0"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 >
 
-<title>History - Zyper Diamond Store</title>
+<title>
+Wallet - Zyper Diamond Store
+</title>
 
-<link rel="icon" href="./1.jpg">
+<link
+rel="icon"
+href="./1.jpg"
+>
 
+<!-- WALLET DESIGN -->
+<link
+rel="stylesheet"
+href="./wallet.css?v=3000"
+>
+
+<!-- OLD 6 BUTTON NAV -->
 <link
 rel="stylesheet"
 href="./zyper-nav.css?v=10001"
 >
-
-<style>
-
-/* =====================================================
-   GLOBAL
-===================================================== */
-
-*{
-    box-sizing:border-box;
-}
-
-
-:root{
-
-    --bg1:#020617;
-    --bg2:#0f172a;
-    --bg3:#312e81;
-
-    --card:#1e293b;
-
-    --blue:#60a5fa;
-    --purple:#c084fc;
-
-    --green:#22c55e;
-    --red:#ef4444;
-    --yellow:#facc15;
-
-    --text:#f8fafc;
-    --muted:#94a3b8;
-
-}
-
-
-body{
-
-    margin:0;
-
-    min-height:100vh;
-
-    padding-bottom:100px;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    color:white;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--bg1),
-            var(--bg2),
-            var(--bg3)
-        );
-
-}
-
-
-/* =====================================================
-   PAGE
-===================================================== */
-
-.history-page{
-
-    width:100%;
-
-    max-width:900px;
-
-    margin:auto;
-
-    padding:20px;
-
-}
-
-
-/* =====================================================
-   TITLE
-===================================================== */
-
-.page-title{
-
-    margin:
-        12px 0 8px;
-
-    text-align:center;
-
-    color:#60a5fa;
-
-    font-size:27px;
-
-}
-
-
-.page-subtitle{
-
-    margin:
-        0 0 22px;
-
-    text-align:center;
-
-    color:#94a3b8;
-
-    font-size:12px;
-
-}
-
-
-/* =====================================================
-   TABS
-===================================================== */
-
-.history-tabs{
-
-    width:100%;
-
-    max-width:520px;
-
-    margin:
-        0 auto 22px;
-
-    padding:5px;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:5px;
-
-    border-radius:16px;
-
-    background:
-        rgba(15,23,42,.85);
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-}
-
-
-.history-tab{
-
-    min-height:46px;
-
-    padding:
-        8px 10px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:transparent;
-
-    color:#94a3b8;
-
-    font-size:13px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-
-.history-tab.active{
-
-    color:white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #7c3aed
-        );
-
-    box-shadow:
-        0 7px 20px
-        rgba(37,99,235,.25);
-
-}
-
-
-/* =====================================================
-   TAB CONTENT
-===================================================== */
-
-.history-section{
-
-    display:none;
-
-}
-
-
-.history-section.active{
-
-    display:block;
-
-}
-
-
-/* =====================================================
-   SECTION HEADER
-===================================================== */
-
-.section-header{
-
-    margin-bottom:14px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:12px;
-
-}
-
-
-.section-header h2{
-
-    margin:0;
-
-    color:#e2e8f0;
-
-    font-size:18px;
-
-}
-
-
-.refresh-btn{
-
-    padding:
-        8px 12px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-
-    border-radius:9px;
-
-    background:
-        rgba(255,255,255,.06);
-
-    color:white;
-
-    font-size:11px;
-
-    cursor:pointer;
-
-}
-
-
-/* =====================================================
-   ORDER CARD
-===================================================== */
-
-.order-card{
-
-    margin-bottom:15px;
-
-    padding:19px;
-
-    border-radius:17px;
-
-    background:
-        rgba(30,41,59,.95);
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.20);
-
-}
-
-
-.order-card h3{
-
-    margin:
-        0 0 15px;
-
-    color:#c084fc;
-
-    font-size:17px;
-
-}
-
-
-.order-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:10px;
-
-}
-
-
-.order-info{
-
-    padding:10px;
-
-    border-radius:10px;
-
-    background:
-        rgba(2,6,23,.28);
-
-}
-
-
-.order-info.full{
-
-    grid-column:
-        1 / -1;
-
-}
-
-
-.order-info span{
-
-    display:block;
-
-    margin-bottom:4px;
-
-    color:#94a3b8;
-
-    font-size:9px;
-
-    text-transform:uppercase;
-
-}
-
-
-.order-info strong{
-
-    display:block;
-
-    color:#f8fafc;
-
-    font-size:12px;
-
-    word-break:break-word;
-
-}
-
-
-/* =====================================================
-   ORDER STATUS
-===================================================== */
-
-.status{
-
-    display:inline-block;
-
-    font-weight:700;
-
-}
-
-
-.pending{
-
-    color:#facc15;
-
-}
-
-
-.success{
-
-    color:#22c55e;
-
-}
-
-
-.rejected{
-
-    color:#ef4444;
-
-}
-
-.processing{
-    color:#60a5fa;
-}
-
-.review{
-    color:#facc15;
-}
-
-.failed{
-    color:#ef4444;
-}
-
-.wallet-held{
-    color:#facc15 !important;
-}
-
-.wallet-deducted{
-    color:#22c55e !important;
-}
-
-.wallet-released{
-    color:#60a5fa !important;
-}
-
-
-/* =====================================================
-   TRACK BUTTON
-===================================================== */
-
-.track-btn{
-
-    width:100%;
-
-    min-height:45px;
-
-    margin-top:14px;
-
-    padding:10px;
-
-    border:none;
-
-    border-radius:11px;
-
-    color:white;
-
-    font-size:13px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #4f46e5
-        );
-
-}
-
-
-.track-btn:active{
-
-    transform:
-        scale(.98);
-
-}
-
-
-/* =====================================================
-   WALLET TRANSACTION
-===================================================== */
-
-.wallet-transaction{
-
-    margin-bottom:12px;
-
-    padding:15px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:12px;
-
-    border-radius:15px;
-
-    background:
-        rgba(30,41,59,.95);
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    box-shadow:
-        0 7px 20px
-        rgba(0,0,0,.18);
-
-}
-
-
-.transaction-left{
-
-    min-width:0;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:11px;
-
-}
-
-
-.transaction-icon{
-
-    width:43px;
-
-    height:43px;
-
-    flex:0 0 43px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:12px;
-
-    font-size:19px;
-
-    background:
-        rgba(255,255,255,.06);
-
-}
-
-
-.transaction-details{
-
-    min-width:0;
-
-}
-
-
-.transaction-title{
-
-    color:white;
-
-    font-size:13px;
-
-    font-weight:700;
-
-}
-
-
-.transaction-meta{
-
-    margin-top:4px;
-
-    color:#94a3b8;
-
-    font-size:10px;
-
-    line-height:1.5;
-
-    word-break:break-word;
-
-}
-
-
-.transaction-right{
-
-    flex-shrink:0;
-
-    text-align:right;
-
-}
-
-
-.transaction-amount{
-
-    font-size:13px;
-
-    font-weight:700;
-
-}
-
-
-.transaction-amount.deposit{
-
-    color:#4ade80;
-
-}
-
-
-.transaction-amount.spend{
-
-    color:#f87171;
-
-}
-
-
-.transaction-amount.refund{
-
-    color:#60a5fa;
-
-}
-
-
-.balance-after{
-
-    margin-top:4px;
-
-    color:#94a3b8;
-
-    font-size:9px;
-
-}
-
-
-/* =====================================================
-   EMPTY / LOADING / ERROR
-===================================================== */
-
-.empty{
-
-    margin-top:30px;
-
-    padding:30px 18px;
-
-    text-align:center;
-
-    color:#cbd5e1;
-
-    font-size:14px;
-
-    line-height:1.7;
-
-    border-radius:15px;
-
-    background:
-        rgba(15,23,42,.55);
-
-    border:
-        1px solid
-        rgba(255,255,255,.06);
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:500px){
-
-    .history-page{
-
-        padding:
-            14px;
-
-    }
-
-
-    .page-title{
-
-        margin-top:15px;
-
-        font-size:22px;
-
-    }
-
-
-    .page-subtitle{
-
-        font-size:10px;
-
-    }
-
-
-    .history-tabs{
-
-        margin-bottom:17px;
-
-    }
-
-
-    .history-tab{
-
-        min-height:43px;
-
-        font-size:11px;
-
-    }
-
-
-    .section-header h2{
-
-        font-size:16px;
-
-    }
-
-
-    .order-card{
-
-        padding:15px;
-
-    }
-
-
-    .order-grid{
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .order-info.full{
-
-        grid-column:auto;
-
-    }
-
-
-    .wallet-transaction{
-
-        padding:13px;
-
-    }
-
-
-    .transaction-icon{
-
-        width:38px;
-
-        height:38px;
-
-        flex-basis:38px;
-
-        font-size:17px;
-
-    }
-
-
-    .transaction-title{
-
-        font-size:11px;
-
-    }
-
-
-    .transaction-meta{
-
-        font-size:9px;
-
-    }
-
-
-    .transaction-amount{
-
-        font-size:11px;
-
-    }
-
-}
-
-</style>
 
 </head>
 
@@ -783,86 +37,214 @@ body{
 <body>
 
 
-<div class="history-page">
+<!-- =====================================================
+     WALLET PAGE
+===================================================== -->
+
+<div class="wallet-page">
 
 
     <!-- =================================================
-         PAGE TITLE
+         WALLET HEADER
     ================================================== -->
 
-    <h1 class="page-title">
-        📜 My History
-    </h1>
+    <header class="wallet-header">
 
 
-    <p class="page-subtitle">
-        View your orders and wallet activity
-    </p>
+        <div class="brand">
 
 
-
-    <!-- =================================================
-         TABS
-    ================================================== -->
-
-    <div class="history-tabs">
+            <div class="logo">
+                💎
+            </div>
 
 
-        <button
-            type="button"
-            class="history-tab active"
-            id="orderTab"
-        >
-            📦 Orders
-        </button>
+            <div>
 
+                <h1>
+                    Zyper Wallet
+                </h1>
 
-        <button
-            type="button"
-            class="history-tab"
-            id="walletTab"
-        >
-            💰 Wallet
-        </button>
+                <p>
+                    Manage your wallet balance
+                </p>
 
+            </div>
 
-    </div>
-
-
-
-    <!-- =================================================
-         ORDER HISTORY
-    ================================================== -->
-
-    <section
-        class="history-section active"
-        id="orderSection"
-    >
-
-
-        <div class="section-header">
-
-            <h2>
-                📦 Order History
-            </h2>
-
-            <button
-                type="button"
-                class="refresh-btn"
-                id="refreshOrders"
-            >
-                ↻ Refresh
-            </button>
 
         </div>
 
 
-        <div id="orders">
+        <a
+        href="./home.html"
+        class="home-button"
+        >
+            ← Home
+        </a>
 
-            <div class="empty">
-                ⏳ Loading orders...
+
+    </header>
+
+
+
+    <!-- =================================================
+         WALLET BALANCE
+    ================================================== -->
+
+    <section class="balance-card">
+
+
+        <div class="balance-top">
+
+
+            <span>
+                💰 Available Balance
+            </span>
+
+
+            <button
+            id="refreshWallet"
+            type="button"
+            aria-label="Refresh wallet"
+            >
+                ↻
+            </button>
+
+
+        </div>
+
+
+
+        <div class="balance">
+
+            <span>
+                LKR
+            </span>
+
+            <strong
+            id="walletBalance"
+            >
+                --
+            </strong>
+
+        </div>
+
+
+
+        <div class="wallet-stats">
+
+
+            <div>
+
+                <small>
+                    Total Added
+                </small>
+
+                <strong
+                id="totalDeposited"
+                >
+                    --
+                </strong>
+
             </div>
 
+
+            <div>
+
+                <small>
+                    Total Spent
+                </small>
+
+                <strong
+                id="totalSpent"
+                >
+                    --
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         RECHARGE WALLET
+    ================================================== -->
+
+    <a
+    href="./recharge-payment.html"
+    class="wallet-recharge-button"
+    id="rechargeWalletButton"
+    >
+        💳 Recharge Wallet
+    </a>
+
+
+
+    <!-- =================================================
+         REDEEM CODE
+    ================================================== -->
+
+    <section class="redeem-card">
+
+
+        <div class="section-title">
+
+
+            <div class="section-icon">
+                🎟️
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Redeem Code
+                </h2>
+
+                <p>
+                    Enter your Zyper redeem code
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="redeem-box">
+
+
+            <input
+            type="text"
+            id="redeemCode"
+            placeholder="Enter redeem code"
+            autocomplete="off"
+            >
+
+
+            <button
+            id="redeemButton"
+            type="button"
+            >
+                Redeem
+            </button>
+
+
+        </div>
+
+
+
+        <div
+        id="redeemMessage"
+        class="redeem-message"
+        style="display:none;"
+        >
         </div>
 
 
@@ -874,33 +256,44 @@ body{
          WALLET HISTORY
     ================================================== -->
 
-    <section
-        class="history-section"
-        id="walletSection"
-    >
+    <section class="transactions-card">
 
 
-        <div class="section-header">
+        <div class="transactions-header">
 
-            <h2>
-                💰 Wallet History
-            </h2>
+
+            <div>
+
+                <h2>
+                    Wallet History
+                </h2>
+
+                <p>
+                    Your recent wallet activity
+                </p>
+
+            </div>
+
 
             <button
-                type="button"
-                class="refresh-btn"
-                id="refreshWallet"
+            id="refreshTransactions"
+            type="button"
             >
                 ↻ Refresh
             </button>
 
+
         </div>
 
 
-        <div id="walletTransactions">
+
+        <div
+        id="transactions"
+        class="transactions"
+        >
 
             <div class="empty">
-                ⏳ Loading wallet history...
+                ⏳ Loading wallet...
             </div>
 
         </div>
@@ -914,7 +307,7 @@ body{
 
 
 <!-- =====================================================
-     BOTTOM NAVIGATION
+     OLD 6 BUTTON BOTTOM NAV
 ===================================================== -->
 
 <div id="zyper-navigation"></div>
@@ -922,1467 +315,39 @@ body{
 
 
 <!-- =====================================================
-     HISTORY LOGIC
-===================================================== -->
-
-<script type="module">
-
-
-/* =====================================================
-   FIREBASE
-===================================================== */
-
-import {
-    auth,
-    db
-}
-from "./firebase.js";
-
-
-import {
-    onAuthStateChanged
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-
-import {
-    collection,
-    query,
-    where,
-    getDocs
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-/* =====================================================
-   WORKER
-===================================================== */
-
-const WORKER_URL =
-"https://zyper-order.ameresh20112011.workers.dev";
-
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const orderTab =
-document.getElementById(
-    "orderTab"
-);
-
-
-const walletTab =
-document.getElementById(
-    "walletTab"
-);
-
-
-const orderSection =
-document.getElementById(
-    "orderSection"
-);
-
-
-const walletSection =
-document.getElementById(
-    "walletSection"
-);
-
-
-const ordersDiv =
-document.getElementById(
-    "orders"
-);
-
-
-const walletTransactionsDiv =
-document.getElementById(
-    "walletTransactions"
-);
-
-
-const refreshOrders =
-document.getElementById(
-    "refreshOrders"
-);
-
-
-const refreshWallet =
-document.getElementById(
-    "refreshWallet"
-);
-
-
-let currentUser =
-null;
-
-
-/* =====================================================
-   MONEY
-===================================================== */
-
-function money(value){
-
-    return Number(
-        value || 0
-    ).toLocaleString(
-        "en-LK",
-        {
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        }
-    );
-
-}
-
-
-/* =====================================================
-   SECURITY
-===================================================== */
-
-function escapeHTML(value){
-
-    return String(
-        value ?? ""
-    )
-
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-
-    .replace(
-        /</g,
-        "&lt;"
-    )
-
-    .replace(
-        />/g,
-        "&gt;"
-    )
-
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-/* =====================================================
-   DATE FORMAT
-===================================================== */
-
-function formatDate(value){
-
-    if(!value){
-
-        return "";
-
-    }
-
-
-    try{
-
-
-        if(
-            typeof value.toDate ===
-            "function"
-        ){
-
-            return value
-                .toDate()
-                .toLocaleString();
-
-        }
-
-
-        if(
-            value.seconds
-        ){
-
-            return new Date(
-                Number(
-                    value.seconds
-                ) * 1000
-            ).toLocaleString();
-
-        }
-
-
-        const date =
-        new Date(
-            value
-        );
-
-
-        if(
-            !Number.isNaN(
-                date.getTime()
-            )
-        ){
-
-            return date
-                .toLocaleString();
-
-        }
-
-
-    }
-    catch(error){
-
-        console.error(
-            "Date error:",
-            error
-        );
-
-    }
-
-
-    return "";
-
-}
-
-
-/* =====================================================
-   TABS
-===================================================== */
-
-function showOrders(){
-
-    orderTab
-        .classList
-        .add(
-            "active"
-        );
-
-
-    walletTab
-        .classList
-        .remove(
-            "active"
-        );
-
-
-    orderSection
-        .classList
-        .add(
-            "active"
-        );
-
-
-    walletSection
-        .classList
-        .remove(
-            "active"
-        );
-
-}
-
-
-function showWallet(){
-
-    walletTab
-        .classList
-        .add(
-            "active"
-        );
-
-
-    orderTab
-        .classList
-        .remove(
-            "active"
-        );
-
-
-    walletSection
-        .classList
-        .add(
-            "active"
-        );
-
-
-    orderSection
-        .classList
-        .remove(
-            "active"
-        );
-
-}
-
-
-orderTab.addEventListener(
-    "click",
-    showOrders
-);
-
-
-walletTab.addEventListener(
-    "click",
-    showWallet
-);
-
-
-/* =====================================================
-   LOAD ORDERS
-===================================================== */
-
-async function loadOrders(user){
-
-
-    ordersDiv.innerHTML = `
-
-        <div class="empty">
-            ⏳ Loading your orders...
-        </div>
-
-    `;
-
-
-    try{
-
-
-        const ordersRef =
-        collection(
-            db,
-            "orders"
-        );
-
-
-        const ordersQuery =
-        query(
-            ordersRef,
-
-            where(
-                "userId",
-                "==",
-                user.uid
-            )
-        );
-
-
-        const snapshot =
-        await getDocs(
-            ordersQuery
-        );
-
-
-        if(
-            snapshot.empty
-        ){
-
-            ordersDiv.innerHTML = `
-
-                <div class="empty">
-
-                    📦 No Orders Found
-
-                    <br><br>
-
-                    You haven't placed any orders yet.
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        const orderList = [];
-
-
-        snapshot.forEach(
-            function(orderSnapshot){
-
-                orderList.push({
-
-                    id:
-                    orderSnapshot.id,
-
-                    data:
-                    orderSnapshot.data()
-
-                });
-
-            }
-        );
-
-
-        /*
-           NEWEST FIRST
-        */
-
-        orderList.sort(
-            function(a,b){
-
-                const dateA =
-                getSortableDate(
-                    a.data.createdAt
-                );
-
-
-                const dateB =
-                getSortableDate(
-                    b.data.createdAt
-                );
-
-
-                return (
-                    dateB -
-                    dateA
-                );
-
-            }
-        );
-
-
-        ordersDiv.innerHTML =
-        "";
-
-
-        orderList.forEach(
-            function(item){
-
-
-                const data =
-                item.data;
-
-
-                const orderId =
-                data.orderId ||
-                item.id;
-
-
-                const gameUID =
-                data.gameUID ||
-                data.uid ||
-                "-";
-
-
-                const packageName =
-                data.package ||
-                data.productName ||
-                data.product ||
-                "-";
-
-
-                const quantity =
-                Math.max(
-                    1,
-                    Number(
-                        data.quantity ||
-                        1
-                    )
-                );
-
-
-                const unitPrice =
-                Number(
-                    data.unitPrice ??
-                    data.productPrice ??
-                    (
-                        data.total != null
-                        ?
-                        Number(data.total) / quantity
-                        :
-                        data.price ??
-                        0
-                    )
-                );
-
-
-                const total =
-                Number(
-                    data.total ??
-                    data.price ??
-                    (unitPrice * quantity)
-                );
-
-
-                const rawStatus =
-                String(
-                    data.status ||
-                    "Processing"
-                ).trim();
-
-
-                const normalizedStatus =
-                rawStatus
-                .toLowerCase()
-                .replace(/[_-]+/g," ")
-                .replace(/\s+/g," ")
-                .trim();
-
-
-                let statusClass =
-                "processing";
-
-
-                let statusText =
-                "⏳ Processing";
-
-
-                if(
-                    normalizedStatus ===
-                    "success" ||
-                    normalizedStatus ===
-                    "approved"
-                ){
-
-                    statusClass =
-                    "success";
-
-                    statusText =
-                    "✅ Success";
-
-                }
-
-                else if(
-                    normalizedStatus ===
-                    "pending review"
-                ){
-
-                    statusClass =
-                    "review";
-
-                    statusText =
-                    "⚠️ Pending Review";
-
-                }
-
-                else if(
-                    normalizedStatus ===
-                    "failed" ||
-                    normalizedStatus ===
-                    "rejected"
-                ){
-
-                    statusClass =
-                    "failed";
-
-                    statusText =
-                    normalizedStatus === "rejected"
-                    ? "❌ Rejected"
-                    : "❌ Failed";
-
-                }
-
-                else if(
-                    normalizedStatus ===
-                    "pending"
-                ){
-
-                    statusClass =
-                    "review";
-
-                    statusText =
-                    "⏳ Pending";
-
-                }
-
-
-                const verifiedPlayerName =
-                (
-                    data.playerVerified === true ||
-                    String(data.playerNameSource || "")
-                    .toLowerCase() === "provider"
-                )
-                ?
-                (
-                    data.playerName ||
-                    data.verifiedPlayerName ||
-                    data.providerPlayerName ||
-                    "-"
-                )
-                :
-                (
-                    normalizedStatus === "success"
-                    ?
-                    (
-                        data.verifiedPlayerName ||
-                        data.providerPlayerName ||
-                        "Verified name unavailable"
-                    )
-                    :
-                    "Processing..."
-                );
-
-
-                const walletState =
-                String(
-                    data.walletState ||
-                    ""
-                ).toLowerCase();
-
-
-                let walletText =
-                "-";
-
-
-                let walletClass =
-                "";
-
-
-                if(walletState === "held"){
-
-                    walletText =
-                    `🔒 LKR ${money(total)} Held`;
-
-                    walletClass =
-                    "wallet-held";
-
-                }
-
-                else if(walletState === "deducted"){
-
-                    const used =
-                    Number(
-                        data.walletAmountUsed ??
-                        total
-                    );
-
-                    walletText =
-                    `💳 LKR ${money(used)} Deducted`;
-
-                    walletClass =
-                    "wallet-deducted";
-
-                }
-
-                else if(walletState === "released"){
-
-                    walletText =
-                    `↩️ LKR ${money(total)} Released`;
-
-                    walletClass =
-                    "wallet-released";
-
-                }
-
-
-                const orderDate =
-                formatDate(
-                    data.createdAt
-                );
-
-
-                const completedDate =
-                formatDate(
-                    data.completedAt ||
-                    data.providerSuccessAt
-                );
-
-
-                const card =
-                document.createElement(
-                    "div"
-                );
-
-
-                card.className =
-                "order-card";
-
-
-                card.innerHTML = `
-
-                    <h3>
-                        💎 Zyper Order
-                    </h3>
-
-                    <div class="order-grid">
-
-                        <div class="order-info">
-                            <span>ORDER ID</span>
-                            <strong>${escapeHTML(orderId)}</strong>
-                        </div>
-
-                        <div class="order-info">
-                            <span>STATUS</span>
-                            <strong class="status ${statusClass}">
-                                ${statusText}
-                            </strong>
-                        </div>
-
-                        <div class="order-info">
-                            <span>GAME UID</span>
-                            <strong>${escapeHTML(gameUID)}</strong>
-                        </div>
-
-                        <div class="order-info">
-                            <span>VERIFIED FF NAME</span>
-                            <strong>${escapeHTML(verifiedPlayerName)}</strong>
-                        </div>
-
-                        <div class="order-info">
-                            <span>PACKAGE</span>
-                            <strong>${escapeHTML(packageName)}</strong>
-                        </div>
-
-                        <div class="order-info">
-                            <span>QUANTITY</span>
-                            <strong>×${escapeHTML(quantity)}</strong>
-                        </div>
-
-                        <div class="order-info">
-                            <span>UNIT PRICE</span>
-                            <strong>LKR ${money(unitPrice)}</strong>
-                        </div>
-
-                        <div class="order-info">
-                            <span>TOTAL</span>
-                            <strong>LKR ${money(total)}</strong>
-                        </div>
-
-                        <div class="order-info full">
-                            <span>WALLET</span>
-                            <strong class="${walletClass}">
-                                ${walletText}
-                            </strong>
-                        </div>
-
-                        ${
-                            orderDate
-                            ?
-                            `
-                            <div class="order-info">
-                                <span>ORDERED</span>
-                                <strong>${escapeHTML(orderDate)}</strong>
-                            </div>
-                            `
-                            :
-                            ""
-                        }
-
-                        ${
-                            completedDate && normalizedStatus === "success"
-                            ?
-                            `
-                            <div class="order-info">
-                                <span>COMPLETED</span>
-                                <strong>${escapeHTML(completedDate)}</strong>
-                            </div>
-                            `
-                            :
-                            ""
-                        }
-
-                    </div>
-
-                    <button
-                        class="track-btn"
-                        data-order-id="${escapeHTML(orderId)}"
-                    >
-                        🔎 Track Order
-                    </button>
-
-                `;
-
-
-                ordersDiv.appendChild(
-                    card
-                );
-
-            }
-        );
-
-
-        document
-            .querySelectorAll(
-                ".track-btn[data-order-id]"
-            )
-            .forEach(
-                function(button){
-
-                    button.addEventListener(
-                        "click",
-                        function(){
-
-                            const id =
-                            button
-                                .dataset
-                                .orderId;
-
-
-                            window.location.href =
-                                "track.html?id=" +
-                                encodeURIComponent(
-                                    id
-                                );
-
-                        }
-                    );
-
-                }
-            );
-
-
-    }
-    catch(error){
-
-
-        console.error(
-            "Order History Error:",
-            error
-        );
-
-
-        ordersDiv.innerHTML = `
-
-            <div class="empty">
-
-                ❌ Unable to load orders.
-
-                <br><br>
-
-                ${escapeHTML(
-                    error.message
-                )}
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* =====================================================
-   SORTABLE FIRESTORE DATE
-===================================================== */
-
-function getSortableDate(value){
-
-    try{
-
-
-        if(!value){
-
-            return 0;
-
-        }
-
-
-        if(
-            typeof value.toDate ===
-            "function"
-        ){
-
-            return value
-                .toDate()
-                .getTime();
-
-        }
-
-
-        if(
-            value.seconds
-        ){
-
-            return Number(
-                value.seconds
-            ) * 1000;
-
-        }
-
-
-        const date =
-        new Date(
-            value
-        );
-
-
-        return Number.isNaN(
-            date.getTime()
-        )
-        ?
-        0
-        :
-        date.getTime();
-
-
-    }
-    catch{
-
-        return 0;
-
-    }
-
-}
-
-
-/* =====================================================
-   LOAD WALLET HISTORY
-===================================================== */
-
-async function loadWalletHistory(user){
-
-
-    walletTransactionsDiv.innerHTML = `
-
-        <div class="empty">
-            ⏳ Loading wallet history...
-        </div>
-
-    `;
-
-
-    try{
-
-
-        const token =
-        await user.getIdToken();
-
-
-        const response =
-        await fetch(
-            WORKER_URL,
-            {
-
-                method:
-                "POST",
-
-                headers:{
-
-                    "Content-Type":
-                    "application/json",
-
-                    "Authorization":
-                    `Bearer ${token}`
-
-                },
-
-                body:
-                JSON.stringify({
-
-                    action:
-                    "wallet_transactions"
-
-                })
-
-            }
-        );
-
-
-        const result =
-        await response.json();
-
-
-        if(
-            !response.ok ||
-            !result.success
-        ){
-
-            throw new Error(
-                result.message ||
-                "Unable to load wallet history."
-            );
-
-        }
-
-
-        const transactions =
-        Array.isArray(
-            result.transactions
-        )
-        ?
-        result.transactions
-        :
-        [];
-
-
-        if(
-            transactions.length ===
-            0
-        ){
-
-            walletTransactionsDiv.innerHTML = `
-
-                <div class="empty">
-
-                    💰 No Wallet History Found
-
-                    <br><br>
-
-                    Your wallet activity will appear here.
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        walletTransactionsDiv.innerHTML =
-        "";
-
-
-        transactions.forEach(
-            function(transaction){
-
-
-                const type =
-                String(
-                    transaction.type ||
-                    ""
-                ).toUpperCase();
-
-
-                const amount =
-                Number(
-                    transaction.amount ||
-                    0
-                );
-
-
-                const balanceAfter =
-                Number(
-                    transaction.balanceAfter ??
-                    0
-                );
-
-
-                const date =
-                formatDate(
-                    transaction.createdAt
-                );
-
-
-                let icon =
-                "💰";
-
-
-                let title =
-                "Wallet Transaction";
-
-
-                let amountClass =
-                "deposit";
-
-
-                let sign =
-                "";
-
-
-                if(type === "DEPOSIT"){
-
-                    icon = "➕";
-                    title = "Wallet Recharge";
-                    amountClass = "deposit";
-                    sign = "+";
-
-                }
-
-                else if(
-                    type === "HOLD" ||
-                    type === "ORDER_HOLD"
-                ){
-
-                    icon = "🔒";
-                    title = "Order Amount Held";
-                    amountClass = "refund";
-                    sign = "";
-
-                }
-
-                else if(
-                    type === "HOLD_FINALIZED" ||
-                    type === "FINALIZE_HOLD" ||
-                    type === "SPEND"
-                ){
-
-                    icon = "💳";
-                    title = "Order Payment";
-                    amountClass = "spend";
-                    sign = "-";
-
-                }
-
-                else if(
-                    type === "HOLD_RELEASED" ||
-                    type === "RELEASE_HOLD" ||
-                    type === "REFUND"
-                ){
-
-                    icon = "↩️";
-                    title = "Money Released";
-                    amountClass = "refund";
-                    sign = "+";
-
-                }
-
-
-                let meta =
-                "";
-
-
-                if(
-                    transaction.redeemCode
-                ){
-
-                    meta +=
-                    `Code: ${
-                        escapeHTML(
-                            transaction.redeemCode
-                        )
-                    }`;
-
-                }
-
-
-                if(
-                    transaction.orderId
-                ){
-
-                    if(meta){
-
-                        meta +=
-                        "<br>";
-
-                    }
-
-
-                    meta +=
-                    `Order ID: ${
-                        escapeHTML(
-                            transaction.orderId
-                        )
-                    }`;
-
-                }
-
-
-                if(
-                    transaction.package
-                ){
-
-                    if(meta){
-
-                        meta +=
-                        "<br>";
-
-                    }
-
-
-                    meta +=
-                    `Package: ${
-                        escapeHTML(
-                            transaction.package
-                        )
-                    }`;
-
-                }
-
-
-                if(
-                    transaction.quantity
-                ){
-
-                    if(meta){
-                        meta += "<br>";
-                    }
-
-                    meta +=
-                    `Quantity: ×${escapeHTML(transaction.quantity)}`;
-
-                }
-
-
-                if(date){
-
-                    if(meta){
-
-                        meta +=
-                        "<br>";
-
-                    }
-
-
-                    meta +=
-                    escapeHTML(
-                        date
-                    );
-
-                }
-
-
-                const row =
-                document.createElement(
-                    "div"
-                );
-
-
-                row.className =
-                "wallet-transaction";
-
-
-                row.innerHTML = `
-
-                    <div class="transaction-left">
-
-
-                        <div class="transaction-icon">
-                            ${icon}
-                        </div>
-
-
-                        <div class="transaction-details">
-
-                            <div class="transaction-title">
-                                ${title}
-                            </div>
-
-                            <div class="transaction-meta">
-                                ${
-                                    meta ||
-                                    "-"
-                                }
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="transaction-right">
-
-
-                        <div
-                            class="transaction-amount ${amountClass}"
-                        >
-                            ${sign}LKR ${money(amount)}
-                        </div>
-
-
-                        <div class="balance-after">
-
-                            Balance:
-                            LKR ${money(balanceAfter)}
-
-                        </div>
-
-
-                    </div>
-
-                `;
-
-
-                walletTransactionsDiv
-                    .appendChild(
-                        row
-                    );
-
-            }
-        );
-
-
-    }
-    catch(error){
-
-
-        console.error(
-            "Wallet History Error:",
-            error
-        );
-
-
-        walletTransactionsDiv.innerHTML = `
-
-            <div class="empty">
-
-                ❌ Unable to load wallet history.
-
-                <br><br>
-
-                ${escapeHTML(
-                    error.message
-                )}
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* =====================================================
-   REFRESH
-===================================================== */
-
-refreshOrders.addEventListener(
-    "click",
-    function(){
-
-        if(currentUser){
-
-            loadOrders(
-                currentUser
-            );
-
-        }
-
-    }
-);
-
-
-refreshWallet.addEventListener(
-    "click",
-    function(){
-
-        if(currentUser){
-
-            loadWalletHistory(
-                currentUser
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   AUTH
-===================================================== */
-
-onAuthStateChanged(
-    auth,
-    async function(user){
-
-
-        currentUser =
-        user || null;
-
-
-        if(!user){
-
-
-            /*
-               PUBLIC PAGE MODE
-
-               Guest can stay on History page.
-               Only private order / wallet data
-               requires login.
-            */
-
-
-            ordersDiv.innerHTML = `
-
-                <div class="empty">
-
-                    🔐 Login to view your order history.
-
-                    <br><br>
-
-                    <a
-                        href="./index.html"
-                        style="
-                            display:inline-block;
-                            padding:10px 18px;
-                            border-radius:10px;
-                            color:white;
-                            text-decoration:none;
-                            font-size:12px;
-                            font-weight:700;
-                            background:linear-gradient(135deg,#2563eb,#7c3aed);
-                        "
-                    >
-                        LOGIN
-                    </a>
-
-                </div>
-
-            `;
-
-
-            walletTransactionsDiv.innerHTML = `
-
-                <div class="empty">
-
-                    🔐 Login to view your wallet history.
-
-                    <br><br>
-
-                    <a
-                        href="./index.html"
-                        style="
-                            display:inline-block;
-                            padding:10px 18px;
-                            border-radius:10px;
-                            color:white;
-                            text-decoration:none;
-                            font-size:12px;
-                            font-weight:700;
-                            background:linear-gradient(135deg,#2563eb,#7c3aed);
-                        "
-                    >
-                        LOGIN
-                    </a>
-
-                </div>
-
-            `;
-
-
-            return;
-
-        }
-
-
-        await Promise.all([
-
-            loadOrders(
-                user
-            ),
-
-            loadWalletHistory(
-                user
-            )
-
-        ]);
-
-    }
-);
-
-</script>
-
-
-
-<!-- =====================================================
      SHARED TOP BAR
-     Guest  -> LOGIN
-     Logged -> LIVE WALLET BALANCE
+
+     ZYPER
+     DIAMOND STORE
+
+     Guest  = LOGIN
+     Login  = Wallet Balance
 ===================================================== -->
 
 <script
-src="./zyper-topbar.js?v=10001">
-</script>
+src="./zyper-topbar.js?v=10001"
+></script>
 
 
 
 <!-- =====================================================
-     OLD 6-BUTTON NAVIGATION
+     OLD NAVIGATION
 ===================================================== -->
 
 <script
-src="./zyper-nav.js?v=10001">
-</script>
+src="./zyper-nav.js?v=10001"
+></script>
+
+
+
+<!-- =====================================================
+     WALLET LOGIC
+===================================================== -->
+
+<script
+type="module"
+src="./wallet.js?v=3001"
+></script>
 
 
 </body>
