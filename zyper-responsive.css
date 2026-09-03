@@ -1,0 +1,541 @@
+/* =========================================================
+   ZYPER DIAMOND STORE
+   UNIVERSAL RESPONSIVE SUPPORT
+
+   PC
+   ANDROID
+   IPHONE
+   IPAD
+   TABLET
+   PORTRAIT
+   LANDSCAPE
+========================================================= */
+
+:root{
+
+  --zyper-topbar-h:
+  72px;
+
+  --zyper-nav-h:
+  74px;
+
+  --zyper-safe-top:
+  env(
+    safe-area-inset-top,
+    0px
+  );
+
+  --zyper-safe-right:
+  env(
+    safe-area-inset-right,
+    0px
+  );
+
+  --zyper-safe-bottom:
+  env(
+    safe-area-inset-bottom,
+    0px
+  );
+
+  --zyper-safe-left:
+  env(
+    safe-area-inset-left,
+    0px
+  );
+
+}
+
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+*,
+*::before,
+*::after{
+
+  box-sizing:
+  border-box;
+
+}
+
+
+html{
+
+  width:
+  100%;
+
+  min-height:
+  100%;
+
+  overflow-x:
+  hidden;
+
+  -webkit-text-size-adjust:
+  100%;
+
+  text-size-adjust:
+  100%;
+
+  scroll-behavior:
+  smooth;
+
+  scroll-padding-top:
+  calc(
+    var(--zyper-topbar-h)
+    +
+    var(--zyper-safe-top)
+    +
+    8px
+  );
+
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body{
+
+  width:
+  100%;
+
+  min-width:
+  0;
+
+  min-height:
+  100dvh;
+
+  margin:
+  0;
+
+  overflow-x:
+  hidden;
+
+  padding-top:
+  calc(
+    var(--zyper-topbar-h)
+    +
+    var(--zyper-safe-top)
+    +
+    10px
+  )
+  !important;
+
+  padding-right:
+  var(
+    --zyper-safe-right
+  );
+
+  padding-bottom:
+  calc(
+    var(--zyper-nav-h)
+    +
+    var(--zyper-safe-bottom)
+    +
+    18px
+  )
+  !important;
+
+  padding-left:
+  var(
+    --zyper-safe-left
+  );
+
+  -webkit-tap-highlight-color:
+  transparent;
+
+}
+
+
+/* =====================================================
+   MEDIA
+===================================================== */
+
+img,
+video,
+canvas,
+svg{
+
+  max-width:
+  100%;
+
+}
+
+
+img,
+video{
+
+  height:
+  auto;
+
+}
+
+
+/* =====================================================
+   FORM / LINKS / BUTTONS
+===================================================== */
+
+button,
+a,
+input,
+select,
+textarea{
+
+  max-width:
+  100%;
+
+}
+
+
+button,
+a,
+[role="button"],
+.card,
+.service-card{
+
+  touch-action:
+  manipulation;
+
+}
+
+
+button,
+a{
+
+  -webkit-tap-highlight-color:
+  transparent;
+
+}
+
+
+input,
+select,
+textarea,
+button{
+
+  font-family:
+  inherit;
+
+}
+
+
+/* =====================================================
+   CONTAINERS
+===================================================== */
+
+.container,
+.wrapper,
+.page,
+.page-container,
+.main-container,
+.content,
+main{
+
+  min-width:
+  0;
+
+}
+
+
+.container{
+
+  width:
+  min(
+    100%,
+    900px
+  );
+
+  margin-left:
+  auto;
+
+  margin-right:
+  auto;
+
+}
+
+
+/* =====================================================
+   TABLE SUPPORT
+===================================================== */
+
+.table-container,
+.table-wrap,
+.table-wrapper,
+.orders-table-wrap{
+
+  max-width:
+  100%;
+
+  overflow-x:
+  auto;
+
+  -webkit-overflow-scrolling:
+  touch;
+
+}
+
+
+table{
+
+  max-width:
+  100%;
+
+}
+
+
+/* =====================================================
+   TOUCH DEVICE
+===================================================== */
+
+@media(hover:none){
+
+  .card:hover,
+  .service-card:hover,
+  button:hover,
+  a:hover{
+
+    transform:
+    none;
+
+  }
+
+}
+
+
+/* =====================================================
+   TABLET / PHONE
+===================================================== */
+
+@media(max-width:768px){
+
+  :root{
+
+    --zyper-topbar-h:
+    64px;
+
+    --zyper-nav-h:
+    70px;
+
+  }
+
+
+  body{
+
+    padding-top:
+    calc(
+      var(--zyper-topbar-h)
+      +
+      var(--zyper-safe-top)
+      +
+      8px
+    )
+    !important;
+
+    padding-bottom:
+    calc(
+      var(--zyper-nav-h)
+      +
+      var(--zyper-safe-bottom)
+      +
+      14px
+    )
+    !important;
+
+  }
+
+
+  /*
+     IMPORTANT FOR IPHONE SAFARI
+
+     font-size 16px prevents Safari
+     automatically zooming when
+     input is selected.
+  */
+
+  input,
+  select,
+  textarea{
+
+    font-size:
+    16px !important;
+
+  }
+
+
+  .container{
+
+    width:
+    100%;
+
+    padding-left:
+    max(
+      12px,
+      var(--zyper-safe-left)
+    );
+
+    padding-right:
+    max(
+      12px,
+      var(--zyper-safe-right)
+    );
+
+  }
+
+
+  .grid{
+
+    min-width:
+    0;
+
+  }
+
+}
+
+
+/* =====================================================
+   SMALL PHONE
+===================================================== */
+
+@media(max-width:480px){
+
+  :root{
+
+    --zyper-topbar-h:
+    62px;
+
+    --zyper-nav-h:
+    68px;
+
+  }
+
+
+  body{
+
+    padding-top:
+    calc(
+      var(--zyper-topbar-h)
+      +
+      var(--zyper-safe-top)
+      +
+      8px
+    )
+    !important;
+
+  }
+
+
+  .container{
+
+    padding-left:
+    max(
+      10px,
+      var(--zyper-safe-left)
+    );
+
+    padding-right:
+    max(
+      10px,
+      var(--zyper-safe-right)
+    );
+
+  }
+
+
+  h1,
+  h2,
+  h3,
+  h4{
+
+    overflow-wrap:
+    anywhere;
+
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONE
+===================================================== */
+
+@media(max-width:360px){
+
+  :root{
+
+    --zyper-topbar-h:
+    60px;
+
+    --zyper-nav-h:
+    66px;
+
+  }
+
+}
+
+
+/* =====================================================
+   PHONE LANDSCAPE
+===================================================== */
+
+@media(
+  max-height:520px
+)
+and
+(
+  orientation:landscape
+){
+
+  :root{
+
+    --zyper-topbar-h:
+    56px;
+
+    --zyper-nav-h:
+    58px;
+
+  }
+
+
+  body{
+
+    padding-top:
+    calc(
+      var(--zyper-topbar-h)
+      +
+      var(--zyper-safe-top)
+      +
+      6px
+    )
+    !important;
+
+    padding-bottom:
+    calc(
+      var(--zyper-nav-h)
+      +
+      var(--zyper-safe-bottom)
+      +
+      8px
+    )
+    !important;
+
+  }
+
+}
+
+
+/* =====================================================
+   OLD SAFARI FALLBACK
+===================================================== */
+
+@supports not (height:100dvh){
+
+  body{
+
+    min-height:
+    100vh;
+
+  }
+
+}
