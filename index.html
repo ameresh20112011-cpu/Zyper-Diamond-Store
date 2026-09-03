@@ -18,10 +18,6 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 
 <style>
 
-/* ==================================================
-   HEADER
-================================================== */
-
 .login-header{
     text-align:center;
     margin-bottom:28px;
@@ -58,6 +54,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     height:100% !important;
 
     display:block !important;
+
     object-fit:cover !important;
 
     border-radius:50% !important;
@@ -76,9 +73,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 }
 
 
-/* ==================================================
-   PASSWORD
-================================================== */
+/* PASSWORD */
 
 .password-group{
     position:relative;
@@ -138,9 +133,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 }
 
 
-/* ==================================================
-   STATUS
-================================================== */
+/* STATUS */
 
 .login-status{
 
@@ -159,9 +152,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 }
 
 
-/* ==================================================
-   GOOGLE DIVIDER
-================================================== */
+/* OR */
 
 .google-divider{
 
@@ -192,9 +183,7 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 }
 
 
-/* ==================================================
-   GOOGLE BUTTON
-================================================== */
+/* GOOGLE */
 
 .google-login-button{
 
@@ -248,16 +237,12 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 }
 
 
-/* MORE GAP GOOGLE -> CREATE ACCOUNT */
+/* GOOGLE -> CREATE ACCOUNT GAP */
 
 .signup-link{
     margin-top:30px !important;
 }
 
-
-/* ==================================================
-   MOBILE
-================================================== */
 
 @media(max-width:500px){
 
@@ -440,9 +425,7 @@ d="M17.94 17.94A10.07 10.07 0 0 1 12 20"
 d="M9.9 4.24A9.12 9.12 0 0 1 12 4"
 />
 
-<path
-d="M3 3l18 18"
-/>
+<path d="M3 3l18 18"/>
 
 <path
 d="M6.71 6.71C3.93 8.5 2 12 2 12s4 8 10 8c1.52 0 2.9-.38 4.12-.98"
@@ -577,7 +560,7 @@ OR
 
 
 
-<!-- GOOGLE LOGIN -->
+<!-- GOOGLE -->
 
 <button
 type="button"
@@ -700,50 +683,88 @@ from
 
 
 /* ==================================================
+   OTP WORKER
+================================================== */
+
+const OTP_WORKER =
+"https://zyper-email-otp.ameresh20112011.workers.dev/";
+
+
+
+/* ==================================================
    ELEMENTS
 ================================================== */
 
 const loginForm =
-document.getElementById("loginForm");
+document.getElementById(
+    "loginForm"
+);
 
 const emailInput =
-document.getElementById("email");
+document.getElementById(
+    "email"
+);
 
 const passwordInput =
-document.getElementById("password");
+document.getElementById(
+    "password"
+);
 
 const passwordToggle =
-document.getElementById("passwordToggle");
+document.getElementById(
+    "passwordToggle"
+);
 
 const eyeOpen =
-document.getElementById("eyeOpen");
+document.getElementById(
+    "eyeOpen"
+);
 
 const eyeClosed =
-document.getElementById("eyeClosed");
+document.getElementById(
+    "eyeClosed"
+);
 
 const rememberInput =
-document.getElementById("remember");
+document.getElementById(
+    "remember"
+);
 
 const loginButton =
-document.getElementById("loginButton");
+document.getElementById(
+    "loginButton"
+);
 
 const loginText =
-document.getElementById("loginText");
+document.getElementById(
+    "loginText"
+);
 
 const loginLoading =
-document.getElementById("loginLoading");
+document.getElementById(
+    "loginLoading"
+);
 
 const loginStatus =
-document.getElementById("loginStatus");
+document.getElementById(
+    "loginStatus"
+);
 
 const googleLoginButton =
-document.getElementById("googleLoginButton");
+document.getElementById(
+    "googleLoginButton"
+);
 
 const googleLoginText =
-document.getElementById("googleLoginText");
+document.getElementById(
+    "googleLoginText"
+);
 
 
 let loginInProgress =
+false;
+
+let initialAuthChecked =
 false;
 
 
@@ -760,7 +781,6 @@ function showStatus(
     loginStatus.style.display =
     "block";
 
-
     loginStatus.textContent =
     message;
 
@@ -769,7 +789,6 @@ function showStatus(
 
         loginStatus.style.color =
         "#4ade80";
-
 
         loginStatus.style.background =
         "rgba(34,197,94,.10)";
@@ -781,14 +800,12 @@ function showStatus(
         loginStatus.style.color =
         "#fca5a5";
 
-
         loginStatus.style.background =
         "rgba(239,68,68,.10)";
 
     }
 
 }
-
 
 
 function clearStatus(){
@@ -804,7 +821,7 @@ function clearStatus(){
 
 
 /* ==================================================
-   LOADING
+   LOGIN BUTTON
 ================================================== */
 
 function setLoading(
@@ -814,14 +831,12 @@ function setLoading(
     loginButton.disabled =
     loading;
 
-
     loginText.style.display =
     loading
     ?
     "none"
     :
     "inline";
-
 
     loginLoading.style.display =
     loading
@@ -835,13 +850,14 @@ function setLoading(
 
 
 /* ==================================================
-   PASSWORD SHOW / HIDE
+   PASSWORD EYE
 ================================================== */
 
 function togglePassword(){
 
     const hidden =
-    passwordInput.type === "password";
+    passwordInput.type ===
+    "password";
 
 
     if(hidden){
@@ -849,20 +865,16 @@ function togglePassword(){
         passwordInput.type =
         "text";
 
-
         eyeOpen.style.display =
         "none";
 
-
         eyeClosed.style.display =
         "block";
-
 
         passwordToggle.setAttribute(
             "aria-label",
             "Hide password"
         );
-
 
         passwordToggle.setAttribute(
             "aria-pressed",
@@ -876,20 +888,16 @@ function togglePassword(){
         passwordInput.type =
         "password";
 
-
         eyeOpen.style.display =
         "block";
 
-
         eyeClosed.style.display =
         "none";
-
 
         passwordToggle.setAttribute(
             "aria-label",
             "Show password"
         );
-
 
         passwordToggle.setAttribute(
             "aria-pressed",
@@ -901,7 +909,6 @@ function togglePassword(){
 }
 
 
-
 passwordToggle.addEventListener(
     "pointerdown",
     function(event){
@@ -910,7 +917,6 @@ passwordToggle.addEventListener(
 
     }
 );
-
 
 
 passwordToggle.addEventListener(
@@ -935,42 +941,139 @@ passwordToggle.addEventListener(
 
 
 /* ==================================================
-   CHECK PASSWORD ACCOUNT OTP STATUS
+   PASSWORD PROVIDER CHECK
 ================================================== */
 
-async function checkOtpVerified(
+function isPasswordUser(
+    user
+){
+
+    if(
+        !user ||
+        !Array.isArray(
+            user.providerData
+        )
+    ){
+
+        return false;
+
+    }
+
+
+    return user.providerData.some(
+        function(provider){
+
+            return (
+                provider.providerId ===
+                "password"
+            );
+
+        }
+    );
+
+}
+
+
+
+/* ==================================================
+   SERVER-SIDE OTP CHECK
+================================================== */
+
+async function checkServerVerification(
     user
 ){
 
     try{
 
-        const userRef =
-        doc(
-            db,
-            "users",
-            user.uid
-        );
-
-
-        const userSnap =
-        await getDoc(
-            userRef
-        );
-
-
-        if(!userSnap.exists()){
+        if(!user){
 
             return false;
 
         }
 
 
-        const userData =
-        userSnap.data();
+        /*
+           Fresh Firebase token.
+        */
+
+        const idToken =
+        await user.getIdToken(
+            true
+        );
+
+
+        const response =
+        await fetch(
+            OTP_WORKER,
+            {
+
+                method:
+                    "POST",
+
+                headers:{
+
+                    "Content-Type":
+                        "application/json",
+
+                    "Authorization":
+                        "Bearer " +
+                        idToken
+
+                },
+
+                body:
+                    JSON.stringify({
+
+                        action:
+                            "check_verified"
+
+                    })
+
+            }
+        );
+
+
+        let data = null;
+
+
+        try{
+
+            data =
+            await response.json();
+
+        }
+
+        catch(error){
+
+            console.error(
+                "WORKER JSON ERROR:",
+                error
+            );
+
+
+            return false;
+
+        }
+
+
+        if(
+            !response.ok
+        ){
+
+            console.error(
+                "WORKER CHECK FAILED:",
+                data
+            );
+
+
+            return false;
+
+        }
 
 
         return (
-            userData.otpVerified === true
+            data.success === true &&
+            data.verified === true
         );
 
     }
@@ -978,7 +1081,7 @@ async function checkOtpVerified(
     catch(error){
 
         console.error(
-            "OTP STATUS CHECK ERROR:",
+            "SERVER OTP CHECK ERROR:",
             error
         );
 
@@ -992,7 +1095,7 @@ async function checkOtpVerified(
 
 
 /* ==================================================
-   SAVE GOOGLE USER
+   GOOGLE USER -> FIRESTORE
 ================================================== */
 
 async function saveGoogleUserToFirestore(
@@ -1016,49 +1119,48 @@ async function saveGoogleUserToFirestore(
     );
 
 
-    const userSnapshot =
+    const snapshot =
     await getDoc(
         userRef
     );
 
 
-    /* FIRST LOGIN */
+    /*
+       NEW GOOGLE USER
+    */
 
-    if(!userSnapshot.exists()){
+    if(!snapshot.exists()){
 
         await setDoc(
             userRef,
             {
 
                 uid:
-                user.uid,
+                    user.uid,
 
                 email:
-                user.email || "",
+                    user.email || "",
 
                 name:
-                user.displayName || "",
+                    user.displayName || "",
 
                 username:
-                user.displayName || "",
+                    user.displayName || "",
 
                 photoURL:
-                user.photoURL || "",
+                    user.photoURL || "",
 
                 provider:
-                "google",
+                    "google",
 
                 role:
-                "customer",
-
-                otpVerified:
-                true,
+                    "customer",
 
                 createdAt:
-                serverTimestamp(),
+                    serverTimestamp(),
 
                 lastLoginAt:
-                serverTimestamp()
+                    serverTimestamp()
 
             }
         );
@@ -1068,6 +1170,7 @@ async function saveGoogleUserToFirestore(
     else{
 
         /*
+           EXISTING GOOGLE USER
            DO NOT OVERWRITE ROLE
         */
 
@@ -1076,25 +1179,25 @@ async function saveGoogleUserToFirestore(
             {
 
                 uid:
-                user.uid,
+                    user.uid,
 
                 email:
-                user.email || "",
+                    user.email || "",
 
                 name:
-                user.displayName || "",
+                    user.displayName || "",
 
                 username:
-                user.displayName || "",
+                    user.displayName || "",
 
                 photoURL:
-                user.photoURL || "",
+                    user.photoURL || "",
 
                 provider:
-                "google",
+                    "google",
 
                 lastLoginAt:
-                serverTimestamp()
+                    serverTimestamp()
 
             },
             {
@@ -1109,7 +1212,7 @@ async function saveGoogleUserToFirestore(
 
 
 /* ==================================================
-   ALREADY LOGGED IN
+   ALREADY LOGGED-IN USER
 ================================================== */
 
 const unsubscribe =
@@ -1120,10 +1223,30 @@ onAuthStateChanged(
     async function(user){
 
 
-        if(
-            !user ||
-            loginInProgress
-        ){
+        /*
+           Prevent repeated initial redirects
+           during manual login operation.
+        */
+
+        if(loginInProgress){
+
+            return;
+
+        }
+
+
+        if(initialAuthChecked){
+
+            return;
+
+        }
+
+
+        initialAuthChecked =
+        true;
+
+
+        if(!user){
 
             return;
 
@@ -1131,58 +1254,49 @@ onAuthStateChanged(
 
 
         /*
-           CHECK PROVIDER
+           GOOGLE / NON-PASSWORD USER
         */
 
-        const passwordUser =
-        user.providerData.some(
-            function(provider){
+        if(
+            !isPasswordUser(user)
+        ){
 
-                return (
-                    provider.providerId ===
-                    "password"
-                );
-
-            }
-        );
-
-
-        /*
-           PASSWORD USER MUST HAVE
-           otpVerified:true
-        */
-
-        if(passwordUser){
-
-            const verified =
-            await checkOtpVerified(
-                user
+            window.location.replace(
+                "./home.html"
             );
 
-
-            if(!verified){
-
-                await signOut(
-                    auth
-                );
-
-
-                showStatus(
-                    "Please verify your email OTP first."
-                );
-
-
-                return;
-
-            }
+            return;
 
         }
 
 
         /*
-           VERIFIED / GOOGLE USER
-           GO HOME
+           PASSWORD USER:
+           VERIFY SERVER-SIDE
         */
+
+        const verified =
+        await checkServerVerification(
+            user
+        );
+
+
+        if(!verified){
+
+            await signOut(
+                auth
+            );
+
+
+            showStatus(
+                "This account has not completed email OTP verification."
+            );
+
+
+            return;
+
+        }
+
 
         window.location.replace(
             "./home.html"
@@ -1205,7 +1319,7 @@ new GoogleAuthProvider();
 googleProvider.setCustomParameters({
 
     prompt:
-    "select_account"
+        "select_account"
 
 });
 
@@ -1247,9 +1361,11 @@ googleLoginButton.addEventListener(
         try{
 
 
-            /* PERSISTENCE */
+            /* REMEMBER ME */
 
-            if(rememberInput.checked){
+            if(
+                rememberInput.checked
+            ){
 
                 await setPersistence(
                     auth,
@@ -1288,7 +1404,7 @@ googleLoginButton.addEventListener(
 
 
 
-            /* SAVE FIRESTORE USER */
+            /* SAVE GOOGLE PROFILE */
 
             await saveGoogleUserToFirestore(
                 result.user
@@ -1296,7 +1412,7 @@ googleLoginButton.addEventListener(
 
 
 
-            /* REFRESH TOKEN */
+            /* FRESH TOKEN */
 
             await result.user.getIdToken(
                 true
@@ -1349,7 +1465,6 @@ googleLoginButton.addEventListener(
             "Google login failed. Please try again.";
 
 
-
             if(
                 error.code ===
                 "auth/popup-closed-by-user" ||
@@ -1362,7 +1477,6 @@ googleLoginButton.addEventListener(
 
             }
 
-
             else if(
                 error.code ===
                 "auth/popup-blocked"
@@ -1373,17 +1487,15 @@ googleLoginButton.addEventListener(
 
             }
 
-
             else if(
                 error.code ===
                 "auth/account-exists-with-different-credential"
             ){
 
                 message =
-                "This email already has another login method. Please use your existing login method.";
+                "This email already has another login method.";
 
             }
-
 
             else if(
                 error.code ===
@@ -1394,7 +1506,6 @@ googleLoginButton.addEventListener(
                 "This website domain is not authorized for Google login.";
 
             }
-
 
             else if(
                 error.code ===
@@ -1437,15 +1548,14 @@ loginForm.addEventListener(
 
 
         const email =
-        emailInput.value.trim();
+        emailInput.value
+        .trim()
+        .toLowerCase();
 
 
         const password =
         passwordInput.value;
 
-
-
-        /* EMAIL */
 
         if(!email){
 
@@ -1461,9 +1571,6 @@ loginForm.addEventListener(
         }
 
 
-
-        /* PASSWORD */
-
         if(!password){
 
             showStatus(
@@ -1478,7 +1585,6 @@ loginForm.addEventListener(
         }
 
 
-
         loginInProgress =
         true;
 
@@ -1491,9 +1597,11 @@ loginForm.addEventListener(
         try{
 
 
-            /* PERSISTENCE */
+            /* REMEMBER ME */
 
-            if(rememberInput.checked){
+            if(
+                rememberInput.checked
+            ){
 
                 await setPersistence(
                     auth,
@@ -1533,12 +1641,16 @@ loginForm.addEventListener(
 
 
 
-            /* ==================================================
-               CHECK OTP VERIFIED IN FIRESTORE
-            ================================================== */
+            /*
+               IMPORTANT:
+               FIRESTORE otpVerified FIELD
+               IS NOT TRUSTED HERE.
+
+               SERVER WORKER MUST CONFIRM.
+            */
 
             const verified =
-            await checkOtpVerified(
+            await checkServerVerification(
                 result.user
             );
 
@@ -1560,7 +1672,7 @@ loginForm.addEventListener(
 
 
                 showStatus(
-                    "This account has not completed email OTP verification."
+                    "This account has not completed secure email OTP verification."
                 );
 
 
@@ -1570,9 +1682,7 @@ loginForm.addEventListener(
 
 
 
-            /* ==================================================
-               UPDATE LAST LOGIN
-            ================================================== */
+            /* UPDATE LAST LOGIN */
 
             await setDoc(
                 doc(
@@ -1583,10 +1693,11 @@ loginForm.addEventListener(
                 {
 
                     email:
-                    result.user.email || email,
+                        result.user.email ||
+                        email,
 
                     lastLoginAt:
-                    serverTimestamp()
+                        serverTimestamp()
 
                 },
                 {
@@ -1596,7 +1707,7 @@ loginForm.addEventListener(
 
 
 
-            /* REFRESH TOKEN */
+            /* FRESH TOKEN */
 
             await result.user.getIdToken(
                 true
@@ -1608,7 +1719,6 @@ loginForm.addEventListener(
                 "Login successful ✓",
                 "success"
             );
-
 
 
             setTimeout(
@@ -1647,7 +1757,6 @@ loginForm.addEventListener(
             "Unable to login. Please try again.";
 
 
-
             if(
                 error.code ===
                 "auth/invalid-credential" ||
@@ -1660,7 +1769,6 @@ loginForm.addEventListener(
 
             }
 
-
             else if(
                 error.code ===
                 "auth/user-not-found"
@@ -1670,7 +1778,6 @@ loginForm.addEventListener(
                 "No account found with this email.";
 
             }
-
 
             else if(
                 error.code ===
@@ -1682,7 +1789,6 @@ loginForm.addEventListener(
 
             }
 
-
             else if(
                 error.code ===
                 "auth/too-many-requests"
@@ -1692,7 +1798,6 @@ loginForm.addEventListener(
                 "Too many login attempts. Please try again later.";
 
             }
-
 
             else if(
                 error.code ===
