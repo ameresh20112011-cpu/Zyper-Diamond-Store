@@ -25,10 +25,8 @@ content="width=device-width, initial-scale=1.0">
 .company-logo{
     width:76px !important;
     height:76px !important;
-
     min-width:76px !important;
     min-height:76px !important;
-
     max-width:76px !important;
     max-height:76px !important;
 
@@ -39,7 +37,6 @@ content="width=device-width, initial-scale=1.0">
     overflow:hidden !important;
 
     display:flex !important;
-
     align-items:center !important;
     justify-content:center !important;
 
@@ -54,7 +51,6 @@ content="width=device-width, initial-scale=1.0">
     height:100% !important;
 
     display:block !important;
-
     object-fit:cover !important;
 
     border-radius:50% !important;
@@ -80,25 +76,19 @@ content="width=device-width, initial-scale=1.0">
 }
 
 .password-toggle{
-
     position:absolute;
-
     right:8px;
     top:50%;
-
     transform:translateY(-50%);
 
     width:40px;
     height:40px;
 
     border:0;
-
     background:transparent;
-
     cursor:pointer;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
@@ -111,26 +101,20 @@ content="width=device-width, initial-scale=1.0">
 }
 
 .status{
-
     display:none;
-
     text-align:center;
 
     margin-top:15px;
-
     padding:10px;
 
     border-radius:10px;
 
-    font-weight:600;
-
     font-size:13px;
+    font-weight:600;
 }
 
 
-/* ===============================================
-   SEND OTP
-=============================================== */
+/* EMAIL + OTP BUTTON */
 
 .email-row{
     display:flex;
@@ -143,24 +127,19 @@ content="width=device-width, initial-scale=1.0">
 }
 
 .send-otp-btn{
-
     min-width:95px;
-
-    border:0;
-
-    border-radius:12px;
-
     padding:0 12px;
 
-    cursor:pointer;
+    border:0;
+    border-radius:12px;
 
-    font-weight:700;
+    background:#fff;
+    color:#111827;
 
     font-size:12px;
+    font-weight:700;
 
-    background:#ffffff;
-
-    color:#111827;
+    cursor:pointer;
 
     box-shadow:
     0 5px 15px rgba(0,0,0,.15);
@@ -172,16 +151,12 @@ content="width=device-width, initial-scale=1.0">
 }
 
 
-/* ===============================================
-   OTP AREA
-=============================================== */
+/* OTP */
 
 .otp-area{
-
     display:none;
 
     margin-top:15px;
-
     padding:16px 12px;
 
     border-radius:15px;
@@ -194,40 +169,29 @@ content="width=device-width, initial-scale=1.0">
 }
 
 .otp-title{
-
     text-align:center;
-
     font-size:13px;
-
     margin-bottom:12px;
-
     opacity:.8;
 }
 
 .otp-boxes{
-
     display:flex;
-
     justify-content:center;
-
     gap:7px;
-
     margin-bottom:13px;
 }
 
 .otp-box{
-
     width:42px;
     height:48px;
 
     text-align:center;
 
     font-size:21px !important;
-
     font-weight:800;
 
     border:0;
-
     outline:0;
 
     border-radius:10px;
@@ -236,58 +200,37 @@ content="width=device-width, initial-scale=1.0">
     rgba(255,255,255,.09);
 
     color:white;
-
-    box-shadow:
-    inset 2px 2px 6px rgba(0,0,0,.16);
 }
 
 .verify-otp-btn{
-
     width:100%;
-
     min-height:44px;
 
     border:0;
-
     border-radius:12px;
 
-    cursor:pointer;
-
-    font-weight:800;
-
-    background:#ffffff;
-
+    background:#fff;
     color:#111827;
+
+    cursor:pointer;
+    font-weight:800;
 }
 
 .verify-otp-btn:disabled{
     opacity:.55;
 }
 
-
-/* ===============================================
-   OTP VERIFIED
-=============================================== */
-
 .verified-message{
-
     display:none;
 
     text-align:center;
+    margin-top:10px;
 
     color:#22c55e;
 
     font-size:13px;
-
     font-weight:800;
-
-    margin-top:10px;
 }
-
-
-/* ===============================================
-   CREATE BUTTON LOCKED
-=============================================== */
 
 #registerButton:disabled{
     opacity:.55;
@@ -300,6 +243,12 @@ content="width=device-width, initial-scale=1.0">
     .company-logo{
         width:68px !important;
         height:68px !important;
+
+        min-width:68px !important;
+        min-height:68px !important;
+
+        max-width:68px !important;
+        max-height:68px !important;
     }
 
     .brand-name{
@@ -333,7 +282,6 @@ content="width=device-width, initial-scale=1.0">
 
 <body>
 
-
 <div class="login-container">
 
 <div class="login-card">
@@ -349,18 +297,15 @@ alt="Zyper Diamond Store">
 
 </div>
 
-
 <h2 class="brand-name">
 Zyper Diamond Store
 </h2>
-
 
 <p class="brand-subtitle">
 Create your account
 </p>
 
 </div>
-
 
 
 <form
@@ -415,8 +360,7 @@ Phone Number
 </div>
 
 
-
-<!-- EMAIL + SEND OTP -->
+<!-- EMAIL -->
 
 <div class="form-group">
 
@@ -452,56 +396,26 @@ Send OTP
 </div>
 
 
-
-<!-- OTP AREA -->
+<!-- OTP -->
 
 <div
 id="otpArea"
 class="otp-area">
 
-
 <div class="otp-title">
-
 Enter the 6-digit code sent to your email
-
 </div>
-
 
 <div class="otp-boxes">
 
-<input
-class="otp-box"
-maxlength="1"
-inputmode="numeric"
-autocomplete="one-time-code">
-
-<input
-class="otp-box"
-maxlength="1"
-inputmode="numeric">
-
-<input
-class="otp-box"
-maxlength="1"
-inputmode="numeric">
-
-<input
-class="otp-box"
-maxlength="1"
-inputmode="numeric">
-
-<input
-class="otp-box"
-maxlength="1"
-inputmode="numeric">
-
-<input
-class="otp-box"
-maxlength="1"
-inputmode="numeric">
+<input class="otp-box" maxlength="1" inputmode="numeric" autocomplete="one-time-code">
+<input class="otp-box" maxlength="1" inputmode="numeric">
+<input class="otp-box" maxlength="1" inputmode="numeric">
+<input class="otp-box" maxlength="1" inputmode="numeric">
+<input class="otp-box" maxlength="1" inputmode="numeric">
+<input class="otp-box" maxlength="1" inputmode="numeric">
 
 </div>
-
 
 <button
 type="button"
@@ -512,7 +426,6 @@ Verify OTP
 
 </button>
 
-
 <div
 id="verifiedMessage"
 class="verified-message">
@@ -521,9 +434,7 @@ class="verified-message">
 
 </div>
 
-
 </div>
-
 
 
 <!-- PASSWORD -->
@@ -544,13 +455,11 @@ autocomplete="new-password">
 Password
 </label>
 
-
 <button
 type="button"
 id="passwordToggle"
 class="password-toggle"
 aria-label="Show password">
-
 
 <svg
 id="eyeOpen"
@@ -560,14 +469,9 @@ stroke="currentColor"
 stroke-width="2">
 
 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-
-<circle
-cx="12"
-cy="12"
-r="3"/>
+<circle cx="12" cy="12" r="3"/>
 
 </svg>
-
 
 <svg
 id="eyeClosed"
@@ -578,14 +482,8 @@ stroke-width="2"
 style="display:none;">
 
 <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8"/>
-
 <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8"/>
-
-<line
-x1="1"
-y1="1"
-x2="23"
-y2="23"/>
+<line x1="1" y1="1" x2="23" y2="23"/>
 
 </svg>
 
@@ -596,8 +494,7 @@ y2="23"/>
 </div>
 
 
-
-<!-- CREATE ACCOUNT -->
+<!-- REGISTER -->
 
 <button
 type="submit"
@@ -660,7 +557,7 @@ from "./firebase.js";
 
 
 import {
-    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
     updateProfile
 }
 from
@@ -676,90 +573,115 @@ from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* ==================================================
-   OTP WORKER
-================================================== */
-
 const OTP_WORKER =
-
 "https://zyper-email-otp.ameresh20112011.workers.dev/";
 
 
-/* ==================================================
-   ELEMENTS
-================================================== */
-
 const form =
-document.getElementById("registerForm");
+document.getElementById(
+    "registerForm"
+);
 
 const username =
-document.getElementById("username");
+document.getElementById(
+    "username"
+);
 
 const phone =
-document.getElementById("phone");
+document.getElementById(
+    "phone"
+);
 
 const email =
-document.getElementById("email");
+document.getElementById(
+    "email"
+);
 
 const password =
-document.getElementById("password");
+document.getElementById(
+    "password"
+);
 
 
 const toggle =
-document.getElementById("passwordToggle");
+document.getElementById(
+    "passwordToggle"
+);
 
 const eyeOpen =
-document.getElementById("eyeOpen");
+document.getElementById(
+    "eyeOpen"
+);
 
 const eyeClosed =
-document.getElementById("eyeClosed");
+document.getElementById(
+    "eyeClosed"
+);
 
 
 const sendOtpButton =
-document.getElementById("sendOtpButton");
+document.getElementById(
+    "sendOtpButton"
+);
 
 const otpArea =
-document.getElementById("otpArea");
+document.getElementById(
+    "otpArea"
+);
 
 const otpBoxes =
 Array.from(
-    document.querySelectorAll(".otp-box")
+    document.querySelectorAll(
+        ".otp-box"
+    )
 );
 
 const verifyOtpButton =
-document.getElementById("verifyOtpButton");
+document.getElementById(
+    "verifyOtpButton"
+);
 
 const verifiedMessage =
-document.getElementById("verifiedMessage");
+document.getElementById(
+    "verifiedMessage"
+);
 
 
-const button =
-document.getElementById("registerButton");
+const registerButton =
+document.getElementById(
+    "registerButton"
+);
 
 const registerText =
-document.getElementById("registerText");
+document.getElementById(
+    "registerText"
+);
 
 const registerLoading =
-document.getElementById("registerLoading");
+document.getElementById(
+    "registerLoading"
+);
 
 const status =
-document.getElementById("status");
+document.getElementById(
+    "status"
+);
 
 
-let otpVerified = false;
+let otpVerified =
+false;
 
-let verifiedEmail = "";
+let verifiedEmail =
+"";
 
-let verificationToken = "";
+let verificationToken =
+"";
 
-let resendSeconds = 0;
+let resendTimer =
+null;
 
-let resendTimer = null;
 
-
-/* ==================================================
-   STATUS
-================================================== */
+/* STATUS */
 
 function showStatus(
     message,
@@ -771,6 +693,7 @@ function showStatus(
 
     status.textContent =
     message;
+
 
     if(success){
 
@@ -806,13 +729,11 @@ function clearStatus(){
 }
 
 
-/* ==================================================
-   PASSWORD
-================================================== */
+/* PASSWORD */
 
 toggle.addEventListener(
     "click",
-    () => {
+    function(){
 
         if(
             password.type ===
@@ -847,15 +768,13 @@ toggle.addEventListener(
 );
 
 
-/* ==================================================
-   EMAIL CHANGE
-================================================== */
+/* EMAIL CHANGE INVALIDATES OTP */
 
 email.addEventListener(
     "input",
     function(){
 
-        const currentEmail =
+        const value =
         email.value
         .trim()
         .toLowerCase();
@@ -863,7 +782,7 @@ email.addEventListener(
 
         if(
             otpVerified &&
-            currentEmail !== verifiedEmail
+            value !== verifiedEmail
         ){
 
             otpVerified =
@@ -875,15 +794,31 @@ email.addEventListener(
             verificationToken =
             "";
 
-            button.disabled =
+            registerButton.disabled =
             true;
 
             verifiedMessage.style.display =
             "none";
 
-            showStatus(
-                "Email changed. Please verify the new email."
+
+            otpBoxes.forEach(
+                function(box){
+
+                    box.disabled =
+                    false;
+
+                    box.value =
+                    "";
+
+                }
             );
+
+
+            verifyOtpButton.disabled =
+            false;
+
+            verifyOtpButton.textContent =
+            "Verify OTP";
 
         }
 
@@ -891,9 +826,7 @@ email.addEventListener(
 );
 
 
-/* ==================================================
-   OTP BOX CONTROLS
-================================================== */
+/* OTP INPUT */
 
 otpBoxes.forEach(
     function(box, index){
@@ -929,7 +862,8 @@ otpBoxes.forEach(
             function(event){
 
                 if(
-                    event.key === "Backspace" &&
+                    event.key ===
+                    "Backspace" &&
                     !box.value &&
                     index > 0
                 ){
@@ -948,7 +882,7 @@ otpBoxes.forEach(
             "paste",
             function(event){
 
-                const pasted =
+                const text =
                 (
                     event.clipboardData ||
                     window.clipboardData
@@ -958,7 +892,7 @@ otpBoxes.forEach(
                 .slice(0,6);
 
 
-                if(!pasted){
+                if(!text){
 
                     return;
 
@@ -968,38 +902,22 @@ otpBoxes.forEach(
                 event.preventDefault();
 
 
-                pasted
+                text
                 .split("")
                 .forEach(
-                    function(number, position){
+                    function(number, i){
 
                         if(
-                            otpBoxes[position]
+                            otpBoxes[i]
                         ){
 
-                            otpBoxes[position].value =
+                            otpBoxes[i].value =
                             number;
 
                         }
 
                     }
                 );
-
-
-                const next =
-                Math.min(
-                    pasted.length,
-                    otpBoxes.length
-                ) - 1;
-
-
-                if(
-                    otpBoxes[next]
-                ){
-
-                    otpBoxes[next].focus();
-
-                }
 
             }
         );
@@ -1008,13 +926,11 @@ otpBoxes.forEach(
 );
 
 
-/* ==================================================
-   RESEND TIMER
-================================================== */
+/* RESEND TIMER */
 
 function startResendTimer(){
 
-    resendSeconds =
+    let seconds =
     60;
 
 
@@ -1039,11 +955,11 @@ function startResendTimer(){
     setInterval(
         function(){
 
-            resendSeconds--;
+            seconds--;
 
 
             if(
-                resendSeconds <= 0
+                seconds <= 0
             ){
 
                 clearInterval(
@@ -1061,13 +977,14 @@ function startResendTimer(){
                 sendOtpButton.textContent =
                 "Resend OTP";
 
+
                 return;
 
             }
 
 
             sendOtpButton.textContent =
-            resendSeconds + "s";
+            seconds + "s";
 
         },
         1000
@@ -1076,9 +993,7 @@ function startResendTimer(){
 }
 
 
-/* ==================================================
-   SEND OTP
-================================================== */
+/* SEND OTP */
 
 sendOtpButton.addEventListener(
     "click",
@@ -1093,22 +1008,11 @@ sendOtpButton.addEventListener(
         .toLowerCase();
 
 
-        if(!emailValue){
-
-            showStatus(
-                "Please enter your email address."
-            );
-
-            email.focus();
-
-            return;
-
-        }
-
-
         if(
             !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
-            .test(emailValue)
+            .test(
+                emailValue
+            )
         ){
 
             showStatus(
@@ -1135,23 +1039,23 @@ sendOtpButton.addEventListener(
                 {
 
                     method:
-                    "POST",
+                        "POST",
 
                     headers:{
                         "Content-Type":
-                        "application/json"
+                            "application/json"
                     },
 
                     body:
-                    JSON.stringify({
+                        JSON.stringify({
 
-                        action:
-                        "send_otp",
+                            action:
+                                "send_otp",
 
-                        email:
-                        emailValue
+                            email:
+                                emailValue
 
-                    })
+                        })
 
                 }
             );
@@ -1174,10 +1078,6 @@ sendOtpButton.addEventListener(
             }
 
 
-            otpArea.style.display =
-            "block";
-
-
             otpVerified =
             false;
 
@@ -1187,22 +1087,37 @@ sendOtpButton.addEventListener(
             verificationToken =
             "";
 
-            button.disabled =
-            true;
+
+            otpArea.style.display =
+            "block";
 
 
             verifiedMessage.style.display =
             "none";
 
 
+            registerButton.disabled =
+            true;
+
+
             otpBoxes.forEach(
                 function(box){
+
+                    box.disabled =
+                    false;
 
                     box.value =
                     "";
 
                 }
             );
+
+
+            verifyOtpButton.disabled =
+            false;
+
+            verifyOtpButton.textContent =
+            "Verify OTP";
 
 
             otpBoxes[0].focus();
@@ -1221,7 +1136,6 @@ sendOtpButton.addEventListener(
         catch(error){
 
             console.error(
-                "SEND OTP ERROR:",
                 error
             );
 
@@ -1244,9 +1158,7 @@ sendOtpButton.addEventListener(
 );
 
 
-/* ==================================================
-   VERIFY OTP
-================================================== */
+/* VERIFY OTP */
 
 verifyOtpButton.addEventListener(
     "click",
@@ -1274,7 +1186,7 @@ verifyOtpButton.addEventListener(
         ){
 
             showStatus(
-                "Please enter the complete 6-digit OTP."
+                "Enter the complete 6-digit OTP."
             );
 
             return;
@@ -1297,26 +1209,26 @@ verifyOtpButton.addEventListener(
                 {
 
                     method:
-                    "POST",
+                        "POST",
 
                     headers:{
                         "Content-Type":
-                        "application/json"
+                            "application/json"
                     },
 
                     body:
-                    JSON.stringify({
+                        JSON.stringify({
 
-                        action:
-                        "verify_otp",
+                            action:
+                                "verify_otp",
 
-                        email:
-                        emailValue,
+                            email:
+                                emailValue,
 
-                        otp:
-                        otp
+                            otp:
+                                otp
 
-                    })
+                        })
 
                 }
             );
@@ -1329,12 +1241,13 @@ verifyOtpButton.addEventListener(
             if(
                 !response.ok ||
                 !data.success ||
-                !data.verified
+                !data.verified ||
+                !data.verificationToken
             ){
 
                 throw new Error(
                     data.message ||
-                    "Incorrect OTP."
+                    "OTP verification failed."
                 );
 
             }
@@ -1347,7 +1260,7 @@ verifyOtpButton.addEventListener(
             emailValue;
 
             verificationToken =
-            data.verificationToken || "";
+            data.verificationToken;
 
 
             verifiedMessage.style.display =
@@ -1368,12 +1281,12 @@ verifyOtpButton.addEventListener(
             );
 
 
-            button.disabled =
-            false;
-
-
             email.readOnly =
             true;
+
+
+            registerButton.disabled =
+            false;
 
 
             showStatus(
@@ -1386,7 +1299,6 @@ verifyOtpButton.addEventListener(
         catch(error){
 
             console.error(
-                "VERIFY OTP ERROR:",
                 error
             );
 
@@ -1409,15 +1321,13 @@ verifyOtpButton.addEventListener(
 );
 
 
-/* ==================================================
-   REGISTER
-================================================== */
+/* REGISTER */
 
 form.addEventListener(
     "submit",
-    async function(e){
+    async function(event){
 
-        e.preventDefault();
+        event.preventDefault();
 
 
         clearStatus();
@@ -1426,13 +1336,16 @@ form.addEventListener(
         const usernameValue =
         username.value.trim();
 
+
         const phoneValue =
         phone.value.trim();
+
 
         const emailValue =
         email.value
         .trim()
         .toLowerCase();
+
 
         const passwordValue =
         password.value;
@@ -1462,21 +1375,10 @@ form.addEventListener(
         }
 
 
-        if(!emailValue){
-
-            showStatus(
-                "Please enter your email."
-            );
-
-            return;
-
-        }
-
-
         if(
             !otpVerified ||
-            emailValue !==
-            verifiedEmail
+            !verificationToken ||
+            emailValue !== verifiedEmail
         ){
 
             showStatus(
@@ -1503,22 +1405,87 @@ form.addEventListener(
 
         try{
 
-            button.disabled =
+            registerButton.disabled =
             true;
+
 
             registerText.style.display =
             "none";
+
 
             registerLoading.style.display =
             "inline";
 
 
-            /* ======================================
-               CREATE FIREBASE AUTH ACCOUNT
-            ====================================== */
+            /*
+               WORKER CONSUMES TOKEN
+               AND CREATES FIREBASE ACCOUNT
+            */
 
-            const result =
-            await createUserWithEmailAndPassword(
+            const response =
+            await fetch(
+                OTP_WORKER,
+                {
+
+                    method:
+                        "POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            action:
+                                "complete_registration",
+
+                            username:
+                                usernameValue,
+
+                            phone:
+                                phoneValue,
+
+                            email:
+                                emailValue,
+
+                            password:
+                                passwordValue,
+
+                            verificationToken:
+                                verificationToken
+
+                        })
+
+                }
+            );
+
+
+            const data =
+            await response.json();
+
+
+            if(
+                !response.ok ||
+                !data.success
+            ){
+
+                throw new Error(
+                    data.message ||
+                    "Unable to create account."
+                );
+
+            }
+
+
+            /*
+               WORKER CREATED ACCOUNT.
+               NOW SIGN INTO FIREBASE CLIENT.
+            */
+
+            const loginResult =
+            await signInWithEmailAndPassword(
                 auth,
                 emailValue,
                 passwordValue
@@ -1526,27 +1493,29 @@ form.addEventListener(
 
 
             const user =
-            result.user;
+            loginResult.user;
 
 
-            /* ======================================
-               USERNAME
-            ====================================== */
+            /*
+               NORMAL PROFILE NAME
+            */
 
             await updateProfile(
                 user,
                 {
-
                     displayName:
-                    usernameValue
-
+                        usernameValue
                 }
             );
 
 
-            /* ======================================
-               FIRESTORE PROFILE
-            ====================================== */
+            /*
+               FIRESTORE USER PROFILE
+
+               otpVerified here is only informational.
+               Security does NOT trust this field anymore.
+               Real verification lives in Worker KV.
+            */
 
             await setDoc(
                 doc(
@@ -1557,31 +1526,31 @@ form.addEventListener(
                 {
 
                     uid:
-                    user.uid,
+                        user.uid,
 
                     username:
-                    usernameValue,
+                        usernameValue,
 
                     phone:
-                    phoneValue,
+                        phoneValue,
 
                     email:
-                    emailValue,
+                        emailValue,
 
                     role:
-                    "customer",
+                        "customer",
 
                     provider:
-                    "password",
+                        "password",
 
                     otpVerified:
-                    true,
+                        true,
 
                     otpVerifiedAt:
-                    serverTimestamp(),
+                        serverTimestamp(),
 
                     createdAt:
-                    serverTimestamp()
+                        serverTimestamp()
 
                 }
             );
@@ -1596,8 +1565,9 @@ form.addEventListener(
             setTimeout(
                 function(){
 
-                    window.location.href =
-                    "./home.html";
+                    window.location.replace(
+                        "./home.html"
+                    );
 
                 },
                 900
@@ -1613,70 +1583,22 @@ form.addEventListener(
             );
 
 
-            button.disabled =
+            registerButton.disabled =
             false;
+
 
             registerText.style.display =
             "inline";
+
 
             registerLoading.style.display =
             "none";
 
 
-            if(
-                error.code ===
-                "auth/email-already-in-use"
-            ){
-
-                showStatus(
-                    "This email is already registered."
-                );
-
-            }
-
-            else if(
-                error.code ===
-                "auth/invalid-email"
-            ){
-
-                showStatus(
-                    "Invalid email address."
-                );
-
-            }
-
-            else if(
-                error.code ===
-                "auth/weak-password"
-            ){
-
-                showStatus(
-                    "Password must be at least 6 characters."
-                );
-
-            }
-
-            else if(
-                error.code ===
-                "permission-denied" ||
-                error.code ===
-                "firestore/permission-denied"
-            ){
-
-                showStatus(
-                    "Firestore permission denied."
-                );
-
-            }
-
-            else{
-
-                showStatus(
-                    "Registration failed: " +
-                    error.message
-                );
-
-            }
+            showStatus(
+                error.message ||
+                "Registration failed."
+            );
 
         }
 
@@ -1686,4 +1608,5 @@ form.addEventListener(
 </script>
 
 </body>
+
 </html>
