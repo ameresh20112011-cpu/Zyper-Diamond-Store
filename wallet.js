@@ -1334,32 +1334,6 @@ if (redeemInput) {
 
 
 
-/* =====================================================
-   RECHARGE WALLET
-===================================================== */
-
-if (rechargeButton) {
-
-    rechargeButton.addEventListener(
-
-        "click",
-
-        function(event) {
-
-
-            if (!currentUser) {
-
-                event.preventDefault();
-
-                showLoginPopup();
-
-            }
-
-        }
-
-    );
-
-}
 
 
 
