@@ -3345,23 +3345,25 @@ async function loadLeaderboard(){
                 );
 
 
-                card.innerHTML = `
+card.innerHTML = `
 
-                    <div class="rank-circle ${rankClasses[index]}">
-                        #${index + 1}
-                    </div>
+    <div class="rank-circle ${rankClasses[index]}">
+        #${index + 1}
+    </div>
 
-                    <div>
+    <div>
 
-                        <div class="purchaser-name"></div>
+        <div class="purchaser-name"></div>
 
-                        <div class="purchaser-label">
-                            Top Purchaser
-                        </div>
+        <div class="purchaser-label">
+            Total Purchase
+        </div>
 
-                    </div>
+        <div class="purchaser-total"></div>
 
-                `;
+    </div>
+
+`;
 
 
                 card
