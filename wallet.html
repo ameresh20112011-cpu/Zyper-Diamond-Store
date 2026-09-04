@@ -19,19 +19,1222 @@ rel="icon"
 href="./1.jpg"
 >
 
-<!-- WALLET DESIGN -->
-<link
-rel="stylesheet"
-href="./wallet.css?v=3000"
->
-
-<!-- OLD 6 BUTTON NAV -->
 <link
 rel="stylesheet"
 href="./zyper-nav.css?v=10001"
 >
 
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com"
+>
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin
+>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+rel="stylesheet"
+>
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    margin:0;
+
+    min-height:100vh;
+
+    padding-top:78px;
+
+    padding-bottom:105px;
+
+    font-family:'Poppins',sans-serif;
+
+    background:
+    linear-gradient(
+        180deg,
+        #f7f5fb,
+        #f3f4f8
+    );
+
+    color:#252a32;
+
+    overflow-x:hidden;
+}
+
+button,
+input,
+a{
+    font-family:inherit;
+}
+
+
+/* =====================================================
+   BACKGROUND DECORATION
+===================================================== */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    width:420px;
+
+    height:420px;
+
+    left:-170px;
+
+    top:120px;
+
+    border-radius:50%;
+
+    background:
+    rgba(147,51,234,.10);
+
+    filter:blur(80px);
+
+    pointer-events:none;
+
+    z-index:-1;
+}
+
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    width:420px;
+
+    height:420px;
+
+    right:-180px;
+
+    top:320px;
+
+    border-radius:50%;
+
+    background:
+    rgba(37,99,235,.08);
+
+    filter:blur(90px);
+
+    pointer-events:none;
+
+    z-index:-1;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.wallet-page{
+
+    width:100%;
+
+    max-width:1180px;
+
+    margin:auto;
+
+    padding:
+    22px
+    22px
+    45px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.wallet-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    margin-bottom:24px;
+
+    padding:
+    20px
+    22px;
+
+    border-radius:22px;
+
+    background:#ffffff;
+
+    border:
+    1px solid #e8e5ef;
+
+    box-shadow:
+    0 10px 30px
+    rgba(15,23,42,.06);
+}
+
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+}
+
+
+.logo{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#ffffff;
+
+    font-size:24px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #7c3aed,
+        #a855f7,
+        #2563eb
+    );
+
+    box-shadow:
+    0 8px 20px
+    rgba(124,58,237,.24);
+}
+
+
+.brand h1{
+
+    margin:0;
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:21px;
+
+    color:#292d35;
+}
+
+
+.brand p{
+
+    margin:
+    4px
+    0
+    0;
+
+    color:#9298a2;
+
+    font-size:10px;
+}
+
+
+.home-button{
+
+    min-height:40px;
+
+    padding:
+    0
+    15px;
+
+    border-radius:12px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    color:#7e22ce;
+
+    text-decoration:none;
+
+    background:#f3e8ff;
+
+    border:
+    1px solid #e9d5ff;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    transition:.2s;
+}
+
+
+.home-button:hover{
+
+    transform:
+    translateY(-2px);
+
+    background:#ede9fe;
+}
+
+
+/* =====================================================
+   BALANCE CARD
+===================================================== */
+
+.balance-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:
+    27px;
+
+    border-radius:25px;
+
+    color:#ffffff;
+
+    background:
+    linear-gradient(
+        135deg,
+        #4c1d95,
+        #6d28d9,
+        #7c3aed,
+        #2563eb
+    );
+
+    box-shadow:
+    0 20px 45px
+    rgba(76,29,149,.24);
+}
+
+
+.balance-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+
+    height:260px;
+
+    right:-90px;
+
+    top:-100px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,.10);
+}
+
+
+.balance-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    right:120px;
+
+    bottom:-110px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,.06);
+}
+
+
+.balance-top{
+
+    position:relative;
+
+    z-index:2;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+}
+
+
+.balance-top span{
+
+    font-size:11px;
+
+    font-weight:700;
+
+    color:#ede9fe;
+}
+
+
+#refreshWallet{
+
+    width:37px;
+
+    height:37px;
+
+    border:none;
+
+    border-radius:11px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    color:#ffffff;
+
+    background:
+    rgba(255,255,255,.12);
+
+    border:
+    1px solid
+    rgba(255,255,255,.15);
+
+    transition:.2s;
+}
+
+
+#refreshWallet:hover{
+
+    transform:rotate(45deg);
+
+    background:
+    rgba(255,255,255,.18);
+}
+
+
+.balance{
+
+    position:relative;
+
+    z-index:2;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:10px;
+
+    margin-top:18px;
+}
+
+
+.balance span{
+
+    margin-bottom:6px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    color:#ddd6fe;
+}
+
+
+.balance strong{
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:
+    clamp(
+        34px,
+        6vw,
+        52px
+    );
+
+    line-height:1;
+
+    font-weight:800;
+}
+
+
+.wallet-stats{
+
+    position:relative;
+
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+    gap:12px;
+
+    margin-top:25px;
+}
+
+
+.wallet-stats > div{
+
+    padding:
+    14px
+    16px;
+
+    border-radius:15px;
+
+    background:
+    rgba(255,255,255,.10);
+
+    border:
+    1px solid
+    rgba(255,255,255,.12);
+
+    backdrop-filter:blur(10px);
+}
+
+
+.wallet-stats small{
+
+    display:block;
+
+    color:#ddd6fe;
+
+    font-size:8px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.8px;
+}
+
+
+.wallet-stats strong{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:#ffffff;
+
+    font-size:15px;
+}
+
+
+/* =====================================================
+   RECHARGE BUTTON
+===================================================== */
+
+.wallet-recharge-button{
+
+    width:100%;
+
+    min-height:52px;
+
+    margin-top:18px;
+
+    padding:
+    0
+    18px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:9px;
+
+    text-decoration:none;
+
+    color:#ffffff;
+
+    background:
+    linear-gradient(
+        135deg,
+        #9333ea,
+        #7c3aed,
+        #2563eb
+    );
+
+    box-shadow:
+    0 12px 25px
+    rgba(124,58,237,.20);
+
+    font-size:12px;
+
+    font-weight:800;
+
+    transition:.2s;
+}
+
+
+.wallet-recharge-button:hover{
+
+    transform:
+    translateY(-2px);
+
+    box-shadow:
+    0 16px 30px
+    rgba(124,58,237,.25);
+}
+
+
+/* =====================================================
+   COMMON CARD
+===================================================== */
+
+.redeem-card,
+.transactions-card{
+
+    margin-top:22px;
+
+    padding:24px;
+
+    border-radius:22px;
+
+    background:#ffffff;
+
+    border:
+    1px solid #e7e7ed;
+
+    box-shadow:
+    0 10px 30px
+    rgba(15,23,42,.06);
+}
+
+
+/* =====================================================
+   REDEEM
+===================================================== */
+
+.section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+}
+
+
+.section-icon{
+
+    width:46px;
+
+    height:46px;
+
+    flex:0 0 auto;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:20px;
+
+    background:#f3e8ff;
+
+    color:#7e22ce;
+}
+
+
+.section-title h2{
+
+    margin:0;
+
+    color:#292d35;
+
+    font-size:16px;
+
+    font-weight:800;
+}
+
+
+.section-title p{
+
+    margin:
+    3px
+    0
+    0;
+
+    color:#979da5;
+
+    font-size:9px;
+}
+
+
+.redeem-box{
+
+    display:grid;
+
+    grid-template-columns:
+    minmax(0,1fr)
+    auto;
+
+    gap:10px;
+
+    margin-top:20px;
+}
+
+
+#redeemCode{
+
+    width:100%;
+
+    min-width:0;
+
+    height:48px;
+
+    padding:
+    0
+    14px;
+
+    border-radius:13px;
+
+    border:
+    1px solid #dedfe5;
+
+    outline:none;
+
+    background:#f9fafb;
+
+    color:#252a32;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    transition:.2s;
+}
+
+
+#redeemCode::placeholder{
+
+    color:#a4a8b0;
+}
+
+
+#redeemCode:focus{
+
+    border-color:#a855f7;
+
+    background:#ffffff;
+
+    box-shadow:
+    0 0 0 3px
+    rgba(168,85,247,.10);
+}
+
+
+#redeemButton{
+
+    min-width:118px;
+
+    height:48px;
+
+    padding:
+    0
+    18px;
+
+    border:none;
+
+    border-radius:13px;
+
+    color:#ffffff;
+
+    background:
+    linear-gradient(
+        135deg,
+        #7c3aed,
+        #9333ea
+    );
+
+    cursor:pointer;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    transition:.2s;
+}
+
+
+#redeemButton:hover{
+
+    transform:
+    translateY(-1px);
+}
+
+
+#redeemButton:disabled{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+
+    transform:none;
+}
+
+
+.redeem-message{
+
+    margin-top:13px;
+
+    padding:
+    11px
+    13px;
+
+    border-radius:11px;
+
+    font-size:10px;
+
+    font-weight:600;
+
+    line-height:1.55;
+}
+
+
+/* =====================================================
+   TRANSACTIONS
+===================================================== */
+
+.transactions-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:18px;
+}
+
+
+.transactions-header h2{
+
+    margin:0;
+
+    color:#292d35;
+
+    font-size:16px;
+
+    font-weight:800;
+}
+
+
+.transactions-header p{
+
+    margin:
+    3px
+    0
+    0;
+
+    color:#979da5;
+
+    font-size:9px;
+}
+
+
+#refreshTransactions{
+
+    min-height:38px;
+
+    padding:
+    0
+    13px;
+
+    border-radius:11px;
+
+    border:
+    1px solid #e9d5ff;
+
+    background:#f3e8ff;
+
+    color:#7e22ce;
+
+    cursor:pointer;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    transition:.2s;
+}
+
+
+#refreshTransactions:hover{
+
+    background:#ede9fe;
+
+    transform:
+    translateY(-1px);
+}
+
+
+.transactions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+
+/* wallet.js generated transaction rows */
+
+.transactions > *{
+
+    transition:.2s;
+}
+
+
+.transaction,
+.transaction-item{
+
+    padding:
+    14px
+    16px;
+
+    border-radius:14px;
+
+    background:#fafafa;
+
+    border:
+    1px solid #ececf0;
+}
+
+
+.transaction:hover,
+.transaction-item:hover{
+
+    transform:
+    translateY(-1px);
+
+    background:#ffffff;
+
+    box-shadow:
+    0 7px 18px
+    rgba(15,23,42,.05);
+}
+
+
+.empty{
+
+    padding:
+    30px
+    15px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    color:#969ba4;
+
+    background:#fafafa;
+
+    border:
+    1px dashed #dedfe5;
+
+    font-size:10px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media(max-width:800px){
+
+    .wallet-page{
+
+        max-width:720px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    body{
+
+        padding-top:70px;
+
+        padding-bottom:95px;
+    }
+
+
+    .wallet-page{
+
+        padding:
+        12px
+        12px
+        35px;
+    }
+
+
+    .wallet-header{
+
+        margin-bottom:14px;
+
+        padding:
+        15px;
+
+        border-radius:17px;
+    }
+
+
+    .logo{
+
+        width:44px;
+
+        height:44px;
+
+        border-radius:13px;
+
+        font-size:19px;
+    }
+
+
+    .brand{
+
+        gap:10px;
+    }
+
+
+    .brand h1{
+
+        font-size:15px;
+    }
+
+
+    .brand p{
+
+        font-size:8px;
+    }
+
+
+    .home-button{
+
+        min-height:36px;
+
+        padding:
+        0
+        10px;
+
+        border-radius:10px;
+
+        font-size:8px;
+    }
+
+
+    .balance-card{
+
+        padding:
+        21px
+        17px;
+
+        border-radius:19px;
+    }
+
+
+    .balance{
+
+        margin-top:14px;
+    }
+
+
+    .balance strong{
+
+        font-size:34px;
+    }
+
+
+    .wallet-stats{
+
+        margin-top:20px;
+
+        gap:8px;
+    }
+
+
+    .wallet-stats > div{
+
+        padding:
+        11px;
+    }
+
+
+    .wallet-stats strong{
+
+        font-size:12px;
+    }
+
+
+    .wallet-recharge-button{
+
+        min-height:48px;
+
+        margin-top:13px;
+
+        border-radius:14px;
+
+        font-size:10px;
+    }
+
+
+    .redeem-card,
+    .transactions-card{
+
+        margin-top:14px;
+
+        padding:17px;
+
+        border-radius:17px;
+    }
+
+
+    .section-icon{
+
+        width:40px;
+
+        height:40px;
+
+        font-size:17px;
+    }
+
+
+    .section-title h2,
+    .transactions-header h2{
+
+        font-size:14px;
+    }
+
+
+    .redeem-box{
+
+        grid-template-columns:1fr;
+
+        gap:8px;
+
+        margin-top:15px;
+    }
+
+
+    #redeemCode,
+    #redeemButton{
+
+        width:100%;
+
+        height:45px;
+
+        min-width:0;
+    }
+
+
+    .transactions-header{
+
+        align-items:flex-start;
+    }
+
+
+    #refreshTransactions{
+
+        flex:0 0 auto;
+
+        min-height:35px;
+
+        padding:
+        0
+        10px;
+
+        font-size:8px;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media(max-width:360px){
+
+    .wallet-header{
+
+        align-items:flex-start;
+    }
+
+
+    .home-button{
+
+        padding:
+        0
+        8px;
+    }
+
+
+    .balance strong{
+
+        font-size:29px;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 
 <body>
@@ -79,7 +1282,11 @@ href="./zyper-nav.css?v=10001"
         href="./home.html"
         class="home-button"
         >
-            ← Home
+
+            <i class="fa-solid fa-house"></i>
+
+            Home
+
         </a>
 
 
@@ -98,7 +1305,11 @@ href="./zyper-nav.css?v=10001"
 
 
             <span>
-                💰 Available Balance
+
+                <i class="fa-solid fa-wallet"></i>
+
+                Available Balance
+
             </span>
 
 
@@ -107,7 +1318,9 @@ href="./zyper-nav.css?v=10001"
             type="button"
             aria-label="Refresh wallet"
             >
-                ↻
+
+                <i class="fa-solid fa-rotate-right"></i>
+
             </button>
 
 
@@ -180,7 +1393,11 @@ href="./zyper-nav.css?v=10001"
     class="wallet-recharge-button"
     id="rechargeWalletButton"
     >
-        💳 Recharge Wallet
+
+        <i class="fa-solid fa-credit-card"></i>
+
+        Recharge Wallet
+
     </a>
 
 
@@ -196,7 +1413,9 @@ href="./zyper-nav.css?v=10001"
 
 
             <div class="section-icon">
-                🎟️
+
+                <i class="fa-solid fa-ticket"></i>
+
             </div>
 
 
@@ -232,7 +1451,9 @@ href="./zyper-nav.css?v=10001"
             id="redeemButton"
             type="button"
             >
+
                 Redeem
+
             </button>
 
 
@@ -279,7 +1500,11 @@ href="./zyper-nav.css?v=10001"
             id="refreshTransactions"
             type="button"
             >
-                ↻ Refresh
+
+                <i class="fa-solid fa-rotate-right"></i>
+
+                Refresh
+
             </button>
 
 
@@ -293,7 +1518,11 @@ href="./zyper-nav.css?v=10001"
         >
 
             <div class="empty">
-                ⏳ Loading wallet...
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                Loading wallet...
+
             </div>
 
         </div>
@@ -307,7 +1536,7 @@ href="./zyper-nav.css?v=10001"
 
 
 <!-- =====================================================
-     OLD 6 BUTTON BOTTOM NAV
+     6 BUTTON BOTTOM NAV
 ===================================================== -->
 
 <div id="zyper-navigation"></div>
@@ -316,12 +1545,6 @@ href="./zyper-nav.css?v=10001"
 
 <!-- =====================================================
      SHARED TOP BAR
-
-     ZYPER
-     DIAMOND STORE
-
-     Guest  = LOGIN
-     Login  = Wallet Balance
 ===================================================== -->
 
 <script
@@ -331,7 +1554,7 @@ src="./zyper-topbar.js?v=10001"
 
 
 <!-- =====================================================
-     OLD NAVIGATION
+     NAVIGATION
 ===================================================== -->
 
 <script
@@ -341,7 +1564,7 @@ src="./zyper-nav.js?v=10001"
 
 
 <!-- =====================================================
-     WALLET LOGIC
+     EXISTING WALLET LOGIC
 ===================================================== -->
 
 <script
