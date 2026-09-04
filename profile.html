@@ -2,240 +2,1006 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Zyper Diamond Store - Profile</title>
 
 <link rel="icon" href="./1.jpg">
+
 <link rel="stylesheet" href="ep.css">
+
 <link rel="stylesheet" href="media.css">
+
 <link rel="stylesheet" href="./zyper-nav.css?v=10001">
 
+
 <style>
-*{
-    box-sizing:border-box;
-}
-
-html{
-    min-height:100%;
-    overflow-x:hidden;
-}
-
-body{
-    margin:0;
-    min-height:100vh;
-    font-family:'Segoe UI',Arial,sans-serif;
-    background:
-        radial-gradient(circle at top,#172554,#020617 55%,#000 100%);
-    color:white;
-    padding:92px 12px 135px;
-    overflow-x:hidden;
-    overflow-y:auto;
-    -webkit-overflow-scrolling:touch;
-}
-
-button,
-input,
-a{
-    font-family:inherit;
-}
-
-button{
-    -webkit-tap-highlight-color:transparent;
-}
-
-.page-wrap{
-    width:100%;
-    max-width:1050px;
-    margin:0 auto;
-}
 
 /* =====================================================
-   HERO PROFILE
+   PROFILE PAGE
 ===================================================== */
 
-.profile-hero{
-    position:relative;
-    overflow:hidden;
-    display:grid;
-    grid-template-columns:150px minmax(0,1fr) auto;
-    gap:24px;
-    align-items:center;
-    padding:28px;
-    border-radius:28px;
-    background:
-        linear-gradient(135deg,rgba(15,23,42,.96),rgba(30,27,75,.94));
-    border:1px solid rgba(255,255,255,.12);
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.42),
-        0 0 35px rgba(96,165,250,.10);
+*{
+box-sizing:border-box;
 }
 
-.profile-hero::before{
-    content:"";
-    position:absolute;
-    width:330px;
-    height:330px;
-    border-radius:50%;
-    right:-100px;
-    top:-160px;
-    background:rgba(124,58,237,.22);
-    filter:blur(20px);
-    pointer-events:none;
+
+html{
+
+min-height:100%;
+
+overflow-x:hidden;
+
 }
 
-.profile-hero::after{
-    content:"";
-    position:absolute;
-    width:260px;
-    height:260px;
-    border-radius:50%;
-    left:-110px;
-    bottom:-150px;
-    background:rgba(37,99,235,.18);
-    filter:blur(20px);
-    pointer-events:none;
+
+body{
+
+margin:0;
+
+min-height:100vh;
+
+font-family:
+'Segoe UI',
+Arial,
+sans-serif;
+
+background:
+radial-gradient(
+circle at top,
+#172554,
+#020617 55%,
+#000 100%
+);
+
+color:white;
+
+padding:
+15px
+12px
+140px;
+
+display:block;
+
+overflow-x:hidden;
+
+overflow-y:auto;
+
+-webkit-overflow-scrolling:touch;
+
 }
 
-.avatar-container{
-    position:relative;
-    width:126px;
-    height:126px;
-    z-index:2;
-}
-
-.avatar{
-    width:126px;
-    height:126px;
-    border-radius:50%;
-    object-fit:cover;
-    display:block;
-    border:4px solid #60a5fa;
-    background:#0f172a;
-    box-shadow:
-        0 0 16px rgba(96,165,250,.8),
-        0 0 36px rgba(168,85,247,.35);
-}
-
-.online-dot{
-    position:absolute;
-    right:5px;
-    bottom:8px;
-    width:20px;
-    height:20px;
-    border-radius:50%;
-    background:#22c55e;
-    border:3px solid #0f172a;
-    box-shadow:0 0 12px rgba(34,197,94,.9);
-}
-
-.profile-main{
-    position:relative;
-    z-index:2;
-    min-width:0;
-}
-
-.company-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    padding:6px 11px;
-    border-radius:999px;
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:.8px;
-    color:#bfdbfe;
-    background:rgba(59,130,246,.12);
-    border:1px solid rgba(96,165,250,.24);
-}
-
-#username{
-    margin:10px 0 3px;
-    font-size:31px;
-    font-weight:900;
-    line-height:1.15;
-    background:linear-gradient(90deg,#60a5fa,#c084fc,#22d3ee);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    word-break:break-word;
-}
-
-.account-text{
-    margin:0;
-    color:#94a3b8;
-    font-size:12px;
-}
-
-.profile-meta-row{
-    margin-top:14px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-}
-
-.meta-chip{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    padding:7px 10px;
-    border-radius:999px;
-    background:rgba(255,255,255,.055);
-    border:1px solid rgba(255,255,255,.08);
-    color:#cbd5e1;
-    font-size:10px;
-    font-weight:700;
-}
-
-.meta-chip.verified{
-    color:#86efac;
-    border-color:rgba(34,197,94,.22);
-    background:rgba(34,197,94,.10);
-}
-
-.hero-actions{
-    position:relative;
-    z-index:2;
-    min-width:150px;
-    display:flex;
-    flex-direction:column;
-    gap:9px;
-}
-
-.hero-btn{
-    min-height:42px;
-    padding:0 14px;
-    border:none;
-    border-radius:12px;
-    color:#fff;
-    cursor:pointer;
-    font-size:11px;
-    font-weight:800;
-    transition:.2s;
-}
-
-.hero-btn:hover{
-    transform:translateY(-2px);
-}
-
-.hero-btn.edit{
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
-}
-
-.hero-btn.logout{
-    background:rgba(239,68,68,.11);
-    border:1px solid rgba(239,68,68,.28);
-    color:#fca5a5;
-}
 
 /* =====================================================
-   GUEST BOX
+   PROFILE CARD
+===================================================== */
+
+.profile-card{
+
+width:100%;
+
+max-width:430px;
+
+margin:
+20px auto 40px;
+
+padding:
+30px 22px 35px;
+
+border-radius:28px;
+
+background:
+rgba(15,23,42,.78);
+
+border:
+1px solid rgba(255,255,255,.14);
+
+backdrop-filter:
+blur(20px);
+
+-webkit-backdrop-filter:
+blur(20px);
+
+box-shadow:
+
+0 20px 60px
+rgba(0,0,0,.5),
+
+0 0 35px
+rgba(96,165,250,.12);
+
+text-align:center;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+
+/* =====================================================
+   TOP GLOW
+===================================================== */
+
+.profile-card::before{
+
+content:"";
+
+position:absolute;
+
+top:-100px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:260px;
+
+height:200px;
+
+background:
+radial-gradient(
+circle,
+rgba(59,130,246,.30),
+transparent 70%
+);
+
+pointer-events:none;
+
+}
+
+
+/* =====================================================
+   PROFILE IMAGE
+===================================================== */
+
+.avatar-container{
+
+position:relative;
+
+width:125px;
+
+height:125px;
+
+margin:
+5px auto 18px;
+
+}
+
+
+.avatar{
+
+width:125px;
+
+height:125px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+display:block;
+
+border:
+4px solid #60a5fa;
+
+background:#0f172a;
+
+box-shadow:
+
+0 0 15px
+rgba(96,165,250,.8),
+
+0 0 35px
+rgba(168,85,247,.35);
+
+}
+
+
+/* =====================================================
+   ONLINE
+===================================================== */
+
+.online-dot{
+
+position:absolute;
+
+right:5px;
+
+bottom:8px;
+
+width:20px;
+
+height:20px;
+
+border-radius:50%;
+
+background:#22c55e;
+
+border:
+3px solid #0f172a;
+
+box-shadow:
+0 0 12px
+rgba(34,197,94,.9);
+
+}
+
+
+/* =====================================================
+   CUSTOMER BADGE
+===================================================== */
+
+.company-badge{
+
+display:inline-block;
+
+margin-bottom:8px;
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-size:11px;
+
+font-weight:bold;
+
+letter-spacing:1px;
+
+color:#bfdbfe;
+
+background:
+rgba(59,130,246,.12);
+
+border:
+1px solid rgba(96,165,250,.25);
+
+}
+
+
+/* =====================================================
+   USERNAME
+===================================================== */
+
+#username{
+
+margin:
+5px 0 5px;
+
+font-size:26px;
+
+font-weight:800;
+
+background:
+linear-gradient(
+90deg,
+#60a5fa,
+#c084fc,
+#22d3ee
+);
+
+-webkit-background-clip:text;
+
+background-clip:text;
+
+color:transparent;
+
+word-break:break-word;
+
+}
+
+
+.account-text{
+
+margin:
+0 0 22px;
+
+font-size:13px;
+
+color:#94a3b8;
+
+}
+
+
+/* =====================================================
+   INFO GRID
+===================================================== */
+
+.info-box{
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:10px;
+
+margin-bottom:20px;
+
+}
+
+
+.info-item{
+
+padding:14px 8px;
+
+border-radius:15px;
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+min-width:0;
+
+}
+
+
+.info-icon{
+
+font-size:20px;
+
+margin-bottom:5px;
+
+}
+
+
+.info-title{
+
+font-size:10px;
+
+color:#94a3b8;
+
+text-transform:uppercase;
+
+letter-spacing:.6px;
+
+}
+
+
+.info-value{
+
+font-size:12px;
+
+font-weight:600;
+
+color:#e2e8f0;
+
+margin-top:4px;
+
+word-break:break-word;
+
+}
+
+
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
+
+.quick-title{
+
+text-align:left;
+
+margin:
+5px 0 10px;
+
+font-size:12px;
+
+font-weight:700;
+
+color:#94a3b8;
+
+text-transform:uppercase;
+
+letter-spacing:.8px;
+
+}
+
+
+.quick-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:8px;
+
+margin-bottom:18px;
+
+}
+
+
+.quick-action{
+
+min-width:0;
+
+padding:
+13px 5px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+rgba(255,255,255,.055);
+
+border:
+1px solid rgba(255,255,255,.09);
+
+color:white;
+
+cursor:pointer;
+
+transition:.2s;
+
+-webkit-tap-highlight-color:transparent;
+
+}
+
+
+.quick-action:active{
+
+transform:scale(.95);
+
+}
+
+
+.quick-action-icon{
+
+display:block;
+
+font-size:21px;
+
+margin-bottom:6px;
+
+}
+
+
+.quick-action-text{
+
+display:block;
+
+font-size:10px;
+
+font-weight:700;
+
+color:#e2e8f0;
+
+}
+
+
+.quick-action.recharge{
+
+background:
+linear-gradient(
+135deg,
+rgba(34,197,94,.16),
+rgba(16,185,129,.08)
+);
+
+border-color:
+rgba(34,197,94,.20);
+
+}
+
+
+.quick-action.history{
+
+background:
+linear-gradient(
+135deg,
+rgba(59,130,246,.16),
+rgba(79,70,229,.08)
+);
+
+border-color:
+rgba(96,165,250,.20);
+
+}
+
+
+.quick-action.help{
+
+background:
+linear-gradient(
+135deg,
+rgba(37,211,102,.14),
+rgba(18,140,126,.07)
+);
+
+border-color:
+rgba(37,211,102,.20);
+
+}
+
+
+/* =====================================================
+   PROFILE BUTTON
+===================================================== */
+
+.profile-button{
+
+width:100%;
+
+padding:14px;
+
+margin-top:10px;
+
+border:none;
+
+border-radius:15px;
+
+font-size:15px;
+
+font-weight:700;
+
+color:white;
+
+cursor:pointer;
+
+transition:
+transform .2s,
+box-shadow .2s,
+opacity .2s;
+
+-webkit-tap-highlight-color:transparent;
+
+}
+
+
+.profile-button:active{
+
+transform:scale(.96);
+
+}
+
+
+.edit-button{
+
+background:
+linear-gradient(
+90deg,
+#2563eb,
+#7c3aed
+);
+
+box-shadow:
+0 8px 25px
+rgba(37,99,235,.3);
+
+}
+
+
+.logout-button{
+
+background:
+rgba(239,68,68,.12);
+
+border:
+1px solid rgba(239,68,68,.3);
+
+color:#fca5a5;
+
+}
+
+
+.profile-button:hover{
+
+transform:translateY(-2px);
+
+}
+
+
+/* =====================================================
+   SAFE SPACE FOR FIXED NAV
+===================================================== */
+
+.nav-safe-space{
+
+width:100%;
+
+height:90px;
+
+}
+
+
+/* =====================================================
+   EDIT PANEL
+===================================================== */
+
+.edit-panel{
+
+display:none;
+
+margin-top:20px;
+
+padding:18px;
+
+border-radius:18px;
+
+background:
+rgba(2,6,23,.65);
+
+border:
+1px solid rgba(255,255,255,.10);
+
+text-align:left;
+
+animation:
+editOpen .25s ease;
+
+}
+
+
+.edit-panel.show{
+
+display:block;
+
+}
+
+
+@keyframes editOpen{
+
+from{
+
+opacity:0;
+
+transform:
+translateY(10px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:
+translateY(0);
+
+}
+
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.edit-label{
+
+display:block;
+
+margin:
+12px 0 7px;
+
+font-size:12px;
+
+font-weight:bold;
+
+color:#cbd5e1;
+
+}
+
+
+/* =====================================================
+   NAME INPUT
+===================================================== */
+
+.name-input{
+
+width:100%;
+
+padding:13px;
+
+border-radius:12px;
+
+border:
+1px solid rgba(255,255,255,.12);
+
+outline:none;
+
+background:
+rgba(255,255,255,.06);
+
+color:white;
+
+font-size:14px;
+
+}
+
+
+.name-input:focus{
+
+border-color:#60a5fa;
+
+box-shadow:
+0 0 12px
+rgba(96,165,250,.15);
+
+}
+
+
+/* =====================================================
+   FILE INPUT
+===================================================== */
+
+.file-input{
+
+width:100%;
+
+padding:10px;
+
+border-radius:12px;
+
+border:
+1px dashed rgba(96,165,250,.4);
+
+background:
+rgba(96,165,250,.06);
+
+color:#cbd5e1;
+
+font-size:12px;
+
+}
+
+
+/* =====================================================
+   PREVIEW
+===================================================== */
+
+.preview-title{
+
+font-size:11px;
+
+color:#94a3b8;
+
+margin-top:14px;
+
+}
+
+
+.image-preview{
+
+width:70px;
+
+height:70px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+margin-top:8px;
+
+border:
+2px solid #60a5fa;
+
+}
+
+
+/* =====================================================
+   EDIT ACTIONS
+===================================================== */
+
+.edit-actions{
+
+display:flex;
+
+gap:10px;
+
+margin-top:15px;
+
+}
+
+
+.save-button{
+
+flex:1;
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+background:
+linear-gradient(
+90deg,
+#16a34a,
+#059669
+);
+
+color:white;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+.cancel-button{
+
+flex:1;
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+background:#334155;
+
+color:white;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:500px){
+
+body{
+
+padding:
+10px
+12px
+130px;
+
+overflow-y:auto;
+
+-webkit-overflow-scrolling:touch;
+
+}
+
+
+.profile-card{
+
+margin:
+10px auto 30px;
+
+padding:
+25px 18px 30px;
+
+border-radius:24px;
+
+}
+
+
+.avatar-container{
+
+width:110px;
+
+height:110px;
+
+}
+
+
+.avatar{
+
+width:110px;
+
+height:110px;
+
+}
+
+
+#username{
+
+font-size:23px;
+
+}
+
+
+.info-item{
+
+padding:12px 6px;
+
+}
+
+
+.info-value{
+
+font-size:11px;
+
+}
+
+
+.quick-action{
+
+padding:
+12px 4px;
+
+}
+
+
+.quick-action-icon{
+
+font-size:19px;
+
+}
+
+
+.quick-action-text{
+
+font-size:9px;
+
+}
+
+
+.nav-safe-space{
+
+height:110px;
+
+}
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media(max-width:350px){
+
+.profile-card{
+
+padding:
+22px 14px 28px;
+
+}
+
+
+#username{
+
+font-size:21px;
+
+}
+
+
+.info-box{
+
+gap:7px;
+
+}
+
+
+.quick-grid{
+
+gap:6px;
+
+}
+
+
+.nav-safe-space{
+
+height:120px;
+
+}
+
+}
+
+
+
+/* =====================================================
+   GUEST PROFILE
 ===================================================== */
 
 .zyper-profile-login-box{
     width:100%;
-    margin:18px 0 0;
+    margin:0 0 18px;
     padding:16px;
     border-radius:16px;
     text-align:center;
@@ -250,7 +1016,7 @@ button{
 .zyper-profile-login-box .guest-title{
     color:#fff;
     font-size:14px;
-    font-weight:800;
+    font-weight:700;
 }
 
 .zyper-profile-login-box .guest-text{
@@ -269,347 +1035,9 @@ button{
     color:#fff;
     text-decoration:none;
     font-size:12px;
-    font-weight:800;
+    font-weight:700;
     background:linear-gradient(135deg,#2563eb,#7c3aed);
 }
-
-/* =====================================================
-   SECTION
-===================================================== */
-
-.profile-section{
-    margin-top:18px;
-    padding:22px;
-    border-radius:23px;
-    background:rgba(15,23,42,.78);
-    border:1px solid rgba(255,255,255,.10);
-    box-shadow:0 14px 35px rgba(0,0,0,.24);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-}
-
-.section-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-bottom:15px;
-}
-
-.section-title{
-    margin:0;
-    color:#fff;
-    font-size:16px;
-    font-weight:900;
-}
-
-.section-subtitle{
-    margin:4px 0 0;
-    color:#94a3b8;
-    font-size:10px;
-}
-
-.small-refresh{
-    min-height:36px;
-    padding:0 12px;
-    border:none;
-    border-radius:10px;
-    color:#bfdbfe;
-    background:rgba(59,130,246,.12);
-    border:1px solid rgba(96,165,250,.20);
-    cursor:pointer;
-    font-size:10px;
-    font-weight:800;
-}
-
-/* =====================================================
-   WALLET
-===================================================== */
-
-.wallet-grid{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:12px;
-}
-
-.wallet-stat{
-    padding:17px;
-    border-radius:17px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.wallet-stat.primary{
-    background:linear-gradient(135deg,rgba(37,99,235,.22),rgba(124,58,237,.20));
-    border-color:rgba(96,165,250,.23);
-}
-
-.wallet-stat-label{
-    color:#94a3b8;
-    font-size:9px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:.7px;
-}
-
-.wallet-stat-value{
-    margin-top:6px;
-    color:#fff;
-    font-size:19px;
-    font-weight:900;
-}
-
-.wallet-stat.primary .wallet-stat-value{
-    color:#bfdbfe;
-}
-
-/* =====================================================
-   ACCOUNT INFO
-===================================================== */
-
-.info-grid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:11px;
-}
-
-.info-item{
-    position:relative;
-    min-width:0;
-    padding:15px;
-    border-radius:16px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.075);
-}
-
-.info-title{
-    color:#94a3b8;
-    font-size:9px;
-    text-transform:uppercase;
-    letter-spacing:.7px;
-}
-
-.info-value{
-    margin-top:5px;
-    padding-right:34px;
-    color:#e2e8f0;
-    font-size:12px;
-    font-weight:700;
-    line-height:1.45;
-    word-break:break-word;
-}
-
-.copy-mini{
-    position:absolute;
-    top:50%;
-    right:10px;
-    transform:translateY(-10%);
-    width:29px;
-    height:29px;
-    border:none;
-    border-radius:9px;
-    color:#c4b5fd;
-    background:rgba(124,58,237,.13);
-    cursor:pointer;
-}
-
-/* =====================================================
-   QUICK ACTIONS
-===================================================== */
-
-.quick-grid{
-    display:grid;
-    grid-template-columns:repeat(6,minmax(0,1fr));
-    gap:10px;
-}
-
-.quick-action{
-    min-height:105px;
-    padding:13px 8px;
-    border:none;
-    border-radius:16px;
-    color:#fff;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
-    cursor:pointer;
-    transition:.2s;
-}
-
-.quick-action:hover{
-    transform:translateY(-3px);
-    background:rgba(255,255,255,.065);
-}
-
-.quick-action-icon{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:40px;
-    height:40px;
-    margin:0 auto 8px;
-    border-radius:13px;
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
-    font-size:18px;
-}
-
-.quick-action-text{
-    display:block;
-    color:#e2e8f0;
-    font-size:10px;
-    font-weight:800;
-}
-
-/* =====================================================
-   SETTINGS / TOOLS
-===================================================== */
-
-.tools-grid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
-}
-
-.tool-row{
-    width:100%;
-    min-height:57px;
-    padding:10px 13px;
-    display:flex;
-    align-items:center;
-    gap:11px;
-    border:none;
-    border-radius:15px;
-    text-align:left;
-    color:#fff;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.075);
-    cursor:pointer;
-}
-
-.tool-icon{
-    flex:0 0 auto;
-    width:38px;
-    height:38px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:12px;
-    background:rgba(124,58,237,.15);
-    font-size:17px;
-}
-
-.tool-title{
-    color:#e2e8f0;
-    font-size:11px;
-    font-weight:800;
-}
-
-.tool-sub{
-    margin-top:2px;
-    color:#94a3b8;
-    font-size:9px;
-}
-
-/* =====================================================
-   EDIT PANEL
-===================================================== */
-
-.edit-panel{
-    display:none;
-    margin-top:18px;
-    padding:20px;
-    border-radius:19px;
-    background:rgba(2,6,23,.72);
-    border:1px solid rgba(255,255,255,.10);
-    animation:editOpen .22s ease;
-}
-
-.edit-panel.show{
-    display:block;
-}
-
-@keyframes editOpen{
-    from{opacity:0; transform:translateY(8px);}
-    to{opacity:1; transform:translateY(0);}
-}
-
-.edit-title{
-    margin:0 0 6px;
-    font-size:16px;
-    font-weight:900;
-}
-
-.edit-note{
-    margin:0 0 14px;
-    color:#94a3b8;
-    font-size:10px;
-    line-height:1.5;
-}
-
-.edit-label{
-    display:block;
-    margin:12px 0 7px;
-    font-size:11px;
-    font-weight:800;
-    color:#cbd5e1;
-}
-
-.name-input,
-.file-input{
-    width:100%;
-    padding:13px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,.12);
-    outline:none;
-    background:rgba(255,255,255,.06);
-    color:white;
-    font-size:13px;
-}
-
-.name-input:focus{
-    border-color:#60a5fa;
-    box-shadow:0 0 12px rgba(96,165,250,.15);
-}
-
-.file-input{
-    border-style:dashed;
-}
-
-.image-preview{
-    width:74px;
-    height:74px;
-    border-radius:50%;
-    object-fit:cover;
-    margin-top:9px;
-    border:2px solid #60a5fa;
-}
-
-.edit-actions{
-    display:flex;
-    gap:10px;
-    margin-top:16px;
-}
-
-.edit-actions button{
-    flex:1;
-    min-height:42px;
-    border:none;
-    border-radius:12px;
-    color:white;
-    font-weight:800;
-    cursor:pointer;
-}
-
-.save-button{
-    background:linear-gradient(135deg,#16a34a,#059669);
-}
-
-.cancel-button{
-    background:#334155;
-}
-
-/* =====================================================
-   LOGIN MODAL
-===================================================== */
 
 #zyperProfileLoginModal{
     position:fixed;
@@ -618,7 +1046,7 @@ button{
     display:none;
     align-items:center;
     justify-content:center;
-    background:rgba(2,6,23,.76);
+    background:rgba(2,6,23,.74);
     backdrop-filter:blur(8px);
     -webkit-backdrop-filter:blur(8px);
     z-index:2147483640;
@@ -674,7 +1102,7 @@ button{
     color:#fff;
     text-decoration:none;
     font-size:13px;
-    font-weight:800;
+    font-weight:700;
     background:linear-gradient(135deg,#2563eb,#7c3aed);
 }
 
@@ -693,660 +1121,570 @@ button{
     color:#94a3b8 !important;
 }
 
-/* =====================================================
-   TOAST
-===================================================== */
-
-.zyper-toast{
-    position:fixed;
-    left:50%;
-    bottom:105px;
-    transform:translateX(-50%) translateY(15px);
-    z-index:2147483641;
-    max-width:calc(100vw - 28px);
-    padding:11px 17px;
-    border-radius:13px;
-    color:#fff;
-    background:rgba(15,23,42,.96);
-    border:1px solid rgba(255,255,255,.10);
-    box-shadow:0 12px 35px rgba(0,0,0,.42);
-    font-size:11px;
-    font-weight:800;
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
-    white-space:nowrap;
-}
-
-.zyper-toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
-}
 
 /* =====================================================
-   TABLET
+   ZYPER HOME-LIKE LIGHT PROFILE THEME
 ===================================================== */
-
-@media(max-width:850px){
-
-    .profile-hero{
-        grid-template-columns:130px minmax(0,1fr);
-    }
-
-    .hero-actions{
-        grid-column:1 / -1;
-        flex-direction:row;
-    }
-
-    .hero-actions .hero-btn{
-        flex:1;
-    }
-
-    .quick-grid{
-        grid-template-columns:repeat(3,minmax(0,1fr));
-    }
+body{
+    background:#f5f6f8 !important;
+    color:#252a32 !important;
+    padding-top:92px !important;
 }
 
-/* =====================================================
-   MOBILE
-===================================================== */
+.profile-card{
+    max-width:980px !important;
+    margin:18px auto 40px !important;
+    padding:34px 28px 38px !important;
+    border-radius:25px !important;
+    background:#ffffff !important;
+    border:1px solid #e5e7eb !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    box-shadow:0 12px 35px rgba(15,23,42,.08) !important;
+    color:#252a32 !important;
+}
 
-@media(max-width:600px){
+.profile-card::before{
+    width:330px !important;
+    height:250px !important;
+    top:-160px !important;
+    background:radial-gradient(circle,rgba(168,85,247,.14),transparent 70%) !important;
+}
 
+.avatar-container{
+    width:126px !important;
+    height:126px !important;
+    margin:0 auto 16px !important;
+}
+
+.avatar{
+    width:126px !important;
+    height:126px !important;
+    border:4px solid #8b5cf6 !important;
+    background:#f3f4f6 !important;
+    box-shadow:0 9px 25px rgba(124,58,237,.20) !important;
+}
+
+.online-dot{
+    border-color:#ffffff !important;
+}
+
+.company-badge{
+    color:#7e22ce !important;
+    background:#f3e8ff !important;
+    border:1px solid #e9d5ff !important;
+}
+
+#username{
+    font-size:30px !important;
+    background:linear-gradient(90deg,#2563eb,#7c3aed,#a855f7) !important;
+    -webkit-background-clip:text !important;
+    background-clip:text !important;
+    color:transparent !important;
+}
+
+.account-text{
+    color:#8a919b !important;
+}
+
+.info-box{
+    max-width:760px !important;
+    margin:24px auto 24px !important;
+    gap:12px !important;
+}
+
+.info-item{
+    padding:17px 12px !important;
+    background:#f8fafc !important;
+    border:1px solid #e5e7eb !important;
+    box-shadow:0 4px 14px rgba(15,23,42,.035) !important;
+}
+
+.info-title{
+    color:#8a919b !important;
+}
+
+.info-value{
+    color:#252a32 !important;
+}
+
+.quick-title{
+    max-width:760px !important;
+    margin:8px auto 11px !important;
+    color:#7e22ce !important;
+}
+
+.quick-grid{
+    max-width:760px !important;
+    margin:0 auto 20px !important;
+    gap:11px !important;
+}
+
+.quick-action{
+    background:#ffffff !important;
+    border:1px solid #e5e7eb !important;
+    color:#252a32 !important;
+    box-shadow:0 5px 15px rgba(15,23,42,.05) !important;
+}
+
+.quick-action:hover{
+    transform:translateY(-3px) !important;
+    box-shadow:0 10px 25px rgba(15,23,42,.09) !important;
+}
+
+.quick-action.recharge,
+.quick-action.history,
+.quick-action.help{
+    background:#ffffff !important;
+    border-color:#e5e7eb !important;
+}
+
+.quick-action-icon{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:40px !important;
+    height:40px !important;
+    margin:0 auto 7px !important;
+    border-radius:12px !important;
+    background:linear-gradient(135deg,#2563eb,#7c3aed) !important;
+}
+
+.quick-action-text{
+    color:#252a32 !important;
+}
+
+.profile-button{
+    max-width:760px !important;
+    display:block !important;
+    margin:10px auto 0 !important;
+}
+
+.edit-button{
+    background:linear-gradient(135deg,#2563eb,#7c3aed) !important;
+    box-shadow:0 8px 22px rgba(124,58,237,.18) !important;
+}
+
+.logout-button{
+    background:#fff1f2 !important;
+    border:1px solid #fecdd3 !important;
+    color:#dc2626 !important;
+}
+
+.edit-panel{
+    max-width:760px !important;
+    margin:20px auto 0 !important;
+    background:#f8fafc !important;
+    border:1px solid #e5e7eb !important;
+    color:#252a32 !important;
+}
+
+.edit-label{
+    color:#4b5563 !important;
+}
+
+.name-input{
+    background:#ffffff !important;
+    color:#252a32 !important;
+    border:1px solid #d1d5db !important;
+}
+
+.file-input{
+    background:#ffffff !important;
+    color:#4b5563 !important;
+    border:1px dashed #a78bfa !important;
+}
+
+.preview-title{
+    color:#8a919b !important;
+}
+
+.cancel-button{
+    background:#e5e7eb !important;
+    color:#374151 !important;
+}
+
+.zyper-profile-login-box{
+    max-width:760px !important;
+    margin:0 auto 20px !important;
+    background:linear-gradient(135deg,#eff6ff,#f5f3ff) !important;
+    border:1px solid #ddd6fe !important;
+}
+
+.zyper-profile-login-box .guest-title{
+    color:#252a32 !important;
+}
+
+.zyper-profile-login-box .guest-text{
+    color:#6b7280 !important;
+}
+
+.guest-private{
+    color:#9ca3af !important;
+}
+
+@media(max-width:500px){
     body{
-        padding:78px 11px 125px;
+        padding-top:78px !important;
     }
 
-    .profile-hero{
-        display:block;
-        padding:22px 17px;
-        text-align:center;
-        border-radius:22px;
+    .profile-card{
+        margin:10px auto 28px !important;
+        padding:25px 15px 30px !important;
+        border-radius:20px !important;
     }
 
-    .avatar-container{
-        width:110px;
-        height:110px;
-        margin:0 auto 14px;
-    }
-
-    .avatar{
-        width:110px;
-        height:110px;
-    }
-
-    #username{
-        font-size:24px;
-    }
-
-    .profile-meta-row{
-        justify-content:center;
-    }
-
-    .hero-actions{
-        margin-top:16px;
-        display:grid;
-        grid-template-columns:1fr 1fr;
-    }
-
-    .profile-section{
-        padding:16px;
-        border-radius:19px;
-    }
-
-    .wallet-grid{
-        grid-template-columns:1fr;
-    }
-
-    .info-grid{
-        grid-template-columns:1fr;
+    .info-box{
+        grid-template-columns:1fr 1fr !important;
+        gap:8px !important;
     }
 
     .quick-grid{
-        grid-template-columns:repeat(3,minmax(0,1fr));
-        gap:8px;
-    }
-
-    .quick-action{
-        min-height:92px;
-    }
-
-    .tools-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:repeat(3,1fr) !important;
+        gap:8px !important;
     }
 }
 
-@media(max-width:370px){
-
-    .quick-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-
-    .hero-actions{
-        grid-template-columns:1fr;
-    }
-}
 </style>
+
 </head>
+
 
 <body>
 
-<div class="page-wrap">
 
-    <!-- =====================================================
-         PROFILE HERO
-    ===================================================== -->
+<div class="profile-card">
 
-    <section class="profile-hero">
 
-        <div class="avatar-container">
-            <img
-                id="profileImage"
-                class="avatar"
-                src="1.jpg"
-                alt="Profile Image"
-            >
-            <div class="online-dot"></div>
-        </div>
+<div class="company-badge">
+💎 ZYPER CUSTOMER
+</div>
 
-        <div class="profile-main">
 
-            <div class="company-badge">
-                💎 ZYPER CUSTOMER
-            </div>
+<div class="avatar-container">
 
-            <h1 id="username">
-                User Name
-            </h1>
+<img
+id="profileImage"
+class="avatar"
+src="1.jpg"
+alt="Profile Image"
+>
 
-            <p class="account-text">
-                Your Zyper Diamond Store account
-            </p>
-
-            <div class="profile-meta-row">
-
-                <div class="meta-chip" id="accountStatusChip">
-                    ✅ <span id="accountStatus">Active</span>
-                </div>
-
-                <div class="meta-chip" id="emailVerifiedChip">
-                    📧 <span id="emailVerifiedText">Checking...</span>
-                </div>
-
-                <div class="meta-chip">
-                    📅 <span id="memberSince">Loading...</span>
-                </div>
-
-            </div>
-
-            <div id="zyperProfileGuestNotice"></div>
-
-        </div>
+<div class="online-dot"></div>
 
-        <div class="hero-actions">
-
-            <button
-                class="hero-btn edit"
-                type="button"
-                onclick="editProfile()"
-            >
-                ✏️ Edit Profile
-            </button>
+</div>
 
-            <button
-                class="hero-btn logout"
-                id="logoutButton"
-                type="button"
-                onclick="logout()"
-            >
-                🚪 Logout
-            </button>
 
-        </div>
+<h2 id="username">
+User Name
+</h2>
 
-    </section>
 
+<p class="account-text">
+Your Zyper Diamond Store account
+</p>
 
-    <!-- =====================================================
-         WALLET OVERVIEW
-    ===================================================== -->
 
-    <section class="profile-section">
+<div class="info-box">
 
-        <div class="section-top">
 
-            <div>
-                <h2 class="section-title">
-                    💰 Wallet Overview
-                </h2>
+<div class="info-item">
 
-                <p class="section-subtitle">
-                    Your current Zyper wallet information.
-                </p>
-            </div>
-
-            <button
-                type="button"
-                class="small-refresh"
-                onclick="refreshWallet()"
-            >
-                ↻ Refresh
-            </button>
-
-        </div>
-
-        <div class="wallet-grid">
-
-            <div class="wallet-stat primary">
-                <div class="wallet-stat-label">
-                    Available Balance
-                </div>
-
-                <div
-                    class="wallet-stat-value"
-                    id="walletBalance"
-                >
-                    Login Required
-                </div>
-            </div>
-
-            <div class="wallet-stat">
-                <div class="wallet-stat-label">
-                    Total Added
-                </div>
-
-                <div
-                    class="wallet-stat-value"
-                    id="totalDeposited"
-                >
-                    —
-                </div>
-            </div>
-
-            <div class="wallet-stat">
-                <div class="wallet-stat-label">
-                    Total Spent
-                </div>
-
-                <div
-                    class="wallet-stat-value"
-                    id="totalSpent"
-                >
-                    —
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         ACCOUNT INFORMATION
-    ===================================================== -->
-
-    <section class="profile-section">
-
-        <div class="section-top">
-
-            <div>
-                <h2 class="section-title">
-                    👤 Account Information
-                </h2>
-
-                <p class="section-subtitle">
-                    Your account details and activity.
-                </p>
-            </div>
-
-        </div>
-
-        <div class="info-grid">
-
-            <div class="info-item">
-                <div class="info-title">
-                    Email
-                </div>
-
-                <div
-                    class="info-value"
-                    id="userEmail"
-                >
-                    Loading...
-                </div>
-
-                <button
-                    class="copy-mini"
-                    type="button"
-                    onclick="copyEmail()"
-                    title="Copy Email"
-                >
-                    📋
-                </button>
-            </div>
-
-            <div class="info-item">
-                <div class="info-title">
-                    Firebase UID
-                </div>
-
-                <div
-                    class="info-value"
-                    id="userUid"
-                >
-                    Login to view
-                </div>
-
-                <button
-                    class="copy-mini"
-                    type="button"
-                    onclick="copyUid()"
-                    title="Copy UID"
-                >
-                    📋
-                </button>
-            </div>
-
-            <div class="info-item">
-                <div class="info-title">
-                    Last Sign In
-                </div>
-
-                <div
-                    class="info-value"
-                    id="lastSignIn"
-                >
-                    Loading...
-                </div>
-            </div>
-
-            <div class="info-item">
-                <div class="info-title">
-                    Account Provider
-                </div>
-
-                <div
-                    class="info-value"
-                    id="loginProvider"
-                >
-                    Loading...
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         QUICK ACTIONS
-    ===================================================== -->
-
-    <section class="profile-section">
-
-        <div class="section-top">
-
-            <div>
-                <h2 class="section-title">
-                    ⚡ Quick Actions
-                </h2>
-
-                <p class="section-subtitle">
-                    Open your most-used Zyper pages instantly.
-                </p>
-            </div>
-
-        </div>
-
-        <div class="quick-grid">
-
-            <button class="quick-action" onclick="goWallet()" type="button">
-                <span class="quick-action-icon">💰</span>
-                <span class="quick-action-text">Wallet</span>
-            </button>
-
-            <button class="quick-action" onclick="goRecharge()" type="button">
-                <span class="quick-action-icon">💳</span>
-                <span class="quick-action-text">Recharge</span>
-            </button>
-
-            <button class="quick-action" onclick="goHistory()" type="button">
-                <span class="quick-action-icon">📜</span>
-                <span class="quick-action-text">Orders</span>
-            </button>
-
-            <button class="quick-action" onclick="goShop()" type="button">
-                <span class="quick-action-icon">💎</span>
-                <span class="quick-action-text">Shop</span>
-            </button>
-
-            <button class="quick-action" onclick="goHelp()" type="button">
-                <span class="quick-action-icon">💬</span>
-                <span class="quick-action-text">Support</span>
-            </button>
-
-            <button class="quick-action" onclick="goHome()" type="button">
-                <span class="quick-action-icon">🏠</span>
-                <span class="quick-action-text">Home</span>
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         PROFILE TOOLS
-    ===================================================== -->
-
-    <section class="profile-section">
-
-        <div class="section-top">
-
-            <div>
-                <h2 class="section-title">
-                    🛠 Account Tools
-                </h2>
-
-                <p class="section-subtitle">
-                    Useful profile and account controls.
-                </p>
-            </div>
-
-        </div>
-
-        <div class="tools-grid">
-
-            <button
-                class="tool-row"
-                type="button"
-                onclick="editProfile()"
-            >
-                <span class="tool-icon">
-                    ✏️
-                </span>
-
-                <span>
-                    <span class="tool-title">
-                        Edit Profile
-                    </span>
-                    <span class="tool-sub">
-                        Change your username and profile image.
-                    </span>
-                </span>
-            </button>
-
-            <button
-                class="tool-row"
-                type="button"
-                onclick="copyAccountInfo()"
-            >
-                <span class="tool-icon">
-                    📋
-                </span>
-
-                <span>
-                    <span class="tool-title">
-                        Copy Account Info
-                    </span>
-                    <span class="tool-sub">
-                        Copy your username, email and UID.
-                    </span>
-                </span>
-            </button>
-
-            <button
-                class="tool-row"
-                type="button"
-                onclick="refreshAccount()"
-            >
-                <span class="tool-icon">
-                    🔄
-                </span>
-
-                <span>
-                    <span class="tool-title">
-                        Refresh Account
-                    </span>
-                    <span class="tool-sub">
-                        Reload your profile and wallet information.
-                    </span>
-                </span>
-            </button>
-
-            <button
-                class="tool-row"
-                type="button"
-                onclick="goHelp()"
-            >
-                <span class="tool-icon">
-                    🛟
-                </span>
-
-                <span>
-                    <span class="tool-title">
-                        Customer Support
-                    </span>
-                    <span class="tool-sub">
-                        Contact Zyper support through WhatsApp.
-                    </span>
-                </span>
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         EDIT PROFILE
-    ===================================================== -->
-
-    <section
-        class="edit-panel"
-        id="editPanel"
-    >
-
-        <h2 class="edit-title">
-            ✏️ Edit Profile
-        </h2>
-
-        <p class="edit-note">
-            Your username will also be saved to your Zyper account,
-            so it can be used by supported Zyper features such as
-            the Top Purchasers leaderboard.
-        </p>
-
-        <label class="edit-label">
-            👤 Display Name
-        </label>
-
-        <input
-            id="nameInput"
-            class="name-input"
-            type="text"
-            maxlength="40"
-            placeholder="Enter your name"
-        >
-
-        <label class="edit-label">
-            🖼️ Profile Image
-        </label>
-
-        <input
-            id="imageInput"
-            class="file-input"
-            type="file"
-            accept="image/*"
-        >
-
-        <img
-            id="imagePreview"
-            class="image-preview"
-            src="1.jpg"
-            alt="Profile Preview"
-        >
-
-        <div class="edit-actions">
-
-            <button
-                type="button"
-                class="save-button"
-                onclick="saveProfile()"
-            >
-                💾 Save
-            </button>
-
-            <button
-                type="button"
-                class="cancel-button"
-                onclick="cancelEdit()"
-            >
-                ❌ Cancel
-            </button>
-
-        </div>
-
-    </section>
+<div class="info-icon">
+✅
+</div>
+
+<div class="info-title">
+Account
+</div>
+
+<div
+id="accountStatus"
+class="info-value">
+
+Active
+
+</div>
+
+</div>
+
+
+<div class="info-item">
+
+<div class="info-icon">
+🔐
+</div>
+
+<div class="info-title">
+Sign In
+</div>
+
+<div class="info-value" id="signInMethod">
+Secure Account
+</div>
+
+</div>
+
+
+<div class="info-item">
+
+<div class="info-icon">
+📧
+</div>
+
+<div class="info-title">
+Email
+</div>
+
+<div
+id="userEmail"
+class="info-value">
+
+Loading...
+
+</div>
+
+</div>
+
+
+<div class="info-item">
+
+<div class="info-icon">
+📅
+</div>
+
+<div class="info-title">
+Member Since
+</div>
+
+<div
+id="memberSince"
+class="info-value">
+
+Loading...
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="quick-title">
+Quick Actions
+</div>
+
+
+<div class="quick-grid">
+
+
+<button
+type="button"
+class="quick-action recharge"
+onclick="goRecharge()"
+>
+
+<span class="quick-action-icon">
+💳
+</span>
+
+<span class="quick-action-text">
+Recharge
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="quick-action history"
+onclick="goHistory()"
+>
+
+<span class="quick-action-icon">
+📜
+</span>
+
+<span class="quick-action-text">
+History
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="quick-action help"
+onclick="goHelp()"
+>
+
+<span class="quick-action-icon">
+💬
+</span>
+
+<span class="quick-action-text">
+Help
+</span>
+
+</button>
+
+
+</div>
+
+<div class="quick-grid">
+
+<button
+type="button"
+class="quick-action"
+onclick="goWallet()"
+>
+<span class="quick-action-icon">💰</span>
+<span class="quick-action-text">Wallet</span>
+</button>
+
+<button
+type="button"
+class="quick-action"
+onclick="goShop()"
+>
+<span class="quick-action-icon">💎</span>
+<span class="quick-action-text">Shop</span>
+</button>
+
+<button
+type="button"
+class="quick-action"
+onclick="goHome()"
+>
+<span class="quick-action-icon">🏠</span>
+<span class="quick-action-text">Home</span>
+</button>
+
+</div>
+
+
+<button
+class="profile-button edit-button"
+onclick="editProfile()">
+
+✏️ Edit Profile
+
+</button>
+
+
+<div
+id="editPanel"
+class="edit-panel">
+
+
+<label class="edit-label">
+👤 Change Name
+</label>
+
+
+<input
+id="nameInput"
+class="name-input"
+type="text"
+maxlength="40"
+placeholder="Enter your name"
+>
+
+
+<label class="edit-label">
+🖼️ Change Profile Image
+</label>
+
+
+<input
+id="imageInput"
+class="file-input"
+type="file"
+accept="image/*"
+>
+
+
+<div class="preview-title">
+Image Preview
+</div>
+
+
+<img
+id="imagePreview"
+class="image-preview"
+src="1.jpg"
+alt="Preview"
+>
+
+
+<div class="edit-actions">
+
+
+<button
+type="button"
+class="save-button"
+onclick="saveProfile()">
+
+💾 Save
+
+</button>
+
+
+<button
+type="button"
+class="cancel-button"
+onclick="cancelEdit()">
+
+❌ Cancel
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+<button
+class="profile-button logout-button"
+onclick="logout()">
+
+🚪 Logout
+
+</button>
+
+
+<!-- SAFE SPACE SO LOGOUT CAN SCROLL ABOVE NAV -->
+
+<div class="nav-safe-space"></div>
+
 
 </div>
 
 
 <div id="zyper-navigation"></div>
-<div id="zyperToast" class="zyper-toast"></div>
 
 
 <script type="module">
 
 import {
-    auth,
-    db
+    auth
 }
 from "./firebase.js?v=10000";
 
+
 import {
     onAuthStateChanged,
-    signOut,
-    updateProfile
+    signOut
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import {
-    doc,
-    getDoc,
-    setDoc
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+let currentUser = null;
 
-const WORKER_URL =
-"https://zyper-order.ameresh20112011.workers.dev";
-
-const DEFAULT_IMAGE =
-"1.jpg";
-
-let currentUser =
-null;
+const DEFAULT_IMAGE = "1.jpg";
 
 
 /* =====================================================
@@ -1354,201 +1692,34 @@ null;
 ===================================================== */
 
 const username =
-document.getElementById(
-    "username"
-);
+    document.getElementById("username");
 
 const profileImage =
-document.getElementById(
-    "profileImage"
-);
+    document.getElementById("profileImage");
 
 const userEmail =
-document.getElementById(
-    "userEmail"
-);
-
-const userUid =
-document.getElementById(
-    "userUid"
-);
+    document.getElementById("userEmail");
 
 const memberSince =
-document.getElementById(
-    "memberSince"
-);
+    document.getElementById("memberSince");
 
 const accountStatus =
-document.getElementById(
-    "accountStatus"
-);
-
-const emailVerifiedText =
-document.getElementById(
-    "emailVerifiedText"
-);
-
-const emailVerifiedChip =
-document.getElementById(
-    "emailVerifiedChip"
-);
-
-const lastSignIn =
-document.getElementById(
-    "lastSignIn"
-);
-
-const loginProvider =
-document.getElementById(
-    "loginProvider"
-);
-
-const walletBalance =
-document.getElementById(
-    "walletBalance"
-);
-
-const totalDeposited =
-document.getElementById(
-    "totalDeposited"
-);
-
-const totalSpent =
-document.getElementById(
-    "totalSpent"
-);
+    document.getElementById("accountStatus");
 
 const editPanel =
-document.getElementById(
-    "editPanel"
-);
+    document.getElementById("editPanel");
 
 const nameInput =
-document.getElementById(
-    "nameInput"
-);
+    document.getElementById("nameInput");
 
 const imageInput =
-document.getElementById(
-    "imageInput"
-);
+    document.getElementById("imageInput");
 
 const imagePreview =
-document.getElementById(
-    "imagePreview"
-);
+    document.getElementById("imagePreview");
 
 const logoutButton =
-document.getElementById(
-    "logoutButton"
-);
-
-const guestNotice =
-document.getElementById(
-    "zyperProfileGuestNotice"
-);
-
-
-/* =====================================================
-   MONEY
-===================================================== */
-
-function money(
-    value
-){
-
-    return Number(
-        value || 0
-    )
-    .toLocaleString(
-        "en-LK",
-        {
-            minimumFractionDigits:0,
-            maximumFractionDigits:0
-        }
-    );
-}
-
-
-/* =====================================================
-   DATE
-===================================================== */
-
-function formatDate(
-    value
-){
-
-    if(!value){
-        return "Not available";
-    }
-
-    try{
-
-        return new Date(
-            value
-        )
-        .toLocaleString(
-            "en-LK",
-            {
-                year:"numeric",
-                month:"short",
-                day:"numeric",
-                hour:"2-digit",
-                minute:"2-digit"
-            }
-        );
-
-    }
-    catch{
-
-        return "Not available";
-    }
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-let toastTimer =
-null;
-
-function showToast(
-    message
-){
-
-    const toast =
-    document.getElementById(
-        "zyperToast"
-    );
-
-    if(!toast){
-        return;
-    }
-
-    toast.textContent =
-    message;
-
-    toast.classList.add(
-        "show"
-    );
-
-    clearTimeout(
-        toastTimer
-    );
-
-    toastTimer =
-    setTimeout(
-        function(){
-
-            toast.classList.remove(
-                "show"
-            );
-
-        },
-        2200
-    );
-}
+    document.querySelector(".logout-button");
 
 
 /* =====================================================
@@ -1565,53 +1736,56 @@ function createLoginModal(){
         return;
     }
 
+
     const modal =
-    document.createElement(
-        "div"
-    );
+        document.createElement("div");
+
 
     modal.id =
-    "zyperProfileLoginModal";
+        "zyperProfileLoginModal";
+
 
     modal.innerHTML = `
 
-        <div class="zyper-profile-modal-card">
+<div class="zyper-profile-modal-card">
 
-            <div class="zyper-profile-modal-icon">
-                🔐
-            </div>
+    <div class="zyper-profile-modal-icon">
+        🔐
+    </div>
 
-            <h3>
-                Login Required
-            </h3>
+    <h3>
+        Login Required
+    </h3>
 
-            <p>
-                Please login to use your
-                Zyper Profile and private account features.
-            </p>
+    <p>
+        Please login to use your
+        Zyper Profile.
+    </p>
 
-            <a
-                href="./index.html"
-                class="zyper-profile-modal-login"
-            >
-                LOGIN
-            </a>
+    <a
+    href="./index.html"
+    class="zyper-profile-modal-login"
+    >
+        LOGIN
+    </a>
 
-            <button
-                type="button"
-                class="zyper-profile-modal-cancel"
-                id="zyperProfileModalCancel"
-            >
-                Continue Browsing
-            </button>
+    <button
+    type="button"
+    class="zyper-profile-modal-cancel"
+    id="zyperProfileModalCancel"
+    >
+        Continue Browsing
+    </button>
 
-        </div>
+</div>
 
     `;
+
 
     document.body.appendChild(
         modal
     );
+
 
     document
     .getElementById(
@@ -1622,21 +1796,20 @@ function createLoginModal(){
         hideLoginPopup
     );
 
+
     modal.addEventListener(
         "click",
-        function(
-            event
-        ){
+        function(event){
 
             if(
-                event.target ===
-                modal
+                event.target === modal
             ){
                 hideLoginPopup();
             }
 
         }
     );
+
 }
 
 
@@ -1645,314 +1818,389 @@ function showLoginPopup(){
     createLoginModal();
 
     const modal =
-    document.getElementById(
-        "zyperProfileLoginModal"
-    );
+        document.getElementById(
+            "zyperProfileLoginModal"
+        );
 
     if(modal){
-        modal.classList.add(
-            "show"
-        );
+        modal.classList.add("show");
     }
+
 }
 
 
 function hideLoginPopup(){
 
     const modal =
-    document.getElementById(
-        "zyperProfileLoginModal"
-    );
+        document.getElementById(
+            "zyperProfileLoginModal"
+        );
 
     if(modal){
-        modal.classList.remove(
-            "show"
-        );
+        modal.classList.remove("show");
     }
+
 }
 
 
 /* =====================================================
-   GUEST
+   GUEST NOTICE
 ===================================================== */
 
 function showGuestNotice(){
 
-    if(!guestNotice){
+    const card =
+        document.querySelector(
+            ".profile-card"
+        );
+
+    if(
+        !card ||
+        document.getElementById(
+            "zyperProfileGuestNotice"
+        )
+    ){
         return;
     }
 
-    guestNotice.innerHTML = `
 
-        <div class="zyper-profile-login-box">
+    const notice =
+        document.createElement("div");
 
-            <div class="guest-title">
-                🔐 Login to use your Profile
-            </div>
 
-            <div class="guest-text">
-                Login to view wallet details,
-                account information and edit your profile.
-            </div>
+    notice.id =
+        "zyperProfileGuestNotice";
 
-            <a
-                href="./index.html"
-                class="guest-login"
-            >
-                LOGIN
-            </a>
 
-        </div>
+    notice.className =
+        "zyper-profile-login-box";
+
+
+    notice.innerHTML = `
+
+<div class="guest-title">
+    🔐 Login to use your Profile
+</div>
+
+<div class="guest-text">
+    You can view this page and all options.
+    Login is required to view or change
+    your personal profile information.
+</div>
+
+<a
+href="./index.html"
+class="guest-login"
+>
+    LOGIN
+</a>
 
     `;
-}
 
 
-function clearGuestNotice(){
+    const badge =
+        card.querySelector(
+            ".company-badge"
+        );
 
-    if(guestNotice){
-        guestNotice.innerHTML =
-        "";
+
+    if(
+        badge &&
+        badge.nextSibling
+    ){
+
+        card.insertBefore(
+            notice,
+            badge.nextSibling
+        );
+
     }
+    else{
+
+        card.prepend(
+            notice
+        );
+
+    }
+
 }
 
 
-function showGuestProfile(){
+function removeGuestNotice(){
 
-    currentUser =
-    null;
+    const notice =
+        document.getElementById(
+            "zyperProfileGuestNotice"
+        );
 
-    username.textContent =
-    "Guest";
 
-    profileImage.src =
-    DEFAULT_IMAGE;
+    if(notice){
+        notice.remove();
+    }
 
-    accountStatus.textContent =
-    "Login Required";
 
-    emailVerifiedText.textContent =
-    "Login Required";
+    hideLoginPopup();
 
-    emailVerifiedChip.classList.remove(
-        "verified"
-    );
-
-    memberSince.textContent =
-    "Login Required";
-
-    userEmail.textContent =
-    "Login to view";
-
-    userUid.textContent =
-    "Login to view";
-
-    lastSignIn.textContent =
-    "Login to view";
-
-    loginProvider.textContent =
-    "Login to view";
-
-    walletBalance.textContent =
-    "Login Required";
-
-    totalDeposited.textContent =
-    "—";
-
-    totalSpent.textContent =
-    "—";
-
-    logoutButton.textContent =
-    "🔐 Login";
-
-    editPanel.classList.remove(
-        "show"
-    );
-
-    showGuestNotice();
 }
 
 
 /* =====================================================
-   FIRESTORE PROFILE
+   GUEST PROFILE STATE
 ===================================================== */
 
-async function getFirestoreProfile(
-    user
-){
+function showGuestProfile(){
+
+    currentUser =
+        null;
+
+
+    if(username){
+        username.textContent =
+            "Guest";
+    }
+
+
+    if(profileImage){
+        profileImage.src =
+            DEFAULT_IMAGE;
+    }
+
+
+    if(accountStatus){
+
+        accountStatus.textContent =
+            "Login Required";
+
+        accountStatus.classList.add(
+            "guest-private"
+        );
+
+    }
+
+
+    if(userEmail){
+
+        userEmail.textContent =
+            "Login to view";
+
+        userEmail.classList.add(
+            "guest-private"
+        );
+
+    }
+
+
+    if(memberSince){
+
+        memberSince.textContent =
+            "Login to view";
+
+        memberSince.classList.add(
+            "guest-private"
+        );
+
+    }
+
+
+    if(nameInput){
+        nameInput.value = "";
+    }
+
+
+    if(imagePreview){
+        imagePreview.src =
+            DEFAULT_IMAGE;
+    }
+
+
+    if(editPanel){
+        editPanel.classList.remove(
+            "show"
+        );
+    }
+
+
+    if(logoutButton){
+
+    logoutButton.innerHTML =
+        "🚪 Logout";
+
+}
+
+    showGuestNotice();
+
+}
+
+
+/* =====================================================
+   LOGGED-IN PROFILE
+===================================================== */
+
+function showUserProfile(user){
+
+    currentUser =
+        user;
+
+
+    removeGuestNotice();
+
+
+    if(accountStatus){
+
+        accountStatus.textContent =
+            "Active";
+
+        accountStatus.classList.remove(
+            "guest-private"
+        );
+
+    }
+
+
+    if(userEmail){
+
+        userEmail.textContent =
+            user.email ||
+            "Not available";
+
+        userEmail.classList.remove(
+            "guest-private"
+        );
+
+    }
+
+
+    let createdDate =
+        "Not available";
+
+
+    if(
+        user.metadata &&
+        user.metadata.creationTime
+    ){
+
+        try{
+
+            createdDate =
+                new Date(
+                    user.metadata.creationTime
+                )
+                .toLocaleDateString(
+                    "en-LK",
+                    {
+                        year:"numeric",
+                        month:"short",
+                        day:"numeric"
+                    }
+                );
+
+        }
+        catch(error){
+
+            console.error(
+                "Creation date error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    if(memberSince){
+
+        memberSince.textContent =
+            createdDate;
+
+        memberSince.classList.remove(
+            "guest-private"
+        );
+
+    }
+
+
+    const uid =
+        user.uid;
+
+
+    let savedName =
+        localStorage.getItem(
+            uid + "_name"
+        );
+
+
+    if(!savedName){
+
+        savedName =
+            user.displayName ||
+            "Zyper Customer";
+
+    }
+
+
+    let savedImage =
+        localStorage.getItem(
+            uid + "_img"
+        );
+
+
+    if(!savedImage){
+
+        savedImage =
+            DEFAULT_IMAGE;
+
+    }
+
 
     try{
 
-        const profileRef =
-        doc(
-            db,
-            "users",
-            user.uid
+        localStorage.setItem(
+            uid + "_img",
+            savedImage
         );
-
-        const snap =
-        await getDoc(
-            profileRef
-        );
-
-        if(
-            snap.exists()
-        ){
-            return snap.data();
-        }
 
     }
     catch(error){
 
         console.error(
-            "Firestore profile read error:",
+            "Profile image cache error:",
             error
         );
-    }
-
-    return {};
-}
-
-
-/* =====================================================
-   SHOW USER
-===================================================== */
-
-async function showUserProfile(
-    user
-){
-
-    currentUser =
-    user;
-
-    clearGuestNotice();
-
-    accountStatus.textContent =
-    "Active";
-
-    logoutButton.textContent =
-    "🚪 Logout";
-
-    userEmail.textContent =
-    user.email ||
-    "Not available";
-
-    userUid.textContent =
-    user.uid;
-
-    memberSince.textContent =
-    user.metadata &&
-    user.metadata.creationTime
-    ?
-    formatDate(
-        user.metadata.creationTime
-    )
-    :
-    "Not available";
-
-    lastSignIn.textContent =
-    user.metadata &&
-    user.metadata.lastSignInTime
-    ?
-    formatDate(
-        user.metadata.lastSignInTime
-    )
-    :
-    "Not available";
-
-    const providerId =
-    user.providerData &&
-    user.providerData.length
-    ?
-    user.providerData[0].providerId
-    :
-    "";
-
-    if(
-        providerId ===
-        "google.com"
-    ){
-        loginProvider.textContent =
-        "Google";
-    }
-    else if(
-        providerId ===
-        "password"
-    ){
-        loginProvider.textContent =
-        "Email & Password";
-    }
-    else{
-        loginProvider.textContent =
-        providerId ||
-        "Firebase";
-    }
-
-    if(
-        user.emailVerified
-    ){
-
-        emailVerifiedText.textContent =
-        "Email Verified";
-
-        emailVerifiedChip.classList.add(
-            "verified"
-        );
 
     }
-    else{
 
-        emailVerifiedText.textContent =
-        "Email Not Verified";
 
-        emailVerifiedChip.classList.remove(
-            "verified"
-        );
+    if(username){
+        username.innerText =
+            savedName;
     }
 
-    const profileData =
-    await getFirestoreProfile(
-        user
-    );
 
-    let savedName =
-    profileData.username ||
-    profileData.name ||
-    localStorage.getItem(
-        user.uid + "_name"
-    ) ||
-    user.displayName ||
-    "Zyper Customer";
+    if(profileImage){
+        profileImage.src =
+            savedImage;
+    }
 
-    let savedImage =
-    localStorage.getItem(
-        user.uid + "_img"
-    ) ||
-    DEFAULT_IMAGE;
 
-    username.textContent =
-    savedName;
+    if(nameInput){
+        nameInput.value =
+            savedName;
+    }
 
-    profileImage.src =
-    savedImage;
 
-    nameInput.value =
-    savedName;
+    if(imagePreview){
+        imagePreview.src =
+            savedImage;
+    }
 
-    imagePreview.src =
-    savedImage;
 
-    try{
+    if(logoutButton){
 
-        localStorage.setItem(
-            user.uid + "_name",
-            savedName
-        );
+        logoutButton.innerHTML =
+            "🚪 Logout";
 
     }
-    catch{}
 
-    await loadWallet();
 }
 
 
@@ -1962,170 +2210,28 @@ async function showUserProfile(
 
 onAuthStateChanged(
     auth,
-    async function(
-        user
-    ){
+    function(user){
 
         if(!user){
 
             showGuestProfile();
 
             return;
+
         }
 
-        await showUserProfile(
+
+        showUserProfile(
             user
         );
+
     }
 );
 
 
 /* =====================================================
-   WALLET
+   QUICK ACTIONS
 ===================================================== */
-
-async function loadWallet(){
-
-    if(!currentUser){
-
-        walletBalance.textContent =
-        "Login Required";
-
-        totalDeposited.textContent =
-        "—";
-
-        totalSpent.textContent =
-        "—";
-
-        return;
-    }
-
-    walletBalance.textContent =
-    "Loading...";
-
-    totalDeposited.textContent =
-    "Loading...";
-
-    totalSpent.textContent =
-    "Loading...";
-
-    try{
-
-        const token =
-        await currentUser.getIdToken();
-
-        const response =
-        await fetch(
-            WORKER_URL,
-            {
-                method:"POST",
-
-                headers:{
-                    "Content-Type":"application/json",
-                    "Authorization":
-                    `Bearer ${token}`
-                },
-
-                body:
-                JSON.stringify({
-                    action:
-                    "wallet_balance"
-                })
-            }
-        );
-
-        const result =
-        await response.json();
-
-        if(
-            !response.ok ||
-            !result.success
-        ){
-
-            throw new Error(
-                result.message ||
-                "Unable to load wallet"
-            );
-        }
-
-        const wallet =
-        result.wallet ||
-        {};
-
-        const available =
-        wallet.availableBalance ??
-        wallet.balance ??
-        0;
-
-        walletBalance.textContent =
-        "LKR " +
-        money(
-            available
-        );
-
-        totalDeposited.textContent =
-        "LKR " +
-        money(
-            wallet.totalDeposited ||
-            0
-        );
-
-        totalSpent.textContent =
-        "LKR " +
-        money(
-            wallet.totalSpent ||
-            0
-        );
-
-    }
-    catch(error){
-
-        console.error(
-            "Wallet load error:",
-            error
-        );
-
-        walletBalance.textContent =
-        "Unable to load";
-
-        totalDeposited.textContent =
-        "—";
-
-        totalSpent.textContent =
-        "—";
-    }
-}
-
-
-window.refreshWallet =
-async function(){
-
-    if(!currentUser){
-
-        showLoginPopup();
-
-        return;
-    }
-
-    await loadWallet();
-
-    showToast(
-        "✅ Wallet refreshed"
-    );
-};
-
-
-/* =====================================================
-   ROUTES
-===================================================== */
-
-window.goWallet =
-function(){
-
-    window.location.href =
-    "./wallet.html";
-};
-
 
 window.goRecharge =
 function(){
@@ -2137,24 +2243,25 @@ function(){
         return;
     }
 
+
     window.location.href =
-    "./recharge-payment.html";
+        "./recharge-payment.html";
+
 };
 
 
 window.goHistory =
 function(){
 
-    window.location.href =
-    "./history.html";
-};
-
-
-window.goShop =
-function(){
+    /*
+       History page is public.
+       Guest can open it and the page itself
+       shows Login to view private history.
+    */
 
     window.location.href =
-    "./topup.html";
+        "./history.html";
+
 };
 
 
@@ -2162,15 +2269,28 @@ window.goHelp =
 function(){
 
     window.location.href =
-    "./whatsapp.html";
+        "./whatsapp.html";
+
 };
 
 
+
+window.goWallet =
+function(){
+    window.location.href =
+        "./wallet.html";
+};
+
+window.goShop =
+function(){
+    window.location.href =
+        "./topup.html";
+};
+
 window.goHome =
 function(){
-
     window.location.href =
-    "./home.html";
+        "./home.html";
 };
 
 
@@ -2188,40 +2308,72 @@ function(){
         return;
     }
 
+
     const uid =
-    currentUser.uid;
+        currentUser.uid;
 
-    const savedName =
-    localStorage.getItem(
-        uid + "_name"
-    ) ||
-    currentUser.displayName ||
-    username.textContent ||
-    "Zyper Customer";
 
-    const savedImage =
-    localStorage.getItem(
-        uid + "_img"
-    ) ||
-    DEFAULT_IMAGE;
+    let savedName =
+        localStorage.getItem(
+            uid + "_name"
+        );
 
-    nameInput.value =
-    savedName;
 
-    imagePreview.src =
-    savedImage;
+    if(!savedName){
 
-    imageInput.value =
-    "";
+        savedName =
+            currentUser.displayName ||
+            "Zyper Customer";
 
-    editPanel.classList.add(
-        "show"
-    );
+    }
 
-    editPanel.scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-    });
+
+    let savedImage =
+        localStorage.getItem(
+            uid + "_img"
+        );
+
+
+    if(!savedImage){
+
+        savedImage =
+            DEFAULT_IMAGE;
+
+    }
+
+
+    if(nameInput){
+
+        nameInput.value =
+            savedName;
+
+    }
+
+
+    if(imagePreview){
+
+        imagePreview.src =
+            savedImage;
+
+    }
+
+
+    if(imageInput){
+
+        imageInput.value =
+            "";
+
+    }
+
+
+    if(editPanel){
+
+        editPanel.classList.add(
+            "show"
+        );
+
+    }
+
 };
 
 
@@ -2229,75 +2381,97 @@ function(){
    IMAGE PREVIEW
 ===================================================== */
 
-imageInput.addEventListener(
-    "change",
-    function(
-        event
-    ){
+if(imageInput){
 
-        if(!currentUser){
+    imageInput.addEventListener(
 
-            event.target.value =
-            "";
+        "change",
 
-            showLoginPopup();
+        function(event){
 
-            return;
-        }
 
-        const file =
-        event.target.files[0];
+            if(!currentUser){
 
-        if(!file){
-            return;
-        }
+                event.target.value =
+                    "";
 
-        if(
-            file.size >
-            2 * 1024 * 1024
-        ){
+                showLoginPopup();
 
-            alert(
-                "Please select an image smaller than 2MB."
+                return;
+
+            }
+
+
+            const file =
+                event.target.files[0];
+
+
+            if(!file){
+                return;
+            }
+
+
+            if(
+                file.size >
+                2 * 1024 * 1024
+            ){
+
+                alert(
+                    "Please select an image smaller than 2MB."
+                );
+
+                event.target.value =
+                    "";
+
+                return;
+
+            }
+
+
+            if(
+                !file.type.startsWith(
+                    "image/"
+                )
+            ){
+
+                alert(
+                    "Please select a valid image."
+                );
+
+                event.target.value =
+                    "";
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+            function(){
+
+                if(imagePreview){
+
+                    imagePreview.src =
+                        reader.result;
+
+                }
+
+            };
+
+
+            reader.readAsDataURL(
+                file
             );
 
-            event.target.value =
-            "";
-
-            return;
         }
 
-        if(
-            !file.type.startsWith(
-                "image/"
-            )
-        ){
+    );
 
-            alert(
-                "Please select a valid image."
-            );
-
-            event.target.value =
-            "";
-
-            return;
-        }
-
-        const reader =
-        new FileReader();
-
-        reader.onload =
-        function(){
-
-            imagePreview.src =
-            reader.result;
-        };
-
-        reader.readAsDataURL(
-            file
-        );
-    }
-);
+}
 
 
 /* =====================================================
@@ -2305,194 +2479,273 @@ imageInput.addEventListener(
 ===================================================== */
 
 window.saveProfile =
-async function(){
+function(){
 
     if(!currentUser){
 
         showLoginPopup();
 
         return;
+
     }
+
+
+    const uid =
+        currentUser.uid;
+
 
     let name =
-    nameInput.value.trim();
+        nameInput
+        ? nameInput.value.trim()
+        : "";
+
 
     if(!name){
+
         name =
-        "Zyper Customer";
+            "Zyper Customer";
+
     }
+
 
     if(
         name.length >
         40
     ){
+
         name =
-        name.substring(
-            0,
-            40
-        );
+            name.substring(
+                0,
+                40
+            );
+
     }
 
-    const uid =
-    currentUser.uid;
+
+    localStorage.setItem(
+        uid + "_name",
+        name
+    );
+
 
     const file =
-    imageInput.files[0];
+        imageInput
+        ? imageInput.files[0]
+        : null;
 
-    let imageData =
-    localStorage.getItem(
-        uid + "_img"
-    ) ||
-    DEFAULT_IMAGE;
 
     if(file){
 
-        try{
+        const reader =
+            new FileReader();
 
-            imageData =
-            await new Promise(
-                function(
-                    resolve,
-                    reject
-                ){
 
-                    const reader =
-                    new FileReader();
+        reader.onload =
+        function(){
 
-                    reader.onload =
-                    function(){
-                        resolve(
-                            reader.result
-                        );
-                    };
+            const imageData =
+                reader.result;
 
-                    reader.onerror =
-                    reject;
 
-                    reader.readAsDataURL(
-                        file
-                    );
-                }
+            try{
+
+                localStorage.setItem(
+                    uid + "_img",
+                    imageData
+                );
+
+
+                finishProfileSave(
+                    name,
+                    imageData
+                );
+
+            }
+            catch(error){
+
+                console.error(
+                    "Profile image save error:",
+                    error
+                );
+
+
+                alert(
+                    "Image is too large to save. Please choose a smaller image."
+                );
+
+            }
+
+        };
+
+
+        reader.readAsDataURL(
+            file
+        );
+
+    }
+    else{
+
+        let existingImage =
+            localStorage.getItem(
+                uid + "_img"
+            );
+
+
+        if(!existingImage){
+
+            existingImage =
+                DEFAULT_IMAGE;
+
+
+            localStorage.setItem(
+                uid + "_img",
+                DEFAULT_IMAGE
             );
 
         }
-        catch(error){
 
-            console.error(
-                "Image read error:",
-                error
-            );
 
-            alert(
-                "Unable to read image."
-            );
-
-            return;
-        }
-    }
-
-    try{
-
-        localStorage.setItem(
-            uid + "_name",
-            name
-        );
-
-        localStorage.setItem(
-            uid + "_img",
-            imageData
+        finishProfileSave(
+            name,
+            existingImage
         );
 
     }
-    catch(error){
 
-        console.error(
-            "Local profile save error:",
-            error
-        );
-
-        alert(
-            "Profile image is too large to save. Please choose a smaller image."
-        );
-
-        return;
-    }
-
-    try{
-
-        await updateProfile(
-            currentUser,
-            {
-                displayName:
-                name
-            }
-        );
-
-    }
-    catch(error){
-
-        console.error(
-            "Firebase Auth profile update error:",
-            error
-        );
-    }
-
-    try{
-
-        const profileRef =
-        doc(
-            db,
-            "users",
-            uid
-        );
-
-        await setDoc(
-            profileRef,
-            {
-                username:name,
-                name:name,
-                updatedAt:
-                new Date().toISOString()
-            },
-            {
-                merge:true
-            }
-        );
-
-    }
-    catch(error){
-
-        console.error(
-            "Firestore username save error:",
-            error
-        );
-
-        /*
-         * Keep local profile working even if
-         * Firestore permissions reject this update.
-         */
-    }
-
-    username.textContent =
-    name;
-
-    profileImage.src =
-    imageData;
-
-    imagePreview.src =
-    imageData;
-
-    imageInput.value =
-    "";
-
-    editPanel.classList.remove(
-        "show"
-    );
-
-    showToast(
-        "✅ Profile saved successfully"
-    );
 };
+
+
+/* =====================================================
+   FINISH SAVE
+===================================================== */
+
+function finishProfileSave(
+    name,
+    image
+){
+
+    if(profileImage){
+
+        profileImage.src =
+            image;
+
+    }
+
+
+    if(username){
+
+        username.innerText =
+            name;
+
+    }
+
+
+    if(imagePreview){
+
+        imagePreview.src =
+            image;
+
+    }
+
+
+    if(imageInput){
+
+        imageInput.value =
+            "";
+
+    }
+
+
+    if(editPanel){
+
+        editPanel.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    const savedNotice =
+        document.createElement(
+            "div"
+        );
+
+
+    savedNotice.style.position =
+        "fixed";
+
+    savedNotice.style.left =
+        "50%";
+
+    savedNotice.style.bottom =
+        "105px";
+
+    savedNotice.style.transform =
+        "translateX(-50%)";
+
+    savedNotice.style.zIndex =
+        "10001";
+
+    savedNotice.style.padding =
+        "12px 20px";
+
+    savedNotice.style.borderRadius =
+        "14px";
+
+    savedNotice.style.background =
+        "rgba(22,163,74,.95)";
+
+    savedNotice.style.border =
+        "1px solid rgba(134,239,172,.5)";
+
+    savedNotice.style.color =
+        "white";
+
+    savedNotice.style.fontSize =
+        "13px";
+
+    savedNotice.style.fontWeight =
+        "600";
+
+    savedNotice.style.whiteSpace =
+        "nowrap";
+
+    savedNotice.style.boxShadow =
+        "0 10px 30px rgba(0,0,0,.4)";
+
+    savedNotice.innerText =
+        "✅ Profile saved successfully";
+
+
+    document.body.appendChild(
+        savedNotice
+    );
+
+
+    setTimeout(
+        function(){
+
+            savedNotice.style.opacity =
+                "0";
+
+            savedNotice.style.transition =
+                "opacity .3s";
+
+
+            setTimeout(
+                function(){
+
+                    savedNotice.remove();
+
+                },
+                300
+            );
+
+        },
+        2000
+    );
+
+}
 
 
 /* =====================================================
@@ -2502,210 +2755,81 @@ async function(){
 window.cancelEdit =
 function(){
 
-    editPanel.classList.remove(
-        "show"
-    );
+    if(editPanel){
 
-    imageInput.value =
-    "";
+        editPanel.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    if(imageInput){
+
+        imageInput.value =
+            "";
+
+    }
+
 
     if(!currentUser){
         return;
     }
+
 
     const uid =
-    currentUser.uid;
+        currentUser.uid;
 
-    const savedName =
-    localStorage.getItem(
-        uid + "_name"
-    ) ||
-    currentUser.displayName ||
-    "Zyper Customer";
 
-    const savedImage =
-    localStorage.getItem(
-        uid + "_img"
-    ) ||
-    DEFAULT_IMAGE;
+    let savedName =
+        localStorage.getItem(
+            uid + "_name"
+        );
 
-    nameInput.value =
-    savedName;
 
-    imagePreview.src =
-    savedImage;
+    let savedImage =
+        localStorage.getItem(
+            uid + "_img"
+        );
+
+
+    if(!savedName){
+
+        savedName =
+            currentUser.displayName ||
+            "Zyper Customer";
+
+    }
+
+
+    if(!savedImage){
+
+        savedImage =
+            DEFAULT_IMAGE;
+
+    }
+
+
+    if(nameInput){
+
+        nameInput.value =
+            savedName;
+
+    }
+
+
+    if(imagePreview){
+
+        imagePreview.src =
+            savedImage;
+
+    }
+
 };
 
 
 /* =====================================================
-   COPY
-===================================================== */
-
-async function copyText(
-    text,
-    successMessage
-){
-
-    if(
-        !text ||
-        text ===
-        "Login to view"
-    ){
-
-        showLoginPopup();
-
-        return;
-    }
-
-    try{
-
-        await navigator.clipboard.writeText(
-            text
-        );
-
-        showToast(
-            successMessage
-        );
-
-    }
-    catch{
-
-        const temp =
-        document.createElement(
-            "textarea"
-        );
-
-        temp.value =
-        text;
-
-        document.body.appendChild(
-            temp
-        );
-
-        temp.select();
-
-        document.execCommand(
-            "copy"
-        );
-
-        temp.remove();
-
-        showToast(
-            successMessage
-        );
-    }
-}
-
-
-window.copyEmail =
-function(){
-
-    if(!currentUser){
-
-        showLoginPopup();
-
-        return;
-    }
-
-    copyText(
-        currentUser.email ||
-        "",
-        "✅ Email copied"
-    );
-};
-
-
-window.copyUid =
-function(){
-
-    if(!currentUser){
-
-        showLoginPopup();
-
-        return;
-    }
-
-    copyText(
-        currentUser.uid,
-        "✅ UID copied"
-    );
-};
-
-
-window.copyAccountInfo =
-function(){
-
-    if(!currentUser){
-
-        showLoginPopup();
-
-        return;
-    }
-
-    const text =
-`Zyper Diamond Store
-Username: ${username.textContent}
-Email: ${currentUser.email || "Not available"}
-Firebase UID: ${currentUser.uid}`;
-
-    copyText(
-        text,
-        "✅ Account info copied"
-    );
-};
-
-
-/* =====================================================
-   REFRESH ACCOUNT
-===================================================== */
-
-window.refreshAccount =
-async function(){
-
-    if(!currentUser){
-
-        showLoginPopup();
-
-        return;
-    }
-
-    try{
-
-        await currentUser.reload();
-
-        const refreshedUser =
-        auth.currentUser;
-
-        if(
-            refreshedUser
-        ){
-
-            await showUserProfile(
-                refreshedUser
-            );
-        }
-
-        showToast(
-            "✅ Account refreshed"
-        );
-
-    }
-    catch(error){
-
-        console.error(
-            "Account refresh error:",
-            error
-        );
-
-        showToast(
-            "❌ Refresh failed"
-        );
-    }
-};
-
-
-/* =====================================================
-   LOGOUT / LOGIN
+   LOGOUT / LOGIN BUTTON
 ===================================================== */
 
 window.logout =
@@ -2716,7 +2840,9 @@ async function(){
         showLoginPopup();
 
         return;
+
     }
+
 
     try{
 
@@ -2724,8 +2850,9 @@ async function(){
             auth
         );
 
+
         window.location.href =
-        "./home.html";
+            "./home.html";
 
     }
     catch(error){
@@ -2735,10 +2862,13 @@ async function(){
             error
         );
 
+
         alert(
             "Logout failed. Please try again."
         );
+
     }
+
 };
 
 
@@ -2750,7 +2880,6 @@ createLoginModal();
 
 </script>
 
-
 <script
 src="./zyper-topbar.js?v=10001">
 </script>
@@ -2760,4 +2889,5 @@ src="./zyper-nav.js?v=10001">
 </script>
 
 </body>
+
 </html>
