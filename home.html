@@ -10,9 +10,7 @@ name="viewport"
 content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 >
 
-<title>
-Zyper Diamond Store | Games, Top Up & Wallet
-</title>
+<title>Zyper Diamond Store | Games, Top Up & Wallet</title>
 
 <meta
 name="description"
@@ -320,7 +318,7 @@ button{
 
 
 /* =====================================================
-   WELCOME PANEL
+   WELCOME
 ===================================================== */
 
 .welcome-panel{
@@ -339,8 +337,7 @@ button{
 
     align-items:center;
 
-    padding:
-    32px;
+    padding:32px;
 
     border-radius:25px;
 
@@ -398,9 +395,7 @@ button{
 
     gap:7px;
 
-    padding:
-    6px
-    10px;
+    padding:6px 10px;
 
     border-radius:999px;
 
@@ -423,10 +418,7 @@ button{
 
 .welcome-panel h1{
 
-    margin:
-    13px
-    0
-    8px;
+    margin:13px 0 8px;
 
     font-family:'Orbitron',sans-serif;
 
@@ -489,9 +481,7 @@ button{
 
     min-height:43px;
 
-    padding:
-    0
-    16px;
+    padding:0 16px;
 
     border:none;
 
@@ -549,7 +539,7 @@ button{
 
 
 /* =====================================================
-   ACCOUNT SUMMARY
+   ACCOUNT
 ===================================================== */
 
 .account-summary{
@@ -642,7 +632,7 @@ button{
 
 
 /* =====================================================
-   SECTION
+   SECTIONS
 ===================================================== */
 
 .home-section{
@@ -681,10 +671,7 @@ button{
 
 .section-heading h2{
 
-    margin:
-    4px
-    0
-    0;
+    margin:4px 0 0;
 
     color:#252a32;
 
@@ -696,10 +683,7 @@ button{
 
 .section-heading p{
 
-    margin:
-    5px
-    0
-    0;
+    margin:5px 0 0;
 
     color:#8a919b;
 
@@ -708,7 +692,7 @@ button{
 
 
 /* =====================================================
-   QUICK BUTTONS
+   QUICK ACCESS
 ===================================================== */
 
 .quick-grid{
@@ -797,10 +781,7 @@ button{
 
 .quick-card p{
 
-    margin:
-    5px
-    0
-    0;
+    margin:5px 0 0;
 
     color:#9299a3;
 
@@ -811,7 +792,7 @@ button{
 
 
 /* =====================================================
-   SERVICE CARDS WITH IMAGES
+   IMAGE SERVICES
 ===================================================== */
 
 .services-grid{
@@ -924,8 +905,7 @@ button{
 
     bottom:0;
 
-    padding:
-    23px;
+    padding:23px;
 }
 
 
@@ -972,10 +952,7 @@ button{
 
 .service-content p{
 
-    margin:
-    6px
-    0
-    15px;
+    margin:6px 0 15px;
 
     color:#d7dce4;
 
@@ -1006,7 +983,7 @@ button{
 
 
 /* =====================================================
-   TOP PURCHASERS
+   LEADERBOARD
 ===================================================== */
 
 .leaderboard{
@@ -1033,8 +1010,7 @@ button{
 
 .leaderboard-top{
 
-    padding:
-    22px;
+    padding:22px;
 
     display:flex;
 
@@ -1066,10 +1042,7 @@ button{
 
 .leaderboard-top p{
 
-    margin:
-    4px
-    0
-    0;
+    margin:4px 0 0;
 
     color:#ede9fe;
 
@@ -1079,9 +1052,7 @@ button{
 
 .month-badge{
 
-    padding:
-    7px
-    10px;
+    padding:7px 10px;
 
     border-radius:999px;
 
@@ -1113,11 +1084,13 @@ button{
 
 .purchaser-card{
 
-    min-height:145px;
+    position:relative;
 
-    padding:18px;
+    min-height:175px;
 
-    border-radius:17px;
+    padding:20px;
+
+    border-radius:18px;
 
     text-align:center;
 
@@ -1129,19 +1102,43 @@ button{
     box-shadow:
     0 5px 15px
     rgba(15,23,42,.05);
+
+    overflow:hidden;
+}
+
+
+.purchaser-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:110px;
+
+    height:110px;
+
+    border-radius:50%;
+
+    right:-60px;
+
+    top:-60px;
+
+    background:
+    rgba(168,85,247,.07);
 }
 
 
 .rank-circle{
 
-    width:42px;
+    position:relative;
 
-    height:42px;
+    z-index:2;
 
-    margin:
-    0
-    auto
-    12px;
+    width:44px;
+
+    height:44px;
+
+    margin:0 auto 12px;
 
     border-radius:50%;
 
@@ -1156,10 +1153,15 @@ button{
     font-weight:900;
 
     font-size:12px;
+
+    box-shadow:
+    0 7px 15px
+    rgba(15,23,42,.12);
 }
 
 
 .rank1{
+
     background:
     linear-gradient(
         135deg,
@@ -1168,7 +1170,9 @@ button{
     );
 }
 
+
 .rank2{
+
     background:
     linear-gradient(
         135deg,
@@ -1177,7 +1181,9 @@ button{
     );
 }
 
+
 .rank3{
+
     background:
     linear-gradient(
         135deg,
@@ -1189,9 +1195,13 @@ button{
 
 .purchaser-name{
 
+    position:relative;
+
+    z-index:2;
+
     color:#292d35;
 
-    font-size:13px;
+    font-size:14px;
 
     font-weight:800;
 
@@ -1201,11 +1211,39 @@ button{
 
 .purchaser-label{
 
-    margin-top:4px;
+    position:relative;
+
+    z-index:2;
+
+    margin-top:7px;
 
     color:#9ca3af;
 
     font-size:8px;
+
+    font-weight:600;
+
+    text-transform:uppercase;
+
+    letter-spacing:.6px;
+}
+
+
+.purchaser-total{
+
+    position:relative;
+
+    z-index:2;
+
+    margin-top:5px;
+
+    color:#7e22ce;
+
+    font-size:16px;
+
+    font-weight:800;
+
+    font-family:'Orbitron',sans-serif;
 }
 
 
@@ -1213,8 +1251,7 @@ button{
 
     display:none;
 
-    padding:
-    20px;
+    padding:25px;
 
     color:#7c3aed;
 
@@ -1227,7 +1264,7 @@ button{
 
 
 /* =====================================================
-   WHY ZYPER
+   FEATURES
 ===================================================== */
 
 .features-grid{
@@ -1292,10 +1329,7 @@ button{
 
 .feature-card p{
 
-    margin:
-    5px
-    0
-    0;
+    margin:5px 0 0;
 
     color:#969ca5;
 
@@ -1313,8 +1347,7 @@ button{
 
     margin-top:52px;
 
-    padding:
-    35px;
+    padding:35px;
 
     border-radius:23px;
 
@@ -1352,10 +1385,7 @@ button{
 
 .final-cta p{
 
-    margin:
-    5px
-    0
-    0;
+    margin:5px 0 0;
 
     color:#ddd6fe;
 
@@ -1369,9 +1399,7 @@ button{
 
     min-height:44px;
 
-    padding:
-    0
-    18px;
+    padding:0 18px;
 
     border:none;
 
@@ -1488,6 +1516,7 @@ button{
         left:7px;
     }
 
+
     .banner-next{
         right:7px;
     }
@@ -1517,9 +1546,7 @@ button{
 
         grid-template-columns:1fr;
 
-        padding:
-        23px
-        17px;
+        padding:23px 17px;
 
         border-radius:19px;
 
@@ -1675,19 +1702,20 @@ button{
 
     .purchaser-card{
 
-        min-height:auto;
+        min-height:95px;
 
         display:grid;
 
         grid-template-columns:
-        43px
-        1fr;
+        48px
+        1fr
+        auto;
 
         align-items:center;
 
-        gap:10px;
+        gap:11px;
 
-        padding:12px;
+        padding:14px;
 
         text-align:left;
     }
@@ -1696,23 +1724,28 @@ button{
     .rank-circle{
 
         margin:0;
+
+        width:42px;
+
+        height:42px;
     }
 
 
     .purchaser-label{
 
-        display:none;
+        margin-top:3px;
     }
-.purchaser-total{
 
-    margin-top:5px;
 
-    color:#7e22ce;
+    .purchaser-total{
 
-    font-size:14px;
+        margin:0;
 
-    font-weight:800;
-}
+        font-size:13px;
+
+        text-align:right;
+    }
+
 
     .features-grid{
 
@@ -1764,27 +1797,31 @@ button{
 
 
 /* =====================================================
-   VERY SMALL PHONE
+   VERY SMALL MOBILE
 ===================================================== */
 
-@media(max-width:360px){
+@media(max-width:380px){
+
+    .purchaser-card{
+
+        grid-template-columns:
+        43px
+        1fr;
+    }
+
+
+    .purchaser-total{
+
+        grid-column:2;
+
+        text-align:left;
+    }
+
 
     .quick-grid,
     .features-grid{
 
         gap:7px;
-    }
-
-
-    .quick-card{
-
-        padding:12px;
-    }
-
-
-    .service-image-card{
-
-        min-height:220px;
     }
 
 }
@@ -1798,12 +1835,12 @@ button{
 <body>
 
 
+<div class="main-container">
+
+
 <!-- =====================================================
      SAME 6 BANNERS AS TOPUP
 ===================================================== -->
-
-<div class="main-container">
-
 
 <section class="home-banner">
 
@@ -1949,7 +1986,6 @@ recharge services and digital gaming products in one place.
 </p>
 
 
-
 <div class="welcome-actions">
 
 
@@ -1988,9 +2024,7 @@ MY WALLET
 
 
 <div class="account-summary-label">
-
 ACCOUNT
-
 </div>
 
 
@@ -1998,9 +2032,7 @@ ACCOUNT
 class="account-username"
 id="homeUsername"
 >
-
 Guest
-
 </div>
 
 
@@ -2013,9 +2045,7 @@ Available Wallet Balance
 <strong
 id="homeWalletBalance"
 >
-
 Login Required
-
 </strong>
 
 </div>
@@ -2029,14 +2059,13 @@ Login Required
 
 
 <!-- =====================================================
-     QUICK ACTIONS
+     QUICK ACCESS
 ===================================================== -->
 
 <section class="home-section">
 
 
 <div class="section-heading">
-
 
 <div>
 
@@ -2054,7 +2083,6 @@ Access your most-used Zyper services instantly.
 
 </div>
 
-
 </div>
 
 
@@ -2068,9 +2096,7 @@ onclick="goTopup()"
 >
 
 <div class="quick-icon">
-
 <i class="fa-solid fa-gamepad"></i>
-
 </div>
 
 <h3>
@@ -2091,9 +2117,7 @@ onclick="goWallet()"
 >
 
 <div class="quick-icon">
-
 <i class="fa-solid fa-wallet"></i>
-
 </div>
 
 <h3>
@@ -2114,9 +2138,7 @@ onclick="goRecharge()"
 >
 
 <div class="quick-icon">
-
 <i class="fa-solid fa-bolt"></i>
-
 </div>
 
 <h3>
@@ -2124,7 +2146,7 @@ Recharge
 </h3>
 
 <p>
-Recharge your Zyper Wallet using our payment method.
+Recharge your Zyper Wallet using available payments.
 </p>
 
 </div>
@@ -2137,9 +2159,7 @@ onclick="goHistory()"
 >
 
 <div class="quick-icon">
-
 <i class="fa-solid fa-clock-rotate-left"></i>
-
 </div>
 
 <h3>
@@ -2161,7 +2181,7 @@ Track current and previous orders.
 
 
 <!-- =====================================================
-     IMAGE SERVICES
+     SERVICES
 ===================================================== -->
 
 <section class="home-section">
@@ -2216,9 +2236,7 @@ alt="Free Fire Top Up"
 <div class="service-content">
 
 <div class="service-icon">
-
 <i class="fa-solid fa-fire"></i>
-
 </div>
 
 <h3>
@@ -2269,9 +2287,7 @@ alt="Zyper Wallet"
 <div class="service-content">
 
 <div class="service-icon">
-
 <i class="fa-solid fa-wallet"></i>
-
 </div>
 
 <h3>
@@ -2321,9 +2337,7 @@ alt="Recharge Wallet"
 <div class="service-content">
 
 <div class="service-icon">
-
 <i class="fa-solid fa-credit-card"></i>
-
 </div>
 
 <h3>
@@ -2331,7 +2345,7 @@ Recharge Wallet
 </h3>
 
 <p>
-View payment information and recharge your balance.
+View payment information and recharge your wallet balance.
 </p>
 
 <div class="service-action">
@@ -2373,9 +2387,7 @@ alt="Order History"
 <div class="service-content">
 
 <div class="service-icon">
-
 <i class="fa-solid fa-receipt"></i>
-
 </div>
 
 <h3>
@@ -2425,9 +2437,7 @@ alt="Customer Support"
 <div class="service-content">
 
 <div class="service-icon">
-
 <i class="fa-brands fa-whatsapp"></i>
-
 </div>
 
 <h3>
@@ -2468,7 +2478,6 @@ GET SUPPORT
 
 <div class="section-heading">
 
-
 <div>
 
 <small>
@@ -2480,11 +2489,10 @@ Top Purchasers
 </h2>
 
 <p>
-Only public usernames are displayed.
+This month's highest purchasing customers.
 </p>
 
 </div>
-
 
 </div>
 
@@ -2513,10 +2521,11 @@ Top customers for the current month.
 </div>
 
 
-<div class="month-badge">
-
+<div
+class="month-badge"
+id="leaderboardMonth"
+>
 THIS MONTH
-
 </div>
 
 
@@ -2543,9 +2552,13 @@ Loading...
 </div>
 
 <div class="purchaser-label">
-Top Purchaser
+Total Purchase
 </div>
 
+</div>
+
+<div class="purchaser-total">
+—
 </div>
 
 </div>
@@ -2565,9 +2578,13 @@ Loading...
 </div>
 
 <div class="purchaser-label">
-Top Purchaser
+Total Purchase
 </div>
 
+</div>
+
+<div class="purchaser-total">
+—
 </div>
 
 </div>
@@ -2587,9 +2604,13 @@ Loading...
 </div>
 
 <div class="purchaser-label">
-Top Purchaser
+Total Purchase
 </div>
 
+</div>
+
+<div class="purchaser-total">
+—
 </div>
 
 </div>
@@ -2604,7 +2625,7 @@ id="leaderboardMessage"
 class="leaderboard-message"
 >
 
-Top Purchasers will appear here when leaderboard data is available.
+No successful purchases found for this month yet.
 
 </div>
 
@@ -2715,7 +2736,7 @@ Reach customer support when you need help.
 
 
 <!-- =====================================================
-     CTA
+     FINAL CTA
 ===================================================== -->
 
 <section class="final-cta">
@@ -2754,19 +2775,18 @@ EXPLORE STORE
 
 
 <!-- =====================================================
-     NAVIGATION
+     BOTTOM NAV
 ===================================================== -->
 
 <div id="zyper-navigation"></div>
 
 
 
-<!-- =====================================================
-     BASIC ROUTES
-===================================================== -->
-
 <script>
 
+/* =====================================================
+   ROUTES
+===================================================== */
 
 function goTopup(){
 
@@ -2835,7 +2855,10 @@ null;
 
 
 bannerSlides.forEach(
-    function(slide,index){
+    function(
+        slide,
+        index
+    ){
 
         const dot =
         document.createElement(
@@ -2845,6 +2868,13 @@ bannerSlides.forEach(
 
         dot.className =
         "banner-dot";
+
+
+        dot.setAttribute(
+            "aria-label",
+            "Banner " +
+            (index + 1)
+        );
 
 
         if(index === 0){
@@ -2883,7 +2913,9 @@ document.querySelectorAll(
 );
 
 
-function showBanner(index){
+function showBanner(
+    index
+){
 
     if(
         !bannerSlides.length
@@ -2941,7 +2973,6 @@ function nextBanner(){
         currentBanner + 1
     );
 
-
     restartBannerTimer();
 }
 
@@ -2952,12 +2983,16 @@ function previousBanner(){
         currentBanner - 1
     );
 
-
     restartBannerTimer();
 }
 
 
 function startBannerTimer(){
+
+    clearInterval(
+        bannerTimer
+    );
+
 
     bannerTimer =
     setInterval(
@@ -2975,11 +3010,6 @@ function startBannerTimer(){
 
 function restartBannerTimer(){
 
-    clearInterval(
-        bannerTimer
-    );
-
-
     startBannerTimer();
 }
 
@@ -2991,7 +3021,9 @@ document.addEventListener(
     "visibilitychange",
     function(){
 
-        if(document.hidden){
+        if(
+            document.hidden
+        ){
 
             clearInterval(
                 bannerTimer
@@ -3000,7 +3032,7 @@ document.addEventListener(
         }
         else{
 
-            restartBannerTimer();
+            startBannerTimer();
         }
 
     }
@@ -3011,7 +3043,7 @@ document.addEventListener(
 
 
 <!-- =====================================================
-     FIREBASE USER + WALLET + LEADERBOARD
+     FIREBASE + WALLET + LEADERBOARD
 ===================================================== -->
 
 <script type="module">
@@ -3056,10 +3088,12 @@ document.getElementById(
 
 
 /* =====================================================
-   MONEY
+   MONEY FORMAT
 ===================================================== */
 
-function money(value){
+function money(
+    value
+){
 
     return Number(
         value || 0
@@ -3067,8 +3101,11 @@ function money(value){
     .toLocaleString(
         "en-LK",
         {
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
+
+            minimumFractionDigits:0,
+
+            maximumFractionDigits:0
+
         }
     );
 }
@@ -3080,7 +3117,9 @@ function money(value){
 
 onAuthStateChanged(
     auth,
-    async function(user){
+    async function(
+        user
+    ){
 
 
         if(!user){
@@ -3097,7 +3136,9 @@ onAuthStateChanged(
         }
 
 
-        /* USERNAME */
+        /* =============================================
+           USERNAME
+        ============================================= */
 
         try{
 
@@ -3124,16 +3165,22 @@ onAuthStateChanged(
 
 
                 usernameElement.textContent =
+
                 data.username ||
+
                 data.name ||
+
                 user.displayName ||
+
                 "Zyper Customer";
 
             }
             else{
 
                 usernameElement.textContent =
+
                 user.displayName ||
+
                 "Zyper Customer";
             }
 
@@ -3147,12 +3194,16 @@ onAuthStateChanged(
 
 
             usernameElement.textContent =
+
             user.displayName ||
+
             "Zyper Customer";
         }
 
 
-        /* WALLET */
+        /* =============================================
+           WALLET BALANCE
+        ============================================= */
 
         try{
 
@@ -3165,7 +3216,8 @@ onAuthStateChanged(
                 WORKER_URL,
                 {
 
-                    method:"POST",
+                    method:
+                    "POST",
 
                     headers:{
 
@@ -3179,8 +3231,10 @@ onAuthStateChanged(
 
                     body:
                     JSON.stringify({
+
                         action:
                         "wallet_balance"
+
                     })
 
                 }
@@ -3196,13 +3250,23 @@ onAuthStateChanged(
                 result.success
             ){
 
+                const balance =
+
+                result.wallet
+                ?.availableBalance ??
+
+                result.wallet
+                ?.balance ??
+
+                0;
+
+
                 walletElement.textContent =
+
+                "LKR " +
                 money(
-                    result.wallet?.balance ||
-                    0
-                )
-                +
-                " LKR";
+                    balance
+                );
 
             }
             else{
@@ -3229,26 +3293,7 @@ onAuthStateChanged(
 
 
 /* =====================================================
-   PUBLIC TOP PURCHASERS
-
-   Expected Worker action:
-
-   {
-       action:"public_leaderboard"
-   }
-
-   Expected response:
-
-   {
-       success:true,
-       leaders:[
-           {username:"Player1"},
-           {username:"Player2"},
-           {username:"Player3"}
-       ]
-   }
-
-   ONLY USERNAME IS DISPLAYED.
+   LEADERBOARD
 ===================================================== */
 
 async function loadLeaderboard(){
@@ -3265,24 +3310,36 @@ async function loadLeaderboard(){
     );
 
 
+    const monthElement =
+    document.getElementById(
+        "leaderboardMonth"
+    );
+
+
     try{
+
 
         const response =
         await fetch(
             WORKER_URL,
             {
 
-                method:"POST",
+                method:
+                "POST",
 
                 headers:{
+
                     "Content-Type":
                     "application/json"
+
                 },
 
                 body:
                 JSON.stringify({
+
                     action:
                     "public_leaderboard"
+
                 })
 
             }
@@ -3295,25 +3352,88 @@ async function loadLeaderboard(){
 
         if(
             !response.ok ||
-            !result.success ||
-            !Array.isArray(
-                result.leaders
-            ) ||
-            result.leaders.length === 0
+            !result.success
         ){
 
             throw new Error(
+                result.message ||
                 "Leaderboard unavailable"
             );
         }
 
 
         const leaders =
-        result.leaders
-        .slice(
+        Array.isArray(
+            result.leaders
+        )
+        ?
+        result.leaders.slice(
             0,
             3
-        );
+        )
+        :
+        [];
+
+
+        /* =============================================
+           MONTH LABEL
+        ============================================= */
+
+        if(
+            result.period &&
+            result.period.year &&
+            result.period.month
+        ){
+
+            const monthName =
+            new Date(
+                result.period.year,
+                result.period.month - 1,
+                1
+            )
+            .toLocaleString(
+                "en",
+                {
+                    month:
+                    "long"
+                }
+            );
+
+
+            monthElement.textContent =
+
+            monthName
+            .toUpperCase()
+
+            +
+
+            " "
+
+            +
+
+            result.period.year;
+
+        }
+
+
+        if(
+            leaders.length === 0
+        ){
+
+            grid.style.display =
+            "none";
+
+
+            message.style.display =
+            "block";
+
+
+            message.textContent =
+            "No successful purchases found for this month yet.";
+
+
+            return;
+        }
 
 
         grid.innerHTML =
@@ -3321,9 +3441,13 @@ async function loadLeaderboard(){
 
 
         const rankClasses = [
+
             "rank1",
+
             "rank2",
+
             "rank3"
+
         ];
 
 
@@ -3332,6 +3456,7 @@ async function loadLeaderboard(){
                 leader,
                 index
             ){
+
 
                 const card =
                 document.createElement(
@@ -3343,36 +3468,55 @@ async function loadLeaderboard(){
                 "purchaser-card";
 
 
-                const safeUsername =
+                const username =
                 String(
                     leader.username ||
                     "Zyper Customer"
                 )
+                .trim()
                 .slice(
                     0,
                     30
                 );
 
 
-card.innerHTML = `
+                const totalPurchase =
+                Number(
+                    leader.totalPurchase ||
+                    0
+                );
 
-    <div class="rank-circle ${rankClasses[index]}">
-        #${index + 1}
-    </div>
 
-    <div>
+                card.innerHTML = `
 
-        <div class="purchaser-name"></div>
+                    <div
+                    class="rank-circle ${rankClasses[index]}"
+                    >
+                    #${index + 1}
+                    </div>
 
-        <div class="purchaser-label">
-            Total Purchase
-        </div>
 
-        <div class="purchaser-total"></div>
+                    <div>
 
-    </div>
+                        <div
+                        class="purchaser-name"
+                        ></div>
 
-`;
+                        <div
+                        class="purchaser-label"
+                        >
+                        Total Purchase
+                        </div>
+
+                    </div>
+
+
+                    <div
+                    class="purchaser-total"
+                    >
+                    </div>
+
+                `;
 
 
                 card
@@ -3380,7 +3524,22 @@ card.innerHTML = `
                     ".purchaser-name"
                 )
                 .textContent =
-                safeUsername;
+                username;
+
+
+                card
+                .querySelector(
+                    ".purchaser-total"
+                )
+                .textContent =
+
+                "LKR "
+
+                +
+
+                money(
+                    totalPurchase
+                );
 
 
                 grid.appendChild(
@@ -3401,8 +3560,9 @@ card.innerHTML = `
     }
     catch(error){
 
-        console.log(
-            "Leaderboard not available:",
+
+        console.error(
+            "Leaderboard error:",
             error
         );
 
@@ -3413,6 +3573,11 @@ card.innerHTML = `
 
         message.style.display =
         "block";
+
+
+        message.textContent =
+        "Top Purchasers are temporarily unavailable.";
+
     }
 
 }
