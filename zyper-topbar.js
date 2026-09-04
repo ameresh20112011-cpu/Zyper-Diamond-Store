@@ -2,7 +2,6 @@
    ZYPER DIAMOND STORE
    SHARED TOP BAR
    PC + PHONE
-   FIXED LIVE WALLET BALANCE
 ========================================================= */
 
 (function () {
@@ -11,9 +10,6 @@
 
     var TOPBAR_ID = "zyperSharedTopbar";
     var STYLE_ID = "zyperSharedTopbarStyle";
-
-    var WORKER_URL =
-        "https://zyper-order.ameresh20112011.workers.dev";
 
 
     /* =====================================================
@@ -170,6 +166,8 @@
 }
 
 
+/* LOGO */
+
 .zyper-top-logo{
 
     width:46px !important;
@@ -198,6 +196,8 @@
 }
 
 
+/* BRAND TEXT */
+
 .zyper-brand-text{
 
     display:flex !important;
@@ -207,6 +207,8 @@
     justify-content:center !important;
 }
 
+
+/* ZYPER */
 
 .zyper-top-name{
 
@@ -228,6 +230,8 @@
     white-space:nowrap !important;
 }
 
+
+/* SMALL DIAMOND STORE */
 
 .zyper-top-subtitle{
 
@@ -265,82 +269,6 @@
     justify-content:flex-end !important;
 
     min-width:0 !important;
-}
-
-
-.zyper-top-action-button{
-
-    min-height:38px !important;
-
-    padding:0 15px !important;
-
-    border:none !important;
-
-    border-radius:999px !important;
-
-    display:inline-flex !important;
-
-    align-items:center !important;
-
-    justify-content:center !important;
-
-    gap:7px !important;
-
-    color:#ffffff !important;
-
-    text-decoration:none !important;
-
-    font-family:
-    Poppins,
-    Arial,
-    sans-serif !important;
-
-    font-size:10px !important;
-
-    font-weight:800 !important;
-
-    white-space:nowrap !important;
-
-    cursor:pointer !important;
-
-    background:
-    linear-gradient(
-        135deg,
-        #6d28d9,
-        #7c3aed,
-        #8b5cf6
-    ) !important;
-
-    border:
-    1px solid
-    rgba(255,255,255,.18) !important;
-
-    box-shadow:
-    0 7px 20px
-    rgba(124,58,237,.28) !important;
-
-    transition:.2s !important;
-}
-
-
-.zyper-top-action-button:hover{
-
-    transform:
-    translateY(-1px) !important;
-}
-
-
-.zyper-top-action-button.loading{
-
-    opacity:.82 !important;
-
-    pointer-events:none !important;
-}
-
-
-.zyper-top-action-button.login{
-
-    min-width:84px !important;
 }
 
 
@@ -413,18 +341,6 @@ body{
         letter-spacing:1.2px !important;
     }
 
-
-    .zyper-top-action-button{
-
-        min-height:36px !important;
-
-        padding:0 12px !important;
-
-        font-size:9px !important;
-
-        gap:6px !important;
-    }
-
 }
 
 
@@ -455,14 +371,6 @@ body{
         font-size:5.5px !important;
 
         letter-spacing:1px !important;
-    }
-
-
-    .zyper-top-action-button{
-
-        padding:0 10px !important;
-
-        font-size:8px !important;
     }
 
 }
@@ -538,23 +446,7 @@ class="zyper-top-brand"
 
 <div
 id="zyperTopbarAction"
->
-
-    <a
-    href="./index.html"
-    class="zyper-top-action-button loading"
-    id="zyperTopbarButton"
-    >
-
-        <i class="fa-solid fa-circle-notch fa-spin"></i>
-
-        <span>
-            LOADING
-        </span>
-
-    </a>
-
-</div>
+></div>
 
         `;
 
@@ -567,328 +459,69 @@ id="zyperTopbarAction"
 
 
     /* =====================================================
-       MONEY FORMAT
+       CHECK WALLET BADGE SCRIPT
     ===================================================== */
 
-    function money(value) {
+    function walletBadgeAlreadyLoaded() {
 
-        return Number(
-            value || 0
-        )
-        .toLocaleString(
-            "en-LK",
-            {
-                minimumFractionDigits:0,
-                maximumFractionDigits:0
+        var scripts =
+            document.getElementsByTagName("script");
+
+        var i;
+
+
+        for (
+            i = 0;
+            i < scripts.length;
+            i++
+        ) {
+
+            var src =
+                scripts[i].getAttribute("src") || "";
+
+
+            if (
+                src.indexOf(
+                    "zyper-wallet-badge.js"
+                ) !== -1
+            ) {
+
+                return true;
             }
-        );
+        }
+
+
+        return false;
     }
 
 
     /* =====================================================
-       LOGIN BUTTON
+       LOAD WALLET BADGE
     ===================================================== */
 
-    function showLoginButton() {
+    function loadWalletBadge() {
 
-        var button =
-            document.getElementById(
-                "zyperTopbarButton"
-            );
+        if (
+            walletBadgeAlreadyLoaded()
+        ) {
 
-
-        if (!button) {
             return;
         }
 
 
-        button.href =
-            "./index.html";
+        var script =
+            document.createElement("script");
 
 
-        button.className =
-            "zyper-top-action-button login";
+        script.type =
+            "module";
 
 
-        button.innerHTML = `
+        script.src =
+            "./zyper-wallet-badge.js?v=10001";
 
-<i class="fa-solid fa-right-to-bracket"></i>
 
-<span>
-    LOGIN
-</span>
-
-        `;
-    }
-
-
-    /* =====================================================
-       WALLET LOADING
-    ===================================================== */
-
-    function showWalletLoading() {
-
-        var button =
-            document.getElementById(
-                "zyperTopbarButton"
-            );
-
-
-        if (!button) {
-            return;
-        }
-
-
-        button.href =
-            "./wallet.html";
-
-
-        button.className =
-            "zyper-top-action-button loading";
-
-
-        button.innerHTML = `
-
-<i class="fa-solid fa-wallet"></i>
-
-<span>
-    WALLET
-</span>
-
-        `;
-    }
-
-
-    /* =====================================================
-       LIVE WALLET BALANCE
-    ===================================================== */
-
-    function showWalletBalance(value) {
-
-        var button =
-            document.getElementById(
-                "zyperTopbarButton"
-            );
-
-
-        if (!button) {
-            return;
-        }
-
-
-        button.href =
-            "./wallet.html";
-
-
-        button.className =
-            "zyper-top-action-button";
-
-
-        button.innerHTML = `
-
-<i class="fa-solid fa-wallet"></i>
-
-<span>
-    LKR ${money(value)}
-</span>
-
-        `;
-    }
-
-
-    /* =====================================================
-       FALLBACK
-    ===================================================== */
-
-    function showWalletFallback() {
-
-        var button =
-            document.getElementById(
-                "zyperTopbarButton"
-            );
-
-
-        if (!button) {
-            return;
-        }
-
-
-        button.href =
-            "./wallet.html";
-
-
-        button.className =
-            "zyper-top-action-button";
-
-
-        button.innerHTML = `
-
-<i class="fa-solid fa-wallet"></i>
-
-<span>
-    WALLET
-</span>
-
-        `;
-    }
-
-
-    /* =====================================================
-       AUTH + WALLET
-    ===================================================== */
-
-    async function startWalletAuth() {
-
-        try {
-
-            var firebaseModule =
-                await import(
-                    "./firebase.js?v=10000"
-                );
-
-
-            var authModule =
-                await import(
-                    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"
-                );
-
-
-            var auth =
-                firebaseModule.auth;
-
-
-            authModule.onAuthStateChanged(
-
-                auth,
-
-                async function(user) {
-
-
-                    if (!user) {
-
-                        showLoginButton();
-
-                        return;
-                    }
-
-
-                    showWalletLoading();
-
-
-                    try {
-
-                        var token =
-                            await user.getIdToken();
-
-
-                        var response =
-                            await fetch(
-
-                                WORKER_URL,
-
-                                {
-
-                                    method:
-                                        "POST",
-
-
-                                    headers: {
-
-                                        "Content-Type":
-                                            "application/json",
-
-
-                                        "Authorization":
-                                            "Bearer " + token
-
-                                    },
-
-
-                                    body:
-                                        JSON.stringify({
-
-                                            action:
-                                                "wallet_balance"
-
-                                        })
-
-                                }
-
-                            );
-
-
-                        var result =
-                            await response.json();
-
-
-                        if (
-                            !response.ok ||
-                            !result.success
-                        ) {
-
-                            throw new Error(
-                                result.message ||
-                                "Unable to load wallet"
-                            );
-                        }
-
-
-                        var wallet =
-                            result.wallet || {};
-
-
-                        var availableBalance =
-
-                            wallet.availableBalance
-
-                            ??
-
-                            wallet.balance
-
-                            ??
-
-                            0;
-
-
-                        showWalletBalance(
-                            availableBalance
-                        );
-
-
-                    }
-                    catch(error) {
-
-                        console.error(
-                            "Topbar wallet error:",
-                            error
-                        );
-
-
-                        /*
-                           Logged-in customer remains
-                           a WALLET button if the Worker
-                           temporarily cannot be reached.
-                        */
-
-                        showWalletFallback();
-                    }
-
-                }
-
-            );
-
-
-        }
-        catch(error) {
-
-            console.error(
-                "Topbar auth error:",
-                error
-            );
-
-
-            showLoginButton();
-        }
+        document.body.appendChild(script);
     }
 
 
@@ -904,7 +537,7 @@ id="zyperTopbarAction"
 
         createTopbar();
 
-        startWalletAuth();
+        loadWalletBadge();
     }
 
 
