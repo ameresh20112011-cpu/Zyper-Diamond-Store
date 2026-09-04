@@ -2489,7 +2489,7 @@ Top Purchasers
 </h2>
 
 <p>
-This month's highest purchasing customers.
+Highest purchasing customers on Zyper.
 </p>
 
 </div>
@@ -2515,7 +2515,7 @@ Zyper Champions
 </h3>
 
 <p>
-Top customers for the current month.
+Top customers of all time.
 </p>
 
 </div>
@@ -2525,7 +2525,7 @@ Top customers for the current month.
 class="month-badge"
 id="leaderboardMonth"
 >
-THIS MONTH
+ALL TIME
 </div>
 
 
@@ -2625,7 +2625,7 @@ id="leaderboardMessage"
 class="leaderboard-message"
 >
 
-No successful purchases found for this month yet.
+No successful purchases found yet.
 
 </div>
 
@@ -3376,44 +3376,11 @@ async function loadLeaderboard(){
 
 
         /* =============================================
-           MONTH LABEL
+           LIFETIME LABEL
         ============================================= */
 
-        if(
-            result.period &&
-            result.period.year &&
-            result.period.month
-        ){
-
-            const monthName =
-            new Date(
-                result.period.year,
-                result.period.month - 1,
-                1
-            )
-            .toLocaleString(
-                "en",
-                {
-                    month:
-                    "long"
-                }
-            );
-
-
-            monthElement.textContent =
-
-            monthName
-            .toUpperCase()
-
-            +
-
-            " "
-
-            +
-
-            result.period.year;
-
-        }
+        monthElement.textContent =
+        "ALL TIME";
 
 
         if(
@@ -3429,7 +3396,7 @@ async function loadLeaderboard(){
 
 
             message.textContent =
-            "No successful purchases found for this month yet.";
+            "No successful purchases found yet.";
 
 
             return;
